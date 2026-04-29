@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProjectX — 市場總覽</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --bg-base: #05060f;
+      --bg-card: rgba(255,255,255,0.04);
+      --bg-card-hover: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08);
+      --text-primary: #f0f0f5;
+      --text-secondary: #8888aa;
+      --text-muted: #44445a;
+      --accent-blue: #4da6ff;
+      --accent-purple: #9f7aea;
+      --accent-green: #48bb78;
+      --accent-red: #fc8181;
+      --accent-orange: #f6ad55;
+      --accent-teal: #38b2ac;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(77,99,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 0%, rgba(159,122,234,0.06) 0%, transparent 50%);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      height: 60px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5,6,15,0.85);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #4da6ff, #9f7aea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+    .nav-links a.active { border-bottom: 2px solid var(--accent-blue); padding-bottom: 2px; }
+    .nav-right { display: flex; gap: 10px; align-items: center; }
+
+    .btn { padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
+    .btn-ghost:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .btn-glow { background: linear-gradient(135deg, #4da6ff, #9f7aea); color: #fff; box-shadow: 0 0 20px rgba(77,166,255,0.3); }
+    .btn-glow:hover { box-shadow: 0 0 30px rgba(77,166,255,0.5); transform: translateY(-1px); }
+
+    main { max-width: 1440px; margin: 0 auto; padding: 28px 40px 60px; }
+
+    /* 頂部標題 */
+    .top-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; }
+    .top-bar h1 { font-size: 20px; font-weight: 600; }
+    .top-bar .meta { font-size: 12px; color: var(--text-muted); text-align: right; line-height: 1.8; }
+
+    /* 市場分頁切換 */
+    .market-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+
+    .tab-btn {
+      padding: 10px 24px;
+      border-radius: 8px 8px 0 0;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      background: transparent;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      letter-spacing: 0.5px;
+    }
+
+    .tab-btn:hover { color: var(--text-secondary); }
+
+    .tab-btn.active {
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--accent-blue);
+    }
+
+    .tab-btn.crypto.active { border-bottom-color: var(--accent-purple); color: var(--accent-purple); }
+    .tab-btn.us.active { border-bottom-color: var(--accent-blue); color: var(--accent-blue); }
+    .tab-btn.tw.active { border-bottom-color: var(--accent-teal); color: var(--accent-teal); }
+
+    /* 分頁內容 */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* 玻璃卡片 */
+    .glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      margin-bottom: 16px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .icon { width: 20px; height: 20px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+    .icon-purple { background: rgba(159,122,234,0.15); }
+    .icon-blue { background: rgba(77,166,255,0.15); }
+    .icon-teal { background: rgba(56,178,172,0.15); }
+    .icon-orange { background: rgba(246,173,85,0.15); }
+
+    /* 主幣卡片區 */
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .asset-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .asset-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(77,166,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .asset-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .asset-name { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+    .asset-fullname { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    .asset-signal {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .signal-bull { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
+    .signal-bear { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.2); }
+    .signal-watch { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
+    .signal-neutral { background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
+
+    .asset-price { font-size: 26px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .asset-change { font-size: 13px; font-weight: 600; margin-bottom: 16px; }
+    .up { color: var(--accent-green); }
+    .down { color: var(--accent-red); }
+    .flat { color: var(--text-muted); }
+
+    .asset-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-item { }
+    .stat-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; }
+    .stat-value { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+
+    /* 分析說明區 */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .analysis-item {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .analysis-item:last-child { border-bottom: none; }
+
+    .analysis-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .analysis-value {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* 股票列表 */
+    .stock-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .stock-table th {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stock-table td {
+      font-size: 13px;
+      padding: 12px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      color: var(--text-secondary);
+    }
+
+    .stock-table tr:last-child td { border-bottom: none; }
+    .stock-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .stock-ticker { font-weight: 700; color: var(--text-primary); font-size: 13px; }
+    .stock-name { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    .tag-pill {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-ai { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.15); }
+    .tag-semi { background: rgba(77,166,255,0.1); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.15); }
+    .tag-server { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.15); }
+    .tag-ev { background: rgba(56,178,172,0.1); color: var(--accent-teal); border: 1px solid rgba(56,178,172,0.15); }
+    .tag-finance { background: rgba(246,173,85,0.1); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
+
+    /* Pro 鎖定遮罩 */
+    .pro-lock {
+      position: relative;
+    }
+
+    .pro-lock-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 20%, rgba(5,6,15,0.95) 60%);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 28px;
+      z-index: 10;
+    }
+
+    .lock-content { text-align: center; }
+    .lock-icon { font-size: 20px; margin-bottom: 8px; }
+    .lock-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .lock-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6; }
+
+    .badge-pro { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.2); font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">PROJECT X</div>
+    <ul class="nav-links">
+      <li><a href="../index.html">總覽</a></li>
+      <li><a href="market.html" class="active">市場</a></li>
+      <li><a href="#">產業</a></li>
+      <li><a href="#">標的追蹤</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="btn btn-ghost">登入</button>
+      <button class="btn btn-glow">訂閱 Pro</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="top-bar">
+      <div>
+        <h1>市場總覽</h1>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:3px;">
+          主要做虛擬貨幣，次要做美股與台股
+        </div>
+      </div>
+      <div class="meta" id="market-date"></div>
+    </div>
+
+    <!-- 市場分頁 -->
+    <div class="market-tabs">
+      <button class="tab-btn crypto active" onclick="switchTab('crypto')">🔮 虛擬貨幣</button>
+      <button class="tab-btn us" onclick="switchTab('us')">🇺🇸 美股</button>
+      <button class="tab-btn tw" onclick="switchTab('tw')">🇹🇼 台股</button>
+    </div>
+
+    <!-- 虛擬貨幣 -->
+    <div id="tab-crypto" class="tab-content active">
+
+      <div class="asset-grid" id="crypto-assets"></div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-purple">📊</div>市場結構分析</div>
+            <span class="badge-pro">PRO</span>
+          </div>
+          <div class="pro-lock" style="min-height:200px;">
+            <div id="crypto-analysis"></div>
+            <div class="pro-lock-overlay">
+              <div class="lock-content">
+                <div class="lock-icon">🔐</div>
+                <div class="lock-title">升級 Pro 解鎖深度分析</div>
+                <div class="lock-desc">技術面、籌碼面、鏈上數據<br>完整市場結構判讀</div>
+                <button class="btn btn-glow">立即訂閱</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-orange">📰</div>加密市場要聞</div>
+          </div>
+          <div id="crypto-news"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 美股 -->
+    <div id="tab-us" class="tab-content">
+
+      <div class="glass-card">
+        <div class="card-header">
+          <div class="card-title"><div class="icon icon-blue">🏆</div>重點追蹤標的</div>
+        </div>
+        <table class="stock-table" id="us-stocks"></table>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-blue">📊</div>技術面 + 籌碼面</div>
+            <span class="badge-pro">PRO</span>
+          </div>
+          <div class="pro-lock" style="min-height:180px;">
+            <div style="padding:12px 0; color:var(--text-muted); font-size:13px;">深度技術分析、機構籌碼動向、支撐壓力位...</div>
+            <div class="pro-lock-overlay">
+              <div class="lock-content">
+                <div class="lock-icon">🔐</div>
+                <div class="lock-title">升級 Pro 解鎖</div>
+                <div class="lock-desc">完整技術面與籌碼面分析</div>
+                <button class="btn btn-glow">立即訂閱</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-orange">📰</div>美股市場要聞</div>
+          </div>
+          <div id="us-news"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 台股 -->
+    <div id="tab-tw" class="tab-content">
+
+      <div class="glass-card">
+        <div class="card-header">
+          <div class="card-title"><div class="icon icon-teal">🏆</div>重點追蹤標的</div>
+        </div>
+        <table class="stock-table" id="tw-stocks"></table>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-teal">📊</div>技術面 + 籌碼面</div>
+            <span class="badge-pro">PRO</span>
+          </div>
+          <div class="pro-lock" style="min-height:180px;">
+            <div style="padding:12px 0; color:var(--text-muted); font-size:13px;">深度技術分析、外資籌碼、融資融券、支撐壓力位...</div>
+            <div class="pro-lock-overlay">
+              <div class="lock-content">
+                <div class="lock-icon">🔐</div>
+                <div class="lock-title">升級 Pro 解鎖</div>
+                <div class="lock-desc">完整技術面與籌碼面分析</div>
+                <button class="btn btn-glow">立即訂閱</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-orange">📰</div>台股市場要聞</div>
+          </div>
+          <div id="tw-news"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      document.querySelector('.tab-btn.' + tab).classList.add('active');
+    }
+
+    async function loadMarketData() {
+      const res = await fetch('../data/daily.json');
+      const data = await res.json();
+
+      // 日期
+      const d = new Date(data.date);
+      document.getElementById('market-date').innerHTML =
+        d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) +
+        '<br>UTC+8 台北時間';
+
+      // 加密資產卡片
+      if (data.market?.crypto) {
+        document.getElementById('crypto-assets').innerHTML = data.market.crypto.map(c => `
+          <div class="asset-card">
+            <div class="asset-header">
+              <div>
+                <div class="asset-name">${c.symbol}</div>
+                <div class="asset-fullname">${c.name}</div>
+              </div>
+              <span class="asset-signal signal-${c.signal}">${c.signal_label}</span>
+            </div>
+            <div class="asset-price">${c.price}</div>
+            <div class="asset-change ${c.dir}">
+              ${c.dir === 'up' ? '▲' : c.dir === 'down' ? '▼' : '—'} ${c.change}
+            </div>
+            <div class="asset-stats">
+              <div class="stat-item">
+                <div class="stat-label">24H 高</div>
+                <div class="stat-value">${c.high}</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">24H 低</div>
+                <div class="stat-value">${c.low}</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">市值</div>
+                <div class="stat-value">${c.market_cap}</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">成交量</div>
+                <div class="stat-value">${c.volume}</div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // 美股列表
+      if (data.market?.us_stocks) {
+        document.getElementById('us-stocks').innerHTML = `
+          <thead>
+            <tr>
+              <th>標的</th>
+              <th>價格</th>
+              <th>漲跌</th>
+              <th>類別</th>
+              <th>觀察重點</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.market.us_stocks.map(s => `
+              <tr>
+                <td>
+                  <div class="stock-ticker">${s.ticker}</div>
+                  <div class="stock-name">${s.name}</div>
+                </td>
+                <td style="color:var(--text-primary); font-weight:600;">${s.price}</td>
+                <td class="${s.dir}">${s.dir === 'up' ? '▲' : '▼'} ${s.change}</td>
+                <td><span class="tag-pill tag-${s.tag}">${s.tag_label}</span></td>
+                <td style="color:var(--text-muted); font-size:12px;">${s.note}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        `;
+      }
+
+      // 台股列表
+      if (data.market?.tw_stocks) {
+        document.getElementById('tw-stocks').innerHTML = `
+          <thead>
+            <tr>
+              <th>標的</th>
+              <th>價格</th>
+              <th>漲跌</th>
+              <th>類別</th>
+              <th>觀察重點</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.market.tw_stocks.map(s => `
+              <tr>
+                <td>
+                  <div class="stock-ticker">${s.ticker}</div>
+                  <div class="stock-name">${s.name}</div>
+                </td>
+                <td style="color:var(--text-primary); font-weight:600;">${s.price}</td>
+                <td class="${s.dir}">${s.dir === 'up' ? '▲' : '▼'} ${s.change}</td>
+                <td><span class="tag-pill tag-${s.tag}">${s.tag_label}</span></td>
+                <td style="color:var(--text-muted); font-size:12px;">${s.note}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        `;
+      }
+
+      // 要聞
+      const renderNews = (id, items) => {
+        if (!items) return;
+        document.getElementById(id).innerHTML = items.map(item => `
+          <div style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.04);">
+            <div style="font-size:13px; color:#c8c8d8; line-height:1.6;">${item.text}</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">${item.time}</div>
+          </div>
+        `).join('');
+      };
+
+      renderNews('crypto-news', data.market?.crypto_news);
+      renderNews('us-news', data.market?.us_news);
+      renderNews('tw-news', data.market?.tw_news);
+    }
+
+    loadMarketData();
+  </script>
+</body>
+</html>

@@ -42,4 +42,136 @@
     {
       "tag": "半導體",
       "type": "industry",
-      "text": "TSMC 法說會釋樂觀展望，AI 相關需求持
+      "text": "TSMC 法說會釋樂觀展望，AI 相關需求持續強勁，CoWoS 產能持續擴充，台積電 ADR 盤後漲逾 3%。",
+      "time": "09:00",
+      "impact": "↑ 2330 / TSM 追蹤"
+    },
+    {
+      "tag": "科技",
+      "type": "us",
+      "text": "NVIDIA 宣布新一代 Blackwell Ultra 出貨時程，供應鏈受惠股廣達、緯穎普遍走強。",
+      "time": "06:45",
+      "impact": "↑ AI 供應鏈受惠"
+    },
+    {
+      "tag": "加密",
+      "type": "crypto",
+      "text": "比特幣現貨 ETF 連續第五日淨流入，累計本週流入逾 12 億美元，機構資金回流跡象明顯。",
+      "time": "08:00",
+      "impact": "↑ BTC 籌碼結構改善"
+    },
+    {
+      "tag": "台股",
+      "type": "tw",
+      "text": "鴻海公告 Q1 營收年增 24%，伺服器及 AI 相關業務為主要成長動能，法人持續加碼。",
+      "time": "07:30",
+      "impact": "↑ 2317 基本面改善"
+    },
+    {
+      "tag": "航運",
+      "type": "industry",
+      "text": "波羅的海乾散貨指數 BDI 連跌三日，大宗商品需求疲軟，散裝航運類股承壓。",
+      "time": "06:20",
+      "impact": "↓ 航運股觀望"
+    }
+  ],
+  "persons": [
+    {
+      "initials": "JP",
+      "name": "Jerome Powell",
+      "title": "Fed 主席｜美國聯邦準備理事會",
+      "note": "最新發言暗示通膨降溫中，年內可能降息 1-2 次，市場解讀偏鴿。"
+    },
+    {
+      "initials": "JH",
+      "name": "Jensen Huang",
+      "title": "執行長｜NVIDIA",
+      "note": "出席 GTC 強調 Blackwell 需求遠超供給，暗示擴產計畫加速推進。"
+    },
+    {
+      "initials": "CC",
+      "name": "魏哲家",
+      "title": "董事長｜台積電 TSMC",
+      "note": "法說會表示 AI 晶片需求強勁，CoWoS 先進封裝產能持續滿載。"
+    }
+  ],
+  "signals": [
+    { "name": "半導體 / AI", "signal": "bull", "label": "看多" },
+    { "name": "加密貨幣", "signal": "bull", "label": "看多" },
+    { "name": "雲端 / 資料中心", "signal": "bull", "label": "看多" },
+    { "name": "金融", "signal": "watch", "label": "觀察" },
+    { "name": "航運", "signal": "watch", "label": "觀察" },
+    { "name": "能源", "signal": "bear", "label": "看空" },
+    { "name": "消費", "signal": "neutral", "label": "中性" }
+  ],
+  "market": {
+    "crypto": [
+      {
+        "symbol": "BTC",
+        "name": "Bitcoin",
+        "price": "$94,250",
+        "change": "+2.4%",
+        "dir": "up",
+        "high": "$95,800",
+        "low": "$91,200",
+        "market_cap": "$1.86T",
+        "volume": "$38.2B",
+        "signal": "bull",
+        "signal_label": "看多"
+      },
+      {
+        "symbol": "ETH",
+        "name": "Ethereum",
+        "price": "$1,788",
+        "change": "+1.8%",
+        "dir": "up",
+        "high": "$1,820",
+        "low": "$1,740",
+        "market_cap": "$215B",
+        "volume": "$12.4B",
+        "signal": "watch",
+        "signal_label": "觀察"
+      },
+      {
+        "symbol": "SOL",
+        "name": "Solana",
+        "price": "$148",
+        "change": "-0.6%",
+        "dir": "down",
+        "high": "$155",
+        "low": "$144",
+        "market_cap": "$68B",
+        "volume": "$3.8B",
+        "signal": "watch",
+        "signal_label": "觀察"
+      }
+    ],
+    "crypto_news": [
+      { "text": "比特幣現貨 ETF 連續第五日淨流入，累計本週逾 12 億美元，機構資金回流明顯。", "time": "08:00" },
+      { "text": "以太坊 Pectra 升級進入最終測試階段，預計下月主網上線，質押效率大幅提升。", "time": "07:20" },
+      { "text": "Solana 鏈上 DEX 交易量回落，市場觀望情緒升溫，短線支撐在 $140。", "time": "06:30" }
+    ],
+    "us_stocks": [
+      { "ticker": "NVDA", "name": "NVIDIA", "price": "$875", "change": "+3.2%", "dir": "up", "tag": "ai", "tag_label": "AI", "note": "Blackwell Ultra 出貨時程確認，需求持續強勁" },
+      { "ticker": "TSM", "name": "台積電 ADR", "price": "$168", "change": "+2.8%", "dir": "up", "tag": "semi", "tag_label": "半導體", "note": "法說會樂觀，CoWoS 滿載" },
+      { "ticker": "AAPL", "name": "Apple", "price": "$212", "change": "-0.4%", "dir": "down", "tag": "ai", "tag_label": "AI", "note": "Apple Intelligence 擴展語系，WWDC 前關注" },
+      { "ticker": "MSFT", "name": "Microsoft", "price": "$418", "change": "+0.9%", "dir": "up", "tag": "server", "tag_label": "雲端", "note": "Azure AI 需求持續增長，資本支出上修" },
+      { "ticker": "META", "name": "Meta", "price": "$528", "change": "+1.4%", "dir": "up", "tag": "ai", "tag_label": "AI", "note": "Llama 4 發布，廣告 AI 整合加速" }
+    ],
+    "us_news": [
+      { "text": "Fed 官員暗示降息空間存在，科技股整體受惠，那斯達克反彈。", "time": "08:30" },
+      { "text": "美中技術談判傳出進展，半導體出口管制有望鬆綁部分條款。", "time": "07:00" }
+    ],
+    "tw_stocks": [
+      { "ticker": "2330", "name": "台積電", "price": "NT$950", "change": "+1.8%", "dir": "up", "tag": "semi", "tag_label": "半導體", "note": "法說會後外資持續加碼，CoWoS 訂單滿載" },
+      { "ticker": "2317", "name": "鴻海", "price": "NT$198", "change": "+2.1%", "dir": "up", "tag": "server", "tag_label": "伺服器", "note": "Q1 營收年增 24%，AI 伺服器為主要動能" },
+      { "ticker": "2454", "name": "聯發科", "price": "NT$1,285", "change": "-0.5%", "dir": "down", "tag": "semi", "tag_label": "半導體", "note": "天璣晶片出貨穩定，AI 手機需求持續" },
+      { "ticker": "3711", "name": "日月光投控", "price": "NT$168", "change": "+0.9%", "dir": "up", "tag": "semi", "tag_label": "封裝", "note": "先進封裝需求強勁，CoWoS 受惠明顯" },
+      { "ticker": "2308", "name": "台達電", "price": "NT$388", "change": "+1.2%", "dir": "up", "tag": "server", "tag_label": "電源", "note": "AI 資料中心電源需求爆發，毛利率上修" }
+    ],
+    "tw_news": [
+      { "text": "台股加權指數收 21,340 點，半導體族群領漲，外資買超逾 80 億元。", "time": "13:35" },
+      { "text": "鴻海法說會後法人持續加碼，目標價普遍上調至 220 元以上。", "time": "10:00" }
+    ]
+  }
+}
