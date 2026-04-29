@@ -1,78 +1,78 @@
 {
   "date": "2026-04-29",
   "tickers": [
-    { "label": "BTC / USD", "value": "94,250", "change": "+2.4%", "dir": "up" },
-    { "label": "ETH / USD", "value": "1,788", "change": "+1.8%", "dir": "up" },
-    { "label": "S&P 500", "value": "5,560", "change": "−0.8%", "dir": "down" },
-    { "label": "NASDAQ", "value": "17,420", "change": "−1.1%", "dir": "down" },
-    { "label": "台股加權", "value": "21,340", "change": "+0.5%", "dir": "up" },
-    { "label": "USD / TWD", "value": "32.15", "change": "持平", "dir": "flat" }
+    { "label": "BTC / USD", "value": "76,500", "change": "-1.2%", "dir": "down" },
+    { "label": "ETH / USD", "value": "2,280", "change": "-2.1%", "dir": "down" },
+    { "label": "S&P 500", "value": "7,165", "change": "+0.8%", "dir": "up" },
+    { "label": "NASDAQ", "value": "24,836", "change": "+1.6%", "dir": "up" },
+    { "label": "台股加權", "value": "39,807", "change": "+0.5%", "dir": "up" },
+    { "label": "Brent 原油", "value": "$111", "change": "+3.0%", "dir": "up" }
   ],
   "macro": [
     {
-      "tag": "政策",
+      "tag": "央行",
       "type": "macro",
-      "text": "Fed 官員發表鴿派言論，暗示年內仍有降息空間，美債殖利率小幅回落至 4.21%。",
-      "time": "08:30",
-      "impact": "↑ 風險資產利多"
-    },
-    {
-      "tag": "外交",
-      "type": "macro",
-      "text": "美中貿易談判傳出進展，雙方將於下週重啟技術層級會談，市場情緒轉樂觀。",
-      "time": "07:15",
-      "impact": "↑ 出口類股受惠"
-    },
-    {
-      "tag": "數據",
-      "type": "macro",
-      "text": "美國 PCE 通膨數據本週五公布，市場預期年增 2.6%，若低於預期將強化降息預期。",
-      "time": "06:00",
-      "impact": "⚠ 關鍵數據待觀察"
+      "text": "今日 FOMC 會議結果將於台北時間深夜公布，市場 100% 預期維持利率於 3.5%-3.75% 不變。這也可能是 Powell 擔任Fed主席的最後一次會議，5月接任者 Kevin Warsh 動向備受關注。",
+      "time": "今日重點",
+      "impact": "⚠ 深夜 02:00 關注 Powell 記者會"
     },
     {
       "tag": "地緣",
       "type": "macro",
-      "text": "中東局勢趨於穩定，油價受壓，WTI 原油回落至 78 美元，能源板塊承壓。",
-      "time": "05:30",
-      "impact": "↓ 能源股利空"
+      "text": "美伊談判再度陷入僵局，伊朗提出以開放荷姆茲海峽換取美國撤除海上封鎖，但將核武談判推遲至戰後，Trump 表態不滿意此方案。談判進展決定油價與全球通膨走勢。",
+      "time": "持續追蹤",
+      "impact": "↑ 油價持續高位 Brent $111"
+    },
+    {
+      "tag": "能源",
+      "type": "macro",
+      "text": "荷姆茲海峽封鎖進入第九週，佔全球約 20% 油氣供應的通道近乎停擺。IEA 警告史上最大供應衝擊，Goldman Sachs 上調 Brent Q4 目標至 $90，Citi 更預警若封鎖延至六月底 Brent 可能衝上 $150。",
+      "time": "08:00",
+      "impact": "↑ 能源通膨壓力持續升溫"
+    },
+    {
+      "tag": "OPEC",
+      "type": "macro",
+      "text": "UAE 宣布本週五正式退出 OPEC，尋求更大增產彈性。此舉雖可望增加供給，但在荷姆茲未開放前實際效益有限，市場反應偏向觀望。",
+      "time": "昨日",
+      "impact": "⚠ OPEC 結構性變化追蹤"
     }
   ],
   "industry": [
     {
       "tag": "半導體",
       "type": "industry",
-      "text": "TSMC 法說會釋樂觀展望，AI 相關需求持續強勁，CoWoS 產能持續擴充，台積電 ADR 盤後漲逾 3%。",
-      "time": "09:00",
-      "impact": "↑ 2330 / TSM 追蹤"
+      "text": "台積電 Q1 營收年增 40.6%，AI 需求強勁，TSM ADR 昨收 $393，分析師平均目標價 $463，強烈買進評級。台灣金管會同步放寬基金單一持股上限至 25%，直接利多台積電。",
+      "time": "最新",
+      "impact": "↑ 2330 / TSM 持續看多"
     },
     {
       "tag": "科技",
       "type": "us",
-      "text": "NVIDIA 宣布新一代 Blackwell Ultra 出貨時程，供應鏈受惠股廣達、緯穎普遍走強。",
-      "time": "06:45",
-      "impact": "↑ AI 供應鏈受惠"
+      "text": "Micron 獲 Melius Research 買進評級，今年以來漲幅已達 74%，AI HBM 需求強勁，分析師視其為潛在兆元市值候選。Dell 因 SMCI 被司法部起訴獲益，AI 伺服器市占有望擴大。",
+      "time": "昨日",
+      "impact": "↑ MU / DELL AI 伺服器受惠"
     },
     {
       "tag": "加密",
       "type": "crypto",
-      "text": "比特幣現貨 ETF 連續第五日淨流入，累計本週流入逾 12 億美元，機構資金回流跡象明顯。",
-      "time": "08:00",
-      "impact": "↑ BTC 籌碼結構改善"
+      "text": "Bitcoin 2026 大會於拉斯維加斯 4/27-29 舉行，歷史規律顯示大會後價格易走軟（買謠言賣事實）。BTC 目前在 $76-77K 區間整理，Fed 會議結果與伊朗談判為短線關鍵。",
+      "time": "今日",
+      "impact": "⚠ 大會後注意回調風險"
     },
     {
       "tag": "台股",
       "type": "tw",
-      "text": "鴻海公告 Q1 營收年增 24%，伺服器及 AI 相關業務為主要成長動能，法人持續加碼。",
-      "time": "07:30",
-      "impact": "↑ 2317 基本面改善"
+      "text": "台股加權指數今晨高開挑戰 40,000 點歷史關卡，連三日創新高。AI 基礎建設樂觀預期持續推升，Macronix、Kaimei、Chieftek 等個股漲停，但台積電本日小幅回落 1.1% 進行獲利了結。",
+      "time": "盤中",
+      "impact": "↑ 台股強勢 留意獲利了結"
     },
     {
       "tag": "航運",
       "type": "industry",
-      "text": "波羅的海乾散貨指數 BDI 連跌三日，大宗商品需求疲軟，散裝航運類股承壓。",
-      "time": "06:20",
-      "impact": "↓ 航運股觀望"
+      "text": "荷姆茲封鎖使各國搶搭巴拿馬運河替代路線，相關過路費大幅攀升。美國原油與石油產品出口量創歷史新高至 1,288 萬桶/日，受惠於亞歐各國搶購替代供應。",
+      "time": "最新",
+      "impact": "↑ 替代航線運費上漲受惠"
     }
   ],
   "persons": [
@@ -80,98 +80,98 @@
       "initials": "JP",
       "name": "Jerome Powell",
       "title": "Fed 主席｜美國聯邦準備理事會",
-      "note": "最新發言暗示通膨降溫中，年內可能降息 1-2 次，市場解讀偏鴿。"
+      "note": "今日可能是其最後一次主持 FOMC 會議，5月任期屆滿後由 Kevin Warsh 接任。市場預期維持利率不變，記者會發言為最後政策信號。"
     },
     {
-      "initials": "JH",
-      "name": "Jensen Huang",
-      "title": "執行長｜NVIDIA",
-      "note": "出席 GTC 強調 Blackwell 需求遠超供給，暗示擴產計畫加速推進。"
+      "initials": "DT",
+      "name": "Donald Trump",
+      "title": "美國總統",
+      "note": "對伊朗最新提案表達不滿，稱對方未能解決核武問題，取消派遣談判代表赴巴基斯坦，改要求伊朗直接致電白宮。油價應聲再漲。"
     },
     {
-      "initials": "CC",
-      "name": "魏哲家",
-      "title": "董事長｜台積電 TSMC",
-      "note": "法說會表示 AI 晶片需求強勁，CoWoS 先進封裝產能持續滿載。"
+      "initials": "AA",
+      "name": "Abbas Araghchi",
+      "title": "伊朗外交部長",
+      "note": "透過巴基斯坦轉達最新提案：開放荷姆茲換取美國撤封鎖，核武談判推後處理。強調此為伊朗紅線框架內的最大讓步。"
     }
   ],
   "signals": [
     { "name": "半導體 / AI", "signal": "bull", "label": "看多" },
-    { "name": "加密貨幣", "signal": "bull", "label": "看多" },
-    { "name": "雲端 / 資料中心", "signal": "bull", "label": "看多" },
-    { "name": "金融", "signal": "watch", "label": "觀察" },
+    { "name": "能源", "signal": "bull", "label": "看多" },
+    { "name": "台股", "signal": "bull", "label": "看多" },
+    { "name": "加密貨幣", "signal": "watch", "label": "觀察" },
+    { "name": "美股科技", "signal": "watch", "label": "觀察" },
     { "name": "航運", "signal": "watch", "label": "觀察" },
-    { "name": "能源", "signal": "bear", "label": "看空" },
-    { "name": "消費", "signal": "neutral", "label": "中性" }
+    { "name": "消費", "signal": "bear", "label": "看空" }
   ],
   "market": {
     "crypto": [
       {
         "symbol": "BTC",
         "name": "Bitcoin",
-        "price": "$94,250",
-        "change": "+2.4%",
-        "dir": "up",
-        "high": "$95,800",
-        "low": "$91,200",
-        "market_cap": "$1.86T",
-        "volume": "$38.2B",
-        "signal": "bull",
-        "signal_label": "看多"
+        "price": "$76,500",
+        "change": "-1.2%",
+        "dir": "down",
+        "high": "$79,417",
+        "low": "$75,800",
+        "market_cap": "$1.33T",
+        "volume": "$28.4B",
+        "signal": "watch",
+        "signal_label": "觀察"
       },
       {
         "symbol": "ETH",
         "name": "Ethereum",
-        "price": "$1,788",
-        "change": "+1.8%",
-        "dir": "up",
-        "high": "$1,820",
-        "low": "$1,740",
-        "market_cap": "$215B",
-        "volume": "$12.4B",
+        "price": "$2,280",
+        "change": "-2.1%",
+        "dir": "down",
+        "high": "$2,370",
+        "low": "$2,250",
+        "market_cap": "$233B",
+        "volume": "$9.8B",
         "signal": "watch",
         "signal_label": "觀察"
       },
       {
         "symbol": "SOL",
         "name": "Solana",
-        "price": "$148",
-        "change": "-0.6%",
+        "price": "$142",
+        "change": "-1.8%",
         "dir": "down",
-        "high": "$155",
-        "low": "$144",
-        "market_cap": "$68B",
-        "volume": "$3.8B",
+        "high": "$151",
+        "low": "$139",
+        "market_cap": "$65B",
+        "volume": "$3.1B",
         "signal": "watch",
         "signal_label": "觀察"
       }
     ],
     "crypto_news": [
-      { "text": "比特幣現貨 ETF 連續第五日淨流入，累計本週逾 12 億美元，機構資金回流明顯。", "time": "08:00" },
-      { "text": "以太坊 Pectra 升級進入最終測試階段，預計下月主網上線，質押效率大幅提升。", "time": "07:20" },
-      { "text": "Solana 鏈上 DEX 交易量回落，市場觀望情緒升溫，短線支撐在 $140。", "time": "06:30" }
+      { "text": "Bitcoin 2026 大會於拉斯維加斯 4/27-29 舉行，歷史顯示大會後易走軟，目前在 $76-77K 整理，Fed 決策為今日關鍵。", "time": "今日" },
+      { "text": "伊朗談判僵局加上 Fed 觀望，加密市場風險情緒偏謹慎，BTC 自 $79K 高點回落。", "time": "昨日" },
+      { "text": "Polymarket 預測市場顯示 BTC 今年突破 $90K 機率已達 100%，$75K 以上機率亦為 100%。", "time": "參考" }
     ],
     "us_stocks": [
-      { "ticker": "NVDA", "name": "NVIDIA", "price": "$875", "change": "+3.2%", "dir": "up", "tag": "ai", "tag_label": "AI", "note": "Blackwell Ultra 出貨時程確認，需求持續強勁" },
-      { "ticker": "TSM", "name": "台積電 ADR", "price": "$168", "change": "+2.8%", "dir": "up", "tag": "semi", "tag_label": "半導體", "note": "法說會樂觀，CoWoS 滿載" },
-      { "ticker": "AAPL", "name": "Apple", "price": "$212", "change": "-0.4%", "dir": "down", "tag": "ai", "tag_label": "AI", "note": "Apple Intelligence 擴展語系，WWDC 前關注" },
-      { "ticker": "MSFT", "name": "Microsoft", "price": "$418", "change": "+0.9%", "dir": "up", "tag": "server", "tag_label": "雲端", "note": "Azure AI 需求持續增長，資本支出上修" },
-      { "ticker": "META", "name": "Meta", "price": "$528", "change": "+1.4%", "dir": "up", "tag": "ai", "tag_label": "AI", "note": "Llama 4 發布，廣告 AI 整合加速" }
+      { "ticker": "NVDA", "name": "NVIDIA", "price": "$875+", "change": "+強勢", "dir": "up", "tag": "ai", "tag_label": "AI", "note": "Blackwell Ultra 出貨確認，AI 伺服器需求強勁" },
+      { "ticker": "TSM", "name": "台積電 ADR", "price": "$393", "change": "-3.1%", "dir": "down", "tag": "semi", "tag_label": "半導體", "note": "Q1 營收年增 40.6%，短線獲利了結，目標價 $463" },
+      { "ticker": "MU", "name": "Micron", "price": "$512", "change": "+3.2%", "dir": "up", "tag": "semi", "tag_label": "HBM", "note": "Melius 買進評級，年初以來漲 74%，AI HBM 需求強勁" },
+      { "ticker": "DELL", "name": "Dell", "price": "$245 目標", "change": "上調目標", "dir": "up", "tag": "server", "tag_label": "伺服器", "note": "SMCI 被起訴後市占受惠，Melius 目標上調至 $245" },
+      { "ticker": "VZ", "name": "Verizon", "price": "+3.5%", "change": "+3.5%", "dir": "up", "tag": "finance", "tag_label": "電信", "note": "Q1 獲利超預期，上調全年獲利展望" }
     ],
     "us_news": [
-      { "text": "Fed 官員暗示降息空間存在，科技股整體受惠，那斯達克反彈。", "time": "08:30" },
-      { "text": "美中技術談判傳出進展，半導體出口管制有望鬆綁部分條款。", "time": "07:00" }
+      { "text": "今晚 FOMC 決策為最大關注，市場 100% 預期按兵不動，Powell 記者會為最後政策信號。", "time": "今日重點" },
+      { "text": "Nasdaq、S&P 500 上週五創新高，本週開盤小幅回落，等待 Fed 決策與科技股財報。", "time": "今日" }
     ],
     "tw_stocks": [
-      { "ticker": "2330", "name": "台積電", "price": "NT$950", "change": "+1.8%", "dir": "up", "tag": "semi", "tag_label": "半導體", "note": "法說會後外資持續加碼，CoWoS 訂單滿載" },
-      { "ticker": "2317", "name": "鴻海", "price": "NT$198", "change": "+2.1%", "dir": "up", "tag": "server", "tag_label": "伺服器", "note": "Q1 營收年增 24%，AI 伺服器為主要動能" },
-      { "ticker": "2454", "name": "聯發科", "price": "NT$1,285", "change": "-0.5%", "dir": "down", "tag": "semi", "tag_label": "半導體", "note": "天璣晶片出貨穩定，AI 手機需求持續" },
-      { "ticker": "3711", "name": "日月光投控", "price": "NT$168", "change": "+0.9%", "dir": "up", "tag": "semi", "tag_label": "封裝", "note": "先進封裝需求強勁，CoWoS 受惠明顯" },
-      { "ticker": "2308", "name": "台達電", "price": "NT$388", "change": "+1.2%", "dir": "up", "tag": "server", "tag_label": "電源", "note": "AI 資料中心電源需求爆發，毛利率上修" }
+      { "ticker": "2330", "name": "台積電", "price": "NT$1,100+", "change": "-1.1%", "dir": "down", "tag": "semi", "tag_label": "半導體", "note": "連三日創高後今日獲利了結，Q1 年增 40.6%，金管會放寬持股上限利多" },
+      { "ticker": "Macronix", "name": "旺宏電子", "price": "漲停", "change": "+10%", "dir": "up", "tag": "semi", "tag_label": "記憶體", "note": "AI 基礎建設題材，今日漲停為台股最強個股之一" },
+      { "ticker": "Kaimei", "name": "凱美電機", "price": "漲停", "change": "+10%", "dir": "up", "tag": "server", "tag_label": "電子", "note": "AI 相關電子族群跟漲，漲停鎖板" },
+      { "ticker": "2454", "name": "聯發科", "price": "NT$1,300+", "change": "+穩健", "dir": "up", "tag": "semi", "tag_label": "半導體", "note": "AI 手機晶片需求持續，隨大盤走強" },
+      { "ticker": "2308", "name": "台達電", "price": "NT$400+", "change": "+跟漲", "dir": "up", "tag": "server", "tag_label": "電源", "note": "AI 資料中心電源需求爆發，毛利率上修" }
     ],
     "tw_news": [
-      { "text": "台股加權指數收 21,340 點，半導體族群領漲，外資買超逾 80 億元。", "time": "13:35" },
-      { "text": "鴻海法說會後法人持續加碼，目標價普遍上調至 220 元以上。", "time": "10:00" }
+      { "text": "台股今日高開挑戰 40,000 點歷史大關，連三日創新高，AI 基礎建設樂觀情緒持續推升。", "time": "盤中" },
+      { "text": "金管會放寬基金單一持股上限至 25%，台積電直接受惠，外資與投信加速布局。", "time": "最新政策" }
     ]
   },
   "industry_detail": {
@@ -179,70 +179,110 @@
       {
         "tag": "半導體",
         "type": "semi",
-        "text": "TSMC 法說會釋出樂觀展望，AI 相關需求持續強勁，CoWoS 先進封裝產能持續滿載，全年營收指引上修。",
-        "time": "09:00",
-        "impact": "↑ 半導體族群全面受惠"
-      },
-      {
-        "tag": "AI",
-        "type": "ai",
-        "text": "NVIDIA Blackwell Ultra 架構正式確認出貨時程，下游伺服器組裝廠廣達、緯穎訂單能見度提升至 Q3。",
-        "time": "06:45",
-        "impact": "↑ AI 伺服器供應鏈追蹤"
+        "text": "台積電 Q1 2026 營收年增 40.6%，AI 晶片需求強勁，金管會同步放寬基金持股上限至 25%，台積電市值持續創高，外資強烈買進評級目標價 $463。",
+        "time": "最新",
+        "impact": "↑ 半導體主線強勁不變"
       },
       {
         "tag": "能源",
         "type": "energy",
-        "text": "中東局勢緩和，WTI 原油跌破 78 美元，OPEC+ 增產預期升溫，能源股面臨獲利了結壓力。",
-        "time": "05:30",
-        "impact": "↓ 能源板塊短線承壓"
+        "text": "荷姆茲海峽封鎖第九週，WTI 突破 $100、Brent 升至 $111，IEA 警告史上最大供應衝擊。UAE 宣布退出 OPEC，Goldman 上調 Brent Q4 目標至 $90，Citi 預警最壞情境 $150。",
+        "time": "今日重點",
+        "impact": "↑ 能源股 / 替代能源全面受惠"
       },
       {
-        "tag": "金融",
-        "type": "finance",
-        "text": "Fed 鴿派言論提振銀行股，降息預期重燃，利差擴大預期支撐區域銀行板塊。",
-        "time": "08:30",
-        "impact": "↑ 金融股短線受惠"
+        "tag": "AI",
+        "type": "ai",
+        "text": "Micron 獲 Melius 買進評級，AI HBM 需求強勁，年初以來漲幅 74%。Dell 因 SMCI 被司法部起訴獲得市占轉移機會，AI 伺服器競爭格局重組。",
+        "time": "昨日",
+        "impact": "↑ AI 記憶體 / 伺服器受惠"
+      },
+      {
+        "tag": "台股",
+        "type": "tw",
+        "text": "台股挑戰 40,000 點歷史大關，連三日創新高，AI 基礎建設題材為主要動能。電子科技族群全面走強，Macronix、Kaimei 漲停，TSMC 小幅回落進行健康獲利了結。",
+        "time": "盤中",
+        "impact": "↑ 台股強勢 注意高檔震盪"
       },
       {
         "tag": "航運",
         "type": "shipping",
-        "text": "波羅的海乾散貨指數 BDI 連跌三日至 1,820 點，大宗商品需求疲軟，散裝航運進入觀望。",
-        "time": "06:20",
-        "impact": "↓ 散裝航運短線偏弱"
+        "text": "荷姆茲替代航線需求暴增，巴拿馬運河過路費大幅攀升。美國石油出口創歷史新高至 1,288 萬桶/日，亞歐各國搶購替代供應，特殊航線受惠。",
+        "time": "最新",
+        "impact": "↑ 替代航線 / LNG 船東受惠"
       },
       {
-        "tag": "電動車",
+        "tag": "消費",
         "type": "ev",
-        "text": "Tesla Q1 交車量低於預期，中國市場競爭加劇，比亞迪持續以價格戰搶占市場份額。",
-        "time": "07:00",
-        "impact": "↓ 電動車競爭加劇"
+        "text": "Domino's Pizza Q1 財報不如預期，股價下跌 10.5%，消費類股在高油價通膨環境下整體承壓。高能源成本正侵蝕消費者可支配所得。",
+        "time": "昨日",
+        "impact": "↓ 消費類股承壓"
       }
     ],
     "top_companies": [
+      {
+        "name": "台積電 TSMC",
+        "ticker": "2330 · 台股 / TSM · 美股",
+        "industry": "晶圓代工",
+        "event_type": "earnings",
+        "event_label": "財報亮眼",
+        "note": "Q1 營收年增 40.6%，AI 需求強勁，金管會放寬持股上限直接利多，分析師目標價 $463，強烈買進。"
+      },
       {
         "name": "NVIDIA",
         "ticker": "NVDA · 美股",
         "industry": "AI 晶片",
         "event_type": "watch",
         "event_label": "高度關注",
-        "note": "Blackwell Ultra 出貨確認，資料中心營收持續超預期，AI 基礎設施核心受惠股。"
+        "note": "Blackwell Ultra 出貨確認，AI 基礎建設核心受惠，Q1 財報 5/28 為本季最重要事件。"
       },
       {
-        "name": "台積電",
-        "ticker": "2330 · 台股 / TSM · 美股",
-        "industry": "晶圓代工",
+        "name": "Micron",
+        "ticker": "MU · 美股",
+        "industry": "HBM 記憶體",
+        "event_type": "expand",
+        "event_label": "分析師買進",
+        "note": "Melius Research 買進評級，年初以來漲幅 74%，AI HBM 需求強勁，分析師視為潛在兆元市值候選。"
+      },
+      {
+        "name": "Dell Technologies",
+        "ticker": "DELL · 美股",
+        "industry": "AI 伺服器",
+        "event_type": "expand",
+        "event_label": "市占受惠",
+        "note": "SMCI 被司法部起訴後，Dell 有望吃下競爭對手市占，Melius 上調目標至 $245，AI 伺服器需求持續成長。"
+      },
+      {
+        "name": "Saudi Aramco",
+        "ticker": "2222 · 沙股",
+        "industry": "能源",
+        "event_type": "watch",
+        "event_label": "油價飆升",
+        "note": "荷姆茲封鎖推升 Brent 至 $111，沙烏地阿拉伯坐收高油價紅利，但 UAE 退出 OPEC 帶來增產不確定性。"
+      },
+      {
+        "name": "Alphabet",
+        "ticker": "GOOGL · 美股",
+        "industry": "搜尋 / 雲端",
         "event_type": "earnings",
-        "event_label": "法說會",
-        "note": "Q1 法說會超預期，CoWoS 滿載至 2026 年底，全年營收指引上修 5%。"
+        "event_label": "財報超預期",
+        "note": "Q1 財報超預期，Google Cloud 成長加速，Gemini AI 廣告整合效益顯現。"
       },
       {
         "name": "Microsoft",
         "ticker": "MSFT · 美股",
         "industry": "雲端 / AI",
         "event_type": "expand",
-        "event_label": "擴產",
-        "note": "Azure AI 需求強勁，宣布未來兩年資本支出達 800 億美元，雲端市占持續提升。"
+        "event_label": "資本支出",
+        "note": "Azure AI 需求強勁，宣布未來兩年資本支出 800 億美元，AI 基礎建設最大投入者之一。"
+      },
+      {
+        "name": "ExxonMobil",
+        "ticker": "XOM · 美股",
+        "industry": "能源",
+        "event_type": "watch",
+        "event_label": "高油價受惠",
+        "note": "WTI 突破 $100、Brent $111，能源龍頭獲利大幅提升，但荷姆茲局勢為最大變數。"
       },
       {
         "name": "Apple",
@@ -250,102 +290,67 @@
         "industry": "消費科技",
         "event_type": "watch",
         "event_label": "觀察",
-        "note": "Apple Intelligence 功能持續擴展，WWDC 6 月舉行，AI 整合深度為市場關注焦點。"
-      },
-      {
-        "name": "Alphabet",
-        "ticker": "GOOGL · 美股",
-        "industry": "搜尋 / 雲端",
-        "event_type": "earnings",
-        "event_label": "財報",
-        "note": "Q1 財報超預期，Google Cloud 成長加速，Gemini AI 廣告整合效益開始顯現。"
-      },
-      {
-        "name": "Samsung",
-        "ticker": "005930 · 韓股",
-        "industry": "記憶體 / 手機",
-        "event_type": "watch",
-        "event_label": "觀察",
-        "note": "HBM3E 良率改善，但仍落後 SK Hynix，AI 記憶體市占爭奪戰持續中。"
+        "note": "高油價環境壓縮消費者支出，Apple Intelligence 功能持續擴展，WWDC 6月為下一個催化劑。"
       },
       {
         "name": "鴻海",
         "ticker": "2317 · 台股",
         "industry": "AI 伺服器",
         "event_type": "earnings",
-        "event_label": "營收",
-        "note": "Q1 營收年增 24%，AI 伺服器佔比持續提升，GB200 機架組裝訂單能見度高。"
-      },
-      {
-        "name": "Saudi Aramco",
-        "ticker": "2222 · 沙股",
-        "industry": "能源",
-        "event_type": "watch",
-        "event_label": "觀察",
-        "note": "油價下跌壓縮獲利空間，OPEC+ 增產決策為關鍵變數，短線偏空。"
-      },
-      {
-        "name": "Meta",
-        "ticker": "META · 美股",
-        "industry": "社群 / AI",
-        "event_type": "expand",
-        "event_label": "擴張",
-        "note": "Llama 4 開源發布，廣告 AI 整合效益強勁，Q1 營收與獲利雙超預期。"
-      },
-      {
-        "name": "Tesla",
-        "ticker": "TSLA · 美股",
-        "industry": "電動車",
-        "event_type": "watch",
-        "event_label": "觀察",
-        "note": "Q1 交車量低於預期，中國市場競爭加劇，FSD 授權與 Robotaxi 進展為下半年催化劑。"
+        "event_label": "強勁成長",
+        "note": "AI 伺服器佔比持續提升，GB200 機架組裝訂單能見度高，隨台股創高同步走強。"
       }
     ],
     "corp_events": [
       {
+        "date": "2026/04/29",
+        "title": "FOMC 利率決策",
+        "desc": "今晚台北時間 02:00 公布，100% 預期按兵不動，Powell 記者會為最後政策信號"
+      },
+      {
+        "date": "2026/04/30",
+        "title": "Meta Q1 財報",
+        "desc": "廣告 AI 整合效益、Llama 4 進展為市場焦點"
+      },
+      {
+        "date": "2026/04/30",
+        "title": "Microsoft Q1 財報",
+        "desc": "Azure 成長率與 AI 資本支出指引為關鍵"
+      },
+      {
         "date": "2026/05/01",
         "title": "Amazon Q1 財報",
-        "desc": "AWS 雲端成長與 AI 資本支出指引為市場焦點"
+        "desc": "AWS 雲端成長與 AI 投資規模為焦點"
       },
       {
         "date": "2026/05/07",
         "title": "台積電 4 月營收",
-        "desc": "月營收公布，觀察 AI 需求持續性"
+        "desc": "月營收公布，驗證 AI 需求持續性"
       },
       {
         "date": "2026/05/28",
         "title": "NVIDIA Q1 財報",
-        "desc": "資料中心營收指引為本季最重要事件"
-      },
-      {
-        "date": "2026/06/09",
-        "title": "Apple WWDC",
-        "desc": "Apple Intelligence 新功能發布，AI 整合深度觀察"
-      },
-      {
-        "date": "2026/06/18",
-        "title": "Fed 利率決策",
-        "desc": "降息路徑指引，影響風險資產走向"
+        "desc": "本季最重要財報事件，資料中心營收指引為市場焦點"
       }
     ],
     "rotation": [
       {
-        "from": "能源",
-        "to": "半導體",
+        "from": "消費 / 一般製造",
+        "to": "能源",
         "strength": "強烈",
-        "reason": "油價承壓加上 AI 需求爆發，資金明顯從能源板塊流向半導體與 AI 基礎設施。"
+        "reason": "荷姆茲海峽封鎖進入第九週，WTI 破百、Brent $111，能源股受油價飆升直接受惠，消費類股則因通膨壓力承壓。"
       },
       {
-        "from": "航運",
-        "to": "雲端",
-        "strength": "中等",
-        "reason": "BDI 連跌、大宗需求疲軟，部分資金轉向受益於降息預期的雲端與成長股。"
+        "from": "傳統科技",
+        "to": "AI 基礎建設",
+        "strength": "持續",
+        "reason": "台積電 Q1 年增 40.6%、Micron HBM 需求爆發、Dell 市占擴大，AI 算力基礎建設資金持續集中。"
       },
       {
-        "from": "現金",
-        "to": "加密貨幣",
+        "from": "現金 / 短債",
+        "to": "台股",
         "strength": "明顯",
-        "reason": "ETF 持續淨流入、機構回補，比特幣突破關鍵壓力位，市場風險偏好回升。"
+        "reason": "台股挑戰 40,000 點，金管會放寬持股上限政策性利多，外資加速布局台灣 AI 供應鏈龍頭。"
       }
     ]
   }
