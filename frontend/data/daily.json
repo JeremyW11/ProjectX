@@ -1,298 +1,586 @@
 {
   "date": "2026-04-29",
   "tickers": [
-    "NVDA",
-    "TSM",
-    "AAPL",
-    "MSFT",
-    "GOOGL",
-    "AMZN",
-    "META",
-    "BTC",
-    "ETH",
-    "SOL",
-    "TSMC",
-    "AVGO",
-    "AMD",
-    "MU",
-    "ORCL",
-    "KO",
-    "GM"
+    {
+      "label": "BTC / USD",
+      "value": "$76,012",
+      "change": "-0.99%",
+      "dir": "down"
+    },
+    {
+      "label": "ETH / USD",
+      "value": "$2,285",
+      "change": "-1.10%",
+      "dir": "down"
+    },
+    {
+      "label": "S&P 500",
+      "value": "7,138.80",
+      "change": "-0.49%",
+      "dir": "down"
+    },
+    {
+      "label": "NASDAQ",
+      "value": "24,663.80",
+      "change": "-0.90%",
+      "dir": "down"
+    },
+    {
+      "label": "台股加權",
+      "value": "39,303.50",
+      "change": "-0.55%",
+      "dir": "down"
+    },
+    {
+      "label": "Brent 原油",
+      "value": "$111.16",
+      "change": "+2.71%",
+      "dir": "up"
+    }
   ],
   "macro": [
     {
-      "category": "央行政策",
-      "headline": "聯準會FOMC會議今日決議，市場預期維持利率不變",
-      "detail": "利率目標區間預計維持在3.50%-3.75%，這可能是鮑威爾擔任主席的最後一次會議，Kevin Warsh預計將於5月接任",
-      "impact": "中性偏鴿"
+      "tag": "政策",
+      "type": "macro",
+      "text": "Fed FOMC會議今日結束，預計維持利率3.5%-3.75%不變，可能是Powell最後一次主持會議",
+      "time": "04/29 14:00 ET",
+      "impact": "⚠ 市場已消化維持利率預期，焦點轉向Powell記者會與接任人選Warsh"
     },
     {
-      "category": "地緣政治",
-      "headline": "美伊衝突持續，荷姆茲海峽封鎖進入第九週",
-      "detail": "伊朗提出新和平方案，要求美國解除海上封鎖，但川普對方案不滿意，伊朗核計畫仍是主要癥結點",
-      "impact": "負面"
+      "tag": "地緣",
+      "type": "macro",
+      "text": "美伊和談陷入僵局，霍爾木茲海峽仍近乎關閉，影響全球20%能源流通",
+      "time": "04/29",
+      "impact": "↓ 地緣風險持續壓制風險資產，推升油價與通膨預期"
     },
     {
-      "category": "全球經濟",
-      "headline": "IMF四月展望：全球成長預測下調至3.1%",
-      "detail": "中東衝突導致油價上升、通膨預期升溫，新興市場面臨較大壓力，下行風險主導",
-      "impact": "負面"
+      "tag": "數據",
+      "type": "macro",
+      "text": "3月CPI年增達3.3%創2024年5月以來新高，通膨壓力因油價衝擊加劇",
+      "time": "04/29",
+      "impact": "↓ 聯準會降息預期再延後，市場預計最快9月才有降息機會"
     },
     {
-      "category": "通膨",
-      "headline": "美國核心PCE通膨維持高位，年率3.1%",
-      "detail": "紐約聯儲主席Williams預期2026年通膨在2.75%-3%之間，2027年回歸2%目標",
-      "impact": "負面"
+      "tag": "央行",
+      "type": "macro",
+      "text": "日本央行維持政策利率0.75%不變，上修通膨預期；ECB週四將公布利率決議",
+      "time": "04/28-29",
+      "impact": "⚠ 全球央行維持觀望，關注伊朗戰爭供給面風險"
     }
   ],
   "industry": [
     {
-      "sector": "半導體/AI",
-      "trend": "強勢",
-      "highlight": "iShares半導體ETF(SOXX)四月上漲40.4%，Nvidia重回5兆美元市值"
+      "tag": "半導體",
+      "type": "industry",
+      "text": "費半指數連漲18日後回落，OpenAI營收未達標報導衝擊晶片股；NVDA跌1.5%、AMD跌3%",
+      "time": "04/28",
+      "impact": "↓ 短線技術面過熱，RSI曾達85以上，回測整理壓力大"
     },
     {
-      "sector": "能源",
-      "trend": "強勢",
-      "highlight": "WTI原油逼近100美元，Brent突破111美元，荷姆茲海峽封鎖持續推升油價"
+      "tag": "AI",
+      "type": "us",
+      "text": "WSJ報導OpenAI營收與用戶增長未達內部目標，CFO憂慮未來算力合約支付能力",
+      "time": "04/28",
+      "impact": "↓ AI概念股承壓，Oracle跌逾5%，市場重新審視AI估值"
     },
     {
-      "sector": "科技",
-      "trend": "震盪",
-      "highlight": "OpenAI成長低於預期引發AI股震盪，Magnificent Seven今日四家同時發布財報"
+      "tag": "加密",
+      "type": "crypto",
+      "text": "BTC連日下跌至$76,000附近，Fed會議與伊朗談判僵局壓抑市場情緒",
+      "time": "04/29",
+      "impact": "↓ 加密市場避險情緒升溫，關注$73,500支撐位"
     },
     {
-      "sector": "航運",
-      "trend": "承壓",
-      "highlight": "荷姆茲海峽封鎖影響全球20%能源運輸，中東航線受阻"
+      "tag": "台股",
+      "type": "tw",
+      "text": "台股創高後回落，終場收39,303點跌218點；台積電跌1.58%至2,180元，市值躍居全球第六大股市",
+      "time": "04/29",
+      "impact": "↓ 短線乖離率創AI浪潮以來新高，面臨技術性回調"
     },
     {
-      "sector": "消費",
-      "trend": "分化",
-      "highlight": "可口可樂財報優於預期，汽油價格創2022年8月以來新高達4.176美元/加侖"
+      "tag": "能源",
+      "type": "industry",
+      "text": "UAE宣布5月1日退出OPEC，Brent原油突破$111創三週新高；美國汽油均價達$4.18創年內高點",
+      "time": "04/28",
+      "impact": "↑ 供給面風險加劇，霍爾木茲海峽關閉持續影響全球能源供應"
     }
   ],
   "persons": [
     {
+      "initials": "JP",
       "name": "Jerome Powell",
-      "role": "聯準會主席",
-      "event": "今日可能是最後一次主持FOMC會議，任期將於5月結束"
+      "title": "主席｜聯準會",
+      "note": "今日主持可能是最後一次FOMC會議，任期5月15日届滿，接任者Kevin Warsh預計6月上任"
     },
     {
-      "name": "Kevin Warsh",
-      "role": "聯準會主席提名人",
-      "event": "4月21日通過參議院銀行委員會確認聽證會，預計接任主席"
+      "initials": "SM",
+      "name": "Suhail Al Mazrouei",
+      "title": "能源部長｜阿聯酋",
+      "note": "宣布UAE將於5月1日退出OPEC及OPEC+，稱伊朗戰爭造成的市場混亂是適當退出時機"
     },
     {
-      "name": "Tim Cook",
-      "role": "Apple CEO",
-      "event": "宣布將於9月1日卸任CEO，由硬體主管John Ternus接任"
+      "initials": "DT",
+      "name": "Donald Trump",
+      "title": "總統｜美國",
+      "note": "對伊朗最新和談提案表示不滿，核問題仍是談判核心分歧點"
     }
   ],
   "signals": [
     {
-      "type": "利多",
-      "description": "半導體股四月強勁反彈，SOXX漲40%",
-      "confidence": "高"
+      "name": "半導體 / AI",
+      "signal": "watch",
+      "label": "觀察"
     },
     {
-      "type": "利空",
-      "description": "OpenAI成長低於內部目標，AI產業估值面臨質疑",
-      "confidence": "中"
+      "name": "加密貨幣",
+      "signal": "watch",
+      "label": "觀察"
     },
     {
-      "type": "利多",
-      "description": "比特幣ETF連續8日淨流入達21億美元",
-      "confidence": "高"
+      "name": "能源",
+      "signal": "bull",
+      "label": "看多"
     },
     {
-      "type": "利空",
-      "description": "油價飆升推升通膨擔憂，央行可能維持高利率更久",
-      "confidence": "高"
+      "name": "雲端 / 資料中心",
+      "signal": "watch",
+      "label": "觀察"
+    },
+    {
+      "name": "金融",
+      "signal": "bull",
+      "label": "看多"
+    },
+    {
+      "name": "航運",
+      "signal": "bear",
+      "label": "看空"
+    },
+    {
+      "name": "消費",
+      "signal": "bear",
+      "label": "看空"
     }
   ],
   "market": {
     "crypto": [
       {
         "symbol": "BTC",
-        "price": 77040,
-        "change_24h": "-0.75%",
-        "note": "連續在80000美元遇阻，ETF持續淨流入"
+        "name": "Bitcoin",
+        "price": "$76,012",
+        "change": "-0.99%",
+        "dir": "down",
+        "high": "$78,185",
+        "low": "$73,485",
+        "market_cap": "$1.53T",
+        "volume": "$14.55B",
+        "signal": "watch",
+        "signal_label": "觀察"
       },
       {
         "symbol": "ETH",
-        "price": 2278,
-        "change_24h": "-2.8%",
-        "note": "創一週來最低開盤價，ETF持續淨流出"
+        "name": "Ethereum",
+        "price": "$2,285",
+        "change": "-1.10%",
+        "dir": "down",
+        "high": "$2,404",
+        "low": "$2,254",
+        "market_cap": "$279B",
+        "volume": "$10.2B",
+        "signal": "watch",
+        "signal_label": "觀察"
       },
       {
         "symbol": "SOL",
-        "price": 84,
-        "change_24h": "-0.4%",
-        "note": "四月微漲1.18%，ETF流入連續6個月下滑"
+        "name": "Solana",
+        "price": "$83.89",
+        "change": "-1.32%",
+        "dir": "down",
+        "high": "$88.01",
+        "low": "$83.83",
+        "market_cap": "$48.3B",
+        "volume": "$3.99B",
+        "signal": "watch",
+        "signal_label": "觀察"
       }
     ],
     "crypto_news": [
-      "比特幣ETF過去8天淨流入21億美元，累計淨流入達580億美元",
-      "BlackRock IBIT單月流入21.4億美元，居全ETF前1%",
-      "Morgan Stanley新推MSBT比特幣ETF首週流入7100萬美元",
-      "策略公司(前MicroStrategy)購入34,164枚BTC，總持倉達815,061枚"
+      {
+        "text": "BTC跌破$77,000，Fed會議維持利率與伊朗談判僵局壓抑市場情緒",
+        "time": "04/29"
+      },
+      {
+        "text": "Circle在Solana鏈上鑄造5億USDC，穩定幣需求持續增長",
+        "time": "04/28"
+      },
+      {
+        "text": "BitMine Immersion持有ETH突破500萬枚，單週買入逾10萬枚創2026年新高",
+        "time": "04/27"
+      }
     ],
     "us_stocks": [
       {
-        "symbol": "S&P 500",
-        "price": 7130.53,
-        "change": "-0.60%"
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "price": "$210.23",
+        "change": "-1.50%",
+        "dir": "down",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "OpenAI營收未達標報導衝擊晶片股，市值仍維持$5.33T"
       },
       {
-        "symbol": "NASDAQ",
-        "price": 24650.38,
-        "change": "-0.95%"
+        "ticker": "TSM",
+        "name": "台積電ADR",
+        "price": "$393.03",
+        "change": "-3.16%",
+        "dir": "down",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "跟隨費半指數回落，Q1營收年增40.6%基本面強勁"
       },
       {
-        "symbol": "DOW",
-        "price": 49108.15,
-        "change": "-0.12%"
+        "ticker": "MSFT",
+        "name": "Microsoft",
+        "price": "$428.01",
+        "change": "+2.13%",
+        "dir": "up",
+        "tag": "server",
+        "tag_label": "雲端",
+        "note": "今日盤後公布財報，Azure雲端收入增長39%受關注"
       },
       {
-        "symbol": "Russell 2000",
-        "price": 2761.63,
-        "change": "-0.95%"
+        "ticker": "AAPL",
+        "name": "Apple",
+        "price": "$269.70",
+        "change": "+0.87%",
+        "dir": "up",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "週四公布財報，iPhone 17銷售預期樂觀"
+      },
+      {
+        "ticker": "META",
+        "name": "Meta",
+        "price": "$675.50",
+        "change": "-0.80%",
+        "dir": "down",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "明日公布Q1財報，AI廣告業務增長為焦點"
       }
     ],
     "us_news": [
-      "四家Magnificent Seven成員(Alphabet、Microsoft、Amazon、Meta)今日盤後發布財報",
-      "S&P 500已有82%企業財報超預期，財報季表現強勁",
-      "GM獲5億美元關稅退款，上調2026年業績指引",
-      "EU監管機構擴大對雲服務和AI的審查"
+      {
+        "text": "WSJ報導OpenAI營收與用戶增長未達內部目標，科技股承壓回落",
+        "time": "04/28"
+      },
+      {
+        "text": "Magnificent Seven本週五家公布財報，佔S&P 500市值約44%",
+        "time": "04/29"
+      }
     ],
     "tw_stocks": [
       {
-        "symbol": "TAIEX",
-        "price": 39616.63,
-        "change": "+1.76%",
-        "note": "盤中首度突破40000點關卡，成交量達1.184兆新台幣"
+        "ticker": "2330",
+        "name": "台積電",
+        "price": "2,180元",
+        "change": "-1.58%",
+        "dir": "down",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "連兩日跌破5日線，融資餘額創2000年9月以來新高"
       },
       {
-        "symbol": "TSMC",
-        "price": 2265,
-        "change": "+3.66%",
-        "note": "占台股市值40%以上，受惠ETF持股上限放寬政策"
+        "ticker": "2317",
+        "name": "鴻海",
+        "price": "225元",
+        "change": "-0.22%",
+        "dir": "down",
+        "tag": "server",
+        "tag_label": "伺服器",
+        "note": "小幅回落，外資買超"
+      },
+      {
+        "ticker": "2454",
+        "name": "聯發科",
+        "price": "2,575元",
+        "change": "-1.53%",
+        "dir": "down",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "跟隨大盤回落，高毛利率46%優勢支撐"
+      },
+      {
+        "ticker": "2308",
+        "name": "台達電",
+        "price": "2,165元",
+        "change": "+1.88%",
+        "dir": "up",
+        "tag": "server",
+        "tag_label": "電源",
+        "note": "逆勢上漲，明日召開法說會，外資買超"
+      },
+      {
+        "ticker": "3711",
+        "name": "日月光",
+        "price": "315元",
+        "change": "-0.95%",
+        "dir": "down",
+        "tag": "semi",
+        "tag_label": "封裝",
+        "note": "先進封裝需求強勁，長線投資價值獲分析師肯定"
       }
     ],
     "tw_news": [
-      "TAIEX盤中首度觸及40194.92點歷史新高",
-      "金管會放寬ETF單一股票持股上限從10%提高至25%",
-      "Google獲准投資台灣270.8億新台幣用於資料中心和半導體業務",
-      "三月工業生產年增28.7%，為2020年5月以來最快增速",
-      "電子科技與科技服務類股領漲，Phison、南亞電路板等漲停"
+      {
+        "text": "台股市值超越加拿大躍居全球第六大股市，台積電市值膨脹至1.8兆美元",
+        "time": "04/29"
+      },
+      {
+        "text": "台股融資餘額飆升至4,500億元創25年新高，市場追價氛圍濃厚",
+        "time": "04/29"
+      }
     ]
   },
   "industry_detail": {
     "news": [
-      "TSMC預計2026年營收成長超過30%，資本支出520-560億美元",
-      "Nvidia重返5兆美元市值，距歷史高點僅差2%",
-      "記憶體出現30年來最嚴重短缺，帶動DRAM價格飆升",
-      "四大雲端巨頭2026年AI基礎設施支出預計超過6000億美元",
-      "阿聯酋宣布下月退出OPEC以獲得更大市場彈性"
+      {
+        "tag": "半導體",
+        "type": "semi",
+        "text": "台灣金管會放寬基金單一股票投資上限，台積電受惠跳空大漲後回落整理",
+        "time": "04/24-29",
+        "impact": "⚠ 政策鬆綁短期刺激股價，但技術面進入超買區"
+      },
+      {
+        "tag": "AI",
+        "type": "ai",
+        "text": "OpenAI營收成長放緩引發AI估值質疑，CFO警告未來算力成本支付壓力",
+        "time": "04/28",
+        "impact": "↓ AI概念股短線面臨重新估值壓力"
+      },
+      {
+        "tag": "能源",
+        "type": "energy",
+        "text": "UAE宣布退出OPEC，可望將日產量從320萬桶大幅提升，但霍爾木茲海峽關閉限制出口",
+        "time": "04/28",
+        "impact": "↑ 短期供給緊張持續，中長期OPEC影響力弱化"
+      },
+      {
+        "tag": "台股",
+        "type": "tw",
+        "text": "台股連兩日攻上4萬點後回檔，74%個股下跌呈現拉權值股出中小型股格局",
+        "time": "04/29",
+        "impact": "⚠ 指數表現與個股分歧擴大，選股風險提升"
+      },
+      {
+        "tag": "航運",
+        "type": "shipping",
+        "text": "霍爾木茲海峽通行量從日均130艘驟降至6艘，數千船員受困",
+        "time": "04/29",
+        "impact": "↓ 全球航運嚴重受阻，運價與保險成本飆升"
+      },
+      {
+        "tag": "金融",
+        "type": "finance",
+        "text": "台股金融股逆勢走強，國泰金大漲5.22%收78.6元，富邦金漲逾3%",
+        "time": "04/29",
+        "impact": "↑ 資金輪動轉向金融股避險，殖利率優勢吸引買盤"
+      }
     ],
     "top_companies": [
       {
-        "ticker": "NVDA",
-        "name": "Nvidia",
-        "highlight": "四月上漲19%，AI晶片市場份額超過80%"
-      },
-      {
-        "ticker": "TSM",
         "name": "台積電",
-        "highlight": "年初至今上漲26%，Q2營收指引季增10.3%"
+        "ticker": "2330·TW",
+        "industry": "半導體",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "子公司全數出清安謀持股，為財務投資策略調整"
       },
       {
-        "ticker": "AVGO",
-        "name": "Broadcom",
-        "highlight": "ASIC設計市場份額60%，客戶包括Google、Meta、OpenAI"
+        "name": "Microsoft",
+        "ticker": "MSFT·US",
+        "industry": "雲端",
+        "event_type": "earnings",
+        "event_label": "財報",
+        "note": "今日盤後公布Q3財報，Azure增長為焦點"
       },
       {
-        "ticker": "MU",
-        "name": "Micron",
-        "highlight": "摩根士丹利2026年半導體首選股，受惠DRAM/NAND短缺"
+        "name": "Meta",
+        "ticker": "META·US",
+        "industry": "社群",
+        "event_type": "earnings",
+        "event_label": "財報",
+        "note": "明日公布Q1財報，AI廣告變現能力受關注"
+      },
+      {
+        "name": "Apple",
+        "ticker": "AAPL·US",
+        "industry": "消費電子",
+        "event_type": "earnings",
+        "event_label": "財報",
+        "note": "週四公布Q2財報，iPhone 17週期預期樂觀"
+      },
+      {
+        "name": "Amazon",
+        "ticker": "AMZN·US",
+        "industry": "電商/雲端",
+        "event_type": "earnings",
+        "event_label": "財報",
+        "note": "明日公布財報，AWS年增24%增速受矚目"
+      },
+      {
+        "name": "台達電",
+        "ticker": "2308·TW",
+        "industry": "電源/AI伺服器",
+        "event_type": "watch",
+        "event_label": "法說",
+        "note": "明日召開法說會，AI伺服器電源需求強勁"
+      },
+      {
+        "name": "NVIDIA",
+        "ticker": "NVDA·US",
+        "industry": "AI晶片",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "市值維持$5T以上，5/20公布財報"
+      },
+      {
+        "name": "威騰電子",
+        "ticker": "WDC·US",
+        "industry": "記憶體",
+        "event_type": "earnings",
+        "event_label": "財報",
+        "note": "希捷財測優於預期，盤後大漲10%"
+      },
+      {
+        "name": "GM通用汽車",
+        "ticker": "GM·US",
+        "industry": "汽車",
+        "event_type": "earnings",
+        "event_label": "財報",
+        "note": "Q1財報優於預期，上調2026年展望"
+      },
+      {
+        "name": "Coca-Cola",
+        "ticker": "KO·US",
+        "industry": "消費",
+        "event_type": "earnings",
+        "event_label": "財報",
+        "note": "財報優於預期，股價大漲近4%"
       }
     ],
     "corp_events": [
       {
-        "company": "Apple",
-        "event": "Tim Cook宣布9月1日卸任CEO",
-        "date": "2026-09-01"
+        "date": "04/29",
+        "title": "FOMC利率決議",
+        "desc": "聯準會公布4月利率決議，市場預期維持3.5%-3.75%不變"
       },
       {
-        "company": "OpenAI",
-        "event": "營收和用戶成長低於內部目標",
-        "impact": "AI股普遍受壓"
+        "date": "04/29",
+        "title": "Microsoft財報",
+        "desc": "盤後公布Q3財報，Azure雲端營收增長為焦點"
       },
       {
-        "company": "Dell",
-        "event": "Melius Research上調目標價至245美元，看好AI伺服器需求"
+        "date": "04/30",
+        "title": "Meta/Amazon財報",
+        "desc": "兩大科技巨頭公布Q1財報，AI投資效益受檢視"
+      },
+      {
+        "date": "05/01",
+        "title": "Apple財報",
+        "desc": "公布Q2財報，iPhone銷售與AI策略為焦點"
+      },
+      {
+        "date": "05/01",
+        "title": "UAE退出OPEC生效",
+        "desc": "阿聯酋正式退出OPEC，可能逐步提高產量"
       }
     ],
     "rotation": [
       {
-        "from": "防禦股",
-        "to": "半導體/AI",
-        "driver": "伊朗局勢緩和預期、AI支出持續"
+        "from": "科技成長股",
+        "to": "金融股",
+        "strength": "明顯",
+        "reason": "科技股估值過高引發獲利了結，資金轉向殖利率較高的金融股避險"
+      },
+      {
+        "from": "中小型股",
+        "to": "權值股",
+        "strength": "強烈",
+        "reason": "台股4萬點後資金集中拉抬權值股，74%個股下跌顯示輪動明顯"
+      },
+      {
+        "from": "AI概念股",
+        "to": "傳統能源",
+        "strength": "中等",
+        "reason": "OpenAI營收疑慮與油價飆漲驅動資金流向能源板塊"
       }
     ]
   },
   "institutional": {
     "research": [
       {
-        "firm": "Morgan Stanley",
-        "target": "MU",
-        "rating": "買入",
-        "note": "2026年半導體首選，預期EPS年成長48%"
+        "ticker": "AAPL",
+        "name": "Apple",
+        "firm": "UBS",
+        "rating": "中性",
+        "rating_type": "neutral",
+        "target": "$287",
+        "date": "2026-04-29",
+        "note": "供應鏈檢查正面，目標價由$280上調至$287"
       },
       {
-        "firm": "Melius Research",
-        "target": "DELL",
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "firm": "Consensus",
         "rating": "買入",
-        "price_target": 245,
-        "note": "看好AI伺服器市場份額增加"
+        "rating_type": "buy",
+        "target": "$267.55",
+        "date": "2026-04-29",
+        "note": "38位分析師共識評級買入，AI領導地位穩固"
       },
       {
-        "firm": "Goldman Sachs",
-        "target": "黃金",
-        "note": "2026年金價區間預測4000-6300美元"
+        "ticker": "TSM",
+        "name": "台積電",
+        "firm": "Barchart",
+        "rating": "強力買入",
+        "rating_type": "buy",
+        "target": "$450",
+        "date": "2026-04-29",
+        "note": "技術指標100%買入，AI晶圓代工需求持續強勁"
       }
     ],
     "earnings": [
       {
-        "company": "Alphabet (GOOGL)",
-        "date": "2026-04-29",
-        "time": "盤後",
-        "expectation": "Google搜尋和雲端AI需求支撐成長"
+        "ticker": "MSFT",
+        "name": "Microsoft",
+        "note": "今日盤後公布Q3財報",
+        "eps": "預期$3.22",
+        "eps_result": "",
+        "revenue": "預期$705億",
+        "status": "今日公布",
+        "status_type": "today"
       },
       {
-        "company": "Microsoft (MSFT)",
-        "date": "2026-04-29",
-        "time": "盤後",
-        "expectation": "Azure成長預估37-38%，Copilot變現進展"
+        "ticker": "META",
+        "name": "Meta",
+        "note": "明日公布Q1財報",
+        "eps": "預期$5.25",
+        "eps_result": "",
+        "revenue": "預期$420億",
+        "status": "明日公布",
+        "status_type": "upcoming"
       },
       {
-        "company": "Amazon (AMZN)",
-        "date": "2026-04-29",
-        "time": "盤後",
-        "expectation": "AWS成長需超過20%以證明市佔穩固"
-      },
-      {
-        "company": "Meta (META)",
-        "date": "2026-04-29",
-        "time": "盤後",
-        "expectation": "Q1營收指引暗示年增約30%"
-      },
-      {
-        "company": "Apple (AAPL)",
-        "date": "2026-04-30",
-        "time": "盤後",
-        "expectation": "關注CEO交接計畫與iPhone需求"
+        "ticker": "AAPL",
+        "name": "Apple",
+        "note": "週四公布Q2財報",
+        "eps": "預期$1.62",
+        "eps_result": "",
+        "revenue": "預期$940億",
+        "status": "5/1公布",
+        "status_type": "upcoming"
       }
     ]
   },
@@ -300,52 +588,85 @@
     "events": [
       {
         "date": "2026-04-29",
-        "event": "聯準會FOMC利率決議",
-        "importance": "高"
+        "time": "14:00 ET",
+        "title": "FOMC利率決議",
+        "desc": "聯準會公布4月利率決議，Powell記者會14:30開始",
+        "type": "fed",
+        "tag": "聯準會",
+        "impact": "high"
       },
       {
         "date": "2026-04-29",
-        "event": "Magnificent Seven四家財報(GOOGL/MSFT/AMZN/META)",
-        "importance": "高"
+        "time": "盤後",
+        "title": "Microsoft財報",
+        "desc": "公布FY26 Q3財報，Azure雲端增長為焦點",
+        "type": "earnings",
+        "tag": "財報",
+        "impact": "high"
       },
       {
         "date": "2026-04-30",
-        "event": "美國Q1 GDP初值公佈",
-        "importance": "高"
+        "time": "盤後",
+        "title": "Meta/Amazon財報",
+        "desc": "兩大科技巨頭公布Q1財報",
+        "type": "earnings",
+        "tag": "財報",
+        "impact": "high"
       },
       {
         "date": "2026-04-30",
-        "event": "初請失業金人數",
-        "importance": "中"
-      },
-      {
-        "date": "2026-04-30",
-        "event": "Apple財報發布",
-        "importance": "高"
+        "time": "09:00",
+        "title": "台達電法說會",
+        "desc": "公布Q1業績展望與AI伺服器電源訂單動態",
+        "type": "tw",
+        "tag": "台股",
+        "impact": "mid"
       },
       {
         "date": "2026-05-01",
-        "event": "四月製造業PMI公佈",
-        "importance": "中"
+        "time": "全日",
+        "title": "UAE退出OPEC生效",
+        "desc": "阿聯酋正式退出OPEC，能源市場關注後續產量政策",
+        "type": "geo",
+        "tag": "地緣",
+        "impact": "high"
       }
     ],
     "high_impact": [
-      "聯準會利率決議 - 預期維持不變，關注鮑威爾記者會談話",
-      "四大科技巨頭財報 - AI資本支出與雲端成長為焦點",
-      "美國Q1 GDP - 衡量經濟對高油價和地緣風險的承受力"
+      {
+        "date": "04/29",
+        "title": "FOMC利率決議",
+        "desc": "Powell可能最後一次主持會議，市場關注政策展望",
+        "impact": "high"
+      },
+      {
+        "date": "04/29-05/01",
+        "title": "Mag 7財報週",
+        "desc": "Microsoft、Meta、Amazon、Apple本週密集公布財報",
+        "impact": "high"
+      },
+      {
+        "date": "05/01",
+        "title": "UAE退出OPEC",
+        "desc": "可能引發其他成員國跟進，重塑全球能源格局",
+        "impact": "mid"
+      }
     ],
     "future": [
       {
-        "date": "2026-05-15",
-        "event": "鮑威爾主席任期屆滿"
+        "date": "05/01",
+        "title": "ECB利率決議",
+        "desc": "歐洲央行公布4月利率決議"
       },
       {
-        "date": "2026-06月",
-        "event": "Kevin Warsh預計主持首次FOMC會議"
+        "date": "05/15",
+        "title": "Powell任期届滿",
+        "desc": "聯準會主席交接，Kevin Warsh預計接任"
       },
       {
-        "date": "2026-09-01",
-        "event": "Apple CEO交接(Tim Cook → John Ternus)"
+        "date": "05/20",
+        "title": "NVIDIA財報",
+        "desc": "公布FY27 Q1財報，AI晶片需求為焦點"
       }
     ]
   }
