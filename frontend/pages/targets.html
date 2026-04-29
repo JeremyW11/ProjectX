@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProjectX — 標的深度分析</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --bg-base: #05060f;
+      --bg-card: rgba(255,255,255,0.04);
+      --bg-card-hover: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08);
+      --text-primary: #f0f0f5;
+      --text-secondary: #8888aa;
+      --text-muted: #44445a;
+      --accent-blue: #4da6ff;
+      --accent-purple: #9f7aea;
+      --accent-green: #48bb78;
+      --accent-red: #fc8181;
+      --accent-orange: #f6ad55;
+      --accent-teal: #38b2ac;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(77,99,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 0%, rgba(159,122,234,0.06) 0%, transparent 50%);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      height: 60px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5,6,15,0.85);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #4da6ff, #9f7aea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a.active { color: var(--text-primary); border-bottom: 2px solid var(--accent-purple); padding-bottom: 2px; }
+    .nav-right { display: flex; gap: 10px; align-items: center; }
+
+    .btn { padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
+    .btn-ghost:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .btn-glow { background: linear-gradient(135deg, #4da6ff, #9f7aea); color: #fff; box-shadow: 0 0 20px rgba(77,166,255,0.3); }
+    .btn-glow:hover { box-shadow: 0 0 30px rgba(77,166,255,0.5); transform: translateY(-1px); }
+
+    main { max-width: 1440px; margin: 0 auto; padding: 28px 40px 60px; }
+
+    .top-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; }
+    .top-bar h1 { font-size: 20px; font-weight: 600; }
+    .top-bar .meta { font-size: 12px; color: var(--text-muted); text-align: right; line-height: 1.8; }
+
+    /* Pro 牆 */
+    .pro-gate {
+      background: linear-gradient(135deg, rgba(77,99,255,0.08), rgba(159,122,234,0.06));
+      border: 1px solid rgba(99,130,255,0.2);
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pro-gate::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(99,130,255,0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    .pro-gate-icon { font-size: 36px; margin-bottom: 16px; }
+    .pro-gate-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--accent-purple); margin-bottom: 12px; text-transform: uppercase; }
+    .pro-gate-title { font-size: 24px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; line-height: 1.4; }
+    .pro-gate-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    .pro-features-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pro-feature-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+
+    .pro-feature-icon { font-size: 20px; margin-bottom: 8px; }
+    .pro-feature-name { font-size: 12px; font-weight: 600; color: var(--text-secondary); line-height: 1.4; }
+
+    /* 預覽區（模糊遮罩） */
+    .preview-section { position: relative; }
+
+    .preview-blur {
+      filter: blur(4px);
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.4;
+    }
+
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .preview-overlay-content {
+      text-align: center;
+      background: rgba(5,6,15,0.8);
+      border: 1px solid rgba(99,130,255,0.2);
+      border-radius: 16px;
+      padding: 24px 32px;
+      backdrop-filter: blur(10px);
+    }
+
+    .preview-overlay-content .lock { font-size: 24px; margin-bottom: 8px; }
+    .preview-overlay-content p { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+
+    /* 標的卡片（預覽用） */
+    .targets-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .target-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .target-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+    .target-ticker { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+    .target-name { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    .target-signal {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .signal-long { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
+    .signal-short { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.2); }
+    .signal-watch { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
+
+    .target-price { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .target-change { font-size: 12px; font-weight: 600; margin-bottom: 14px; }
+    .up { color: var(--accent-green); }
+    .down { color: var(--accent-red); }
+
+    .target-levels {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .level-item { text-align: center; }
+    .level-label { font-size: 9px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; }
+    .level-value { font-size: 12px; font-weight: 700; }
+    .level-support { color: var(--accent-green); }
+    .level-resist { color: var(--accent-red); }
+    .level-target { color: var(--accent-blue); }
+
+    .target-analysis { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* 籌碼區 */
+    .chips-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .chip-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+
+    .chip-label { font-size: 9px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; }
+    .chip-value { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+
+    /* 玻璃卡片 */
+    .glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      margin-bottom: 16px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .icon { width: 20px; height: 20px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+    .icon-purple { background: rgba(159,122,234,0.15); }
+    .icon-blue { background: rgba(77,166,255,0.15); }
+    .icon-green { background: rgba(72,187,120,0.15); }
+
+    .badge-pro { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.2); font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">PROJECT X</div>
+    <ul class="nav-links">
+      <li><a href="../index.html">總覽</a></li>
+      <li><a href="market.html">市場</a></li>
+      <li><a href="industry.html">產業</a></li>
+      <li><a href="targets.html" class="active">標的追蹤</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="btn btn-ghost">登入</button>
+      <button class="btn btn-glow">訂閱 Pro</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="top-bar">
+      <div>
+        <h1>標的深度分析</h1>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:3px;">
+          技術面 + 籌碼面 + 操作策略｜Pro 會員專屬
+        </div>
+      </div>
+      <div class="meta" id="targets-date"></div>
+    </div>
+
+    <!-- Pro 升級牆 -->
+    <div class="pro-gate">
+      <div class="pro-gate-icon">🔐</div>
+      <div class="pro-gate-label">PRO EXCLUSIVE</div>
+      <div class="pro-gate-title">客製化標的深度分析<br>每日直送你的投資決策</div>
+      <div class="pro-gate-desc">
+        依你自選的產業與標的，每日整合技術面、籌碼面與宏觀背景，
+        提供具體支撐壓力位、操作建議，Email 直送 + 會員頁查閱。
+      </div>
+
+      <div class="pro-features-row">
+        <div class="pro-feature-item">
+          <div class="pro-feature-icon">📊</div>
+          <div class="pro-feature-name">技術面分析<br>支撐壓力位</div>
+        </div>
+        <div class="pro-feature-item">
+          <div class="pro-feature-icon">🧮</div>
+          <div class="pro-feature-name">籌碼面追蹤<br>機構動向</div>
+        </div>
+        <div class="pro-feature-item">
+          <div class="pro-feature-icon">🎯</div>
+          <div class="pro-feature-name">具體操作<br>進出場建議</div>
+        </div>
+        <div class="pro-feature-item">
+          <div class="pro-feature-icon">📧</div>
+          <div class="pro-feature-name">每日 Email<br>客製化日報</div>
+        </div>
+      </div>
+
+      <button class="btn btn-glow" style="padding: 12px 40px; font-size: 15px;">立即訂閱 Pro</button>
+    </div>
+
+    <!-- 預覽區（模糊遮罩） -->
+    <div class="preview-section">
+      <div class="preview-blur">
+
+        <div class="glass-card" style="margin-bottom:16px;">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-purple">🎯</div>今日精選標的</div>
+            <span class="badge-pro">PRO</span>
+          </div>
+          <div class="targets-grid">
+
+            <div class="target-card">
+              <div class="target-header">
+                <div>
+                  <div class="target-ticker">BTC / USD</div>
+                  <div class="target-name">Bitcoin</div>
+                </div>
+                <span class="target-signal signal-long">做多</span>
+              </div>
+              <div class="target-price">$94,250</div>
+              <div class="target-change up">▲ +2.4%</div>
+              <div class="target-levels">
+                <div class="level-item">
+                  <div class="level-label">支撐</div>
+                  <div class="level-value level-support">$91,200</div>
+                </div>
+                <div class="level-item">
+                  <div class="level-label">壓力</div>
+                  <div class="level-value level-resist">$96,500</div>
+                </div>
+                <div class="level-item">
+                  <div class="level-label">目標</div>
+                  <div class="level-value level-target">$102,000</div>
+                </div>
+              </div>
+              <div class="target-analysis">突破 93K 關鍵壓力後量能放大，ETF 持續淨流入支撐籌碼結構，短線回測 91K 可加碼，目標看 102K。</div>
+              <div class="chips-row">
+                <div class="chip-item"><div class="chip-label">ETF 流入</div><div class="chip-value" style="color:var(--accent-green);">+$240M</div></div>
+                <div class="chip-item"><div class="chip-label">多空比</div><div class="chip-value">58/42</div></div>
+                <div class="chip-item"><div class="chip-label">未平倉</div><div class="chip-value">$32.4B</div></div>
+              </div>
+            </div>
+
+            <div class="target-card">
+              <div class="target-header">
+                <div>
+                  <div class="target-ticker">NVDA</div>
+                  <div class="target-name">NVIDIA</div>
+                </div>
+                <span class="target-signal signal-long">做多</span>
+              </div>
+              <div class="target-price">$875</div>
+              <div class="target-change up">▲ +3.2%</div>
+              <div class="target-levels">
+                <div class="level-item">
+                  <div class="level-label">支撐</div>
+                  <div class="level-value level-support">$840</div>
+                </div>
+                <div class="level-item">
+                  <div class="level-label">壓力</div>
+                  <div class="level-value level-resist">$900</div>
+                </div>
+                <div class="level-item">
+                  <div class="level-label">目標</div>
+                  <div class="level-value level-target">$950</div>
+                </div>
+              </div>
+              <div class="target-analysis">法說會後機構持續加碼，Blackwell 出貨確認消除不確定性，技術面突破整理區，目標 950，停損設 840。</div>
+              <div class="chips-row">
+                <div class="chip-item"><div class="chip-label">外資動向</div><div class="chip-value" style="color:var(--accent-green);">買超</div></div>
+                <div class="chip-item"><div class="chip-label">法人持倉</div><div class="chip-value">+2.3%</div></div>
+                <div class="chip-item"><div class="chip-label">Put/Call</div><div class="chip-value">0.72</div></div>
+              </div>
+            </div>
+
+            <div class="target-card">
+              <div class="target-header">
+                <div>
+                  <div class="target-ticker">2330</div>
+                  <div class="target-name">台積電</div>
+                </div>
+                <span class="target-signal signal-long">做多</span>
+              </div>
+              <div class="target-price">NT$950</div>
+              <div class="target-change up">▲ +1.8%</div>
+              <div class="target-levels">
+                <div class="level-item">
+                  <div class="level-label">支撐</div>
+                  <div class="level-value level-support">920</div>
+                </div>
+                <div class="level-item">
+                  <div class="level-label">壓力</div>
+                  <div class="level-value level-resist">970</div>
+                </div>
+                <div class="level-item">
+                  <div class="level-label">目標</div>
+                  <div class="level-value level-target">1,050</div>
+                </div>
+              </div>
+              <div class="target-analysis">外資法說會後連續買超，月線站穩支撐，CoWoS 訂單滿載至年底提供基本面支撐，目標 1,050，停損 920。</div>
+              <div class="chips-row">
+                <div class="chip-item"><div class="chip-label">外資</div><div class="chip-value" style="color:var(--accent-green);">+8.2萬</div></div>
+                <div class="chip-item"><div class="chip-label">投信</div><div class="chip-value" style="color:var(--accent-green);">+1.1萬</div></div>
+                <div class="chip-item"><div class="chip-label">融資</div><div class="chip-value">-0.3%</div></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 遮罩 -->
+      <div class="preview-overlay">
+        <div class="preview-overlay-content">
+          <div class="lock">🔐</div>
+          <p>訂閱 Pro 解鎖完整標的分析<br>技術面、籌碼面、操作策略一次看</p>
+          <button class="btn btn-glow">立即訂閱 Pro</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    async function loadTargetsDate() {
+      const res = await fetch('../data/daily.json');
+      const data = await res.json();
+      const d = new Date(data.date);
+      document.getElementById('targets-date').innerHTML =
+        d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) +
+        '<br>UTC+8 台北時間';
+    }
+    loadTargetsDate();
+  </script>
+
+</body>
+</html>

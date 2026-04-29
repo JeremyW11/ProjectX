@@ -173,5 +173,180 @@
       { "text": "台股加權指數收 21,340 點，半導體族群領漲，外資買超逾 80 億元。", "time": "13:35" },
       { "text": "鴻海法說會後法人持續加碼，目標價普遍上調至 220 元以上。", "time": "10:00" }
     ]
+  },
+  "industry_detail": {
+    "news": [
+      {
+        "tag": "半導體",
+        "type": "semi",
+        "text": "TSMC 法說會釋出樂觀展望，AI 相關需求持續強勁，CoWoS 先進封裝產能持續滿載，全年營收指引上修。",
+        "time": "09:00",
+        "impact": "↑ 半導體族群全面受惠"
+      },
+      {
+        "tag": "AI",
+        "type": "ai",
+        "text": "NVIDIA Blackwell Ultra 架構正式確認出貨時程，下游伺服器組裝廠廣達、緯穎訂單能見度提升至 Q3。",
+        "time": "06:45",
+        "impact": "↑ AI 伺服器供應鏈追蹤"
+      },
+      {
+        "tag": "能源",
+        "type": "energy",
+        "text": "中東局勢緩和，WTI 原油跌破 78 美元，OPEC+ 增產預期升溫，能源股面臨獲利了結壓力。",
+        "time": "05:30",
+        "impact": "↓ 能源板塊短線承壓"
+      },
+      {
+        "tag": "金融",
+        "type": "finance",
+        "text": "Fed 鴿派言論提振銀行股，降息預期重燃，利差擴大預期支撐區域銀行板塊。",
+        "time": "08:30",
+        "impact": "↑ 金融股短線受惠"
+      },
+      {
+        "tag": "航運",
+        "type": "shipping",
+        "text": "波羅的海乾散貨指數 BDI 連跌三日至 1,820 點，大宗商品需求疲軟，散裝航運進入觀望。",
+        "time": "06:20",
+        "impact": "↓ 散裝航運短線偏弱"
+      },
+      {
+        "tag": "電動車",
+        "type": "ev",
+        "text": "Tesla Q1 交車量低於預期，中國市場競爭加劇，比亞迪持續以價格戰搶占市場份額。",
+        "time": "07:00",
+        "impact": "↓ 電動車競爭加劇"
+      }
+    ],
+    "top_companies": [
+      {
+        "name": "NVIDIA",
+        "ticker": "NVDA · 美股",
+        "industry": "AI 晶片",
+        "event_type": "watch",
+        "event_label": "高度關注",
+        "note": "Blackwell Ultra 出貨確認，資料中心營收持續超預期，AI 基礎設施核心受惠股。"
+      },
+      {
+        "name": "台積電",
+        "ticker": "2330 · 台股 / TSM · 美股",
+        "industry": "晶圓代工",
+        "event_type": "earnings",
+        "event_label": "法說會",
+        "note": "Q1 法說會超預期，CoWoS 滿載至 2026 年底，全年營收指引上修 5%。"
+      },
+      {
+        "name": "Microsoft",
+        "ticker": "MSFT · 美股",
+        "industry": "雲端 / AI",
+        "event_type": "expand",
+        "event_label": "擴產",
+        "note": "Azure AI 需求強勁，宣布未來兩年資本支出達 800 億美元，雲端市占持續提升。"
+      },
+      {
+        "name": "Apple",
+        "ticker": "AAPL · 美股",
+        "industry": "消費科技",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "Apple Intelligence 功能持續擴展，WWDC 6 月舉行，AI 整合深度為市場關注焦點。"
+      },
+      {
+        "name": "Alphabet",
+        "ticker": "GOOGL · 美股",
+        "industry": "搜尋 / 雲端",
+        "event_type": "earnings",
+        "event_label": "財報",
+        "note": "Q1 財報超預期，Google Cloud 成長加速，Gemini AI 廣告整合效益開始顯現。"
+      },
+      {
+        "name": "Samsung",
+        "ticker": "005930 · 韓股",
+        "industry": "記憶體 / 手機",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "HBM3E 良率改善，但仍落後 SK Hynix，AI 記憶體市占爭奪戰持續中。"
+      },
+      {
+        "name": "鴻海",
+        "ticker": "2317 · 台股",
+        "industry": "AI 伺服器",
+        "event_type": "earnings",
+        "event_label": "營收",
+        "note": "Q1 營收年增 24%，AI 伺服器佔比持續提升，GB200 機架組裝訂單能見度高。"
+      },
+      {
+        "name": "Saudi Aramco",
+        "ticker": "2222 · 沙股",
+        "industry": "能源",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "油價下跌壓縮獲利空間，OPEC+ 增產決策為關鍵變數，短線偏空。"
+      },
+      {
+        "name": "Meta",
+        "ticker": "META · 美股",
+        "industry": "社群 / AI",
+        "event_type": "expand",
+        "event_label": "擴張",
+        "note": "Llama 4 開源發布，廣告 AI 整合效益強勁，Q1 營收與獲利雙超預期。"
+      },
+      {
+        "name": "Tesla",
+        "ticker": "TSLA · 美股",
+        "industry": "電動車",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "Q1 交車量低於預期，中國市場競爭加劇，FSD 授權與 Robotaxi 進展為下半年催化劑。"
+      }
+    ],
+    "corp_events": [
+      {
+        "date": "2026/05/01",
+        "title": "Amazon Q1 財報",
+        "desc": "AWS 雲端成長與 AI 資本支出指引為市場焦點"
+      },
+      {
+        "date": "2026/05/07",
+        "title": "台積電 4 月營收",
+        "desc": "月營收公布，觀察 AI 需求持續性"
+      },
+      {
+        "date": "2026/05/28",
+        "title": "NVIDIA Q1 財報",
+        "desc": "資料中心營收指引為本季最重要事件"
+      },
+      {
+        "date": "2026/06/09",
+        "title": "Apple WWDC",
+        "desc": "Apple Intelligence 新功能發布，AI 整合深度觀察"
+      },
+      {
+        "date": "2026/06/18",
+        "title": "Fed 利率決策",
+        "desc": "降息路徑指引，影響風險資產走向"
+      }
+    ],
+    "rotation": [
+      {
+        "from": "能源",
+        "to": "半導體",
+        "strength": "強烈",
+        "reason": "油價承壓加上 AI 需求爆發，資金明顯從能源板塊流向半導體與 AI 基礎設施。"
+      },
+      {
+        "from": "航運",
+        "to": "雲端",
+        "strength": "中等",
+        "reason": "BDI 連跌、大宗需求疲軟，部分資金轉向受益於降息預期的雲端與成長股。"
+      },
+      {
+        "from": "現金",
+        "to": "加密貨幣",
+        "strength": "明顯",
+        "reason": "ETF 持續淨流入、機構回補，比特幣突破關鍵壓力位，市場風險偏好回升。"
+      }
+    ]
   }
 }
