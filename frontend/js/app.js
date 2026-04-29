@@ -37,3 +37,47 @@ function renderNews(containerId, items) {
         <div class="news-footer">
           <span class="news-time">${item.time}</span>
           <span class="news-impact">${item.impact}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderPersons(persons) {
+  const container = document.getElementById('persons-list');
+  container.innerHTML = persons.map(p => `
+    <div class="person-item">
+      <div class="person-avatar">${p.initials}</div>
+      <div>
+        <div class="person-name">${p.name}</div>
+        <div class="person-title">${p.title}</div>
+        <div class="person-note">${p.note}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderSignals(signals) {
+  const container = document.getElementById('signals-list');
+  container.innerHTML = signals.map(s => `
+    <div class="industry-row">
+      <div class="ind-left">
+        <div class="ind-dot" style="background:${dotColor(s.signal)}"></div>
+        <span class="ind-name">${s.name}</span>
+      </div>
+      <span class="signal-pill ${s.signal}">${s.label}</span>
+    </div>
+  `).join('');
+}
+
+function dotColor(signal) {
+  const map = {
+    bull: 'var(--accent-green)',
+    bear: 'var(--accent-red)',
+    watch: 'var(--accent-orange)',
+    neutral: 'var(--text-muted)'
+  };
+  return map[signal] || 'var(--text-muted)';
+}
+
+loadData();
