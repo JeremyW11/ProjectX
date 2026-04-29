@@ -1,5 +1,5 @@
 async function loadData() {
-  const res = await fetch('./data/daily.json');
+  const res = await fetch('/data/daily.json');
   const data = await res.json();
   renderDate(data.date);
   renderTickers(data.tickers);
