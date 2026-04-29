@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProjectX — 全球投資情報</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --bg-base: #05060f;
+      --bg-card: rgba(255,255,255,0.04);
+      --bg-card-hover: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08);
+      --border-bright: rgba(99,179,237,0.3);
+      --text-primary: #f0f0f5;
+      --text-secondary: #8888aa;
+      --text-muted: #44445a;
+      --accent-blue: #4da6ff;
+      --accent-purple: #9f7aea;
+      --accent-green: #48bb78;
+      --accent-red: #fc8181;
+      --accent-orange: #f6ad55;
+      --accent-teal: #38b2ac;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(77,99,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 0%, rgba(159,122,234,0.06) 0%, transparent 50%);
+    }
+
+    /* ── 導航 ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      height: 60px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5,6,15,0.85);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #4da6ff, #9f7aea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .nav-right { display: flex; gap: 10px; align-items: center; }
+
+    .btn {
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+
+    .btn-glow {
+      background: linear-gradient(135deg, #4da6ff, #9f7aea);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(77,166,255,0.3);
+    }
+
+    .btn-glow:hover {
+      box-shadow: 0 0 30px rgba(77,166,255,0.5);
+      transform: translateY(-1px);
+    }
+
+    /* ── 主區域 ── */
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 28px 40px 60px;
+    }
+
+    /* ── 頂部標題列 ── */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 20px;
+    }
+
+    .top-bar h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .top-bar .meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.8;
+    }
+
+    .live-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      margin-right: 5px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── 行情快訊列 ── */
+    .ticker-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .ticker-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .ticker-item:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(77,166,255,0.2);
+    }
+
+    .ticker-item .t-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .ticker-item .t-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+    }
+
+    .ticker-item .t-change {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .up { color: var(--accent-green); }
+    .down { color: var(--accent-red); }
+    .flat { color: var(--text-muted); }
+
+    /* ── 主內容三欄 ── */
+    .content-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr 320px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* ── 玻璃卡片 ── */
+    .glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      margin-bottom: 16px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.3px;
+    }
+
+    .card-title .icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .icon-blue { background: rgba(77,166,255,0.15); }
+    .icon-green { background: rgba(72,187,120,0.15); }
+    .icon-purple { background: rgba(159,122,234,0.15); }
+    .icon-orange { background: rgba(246,173,85,0.15); }
+    .icon-teal { background: rgba(56,178,172,0.15); }
+
+    .card-badge {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-free { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
+    .badge-pro { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.2); }
+
+    /* ── 新聞條目 ── */
+    .news-item {
+      display: flex;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .news-tag {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+      height: fit-content;
+      margin-top: 1px;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-macro { background: rgba(77,166,255,0.1); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.15); }
+    .tag-industry { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.15); }
+    .tag-crypto { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.15); }
+    .tag-us { background: rgba(246,173,85,0.1); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
+    .tag-tw { background: rgba(56,178,172,0.1); color: var(--accent-teal); border: 1px solid rgba(56,178,172,0.15); }
+
+    .news-body { flex: 1; }
+    .news-text { font-size: 13px; color: #c8c8d8; line-height: 1.65; }
+    .news-footer { display: flex; justify-content: space-between; margin-top: 4px; }
+    .news-time { font-size: 11px; color: var(--text-muted); }
+    .news-impact { font-size: 10px; font-weight: 600; color: var(--accent-orange); }
+
+    /* ── 產業信號 ── */
+    .industry-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .industry-row:last-child { border-bottom: none; }
+
+    .ind-left { display: flex; align-items: center; gap: 8px; }
+
+    .ind-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .ind-name { font-size: 13px; color: var(--text-secondary); }
+
+    .signal-pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .bull { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
+    .bear { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.2); }
+    .watch { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
+    .neutral { background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
+
+    /* ── 重要人物追蹤 ── */
+    .person-item {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .person-item:last-child { border-bottom: none; }
+
+    .person-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(77,166,255,0.2), rgba(159,122,234,0.2));
+      border: 1px solid rgba(77,166,255,0.2);
+      color: var(--accent-blue);
+    }
+
+    .person-name { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+    .person-title { font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
+    .person-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* ── 付費升級卡 ── */
+    .pro-card {
+      background: linear-gradient(135deg, rgba(77,99,255,0.12), rgba(159,122,234,0.08));
+      border: 1px solid rgba(99,130,255,0.25);
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pro-card::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(99,130,255,0.2), transparent 70%);
+      pointer-events: none;
+    }
+
+    .pro-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-purple);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .pro-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .pro-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .pro-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .pro-features li {
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .pro-features li::before {
+      content: '✦';
+      font-size: 8px;
+      color: var(--accent-purple);
+    }
+
+    .divider-line {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">PROJECT X</div>
+    <ul class="nav-links">
+      <li><a href="#">總覽</a></li>
+      <li><a href="#">市場</a></li>
+      <li><a href="#">產業</a></li>
+      <li><a href="#">標的追蹤</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="btn btn-ghost">登入</button>
+      <button class="btn btn-glow">訂閱 Pro</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <div class="top-bar">
+      <div>
+        <h1>每日全球投資情報</h1>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:3px;">
+          <span class="live-dot"></span>即時更新中
+        </div>
+      </div>
+      <div class="meta">
+        2026年4月29日 星期二<br>
+        UTC+8 台北時間
+      </div>
+    </div>
+
+    <!-- 行情快訊 -->
+    <div class="ticker-strip">
+      <div class="ticker-item">
+        <div class="t-label">BTC / USD</div>
+        <div class="t-value">94,250</div>
+        <div class="t-change up">▲ +2.4%</div>
+      </div>
+      <div class="ticker-item">
+        <div class="t-label">ETH / USD</div>
+        <div class="t-value">1,788</div>
+        <div class="t-change up">▲ +1.8%</div>
+      </div>
+      <div class="ticker-item">
+        <div class="t-label">S&P 500</div>
+        <div class="t-value">5,560</div>
+        <div class="t-change down">▼ −0.8%</div>
+      </div>
+      <div class="ticker-item">
+        <div class="t-label">NASDAQ</div>
+        <div class="t-value">17,420</div>
+        <div class="t-change down">▼ −1.1%</div>
+      </div>
+      <div class="ticker-item">
+        <div class="t-label">台股加權</div>
+        <div class="t-value">21,340</div>
+        <div class="t-change up">▲ +0.5%</div>
+      </div>
+      <div class="ticker-item">
+        <div class="t-label">USD / TWD</div>
+        <div class="t-value">32.15</div>
+        <div class="t-change flat">— 持平</div>
+      </div>
+    </div>
+
+    <!-- 三欄主內容 -->
+    <div class="content-layout">
+
+      <!-- 第一欄：宏觀政策 -->
+      <div>
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="icon icon-blue">🌐</div>
+              宏觀政策觀察
+            </div>
+            <span class="card-badge badge-free">FREE</span>
+          </div>
+
+          <div class="news-item">
+            <span class="news-tag tag-macro">政策</span>
+            <div class="news-body">
+              <div class="news-text">Fed 官員發表鴿派言論，暗示年內仍有降息空間，美債殖利率小幅回落至 4.21%。</div>
+              <div class="news-footer">
+                <span class="news-time">08:30</span>
+                <span class="news-impact">↑ 風險資產利多</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <span class="news-tag tag-macro">外交</span>
+            <div class="news-body">
+              <div class="news-text">美中貿易談判傳出進展，雙方將於下週重啟技術層級會談，市場情緒轉樂觀。</div>
+              <div class="news-footer">
+                <span class="news-time">07:15</span>
+                <span class="news-impact">↑ 出口類股受惠</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <span class="news-tag tag-macro">數據</span>
+            <div class="news-body">
+              <div class="news-text">美國 PCE 通膨數據本週五公布，市場預期年增 2.6%，若低於預期將強化降息預期。</div>
+              <div class="news-footer">
+                <span class="news-time">06:00</span>
+                <span class="news-impact">⚠ 關鍵數據待觀察</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <span class="news-tag tag-macro">地緣</span>
+            <div class="news-body">
+              <div class="news-text">中東局勢趨於穩定，油價受壓，WTI 原油回落至 78 美元，能源板塊承壓。</div>
+              <div class="news-footer">
+                <span class="news-time">05:30</span>
+                <span class="news-impact">↓ 能源股利空</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 重要人物追蹤 -->
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="icon icon-orange">👤</div>
+              重要人物動向
+            </div>
+            <span class="card-badge badge-free">FREE</span>
+          </div>
+
+          <div class="person-item">
+            <div class="person-avatar">JP</div>
+            <div>
+              <div class="person-name">Jerome Powell｜Fed 主席</div>
+              <div class="person-title">美國聯邦準備理事會</div>
+              <div class="person-note">最新發言暗示通膨降溫中，年內可能降息 1-2 次，市場解讀偏鴿。</div>
+            </div>
+          </div>
+
+          <div class="person-item">
+            <div class="person-avatar">JH</div>
+            <div>
+              <div class="person-name">Jensen Huang｜執行長</div>
+              <div class="person-title">NVIDIA</div>
+              <div class="person-note">出席 GTC 強調 Blackwell 需求遠超供給，暗示擴產計畫加速推進。</div>
+            </div>
+          </div>
+
+          <div class="person-item">
+            <div class="person-avatar">CC</div>
+            <div>
+              <div class="person-name">魏哲家｜董事長</div>
+              <div class="person-title">台積電 TSMC</div>
+              <div class="person-note">法說會表示 AI 晶片需求強勁，CoWoS 先進封裝產能持續滿載。</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 第二欄：產業動態 -->
+      <div>
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="icon icon-green">🏭</div>
+              全球產業動態
+            </div>
+            <span class="card-badge badge-free">FREE</span>
+          </div>
+
+          <div class="news-item">
+            <span class="news-tag tag-industry">半導體</span>
+            <div class="news-body">
+              <div class="news-text">TSMC 法說會釋樂觀展望，AI 相關需求持續強勁，CoWoS 產能持續擴充，台積電 ADR 盤後漲逾 3%。</div>
+              <div class="news-footer">
+                <span class="news-time">09:00</span>
+                <span class="news-impact">↑ 2330 / TSM 追蹤</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <span class="news-tag tag-us">科技</span>
+            <div class="news-body">
+              <div class="news-text">NVIDIA 宣布新一代 Blackwell Ultra 出貨時程，供應鏈受惠股廣達、緯穎普遍走強。</div>
+              <div class="news-footer">
+                <span class="news-time">06:45</span>
+                <span class="news-impact">↑ AI 供應鏈受惠</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <span class="news-tag tag-crypto">加密</span>
+            <div class="news-body">
+              <div class="news-text">比特幣現貨 ETF 連續第五日淨流入，累計本週流入逾 12 億美元，機構資金回流跡象明顯。</div>
+              <div class="news-footer">
+                <span class="news-time">08:00</span>
+                <span class="news-impact">↑ BTC 籌碼結構改善</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <span class="news-tag tag-tw">台股</span>
+            <div class="news-body">
+              <div class="news-text">鴻海公告 Q1 營收年增 24%，伺服器及 AI 相關業務為主要成長動能，法人持續加碼。</div>
+              <div class="news-footer">
+                <span class="news-time">07:30</span>
+                <span class="news-impact">↑ 2317 基本面改善</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <span class="news-tag tag-industry">航運</span>
+            <div class="news-body">
+              <div class="news-text">波羅的海乾散貨指數 BDI 連跌三日，大宗商品需求疲軟，散裝航運類股承壓。</div>
+              <div class="news-footer">
+                <span class="news-time">06:20</span>
+                <span class="news-impact">↓ 航運股觀望</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 前十大公司股務事件 -->
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="icon icon-teal">📋</div>
+              全球前十大公司股務事件
+            </div>
+            <span class="card-badge badge-free">FREE</span>
+          </div>
+
+          <div class="news-item">
+            <span class="news-tag tag-us">NVDA</span>
+            <div class="news-body">
+              <div class="news-text">Q1 財報將於 5/28 公布，EPS 預期 $0.88，市場高度關注數據中心營收指引。</div>
+              <div class="news-footer">
+                <span class="news-time">財報前</span>
+                <span class="news-impact">⚠ 高度關注</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <span class="news-tag tag-us">AAPL</span>
+            <div class="news-body">
+              <div class="news-text">庫克出席 WWDC 預告 AI 整合深化，Apple Intelligence 新功能擴展至更多語系。</div>
+              <div class="news-footer">
+                <span class="news-time">昨日</span>
+                <span class="news-impact">↑ 持續追蹤</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 第三欄：側欄 -->
+      <div>
+
+        <!-- 產業信號雷達 -->
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="icon icon-purple">📡</div>
+              產業信號雷達
+            </div>
+          </div>
+
+          <div class="industry-row">
+            <div class="ind-left">
+              <div class="ind-dot" style="background:var(--accent-green)"></div>
+              <span class="ind-name">半導體 / AI</span>
+            </div>
+            <span class="signal-pill bull">看多</span>
+          </div>
+          <div class="industry-row">
+            <div class="ind-left">
+              <div class="ind-dot" style="background:var(--accent-green)"></div>
+              <span class="ind-name">加密貨幣</span>
+            </div>
+            <span class="signal-pill bull">看多</span>
+          </div>
+          <div class="industry-row">
+            <div class="ind-left">
+              <div class="ind-dot" style="background:var(--accent-green)"></div>
+              <span class="ind-name">雲端 / 資料中心</span>
+            </div>
+            <span class="signal-pill bull">看多</span>
+          </div>
+          <div class="industry-row">
+            <div class="ind-left">
+              <div class="ind-dot" style="background:var(--accent-orange)"></div>
+              <span class="ind-name">金融</span>
+            </div>
+            <span class="signal-pill watch">觀察</span>
+          </div>
+          <div class="industry-row">
+            <div class="ind-left">
+              <div class="ind-dot" style="background:var(--accent-orange)"></div>
+              <span class="ind-name">航運</span>
+            </div>
+            <span class="signal-pill watch">觀察</span>
+          </div>
+          <div class="industry-row">
+            <div class="ind-left">
+              <div class="ind-dot" style="background:var(--accent-red)"></div>
+              <span class="ind-name">能源</span>
+            </div>
+            <span class="signal-pill bear">看空</span>
+          </div>
+          <div class="industry-row">
+            <div class="ind-left">
+              <div class="ind-dot" style="background:var(--text-muted)"></div>
+              <span class="ind-name">消費</span>
+            </div>
+            <span class="signal-pill neutral">中性</span>
+          </div>
+        </div>
+
+        <div class="divider-line"></div>
+
+        <!-- Pro 升級卡 -->
+        <div class="pro-card">
+          <div class="pro-label">PRO PLAN</div>
+          <div class="pro-title">客製化<br>每日投資日報</div>
+          <div class="pro-desc">依你的關注標的與產業，每日自動篩選整合，直送 Email 與會員頁。</div>
+          <ul class="pro-features">
+            <li>自選產業 &amp; 標的追蹤</li>
+            <li>技術面 + 籌碼面深度分析</li>
+            <li>全球前10大公司完整報告</li>
+            <li>每日 Email 專屬日報</li>
+          </ul>
+          <button class="btn btn-glow" style="width:100%; padding:10px;">立即訂閱 Pro</button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
