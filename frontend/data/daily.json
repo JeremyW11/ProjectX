@@ -164,10 +164,10 @@
     ],
     "tw_stocks": [
       { "ticker": "2330", "name": "台積電", "price": "NT$1,100+", "change": "-1.1%", "dir": "down", "tag": "semi", "tag_label": "半導體", "note": "連三日創高後今日獲利了結，Q1 年增 40.6%，金管會放寬持股上限利多" },
-      { "ticker": "Macronix", "name": "旺宏電子", "price": "漲停", "change": "+10%", "dir": "up", "tag": "semi", "tag_label": "記憶體", "note": "AI 基礎建設題材，今日漲停為台股最強個股之一" },
-      { "ticker": "Kaimei", "name": "凱美電機", "price": "漲停", "change": "+10%", "dir": "up", "tag": "server", "tag_label": "電子", "note": "AI 相關電子族群跟漲，漲停鎖板" },
+      { "ticker": "旺宏", "name": "Macronix", "price": "漲停", "change": "+10%", "dir": "up", "tag": "semi", "tag_label": "記憶體", "note": "AI 基礎建設題材，今日漲停" },
       { "ticker": "2454", "name": "聯發科", "price": "NT$1,300+", "change": "+穩健", "dir": "up", "tag": "semi", "tag_label": "半導體", "note": "AI 手機晶片需求持續，隨大盤走強" },
-      { "ticker": "2308", "name": "台達電", "price": "NT$400+", "change": "+跟漲", "dir": "up", "tag": "server", "tag_label": "電源", "note": "AI 資料中心電源需求爆發，毛利率上修" }
+      { "ticker": "2308", "name": "台達電", "price": "NT$400+", "change": "+跟漲", "dir": "up", "tag": "server", "tag_label": "電源", "note": "AI 資料中心電源需求爆發，毛利率上修" },
+      { "ticker": "2317", "name": "鴻海", "price": "NT$200+", "change": "+跟漲", "dir": "up", "tag": "server", "tag_label": "伺服器", "note": "AI 伺服器佔比提升，GB200 機架訂單能見度高" }
     ],
     "tw_news": [
       { "text": "台股今日高開挑戰 40,000 點歷史大關，連三日創新高，AI 基礎建設樂觀情緒持續推升。", "time": "盤中" },
@@ -250,7 +250,7 @@
         "industry": "AI 伺服器",
         "event_type": "expand",
         "event_label": "市占受惠",
-        "note": "SMCI 被司法部起訴後，Dell 有望吃下競爭對手市占，Melius 上調目標至 $245，AI 伺服器需求持續成長。"
+        "note": "SMCI 被司法部起訴後，Dell 有望吃下競爭對手市占，Melius 上調目標至 $245。"
       },
       {
         "name": "Saudi Aramco",
@@ -258,7 +258,7 @@
         "industry": "能源",
         "event_type": "watch",
         "event_label": "油價飆升",
-        "note": "荷姆茲封鎖推升 Brent 至 $111，沙烏地阿拉伯坐收高油價紅利，但 UAE 退出 OPEC 帶來增產不確定性。"
+        "note": "荷姆茲封鎖推升 Brent 至 $111，UAE 退出 OPEC 帶來增產不確定性。"
       },
       {
         "name": "Alphabet",
@@ -274,7 +274,7 @@
         "industry": "雲端 / AI",
         "event_type": "expand",
         "event_label": "資本支出",
-        "note": "Azure AI 需求強勁，宣布未來兩年資本支出 800 億美元，AI 基礎建設最大投入者之一。"
+        "note": "Azure AI 需求強勁，宣布未來兩年資本支出 800 億美元。"
       },
       {
         "name": "ExxonMobil",
@@ -282,7 +282,7 @@
         "industry": "能源",
         "event_type": "watch",
         "event_label": "高油價受惠",
-        "note": "WTI 突破 $100、Brent $111，能源龍頭獲利大幅提升，但荷姆茲局勢為最大變數。"
+        "note": "WTI 突破 $100、Brent $111，能源龍頭獲利大幅提升。"
       },
       {
         "name": "Apple",
@@ -351,6 +351,266 @@
         "to": "台股",
         "strength": "明顯",
         "reason": "台股挑戰 40,000 點，金管會放寬持股上限政策性利多，外資加速布局台灣 AI 供應鏈龍頭。"
+      }
+    ]
+  },
+  "institutional": {
+    "research": [
+      {
+        "ticker": "TSM",
+        "name": "台積電 ADR",
+        "firm": "多家機構",
+        "rating": "強烈買進",
+        "rating_type": "buy",
+        "target": "$463（平均）",
+        "date": "2026/04/28",
+        "note": "Q1 營收年增 40.6% 超預期，AI 需求持續強勁，CoWoS 先進封裝滿載至年底，金管會放寬持股上限為額外催化劑。"
+      },
+      {
+        "ticker": "MU",
+        "name": "Micron Technology",
+        "firm": "Melius Research",
+        "rating": "買進",
+        "rating_type": "buy",
+        "target": "$600",
+        "date": "2026/04/27",
+        "note": "AI HBM3E 需求強勁，年初以來漲幅 74%，分析師視為潛在兆元市值候選，長線布局機會。"
+      },
+      {
+        "ticker": "DELL",
+        "name": "Dell Technologies",
+        "firm": "Melius Research",
+        "rating": "買進",
+        "rating_type": "buy",
+        "target": "$245",
+        "date": "2026/04/27",
+        "note": "SMCI 被司法部起訴後，Dell AI 伺服器市占受惠，Agentic AI 帶動企業端需求，儲存業務同步受益。"
+      },
+      {
+        "ticker": "VZ",
+        "name": "Verizon",
+        "firm": "多家機構",
+        "rating": "持有",
+        "rating_type": "hold",
+        "target": "$48",
+        "date": "2026/04/28",
+        "note": "Q1 獲利超預期並上調全年展望，但高油價通膨環境壓制消費支出，電信股成長空間有限。"
+      },
+      {
+        "ticker": "AMD",
+        "name": "Advanced Micro Devices",
+        "firm": "Northland Capital",
+        "rating": "中性",
+        "rating_type": "neutral",
+        "target": "下調",
+        "date": "2026/04/28",
+        "note": "Northland Capital 下調評級至 Market Perform，AI GPU 競爭中與 NVIDIA 差距仍大，短線觀望。"
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet",
+        "firm": "多家機構",
+        "rating": "優於大盤",
+        "rating_type": "outperform",
+        "target": "$220",
+        "date": "2026/04/25",
+        "note": "Q1 財報超預期，Google Cloud 成長加速，Gemini AI 廣告整合效益開始顯現，估值相對合理。"
+      }
+    ],
+    "earnings": [
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet",
+        "note": "Q1 財報超預期，Google Cloud 成長加速，Gemini AI 廣告整合效益顯現",
+        "eps": "已公布 ✓",
+        "eps_result": "beat",
+        "revenue": "超預期",
+        "status": "已公布",
+        "status_type": "reported"
+      },
+      {
+        "ticker": "META",
+        "name": "Meta Platforms",
+        "note": "廣告 AI 整合效益、Llama 4 進展、資本支出指引為市場焦點",
+        "eps": "預期 $5.27",
+        "eps_result": "",
+        "revenue": "預期 $415B",
+        "status": "明日",
+        "status_type": "today"
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft",
+        "note": "Azure 成長率目標 34-35%，AI 資本支出規模指引為關鍵",
+        "eps": "預期 $3.22",
+        "eps_result": "",
+        "revenue": "預期 $68.4B",
+        "status": "明日",
+        "status_type": "today"
+      },
+      {
+        "ticker": "AMZN",
+        "name": "Amazon",
+        "note": "AWS 雲端成長與 AI 基礎建設投資規模為焦點",
+        "eps": "預期 $1.37",
+        "eps_result": "",
+        "revenue": "預期 $155B",
+        "status": "5/1",
+        "status_type": "upcoming"
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "note": "資料中心營收指引為本季最重要財報，Blackwell 出貨量為關鍵",
+        "eps": "預期 $0.88",
+        "eps_result": "",
+        "revenue": "預期 $43B",
+        "status": "5/28",
+        "status_type": "upcoming"
+      },
+      {
+        "ticker": "2330",
+        "name": "台積電",
+        "note": "Q1 營收年增 40.6% 已公布，4月月營收 5/7 公布",
+        "eps": "已公布 ✓",
+        "eps_result": "beat",
+        "revenue": "+40.6% YoY",
+        "status": "已公布",
+        "status_type": "reported"
+      }
+    ]
+  },
+  "calendar": {
+    "events": [
+      {
+        "date": "2026-04-29",
+        "time": "02:00",
+        "title": "FOMC 利率決策（台北時間）",
+        "desc": "市場 100% 預期維持 3.5%-3.75% 不變，Powell 記者會為最後政策信號",
+        "type": "fed",
+        "tag": "Fed",
+        "impact": "high"
+      },
+      {
+        "date": "2026-04-29",
+        "time": "盤中",
+        "title": "台股挑戰 40,000 點",
+        "desc": "連三日創新高，AI 基礎建設題材持續推升，注意高檔獲利了結",
+        "type": "tw",
+        "tag": "台股",
+        "impact": "mid"
+      },
+      {
+        "date": "2026-04-29",
+        "time": "持續",
+        "title": "美伊談判最新進展",
+        "desc": "Trump 對伊朗提案不滿，荷姆茲封鎖持續，油價高位震盪",
+        "type": "geo",
+        "tag": "地緣",
+        "impact": "high"
+      },
+      {
+        "date": "2026-04-30",
+        "time": "盤後",
+        "title": "Meta Q1 財報",
+        "desc": "廣告 AI 整合效益、Llama 4 進展為市場焦點，EPS 預期 $5.27",
+        "type": "earnings",
+        "tag": "財報",
+        "impact": "high"
+      },
+      {
+        "date": "2026-04-30",
+        "time": "盤後",
+        "title": "Microsoft Q1 財報",
+        "desc": "Azure 成長率目標 34-35%，AI 資本支出指引為關鍵",
+        "type": "earnings",
+        "tag": "財報",
+        "impact": "high"
+      },
+      {
+        "date": "2026-05-01",
+        "time": "盤後",
+        "title": "Amazon Q1 財報",
+        "desc": "AWS 雲端成長與 AI 投資規模為焦點，EPS 預期 $1.37",
+        "type": "earnings",
+        "tag": "財報",
+        "impact": "high"
+      },
+      {
+        "date": "2026-05-02",
+        "time": "全天",
+        "title": "UAE 正式退出 OPEC",
+        "desc": "UAE 增產彈性提升，但荷姆茲未開放前實際油市影響有限",
+        "type": "geo",
+        "tag": "能源",
+        "impact": "mid"
+      },
+      {
+        "date": "2026-05-07",
+        "time": "盤後",
+        "title": "台積電 4 月營收",
+        "desc": "月營收公布，驗證 AI 需求持續性，觀察是否維持強勁態勢",
+        "type": "tw",
+        "tag": "台股",
+        "impact": "mid"
+      },
+      {
+        "date": "2026-05-15",
+        "time": "全天",
+        "title": "Powell 任期屆滿，Warsh 接任 Fed 主席",
+        "desc": "新任 Fed 主席 Kevin Warsh 正式接掌，政策方向轉變風險需評估",
+        "type": "fed",
+        "tag": "Fed",
+        "impact": "high"
+      }
+    ],
+    "high_impact": [
+      {
+        "date": "今日 04/29",
+        "title": "FOMC 利率決策",
+        "desc": "台北時間深夜 02:00 公布，Powell 最後記者會，降息預期路徑為關鍵",
+        "impact": "high"
+      },
+      {
+        "date": "04/30",
+        "title": "Meta + Microsoft 財報",
+        "desc": "兩大科技巨頭同日公布，AI 資本支出指引將影響整體科技股走向",
+        "impact": "high"
+      },
+      {
+        "date": "05/01",
+        "title": "Amazon Q1 財報",
+        "desc": "AWS 成長率與 AI 投資規模，驗證雲端基礎建設需求是否持續",
+        "impact": "high"
+      },
+      {
+        "date": "05/15",
+        "title": "Warsh 接任 Fed 主席",
+        "desc": "政策立場較 Powell 偏鷹，市場需重新評估降息路徑",
+        "impact": "high"
+      },
+      {
+        "date": "05/28",
+        "title": "NVIDIA Q1 財報",
+        "desc": "本季最重要財報，Blackwell 出貨量與資料中心營收指引",
+        "impact": "high"
+      }
+    ],
+    "future": [
+      {
+        "date": "2026/06/09",
+        "title": "Apple WWDC",
+        "desc": "Apple Intelligence 新功能發布，AI 整合深度為觀察重點"
+      },
+      {
+        "date": "2026/06/17-18",
+        "title": "FOMC 會議",
+        "desc": "Warsh 首次主持會議，新政策框架方向將更加清晰"
+      },
+      {
+        "date": "2026/Q2",
+        "title": "美伊和談結果",
+        "desc": "荷姆茲解封時間點決定全球能源價格與通膨走勢，為下半年最大變數"
       }
     ]
   }
