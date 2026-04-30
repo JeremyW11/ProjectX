@@ -42,7 +42,7 @@ function renderNews(containerId, items) {
           <div class="expand-divider"></div>
           <div class="expand-row" style="align-items:flex-start; gap:12px;">
             <span class="expand-label" style="flex-shrink:0; margin-top:2px;">深度分析</span>
-            <span class="expand-value" style="text-align:right; line-height:1.6;">${item.expand_analysis || item.impact}</span>
+            <span class="expand-value" style="text-align:left; line-height:1.6;">${item.expand_analysis || item.impact}</span>
           </div>
           <div class="expand-row">
             <span class="expand-label">關注標的</span>
@@ -50,7 +50,7 @@ function renderNews(containerId, items) {
           </div>
           <div class="expand-row" style="align-items:flex-start; gap:12px;">
             <span class="expand-label" style="flex-shrink:0; margin-top:2px;">持續追蹤</span>
-            <span class="expand-value" style="text-align:right; line-height:1.6;">${item.expand_watch || '待觀察'}</span>
+            <span class="expand-value" style="text-align:left; line-height:1.6;">${item.expand_watch || '待觀察'}</span>
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ function renderPersons(persons) {
           </div>
           <div class="expand-row" style="align-items:flex-start; gap:12px;">
             <span class="expand-label" style="flex-shrink:0; margin-top:2px;">觀察重點</span>
-            <span class="expand-value" style="text-align:right; line-height:1.6;">${p.expand_watch || p.note}</span>
+            <span class="expand-value" style="text-align:left; line-height:1.6;">${p.expand_watch || p.note}</span>
           </div>
         </div>
       </div>
