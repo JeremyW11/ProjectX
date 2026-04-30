@@ -29,8 +29,8 @@ function renderTickers(tickers) {
 
 function renderNews(containerId, items) {
   const container = document.getElementById(containerId);
-  container.innerHTML = items.map(item => `
-    <div class="news-item">
+  container.innerHTML = items.map((item, i) => `
+    <div class="news-item expandable" onclick="toggleExpand(this)">
       <span class="news-tag tag-${item.type}">${item.tag}</span>
       <div class="news-body">
         <div class="news-text">${item.text}</div>
@@ -38,21 +38,74 @@ function renderNews(containerId, items) {
           <span class="news-time">${item.time}</span>
           <span class="news-impact">${item.impact}</span>
         </div>
+        <div class="news-expand">
+          <div class="expand-divider"></div>
+          <div class="expand-row">
+            <span class="expand-label">影響分析</span>
+            <span class="expand-value">${item.impact}</span>
+          </div>
+          <div class="expand-row">
+            <span class="expand-label">關注標的</span>
+            <span class="expand-value">${getRelatedTickers(item.tag)}</span>
+          </div>
+          <div class="expand-row">
+            <span class="expand-label">持續追蹤</span>
+            <span class="expand-value">${item.time === '持續追蹤' ? '是' : '視情況'}</span>
+          </div>
+        </div>
       </div>
+      <div class="expand-arrow">›</div>
     </div>
   `).join('');
+}
+
+function getRelatedTickers(tag) {
+  const map = {
+    '半導體': 'NVDA / TSM / 2330 / MU',
+    'AI': 'NVDA / MSFT / GOOGL / 2330',
+    '加密': 'BTC / ETH / SOL',
+    '台股': 'TAIEX / 2330 / 2317',
+    '能源': 'XOM / CVX / OIL',
+    '航運': '2603 / 2609 / ZIM',
+    '科技': 'NVDA / AAPL / MSFT / META',
+    '政策': 'SPY / TLT / DXY',
+    '地緣': 'GC / OIL / VIX',
+    '數據': 'SPY / TLT / USD',
+    '央行': 'TLT / DXY / GC',
+    'OPEC': 'XOM / OIL / Brent',
+    'IMF': 'SPY / EEM / DXY',
+    '消費': 'XRT / AMZN / WMT',
+    '貴金屬': 'GC / SI / GDX'
+  };
+  return map[tag] || '—';
 }
 
 function renderPersons(persons) {
   const container = document.getElementById('persons-list');
   container.innerHTML = persons.map(p => `
-    <div class="person-item">
+    <div class="person-item expandable" onclick="toggleExpand(this)">
       <div class="person-avatar">${p.initials}</div>
-      <div>
+      <div class="person-body">
         <div class="person-name">${p.name}</div>
         <div class="person-title">${p.title}</div>
         <div class="person-note">${p.note}</div>
+        <div class="news-expand">
+          <div class="expand-divider"></div>
+          <div class="expand-row">
+            <span class="expand-label">機構</span>
+            <span class="expand-value">${p.title.split('｜')[1] || p.title}</span>
+          </div>
+          <div class="expand-row">
+            <span class="expand-label">職位</span>
+            <span class="expand-value">${p.title.split('｜')[0] || '—'}</span>
+          </div>
+          <div class="expand-row">
+            <span class="expand-label">影響力</span>
+            <span class="expand-value" style="color:var(--accent-orange)">高度關注</span>
+          </div>
+        </div>
       </div>
+      <div class="expand-arrow">›</div>
     </div>
   `).join('');
 }
@@ -78,6 +131,20 @@ function dotColor(signal) {
     neutral: 'var(--text-muted)'
   };
   return map[signal] || 'var(--text-muted)';
+}
+
+function toggleExpand(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.expandable.open').forEach(item => {
+    item.classList.remove('open');
+    const arrow = item.querySelector('.expand-arrow');
+    if (arrow) arrow.style.transform = 'rotate(0deg)';
+  });
+  if (!isOpen) {
+    el.classList.add('open');
+    const arrow = el.querySelector('.expand-arrow');
+    if (arrow) arrow.style.transform = 'rotate(90deg)';
+  }
 }
 
 loadData();

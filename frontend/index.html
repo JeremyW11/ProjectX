@@ -136,6 +136,7 @@
     .person-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
     .person-item:last-child { border-bottom: none; }
     .person-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; background: linear-gradient(135deg, rgba(77,166,255,0.2), rgba(159,122,234,0.2)); border: 1px solid rgba(77,166,255,0.2); color: var(--accent-blue); }
+    .person-body { flex: 1; }
     .person-name { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
     .person-title { font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
     .person-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
@@ -148,6 +149,66 @@
     .pro-features li { font-size: 12px; color: var(--text-secondary); padding: 4px 0; display: flex; align-items: center; gap: 7px; }
     .pro-features li::before { content: '✦'; font-size: 8px; color: var(--accent-purple); }
     .divider-line { height: 1px; background: var(--border); margin: 20px 0; }
+
+    /* 展開互動 */
+    .expandable {
+      cursor: pointer;
+      transition: background 0.2s;
+      border-radius: 8px;
+      padding: 11px 6px;
+      margin: 0 -6px;
+    }
+
+    .expandable:hover { background: rgba(255,255,255,0.03); }
+
+    .expand-arrow {
+      font-size: 16px;
+      color: var(--text-muted);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 8px;
+      align-self: flex-start;
+      margin-top: 2px;
+    }
+
+    .news-expand {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .expandable.open .news-expand {
+      max-height: 200px;
+      opacity: 1;
+    }
+
+    .expand-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+      margin: 10px 0;
+    }
+
+    .expand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+    }
+
+    .expand-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .expand-value {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -156,9 +217,11 @@
     <div class="logo">PROJECT X</div>
     <ul class="nav-links">
       <li><a href="index.html" class="active">總覽</a></li>
-      <li><a href="pages/market.html">市場</a></li>
-      <li><a href="pages/industry.html">產業</a></li>
-      <li><a href="/pages/institutional.html">機構報告</a></li><li><a href="/pages/calendar.html">市場日曆</a></li><li><a href="/pages/targets.html">標的追蹤</a></li>
+      <li><a href="/pages/market.html">市場</a></li>
+      <li><a href="/pages/industry.html">產業</a></li>
+      <li><a href="/pages/institutional.html">機構報告</a></li>
+      <li><a href="/pages/calendar.html">市場日曆</a></li>
+      <li><a href="/pages/targets.html">標的追蹤</a></li>
     </ul>
     <div class="nav-right">
       <button class="btn btn-ghost">登入</button>
@@ -240,4 +303,4 @@
 
   <script src="./js/app.js"></script>
 </body>
-</html> 
+</html>
