@@ -40,17 +40,17 @@ function renderNews(containerId, items) {
         </div>
         <div class="news-expand">
           <div class="expand-divider"></div>
-          <div class="expand-row">
-            <span class="expand-label">影響分析</span>
-            <span class="expand-value">${item.impact}</span>
+          <div class="expand-row" style="align-items:flex-start; gap:12px;">
+            <span class="expand-label" style="flex-shrink:0; margin-top:2px;">深度分析</span>
+            <span class="expand-value" style="text-align:right; line-height:1.6;">${item.expand_analysis || item.impact}</span>
           </div>
           <div class="expand-row">
             <span class="expand-label">關注標的</span>
-            <span class="expand-value">${getRelatedTickers(item.tag)}</span>
+            <span class="expand-value">${item.expand_tickers || getRelatedTickers(item.tag)}</span>
           </div>
-          <div class="expand-row">
-            <span class="expand-label">持續追蹤</span>
-            <span class="expand-value">${item.time === '持續追蹤' ? '是' : '視情況'}</span>
+          <div class="expand-row" style="align-items:flex-start; gap:12px;">
+            <span class="expand-label" style="flex-shrink:0; margin-top:2px;">持續追蹤</span>
+            <span class="expand-value" style="text-align:right; line-height:1.6;">${item.expand_watch || '待觀察'}</span>
           </div>
         </div>
       </div>
@@ -99,9 +99,9 @@ function renderPersons(persons) {
             <span class="expand-label">職位</span>
             <span class="expand-value">${p.title.split('｜')[0] || '—'}</span>
           </div>
-          <div class="expand-row">
-            <span class="expand-label">影響力</span>
-            <span class="expand-value" style="color:var(--accent-orange)">高度關注</span>
+          <div class="expand-row" style="align-items:flex-start; gap:12px;">
+            <span class="expand-label" style="flex-shrink:0; margin-top:2px;">觀察重點</span>
+            <span class="expand-value" style="text-align:right; line-height:1.6;">${p.expand_watch || p.note}</span>
           </div>
         </div>
       </div>
