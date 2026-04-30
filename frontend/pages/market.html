@@ -131,7 +131,6 @@
     .icon-teal { background: rgba(56,178,172,0.15); }
     .icon-orange { background: rgba(246,173,85,0.15); }
 
-    /* 加密資產卡片 */
     .asset-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
 
     .asset-card {
@@ -165,7 +164,6 @@
     .stat-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; }
     .stat-value { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
 
-    /* 展開區塊 */
     .asset-expand {
       max-height: 0;
       overflow: hidden;
@@ -191,12 +189,6 @@
     .expand-label { font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; flex-shrink: 0; margin-top: 2px; }
     .expand-value { font-size: 12px; color: var(--text-secondary); font-weight: 500; text-align: left; line-height: 1.6; }
 
-    /* 股票表格 */
-    .stock-table { width: 100%; border-collapse: collapse; }
-    .stock-table th { font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
-    .stock-table td { font-size: 13px; padding: 0; border-bottom: 1px solid rgba(255,255,255,0.03); color: var(--text-secondary); }
-    .stock-table tr:last-child td { border-bottom: none; }
-
     .stock-row-main {
       display: flex;
       align-items: center;
@@ -204,6 +196,7 @@
       cursor: pointer;
       transition: background 0.2s;
       border-radius: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
     }
 
     .stock-row-main:hover { background: rgba(255,255,255,0.02); }
@@ -246,9 +239,8 @@
     .expand-cell-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
     .expand-cell-value { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
 
-    .expand-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s ease; margin-left: 8px; }
+    .expand-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s ease; margin-left: 8px; flex-shrink: 0; }
 
-    /* Pro 鎖定 */
     .pro-lock { position: relative; }
     .pro-lock-overlay {
       position: absolute;
@@ -303,43 +295,13 @@
     </div>
 
     <div class="market-tabs">
-      <button class="tab-btn crypto active" onclick="switchTab('crypto')">🔮 虛擬貨幣</button>
-      <button class="tab-btn us" onclick="switchTab('us')">🇺🇸 美股</button>
+      <button class="tab-btn us active" onclick="switchTab('us')">🇺🇸 美股</button>
       <button class="tab-btn tw" onclick="switchTab('tw')">🇹🇼 台股</button>
-    </div>
-
-    <!-- 虛擬貨幣 -->
-    <div id="tab-crypto" class="tab-content active">
-      <div class="asset-grid" id="crypto-assets"></div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-        <div class="glass-card">
-          <div class="card-header">
-            <div class="card-title"><div class="icon icon-purple">📊</div>市場結構分析</div>
-            <span class="badge-pro">PRO</span>
-          </div>
-          <div class="pro-lock" style="min-height:200px;">
-            <div style="padding:12px 0; color:var(--text-muted); font-size:13px;">技術面、籌碼面、鏈上數據完整市場結構判讀...</div>
-            <div class="pro-lock-overlay">
-              <div class="lock-content">
-                <div class="lock-icon">🔐</div>
-                <div class="lock-title">升級 Pro 解鎖深度分析</div>
-                <div class="lock-desc">技術面、籌碼面、鏈上數據<br>完整市場結構判讀</div>
-                <button class="btn btn-glow">立即訂閱</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="glass-card">
-          <div class="card-header">
-            <div class="card-title"><div class="icon icon-orange">📰</div>加密市場要聞</div>
-          </div>
-          <div id="crypto-news"></div>
-        </div>
-      </div>
+      <button class="tab-btn crypto" onclick="switchTab('crypto')">🔮 虛擬貨幣</button>
     </div>
 
     <!-- 美股 -->
-    <div id="tab-us" class="tab-content">
+    <div id="tab-us" class="tab-content active">
       <div class="glass-card">
         <div class="card-header">
           <div class="card-title"><div class="icon icon-blue">🏆</div>重點追蹤標的</div>
@@ -408,6 +370,36 @@
       </div>
     </div>
 
+    <!-- 虛擬貨幣 -->
+    <div id="tab-crypto" class="tab-content">
+      <div class="asset-grid" id="crypto-assets"></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-purple">📊</div>市場結構分析</div>
+            <span class="badge-pro">PRO</span>
+          </div>
+          <div class="pro-lock" style="min-height:200px;">
+            <div style="padding:12px 0; color:var(--text-muted); font-size:13px;">技術面、籌碼面、鏈上數據完整市場結構判讀...</div>
+            <div class="pro-lock-overlay">
+              <div class="lock-content">
+                <div class="lock-icon">🔐</div>
+                <div class="lock-title">升級 Pro 解鎖深度分析</div>
+                <div class="lock-desc">技術面、籌碼面、鏈上數據<br>完整市場結構判讀</div>
+                <button class="btn btn-glow">立即訂閱</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-orange">📰</div>加密市場要聞</div>
+          </div>
+          <div id="crypto-news"></div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <script>
@@ -448,7 +440,6 @@
         d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) +
         '<br>UTC+8 台北時間';
 
-      // 加密資產卡片
       if (data.market?.crypto) {
         document.getElementById('crypto-assets').innerHTML = data.market.crypto.map(c => `
           <div class="asset-card" onclick="toggleAsset(this)">
@@ -473,14 +464,14 @@
               <div class="expand-divider"></div>
               <div class="expand-row">
                 <span class="expand-label">技術面</span>
-                <span class="expand-value">${c.tech_note || '點擊查看更多分析（Pro）'}</span>
+                <span class="expand-value">${c.tech_note || '—'}</span>
               </div>
               <div class="expand-row">
-                <span class="expand-label">支撐</span>
+                <span class="expand-label">支撐位</span>
                 <span class="expand-value" style="color:var(--accent-green)">${c.support || '—'}</span>
               </div>
               <div class="expand-row">
-                <span class="expand-label">壓力</span>
+                <span class="expand-label">壓力位</span>
                 <span class="expand-value" style="color:var(--accent-red)">${c.resistance || '—'}</span>
               </div>
               <div class="expand-row">
@@ -492,7 +483,6 @@
         `).join('');
       }
 
-      // 美股列表
       const renderStocks = (id, stocks) => {
         if (!stocks) return;
         document.getElementById(id).innerHTML = stocks.map(s => `
@@ -533,7 +523,6 @@
       renderStocks('us-stocks', data.market?.us_stocks);
       renderStocks('tw-stocks', data.market?.tw_stocks);
 
-      // 要聞
       const renderNews = (id, items) => {
         if (!items) return;
         document.getElementById(id).innerHTML = items.map(item => `
