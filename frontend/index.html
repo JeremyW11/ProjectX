@@ -35,6 +35,7 @@
         radial-gradient(ellipse 60% 40% at 80% 0%, rgba(159,122,234,0.06) 0%, transparent 50%);
     }
 
+    /* ===== NAV ===== */
     nav {
       display: flex;
       justify-content: space-between;
@@ -42,11 +43,11 @@
       padding: 0 40px;
       height: 60px;
       border-bottom: 1px solid var(--border);
-      background: rgba(5,6,15,0.85);
+      background: rgba(5,6,15,0.95);
       backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 200;
     }
 
     .logo {
@@ -56,13 +57,15 @@
       background: linear-gradient(135deg, #4da6ff, #9f7aea);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      flex-shrink: 0;
     }
 
     .nav-links { display: flex; gap: 24px; list-style: none; }
-    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; white-space: nowrap; }
     .nav-links a:hover { color: var(--text-primary); }
     .nav-links a.active { color: var(--text-primary); border-bottom: 2px solid var(--accent-blue); padding-bottom: 2px; }
-    .nav-right { display: flex; gap: 10px; align-items: center; }
+
+    .nav-right { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
 
     .btn { padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: all 0.2s; }
     .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
@@ -70,6 +73,76 @@
     .btn-glow { background: linear-gradient(135deg, #4da6ff, #9f7aea); color: #fff; box-shadow: 0 0 20px rgba(77,166,255,0.3); }
     .btn-glow:hover { box-shadow: 0 0 30px rgba(77,166,255,0.5); transform: translateY(-1px); }
 
+    /* 漢堡選單按鈕 */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* 手機側邊選單 */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(5,6,15,0.98);
+      backdrop-filter: blur(20px);
+      z-index: 199;
+      padding: 24px 24px;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover, .mobile-menu a.active { color: var(--text-primary); }
+    .mobile-menu a.active { color: var(--accent-blue); }
+
+    .mobile-menu-btns {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mobile-menu-btns .btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    /* ===== MAIN ===== */
     main { max-width: 1440px; margin: 0 auto; padding: 28px 40px 60px; }
 
     .top-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
@@ -79,6 +152,7 @@
     .live-dot { display: inline-block; width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; margin-right: 5px; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
+    /* Ticker */
     .ticker-strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 28px; }
     .ticker-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; transition: all 0.2s; }
     .ticker-item:hover { background: var(--bg-card-hover); border-color: rgba(77,166,255,0.2); }
@@ -89,6 +163,7 @@
     .down { color: var(--accent-red); }
     .flat { color: var(--text-muted); }
 
+    /* 三欄佈局 */
     .content-layout { display: grid; grid-template-columns: 1fr 1fr 320px; gap: 20px; align-items: start; }
 
     .glass-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); margin-bottom: 16px; }
@@ -100,13 +175,12 @@
     .icon-green { background: rgba(72,187,120,0.15); }
     .icon-purple { background: rgba(159,122,234,0.15); }
     .icon-orange { background: rgba(246,173,85,0.15); }
-    .icon-teal { background: rgba(56,178,172,0.15); }
     .icon-red { background: rgba(252,129,129,0.15); }
 
     .card-badge { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 600; letter-spacing: 0.5px; }
     .badge-free { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
 
-    /* 新聞條目 */
+    /* 新聞 */
     .news-item { display: flex; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.04); border-radius: 8px; cursor: pointer; transition: background 0.2s; margin: 0 -6px; padding: 11px 6px; }
     .news-item:last-child { border-bottom: none; }
     .news-item:hover { background: rgba(255,255,255,0.03); }
@@ -117,9 +191,9 @@
     .tag-crypto { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.15); }
     .tag-us { background: rgba(246,173,85,0.1); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
     .tag-tw { background: rgba(56,178,172,0.1); color: var(--accent-teal); border: 1px solid rgba(56,178,172,0.15); }
-    .news-body { flex: 1; }
+    .news-body { flex: 1; min-width: 0; }
     .news-text { font-size: 13px; color: #c8c8d8; line-height: 1.65; }
-    .news-footer { display: flex; justify-content: space-between; margin-top: 4px; }
+    .news-footer { display: flex; justify-content: space-between; margin-top: 4px; flex-wrap: wrap; gap: 4px; }
     .news-time { font-size: 11px; color: var(--text-muted); }
     .news-impact { font-size: 10px; font-weight: 600; color: var(--accent-orange); }
 
@@ -128,19 +202,19 @@
     .expandable:hover { background: rgba(255,255,255,0.03); }
     .expand-arrow { font-size: 16px; color: var(--text-muted); transition: transform 0.3s ease; flex-shrink: 0; margin-left: 8px; align-self: flex-start; margin-top: 2px; }
     .news-expand { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; opacity: 0; }
-    .expandable.open .news-expand { max-height: 200px; opacity: 1; }
+    .expandable.open .news-expand { max-height: 220px; opacity: 1; }
     .expand-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 10px 0; }
     .expand-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 4px 0; gap: 12px; }
     .expand-label { font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; flex-shrink: 0; margin-top: 2px; }
     .expand-value { font-size: 12px; color: var(--text-secondary); font-weight: 500; text-align: left; line-height: 1.6; }
 
-    /* 信號雷達 */
+    /* 信號 */
     .industry-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
     .industry-row:last-child { border-bottom: none; }
     .ind-left { display: flex; align-items: center; gap: 8px; }
-    .ind-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .ind-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
     .ind-name { font-size: 13px; color: var(--text-secondary); }
-    .signal-pill { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px; }
+    .signal-pill { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px; white-space: nowrap; }
     .bull { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
     .bear { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.2); }
     .watch { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
@@ -150,7 +224,7 @@
     .person-item { display: flex; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.04); }
     .person-item:last-child { border-bottom: none; }
     .person-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; background: linear-gradient(135deg, rgba(77,166,255,0.2), rgba(159,122,234,0.2)); border: 1px solid rgba(77,166,255,0.2); color: var(--accent-blue); }
-    .person-body { flex: 1; }
+    .person-body { flex: 1; min-width: 0; }
     .person-name { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
     .person-title { font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
     .person-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
@@ -161,7 +235,7 @@
     .fg-label { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
     .fg-change { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
     .fg-bar { height: 8px; border-radius: 4px; background: linear-gradient(to right, #fc8181 0%, #f6ad55 25%, #f6e05e 50%, #68d391 75%, #48bb78 100%); position: relative; margin-bottom: 8px; }
-    .fg-indicator { position: absolute; top: -4px; width: 16px; height: 16px; border-radius: 50%; background: white; border: 2px solid var(--bg-base); transform: translateX(-50%); transition: left 0.5s ease; }
+    .fg-indicator { position: absolute; top: -4px; width: 16px; height: 16px; border-radius: 50%; background: white; border: 2px solid var(--bg-base); transform: translateX(-50%); }
     .fg-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
     .extreme-fear { color: #fc8181; }
     .fear { color: #f6ad55; }
@@ -172,11 +246,11 @@
     /* Polymarket */
     .poly-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
     .poly-item:last-child { border-bottom: none; }
-    .poly-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
-    .poly-title { font-size: 12px; color: var(--text-primary); font-weight: 600; flex: 1; padding-right: 8px; line-height: 1.4; }
-    .poly-prob { font-size: 16px; font-weight: 800; color: var(--accent-blue); white-space: nowrap; }
+    .poly-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; gap: 8px; }
+    .poly-title { font-size: 12px; color: var(--text-primary); font-weight: 600; flex: 1; line-height: 1.4; }
+    .poly-prob { font-size: 16px; font-weight: 800; color: var(--accent-blue); white-space: nowrap; flex-shrink: 0; }
     .poly-bar-bg { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.06); margin-bottom: 4px; }
-    .poly-bar { height: 4px; border-radius: 2px; background: var(--accent-blue); transition: width 0.5s ease; }
+    .poly-bar { height: 4px; border-radius: 2px; background: var(--accent-blue); }
     .poly-note { font-size: 11px; color: var(--text-muted); }
 
     /* CoinGlass */
@@ -189,7 +263,7 @@
     .cg-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.04); }
     .cg-funding { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
 
-    /* Pro 卡片 */
+    /* Pro */
     .pro-card { background: linear-gradient(135deg, rgba(77,99,255,0.12), rgba(159,122,234,0.08)); border: 1px solid rgba(99,130,255,0.25); border-radius: 16px; padding: 24px 20px; text-align: center; }
     .pro-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--accent-purple); margin-bottom: 10px; text-transform: uppercase; }
     .pro-title { font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; line-height: 1.4; }
@@ -198,6 +272,37 @@
     .pro-features li { font-size: 12px; color: var(--text-secondary); padding: 4px 0; display: flex; align-items: center; gap: 7px; }
     .pro-features li::before { content: '✦'; font-size: 8px; color: var(--accent-purple); }
     .divider-line { height: 1px; background: var(--border); margin: 16px 0; }
+
+    /* ===== 手機響應式 ===== */
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .nav-right { display: none; }
+      .hamburger { display: flex; }
+
+      main { padding: 16px 16px 40px; }
+
+      .top-bar { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 16px; }
+      .top-bar .meta { text-align: left; font-size: 11px; }
+
+      /* Ticker 手機：2欄 */
+      .ticker-strip { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
+      .t-value { font-size: 15px; }
+
+      /* 首頁改為單欄 */
+      .content-layout { grid-template-columns: 1fr; gap: 0; }
+
+      .glass-card { padding: 16px; margin-bottom: 12px; border-radius: 12px; }
+
+      .news-text { font-size: 13px; }
+      .expandable.open .news-expand { max-height: 280px; }
+    }
+
+    @media (max-width: 480px) {
+      .ticker-strip { grid-template-columns: repeat(2, 1fr); }
+      .t-value { font-size: 14px; }
+      .t-label { font-size: 9px; }
+    }
   </style>
 </head>
 <body>
@@ -205,7 +310,7 @@
   <nav>
     <div class="logo">PROJECT X</div>
     <ul class="nav-links">
-      <li><a href="index.html" class="active">總覽</a></li>
+      <li><a href="/index.html" class="active">總覽</a></li>
       <li><a href="/pages/market.html">市場</a></li>
       <li><a href="/pages/industry.html">產業</a></li>
       <li><a href="/pages/institutional.html">機構報告</a></li>
@@ -216,7 +321,23 @@
       <button class="btn btn-ghost">登入</button>
       <button class="btn btn-glow">訂閱 Pro</button>
     </div>
+    <button class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/index.html" class="active">📊 總覽</a>
+    <a href="/pages/market.html">📈 市場</a>
+    <a href="/pages/industry.html">🏭 產業</a>
+    <a href="/pages/institutional.html">🏛 機構報告</a>
+    <a href="/pages/calendar.html">📅 市場日曆</a>
+    <a href="/pages/targets.html">🎯 標的追蹤</a>
+    <div class="mobile-menu-btns">
+      <button class="btn btn-ghost">登入</button>
+      <button class="btn btn-glow">訂閱 Pro</button>
+    </div>
+  </div>
 
   <main>
     <div class="top-bar">
@@ -234,8 +355,6 @@
     <div id="ticker-strip" class="ticker-strip"></div>
 
     <div class="content-layout">
-
-      <!-- 左欄 -->
       <div>
         <div class="glass-card">
           <div class="card-header">
@@ -244,86 +363,7 @@
           </div>
           <div id="macro-list"></div>
         </div>
-
         <div class="glass-card">
           <div class="card-header">
             <div class="card-title"><div class="icon icon-orange">👤</div>重要人物動向</div>
-            <span class="card-badge badge-free">FREE</span>
-          </div>
-          <div id="persons-list"></div>
-        </div>
-      </div>
-
-      <!-- 中欄 -->
-      <div>
-        <div class="glass-card">
-          <div class="card-header">
-            <div class="card-title"><div class="icon icon-green">🏭</div>全球產業動態</div>
-            <span class="card-badge badge-free">FREE</span>
-          </div>
-          <div id="industry-list"></div>
-        </div>
-      </div>
-
-      <!-- 右欄 -->
-      <div>
-        <!-- 產業信號雷達 -->
-        <div class="glass-card">
-          <div class="card-header">
-            <div class="card-title"><div class="icon icon-purple">📡</div>產業信號雷達</div>
-          </div>
-          <div id="signals-list"></div>
-        </div>
-
-        <div class="divider-line"></div>
-
-        <!-- Fear & Greed -->
-        <div class="glass-card">
-          <div class="card-header">
-            <div class="card-title"><div class="icon icon-red">😱</div>恐懼貪婪指數</div>
-            <span class="card-badge badge-free">FREE</span>
-          </div>
-          <div id="fear-greed"></div>
-        </div>
-
-        <!-- Polymarket -->
-        <div class="glass-card">
-          <div class="card-header">
-            <div class="card-title"><div class="icon icon-blue">🎯</div>Polymarket 預測</div>
-            <span class="card-badge badge-free">FREE</span>
-          </div>
-          <div id="polymarket-list"></div>
-        </div>
-
-        <!-- CoinGlass -->
-        <div class="glass-card">
-          <div class="card-header">
-            <div class="card-title"><div class="icon icon-purple">💥</div>清算數據</div>
-            <span class="card-badge badge-free">FREE</span>
-          </div>
-          <div id="coinglass"></div>
-        </div>
-
-        <div class="divider-line"></div>
-
-        <!-- Pro -->
-        <div class="pro-card">
-          <div class="pro-label">PRO PLAN</div>
-          <div class="pro-title">客製化<br>每日投資日報</div>
-          <div class="pro-desc">依你的關注標的與產業，每日自動篩選整合，直送 Email 與會員頁。</div>
-          <ul class="pro-features">
-            <li>自選產業 &amp; 標的追蹤</li>
-            <li>技術面 + 籌碼面深度分析</li>
-            <li>全球前10大公司完整報告</li>
-            <li>每日 Email 專屬日報</li>
-          </ul>
-          <button class="btn btn-glow" style="width:100%; padding:10px;">立即訂閱 Pro</button>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <script src="./js/app.js"></script>
-</body>
-</html>
+            <span
