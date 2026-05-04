@@ -103,11 +103,10 @@
     .icon-purple { background: rgba(159,122,234,0.15); }
     .icon-red { background: rgba(252,129,129,0.15); }
 
-    /* 事件列表 */
     .event-item {
       display: flex;
       gap: 14px;
-      padding: 12px 6px;
+      padding: 14px 6px;
       border-bottom: 1px solid rgba(255,255,255,0.04);
       border-radius: 8px;
       cursor: pointer;
@@ -120,20 +119,22 @@
     .event-item.open { background: rgba(255,255,255,0.02); }
 
     .event-date-col {
-      min-width: 80px;
+      min-width: 72px;
       text-align: center;
+      padding-top: 2px;
     }
 
     .event-month { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-    .event-day { font-size: 24px; font-weight: 700; color: var(--text-primary); line-height: 1.1; }
+    .event-day { font-size: 26px; font-weight: 700; color: var(--text-primary); line-height: 1.1; }
     .event-weekday { font-size: 10px; color: var(--text-muted); }
-    .event-time { font-size: 10px; color: var(--accent-blue); margin-top: 4px; font-weight: 600; }
+    .event-time-label { font-size: 10px; color: var(--accent-blue); margin-top: 4px; font-weight: 600; }
 
     .event-body { flex: 1; }
 
-    .event-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+    .event-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; }
+    .event-title-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
     .event-title { font-size: 14px; font-weight: 700; color: var(--text-primary); }
-    .event-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin-top: 4px; }
+    .event-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
 
     .impact-badge {
       font-size: 9px;
@@ -153,7 +154,6 @@
       font-weight: 700;
       padding: 2px 7px;
       border-radius: 4px;
-      margin-right: 6px;
       letter-spacing: 0.5px;
     }
 
@@ -167,36 +167,57 @@
     .event-expand {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.35s ease, opacity 0.3s ease;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
       opacity: 0;
     }
 
     .event-item.open .event-expand {
-      max-height: 150px;
+      max-height: 250px;
       opacity: 1;
     }
 
-    .expand-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 10px 0; }
+    .expand-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 12px 0; }
 
     .expand-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 10px;
     }
 
     .expand-cell-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; font-weight: 600; }
     .expand-cell-value { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .expand-cell-value.green { color: var(--accent-green); font-weight: 600; }
+    .expand-cell-value.blue { color: var(--accent-blue); font-weight: 600; }
+    .expand-cell-value.orange { color: var(--accent-orange); }
 
-    .expand-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s ease; flex-shrink: 0; align-self: flex-start; margin-top: 2px; }
+    .expand-full {
+      margin-top: 10px;
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.02);
+      border-radius: 6px;
+      border-left: 2px solid var(--accent-blue);
+    }
 
-    /* 高影響力事件 */
+    .expand-full.watch { border-left-color: var(--accent-orange); }
+
+    .expand-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s ease; flex-shrink: 0; align-self: flex-start; margin-top: 4px; }
+
+    .today-badge {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(77,166,255,0.15);
+      color: var(--accent-blue);
+      border: 1px solid rgba(77,166,255,0.3);
+    }
+
     .high-impact-item {
       padding: 12px;
       border-radius: 10px;
       margin-bottom: 10px;
       border: 1px solid rgba(252,129,129,0.15);
       background: rgba(252,129,129,0.04);
-      cursor: pointer;
       transition: all 0.2s;
     }
 
@@ -208,7 +229,6 @@
     .hi-title { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
     .hi-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
 
-    /* 遠期預告 */
     .future-item {
       padding: 10px 0;
       border-bottom: 1px solid rgba(255,255,255,0.04);
@@ -218,19 +238,6 @@
     .future-date { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; }
     .future-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
     .future-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-
-    /* 今日標記 */
-    .today-badge {
-      font-size: 9px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(77,166,255,0.15);
-      color: var(--accent-blue);
-      border: 1px solid rgba(77,166,255,0.3);
-      margin-left: 6px;
-      vertical-align: middle;
-    }
   </style>
 </head>
 <body>
@@ -304,30 +311,28 @@
     }
 
     function formatEventDate(dateStr) {
-      const d = new Date(dateStr);
-      const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-      const weekdays = ['日','一','二','三','四','五','六'];
-      return {
-        month: months[d.getMonth()],
-        day: d.getDate(),
-        weekday: `週${weekdays[d.getDay()]}`
-      };
-    }
-
-    function isToday(dateStr, today) {
-      return dateStr === today;
+      try {
+        const d = new Date(dateStr + 'T00:00:00');
+        const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+        const weekdays = ['日','一','二','三','四','五','六'];
+        return {
+          month: months[d.getMonth()],
+          day: d.getDate(),
+          weekday: `週${weekdays[d.getDay()]}`
+        };
+      } catch(e) {
+        return { month: '--', day: '--', weekday: '--' };
+      }
     }
 
     function getTypeLabel(type) {
-      const map = {
-        'fed': 'Fed',
-        'earnings': '財報',
-        'data': '數據',
-        'tw': '台股',
-        'crypto': '加密',
-        'geo': '地緣'
-      };
+      const map = { 'fed':'Fed', 'earnings':'財報', 'data':'數據', 'tw':'台股', 'crypto':'加密', 'geo':'地緣' };
       return map[type] || type;
+    }
+
+    function getImpactLabel(impact) {
+      const map = { 'high':'🔴 高度關注', 'mid':'🟡 中度關注', 'low':'⚪ 一般關注' };
+      return map[impact] || impact;
     }
 
     async function loadData() {
@@ -335,7 +340,7 @@
       const data = await res.json();
       const today = data.date;
 
-      const d = new Date(today);
+      const d = new Date(today + 'T00:00:00');
       document.getElementById('cal-date').innerHTML =
         d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) +
         '<br>UTC+8 台北時間';
@@ -343,40 +348,48 @@
       if (data.calendar?.events) {
         document.getElementById('events-list').innerHTML = data.calendar.events.map(e => {
           const dt = formatEventDate(e.date);
-          const todayMark = isToday(e.date, today) ? '<span class="today-badge">今日</span>' : '';
+          const isToday = e.date === today;
+
           return `
           <div class="event-item" onclick="toggleEvent(this)">
             <div class="event-date-col">
               <div class="event-month">${dt.month}</div>
               <div class="event-day">${dt.day}</div>
               <div class="event-weekday">${dt.weekday}</div>
-              ${e.time ? `<div class="event-time">${e.time}</div>` : ''}
+              ${e.time ? `<div class="event-time-label">${e.time}</div>` : ''}
             </div>
             <div class="event-body">
-              <div class="event-header">
-                <div>
-                  <span class="type-badge type-${e.type}">${getTypeLabel(e.type)}</span>
-                  <span class="event-title">${e.title}${todayMark}</span>
-                </div>
-                <span class="impact-badge impact-${e.impact}">${e.impact === 'high' ? '高影響' : e.impact === 'mid' ? '中影響' : '低影響'}</span>
+              <div class="event-title-row">
+                <span class="type-badge type-${e.type}">${getTypeLabel(e.type)}</span>
+                ${isToday ? '<span class="today-badge">今日</span>' : ''}
+                <span class="event-title">${e.title}</span>
               </div>
               <div class="event-desc">${e.desc}</div>
               <div class="event-expand">
                 <div class="expand-divider"></div>
                 <div class="expand-grid">
                   <div>
-                    <div class="expand-cell-label">事件類型</div>
-                    <div class="expand-cell-value">${e.tag}</div>
+                    <div class="expand-cell-label">市場預期</div>
+                    <div class="expand-cell-value green">${e.expect || '—'}</div>
+                  </div>
+                  <div>
+                    <div class="expand-cell-label">前次數值</div>
+                    <div class="expand-cell-value">${e.prev || '—'}</div>
+                  </div>
+                  <div>
+                    <div class="expand-cell-label">受影響標的</div>
+                    <div class="expand-cell-value blue">${e.affect_assets || '—'}</div>
                   </div>
                   <div>
                     <div class="expand-cell-label">影響程度</div>
-                    <div class="expand-cell-value" style="color:${e.impact === 'high' ? 'var(--accent-red)' : e.impact === 'mid' ? 'var(--accent-orange)' : 'var(--text-muted)'}">${e.impact === 'high' ? '🔴 高度關注' : e.impact === 'mid' ? '🟡 中度關注' : '⚪ 一般關注'}</div>
-                  </div>
-                  <div style="grid-column: 1 / -1;">
-                    <div class="expand-cell-label">事件說明</div>
-                    <div class="expand-cell-value">${e.desc}</div>
+                    <div class="expand-cell-value orange">${getImpactLabel(e.impact)}</div>
                   </div>
                 </div>
+                ${e.watch ? `
+                <div class="expand-full watch" style="margin-top:10px;">
+                  <div class="expand-cell-label" style="margin-bottom:4px;">持續觀察</div>
+                  <div class="expand-cell-value">${e.watch}</div>
+                </div>` : ''}
               </div>
             </div>
             <div class="expand-arrow">›</div>
