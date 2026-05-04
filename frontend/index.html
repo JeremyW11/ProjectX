@@ -85,7 +85,6 @@
     .t-label { font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
     .t-value { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
     .t-change { font-size: 12px; font-weight: 500; }
-
     .up { color: var(--accent-green); }
     .down { color: var(--accent-red); }
     .flat { color: var(--text-muted); }
@@ -102,26 +101,40 @@
     .icon-purple { background: rgba(159,122,234,0.15); }
     .icon-orange { background: rgba(246,173,85,0.15); }
     .icon-teal { background: rgba(56,178,172,0.15); }
+    .icon-red { background: rgba(252,129,129,0.15); }
 
     .card-badge { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 600; letter-spacing: 0.5px; }
     .badge-free { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
-    .badge-pro { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.2); }
 
-    .news-item { display: flex; gap: 10px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+    /* 新聞條目 */
+    .news-item { display: flex; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.04); border-radius: 8px; cursor: pointer; transition: background 0.2s; margin: 0 -6px; padding: 11px 6px; }
+    .news-item:last-child { border-bottom: none; }
+    .news-item:hover { background: rgba(255,255,255,0.03); }
+    .news-item.open { background: rgba(255,255,255,0.03); }
     .news-tag { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; white-space: nowrap; height: fit-content; margin-top: 1px; letter-spacing: 0.5px; }
     .tag-macro { background: rgba(77,166,255,0.1); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.15); }
     .tag-industry { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.15); }
     .tag-crypto { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.15); }
     .tag-us { background: rgba(246,173,85,0.1); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
     .tag-tw { background: rgba(56,178,172,0.1); color: var(--accent-teal); border: 1px solid rgba(56,178,172,0.15); }
-
     .news-body { flex: 1; }
     .news-text { font-size: 13px; color: #c8c8d8; line-height: 1.65; }
     .news-footer { display: flex; justify-content: space-between; margin-top: 4px; }
     .news-time { font-size: 11px; color: var(--text-muted); }
     .news-impact { font-size: 10px; font-weight: 600; color: var(--accent-orange); }
 
+    /* 展開 */
+    .expandable { cursor: pointer; transition: background 0.2s; border-radius: 8px; padding: 11px 6px; margin: 0 -6px; }
+    .expandable:hover { background: rgba(255,255,255,0.03); }
+    .expand-arrow { font-size: 16px; color: var(--text-muted); transition: transform 0.3s ease; flex-shrink: 0; margin-left: 8px; align-self: flex-start; margin-top: 2px; }
+    .news-expand { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; opacity: 0; }
+    .expandable.open .news-expand { max-height: 200px; opacity: 1; }
+    .expand-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 10px 0; }
+    .expand-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 4px 0; gap: 12px; }
+    .expand-label { font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; flex-shrink: 0; margin-top: 2px; }
+    .expand-value { font-size: 12px; color: var(--text-secondary); font-weight: 500; text-align: left; line-height: 1.6; }
+
+    /* 信號雷達 */
     .industry-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
     .industry-row:last-child { border-bottom: none; }
     .ind-left { display: flex; align-items: center; gap: 8px; }
@@ -133,7 +146,8 @@
     .watch { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
     .neutral { background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
 
-    .person-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    /* 人物 */
+    .person-item { display: flex; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.04); }
     .person-item:last-child { border-bottom: none; }
     .person-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; background: linear-gradient(135deg, rgba(77,166,255,0.2), rgba(159,122,234,0.2)); border: 1px solid rgba(77,166,255,0.2); color: var(--accent-blue); }
     .person-body { flex: 1; }
@@ -141,74 +155,49 @@
     .person-title { font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
     .person-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
 
-    .pro-card { background: linear-gradient(135deg, rgba(77,99,255,0.12), rgba(159,122,234,0.08)); border: 1px solid rgba(99,130,255,0.25); border-radius: 16px; padding: 24px 20px; text-align: center; position: relative; overflow: hidden; }
+    /* Fear & Greed */
+    .fg-container { text-align: center; padding: 8px 0 16px; }
+    .fg-value { font-size: 48px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+    .fg-label { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .fg-change { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
+    .fg-bar { height: 8px; border-radius: 4px; background: linear-gradient(to right, #fc8181 0%, #f6ad55 25%, #f6e05e 50%, #68d391 75%, #48bb78 100%); position: relative; margin-bottom: 8px; }
+    .fg-indicator { position: absolute; top: -4px; width: 16px; height: 16px; border-radius: 50%; background: white; border: 2px solid var(--bg-base); transform: translateX(-50%); transition: left 0.5s ease; }
+    .fg-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .extreme-fear { color: #fc8181; }
+    .fear { color: #f6ad55; }
+    .neutral-fg { color: #f6e05e; }
+    .greed { color: #68d391; }
+    .extreme-greed { color: #48bb78; }
+
+    /* Polymarket */
+    .poly-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .poly-item:last-child { border-bottom: none; }
+    .poly-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+    .poly-title { font-size: 12px; color: var(--text-primary); font-weight: 600; flex: 1; padding-right: 8px; line-height: 1.4; }
+    .poly-prob { font-size: 16px; font-weight: 800; color: var(--accent-blue); white-space: nowrap; }
+    .poly-bar-bg { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.06); margin-bottom: 4px; }
+    .poly-bar { height: 4px; border-radius: 2px; background: var(--accent-blue); transition: width 0.5s ease; }
+    .poly-note { font-size: 11px; color: var(--text-muted); }
+
+    /* CoinGlass */
+    .cg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+    .cg-item { background: rgba(255,255,255,0.02); border-radius: 8px; padding: 10px; }
+    .cg-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; font-weight: 600; }
+    .cg-value { font-size: 14px; font-weight: 700; }
+    .cg-value.long { color: var(--accent-green); }
+    .cg-value.short { color: var(--accent-red); }
+    .cg-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.04); }
+    .cg-funding { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+
+    /* Pro 卡片 */
+    .pro-card { background: linear-gradient(135deg, rgba(77,99,255,0.12), rgba(159,122,234,0.08)); border: 1px solid rgba(99,130,255,0.25); border-radius: 16px; padding: 24px 20px; text-align: center; }
     .pro-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--accent-purple); margin-bottom: 10px; text-transform: uppercase; }
     .pro-title { font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; line-height: 1.4; }
     .pro-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 18px; }
     .pro-features { list-style: none; text-align: left; margin-bottom: 20px; }
     .pro-features li { font-size: 12px; color: var(--text-secondary); padding: 4px 0; display: flex; align-items: center; gap: 7px; }
     .pro-features li::before { content: '✦'; font-size: 8px; color: var(--accent-purple); }
-    .divider-line { height: 1px; background: var(--border); margin: 20px 0; }
-
-    /* 展開互動 */
-    .expandable {
-      cursor: pointer;
-      transition: background 0.2s;
-      border-radius: 8px;
-      padding: 11px 6px;
-      margin: 0 -6px;
-    }
-
-    .expandable:hover { background: rgba(255,255,255,0.03); }
-
-    .expand-arrow {
-      font-size: 16px;
-      color: var(--text-muted);
-      transition: transform 0.3s ease;
-      flex-shrink: 0;
-      margin-left: 8px;
-      align-self: flex-start;
-      margin-top: 2px;
-    }
-
-    .news-expand {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease, opacity 0.3s ease;
-      opacity: 0;
-    }
-
-    .expandable.open .news-expand {
-      max-height: 200px;
-      opacity: 1;
-    }
-
-    .expand-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.06);
-      margin: 10px 0;
-    }
-
-    .expand-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 4px 0;
-    }
-
-    .expand-label {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .expand-value {
-      font-size: 12px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
+    .divider-line { height: 1px; background: var(--border); margin: 16px 0; }
   </style>
 </head>
 <body>
@@ -246,6 +235,7 @@
 
     <div class="content-layout">
 
+      <!-- 左欄 -->
       <div>
         <div class="glass-card">
           <div class="card-header">
@@ -264,6 +254,7 @@
         </div>
       </div>
 
+      <!-- 中欄 -->
       <div>
         <div class="glass-card">
           <div class="card-header">
@@ -274,7 +265,9 @@
         </div>
       </div>
 
+      <!-- 右欄 -->
       <div>
+        <!-- 產業信號雷達 -->
         <div class="glass-card">
           <div class="card-header">
             <div class="card-title"><div class="icon icon-purple">📡</div>產業信號雷達</div>
@@ -284,6 +277,36 @@
 
         <div class="divider-line"></div>
 
+        <!-- Fear & Greed -->
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-red">😱</div>恐懼貪婪指數</div>
+            <span class="card-badge badge-free">FREE</span>
+          </div>
+          <div id="fear-greed"></div>
+        </div>
+
+        <!-- Polymarket -->
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-blue">🎯</div>Polymarket 預測</div>
+            <span class="card-badge badge-free">FREE</span>
+          </div>
+          <div id="polymarket-list"></div>
+        </div>
+
+        <!-- CoinGlass -->
+        <div class="glass-card">
+          <div class="card-header">
+            <div class="card-title"><div class="icon icon-purple">💥</div>清算數據</div>
+            <span class="card-badge badge-free">FREE</span>
+          </div>
+          <div id="coinglass"></div>
+        </div>
+
+        <div class="divider-line"></div>
+
+        <!-- Pro -->
         <div class="pro-card">
           <div class="pro-label">PRO PLAN</div>
           <div class="pro-title">客製化<br>每日投資日報</div>
@@ -301,6 +324,6 @@
     </div>
   </main>
 
-  <script src="./js/app.js"></script> 
+  <script src="./js/app.js"></script>
 </body>
 </html>
