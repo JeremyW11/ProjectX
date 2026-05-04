@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProjectX — 產業追蹤</title>
+  <title>ProjectX — 全球產業追蹤</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -36,232 +36,148 @@
     }
 
     nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 40px;
-      height: 60px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(5,6,15,0.85);
-      backdrop-filter: blur(20px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 40px; height: 60px; border-bottom: 1px solid var(--border);
+      background: rgba(5,6,15,0.95); backdrop-filter: blur(20px);
+      position: sticky; top: 0; z-index: 200;
     }
-
-    .logo {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      background: linear-gradient(135deg, #4da6ff, #9f7aea);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
+    .logo { font-size: 18px; font-weight: 700; letter-spacing: 2px; background: linear-gradient(135deg, #4da6ff, #9f7aea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; flex-shrink: 0; }
     .nav-links { display: flex; gap: 24px; list-style: none; }
-    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; white-space: nowrap; }
     .nav-links a:hover { color: var(--text-primary); }
     .nav-links a.active { color: var(--text-primary); border-bottom: 2px solid var(--accent-blue); padding-bottom: 2px; }
-    .nav-right { display: flex; gap: 10px; align-items: center; }
-
+    .nav-right { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
     .btn { padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: all 0.2s; }
     .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
-    .btn-ghost:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
     .btn-glow { background: linear-gradient(135deg, #4da6ff, #9f7aea); color: #fff; box-shadow: 0 0 20px rgba(77,166,255,0.3); }
-    .btn-glow:hover { box-shadow: 0 0 30px rgba(77,166,255,0.5); transform: translateY(-1px); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; bottom: 0; background: rgba(5,6,15,0.98); backdrop-filter: blur(20px); z-index: 199; padding: 24px; flex-direction: column; gap: 8px; overflow-y: auto; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--text-secondary); text-decoration: none; font-size: 18px; font-weight: 600; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu a.active { color: var(--accent-blue); }
+    .mobile-menu-btns { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .mobile-menu-btns .btn { width: 100%; padding: 12px; font-size: 15px; text-align: center; }
 
     main { max-width: 1440px; margin: 0 auto; padding: 28px 40px 60px; }
-
     .top-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; }
     .top-bar h1 { font-size: 20px; font-weight: 600; }
     .top-bar .meta { font-size: 12px; color: var(--text-muted); text-align: right; line-height: 1.8; }
 
-    .radar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-
-    .radar-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .radar-card:hover { background: var(--bg-card-hover); transform: translateY(-2px); }
-    .radar-card.selected { border-color: var(--accent-blue); background: rgba(77,166,255,0.06); }
-
-    .radar-icon { font-size: 18px; margin-bottom: 6px; }
-    .radar-name { font-size: 11px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
-    .radar-signal { font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 20px; letter-spacing: 0.5px; display: inline-block; }
-
+    /* 信號雷達橫向 */
+    .signal-radar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 28px; }
+    .radar-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 12px; text-align: center; cursor: pointer; transition: all 0.2s; }
+    .radar-item:hover { background: var(--bg-card-hover); }
+    .radar-icon { font-size: 20px; margin-bottom: 6px; }
+    .radar-name { font-size: 10px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; line-height: 1.3; }
+    .radar-signal { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 20px; letter-spacing: 0.5px; }
     .bull { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
     .bear { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.2); }
     .watch { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
     .neutral { background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
 
-    .content-layout { display: grid; grid-template-columns: 1fr 360px; gap: 20px; align-items: start; }
+    .industry-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-    .glass-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      backdrop-filter: blur(10px);
-      margin-bottom: 16px;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .card-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-primary); }
-    .icon { width: 20px; height: 20px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; }
-    .icon-blue { background: rgba(77,166,255,0.15); }
-    .icon-green { background: rgba(72,187,120,0.15); }
-    .icon-purple { background: rgba(159,122,234,0.15); }
-    .icon-orange { background: rgba(246,173,85,0.15); }
-
-    .card-badge { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 600; letter-spacing: 0.5px; }
+    .glass-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); margin-bottom: 16px; }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+    .card-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
+    .card-badge { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 600; }
     .badge-free { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
 
-    .news-item {
-      display: flex;
-      gap: 10px;
-      padding: 11px 6px;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s;
-      margin: 0 -6px;
-    }
-
-    .news-item:last-child { border-bottom: none; }
-    .news-item:hover { background: rgba(255,255,255,0.03); }
-    .news-item.open { background: rgba(255,255,255,0.03); }
-
-    .news-tag { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; white-space: nowrap; height: fit-content; margin-top: 1px; letter-spacing: 0.5px; }
+    /* 產業新聞 */
+    .ind-news-item { display: flex; gap: 10px; padding: 11px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); border-radius: 8px; cursor: pointer; transition: background 0.2s; margin: 0 -6px; }
+    .ind-news-item:last-child { border-bottom: none; }
+    .ind-news-item:hover { background: rgba(255,255,255,0.02); }
+    .ind-news-item.open { background: rgba(255,255,255,0.02); }
+    .ind-tag { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; white-space: nowrap; height: fit-content; margin-top: 2px; letter-spacing: 0.5px; }
     .tag-semi { background: rgba(77,166,255,0.1); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.15); }
     .tag-ai { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.15); }
     .tag-energy { background: rgba(246,173,85,0.1); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
-    .tag-finance { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.15); }
-    .tag-shipping { background: rgba(56,178,172,0.1); color: var(--accent-teal); border: 1px solid rgba(56,178,172,0.15); }
     .tag-tw { background: rgba(56,178,172,0.1); color: var(--accent-teal); border: 1px solid rgba(56,178,172,0.15); }
-    .tag-ev { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.15); }
-
-    .news-body { flex: 1; }
-    .news-text { font-size: 13px; color: #c8c8d8; line-height: 1.65; }
-    .news-footer { display: flex; justify-content: space-between; margin-top: 4px; }
-    .news-time { font-size: 11px; color: var(--text-muted); }
-    .news-impact { font-size: 10px; font-weight: 600; color: var(--accent-orange); }
-
-    .news-expand {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease, opacity 0.3s ease;
-      opacity: 0;
-    }
-
-    .news-item.open .news-expand {
-      max-height: 250px;
-      opacity: 1;
-    }
-
+    .tag-shipping { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.15); }
+    .tag-finance { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.15); }
+    .ind-body { flex: 1; min-width: 0; }
+    .ind-text { font-size: 13px; color: #c8c8d8; line-height: 1.65; }
+    .ind-footer { display: flex; justify-content: space-between; margin-top: 4px; flex-wrap: wrap; gap: 4px; }
+    .ind-time { font-size: 11px; color: var(--text-muted); }
+    .ind-impact { font-size: 10px; font-weight: 600; color: var(--accent-orange); }
+    .expand-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; align-self: flex-start; margin-top: 2px; }
+    .ind-expand { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; opacity: 0; }
+    .ind-news-item.open .ind-expand { max-height: 200px; opacity: 1; }
     .expand-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 10px 0; }
-
-    .expand-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 4px 0;
-      gap: 12px;
-    }
-
+    .expand-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 4px 0; gap: 12px; }
     .expand-label { font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; flex-shrink: 0; margin-top: 2px; }
-    .expand-value { font-size: 12px; color: var(--text-secondary); font-weight: 500; text-align: left; line-height: 1.6; }
-    .expand-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s ease; flex-shrink: 0; margin-left: 6px; align-self: flex-start; margin-top: 2px; }
+    .expand-value { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
 
-    .company-item {
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      cursor: pointer;
-      transition: background 0.2s;
-      border-radius: 8px;
-      margin: 0 -6px;
-      padding: 0 6px;
-    }
-
+    /* 前十大公司 */
+    .company-item { padding: 12px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); border-radius: 8px; cursor: pointer; transition: background 0.2s; margin: 0 -6px; }
     .company-item:last-child { border-bottom: none; }
     .company-item:hover { background: rgba(255,255,255,0.02); }
     .company-item.open { background: rgba(255,255,255,0.02); }
-
-    .company-main {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 12px 0;
-    }
-
-    .company-rank { font-size: 11px; font-weight: 700; color: var(--text-muted); min-width: 20px; margin-top: 2px; }
-    .company-info { flex: 1; }
-    .company-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
-    .company-name { font-size: 13px; font-weight: 700; color: var(--text-primary); }
-    .company-ticker { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+    .company-main { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .company-left { flex: 1; min-width: 0; }
+    .company-name { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+    .company-ticker { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
     .company-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .event-badge { font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+    .event-watch { background: rgba(77,166,255,0.1); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.15); }
+    .event-earnings { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.15); }
+    .event-expand { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
+    .company-expand { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; opacity: 0; }
+    .company-item.open .company-expand { max-height: 200px; opacity: 1; }
+    .company-expand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .ce-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; font-weight: 600; }
+    .ce-value { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .ce-risk { color: #ff9999; }
 
-    .event-tag { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
-    .event-earnings { background: rgba(77,166,255,0.1); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.15); }
-    .event-expand { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.15); }
-    .event-watch { background: rgba(246,173,85,0.1); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
-    .event-ma { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.15); }
-
-    .company-expand {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease, opacity 0.3s ease;
-      opacity: 0;
-    }
-
-    .company-item.open .company-expand {
-      max-height: 220px;
-      opacity: 1;
-    }
-
-    .company-expand-inner {
-      background: rgba(255,255,255,0.02);
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 12px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .expand-cell-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
-    .expand-cell-value { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-    .expand-cell-value.risk { color: var(--accent-red); }
-
-    .event-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .event-item:last-child { border-bottom: none; }
-    .event-date { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; }
-    .event-title { font-size: 13px; color: var(--text-primary); font-weight: 600; margin-bottom: 3px; }
-    .event-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-
-    .rotation-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    /* 輪動洞察 */
+    .rotation-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
     .rotation-item:last-child { border-bottom: none; }
-    .rotation-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
-    .rotation-flow { font-size: 13px; font-weight: 600; color: var(--text-primary); }
-    .rotation-strength { font-size: 10px; color: var(--accent-orange); }
-    .rotation-reason { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .rot-from { font-size: 12px; color: var(--accent-red); font-weight: 600; white-space: nowrap; }
+    .rot-arrow { font-size: 14px; color: var(--text-muted); }
+    .rot-to { font-size: 12px; color: var(--accent-green); font-weight: 600; white-space: nowrap; }
+    .rot-strength { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 20px; background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); white-space: nowrap; }
+    .rot-reason { font-size: 11px; color: var(--text-muted); flex: 1; }
+
+    /* 股務事件 */
+    .corp-event-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .corp-event-item:last-child { border-bottom: none; }
+    .corp-event-date { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; }
+    .corp-event-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+    .corp-event-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* ===== 手機響應式 ===== */
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .nav-right { display: none; }
+      .hamburger { display: flex; }
+
+      main { padding: 16px 16px 40px; }
+      .top-bar { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 16px; }
+      .top-bar .meta { text-align: left; font-size: 11px; }
+
+      /* 信號雷達手機：3欄 */
+      .signal-radar { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+      .radar-icon { font-size: 16px; margin-bottom: 4px; }
+      .radar-name { font-size: 9px; }
+
+      /* 產業佈局：單欄 */
+      .industry-layout { grid-template-columns: 1fr; gap: 0; }
+
+      .glass-card { padding: 14px; border-radius: 12px; margin-bottom: 12px; }
+
+      /* 輪動卡片手機改垂直 */
+      .rotation-item { flex-wrap: wrap; gap: 6px; }
+      .rot-reason { width: 100%; margin-top: 2px; }
+
+      /* 公司展開手機單欄 */
+      .company-expand-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -280,7 +196,23 @@
       <button class="btn btn-ghost">登入</button>
       <button class="btn btn-glow">訂閱 Pro</button>
     </div>
+    <button class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/index.html">📊 總覽</a>
+    <a href="/pages/market.html">📈 市場</a>
+    <a href="/pages/industry.html" class="active">🏭 產業</a>
+    <a href="/pages/institutional.html">🏛 機構報告</a>
+    <a href="/pages/calendar.html">📅 市場日曆</a>
+    <a href="/pages/targets.html">🎯 標的追蹤</a>
+    <div class="mobile-menu-btns">
+      <button class="btn btn-ghost">登入</button>
+      <button class="btn btn-glow">訂閱 Pro</button>
+    </div>
+  </div>
 
   <main>
     <div class="top-bar">
@@ -288,189 +220,163 @@
         <h1>全球產業追蹤</h1>
         <div style="font-size:12px; color:var(--text-muted); margin-top:3px;">產業面分析 + 全球前十大公司動向</div>
       </div>
-      <div class="meta" id="industry-date"></div>
+      <div class="meta" id="ind-date"></div>
     </div>
 
-    <div id="radar-grid" class="radar-grid"></div>
+    <div class="signal-radar" id="signal-radar"></div>
 
-    <div class="content-layout">
+    <div class="industry-layout">
       <div>
         <div class="glass-card">
           <div class="card-header">
-            <div class="card-title"><div class="icon icon-green">📰</div>產業重大事件</div>
+            <div class="card-title">📰 產業重大事件</div>
             <span class="card-badge badge-free">FREE</span>
           </div>
           <div id="industry-news"></div>
         </div>
-
         <div class="glass-card">
           <div class="card-header">
-            <div class="card-title"><div class="icon icon-blue">🏆</div>全球前十大公司動向</div>
+            <div class="card-title">🔄 產業輪動洞察</div>
             <span class="card-badge badge-free">FREE</span>
           </div>
-          <div id="top-companies"></div>
+          <div id="rotation-list"></div>
         </div>
       </div>
 
       <div>
         <div class="glass-card">
           <div class="card-header">
-            <div class="card-title"><div class="icon icon-orange">📅</div>近期股務事件</div>
+            <div class="card-title">📅 近期股務事件</div>
           </div>
           <div id="corp-events"></div>
         </div>
-
         <div class="glass-card">
           <div class="card-header">
-            <div class="card-title"><div class="icon icon-purple">🔍</div>產業輪動洞察</div>
-            <span class="card-badge badge-free">FREE</span>
+            <div class="card-title">🏢 全球前十大公司動向</div>
           </div>
-          <div id="rotation-insight"></div>
+          <div id="top-companies"></div>
         </div>
       </div>
     </div>
   </main>
 
   <script>
+    function toggleMenu() {
+      var menu = document.getElementById('mobile-menu');
+      var hamburger = document.getElementById('hamburger');
+      menu.classList.toggle('open');
+      hamburger.classList.toggle('open');
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    }
+
     function toggleNews(el) {
-      const isOpen = el.classList.contains('open');
-      document.querySelectorAll('.news-item.open').forEach(item => {
+      var isOpen = el.classList.contains('open');
+      document.querySelectorAll('.ind-news-item.open').forEach(function(item) {
         item.classList.remove('open');
-        const arrow = item.querySelector('.expand-arrow');
+        var arrow = item.querySelector('.expand-arrow');
         if (arrow) arrow.style.transform = 'rotate(0deg)';
       });
       if (!isOpen) {
         el.classList.add('open');
-        const arrow = el.querySelector('.expand-arrow');
+        var arrow = el.querySelector('.expand-arrow');
         if (arrow) arrow.style.transform = 'rotate(90deg)';
       }
     }
 
     function toggleCompany(el) {
-      const isOpen = el.classList.contains('open');
-      document.querySelectorAll('.company-item.open').forEach(item => item.classList.remove('open'));
+      var isOpen = el.classList.contains('open');
+      document.querySelectorAll('.company-item.open').forEach(function(item) { item.classList.remove('open'); });
       if (!isOpen) el.classList.add('open');
     }
 
-    async function loadIndustryData() {
-      const res = await fetch('../data/daily.json');
-      const data = await res.json();
+    var radarIcons = { '半導體 / AI': '💾', '加密貨幣': '🪙', '能源': '⚡', '雲端 / 資料中心': '☁️', '金融': '🏦', '航運': '🚢', '消費': '🛒' };
 
-      const d = new Date(data.date);
-      document.getElementById('industry-date').innerHTML =
-        d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) +
-        '<br>UTC+8 台北時間';
+    async function loadData() {
+      var res = await fetch('../data/daily.json');
+      var data = await res.json();
 
-      const icons = {
-        '半導體 / AI': '💻', '加密貨幣': '🔮', '雲端 / 資料中心': '☁️',
-        '金融': '🏦', '航運': '🚢', '能源': '⚡', '消費': '🛒'
-      };
+      var d = new Date(data.date);
+      document.getElementById('ind-date').innerHTML =
+        d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) + '<br>UTC+8 台北時間';
 
       if (data.signals) {
-        document.getElementById('radar-grid').innerHTML = data.signals.map(s => `
-          <div class="radar-card" onclick="this.classList.toggle('selected')">
-            <div class="radar-icon">${icons[s.name] || '📊'}</div>
-            <div class="radar-name">${s.name}</div>
-            <span class="radar-signal ${s.signal}">${s.label}</span>
-          </div>
-        `).join('');
+        document.getElementById('signal-radar').innerHTML = data.signals.map(function(s) {
+          return '<div class="radar-item">' +
+            '<div class="radar-icon">' + (radarIcons[s.name] || '📊') + '</div>' +
+            '<div class="radar-name">' + s.name + '</div>' +
+            '<span class="radar-signal ' + s.signal + '">' + s.label + '</span>' +
+          '</div>';
+        }).join('');
       }
 
-      if (data.industry_detail?.news) {
-        document.getElementById('industry-news').innerHTML = data.industry_detail.news.map(item => `
-          <div class="news-item" onclick="toggleNews(this)">
-            <span class="news-tag tag-${item.type}">${item.tag}</span>
-            <div class="news-body">
-              <div class="news-text">${item.text}</div>
-              <div class="news-footer">
-                <span class="news-time">${item.time}</span>
-                <span class="news-impact">${item.impact}</span>
-              </div>
-              <div class="news-expand">
-                <div class="expand-divider"></div>
-                <div class="expand-row">
-                  <span class="expand-label">深度分析</span>
-                  <span class="expand-value">${item.expand_analysis || item.impact}</span>
-                </div>
-                <div class="expand-row">
-                  <span class="expand-label">受影響標的</span>
-                  <span class="expand-value" style="color:var(--accent-blue)">${item.expand_tickers || '—'}</span>
-                </div>
-                <div class="expand-row">
-                  <span class="expand-label">持續追蹤</span>
-                  <span class="expand-value">${item.expand_watch || '待觀察'}</span>
-                </div>
-              </div>
-            </div>
-            <div class="expand-arrow">›</div>
-          </div>
-        `).join('');
-      }
+      if (data.industry_detail) {
+        if (data.industry_detail.news) {
+          document.getElementById('industry-news').innerHTML = data.industry_detail.news.map(function(item) {
+            return '<div class="ind-news-item" onclick="toggleNews(this)">' +
+              '<span class="ind-tag tag-' + item.type + '">' + item.tag + '</span>' +
+              '<div class="ind-body">' +
+                '<div class="ind-text">' + item.text + '</div>' +
+                '<div class="ind-footer"><span class="ind-time">' + item.time + '</span><span class="ind-impact">' + item.impact + '</span></div>' +
+                '<div class="ind-expand">' +
+                  '<div class="expand-divider"></div>' +
+                  '<div class="expand-row" style="align-items:flex-start;gap:12px;"><span class="expand-label" style="flex-shrink:0;margin-top:2px;">深度分析</span><span class="expand-value">' + (item.expand_analysis || '—') + '</span></div>' +
+                  '<div class="expand-row"><span class="expand-label">關注標的</span><span class="expand-value">' + (item.expand_tickers || '—') + '</span></div>' +
+                  '<div class="expand-row" style="align-items:flex-start;gap:12px;"><span class="expand-label" style="flex-shrink:0;margin-top:2px;">持續追蹤</span><span class="expand-value">' + (item.expand_watch || '—') + '</span></div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="expand-arrow">›</div>' +
+            '</div>';
+          }).join('');
+        }
 
-      if (data.industry_detail?.top_companies) {
-        document.getElementById('top-companies').innerHTML = data.industry_detail.top_companies.map((c, i) => `
-          <div class="company-item" onclick="toggleCompany(this)">
-            <div class="company-main">
-              <div class="company-rank">#${i + 1}</div>
-              <div class="company-info">
-                <div class="company-header">
-                  <div>
-                    <div class="company-name">${c.name}</div>
-                    <div class="company-ticker">${c.ticker} · ${c.industry}</div>
-                  </div>
-                  <span class="event-tag event-${c.event_type}">${c.event_label}</span>
-                </div>
-                <div class="company-note">${c.note}</div>
-              </div>
-            </div>
-            <div class="company-expand">
-              <div class="company-expand-inner">
-                <div>
-                  <div class="expand-cell-label">核心業務</div>
-                  <div class="expand-cell-value">${c.core_business || c.industry}</div>
-                </div>
-                <div>
-                  <div class="expand-cell-label">近期重大事件</div>
-                  <div class="expand-cell-value">${c.recent_event || c.note}</div>
-                </div>
-                <div>
-                  <div class="expand-cell-label">對產業影響</div>
-                  <div class="expand-cell-value">${c.industry_impact || '—'}</div>
-                </div>
-                <div>
-                  <div class="expand-cell-label">投資風險</div>
-                  <div class="expand-cell-value risk">${c.risk_note || '—'}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        `).join('');
-      }
+        if (data.industry_detail.rotation) {
+          document.getElementById('rotation-list').innerHTML = data.industry_detail.rotation.map(function(r) {
+            return '<div class="rotation-item">' +
+              '<span class="rot-from">' + r.from + '</span>' +
+              '<span class="rot-arrow">→</span>' +
+              '<span class="rot-to">' + r.to + '</span>' +
+              '<span class="rot-strength">' + r.strength + '</span>' +
+              '<span class="rot-reason">' + r.reason + '</span>' +
+            '</div>';
+          }).join('');
+        }
 
-      if (data.industry_detail?.corp_events) {
-        document.getElementById('corp-events').innerHTML = data.industry_detail.corp_events.map(e => `
-          <div class="event-item">
-            <div class="event-date">${e.date}</div>
-            <div class="event-title">${e.title}</div>
-            <div class="event-desc">${e.desc}</div>
-          </div>
-        `).join('');
-      }
+        if (data.industry_detail.corp_events) {
+          document.getElementById('corp-events').innerHTML = data.industry_detail.corp_events.map(function(e) {
+            return '<div class="corp-event-item">' +
+              '<div class="corp-event-date">' + e.date + '</div>' +
+              '<div class="corp-event-title">' + e.title + '</div>' +
+              '<div class="corp-event-desc">' + e.desc + '</div>' +
+            '</div>';
+          }).join('');
+        }
 
-      if (data.industry_detail?.rotation) {
-        document.getElementById('rotation-insight').innerHTML = data.industry_detail.rotation.map(r => `
-          <div class="rotation-item">
-            <div class="rotation-header">
-              <span class="rotation-flow">${r.from} → ${r.to}</span>
-              <span class="rotation-strength">${r.strength}</span>
-            </div>
-            <div class="rotation-reason">${r.reason}</div>
-          </div>
-        `).join('');
+        if (data.industry_detail.top_companies) {
+          document.getElementById('top-companies').innerHTML = data.industry_detail.top_companies.map(function(c) {
+            var eventClass = c.event_type === 'earnings' ? 'event-earnings' : c.event_type === 'expand' ? 'event-expand' : 'event-watch';
+            return '<div class="company-item" onclick="toggleCompany(this)">' +
+              '<div class="company-main">' +
+                '<div class="company-left">' +
+                  '<div class="company-name">' + c.name + ' <span class="company-ticker">' + c.ticker + '</span></div>' +
+                  '<div class="company-note">' + c.note + '</div>' +
+                '</div>' +
+                '<span class="event-badge ' + eventClass + '">' + c.event_label + '</span>' +
+              '</div>' +
+              '<div class="company-expand">' +
+                '<div class="company-expand-grid">' +
+                  '<div><div class="ce-label">核心業務</div><div class="ce-value">' + (c.core_business || '—') + '</div></div>' +
+                  '<div><div class="ce-label">近期事件</div><div class="ce-value">' + (c.recent_event || '—') + '</div></div>' +
+                  '<div><div class="ce-label">產業影響</div><div class="ce-value">' + (c.industry_impact || '—') + '</div></div>' +
+                  '<div><div class="ce-label">投資風險</div><div class="ce-value ce-risk">' + (c.risk_note || '—') + '</div></div>' +
+                '</div>' +
+              '</div>' +
+            '</div>';
+          }).join('');
+        }
       }
     }
 
-    loadIndustryData();
+    loadData();
   </script>
 </body>
 </html>
