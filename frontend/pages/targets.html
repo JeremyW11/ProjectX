@@ -6,50 +6,30 @@
   <title>ProjectX — 標的追蹤</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
     :root {
-      --bg-base: #05060f;
-      --bg-card: rgba(255,255,255,0.04);
-      --border: rgba(255,255,255,0.08);
-      --text-primary: #f0f0f5;
-      --text-secondary: #8888aa;
-      --text-muted: #44445a;
-      --accent-blue: #4da6ff;
-      --accent-purple: #9f7aea;
-      --accent-green: #48bb78;
-      --accent-red: #fc8181;
-      --accent-orange: #f6ad55;
+      --bg-base: #05060f; --bg-card: rgba(255,255,255,0.04); --bg-card-hover: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08); --text-primary: #f0f0f5; --text-secondary: #8888aa;
+      --text-muted: #44445a; --accent-blue: #4da6ff; --accent-purple: #9f7aea;
+      --accent-green: #48bb78; --accent-red: #fc8181; --accent-orange: #f6ad55;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg-base);
-      color: var(--text-primary);
-      min-height: 100vh;
-      background-image:
-        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(77,99,255,0.07) 0%, transparent 60%),
+      background: var(--bg-base); color: var(--text-primary); min-height: 100vh;
+      background-image: radial-gradient(ellipse 80% 50% at 20% 0%, rgba(77,99,255,0.07) 0%, transparent 60%),
         radial-gradient(ellipse 60% 40% at 80% 0%, rgba(159,122,234,0.06) 0%, transparent 50%);
     }
-
-    nav {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0 40px; height: 60px; border-bottom: 1px solid var(--border);
-      background: rgba(5,6,15,0.95); backdrop-filter: blur(20px);
-      position: sticky; top: 0; z-index: 200;
-    }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 0 40px; height: 60px; border-bottom: 1px solid var(--border); background: rgba(5,6,15,0.95); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 200; }
     .logo { font-size: 18px; font-weight: 700; letter-spacing: 2px; background: linear-gradient(135deg, #4da6ff, #9f7aea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; flex-shrink: 0; }
     .nav-links { display: flex; gap: 24px; list-style: none; }
     .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; white-space: nowrap; }
     .nav-links a:hover { color: var(--text-primary); }
     .nav-links a.active { color: var(--text-primary); border-bottom: 2px solid var(--accent-blue); padding-bottom: 2px; }
     .nav-right { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
-    .btn { padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+    .btn { padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: all 0.2s; text-decoration: none; display: inline-block; }
     .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
+    .btn-ghost:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
     .btn-glow { background: linear-gradient(135deg, #4da6ff, #9f7aea); color: #fff; box-shadow: 0 0 20px rgba(77,166,255,0.3); }
-    .btn-glow:hover { box-shadow: 0 0 30px rgba(77,166,255,0.5); transform: translateY(-1px); }
-
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
     .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s; }
     .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
@@ -61,75 +41,94 @@
     .mobile-menu a.active { color: var(--accent-blue); }
     .mobile-menu-btns { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
     .mobile-menu-btns .btn { width: 100%; padding: 12px; font-size: 15px; text-align: center; }
-
     main { max-width: 1440px; margin: 0 auto; padding: 28px 40px 60px; }
     .top-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; }
     .top-bar h1 { font-size: 20px; font-weight: 600; }
     .top-bar .meta { font-size: 12px; color: var(--text-muted); text-align: right; line-height: 1.8; }
+    .glass-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); margin-bottom: 16px; }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+    .card-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
 
-    /* Pro 付費牆 */
-    .pro-gate {
-      max-width: 520px;
-      margin: 40px auto;
-      text-align: center;
-    }
+    /* 未登入狀態 */
+    .login-gate { max-width: 440px; margin: 60px auto; text-align: center; }
+    .login-gate .lock { font-size: 48px; margin-bottom: 20px; }
+    .login-gate h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .login-gate p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; }
+    .btn-login-gate { display: inline-block; padding: 12px 28px; border-radius: 10px; background: linear-gradient(135deg, #4da6ff, #9f7aea); color: #fff; font-weight: 600; font-size: 15px; text-decoration: none; box-shadow: 0 0 20px rgba(77,166,255,0.3); }
 
-    .lock-icon { font-size: 48px; margin-bottom: 20px; }
+    /* 新增標的 */
+    .add-section { margin-bottom: 20px; }
+    .add-form { display: flex; gap: 10px; flex-wrap: wrap; }
+    .add-input { flex: 1; min-width: 200px; padding: 10px 14px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-primary); font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s; }
+    .add-input:focus { border-color: var(--accent-blue); }
+    .add-input::placeholder { color: var(--text-muted); }
+    .market-select { padding: 10px 14px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-primary); font-size: 14px; font-family: 'Inter', sans-serif; outline: none; cursor: pointer; }
+    .market-select option { background: #0a0b1a; }
+    .btn-add { padding: 10px 20px; border-radius: 10px; background: rgba(77,166,255,0.1); border: 1px solid rgba(77,166,255,0.3); color: var(--accent-blue); font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; white-space: nowrap; }
+    .btn-add:hover { background: rgba(77,166,255,0.2); }
 
-    .pro-card {
-      background: linear-gradient(135deg, rgba(77,99,255,0.12), rgba(159,122,234,0.08));
-      border: 1px solid rgba(99,130,255,0.25);
-      border-radius: 20px;
-      padding: 36px 32px;
-    }
+    /* 標的卡片列表 */
+    .watchlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+    .watch-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 14px; padding: 18px; position: relative; transition: all 0.2s; }
+    .watch-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(77,166,255,0.2); }
+    .watch-card.up { border-top: 2px solid var(--accent-green); }
+    .watch-card.down { border-top: 2px solid var(--accent-red); }
+    .watch-card.flat { border-top: 2px solid var(--text-muted); }
+    .wc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .wc-symbol { font-size: 18px; font-weight: 800; }
+    .wc-name { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .wc-market { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: rgba(77,166,255,0.1); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.15); }
+    .wc-price { font-size: 26px; font-weight: 800; margin-bottom: 4px; }
+    .wc-change { font-size: 14px; font-weight: 600; margin-bottom: 14px; }
+    .wc-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 12px 0; }
+    .wc-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .wc-detail-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; font-weight: 600; }
+    .wc-detail-value { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .wc-signal { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); margin-bottom: 10px; }
+    .wc-signal-label { font-size: 11px; color: var(--text-muted); }
+    .wc-signal-pill { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+    .bull { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
+    .bear { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.2); }
+    .watch-pill { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
+    .neutral { background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
+    .wc-note { font-size: 12px; color: var(--text-secondary); line-height: 1.6; padding: 8px 10px; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 2px solid var(--accent-blue); margin-bottom: 10px; }
+    .wc-analysis { font-size: 12px; color: var(--text-secondary); line-height: 1.6; padding: 8px 10px; background: rgba(159,122,234,0.05); border-radius: 6px; border-left: 2px solid var(--accent-purple); margin-bottom: 10px; }
+    .wc-analysis-label { font-size: 9px; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 4px; }
+    .btn-delete { position: absolute; top: 14px; right: 14px; width: 24px; height: 24px; border-radius: 50%; background: rgba(252,129,129,0.1); border: 1px solid rgba(252,129,129,0.2); color: var(--accent-red); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .btn-delete:hover { background: rgba(252,129,129,0.2); }
+    .btn-analyze { width: 100%; padding: 9px; border-radius: 8px; background: rgba(159,122,234,0.1); border: 1px solid rgba(159,122,234,0.2); color: var(--accent-purple); font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+    .btn-analyze:hover { background: rgba(159,122,234,0.2); }
+    .btn-analyze:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    .pro-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--accent-purple); margin-bottom: 12px; text-transform: uppercase; }
-    .pro-title { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; line-height: 1.4; }
-    .pro-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 28px; }
+    .up { color: var(--accent-green); }
+    .down { color: var(--accent-red); }
+    .flat { color: var(--text-muted); }
 
-    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; text-align: left; }
-    .feature-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
-    .feature-icon { font-size: 20px; margin-bottom: 6px; }
-    .feature-title { font-size: 12px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
-    .feature-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+    /* 空狀態 */
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .empty-icon { font-size: 40px; margin-bottom: 12px; }
+    .empty-text { font-size: 14px; }
 
-    .pro-price { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
-    .pro-price strong { font-size: 28px; color: var(--text-primary); font-weight: 800; }
+    /* 用戶資訊欄 */
+    .user-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: rgba(77,166,255,0.05); border: 1px solid rgba(77,166,255,0.15); border-radius: 10px; margin-bottom: 20px; }
+    .user-bar-info { font-size: 13px; color: var(--text-secondary); }
+    .user-bar-email { color: var(--accent-blue); font-weight: 600; }
+    .btn-signout { font-size: 12px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif; }
+    .btn-signout:hover { color: var(--accent-red); }
 
-    /* 模糊預覽 */
-    .preview-section { margin-top: 48px; position: relative; }
-    .preview-label { font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 16px; letter-spacing: 1px; text-transform: uppercase; }
-    .preview-blur { filter: blur(6px); pointer-events: none; user-select: none; opacity: 0.4; }
-    .preview-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 10; }
-    .preview-overlay-text { background: rgba(5,6,15,0.9); border: 1px solid rgba(99,130,255,0.3); border-radius: 12px; padding: 14px 24px; font-size: 13px; color: var(--accent-purple); font-weight: 600; }
-
-    .preview-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 12px; }
-    .preview-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-    .preview-row:last-child { border-bottom: none; }
-    .preview-ticker { font-size: 15px; font-weight: 700; }
-    .preview-price { font-size: 14px; font-weight: 600; color: var(--accent-green); }
-    .preview-signal { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
-
-    /* ===== 手機響應式 ===== */
     @media (max-width: 768px) {
       nav { padding: 0 16px; }
-      .nav-links { display: none; }
-      .nav-right { display: none; }
+      .nav-links { display: none; } .nav-right { display: none; }
       .hamburger { display: flex; }
-
       main { padding: 16px 16px 40px; }
       .top-bar { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 16px; }
-      .top-bar .meta { text-align: left; font-size: 11px; }
-
-      .pro-gate { margin: 20px auto; }
-      .pro-card { padding: 24px 20px; }
-      .pro-title { font-size: 20px; }
-      .feature-grid { grid-template-columns: 1fr; gap: 10px; }
+      .watchlist-grid { grid-template-columns: 1fr; }
+      .add-form { flex-direction: column; }
+      .add-input { min-width: unset; }
     }
   </style>
 </head>
 <body>
-
   <nav>
     <div class="logo">PROJECT X</div>
     <ul class="nav-links">
@@ -141,7 +140,7 @@
       <li><a href="/pages/targets.html" class="active">標的追蹤</a></li>
     </ul>
     <div class="nav-right">
-      <a href="/pages/login.html" class="btn btn-ghost" style="text-decoration:none;">登入</a>
+      <a href="/pages/login.html" class="btn btn-ghost" style="text-decoration:none;" id="nav-login-btn">登入</a>
       <button class="btn btn-glow">訂閱 Pro</button>
     </div>
     <button class="hamburger" onclick="toggleMenu()" id="hamburger">
@@ -157,7 +156,7 @@
     <a href="/pages/calendar.html">📅 市場日曆</a>
     <a href="/pages/targets.html" class="active">🎯 標的追蹤</a>
     <div class="mobile-menu-btns">
-      <a href="/pages/login.html" class="btn btn-ghost" style="text-decoration:none;">登入</a>
+      <a href="/pages/login.html" class="btn btn-ghost" style="text-align:center;">登入</a>
       <button class="btn btn-glow">訂閱 Pro</button>
     </div>
   </div>
@@ -165,83 +164,64 @@
   <main>
     <div class="top-bar">
       <div>
-        <h1>標的深度分析</h1>
-        <div style="font-size:12px; color:var(--text-muted); margin-top:3px;">技術面 + 籌碼面 + 操作策略 | Pro 會員專屬</div>
+        <h1>標的追蹤</h1>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:3px;">自選標的 · 每日深度分析</div>
       </div>
       <div class="meta" id="target-date"></div>
     </div>
 
-    <div class="pro-gate">
-      <div class="lock-icon">🔒</div>
-      <div class="pro-card">
-        <div class="pro-label">PRO EXCLUSIVE</div>
-        <div class="pro-title">客製化標的深度分析<br>每日直送你的投資決策</div>
-        <div class="pro-desc">依你自選的產業與標的，每日整合技術面、籌碼面與宏觀背景，提供具體支撐壓力位、操作建議，Email 直送 + 會員頁查閱。</div>
-
-        <div class="feature-grid">
-          <div class="feature-item">
-            <div class="feature-icon">📊</div>
-            <div class="feature-title">技術面分析</div>
-            <div class="feature-desc">支撐壓力位、均線結構、量價關係每日更新</div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">🧲</div>
-            <div class="feature-title">籌碼面追蹤</div>
-            <div class="feature-desc">外資動向、機構持倉、融資融券動態</div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">🎯</div>
-            <div class="feature-title">具體操作建議</div>
-            <div class="feature-desc">進出場區間、停損設定、風報比評估</div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">📧</div>
-            <div class="feature-title">每日 Email 客製日報</div>
-            <div class="feature-desc">依你的標的自動彙整，開盤前直送信箱</div>
-          </div>
-        </div>
-
-        <div class="pro-price">月費 <strong>NT$299</strong> /月</div>
-        <button class="btn btn-glow" style="width:100%; padding:14px; font-size:15px;">立即訂閱 Pro</button>
+    <!-- 未登入狀態 -->
+    <div id="gate-view" style="display:none;">
+      <div class="login-gate">
+        <div class="lock">🔒</div>
+        <h2>登入後使用標的追蹤</h2>
+        <p>登入後可以新增自選標的，每日自動從日報中抓取最新數據，並提供 AI 深度分析。</p>
+        <a href="/pages/login.html" class="btn-login-gate">立即登入 / 註冊</a>
       </div>
     </div>
 
-    <!-- 模糊預覽 -->
-    <div class="preview-section">
-      <div class="preview-label">預覽內容（訂閱後解鎖完整分析）</div>
-      <div style="position:relative;">
-        <div class="preview-blur">
-          <div class="preview-card">
-            <div style="font-size:13px; font-weight:700; margin-bottom:12px; color:var(--text-muted);">🪙 加密貨幣追蹤</div>
-            <div class="preview-row">
-              <div><div class="preview-ticker">BTC / USD</div><div style="font-size:11px; color:var(--text-muted);">Bitcoin</div></div>
-              <div style="text-align:right;"><div class="preview-price">$84,200</div><div style="margin-top:4px;"><span class="preview-signal">看多</span></div></div>
-            </div>
-            <div class="preview-row">
-              <div><div class="preview-ticker">ETH / USD</div><div style="font-size:11px; color:var(--text-muted);">Ethereum</div></div>
-              <div style="text-align:right;"><div class="preview-price">$2,875</div><div style="margin-top:4px;"><span class="preview-signal">觀察</span></div></div>
-            </div>
-          </div>
-          <div class="preview-card">
-            <div style="font-size:13px; font-weight:700; margin-bottom:12px; color:var(--text-muted);">🇺🇸 美股追蹤</div>
-            <div class="preview-row">
-              <div><div class="preview-ticker">NVDA</div><div style="font-size:11px; color:var(--text-muted);">NVIDIA</div></div>
-              <div style="text-align:right;"><div class="preview-price">$205.30</div><div style="margin-top:4px;"><span class="preview-signal">看多</span></div></div>
-            </div>
-            <div class="preview-row">
-              <div><div class="preview-ticker">AAPL</div><div style="font-size:11px; color:var(--text-muted);">Apple</div></div>
-              <div style="text-align:right;"><div class="preview-price">$182.50</div><div style="margin-top:4px;"><span class="preview-signal">觀察</span></div></div>
-            </div>
-          </div>
+    <!-- 已登入狀態 -->
+    <div id="main-view" style="display:none;">
+      <div class="user-bar">
+        <div class="user-bar-info">👤 <span class="user-bar-email" id="bar-email"></span></div>
+        <button class="btn-signout" onclick="signOut()">登出</button>
+      </div>
+
+      <div class="glass-card add-section">
+        <div class="card-header">
+          <div class="card-title">➕ 新增自選標的</div>
         </div>
-        <div class="preview-overlay">
-          <div class="preview-overlay-text">🔒 訂閱 Pro 解鎖完整的分析<br>技術面、籌碼面、操作策略一次看</div>
+        <div class="add-form">
+          <input class="add-input" id="add-symbol" placeholder="代號，如 BTC、NVDA、2330" />
+          <input class="add-input" id="add-name" placeholder="名稱，如 Bitcoin、NVIDIA、台積電" />
+          <select class="market-select" id="add-market">
+            <option value="crypto">加密貨幣</option>
+            <option value="us">美股</option>
+            <option value="tw">台股</option>
+          </select>
+          <button class="btn-add" onclick="addWatchItem()">新增</button>
+        </div>
+        <div id="add-msg" style="font-size:12px;margin-top:8px;color:var(--accent-green);display:none;"></div>
+      </div>
+
+      <div id="watchlist-container">
+        <div class="empty-state">
+          <div class="empty-icon">📋</div>
+          <div class="empty-text">還沒有自選標的，請新增你關注的標的</div>
         </div>
       </div>
     </div>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
+    var SUPABASE_URL = 'https://eezhmeccakaeiprviqra.supabase.co';
+    var SUPABASE_KEY = 'sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+    var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    var currentUser = null;
+    var dailyData = null;
+
     function toggleMenu() {
       var menu = document.getElementById('mobile-menu');
       var hamburger = document.getElementById('hamburger');
@@ -250,17 +230,174 @@
       document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
     }
 
-    async function loadDate() {
+    async function init() {
+      var session = await sb.auth.getSession();
+      currentUser = session.data.session ? session.data.session.user : null;
+
+      // 載入日報資料
       try {
         var res = await fetch('../data/daily.json');
-        var data = await res.json();
-        var d = new Date(data.date);
+        dailyData = await res.json();
+        var d = new Date(dailyData.date);
         document.getElementById('target-date').innerHTML =
           d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) + '<br>UTC+8 台北時間';
       } catch(e) {}
+
+      if (currentUser) {
+        document.getElementById('gate-view').style.display = 'none';
+        document.getElementById('main-view').style.display = 'block';
+        document.getElementById('bar-email').textContent = currentUser.email;
+        var loginBtn = document.getElementById('nav-login-btn');
+        if (loginBtn) { loginBtn.textContent = '我的帳號'; loginBtn.href = '/pages/login.html'; }
+        loadWatchlist();
+      } else {
+        document.getElementById('gate-view').style.display = 'block';
+        document.getElementById('main-view').style.display = 'none';
+      }
     }
 
-    loadDate();
+    async function loadWatchlist() {
+      var result = await sb.from('watchlist').select('*').order('created_at', { ascending: true });
+      if (result.error) { console.error(result.error); return; }
+      renderWatchlist(result.data);
+    }
+
+    function getMarketData(symbol, market) {
+      if (!dailyData) return null;
+      symbol = symbol.toUpperCase();
+      if (market === 'crypto' && dailyData.market && dailyData.market.crypto) {
+        return dailyData.market.crypto.find(function(c) { return c.symbol === symbol; });
+      }
+      if (market === 'us' && dailyData.market && dailyData.market.us_stocks) {
+        return dailyData.market.us_stocks.find(function(s) { return s.ticker === symbol; });
+      }
+      if (market === 'tw' && dailyData.market && dailyData.market.tw_stocks) {
+        return dailyData.market.tw_stocks.find(function(s) { return s.ticker === symbol; });
+      }
+      return null;
+    }
+
+    function renderWatchlist(items) {
+      var container = document.getElementById('watchlist-container');
+      if (!items || items.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">還沒有自選標的，請新增你關注的標的</div></div>';
+        return;
+      }
+      container.innerHTML = '<div class="watchlist-grid">' + items.map(function(item) {
+        var mdata = getMarketData(item.symbol, item.market);
+        var price = mdata ? mdata.price : '--';
+        var change = mdata ? mdata.change : '--';
+        var dir = mdata ? mdata.dir : 'flat';
+        var dirClass = dir === 'up' ? 'up' : dir === 'down' ? 'down' : 'flat';
+        var dirIcon = dir === 'up' ? '▲' : dir === 'down' ? '▼' : '—';
+        var marketLabel = item.market === 'crypto' ? '加密' : item.market === 'us' ? '美股' : '台股';
+
+        var support = mdata && mdata.support ? mdata.support : '--';
+        var resistance = mdata && mdata.resistance ? mdata.resistance : '--';
+        var techNote = mdata && mdata.tech_note ? mdata.tech_note : '--';
+        var watchNote = mdata && mdata.watch_note ? mdata.watch_note : '--';
+        var note = mdata && mdata.note ? mdata.note : '--';
+        var signal = mdata && mdata.signal ? mdata.signal : 'neutral';
+        var signalLabel = mdata && mdata.signal_label ? mdata.signal_label : (mdata && mdata.tag_label ? mdata.tag_label : '—');
+
+        return '<div class="watch-card ' + dirClass + '" id="card-' + item.id + '">' +
+          '<button class="btn-delete" onclick="deleteItem(\'' + item.id + '\')" title="移除">×</button>' +
+          '<div class="wc-header">' +
+            '<div><div class="wc-symbol">' + item.symbol + '</div><div class="wc-name">' + item.name + '</div></div>' +
+            '<span class="wc-market">' + marketLabel + '</span>' +
+          '</div>' +
+          '<div class="wc-price ' + dirClass + '">' + price + '</div>' +
+          '<div class="wc-change ' + dirClass + '">' + dirIcon + ' ' + change + '</div>' +
+          '<div class="wc-signal">' +
+            '<span class="wc-signal-label">今日信號</span>' +
+            '<span class="wc-signal-pill ' + (signal === 'bull' ? 'bull' : signal === 'bear' ? 'bear' : signal === 'watch' ? 'watch-pill' : 'neutral') + '">' + signalLabel + '</span>' +
+          '</div>' +
+          '<div class="wc-divider"></div>' +
+          '<div class="wc-detail-grid">' +
+            '<div><div class="wc-detail-label">支撐位</div><div class="wc-detail-value">' + support + '</div></div>' +
+            '<div><div class="wc-detail-label">壓力位</div><div class="wc-detail-value">' + resistance + '</div></div>' +
+            '<div><div class="wc-detail-label">技術面</div><div class="wc-detail-value">' + techNote + '</div></div>' +
+            '<div><div class="wc-detail-label">觀察重點</div><div class="wc-detail-value">' + watchNote + '</div></div>' +
+          '</div>' +
+          (note !== '--' ? '<div class="wc-note">' + note + '</div>' : '') +
+          '<div id="analysis-' + item.id + '"></div>' +
+          '<button class="btn-analyze" onclick="analyzeItem(\'' + item.id + '\',\'' + item.symbol + '\',\'' + item.market + '\')" id="btn-analyze-' + item.id + '">🤖 AI 深度分析</button>' +
+        '</div>';
+      }).join('') + '</div>';
+    }
+
+    async function addWatchItem() {
+      var symbol = document.getElementById('add-symbol').value.trim().toUpperCase();
+      var name = document.getElementById('add-name').value.trim();
+      var market = document.getElementById('add-market').value;
+      if (!symbol || !name) {
+        showAddMsg('請填寫代號和名稱', 'error');
+        return;
+      }
+      var result = await sb.from('watchlist').insert([{ user_id: currentUser.id, symbol: symbol, name: name, market: market }]);
+      if (result.error) {
+        showAddMsg('新增失敗：' + result.error.message, 'error');
+      } else {
+        document.getElementById('add-symbol').value = '';
+        document.getElementById('add-name').value = '';
+        showAddMsg('✅ 已新增 ' + symbol, 'success');
+        loadWatchlist();
+      }
+    }
+
+    async function deleteItem(id) {
+      await sb.from('watchlist').delete().eq('id', id);
+      loadWatchlist();
+    }
+
+    async function analyzeItem(id, symbol, market) {
+      var btn = document.getElementById('btn-analyze-' + id);
+      var analysisDiv = document.getElementById('analysis-' + id);
+      btn.disabled = true;
+      btn.textContent = '🤖 分析中...';
+      analysisDiv.innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:8px 0;">AI 正在分析，請稍候...</div>';
+
+      var mdata = getMarketData(symbol, market);
+      var context = mdata ? JSON.stringify(mdata) : '無即時數據';
+      var marketContext = dailyData ? JSON.stringify({ macro: dailyData.macro, signals: dailyData.signals }) : '';
+
+      try {
+        var response = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 500,
+            messages: [{
+              role: 'user',
+              content: '根據以下今日市場數據，對 ' + symbol + ' 進行深度分析，用繁體中文回答，100字以內，重點說明：1.今日技術面狀況 2.關鍵支撐壓力位 3.短線操作建議（進場/觀望/避開）\n\n標的數據：' + context + '\n\n宏觀背景：' + marketContext
+            }]
+          })
+        });
+        var data = await response.json();
+        var text = data.content && data.content[0] ? data.content[0].text : '分析失敗';
+        analysisDiv.innerHTML = '<div class="wc-analysis"><div class="wc-analysis-label">AI 深度分析</div>' + text + '</div>';
+      } catch(e) {
+        analysisDiv.innerHTML = '<div style="font-size:12px;color:var(--accent-red);padding:8px 0;">分析失敗，請稍後再試</div>';
+      }
+      btn.disabled = false;
+      btn.textContent = '🤖 重新分析';
+    }
+
+    function showAddMsg(text, type) {
+      var el = document.getElementById('add-msg');
+      el.textContent = text;
+      el.style.color = type === 'error' ? 'var(--accent-red)' : 'var(--accent-green)';
+      el.style.display = 'block';
+      setTimeout(function() { el.style.display = 'none'; }, 3000);
+    }
+
+    async function signOut() {
+      await sb.auth.signOut();
+      window.location.href = '/pages/login.html';
+    }
+
+    init();
   </script>
 </body>
 </html>
