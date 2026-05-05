@@ -39,11 +39,15 @@
     .mobile-menu-btns { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
     .mobile-menu-btns .btn { width: 100%; padding: 12px; font-size: 15px; text-align: center; }
     main { max-width: 1440px; margin: 0 auto; padding: 28px 40px 60px; }
-    .top-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
+    .top-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px; }
     .top-bar h1 { font-size: 20px; font-weight: 600; }
     .top-bar .meta { font-size: 12px; color: var(--text-muted); text-align: right; line-height: 1.8; }
     .live-dot { display: inline-block; width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; margin-right: 5px; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .date-picker-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .date-btn { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-family: 'Inter', sans-serif; transition: all 0.2s; white-space: nowrap; }
+    .date-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .date-btn.active { background: rgba(77,166,255,0.1); border-color: var(--accent-blue); color: var(--accent-blue); }
     .ticker-strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 28px; }
     .ticker-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; transition: all 0.2s; }
     .ticker-item:hover { background: var(--bg-card-hover); border-color: rgba(77,166,255,0.2); }
@@ -137,8 +141,10 @@
       .nav-links { display: none; } .nav-right { display: none; }
       .hamburger { display: flex; }
       main { padding: 16px 16px 40px; }
-      .top-bar { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 16px; }
+      .top-bar { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 12px; }
       .top-bar .meta { text-align: left; font-size: 11px; }
+      .date-picker-wrap { gap: 6px; }
+      .date-btn { padding: 5px 10px; font-size: 11px; }
       .ticker-strip { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
       .t-value { font-size: 15px; }
       .content-layout { grid-template-columns: 1fr; gap: 0; }
@@ -170,6 +176,7 @@
       <span></span><span></span><span></span>
     </button>
   </nav>
+
   <div class="mobile-menu" id="mobile-menu">
     <a href="/index.html" class="active">📊 總覽</a>
     <a href="/pages/market.html">📈 市場</a>
@@ -182,6 +189,7 @@
       <button class="btn btn-glow">訂閱 Pro</button>
     </div>
   </div>
+
   <main>
     <div class="top-bar">
       <div>
@@ -190,7 +198,11 @@
       </div>
       <div class="meta"><span id="date-display"></span><br>UTC+8 台北時間</div>
     </div>
+
+    <div id="date-picker"></div>
+
     <div id="ticker-strip" class="ticker-strip"></div>
+
     <div class="content-layout">
       <div>
         <div class="glass-card">
@@ -262,6 +274,7 @@
       </div>
     </div>
   </main>
+
   <script>
     function toggleMenu() {
       var menu = document.getElementById('mobile-menu');

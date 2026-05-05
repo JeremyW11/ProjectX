@@ -1,6 +1,10 @@
-async function loadData() {
-  const res = await fetch('/data/daily.json');
-  const data = await res.json();
+var currentDate = null;
+
+async function loadData(date) {
+  var url = date ? '/data/history/' + date + '.json' : '/data/daily.json';
+  var res = await fetch(url);
+  var data = await res.json();
+  currentDate = data.date;
   renderDate(data.date);
   renderTickers(data.tickers);
   renderNews('macro-list', data.macro);
@@ -10,22 +14,56 @@ async function loadData() {
   renderSentiment(data.sentiment);
 }
 
+async function loadHistory() {
+  try {
+    var res = await fetch('https://projectx-backend-o2pl.onrender.com/history');
+    var data = await res.json();
+    renderDatePicker(data.dates);
+  } catch(e) {
+    console.log('歷史版本載入失敗', e);
+  }
+}
+
+function renderDatePicker(dates) {
+  var picker = document.getElementById('date-picker');
+  if (!picker || !dates || dates.length === 0) return;
+
+  picker.innerHTML =
+    '<div class="date-picker-wrap">' +
+      '<button class="date-btn active" onclick="switchDate(null, this)">今日</button>' +
+      dates.slice(0, 7).map(function(d) {
+        var label = d.substring(5).replace('-', '/');
+        return '<button class="date-btn" onclick="switchDate(\'' + d + '\', this)">' + label + '</button>';
+      }).join('') +
+    '</div>';
+}
+
+function switchDate(date, btn) {
+  document.querySelectorAll('.date-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  loadData(date);
+}
+
 function renderDate(date) {
-  const d = new Date(date);
-  const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+  var d = new Date(date);
+  var options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
   document.getElementById('date-display').textContent =
     d.toLocaleDateString('zh-TW', options);
 }
 
 function renderTickers(tickers) {
-  const container = document.getElementById('ticker-strip');
-  container.innerHTML = tickers.map(t =>
-    '<div class="ticker-item"><div class="t-label">' + t.label + '</div><div class="t-value">' + t.value + '</div><div class="t-change ' + t.dir + '">' + (t.dir === 'up' ? '▲' : t.dir === 'down' ? '▼' : '—') + ' ' + t.change + '</div></div>'
-  ).join('');
+  var container = document.getElementById('ticker-strip');
+  container.innerHTML = tickers.map(function(t) {
+    return '<div class="ticker-item">' +
+      '<div class="t-label">' + t.label + '</div>' +
+      '<div class="t-value">' + t.value + '</div>' +
+      '<div class="t-change ' + t.dir + '">' + (t.dir === 'up' ? '▲' : t.dir === 'down' ? '▼' : '—') + ' ' + t.change + '</div>' +
+    '</div>';
+  }).join('');
 }
 
 function renderNews(containerId, items) {
-  const container = document.getElementById(containerId);
+  var container = document.getElementById(containerId);
   container.innerHTML = items.map(function(item) {
     return '<div class="news-item expandable" onclick="toggleExpand(this)">' +
       '<span class="news-tag tag-' + item.type + '">' + item.tag + '</span>' +
@@ -45,19 +83,12 @@ function renderNews(containerId, items) {
 
 function getRelatedTickers(tag) {
   var map = {
-    '半導體': 'NVDA / TSM / 2330 / MU',
-    'AI': 'NVDA / MSFT / GOOGL / 2330',
-    '加密': 'BTC / ETH / SOL',
-    '台股': 'TAIEX / 2330 / 2317',
-    '能源': 'XOM / CVX / OIL',
-    '航運': '2603 / 2609 / ZIM',
-    '科技': 'NVDA / AAPL / MSFT / META',
-    '政策': 'SPY / TLT / DXY',
-    '地緣': 'GC / OIL / VIX',
-    '數據': 'SPY / TLT / USD',
-    '央行': 'TLT / DXY / GC',
-    '消費': 'XRT / AMZN / WMT',
-    '貴金屬': 'GC / SI / GDX'
+    '半導體': 'NVDA / TSM / 2330 / MU', 'AI': 'NVDA / MSFT / GOOGL / 2330',
+    '加密': 'BTC / ETH / SOL', '台股': 'TAIEX / 2330 / 2317',
+    '能源': 'XOM / CVX / OIL', '航運': '2603 / 2609 / ZIM',
+    '科技': 'NVDA / AAPL / MSFT / META', '政策': 'SPY / TLT / DXY',
+    '地緣': 'GC / OIL / VIX', '數據': 'SPY / TLT / USD',
+    '央行': 'TLT / DXY / GC', '消費': 'XRT / AMZN / WMT', '貴金屬': 'GC / SI / GDX'
   };
   return map[tag] || '—';
 }
@@ -155,4 +186,5 @@ function toggleExpand(el) {
   }
 }
 
-loadData();
+loadData(null);
+loadHistory();
