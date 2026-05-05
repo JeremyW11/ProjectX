@@ -48,15 +48,11 @@
     .glass-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); margin-bottom: 16px; }
     .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
     .card-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
-
-    /* 未登入狀態 */
     .login-gate { max-width: 440px; margin: 60px auto; text-align: center; }
     .login-gate .lock { font-size: 48px; margin-bottom: 20px; }
     .login-gate h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
     .login-gate p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; }
     .btn-login-gate { display: inline-block; padding: 12px 28px; border-radius: 10px; background: linear-gradient(135deg, #4da6ff, #9f7aea); color: #fff; font-weight: 600; font-size: 15px; text-decoration: none; box-shadow: 0 0 20px rgba(77,166,255,0.3); }
-
-    /* 新增標的 */
     .add-section { margin-bottom: 20px; }
     .add-form { display: flex; gap: 10px; flex-wrap: wrap; }
     .add-input { flex: 1; min-width: 200px; padding: 10px 14px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-primary); font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s; }
@@ -66,8 +62,6 @@
     .market-select option { background: #0a0b1a; }
     .btn-add { padding: 10px 20px; border-radius: 10px; background: rgba(77,166,255,0.1); border: 1px solid rgba(77,166,255,0.3); color: var(--accent-blue); font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; white-space: nowrap; }
     .btn-add:hover { background: rgba(77,166,255,0.2); }
-
-    /* 標的卡片列表 */
     .watchlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
     .watch-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 14px; padding: 18px; position: relative; transition: all 0.2s; }
     .watch-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(77,166,255,0.2); }
@@ -92,30 +86,22 @@
     .watch-pill { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
     .neutral { background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
     .wc-note { font-size: 12px; color: var(--text-secondary); line-height: 1.6; padding: 8px 10px; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 2px solid var(--accent-blue); margin-bottom: 10px; }
-    .wc-analysis { font-size: 12px; color: var(--text-secondary); line-height: 1.6; padding: 8px 10px; background: rgba(159,122,234,0.05); border-radius: 6px; border-left: 2px solid var(--accent-purple); margin-bottom: 10px; }
-    .wc-analysis-label { font-size: 9px; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 4px; }
+    .wc-analysis { font-size: 12px; color: var(--text-secondary); line-height: 1.6; padding: 10px 12px; background: rgba(159,122,234,0.05); border-radius: 8px; border-left: 2px solid var(--accent-purple); margin-bottom: 10px; }
+    .wc-analysis-label { font-size: 9px; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 6px; }
     .btn-delete { position: absolute; top: 14px; right: 14px; width: 24px; height: 24px; border-radius: 50%; background: rgba(252,129,129,0.1); border: 1px solid rgba(252,129,129,0.2); color: var(--accent-red); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
     .btn-delete:hover { background: rgba(252,129,129,0.2); }
     .btn-analyze { width: 100%; padding: 9px; border-radius: 8px; background: rgba(159,122,234,0.1); border: 1px solid rgba(159,122,234,0.2); color: var(--accent-purple); font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
     .btn-analyze:hover { background: rgba(159,122,234,0.2); }
     .btn-analyze:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    .up { color: var(--accent-green); }
-    .down { color: var(--accent-red); }
-    .flat { color: var(--text-muted); }
-
-    /* 空狀態 */
+    .up { color: var(--accent-green); } .down { color: var(--accent-red); } .flat { color: var(--text-muted); }
     .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
     .empty-icon { font-size: 40px; margin-bottom: 12px; }
     .empty-text { font-size: 14px; }
-
-    /* 用戶資訊欄 */
     .user-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: rgba(77,166,255,0.05); border: 1px solid rgba(77,166,255,0.15); border-radius: 10px; margin-bottom: 20px; }
     .user-bar-info { font-size: 13px; color: var(--text-secondary); }
     .user-bar-email { color: var(--accent-blue); font-weight: 600; }
     .btn-signout { font-size: 12px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif; }
     .btn-signout:hover { color: var(--accent-red); }
-
     @media (max-width: 768px) {
       nav { padding: 0 16px; }
       .nav-links { display: none; } .nav-right { display: none; }
@@ -140,7 +126,7 @@
       <li><a href="/pages/targets.html" class="active">標的追蹤</a></li>
     </ul>
     <div class="nav-right">
-      <a href="/pages/login.html" class="btn btn-ghost" style="text-decoration:none;" id="nav-login-btn">登入</a>
+      <a href="/pages/login.html" class="btn btn-ghost" id="nav-login-btn">登入</a>
       <button class="btn btn-glow">訂閱 Pro</button>
     </div>
     <button class="hamburger" onclick="toggleMenu()" id="hamburger">
@@ -170,7 +156,6 @@
       <div class="meta" id="target-date"></div>
     </div>
 
-    <!-- 未登入狀態 -->
     <div id="gate-view" style="display:none;">
       <div class="login-gate">
         <div class="lock">🔒</div>
@@ -180,7 +165,6 @@
       </div>
     </div>
 
-    <!-- 已登入狀態 -->
     <div id="main-view" style="display:none;">
       <div class="user-bar">
         <div class="user-bar-info">👤 <span class="user-bar-email" id="bar-email"></span></div>
@@ -201,7 +185,7 @@
           </select>
           <button class="btn-add" onclick="addWatchItem()">新增</button>
         </div>
-        <div id="add-msg" style="font-size:12px;margin-top:8px;color:var(--accent-green);display:none;"></div>
+        <div id="add-msg" style="font-size:12px;margin-top:8px;display:none;"></div>
       </div>
 
       <div id="watchlist-container">
@@ -217,8 +201,8 @@
   <script>
     var SUPABASE_URL = 'https://eezhmeccakaeiprviqra.supabase.co';
     var SUPABASE_KEY = 'sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+    var BACKEND_URL = 'https://projectx-backend-o2pl.onrender.com';
     var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
     var currentUser = null;
     var dailyData = null;
 
@@ -233,8 +217,6 @@
     async function init() {
       var session = await sb.auth.getSession();
       currentUser = session.data.session ? session.data.session.user : null;
-
-      // 載入日報資料
       try {
         var res = await fetch('../data/daily.json');
         dailyData = await res.json();
@@ -248,7 +230,7 @@
         document.getElementById('main-view').style.display = 'block';
         document.getElementById('bar-email').textContent = currentUser.email;
         var loginBtn = document.getElementById('nav-login-btn');
-        if (loginBtn) { loginBtn.textContent = '我的帳號'; loginBtn.href = '/pages/login.html'; }
+        if (loginBtn) loginBtn.textContent = '我的帳號';
         loadWatchlist();
       } else {
         document.getElementById('gate-view').style.display = 'block';
@@ -291,12 +273,11 @@
         var dirClass = dir === 'up' ? 'up' : dir === 'down' ? 'down' : 'flat';
         var dirIcon = dir === 'up' ? '▲' : dir === 'down' ? '▼' : '—';
         var marketLabel = item.market === 'crypto' ? '加密' : item.market === 'us' ? '美股' : '台股';
-
         var support = mdata && mdata.support ? mdata.support : '--';
         var resistance = mdata && mdata.resistance ? mdata.resistance : '--';
         var techNote = mdata && mdata.tech_note ? mdata.tech_note : '--';
         var watchNote = mdata && mdata.watch_note ? mdata.watch_note : '--';
-        var note = mdata && mdata.note ? mdata.note : '--';
+        var note = mdata && mdata.note ? mdata.note : '';
         var signal = mdata && mdata.signal ? mdata.signal : 'neutral';
         var signalLabel = mdata && mdata.signal_label ? mdata.signal_label : (mdata && mdata.tag_label ? mdata.tag_label : '—');
 
@@ -319,7 +300,7 @@
             '<div><div class="wc-detail-label">技術面</div><div class="wc-detail-value">' + techNote + '</div></div>' +
             '<div><div class="wc-detail-label">觀察重點</div><div class="wc-detail-value">' + watchNote + '</div></div>' +
           '</div>' +
-          (note !== '--' ? '<div class="wc-note">' + note + '</div>' : '') +
+          (note ? '<div class="wc-note">' + note + '</div>' : '') +
           '<div id="analysis-' + item.id + '"></div>' +
           '<button class="btn-analyze" onclick="analyzeItem(\'' + item.id + '\',\'' + item.symbol + '\',\'' + item.market + '\')" id="btn-analyze-' + item.id + '">🤖 AI 深度分析</button>' +
         '</div>';
@@ -330,10 +311,7 @@
       var symbol = document.getElementById('add-symbol').value.trim().toUpperCase();
       var name = document.getElementById('add-name').value.trim();
       var market = document.getElementById('add-market').value;
-      if (!symbol || !name) {
-        showAddMsg('請填寫代號和名稱', 'error');
-        return;
-      }
+      if (!symbol || !name) { showAddMsg('請填寫代號和名稱', 'error'); return; }
       var result = await sb.from('watchlist').insert([{ user_id: currentUser.id, symbol: symbol, name: name, market: market }]);
       if (result.error) {
         showAddMsg('新增失敗：' + result.error.message, 'error');
@@ -362,21 +340,14 @@
       var marketContext = dailyData ? JSON.stringify({ macro: dailyData.macro, signals: dailyData.signals }) : '';
 
       try {
-        var response = await fetch('https://api.anthropic.com/v1/messages', {
+        var response = await fetch(BACKEND_URL + '/analyze', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01' },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
-            max_tokens: 500,
-            messages: [{
-              role: 'user',
-              content: '根據以下今日市場數據，對 ' + symbol + ' 進行深度分析，用繁體中文回答，100字以內，重點說明：1.今日技術面狀況 2.關鍵支撐壓力位 3.短線操作建議（進場/觀望/避開）\n\n標的數據：' + context + '\n\n宏觀背景：' + marketContext
-            }]
-          })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ symbol: symbol, market: market, context: context, marketContext: marketContext })
         });
         var data = await response.json();
-        var text = data.content && data.content[0] ? data.content[0].text : '分析失敗';
-        analysisDiv.innerHTML = '<div class="wc-analysis"><div class="wc-analysis-label">AI 深度分析</div>' + text + '</div>';
+        var text = data.analysis || '分析失敗';
+        analysisDiv.innerHTML = '<div class="wc-analysis"><div class="wc-analysis-label">🤖 AI 深度分析</div>' + text + '</div>';
       } catch(e) {
         analysisDiv.innerHTML = '<div style="font-size:12px;color:var(--accent-red);padding:8px 0;">分析失敗，請稍後再試</div>';
       }
