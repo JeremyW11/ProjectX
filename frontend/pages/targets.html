@@ -102,6 +102,9 @@
     .user-bar-email { color: var(--accent-blue); font-weight: 600; }
     .btn-signout { font-size: 12px; color: var(--text-muted); background: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif; }
     .btn-signout:hover { color: var(--accent-red); }
+    .fetching-badge { font-size: 10px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 4px; margin-bottom: 8px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { width: 10px; height: 10px; border: 2px solid var(--border); border-top-color: var(--accent-blue); border-radius: 50%; animation: spin 0.8s linear infinite; }
     @media (max-width: 768px) {
       nav { padding: 0 16px; }
       .nav-links { display: none; } .nav-right { display: none; }
@@ -280,6 +283,7 @@
         var note = mdata && mdata.note ? mdata.note : '';
         var signal = mdata && mdata.signal ? mdata.signal : 'neutral';
         var signalLabel = mdata && mdata.signal_label ? mdata.signal_label : (mdata && mdata.tag_label ? mdata.tag_label : '—');
+        var needsFetch = !mdata;
 
         return '<div class="watch-card ' + dirClass + '" id="card-' + item.id + '">' +
           '<button class="btn-delete" onclick="deleteItem(\'' + item.id + '\')" title="移除">×</button>' +
@@ -287,24 +291,88 @@
             '<div><div class="wc-symbol">' + item.symbol + '</div><div class="wc-name">' + item.name + '</div></div>' +
             '<span class="wc-market">' + marketLabel + '</span>' +
           '</div>' +
-          '<div class="wc-price ' + dirClass + '">' + price + '</div>' +
-          '<div class="wc-change ' + dirClass + '">' + dirIcon + ' ' + change + '</div>' +
-          '<div class="wc-signal">' +
+          (needsFetch ? '<div class="fetching-badge"><div class="spinner"></div>即時搜尋中...</div>' : '') +
+          '<div class="wc-price ' + dirClass + '" id="price-' + item.id + '">' + price + '</div>' +
+          '<div class="wc-change ' + dirClass + '" id="change-' + item.id + '">' + dirIcon + ' ' + change + '</div>' +
+          '<div class="wc-signal" id="signal-' + item.id + '">' +
             '<span class="wc-signal-label">今日信號</span>' +
             '<span class="wc-signal-pill ' + (signal === 'bull' ? 'bull' : signal === 'bear' ? 'bear' : signal === 'watch' ? 'watch-pill' : 'neutral') + '">' + signalLabel + '</span>' +
           '</div>' +
           '<div class="wc-divider"></div>' +
-          '<div class="wc-detail-grid">' +
+          '<div class="wc-detail-grid" id="details-' + item.id + '">' +
             '<div><div class="wc-detail-label">支撐位</div><div class="wc-detail-value">' + support + '</div></div>' +
             '<div><div class="wc-detail-label">壓力位</div><div class="wc-detail-value">' + resistance + '</div></div>' +
             '<div><div class="wc-detail-label">技術面</div><div class="wc-detail-value">' + techNote + '</div></div>' +
             '<div><div class="wc-detail-label">觀察重點</div><div class="wc-detail-value">' + watchNote + '</div></div>' +
           '</div>' +
-          (note ? '<div class="wc-note">' + note + '</div>' : '') +
+          (note ? '<div class="wc-note" id="note-' + item.id + '">' + note + '</div>' : '<div class="wc-note" id="note-' + item.id + '" style="display:none;"></div>') +
           '<div id="analysis-' + item.id + '"></div>' +
           '<button class="btn-analyze" onclick="analyzeItem(\'' + item.id + '\',\'' + item.symbol + '\',\'' + item.market + '\')" id="btn-analyze-' + item.id + '">🤖 AI 深度分析</button>' +
         '</div>';
       }).join('') + '</div>';
+
+      // 對沒有數據的標的自動即時搜尋
+      items.forEach(function(item) {
+        var mdata = getMarketData(item.symbol, item.market);
+        if (!mdata) {
+          fetchTickerData(item.id, item.symbol, item.market);
+        }
+      });
+    }
+
+    async function fetchTickerData(id, symbol, market) {
+      try {
+        var response = await fetch(BACKEND_URL + '/search-ticker', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ symbol: symbol, market: market })
+        });
+        var result = await response.json();
+        if (!result.success) throw new Error(result.error);
+        var d = result.data;
+
+        var card = document.getElementById('card-' + id);
+        if (!card) return;
+
+        var dirClass = d.dir === 'up' ? 'up' : d.dir === 'down' ? 'down' : 'flat';
+        var dirIcon = d.dir === 'up' ? '▲' : d.dir === 'down' ? '▼' : '—';
+
+        card.className = 'watch-card ' + dirClass;
+
+        var fetchBadge = card.querySelector('.fetching-badge');
+        if (fetchBadge) fetchBadge.remove();
+
+        var priceEl = document.getElementById('price-' + id);
+        var changeEl = document.getElementById('change-' + id);
+        if (priceEl) { priceEl.textContent = d.price; priceEl.className = 'wc-price ' + dirClass; }
+        if (changeEl) { changeEl.textContent = dirIcon + ' ' + d.change; changeEl.className = 'wc-change ' + dirClass; }
+
+        var signalEl = document.getElementById('signal-' + id);
+        if (signalEl) {
+          signalEl.querySelector('.wc-signal-pill').textContent = d.signal_label || '—';
+          signalEl.querySelector('.wc-signal-pill').className = 'wc-signal-pill ' + (d.signal === 'bull' ? 'bull' : d.signal === 'bear' ? 'bear' : d.signal === 'watch' ? 'watch-pill' : 'neutral');
+        }
+
+        var detailsEl = document.getElementById('details-' + id);
+        if (detailsEl) {
+          var vals = detailsEl.querySelectorAll('.wc-detail-value');
+          if (vals[0]) vals[0].textContent = d.support || '--';
+          if (vals[1]) vals[1].textContent = d.resistance || '--';
+          if (vals[2]) vals[2].textContent = d.tech_note || '--';
+          if (vals[3]) vals[3].textContent = d.watch_note || '--';
+        }
+
+        var noteEl = document.getElementById('note-' + id);
+        if (noteEl && d.note) { noteEl.textContent = d.note; noteEl.style.display = 'block'; }
+
+      } catch(e) {
+        var card = document.getElementById('card-' + id);
+        if (card) {
+          var badge = card.querySelector('.fetching-badge');
+          if (badge) badge.innerHTML = '⚠️ 搜尋失敗';
+        }
+        console.error('fetchTickerData 失敗：', e.message);
+      }
     }
 
     async function addWatchItem() {
@@ -336,7 +404,7 @@
       analysisDiv.innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:8px 0;">AI 正在分析，請稍候...</div>';
 
       var mdata = getMarketData(symbol, market);
-      var context = mdata ? JSON.stringify(mdata) : '無即時數據';
+      var context = mdata ? JSON.stringify(mdata) : '無即時數據，請參考宏觀背景進行分析';
       var marketContext = dailyData ? JSON.stringify({ macro: dailyData.macro, signals: dailyData.signals }) : '';
 
       try {
@@ -348,9 +416,9 @@
         var data = await response.json();
         var text = data.analysis || '分析失敗';
         var html = text
-  .replace(/### (.*?)(\n|$)/g, '<div style="font-size:11px;font-weight:700;color:var(--accent-purple);text-transform:uppercase;letter-spacing:0.5px;margin:8px 0 4px;">$1</div>')
-  .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--text-primary);">$1</strong>')
-  .replace(/\n/g, '<br>');
+          .replace(/### (.*?)(\n|$)/g, '<div style="font-size:11px;font-weight:700;color:var(--accent-purple);text-transform:uppercase;letter-spacing:0.5px;margin:8px 0 4px;">$1</div>')
+          .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--text-primary);">$1</strong>')
+          .replace(/\n/g, '<br>');
         analysisDiv.innerHTML = '<div class="wc-analysis"><div class="wc-analysis-label">🤖 AI 深度分析</div>' + html + '</div>';
       } catch(e) {
         analysisDiv.innerHTML = '<div style="font-size:12px;color:var(--accent-red);padding:8px 0;">分析失敗，請稍後再試</div>';
