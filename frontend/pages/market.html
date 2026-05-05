@@ -61,36 +61,35 @@
     .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
     .card-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
 
-    /* 加密卡片 */
-    .crypto-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
-    .crypto-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.2s; }
-    .crypto-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(77,166,255,0.2); }
-    .crypto-card.open { background: rgba(255,255,255,0.06); }
-    .cc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-    .cc-symbol { font-size: 16px; font-weight: 800; }
-    .cc-name { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
-    .cc-signal { font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
-    .cc-price { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
-    .cc-change { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
-    .cc-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .cc-stat-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-    .cc-stat-value { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
-    .cc-expand { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; opacity: 0; }
-    .crypto-card.open .cc-expand { max-height: 150px; opacity: 1; }
-    .cc-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 12px 0; }
-    .cc-expand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .cc-expand-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
-    .cc-expand-value { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    /* 指數大卡片 */
+    .index-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px; }
+    .index-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; position: relative; overflow: hidden; }
+    .index-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+    .index-card.up::before { background: linear-gradient(90deg, transparent, var(--accent-green), transparent); }
+    .index-card.down::before { background: linear-gradient(90deg, transparent, var(--accent-red), transparent); }
+    .index-card.flat::before { background: linear-gradient(90deg, transparent, var(--text-muted), transparent); }
+    .ic-label { font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .ic-value { font-size: 28px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+    .ic-change { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+    .ic-stats { display: flex; gap: 16px; }
+    .ic-stat { }
+    .ic-stat-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+    .ic-stat-value { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+
+    /* 市場情緒帶 */
+    .sentiment-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .sent-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; text-align: center; }
+    .sent-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
+    .sent-value { font-size: 20px; font-weight: 800; margin-bottom: 2px; }
+    .sent-sub { font-size: 11px; color: var(--text-muted); }
 
     /* 個股列表 */
     .stock-header-row { display: grid; grid-template-columns: 160px 1fr 100px 100px 80px 20px; gap: 12px; padding: 8px 6px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
     .stock-header-row span { font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
-
     .stock-item { display: grid; grid-template-columns: 160px 1fr 100px 100px 80px 20px; gap: 12px; align-items: center; padding: 13px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); border-radius: 8px; cursor: pointer; transition: background 0.2s; margin: 0 -6px; }
     .stock-item:last-child { border-bottom: none; }
     .stock-item:hover { background: rgba(255,255,255,0.02); }
     .stock-item.open { background: rgba(255,255,255,0.02); }
-
     .s-ticker { font-size: 14px; font-weight: 700; }
     .s-name { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
     .s-price { font-size: 15px; font-weight: 700; }
@@ -101,12 +100,42 @@
     .tag-server { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.15); }
     .s-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
     .expand-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s; }
-
     .stock-expand { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; opacity: 0; }
     .stock-item.open .stock-expand { max-height: 120px; opacity: 1; }
     .stock-expand-inner { padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .se-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; font-weight: 600; }
     .se-value { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* 加密卡片 */
+    .crypto-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+    .crypto-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
+    .crypto-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+    .crypto-card.up::before { background: linear-gradient(90deg, transparent, var(--accent-green), transparent); }
+    .crypto-card.down::before { background: linear-gradient(90deg, transparent, var(--accent-red), transparent); }
+    .crypto-card:hover { background: rgba(255,255,255,0.06); }
+    .crypto-card.open { background: rgba(255,255,255,0.06); }
+    .cc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .cc-symbol { font-size: 16px; font-weight: 800; }
+    .cc-name { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+    .cc-signal { font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+    .cc-price { font-size: 24px; font-weight: 800; margin-bottom: 4px; }
+    .cc-change { font-size: 14px; font-weight: 600; margin-bottom: 14px; }
+    .cc-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .cc-stat-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+    .cc-stat-value { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+    .cc-expand { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; opacity: 0; }
+    .crypto-card.open .cc-expand { max-height: 180px; opacity: 1; }
+    .cc-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 14px 0; }
+    .cc-expand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .cc-expand-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; font-weight: 600; }
+    .cc-expand-value { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* 加密市場總覽 */
+    .crypto-overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .co-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .co-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; font-weight: 600; }
+    .co-value { font-size: 18px; font-weight: 800; color: var(--text-primary); margin-bottom: 2px; }
+    .co-sub { font-size: 11px; color: var(--text-muted); }
 
     /* 新聞 */
     .news-strip { margin-top: 4px; }
@@ -121,6 +150,9 @@
     .bear { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.2); }
     .watch { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
 
+    /* 兩欄佈局 */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
     /* 手機響應式 */
     @media (max-width: 768px) {
       nav { padding: 0 16px; }
@@ -131,17 +163,19 @@
       .top-bar .meta { text-align: left; font-size: 11px; }
       .tabs { overflow-x: auto; gap: 0; }
       .tab-btn { padding: 10px 16px; font-size: 12px; }
+      .index-grid { grid-template-columns: 1fr; gap: 10px; }
+      .sentiment-bar { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .crypto-overview { grid-template-columns: repeat(2, 1fr); gap: 8px; }
       .crypto-grid { grid-template-columns: 1fr; gap: 10px; }
-      .crypto-card.open .cc-expand { max-height: 200px; }
       .stock-header-row { display: none; }
       .stock-item { grid-template-columns: 1fr auto; grid-template-rows: auto auto; gap: 6px; padding: 12px 6px; }
       .s-ticker-col { grid-column: 1; grid-row: 1; display: flex; align-items: center; gap: 8px; }
       .s-price-col { grid-column: 2; grid-row: 1; text-align: right; }
       .s-note-col { grid-column: 1 / -1; grid-row: 2; }
       .s-arrow-col { display: none; }
-      .s-price { font-size: 14px; }
       .stock-item.open .stock-expand { max-height: 160px; }
       .stock-expand-inner { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
       .glass-card { padding: 14px; border-radius: 12px; }
     }
   </style>
@@ -195,39 +229,84 @@
       <button class="tab-btn" onclick="switchTab('crypto', this)">🪙 虛擬貨幣</button>
     </div>
 
+    <!-- 美股 -->
     <div id="tab-us" class="tab-content active">
-      <div class="glass-card">
-        <div class="card-header"><div class="card-title">🏆 重點追蹤標的</div></div>
-        <div class="stock-header-row">
-          <span>標的</span><span>今日重點</span><span>股價</span><span>漲跌幅</span><span>板塊</span><span></span>
+      <!-- 指數卡片 -->
+      <div class="index-grid" id="us-index-grid"></div>
+
+      <!-- 市場情緒帶 -->
+      <div class="sentiment-bar" id="us-sentiment-bar"></div>
+
+      <div class="two-col">
+        <div>
+          <div class="glass-card">
+            <div class="card-header"><div class="card-title">🏆 重點追蹤標的</div></div>
+            <div class="stock-header-row">
+              <span>標的</span><span>今日重點</span><span>股價</span><span>漲跌幅</span><span>板塊</span><span></span>
+            </div>
+            <div id="us-stocks-list"></div>
+          </div>
         </div>
-        <div id="us-stocks-list"></div>
-      </div>
-      <div class="glass-card">
-        <div class="card-header"><div class="card-title">📰 今日美股新聞</div></div>
-        <div id="us-news-list"></div>
+        <div>
+          <div class="glass-card">
+            <div class="card-header"><div class="card-title">📰 今日美股新聞</div></div>
+            <div id="us-news-list"></div>
+          </div>
+          <div class="glass-card">
+            <div class="card-header"><div class="card-title">🔄 資金輪動觀察</div></div>
+            <div id="us-rotation"></div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- 台股 -->
     <div id="tab-tw" class="tab-content">
-      <div class="glass-card">
-        <div class="card-header"><div class="card-title">🏆 重點追蹤標的</div></div>
-        <div class="stock-header-row">
-          <span>標的</span><span>今日重點</span><span>股價</span><span>漲跌幅</span><span>板塊</span><span></span>
+      <!-- 台股指數卡片 -->
+      <div class="index-grid" id="tw-index-grid"></div>
+
+      <div class="two-col">
+        <div>
+          <div class="glass-card">
+            <div class="card-header"><div class="card-title">🏆 重點追蹤標的</div></div>
+            <div class="stock-header-row">
+              <span>標的</span><span>今日重點</span><span>股價</span><span>漲跌幅</span><span>板塊</span><span></span>
+            </div>
+            <div id="tw-stocks-list"></div>
+          </div>
         </div>
-        <div id="tw-stocks-list"></div>
-      </div>
-      <div class="glass-card">
-        <div class="card-header"><div class="card-title">📰 今日台股新聞</div></div>
-        <div id="tw-news-list"></div>
+        <div>
+          <div class="glass-card">
+            <div class="card-header"><div class="card-title">📰 今日台股新聞</div></div>
+            <div id="tw-news-list"></div>
+          </div>
+          <div class="glass-card">
+            <div class="card-header"><div class="card-title">🔄 資金輪動觀察</div></div>
+            <div id="tw-rotation"></div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- 加密 -->
     <div id="tab-crypto" class="tab-content">
+      <!-- 加密市場總覽 -->
+      <div class="crypto-overview" id="crypto-overview"></div>
+
       <div class="glass-card">
         <div class="card-header"><div class="card-title">🪙 加密貨幣行情</div></div>
         <div class="crypto-grid" id="crypto-grid"></div>
-        <div id="crypto-news-list"></div>
+      </div>
+
+      <div class="two-col">
+        <div class="glass-card">
+          <div class="card-header"><div class="card-title">📰 今日加密新聞</div></div>
+          <div id="crypto-news-list"></div>
+        </div>
+        <div class="glass-card">
+          <div class="card-header"><div class="card-title">😱 市場情緒</div></div>
+          <div id="crypto-sentiment"></div>
+        </div>
       </div>
     </div>
   </main>
@@ -274,9 +353,7 @@
         var dirClass = s.dir === 'up' ? 'up' : s.dir === 'down' ? 'down' : 'flat';
         var dirIcon = s.dir === 'up' ? '▲' : s.dir === 'down' ? '▼' : '—';
         return '<div class="stock-item" onclick="toggleStock(this)">' +
-          '<div class="s-ticker-col">' +
-            '<div><div class="s-ticker">' + s.ticker + '</div><div class="s-name">' + s.name + '</div></div>' +
-          '</div>' +
+          '<div class="s-ticker-col"><div><div class="s-ticker">' + s.ticker + '</div><div class="s-name">' + s.name + '</div></div></div>' +
           '<div class="s-note-col s-note">' + s.note + '</div>' +
           '<div class="s-price ' + dirClass + '">' + s.price + '</div>' +
           '<div class="s-change ' + dirClass + '">' + dirIcon + ' ' + s.change + '</div>' +
@@ -294,6 +371,7 @@
 
     function renderNews(containerId, newsItems) {
       var container = document.getElementById(containerId);
+      if (!container || !newsItems) return;
       container.innerHTML = '<div class="news-strip">' +
         newsItems.map(function(n) {
           return '<div class="news-strip-item">' +
@@ -305,53 +383,135 @@
       '</div>';
     }
 
+    function renderRotation(containerId, rotation) {
+      var container = document.getElementById(containerId);
+      if (!container || !rotation) return;
+      container.innerHTML = rotation.map(function(r) {
+        return '<div style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);">' +
+          '<span style="font-size:12px;color:var(--accent-red);font-weight:600;white-space:nowrap;">' + r.from + '</span>' +
+          '<span style="color:var(--text-muted);">→</span>' +
+          '<span style="font-size:12px;color:var(--accent-green);font-weight:600;white-space:nowrap;">' + r.to + '</span>' +
+          '<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;background:rgba(246,173,85,0.08);color:var(--accent-orange);border:1px solid rgba(246,173,85,0.15);white-space:nowrap;">' + r.strength + '</span>' +
+          '<span style="font-size:11px;color:var(--text-muted);flex:1;">' + r.reason + '</span>' +
+        '</div>';
+      }).join('');
+    }
+
     async function loadData() {
       var res = await fetch('../data/daily.json');
       var data = await res.json();
 
       var d = new Date(data.date);
       document.getElementById('market-date').innerHTML =
-        d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) +
-        '<br>UTC+8 台北時間';
+        d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) + '<br>UTC+8 台北時間';
 
-      if (data.market) {
-        if (data.market.us_stocks) renderStocks('us-stocks-list', data.market.us_stocks);
-        if (data.market.us_news) renderNews('us-news-list', data.market.us_news);
-        if (data.market.tw_stocks) renderStocks('tw-stocks-list', data.market.tw_stocks);
-        if (data.market.tw_news) renderNews('tw-news-list', data.market.tw_news);
+      // 美股指數卡片
+      var spx = data.tickers ? data.tickers.find(function(t) { return t.label === 'S&P 500'; }) : null;
+      var ndx = data.tickers ? data.tickers.find(function(t) { return t.label === 'NASDAQ'; }) : null;
+      var fg = data.sentiment && data.sentiment.fear_greed ? data.sentiment.fear_greed : null;
 
-        if (data.market.crypto) {
-          document.getElementById('crypto-grid').innerHTML = data.market.crypto.map(function(c) {
-            var dirClass = c.dir === 'up' ? 'up' : c.dir === 'down' ? 'down' : 'flat';
-            var dirIcon = c.dir === 'up' ? '▲' : c.dir === 'down' ? '▼' : '—';
-            return '<div class="crypto-card" onclick="toggleCrypto(this)">' +
-              '<div class="cc-header">' +
-                '<div><div class="cc-symbol">' + c.symbol + '</div><div class="cc-name">' + c.name + '</div></div>' +
-                '<span class="cc-signal ' + (c.signal || 'watch') + '">' + (c.signal_label || '觀察') + '</span>' +
-              '</div>' +
-              '<div class="cc-price ' + dirClass + '">' + c.price + '</div>' +
-              '<div class="cc-change ' + dirClass + '">' + dirIcon + ' ' + c.change + '</div>' +
-              '<div class="cc-stats">' +
-                '<div><div class="cc-stat-label">24H 高</div><div class="cc-stat-value">' + (c.high || '--') + '</div></div>' +
-                '<div><div class="cc-stat-label">24H 低</div><div class="cc-stat-value">' + (c.low || '--') + '</div></div>' +
-                '<div><div class="cc-stat-label">市值</div><div class="cc-stat-value">' + (c.market_cap || '--') + '</div></div>' +
-                '<div><div class="cc-stat-label">成交量</div><div class="cc-stat-value">' + (c.volume || '--') + '</div></div>' +
-              '</div>' +
-              '<div class="cc-expand">' +
-                '<div class="cc-divider"></div>' +
-                '<div class="cc-expand-grid">' +
-                  '<div><div class="cc-expand-label">支撐位</div><div class="cc-expand-value">' + (c.support || '—') + '</div></div>' +
-                  '<div><div class="cc-expand-label">壓力位</div><div class="cc-expand-value">' + (c.resistance || '—') + '</div></div>' +
-                  '<div><div class="cc-expand-label">技術面</div><div class="cc-expand-value">' + (c.tech_note || '—') + '</div></div>' +
-                  '<div><div class="cc-expand-label">觀察重點</div><div class="cc-expand-value">' + (c.watch_note || '—') + '</div></div>' +
-                '</div>' +
-              '</div>' +
-            '</div>';
-          }).join('');
-        }
+      document.getElementById('us-index-grid').innerHTML =
+        renderIndexCard('S&P 500', spx ? spx.value : '--', spx ? spx.change : '--', spx ? spx.dir : 'flat', '美國大盤指數') +
+        renderIndexCard('NASDAQ', ndx ? ndx.value : '--', ndx ? ndx.change : '--', ndx ? ndx.dir : 'flat', '科技股指數') +
+        '<div class="index-card ' + (fg ? (parseInt(fg.value) >= 50 ? 'up' : 'down') : 'flat') + '">' +
+          '<div class="ic-label">市場情緒</div>' +
+          '<div class="ic-value" style="font-size:36px;color:' + (fg ? (parseInt(fg.value) >= 50 ? 'var(--accent-green)' : parseInt(fg.value) >= 30 ? 'var(--accent-orange)' : 'var(--accent-red)') : 'var(--text-muted)') + ';">' + (fg ? fg.value : '--') + '</div>' +
+          '<div class="ic-change ' + (fg ? (parseInt(fg.value) >= 50 ? 'up' : 'down') : 'flat') + '">' + (fg ? fg.label : 'Fear & Greed') + '</div>' +
+          '<div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">較昨日</div><div class="ic-stat-value">' + (fg ? (fg.change || '--') : '--') + '</div></div></div>' +
+        '</div>';
 
-        if (data.market.crypto_news) renderNews('crypto-news-list', data.market.crypto_news);
+      // 美股情緒帶
+      document.getElementById('us-sentiment-bar').innerHTML =
+        '<div class="sent-item"><div class="sent-label">Fear & Greed</div><div class="sent-value" style="color:var(--accent-orange);">' + (fg ? fg.value : '--') + '</div><div class="sent-sub">' + (fg ? fg.label : '--') + '</div></div>' +
+        '<div class="sent-item"><div class="sent-label">BTC 多空比</div><div class="sent-value" style="color:var(--accent-blue);">' + (data.sentiment && data.sentiment.coinglass ? data.sentiment.coinglass.long_short_ratio : '--') + '</div><div class="sent-sub">CoinGlass</div></div>' +
+        '<div class="sent-item"><div class="sent-label">BTC 資金費率</div><div class="sent-value" style="font-size:14px;color:var(--accent-green);">' + (data.sentiment && data.sentiment.coinglass ? data.sentiment.coinglass.funding_rate : '--') + '</div><div class="sent-sub">永續合約</div></div>' +
+        '<div class="sent-item"><div class="sent-label">Brent 原油</div><div class="sent-value" style="color:var(--accent-orange);">' + (data.tickers ? (data.tickers.find(function(t){return t.label==='Brent 原油';}) || {}).value || '--' : '--') + '</div><div class="sent-sub">' + (data.tickers ? ((data.tickers.find(function(t){return t.label==='Brent 原油';}) || {}).change || '--') : '--') + '</div></div>';
+
+      // 美股個股
+      if (data.market && data.market.us_stocks) renderStocks('us-stocks-list', data.market.us_stocks);
+      if (data.market && data.market.us_news) renderNews('us-news-list', data.market.us_news);
+      if (data.industry_detail && data.industry_detail.rotation) renderRotation('us-rotation', data.industry_detail.rotation);
+
+      // 台股指數卡片
+      var twIdx = data.tickers ? data.tickers.find(function(t) { return t.label === '台股加權'; }) : null;
+      document.getElementById('tw-index-grid').innerHTML =
+        renderIndexCard('台股加權指數', twIdx ? twIdx.value : '--', twIdx ? twIdx.change : '--', twIdx ? twIdx.dir : 'flat', 'TAIEX') +
+        '<div class="index-card flat"><div class="ic-label">今日成交量</div><div class="ic-value" style="font-size:22px;">--</div><div class="ic-change flat">億元</div></div>' +
+        '<div class="index-card flat"><div class="ic-label">外資動向</div><div class="ic-value" style="font-size:18px;">--</div><div class="ic-change flat">買賣超</div></div>';
+
+      // 台股個股
+      if (data.market && data.market.tw_stocks) renderStocks('tw-stocks-list', data.market.tw_stocks);
+      if (data.market && data.market.tw_news) renderNews('tw-news-list', data.market.tw_news);
+      if (data.industry_detail && data.industry_detail.rotation) renderRotation('tw-rotation', data.industry_detail.rotation);
+
+      // 加密總覽
+      var btc = data.market && data.market.crypto ? data.market.crypto.find(function(c){return c.symbol==='BTC';}) : null;
+      var eth = data.market && data.market.crypto ? data.market.crypto.find(function(c){return c.symbol==='ETH';}) : null;
+      document.getElementById('crypto-overview').innerHTML =
+        '<div class="co-item"><div class="co-label">BTC 市值</div><div class="co-value">' + (btc ? btc.market_cap : '--') + '</div><div class="co-sub">Bitcoin</div></div>' +
+        '<div class="co-item"><div class="co-label">BTC 24H 交易量</div><div class="co-value">' + (btc ? btc.volume : '--') + '</div><div class="co-sub">全球成交量</div></div>' +
+        '<div class="co-item"><div class="co-label">ETH 市值</div><div class="co-value">' + (eth ? eth.market_cap : '--') + '</div><div class="co-sub">Ethereum</div></div>';
+
+      // 加密卡片
+      if (data.market && data.market.crypto) {
+        document.getElementById('crypto-grid').innerHTML = data.market.crypto.map(function(c) {
+          var dirClass = c.dir === 'up' ? 'up' : c.dir === 'down' ? 'down' : 'flat';
+          var dirIcon = c.dir === 'up' ? '▲' : c.dir === 'down' ? '▼' : '—';
+          return '<div class="crypto-card ' + dirClass + '" onclick="toggleCrypto(this)">' +
+            '<div class="cc-header"><div><div class="cc-symbol">' + c.symbol + '</div><div class="cc-name">' + c.name + '</div></div><span class="cc-signal ' + (c.signal||'watch') + '">' + (c.signal_label||'觀察') + '</span></div>' +
+            '<div class="cc-price ' + dirClass + '">' + c.price + '</div>' +
+            '<div class="cc-change ' + dirClass + '">' + dirIcon + ' ' + c.change + '</div>' +
+            '<div class="cc-stats">' +
+              '<div><div class="cc-stat-label">24H 高</div><div class="cc-stat-value">' + (c.high||'--') + '</div></div>' +
+              '<div><div class="cc-stat-label">24H 低</div><div class="cc-stat-value">' + (c.low||'--') + '</div></div>' +
+              '<div><div class="cc-stat-label">市值</div><div class="cc-stat-value">' + (c.market_cap||'--') + '</div></div>' +
+              '<div><div class="cc-stat-label">成交量</div><div class="cc-stat-value">' + (c.volume||'--') + '</div></div>' +
+            '</div>' +
+            '<div class="cc-expand"><div class="cc-divider"></div>' +
+              '<div class="cc-expand-grid">' +
+                '<div><div class="cc-expand-label">支撐位</div><div class="cc-expand-value">' + (c.support||'—') + '</div></div>' +
+                '<div><div class="cc-expand-label">壓力位</div><div class="cc-expand-value">' + (c.resistance||'—') + '</div></div>' +
+                '<div><div class="cc-expand-label">技術面</div><div class="cc-expand-value">' + (c.tech_note||'—') + '</div></div>' +
+                '<div><div class="cc-expand-label">觀察重點</div><div class="cc-expand-value">' + (c.watch_note||'—') + '</div></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
       }
+
+      if (data.market && data.market.crypto_news) renderNews('crypto-news-list', data.market.crypto_news);
+
+      // 加密情緒
+      var cg = data.sentiment && data.sentiment.coinglass ? data.sentiment.coinglass : null;
+      document.getElementById('crypto-sentiment').innerHTML =
+        '<div style="margin-bottom:12px;">' +
+          '<div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;font-weight:600;">資金費率</div>' +
+          '<div style="font-size:14px;color:var(--text-secondary);">' + (cg ? cg.funding_rate : '--') + '</div>' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">' +
+          '<div style="background:rgba(72,187,120,0.05);border:1px solid rgba(72,187,120,0.15);border-radius:8px;padding:10px;">' +
+            '<div style="font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">BTC 多單清算</div>' +
+            '<div style="font-size:16px;font-weight:700;color:var(--accent-green);">' + (cg ? cg.btc_long_liq : '--') + '</div>' +
+          '</div>' +
+          '<div style="background:rgba(252,129,129,0.05);border:1px solid rgba(252,129,129,0.15);border-radius:8px;padding:10px;">' +
+            '<div style="font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">BTC 空單清算</div>' +
+            '<div style="font-size:16px;font-weight:700;color:var(--accent-red);">' + (cg ? cg.btc_short_liq : '--') + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;font-weight:600;">多空比</div>' +
+        '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">' + (cg ? cg.long_short_ratio : '--') + '</div>' +
+        '<div style="font-size:12px;color:var(--text-muted);padding-top:8px;border-top:1px solid rgba(255,255,255,0.04);">' + (cg ? cg.note : '--') + '</div>';
+    }
+
+    function renderIndexCard(label, value, change, dir, sub) {
+      var dirClass = dir === 'up' ? 'up' : dir === 'down' ? 'down' : 'flat';
+      var dirIcon = dir === 'up' ? '▲' : dir === 'down' ? '▼' : '—';
+      return '<div class="index-card ' + dirClass + '">' +
+        '<div class="ic-label">' + label + '</div>' +
+        '<div class="ic-value">' + value + '</div>' +
+        '<div class="ic-change ' + dirClass + '">' + dirIcon + ' ' + change + '</div>' +
+        '<div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">來源</div><div class="ic-stat-value">' + sub + '</div></div></div>' +
+      '</div>';
     }
 
     loadData();
