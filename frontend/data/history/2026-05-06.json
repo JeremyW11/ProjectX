@@ -1,0 +1,909 @@
+{
+  "date": "2026-05-06",
+  "tickers": [
+    {
+      "label": "BTC / USD",
+      "value": "$81,000",
+      "change": "+5.3%",
+      "dir": "up"
+    },
+    {
+      "label": "ETH / USD",
+      "value": "$2,372",
+      "change": "-0.1%",
+      "dir": "down"
+    },
+    {
+      "label": "S&P 500",
+      "value": "--",
+      "change": "--",
+      "dir": "flat"
+    },
+    {
+      "label": "NASDAQ",
+      "value": "--",
+      "change": "--",
+      "dir": "flat"
+    },
+    {
+      "label": "台股加權",
+      "value": "40,769.29",
+      "change": "+0.16%",
+      "dir": "up"
+    },
+    {
+      "label": "Brent 原油",
+      "value": "$4.46/加侖",
+      "change": "--",
+      "dir": "up"
+    }
+  ],
+  "macro": [
+    {
+      "tag": "政策",
+      "type": "macro",
+      "text": "最高法院裁定Trump無權徵收進口關稅，政府正退還超過1660億美元已徵關稅",
+      "time": "2026-05-06",
+      "impact": "貿易政策重大轉向，進口成本下降",
+      "expand_analysis": "關稅退還將降低企業成本，可能刺激進口消費，但政策不確定性仍存",
+      "expand_tickers": "進口商、零售業ETF",
+      "expand_watch": "後續貿易政策走向及企業獲退稅時程"
+    },
+    {
+      "tag": "地緣",
+      "type": "macro",
+      "text": "美軍炮擊伊朗部隊並擊沉6艘小艇，Trump暫停護送船隻行動以完成與伊朗協議",
+      "time": "2026-05-06",
+      "impact": "油價維持高檔，航運風險持續",
+      "expand_analysis": "霍爾木茲海峽危機導致油價飆升，汽油價格達近4年最高，若持續關閉可能達5美元",
+      "expand_tickers": "XOM、CVX、能源ETF、航運股",
+      "expand_watch": "美伊談判進展及海峽通行狀況"
+    },
+    {
+      "tag": "數據",
+      "type": "macro",
+      "text": "3月CPI年增3.3%為2024年4月以來最快，今日公布新屋銷售及ISM服務業指數",
+      "time": "2026-05-06",
+      "impact": "通膨回升壓縮降息空間",
+      "expand_analysis": "油價飆升推動通膨，交易員押注2026年不再降息，Fed政策面臨兩難",
+      "expand_tickers": "公債ETF、利率敏感股",
+      "expand_watch": "本週五非農就業數據"
+    },
+    {
+      "tag": "央行",
+      "type": "macro",
+      "text": "Fed維持利率3.50%-3.75%不變，Powell表示高油價壓力可能持續，4月會議是其最後一次主持",
+      "time": "2026-05-06",
+      "impact": "利率維持高檔，市場降息預期落空",
+      "expand_analysis": "更多FOMC成員認為不應暗示偏向降息，Powell將留任Fed理事但卸任主席",
+      "expand_tickers": "金融股、REITs",
+      "expand_watch": "下任Fed主席人選及政策延續性"
+    }
+  ],
+  "industry": [
+    {
+      "tag": "半導體",
+      "type": "industry",
+      "text": "ON Semiconductor Q1財報優於預期受AI資料中心驅動，費城半導體指數4月飆漲35.2%",
+      "time": "2026-05-06",
+      "impact": "半導體產業持續受AI需求支撐",
+      "expand_analysis": "AI晶片需求強勁帶動整體半導體板塊，先進封測成長動能明確",
+      "expand_tickers": "NVDA、TSM、ON、日月光",
+      "expand_watch": "AI資料中心擴張速度及庫存水位"
+    },
+    {
+      "tag": "AI",
+      "type": "us",
+      "text": "Siemens與TSMC擴大合作，將AI深度整合至半導體製造流程優化製造成果",
+      "time": "2026-05-06",
+      "impact": "AI應用擴展至製造端提升效率",
+      "expand_analysis": "AI從設計輔助轉向主動優化製造，將改變半導體生產模式",
+      "expand_tickers": "TSMC、西門子、設備商",
+      "expand_watch": "AI製造應用落地進度"
+    },
+    {
+      "tag": "加密",
+      "type": "crypto",
+      "text": "美參議員發布CLARITY Act穩定幣收益妥協案，禁止等同銀行存款收益但允許善意活動",
+      "time": "2026-05-06",
+      "impact": "監管明確化有利產業長期發展",
+      "expand_analysis": "Coinbase和Circle等交易團體支持該協議，穩定幣監管框架逐步成形",
+      "expand_tickers": "BTC、ETH、COIN",
+      "expand_watch": "法案立法進度及細則"
+    },
+    {
+      "tag": "台股",
+      "type": "tw",
+      "text": "台股創史上最大漲點紀錄，5月4日單日大漲1778點，聯發科漲停市值突破5兆元",
+      "time": "2026-05-05",
+      "impact": "多頭氣盛權值股創新高",
+      "expand_analysis": "台積電、台達電、聯發科同步改寫股價新高，成交量突破1兆元",
+      "expand_tickers": "2330、2454、2308",
+      "expand_watch": "外資動向及成交量能否維持"
+    },
+    {
+      "tag": "能源",
+      "type": "industry",
+      "text": "阿聯酋攔截伊朗15枚飛彈和4架無人機，富吉拉油廠起火，OPEC+宣布日增產18.8萬桶",
+      "time": "2026-05-06",
+      "impact": "地緣衝突推升油價至多年高點",
+      "expand_analysis": "美國汽油價格達4.46美元為近4年最高，若海峽持續關閉可能達5美元",
+      "expand_tickers": "XOM、CVX、能源ETF",
+      "expand_watch": "伊朗戰事發展及OPEC+增產執行"
+    }
+  ],
+  "persons": [
+    {
+      "initials": "WB",
+      "name": "Warren Buffett",
+      "title": "董事長｜波克夏海瑟威",
+      "note": "警告市場如賭場，現金達3970億美元，Buffett指標達225%超過玩火門檻",
+      "expand_watch": "波克夏持股變動及現金部署時機"
+    },
+    {
+      "initials": "EM",
+      "name": "Elon Musk",
+      "title": "CEO｜Tesla/SpaceX/xAI",
+      "note": "OpenAI訴訟出庭3天強調不能偷走慈善機構，SEC和解支付150萬罰款，淨資產突破8000億",
+      "expand_watch": "OpenAI訴訟結果及Terafab與Intel合作進展"
+    },
+    {
+      "initials": "TC",
+      "name": "Tim Cook",
+      "title": "CEO｜Apple",
+      "note": "宣布9月1日卸任CEO由John Ternus接任，獲Buffett盛讚為美國商業管理奇蹟",
+      "expand_watch": "Apple領導層交接及新CEO策略方向"
+    }
+  ],
+  "signals": [
+    {
+      "name": "半導體 / AI",
+      "signal": "bull",
+      "label": "看多"
+    },
+    {
+      "name": "加密貨幣",
+      "signal": "watch",
+      "label": "觀察"
+    },
+    {
+      "name": "能源",
+      "signal": "bull",
+      "label": "看多"
+    },
+    {
+      "name": "雲端 / 資料中心",
+      "signal": "bull",
+      "label": "看多"
+    },
+    {
+      "name": "金融",
+      "signal": "neutral",
+      "label": "中性"
+    },
+    {
+      "name": "航運",
+      "signal": "watch",
+      "label": "觀察"
+    },
+    {
+      "name": "消費",
+      "signal": "neutral",
+      "label": "中性"
+    }
+  ],
+  "market": {
+    "crypto": [
+      {
+        "symbol": "BTC",
+        "name": "Bitcoin",
+        "price": "$81,000",
+        "change": "+5.3%",
+        "dir": "up",
+        "high": "$81,000",
+        "low": "$78,000",
+        "market_cap": "$1.59兆",
+        "volume": "$62.64B",
+        "signal": "bull",
+        "signal_label": "看多",
+        "support": "$78,000",
+        "resistance": "$86,000",
+        "tech_note": "亞盤突破為1月下旬以來最高，期貨37.4%多頭vs62.6%空頭",
+        "watch_note": "跌破78000將開啟至65000風險"
+      },
+      {
+        "symbol": "ETH",
+        "name": "Ethereum",
+        "price": "$2,372",
+        "change": "-0.1%",
+        "dir": "down",
+        "high": "$2,400",
+        "low": "$2,350",
+        "market_cap": "--",
+        "volume": "$4.5B",
+        "signal": "watch",
+        "signal_label": "觀察",
+        "support": "$2,211",
+        "resistance": "$2,367",
+        "tech_note": "RSI 48.58中性，鯨魚96小時累積14萬ETH，DeFi TVL恢復至457.4億",
+        "watch_note": "突破2367目標2750，跌破2211風險至2108"
+      },
+      {
+        "symbol": "SOL",
+        "name": "Solana",
+        "price": "$85.48",
+        "change": "+1%",
+        "dir": "up",
+        "high": "$86.08",
+        "low": "$84.05",
+        "market_cap": "$49.23B",
+        "volume": "$799.8M",
+        "signal": "bull",
+        "signal_label": "看多",
+        "support": "$84",
+        "resistance": "$90",
+        "tech_note": "73%多頭vs27%空頭為最看漲衍生品部位，資金費率-0.0036%",
+        "watch_note": "52週區間68.04-294.82，空頭過度擁擠"
+      }
+    ],
+    "crypto_news": [
+      {
+        "text": "BTC突破81000美元為1月下旬以來最高，週漲5.3%",
+        "time": "2026-05-06"
+      },
+      {
+        "text": "CLARITY Act穩定幣法案獲Coinbase和Circle等加密交易團體支持",
+        "time": "2026-05-06"
+      },
+      {
+        "text": "主要山寨幣資金費率為負數顯示空頭過度擁擠，市場偏向輪動",
+        "time": "2026-05-06"
+      }
+    ],
+    "us_stocks": [
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "price": "$196.85",
+        "change": "--",
+        "dir": "up",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "盤中高點200.24創紀錄，AI晶片需求強勁",
+        "watch_note": "Google宣布直接銷售TPU可能形成壓力",
+        "tech_note": "股價走強接近歷史高點"
+      },
+      {
+        "ticker": "TSM",
+        "name": "台積電ADR",
+        "price": "$404.98",
+        "change": "+0.63%",
+        "dir": "up",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "市值達2兆美元超越Meta和Tesla全球排名第六",
+        "watch_note": "與Siemens擴大AI製造合作",
+        "tech_note": "股價穩步上升"
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft",
+        "price": "$424.82",
+        "change": "+0.052%",
+        "dir": "up",
+        "tag": "server",
+        "tag_label": "雲端",
+        "note": "2026年基礎建設支出約1000億美元，持有OpenAI約27%股權",
+        "watch_note": "AI技術持續推動成長",
+        "tech_note": "股價小幅上漲"
+      },
+      {
+        "ticker": "AAPL",
+        "name": "Apple",
+        "price": "$267.61",
+        "change": "+1.27%",
+        "dir": "up",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "強勁季報帶動股價上漲，Tim Cook將於9月卸任CEO",
+        "watch_note": "新任CEO John Ternus接任後策略",
+        "tech_note": "帶動Nasdaq 100上漲"
+      },
+      {
+        "ticker": "META",
+        "name": "Meta",
+        "price": "--",
+        "change": "--",
+        "dir": "down",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "新墨西哥州青少年安全訴訟重大敗訴",
+        "watch_note": "潛在損害賠償遠超初估3.75億美元",
+        "tech_note": "法律風險壓制股價"
+      }
+    ],
+    "us_news": [
+      {
+        "text": "AMD Q1營收103億美元，CEO稱AI基礎設施需求加速成為營收主要驅動力",
+        "time": "2026-05-05"
+      },
+      {
+        "text": "NVIDIA市值領先全球達5.2兆美元，十大公司中八家為科技公司",
+        "time": "2026-05-06"
+      }
+    ],
+    "tw_stocks": [
+      {
+        "ticker": "2330",
+        "name": "台積電",
+        "price": "2250",
+        "change": "-1.10%",
+        "dir": "down",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "跌25元收2250，前日創股價新高後回檔",
+        "watch_note": "市值達2兆美元全球排名第六",
+        "tech_note": "成交量21565張"
+      },
+      {
+        "ticker": "2317",
+        "name": "鴻海",
+        "price": "239.5",
+        "change": "+5.27%",
+        "dir": "up",
+        "tag": "server",
+        "tag_label": "伺服器",
+        "note": "漲12元收239.5，成交量155798張",
+        "watch_note": "伺服器需求持續成長",
+        "tech_note": "量增價漲格局"
+      },
+      {
+        "ticker": "2454",
+        "name": "聯發科",
+        "price": "3155",
+        "change": "+9.93%",
+        "dir": "up",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "漲停收3155元，市值突破5兆元直追台達電",
+        "watch_note": "連續漲停後追價風險",
+        "tech_note": "成交量8508張"
+      },
+      {
+        "ticker": "2308",
+        "name": "台達電",
+        "price": "2165",
+        "change": "-2.48%",
+        "dir": "down",
+        "tag": "server",
+        "tag_label": "電源",
+        "note": "Q1大賺205億元EPS 7.91元創高，斥121億桃園擴產",
+        "watch_note": "AI電源需求持續",
+        "tech_note": "成交量9407張"
+      },
+      {
+        "ticker": "3711",
+        "name": "日月光",
+        "price": "520",
+        "change": "-0.95%",
+        "dir": "down",
+        "tag": "semi",
+        "tag_label": "封裝",
+        "note": "Q1獲利年增87%創同期新高，外資目標價最高660元",
+        "watch_note": "AI封測動能全面爆發",
+        "tech_note": "成交量36427張"
+      }
+    ],
+    "tw_news": [
+      {
+        "text": "台股5月4日單日大漲1778點創史上最大漲點紀錄，成交量突破1兆元",
+        "time": "2026-05-04"
+      },
+      {
+        "text": "台股小漲64點收40769點再創史上最高收盤，聯發科漲停市值破5兆",
+        "time": "2026-05-05"
+      }
+    ]
+  },
+  "sentiment": {
+    "fear_greed": {
+      "value": "49",
+      "label": "恐懼",
+      "change": "+4",
+      "note": "較前日45回升但仍偏弱BTC主導率58.5%"
+    },
+    "polymarket": [
+      {
+        "title": "WTI原油5月價格",
+        "prob": "最熱門",
+        "trend": "up",
+        "note": "交易量688萬美元受霍爾木茲危機推動"
+      },
+      {
+        "title": "2026眾議院選舉",
+        "prob": "82.5%",
+        "trend": "up",
+        "note": "民主黨勝率領先交易量532萬"
+      },
+      {
+        "title": "5月底市值最大公司",
+        "prob": "61%",
+        "trend": "flat",
+        "note": "NVIDIA領先Alphabet38%交易量190萬"
+      }
+    ],
+    "coinglass": {
+      "btc_long_liq": "極端",
+      "btc_short_liq": "極端",
+      "eth_long_liq": "極端",
+      "eth_short_liq": "極端",
+      "funding_rate": "ETH-0.0038% SOL-0.0036%",
+      "long_short_ratio": "BTC空頭62.6% ETH多頭61.6%",
+      "note": "資金費率為負空頭擁擠市場高強度去槓桿中"
+    }
+  },
+  "industry_detail": {
+    "news": [
+      {
+        "tag": "半導體",
+        "type": "semi",
+        "text": "ON Semi Q1財報優於預期 AI資料中心需求激增驅動成長",
+        "time": "2026-05-04",
+        "impact": "盤後股價漲1.05%至104.11美元 接近52週高點",
+        "expand_analysis": "AI伺服器電源管理晶片需求強勁 功率半導體進入超級週期",
+        "expand_tickers": "ON NVDA TSM",
+        "expand_watch": "Q2資料中心訂單能見度與毛利率趨勢"
+      },
+      {
+        "tag": "AI",
+        "type": "ai",
+        "text": "Siemens與台積電擴大合作 AI深度整合半導體製造流程",
+        "time": "2026-05-06",
+        "impact": "AI從設計輔助轉向主動優化製造 提升良率與效率",
+        "expand_analysis": "製造業AI應用加速 智慧工廠成下一波成長動能",
+        "expand_tickers": "SIEGY TSM ASML",
+        "expand_watch": "AI製造解決方案商業化進度"
+      },
+      {
+        "tag": "能源",
+        "type": "energy",
+        "text": "阿聯酋攔截伊朗15枚飛彈 富吉拉油廠起火 OPEC+日增產18.8萬桶",
+        "time": "2026-05-06",
+        "impact": "美國汽油達4.46美元創4年高 油價持續承壓",
+        "expand_analysis": "霍爾木茲海峽危機持續 能源供應鏈風險升高",
+        "expand_tickers": "XOM CVX USO",
+        "expand_watch": "伊朗協議進展與海峽通航狀況"
+      },
+      {
+        "tag": "台股",
+        "type": "tw",
+        "text": "台股站穩4萬點 5月4日大漲1778點創史上最大漲點紀錄",
+        "time": "2026-05-05",
+        "impact": "成交量破兆 聯發科漲停市值突破5兆 台積電創新高",
+        "expand_analysis": "外資回補權值股 AI題材帶動電子股輪動上攻",
+        "expand_tickers": "2330.TW 2454.TW 2317.TW",
+        "expand_watch": "外資買賣超持續性與融資餘額變化"
+      },
+      {
+        "tag": "航運",
+        "type": "shipping",
+        "text": "Maersk船舶在美軍護航下安全通過霍爾木茲海峽",
+        "time": "2026-05-06",
+        "impact": "地緣政治改寫全球航運規則 運費面臨上漲壓力",
+        "expand_analysis": "從霍爾木茲到巴拿馬南海黑海 航運風險溢價攀升",
+        "expand_tickers": "AMKBY ZIM SBLK",
+        "expand_watch": "波斯灣保險費率與繞道成本變化"
+      },
+      {
+        "tag": "金融",
+        "type": "finance",
+        "text": "Klaros預測2026年美國銀行併購案將達去年兩倍",
+        "time": "2026-05-06",
+        "impact": "政策環境有利整合 中小銀行併購潮將加速",
+        "expand_analysis": "利率環境穩定後 銀行業規模經濟效益驅動整併",
+        "expand_tickers": "JPM BAC GS",
+        "expand_watch": "Fed監管態度與區域銀行估值"
+      }
+    ],
+    "top_companies": [
+      {
+        "name": "NVIDIA",
+        "ticker": "NVDA·NASDAQ",
+        "industry": "半導體",
+        "event_type": "watch",
+        "event_label": "AI龍頭",
+        "note": "股價創新高200.24美元 Google TPU直售形成競爭壓力",
+        "core_business": "AI GPU與資料中心加速運算",
+        "recent_event": "季度盈利681億創紀錄 年增94%",
+        "industry_impact": "AI算力需求持續爆發 主導地位面臨雲端巨頭挑戰",
+        "risk_note": "估值過高與客戶自研晶片風險"
+      },
+      {
+        "name": "AMD",
+        "ticker": "AMD·NASDAQ",
+        "industry": "半導體",
+        "event_type": "earnings",
+        "event_label": "財報",
+        "note": "Q1營收103億 EPS 1.37美元 資料中心成主要成長動能",
+        "core_business": "CPU GPU與資料中心處理器",
+        "recent_event": "AI基礎設施需求加速 毛利率達53%",
+        "industry_impact": "與NVIDIA競爭AI市場份額",
+        "risk_note": "AI晶片市佔仍落後NVIDIA"
+      },
+      {
+        "name": "台積電",
+        "ticker": "TSM·NYSE",
+        "industry": "半導體",
+        "event_type": "expand",
+        "event_label": "市值里程碑",
+        "note": "市值達2兆美元 超越Meta Tesla 全球第六",
+        "core_business": "先進製程晶圓代工",
+        "recent_event": "與Siemens合作AI製造 3奈米產能滿載",
+        "industry_impact": "全球AI晶片製造核心 地緣政治敏感",
+        "risk_note": "兩岸關係與客戶集中度風險"
+      },
+      {
+        "name": "聯發科",
+        "ticker": "2454.TW·TWSE",
+        "industry": "半導體",
+        "event_type": "watch",
+        "event_label": "漲停",
+        "note": "連續漲停衝上3155元 市值突破5兆台幣",
+        "core_business": "手機與智慧裝置晶片設計",
+        "recent_event": "AI手機晶片需求強勁帶動營收成長",
+        "industry_impact": "台灣IC設計龍頭 受惠AI終端裝置滲透",
+        "risk_note": "手機市場競爭與庫存調整風險"
+      },
+      {
+        "name": "Pfizer",
+        "ticker": "PFE·NYSE",
+        "industry": "製藥",
+        "event_type": "earnings",
+        "event_label": "財報",
+        "note": "Q1營收144.5億 年增5% 調整後EPS 0.75美元",
+        "core_business": "疫苗與創新藥物研發",
+        "recent_event": "重申2026年展望 營收預期595-625億",
+        "industry_impact": "後疫情時代轉型 聚焦腫瘤與罕病",
+        "risk_note": "專利到期與新藥研發不確定性"
+      },
+      {
+        "name": "台積電",
+        "ticker": "TSM·NYSE",
+        "industry": "半導體",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "市值達2兆美元超越Meta和Tesla,全球排名第六",
+        "core_business": "全球最大晶圓代工廠,先進製程技術領導者",
+        "recent_event": "與Siemens擴大合作將AI深度整合至半導體製造流程",
+        "industry_impact": "AI晶片需求強勁,先進封裝產能持續擴張",
+        "risk_note": "地緣政治風險,客戶集中度高"
+      },
+      {
+        "name": "沙烏地阿美",
+        "ticker": "2222·Tadawul",
+        "industry": "能源",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "伊朗戰爭推升油價3月股價飆升,煉油廠遭無人機攻擊",
+        "core_business": "全球最大石油生產商,掌控沙國石油資源",
+        "recent_event": "OPEC+宣布日增產18.8萬桶,霍爾木茲海峽危機持續",
+        "industry_impact": "油價波動影響全球能源供應鏈和通膨預期",
+        "risk_note": "地緣衝突升級風險,能源轉型長期壓力"
+      },
+      {
+        "name": "Meta",
+        "ticker": "META·NASDAQ",
+        "industry": "科技",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "新墨西哥州青少年安全訴訟重大敗訴,潛在賠償遠超預期",
+        "core_business": "社群媒體平台及元宇宙和AI技術開發",
+        "recent_event": "法律訴訟損害賠償可能遠超初估3.75億美元",
+        "industry_impact": "社群平台監管壓力加劇,AI廣告競爭激烈",
+        "risk_note": "監管風險上升,法律訴訟不確定性"
+      },
+      {
+        "name": "波克夏海瑟威",
+        "ticker": "BRK.B·NYSE",
+        "industry": "金融",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "現金達3970億美元,Buffett警告市場如賭場",
+        "core_business": "多元控股公司涵蓋保險鐵路能源等產業",
+        "recent_event": "連續12季淨賣出股票,Buffett Indicator達225%",
+        "industry_impact": "保守投資策略反映對市場估值過高的擔憂",
+        "risk_note": "接班人風險,大量現金可能錯失投資機會"
+      },
+      {
+        "name": "禮來",
+        "ticker": "LLY·NYSE",
+        "industry": "醫療保健",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "受減肥藥銷售推動已超越UnitedHealth成醫療最有價值公司",
+        "core_business": "全球製藥巨頭專注糖尿病和減肥藥物研發",
+        "recent_event": "GLP-1減肥藥市場需求持續爆發性成長",
+        "industry_impact": "減肥藥革命改變肥胖治療市場格局",
+        "risk_note": "藥品專利到期風險,競爭對手追趕壓力"
+      }
+    ],
+    "corp_events": [
+      {
+        "date": "2026-05-07",
+        "title": "紐約聯儲金融與貨幣歷史年會",
+        "desc": "5月6-7日舉辦 關注Fed官員對利率政策最新表態"
+      },
+      {
+        "date": "2026-05-07",
+        "title": "Strategy財報公布",
+        "desc": "週二公布財報 市場關注企業BTC持倉與營運狀況"
+      },
+      {
+        "date": "2026-05-09",
+        "title": "美國非農就業數據",
+        "desc": "週五公布 影響Fed降息預期與市場風險偏好"
+      },
+      {
+        "date": "2026-05-06",
+        "title": "Fed理事Bowman發言",
+        "desc": "關注對通膨與利率路徑看法 3月CPI年增3.3%"
+      },
+      {
+        "date": "2026-09-01",
+        "title": "Apple CEO交接",
+        "desc": "Tim Cook卸任CEO 由John Ternus接任 Cook轉任執行董事長"
+      }
+    ],
+    "rotation": [
+      {
+        "from": "BTC期貨多頭",
+        "to": "山寨幣",
+        "strength": "強烈",
+        "reason": "BTC期貨僅37.4%多頭 資金費率轉負 空頭過度擁擠引發輪動"
+      },
+      {
+        "from": "防禦型資產",
+        "to": "科技成長股",
+        "strength": "明顯",
+        "reason": "半導體指數4月飆漲35.2% AI題材吸引資金回流"
+      },
+      {
+        "from": "現金",
+        "to": "台股權值股",
+        "strength": "中等",
+        "reason": "台股創史上最大漲點 外資回補台積電聯發科等龍頭"
+      }
+    ]
+  },
+  "institutional": {
+    "research": [
+      {
+        "ticker": "NVTS",
+        "name": "Navitas Semiconductor",
+        "firm": "Robert W. Baird & Co.",
+        "firm_background": "中型投資銀行，專注半導體等科技領域",
+        "rating": "Outperform",
+        "rating_type": "outperform",
+        "rating_change": "維持",
+        "prev_target": "$9",
+        "target": "$20",
+        "date": "2026-05-06",
+        "note": "Q1營收季增18%，毛利率擴張，AI資料中心需求強勁",
+        "core_logic": "受AI資料中心、電網和能源基礎設施等高功率市場推動",
+        "risk_note": "高功率市場競爭加劇、客戶集中度風險"
+      },
+      {
+        "ticker": "VRT",
+        "name": "Vertiv Holdings",
+        "firm": "Morgan Stanley",
+        "firm_background": "全球頂級投行，專長科技與工業研究",
+        "rating": "Overweight",
+        "rating_type": "buy",
+        "rating_change": "維持",
+        "prev_target": "$285",
+        "target": "$350",
+        "date": "2026-05-06",
+        "note": "資料中心基礎建設需求持續強勁",
+        "core_logic": "資料中心基礎建設需求持續強勁",
+        "risk_note": "能源成本波動、AI投資放緩風險"
+      },
+      {
+        "ticker": "JPM",
+        "name": "JPMorgan",
+        "firm": "Goldman Sachs",
+        "firm_background": "全球領先投行",
+        "rating": "Buy",
+        "rating_type": "buy",
+        "rating_change": "維持",
+        "prev_target": "$365",
+        "target": "$361",
+        "date": "2026-05-06",
+        "note": "Q1投資銀行業務強勁，超越盈利和營收預期",
+        "core_logic": "Q1 2026投資銀行業務強勁，Goldman、JPMorgan和Morgan Stanley均超預期",
+        "risk_note": "宏觀經濟不確定性、利率環境變化"
+      }
+    ],
+    "earnings": [
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "note": "Q1營收$103億，毛利率53%，AI基礎設施需求加速",
+        "eps": "$0.84",
+        "eps_est": "--",
+        "eps_result": "beat",
+        "eps_surprise": "--",
+        "revenue": "$103億",
+        "rev_est": "--",
+        "guidance": "資料中心成為營收和盈利增長主要驅動力",
+        "market_reaction": "正面",
+        "key_metric": "Non-GAAP EPS $1.37",
+        "status": "5月5日已公布",
+        "status_type": "reported"
+      },
+      {
+        "ticker": "PFE",
+        "name": "Pfizer",
+        "note": "Q1財報優於預期，重申2026年展望",
+        "eps": "$0.75",
+        "eps_est": "--",
+        "eps_result": "beat",
+        "eps_surprise": "--",
+        "revenue": "$144.5億",
+        "rev_est": "--",
+        "guidance": "營收預期$595-625億",
+        "market_reaction": "正面",
+        "key_metric": "營收年增5%",
+        "status": "5月5日已公布",
+        "status_type": "reported"
+      },
+      {
+        "ticker": "PYPL",
+        "name": "PayPal",
+        "note": "Q1 2026財報已公布，截至2026年3月31日止",
+        "eps": "--",
+        "eps_est": "--",
+        "eps_result": "--",
+        "eps_surprise": "--",
+        "revenue": "--",
+        "rev_est": "--",
+        "guidance": "--",
+        "market_reaction": "待確認",
+        "key_metric": "--",
+        "status": "5月5日已公布",
+        "status_type": "reported"
+      }
+    ]
+  },
+  "calendar": {
+    "events": [
+      {
+        "date": "2026-05-06",
+        "time": "--",
+        "title": "新屋銷售數據公布",
+        "desc": "美國新屋銷售數據",
+        "type": "data",
+        "tag": "經濟數據",
+        "impact": "mid",
+        "expect": "--",
+        "prev": "--",
+        "affect_assets": "SPY/QQQ/房地產股",
+        "watch": "房市需求與利率敏感度"
+      },
+      {
+        "date": "2026-05-06",
+        "time": "--",
+        "title": "ISM服務業指數",
+        "desc": "美國ISM服務業PMI公布",
+        "type": "data",
+        "tag": "經濟數據",
+        "impact": "high",
+        "expect": "--",
+        "prev": "--",
+        "affect_assets": "SPY/DXY",
+        "watch": "服務業擴張速度與通膨壓力"
+      },
+      {
+        "date": "2026-05-06",
+        "time": "--",
+        "title": "Fed理事Bowman發言",
+        "desc": "Fed理事Bowman公開發言",
+        "type": "fed",
+        "tag": "央行",
+        "impact": "mid",
+        "expect": "偏鷹派立場",
+        "prev": "Fed維持利率3.50%-3.75%",
+        "affect_assets": "DXY/TLT/SPY",
+        "watch": "對未來利率路徑的暗示"
+      },
+      {
+        "date": "2026-05-06",
+        "time": "--",
+        "title": "紐約聯儲金融與貨幣歷史年會",
+        "desc": "5月6-7日舉辦2026年金融與貨幣歷史年會",
+        "type": "fed",
+        "tag": "央行",
+        "impact": "low",
+        "expect": "學術性質",
+        "prev": "--",
+        "affect_assets": "--",
+        "watch": "Fed官員附帶發言"
+      },
+      {
+        "date": "2026-05-06",
+        "time": "--",
+        "title": "Strategy財報",
+        "desc": "Strategy公司財報公布",
+        "type": "earnings",
+        "tag": "財報",
+        "impact": "mid",
+        "expect": "--",
+        "prev": "--",
+        "affect_assets": "BTC/MSTR",
+        "watch": "比特幣持倉策略與財務狀況"
+      },
+      {
+        "date": "2026-05-09",
+        "time": "--",
+        "title": "非農就業數據",
+        "desc": "美國5月非農就業報告公布",
+        "type": "data",
+        "tag": "經濟數據",
+        "impact": "high",
+        "expect": "--",
+        "prev": "--",
+        "affect_assets": "SPY/DXY/GC/TLT",
+        "watch": "就業市場強度與Fed政策影響"
+      },
+      {
+        "date": "2026-05-06",
+        "time": "--",
+        "title": "美伊談判進展",
+        "desc": "Trump暫停自由計畫以完成與伊朗協議，Epic Fury行動已結束",
+        "type": "geo",
+        "tag": "地緣",
+        "impact": "high",
+        "expect": "談判結果待定",
+        "prev": "美軍炮擊伊朗部隊並擊沉6艘小艇，UAE攔截15枚導彈",
+        "affect_assets": "OIL/GC/VIX",
+        "watch": "霍爾木茲海峽通行與油價走勢"
+      }
+    ],
+    "high_impact": [
+      {
+        "date": "2026-05-06",
+        "title": "ISM服務業指數",
+        "desc": "美國ISM服務業PMI公布",
+        "impact": "high"
+      },
+      {
+        "date": "2026-05-09",
+        "title": "非農就業數據",
+        "desc": "美國5月非農就業報告公布",
+        "impact": "high"
+      },
+      {
+        "date": "2026-05-06",
+        "title": "美伊談判進展",
+        "desc": "霍爾木茲海峽危機與談判結果",
+        "impact": "high"
+      }
+    ],
+    "future": [
+      {
+        "date": "2026-05-07",
+        "title": "紐約聯儲年會第二日",
+        "desc": "金融與貨幣歷史年會持續進行"
+      },
+      {
+        "date": "2026-05-09",
+        "title": "非農就業數據",
+        "desc": "美國5月非農就業報告"
+      },
+      {
+        "date": "2026-09-01",
+        "title": "Tim Cook卸任CEO",
+        "desc": "Apple CEO交接，John Ternus接任，Cook轉任執行董事長"
+      }
+    ]
+  }
+}
