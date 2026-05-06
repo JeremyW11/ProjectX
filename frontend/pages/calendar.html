@@ -6,41 +6,15 @@
   <title>ProjectX — 市場日曆</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
     :root {
-      --bg-base: #05060f;
-      --bg-card: rgba(255,255,255,0.04);
-      --bg-card-hover: rgba(255,255,255,0.07);
-      --border: rgba(255,255,255,0.08);
-      --text-primary: #f0f0f5;
-      --text-secondary: #8888aa;
-      --text-muted: #44445a;
-      --accent-blue: #4da6ff;
-      --accent-purple: #9f7aea;
-      --accent-green: #48bb78;
-      --accent-red: #fc8181;
-      --accent-orange: #f6ad55;
-      --accent-teal: #38b2ac;
+      --bg-base: #05060f; --bg-card: rgba(255,255,255,0.04); --bg-card-hover: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08); --text-primary: #f0f0f5; --text-secondary: #8888aa;
+      --text-muted: #44445a; --accent-blue: #4da6ff; --accent-purple: #9f7aea;
+      --accent-green: #48bb78; --accent-red: #fc8181; --accent-orange: #f6ad55; --accent-teal: #38b2ac;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg-base);
-      color: var(--text-primary);
-      min-height: 100vh;
-      background-image:
-        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(77,99,255,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 0%, rgba(159,122,234,0.06) 0%, transparent 50%);
-    }
-
-    nav {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0 40px; height: 60px; border-bottom: 1px solid var(--border);
-      background: rgba(5,6,15,0.95); backdrop-filter: blur(20px);
-      position: sticky; top: 0; z-index: 200;
-    }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-base); color: var(--text-primary); min-height: 100vh; background-image: radial-gradient(ellipse 80% 50% at 20% 0%, rgba(77,99,255,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 0%, rgba(159,122,234,0.06) 0%, transparent 50%); }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 0 40px; height: 60px; border-bottom: 1px solid var(--border); background: rgba(5,6,15,0.95); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 200; }
     .logo { font-size: 18px; font-weight: 700; letter-spacing: 2px; background: linear-gradient(135deg, #4da6ff, #9f7aea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; flex-shrink: 0; }
     .nav-links { display: flex; gap: 24px; list-style: none; }
     .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; white-space: nowrap; }
@@ -50,7 +24,6 @@
     .btn { padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: all 0.2s; }
     .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
     .btn-glow { background: linear-gradient(135deg, #4da6ff, #9f7aea); color: #fff; box-shadow: 0 0 20px rgba(77,166,255,0.3); }
-
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
     .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s; }
     .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
@@ -62,14 +35,11 @@
     .mobile-menu a.active { color: var(--accent-blue); }
     .mobile-menu-btns { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
     .mobile-menu-btns .btn { width: 100%; padding: 12px; font-size: 15px; text-align: center; }
-
     main { max-width: 1440px; margin: 0 auto; padding: 28px 40px 60px; }
     .top-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; }
     .top-bar h1 { font-size: 20px; font-weight: 600; }
     .top-bar .meta { font-size: 12px; color: var(--text-muted); text-align: right; line-height: 1.8; }
-
     .calendar-layout { display: grid; grid-template-columns: 1fr 360px; gap: 20px; align-items: start; }
-
     .glass-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); margin-bottom: 16px; }
     .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
     .card-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
@@ -78,10 +48,26 @@
     .icon-red { background: rgba(252,129,129,0.15); }
     .icon-purple { background: rgba(159,122,234,0.15); }
 
-    .event-item { display: flex; gap: 14px; padding: 14px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); border-radius: 8px; cursor: pointer; transition: background 0.2s; margin: 0 -6px; }
+    /* 篩選按鈕 */
+    .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .filter-btn { padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-family: 'Inter', sans-serif; transition: all 0.2s; white-space: nowrap; }
+    .filter-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .filter-btn.active { background: rgba(77,166,255,0.1); border-color: var(--accent-blue); color: var(--accent-blue); }
+    .filter-btn.fed-filter.active { background: rgba(252,129,129,0.1); border-color: var(--accent-red); color: var(--accent-red); }
+    .filter-btn.earnings-filter.active { background: rgba(77,166,255,0.1); border-color: var(--accent-blue); color: var(--accent-blue); }
+    .filter-btn.data-filter.active { background: rgba(72,187,120,0.1); border-color: var(--accent-green); color: var(--accent-green); }
+    .filter-btn.tw-filter.active { background: rgba(56,178,172,0.1); border-color: var(--accent-teal); color: var(--accent-teal); }
+    .filter-btn.geo-filter.active { background: rgba(246,173,85,0.1); border-color: var(--accent-orange); color: var(--accent-orange); }
+
+    /* 事件列表 */
+    .event-item { display: flex; gap: 14px; padding: 14px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); border-radius: 8px; cursor: pointer; transition: all 0.2s; margin: 0 -6px; }
     .event-item:last-child { border-bottom: none; }
     .event-item:hover { background: rgba(255,255,255,0.02); }
     .event-item.open { background: rgba(255,255,255,0.02); }
+    .event-item.hidden { display: none; }
+    .event-item.today-event { background: rgba(77,166,255,0.04); border-left: 2px solid rgba(77,166,255,0.4); padding-left: 12px; border-radius: 0 8px 8px 0; margin-left: -2px; }
+    .event-item.today-event:hover { background: rgba(77,166,255,0.07); }
+    .event-item.high-impact-event { border-left: 2px solid rgba(252,129,129,0.3); padding-left: 12px; border-radius: 0 8px 8px 0; margin-left: -2px; }
 
     .event-date-col { min-width: 60px; text-align: center; padding-top: 2px; flex-shrink: 0; }
     .event-month { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
@@ -107,8 +93,10 @@
     .type-crypto { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.15); }
     .type-geo { background: rgba(246,173,85,0.1); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
 
+    .today-badge { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: rgba(77,166,255,0.15); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.3); }
+
     .event-expand { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; opacity: 0; }
-    .event-item.open .event-expand { max-height: 250px; opacity: 1; }
+    .event-item.open .event-expand { max-height: 280px; opacity: 1; }
     .expand-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 12px 0; }
     .expand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .expand-cell-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; font-weight: 600; }
@@ -119,47 +107,46 @@
     .expand-full { margin-top: 10px; padding: 8px 10px; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 2px solid var(--accent-orange); }
     .expand-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s ease; flex-shrink: 0; align-self: flex-start; margin-top: 4px; }
 
-    .today-badge { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: rgba(77,166,255,0.15); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.3); }
-
-    .high-impact-item { padding: 12px; border-radius: 10px; margin-bottom: 10px; border: 1px solid rgba(252,129,129,0.15); background: rgba(252,129,129,0.04); transition: all 0.2s; }
+    /* 高影響力事件 */
+    .high-impact-item { padding: 14px; border-radius: 10px; margin-bottom: 10px; border: 1px solid rgba(252,129,129,0.15); background: rgba(252,129,129,0.04); transition: all 0.2s; }
     .high-impact-item:hover { background: rgba(252,129,129,0.07); }
     .high-impact-item:last-child { margin-bottom: 0; }
-    .hi-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+    .hi-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
     .hi-date { font-size: 10px; color: var(--accent-red); font-weight: 600; letter-spacing: 0.5px; }
     .hi-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-    .hi-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .hi-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px; }
+    .hi-assets { display: flex; flex-wrap: wrap; gap: 4px; }
+    .hi-asset-tag { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
 
-    .future-item { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    /* 遠期預告 */
+    .future-item { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; gap: 12px; align-items: flex-start; }
     .future-item:last-child { border-bottom: none; }
-    .future-date { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; }
+    .future-date-col { min-width: 50px; flex-shrink: 0; }
+    .future-date-month { font-size: 9px; color: var(--text-muted); text-transform: uppercase; }
+    .future-date-day { font-size: 18px; font-weight: 700; line-height: 1.1; }
+    .future-body { flex: 1; }
     .future-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
     .future-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
 
-    /* ===== 手機響應式 ===== */
     @media (max-width: 768px) {
       nav { padding: 0 16px; }
-      .nav-links { display: none; }
-      .nav-right { display: none; }
+      .nav-links { display: none; } .nav-right { display: none; }
       .hamburger { display: flex; }
-
       main { padding: 16px 16px 40px; }
       .top-bar { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 16px; }
       .top-bar .meta { text-align: left; font-size: 11px; }
-
-      /* 日曆：單欄 */
       .calendar-layout { grid-template-columns: 1fr; gap: 0; }
-
       .glass-card { padding: 14px; border-radius: 12px; margin-bottom: 12px; }
-
       .event-date-col { min-width: 50px; }
       .event-day { font-size: 20px; }
-      .event-item.open .event-expand { max-height: 300px; }
+      .event-item.open .event-expand { max-height: 320px; }
       .expand-grid { grid-template-columns: 1fr; gap: 8px; }
+      .filter-row { gap: 6px; }
+      .filter-btn { padding: 4px 10px; font-size: 10px; }
     }
   </style>
 </head>
 <body>
-
   <nav>
     <div class="logo">PROJECT X</div>
     <ul class="nav-links">
@@ -206,6 +193,15 @@
         <div class="glass-card">
           <div class="card-header">
             <div class="card-title"><div class="icon icon-blue">📅</div>近期重要事件</div>
+            <span id="event-count" style="font-size:11px;color:var(--text-muted);"></span>
+          </div>
+          <div class="filter-row">
+            <button class="filter-btn active" onclick="filterEvents('all', this)">全部</button>
+            <button class="filter-btn fed-filter" onclick="filterEvents('fed', this)">🏛 Fed</button>
+            <button class="filter-btn earnings-filter" onclick="filterEvents('earnings', this)">📊 財報</button>
+            <button class="filter-btn data-filter" onclick="filterEvents('data', this)">📈 數據</button>
+            <button class="filter-btn tw-filter" onclick="filterEvents('tw', this)">🇹🇼 台股</button>
+            <button class="filter-btn geo-filter" onclick="filterEvents('geo', this)">🌐 地緣</button>
           </div>
           <div id="events-list"></div>
         </div>
@@ -251,6 +247,23 @@
       }
     }
 
+    function filterEvents(type, btn) {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var items = document.querySelectorAll('.event-item');
+      var count = 0;
+      items.forEach(function(item) {
+        if (type === 'all' || item.getAttribute('data-type') === type) {
+          item.classList.remove('hidden');
+          count++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+      var countEl = document.getElementById('event-count');
+      if (countEl) countEl.textContent = type !== 'all' ? count + ' 則' : '';
+    }
+
     function formatEventDate(dateStr) {
       try {
         var d = new Date(dateStr + 'T00:00:00');
@@ -285,10 +298,12 @@
         document.getElementById('events-list').innerHTML = data.calendar.events.map(function(e) {
           var dt = formatEventDate(e.date);
           var isToday = e.date === today;
-          return '<div class="event-item" onclick="toggleEvent(this)">' +
+          var isHigh = e.impact === 'high';
+          var extraClass = isToday ? ' today-event' : (isHigh ? ' high-impact-event' : '');
+          return '<div class="event-item' + extraClass + '" data-type="' + e.type + '" onclick="toggleEvent(this)">' +
             '<div class="event-date-col">' +
               '<div class="event-month">' + dt.month + '</div>' +
-              '<div class="event-day">' + dt.day + '</div>' +
+              '<div class="event-day" style="' + (isToday ? 'color:var(--accent-blue);' : '') + '">' + dt.day + '</div>' +
               '<div class="event-weekday">' + dt.weekday + '</div>' +
               (e.time ? '<div class="event-time-label">' + e.time + '</div>' : '') +
             '</div>' +
@@ -296,6 +311,7 @@
               '<div class="event-title-row">' +
                 '<span class="type-badge type-' + e.type + '">' + getTypeLabel(e.type) + '</span>' +
                 (isToday ? '<span class="today-badge">今日</span>' : '') +
+                (isHigh ? '<span class="impact-badge impact-high">高影響</span>' : '') +
                 '<span class="event-title">' + e.title + '</span>' +
               '</div>' +
               '<div class="event-desc">' + e.desc + '</div>' +
@@ -317,17 +333,37 @@
 
       if (data.calendar && data.calendar.high_impact) {
         document.getElementById('high-impact-list').innerHTML = data.calendar.high_impact.map(function(e) {
+          var assets = e.affect_assets ? e.affect_assets.split('/') : [];
           return '<div class="high-impact-item">' +
-            '<div class="hi-header"><div class="hi-date">📍 ' + e.date + '</div><span class="impact-badge impact-' + e.impact + '">' + (e.impact === 'high' ? '高影響' : '中影響') + '</span></div>' +
+            '<div class="hi-header">' +
+              '<div class="hi-date">📍 ' + e.date + '</div>' +
+              '<span class="impact-badge impact-' + e.impact + '">' + (e.impact === 'high' ? '高影響' : '中影響') + '</span>' +
+            '</div>' +
             '<div class="hi-title">' + e.title + '</div>' +
             '<div class="hi-desc">' + e.desc + '</div>' +
+            (assets.length > 0 ?
+              '<div class="hi-assets">' +
+                assets.map(function(a) { return '<span class="hi-asset-tag">' + a.trim() + '</span>'; }).join('') +
+              '</div>' : '') +
           '</div>';
         }).join('');
       }
 
       if (data.calendar && data.calendar.future) {
         document.getElementById('future-list').innerHTML = data.calendar.future.map(function(e) {
-          return '<div class="future-item"><div class="future-date">' + e.date + '</div><div class="future-title">' + e.title + '</div><div class="future-desc">' + e.desc + '</div></div>';
+          var dateParts = e.date ? e.date.split('-') : ['--','--','--'];
+          var month = dateParts[1] ? ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(dateParts[1])-1] : '--';
+          var day = dateParts[2] || '--';
+          return '<div class="future-item">' +
+            '<div class="future-date-col">' +
+              '<div class="future-date-month">' + month + '</div>' +
+              '<div class="future-date-day">' + day + '</div>' +
+            '</div>' +
+            '<div class="future-body">' +
+              '<div class="future-title">' + e.title + '</div>' +
+              '<div class="future-desc">' + e.desc + '</div>' +
+            '</div>' +
+          '</div>';
         }).join('');
       }
     }
