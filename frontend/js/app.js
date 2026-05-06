@@ -66,6 +66,45 @@ function renderTickers(tickers) {
 function renderNews(containerId, items) {
   var container = document.getElementById(containerId);
   container.innerHTML = items.map(function(item) {
+    var expandContent =
+      '<div class="expand-divider"></div>' +
+      '<div class="expand-row" style="align-items:flex-start;gap:12px;">' +
+        '<span class="expand-label" style="flex-shrink:0;margin-top:2px;">深度分析</span>' +
+        '<span class="expand-value" style="text-align:left;line-height:1.6;">' + (item.expand_analysis || item.impact || '—') + '</span>' +
+      '</div>';
+
+    if (item.expand_impact_pos || item.expand_impact_neg) {
+      expandContent +=
+        '<div class="expand-row" style="align-items:flex-start;gap:12px;">' +
+          '<span class="expand-label" style="flex-shrink:0;margin-top:2px;">市場影響</span>' +
+          '<span class="expand-value" style="text-align:left;line-height:1.6;">' +
+            (item.expand_impact_pos ? '<span style="color:var(--accent-green);">▲ ' + item.expand_impact_pos + '</span>' : '') +
+            (item.expand_impact_pos && item.expand_impact_neg ? '<br>' : '') +
+            (item.expand_impact_neg ? '<span style="color:var(--accent-red);">▼ ' + item.expand_impact_neg + '</span>' : '') +
+          '</span>' +
+        '</div>';
+    }
+
+    expandContent +=
+      '<div class="expand-row">' +
+        '<span class="expand-label">關注標的</span>' +
+        '<span class="expand-value">' + (item.expand_tickers || getRelatedTickers(item.tag)) + '</span>' +
+      '</div>';
+
+    if (item.expand_action) {
+      expandContent +=
+        '<div class="expand-row" style="align-items:flex-start;gap:12px;">' +
+          '<span class="expand-label" style="flex-shrink:0;margin-top:2px;">操作建議</span>' +
+          '<span class="expand-value" style="text-align:left;line-height:1.6;color:var(--accent-orange);font-weight:600;">' + item.expand_action + '</span>' +
+        '</div>';
+    }
+
+    expandContent +=
+      '<div class="expand-row" style="align-items:flex-start;gap:12px;">' +
+        '<span class="expand-label" style="flex-shrink:0;margin-top:2px;">持續追蹤</span>' +
+        '<span class="expand-value" style="text-align:left;line-height:1.6;">' + (item.expand_watch || '待觀察') + '</span>' +
+      '</div>';
+
     return '<div class="news-item expandable" onclick="toggleExpand(this)">' +
       '<span class="news-tag tag-' + item.type + '">' + item.tag + '</span>' +
       '<div class="news-body">' +
@@ -74,21 +113,7 @@ function renderNews(containerId, items) {
           '<span class="news-time">' + item.time + '</span>' +
           '<span class="news-impact">' + item.impact + '</span>' +
         '</div>' +
-        '<div class="news-expand">' +
-          '<div class="expand-divider"></div>' +
-          '<div class="expand-row" style="align-items:flex-start;gap:12px;">' +
-            '<span class="expand-label" style="flex-shrink:0;margin-top:2px;">深度分析</span>' +
-            '<span class="expand-value" style="text-align:left;line-height:1.6;">' + (item.expand_analysis || item.impact) + '</span>' +
-          '</div>' +
-          '<div class="expand-row">' +
-            '<span class="expand-label">關注標的</span>' +
-            '<span class="expand-value">' + (item.expand_tickers || getRelatedTickers(item.tag)) + '</span>' +
-          '</div>' +
-          '<div class="expand-row" style="align-items:flex-start;gap:12px;">' +
-            '<span class="expand-label" style="flex-shrink:0;margin-top:2px;">持續追蹤</span>' +
-            '<span class="expand-value" style="text-align:left;line-height:1.6;">' + (item.expand_watch || '待觀察') + '</span>' +
-          '</div>' +
-        '</div>' +
+        '<div class="news-expand">' + expandContent + '</div>' +
       '</div>' +
       '<div class="expand-arrow">›</div>' +
     '</div>';
