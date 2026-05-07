@@ -13,11 +13,7 @@
       --accent-green: #48bb78; --accent-red: #fc8181; --accent-orange: #f6ad55; --accent-teal: #38b2ac;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg-base); color: var(--text-primary); min-height: 100vh;
-      background-image: radial-gradient(ellipse 80% 50% at 20% 0%, rgba(77,99,255,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 0%, rgba(159,122,234,0.06) 0%, transparent 50%);
-    }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-base); color: var(--text-primary); min-height: 100vh; background-image: radial-gradient(ellipse 80% 50% at 20% 0%, rgba(77,99,255,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 0%, rgba(159,122,234,0.06) 0%, transparent 50%); }
     nav { display: flex; justify-content: space-between; align-items: center; padding: 0 40px; height: 60px; border-bottom: 1px solid var(--border); background: rgba(5,6,15,0.95); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 200; }
     .logo { font-size: 18px; font-weight: 700; letter-spacing: 2px; background: linear-gradient(135deg, #4da6ff, #9f7aea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; flex-shrink: 0; }
     .nav-links { display: flex; gap: 24px; list-style: none; }
@@ -64,11 +60,8 @@
     .ic-stats { display: flex; gap: 16px; }
     .ic-stat-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
     .ic-stat-value { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
-    /* 美股情緒條：3欄（移除加密相關） */
     .sentiment-bar-us { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
-    /* 台股情緒條：3欄 */
     .sentiment-bar-tw { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
-    /* 加密情緒條：4欄 */
     .sentiment-bar-crypto { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
     .sent-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; text-align: center; }
     .sent-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
@@ -89,7 +82,6 @@
     .tag-semi { background: rgba(77,166,255,0.1); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.15); }
     .tag-server { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.15); }
     .tag-energy { background: rgba(246,173,85,0.1); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.2); }
-    .tag-封裝 { background: rgba(56,178,172,0.1); color: var(--accent-teal); border: 1px solid rgba(56,178,172,0.2); }
     .s-note { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
     .expand-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s; }
     .stock-expand { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s ease; opacity: 0; }
@@ -220,7 +212,6 @@
     <!-- 美股 -->
     <div id="tab-us" class="tab-content active">
       <div class="index-grid" id="us-index-grid"></div>
-      <!-- FIX: 美股 sentiment bar 只顯示美股相關（Fear&Greed、VIX概念、Brent油價） -->
       <div class="sentiment-bar-us" id="us-sentiment-bar"></div>
       <div class="two-col">
         <div>
@@ -248,7 +239,6 @@
     <!-- 台股 -->
     <div id="tab-tw" class="tab-content">
       <div class="index-grid" id="tw-index-grid"></div>
-      <!-- FIX: 台股 sentiment bar，讀 tw_market_summary -->
       <div class="sentiment-bar-tw" id="tw-sentiment-bar"></div>
       <div class="two-col">
         <div>
@@ -275,7 +265,6 @@
 
     <!-- 虛擬貨幣 -->
     <div id="tab-crypto" class="tab-content">
-      <!-- FIX: 加密 sentiment bar 顯示4欄（Fear&Greed、多空比、資金費率、BTC清算） -->
       <div class="sentiment-bar-crypto" id="crypto-sentiment-bar"></div>
       <div class="crypto-overview" id="crypto-overview"></div>
       <div class="glass-card">
@@ -359,13 +348,8 @@
       if (!container || !newsItems) return;
       container.innerHTML = '<div class="news-strip">' +
         newsItems.map(function(n) {
-          return '<div class="news-strip-item">' +
-            '<div class="news-dot"></div>' +
-            '<div class="news-strip-text">' + n.text + '</div>' +
-            '<div class="news-strip-time">' + n.time + '</div>' +
-          '</div>';
-        }).join('') +
-      '</div>';
+          return '<div class="news-strip-item"><div class="news-dot"></div><div class="news-strip-text">' + n.text + '</div><div class="news-strip-time">' + n.time + '</div></div>';
+        }).join('') + '</div>';
     }
 
     function renderRotation(containerId, rotation) {
@@ -373,14 +357,8 @@
       if (!container || !rotation) return;
       container.innerHTML = rotation.map(function(r) {
         return '<div class="rotation-item">' +
-          '<div class="rotation-row">' +
-            '<span class="rotation-from">' + r.from + '</span>' +
-            '<span class="rotation-arrow">→</span>' +
-            '<span class="rotation-to">' + r.to + '</span>' +
-            '<span class="rotation-strength">' + r.strength + '</span>' +
-          '</div>' +
-          '<div class="rotation-reason">' + r.reason + '</div>' +
-        '</div>';
+          '<div class="rotation-row"><span class="rotation-from">' + r.from + '</span><span class="rotation-arrow">→</span><span class="rotation-to">' + r.to + '</span><span class="rotation-strength">' + r.strength + '</span></div>' +
+          '<div class="rotation-reason">' + r.reason + '</div></div>';
       }).join('');
     }
 
@@ -403,16 +381,26 @@
       document.getElementById('market-date').innerHTML =
         d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) + '<br>UTC+8 台北時間';
 
+      // ── tickers
       var spx = data.tickers ? data.tickers.find(function(t) { return t.label === 'S&P 500'; }) : null;
       var ndx = data.tickers ? data.tickers.find(function(t) { return t.label === 'NASDAQ'; }) : null;
       var brent = data.tickers ? data.tickers.find(function(t) { return t.label === 'Brent 原油'; }) : null;
       var fg = data.sentiment && data.sentiment.fear_greed ? data.sentiment.fear_greed : null;
       var cg = data.sentiment && data.sentiment.coinglass ? data.sentiment.coinglass : null;
 
-      // ── 美股：指數卡（S&P500 / NASDAQ / Fear&Greed）
+      // ── 美股：若 SPX ticker 是 '--'，從 us_stocks 找 SPY/TSM 推算
+      // Polygon 覆蓋邏輯在 server.js 端，前端直接讀 tickers
+      var spxVal = spx && spx.value !== '--' ? spx.value : '--';
+      var spxChange = spx && spx.change !== '--' ? spx.change : '--';
+      var spxDir = spx ? spx.dir : 'flat';
+      var ndxVal = ndx && ndx.value !== '--' ? ndx.value : '--';
+      var ndxChange = ndx && ndx.change !== '--' ? ndx.change : '--';
+      var ndxDir = ndx ? ndx.dir : 'flat';
+
+      // ── 美股指數卡
       document.getElementById('us-index-grid').innerHTML =
-        renderIndexCard('S&P 500', spx ? spx.value : '--', spx ? spx.change : '--', spx ? spx.dir : 'flat', '美國大盤指數') +
-        renderIndexCard('NASDAQ', ndx ? ndx.value : '--', ndx ? ndx.change : '--', ndx ? ndx.dir : 'flat', '科技股指數') +
+        renderIndexCard('S&P 500', spxVal, spxChange, spxDir, 'Polygon / SPY') +
+        renderIndexCard('NASDAQ', ndxVal, ndxChange, ndxDir, 'Polygon / QQQ') +
         '<div class="index-card ' + (fg ? (parseInt(fg.value) >= 50 ? 'up' : 'down') : 'flat') + '">' +
           '<div class="ic-label">市場情緒</div>' +
           '<div class="ic-value" style="font-size:36px;color:' + (fg ? (parseInt(fg.value) >= 50 ? 'var(--accent-green)' : parseInt(fg.value) >= 30 ? 'var(--accent-orange)' : 'var(--accent-red)') : 'var(--text-muted)') + ';">' + (fg ? fg.value : '--') + '</div>' +
@@ -420,23 +408,24 @@
           '<div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">較昨日</div><div class="ic-stat-value">' + (fg ? (fg.change || '--') : '--') + '</div></div></div>' +
         '</div>';
 
-      // ── 美股 Sentiment Bar：Fear&Greed、NASDAQ漲跌、Brent原油（不含加密）
+      // ── 美股 Sentiment Bar（3欄，不含加密）
+      // brent.value 本身已含 $，不需再加
+      var brentDisplay = brent ? brent.value : '--';
+      var brentChange = brent ? brent.change : '--';
       document.getElementById('us-sentiment-bar').innerHTML =
         '<div class="sent-item"><div class="sent-label">Fear & Greed</div><div class="sent-value" style="color:var(--accent-orange);">' + (fg ? fg.value : '--') + '</div><div class="sent-sub">' + (fg ? fg.label : '--') + '</div></div>' +
-        '<div class="sent-item"><div class="sent-label">NASDAQ 漲跌</div><div class="sent-value ' + (ndx ? ndx.dir : 'flat') + '" style="font-size:16px;">' + (ndx ? (ndx.dir === 'up' ? '▲' : ndx.dir === 'down' ? '▼' : '—') + ' ' + ndx.change : '--') + '</div><div class="sent-sub">今日表現</div></div>' +
-        '<div class="sent-item"><div class="sent-label">Brent 原油</div><div class="sent-value" style="color:var(--accent-orange);">' + (brent ? '$' + brent.value : '--') + '</div><div class="sent-sub">' + (brent ? brent.change : '--') + '</div></div>';
+        '<div class="sent-item"><div class="sent-label">NASDAQ 漲跌</div><div class="sent-value ' + ndxDir + '" style="font-size:16px;">' + (ndxChange !== '--' ? (ndxDir === 'up' ? '▲ ' : ndxDir === 'down' ? '▼ ' : '— ') + ndxChange : '--') + '</div><div class="sent-sub">今日表現</div></div>' +
+        '<div class="sent-item"><div class="sent-label">Brent 原油</div><div class="sent-value" style="color:var(--accent-orange);font-size:18px;">' + brentDisplay + '</div><div class="sent-sub">' + brentChange + '</div></div>';
 
       if (data.market && data.market.us_stocks) renderStocks('us-stocks-list', data.market.us_stocks);
       if (data.market && data.market.us_news) renderNews('us-news-list', data.market.us_news);
       if (data.industry_detail && data.industry_detail.rotation) renderRotation('us-rotation', data.industry_detail.rotation);
 
-      // ── 台股：指數卡（讀 tw_market_summary 補成交量和外資）
+      // ── 台股
       var twIdx = data.tickers ? data.tickers.find(function(t) { return t.label === '台股加權'; }) : null;
       var twSummary = data.tw_market_summary || {};
       var tradeVal = twSummary.trade_value || '--';
       var foreignNet = twSummary.foreign_net || '--';
-
-      // 解析外資方向決定顏色
       var foreignDir = foreignNet.indexOf('買超') >= 0 ? 'up' : foreignNet.indexOf('賣超') >= 0 ? 'down' : 'flat';
       var foreignColor = foreignDir === 'up' ? 'var(--accent-green)' : foreignDir === 'down' ? 'var(--accent-red)' : 'var(--text-muted)';
 
@@ -444,7 +433,7 @@
         renderIndexCard('台股加權指數', twIdx ? twIdx.value : '--', twIdx ? twIdx.change : '--', twIdx ? twIdx.dir : 'flat', 'TAIEX') +
         '<div class="index-card flat">' +
           '<div class="ic-label">今日成交量</div>' +
-          '<div class="ic-value" style="font-size:' + (tradeVal === '--' ? '28px' : '22px') + ';">' + tradeVal + '</div>' +
+          '<div class="ic-value" style="font-size:' + (tradeVal === '--' ? '28px' : '20px') + ';">' + tradeVal + '</div>' +
           '<div class="ic-change flat">台股總成交</div>' +
           '<div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">來源</div><div class="ic-stat-value">TWSE</div></div></div>' +
         '</div>' +
@@ -455,34 +444,31 @@
           '<div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">來源</div><div class="ic-stat-value">TWSE BFI82U</div></div></div>' +
         '</div>';
 
-      // ── 台股 Sentiment Bar：加權漲跌、成交量、外資方向
       document.getElementById('tw-sentiment-bar').innerHTML =
-        '<div class="sent-item"><div class="sent-label">加權指數</div><div class="sent-value ' + (twIdx ? twIdx.dir : 'flat') + '" style="font-size:16px;">' + (twIdx ? (twIdx.dir === 'up' ? '▲' : twIdx.dir === 'down' ? '▼' : '—') + ' ' + twIdx.change : '--') + '</div><div class="sent-sub">' + (twIdx ? twIdx.value : '--') + '</div></div>' +
-        '<div class="sent-item"><div class="sent-label">今日成交量</div><div class="sent-value" style="font-size:16px;color:var(--accent-blue);">' + tradeVal + '</div><div class="sent-sub">TWSE</div></div>' +
+        '<div class="sent-item"><div class="sent-label">加權指數</div><div class="sent-value ' + (twIdx ? twIdx.dir : 'flat') + '" style="font-size:16px;">' + (twIdx ? (twIdx.dir === 'up' ? '▲ ' : twIdx.dir === 'down' ? '▼ ' : '— ') + twIdx.change : '--') + '</div><div class="sent-sub">' + (twIdx ? twIdx.value : '--') + '</div></div>' +
+        '<div class="sent-item"><div class="sent-label">今日成交量</div><div class="sent-value" style="font-size:15px;color:var(--accent-blue);">' + tradeVal + '</div><div class="sent-sub">TWSE</div></div>' +
         '<div class="sent-item"><div class="sent-label">外資買賣超</div><div class="sent-value" style="font-size:14px;color:' + foreignColor + ';">' + foreignNet + '</div><div class="sent-sub">三大法人</div></div>';
 
       if (data.market && data.market.tw_stocks) renderStocks('tw-stocks-list', data.market.tw_stocks);
       if (data.market && data.market.tw_news) renderNews('tw-news-list', data.market.tw_news);
       if (data.industry_detail && data.industry_detail.rotation) renderRotation('tw-rotation', data.industry_detail.rotation);
 
-      // ── 虛擬貨幣 Sentiment Bar：Fear&Greed、多空比、資金費率、BTC總清算
-      var btcTotalLiq = cg ? (parseFloat((cg.btc_long_liq || '0').replace(/[^0-9.]/g, '')) + parseFloat((cg.btc_short_liq || '0').replace(/[^0-9.]/g, ''))) : null;
+      // ── 虛擬貨幣 Sentiment Bar（4欄）
       document.getElementById('crypto-sentiment-bar').innerHTML =
         '<div class="sent-item"><div class="sent-label">Fear & Greed</div><div class="sent-value" style="color:var(--accent-orange);">' + (fg ? fg.value : '--') + '</div><div class="sent-sub">' + (fg ? fg.label : '--') + '</div></div>' +
-        '<div class="sent-item"><div class="sent-label">BTC 多空比</div><div class="sent-value" style="color:var(--accent-blue);font-size:13px;line-height:1.3;">' + (cg && cg.long_short_ratio ? cg.long_short_ratio : '--') + '</div><div class="sent-sub">CoinGlass</div></div>' +
-        '<div class="sent-item"><div class="sent-label">BTC 資金費率</div><div class="sent-value" style="font-size:14px;color:var(--accent-green);">' + (cg && cg.funding_rate ? cg.funding_rate : '--') + '</div><div class="sent-sub">永續合約</div></div>' +
-        '<div class="sent-item"><div class="sent-label">BTC 總清算</div><div class="sent-value" style="font-size:14px;color:var(--accent-red);">' + (cg ? (cg.btc_long_liq || '--') : '--') + '</div><div class="sent-sub">多單 / ' + (cg ? (cg.btc_short_liq || '--') : '--') + ' 空單</div></div>';
+        '<div class="sent-item"><div class="sent-label">BTC 多空比</div><div class="sent-value" style="color:var(--accent-blue);font-size:12px;line-height:1.3;">' + (cg && cg.long_short_ratio ? cg.long_short_ratio : '未取得') + '</div><div class="sent-sub">CoinGlass</div></div>' +
+        '<div class="sent-item"><div class="sent-label">BTC 資金費率</div><div class="sent-value" style="font-size:14px;color:var(--accent-green);">' + (cg && cg.funding_rate ? cg.funding_rate : '未取得') + '</div><div class="sent-sub">永續合約</div></div>' +
+        '<div class="sent-item"><div class="sent-label">BTC 多單清算</div><div class="sent-value" style="font-size:15px;color:var(--accent-red);">' + (cg ? (cg.btc_long_liq || '--') : '--') + '</div><div class="sent-sub">空單 ' + (cg ? (cg.btc_short_liq || '--') : '--') + '</div></div>';
 
-      // ── 加密：市值概覽
+      // ── 加密市值概覽
       var btc = data.market && data.market.crypto ? data.market.crypto.find(function(c){return c.symbol==='BTC';}) : null;
       var eth = data.market && data.market.crypto ? data.market.crypto.find(function(c){return c.symbol==='ETH';}) : null;
-      var sol = data.market && data.market.crypto ? data.market.crypto.find(function(c){return c.symbol==='SOL';}) : null;
       document.getElementById('crypto-overview').innerHTML =
         '<div class="co-item"><div class="co-label">BTC 市值</div><div class="co-value">' + (btc ? btc.market_cap : '--') + '</div><div class="co-sub">Bitcoin</div></div>' +
         '<div class="co-item"><div class="co-label">BTC 24H 交易量</div><div class="co-value">' + (btc ? btc.volume : '--') + '</div><div class="co-sub">全球成交量</div></div>' +
         '<div class="co-item"><div class="co-label">ETH 市值</div><div class="co-value">' + (eth ? eth.market_cap : '--') + '</div><div class="co-sub">Ethereum</div></div>';
 
-      // ── 加密：個幣卡片
+      // ── 加密個幣卡片
       if (data.market && data.market.crypto) {
         document.getElementById('crypto-grid').innerHTML = data.market.crypto.map(function(c) {
           var dirClass = c.dir === 'up' ? 'up' : c.dir === 'down' ? 'down' : 'flat';
@@ -492,8 +478,6 @@
             '<div class="cc-price ' + dirClass + '">' + c.price + '</div>' +
             '<div class="cc-change ' + dirClass + '">' + dirIcon + ' ' + c.change + '</div>' +
             '<div class="cc-stats">' +
-              '<div><div class="cc-stat-label">24H 高</div><div class="cc-stat-value">' + (c.high||'--') + '</div></div>' +
-              '<div><div class="cc-stat-label">24H 低</div><div class="cc-stat-value">' + (c.low||'--') + '</div></div>' +
               '<div><div class="cc-stat-label">市值</div><div class="cc-stat-value">' + (c.market_cap||'--') + '</div></div>' +
               '<div><div class="cc-stat-label">成交量</div><div class="cc-stat-value">' + (c.volume||'--') + '</div></div>' +
             '</div>' +
@@ -511,7 +495,7 @@
 
       if (data.market && data.market.crypto_news) renderNews('crypto-news-list', data.market.crypto_news);
 
-      // ── 加密：清算詳情
+      // ── 清算詳情
       document.getElementById('crypto-liquidation').innerHTML =
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">' +
           '<div style="background:rgba(72,187,120,0.05);border:1px solid rgba(72,187,120,0.15);border-radius:8px;padding:12px;">' +
@@ -532,9 +516,9 @@
           '</div>' +
         '</div>' +
         '<div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;font-weight:600;">資金費率</div>' +
-        '<div style="font-size:15px;color:var(--accent-green);font-weight:700;margin-bottom:10px;">' + (cg ? (cg.funding_rate||'--') : '--') + '</div>' +
+        '<div style="font-size:15px;color:var(--accent-green);font-weight:700;margin-bottom:10px;">' + (cg ? (cg.funding_rate||'未取得') : '未取得') + '</div>' +
         '<div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;font-weight:600;">多空比</div>' +
-        '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:10px;">' + (cg ? (cg.long_short_ratio||'--') : '--') + '</div>' +
+        '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:10px;">' + (cg ? (cg.long_short_ratio||'未取得') : '未取得') + '</div>' +
         (cg && cg.note ? '<div style="font-size:12px;color:var(--text-muted);padding-top:10px;border-top:1px solid rgba(255,255,255,0.04);">' + cg.note + '</div>' : '');
     }
 
