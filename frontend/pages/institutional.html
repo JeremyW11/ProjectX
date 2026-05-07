@@ -48,11 +48,7 @@
     .glass-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); margin-bottom: 16px; }
     .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
     .card-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
-    .icon { width: 20px; height: 20px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; }
-    .icon-blue { background: rgba(77,166,255,0.15); }
-    .icon-green { background: rgba(72,187,120,0.15); }
-
-    /* 篩選按鈕 */
+    .range-info { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; padding: 8px 12px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid var(--border); }
     .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
     .filter-btn { padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-family: 'Inter', sans-serif; transition: all 0.2s; }
     .filter-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
@@ -60,8 +56,6 @@
     .filter-btn.bull-filter.active { background: rgba(72,187,120,0.1); border-color: var(--accent-green); color: var(--accent-green); }
     .filter-btn.bear-filter.active { background: rgba(252,129,129,0.1); border-color: var(--accent-red); color: var(--accent-red); }
     .filter-btn.hold-filter.active { background: rgba(246,173,85,0.08); border-color: var(--accent-orange); color: var(--accent-orange); }
-
-    /* 機構研報 */
     .report-item { display: flex; gap: 14px; padding: 14px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); border-radius: 8px; cursor: pointer; transition: background 0.2s; margin: 0 -6px; }
     .report-item:last-child { border-bottom: none; }
     .report-item:hover { background: rgba(255,255,255,0.02); }
@@ -102,8 +96,6 @@
     .expand-full-value.risk { border-left-color: var(--accent-red); color: #ff9999; }
     .expand-full-value.action { border-left-color: var(--accent-orange); color: var(--accent-orange); font-weight: 600; }
     .expand-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s ease; flex-shrink: 0; margin-left: 6px; align-self: flex-start; margin-top: 4px; }
-
-    /* 財報 */
     .earnings-section-title { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; padding: 12px 0 8px; border-bottom: 1px solid rgba(255,255,255,0.04); margin-bottom: 4px; }
     .earnings-item { padding: 14px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); border-radius: 8px; cursor: pointer; transition: background 0.2s; margin: 0 -6px; }
     .earnings-item:last-child { border-bottom: none; }
@@ -121,9 +113,7 @@
     .earn-eps { font-size: 13px; font-weight: 700; }
     .earn-est { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
     .earn-surprise { font-size: 10px; font-weight: 700; margin-top: 2px; }
-    .beat { color: var(--accent-green); }
-    .miss { color: var(--accent-red); }
-    .inline { color: var(--accent-orange); }
+    .beat { color: var(--accent-green); } .miss { color: var(--accent-red); } .inline { color: var(--accent-orange); }
     .status-pill { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 20px; letter-spacing: 0.5px; display: inline-block; }
     .status-reported { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
     .status-upcoming { background: rgba(77,166,255,0.1); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.15); }
@@ -132,6 +122,7 @@
     .earnings-item.open .earnings-expand { max-height: 220px; opacity: 1; margin-top: 12px; }
     .earnings-expand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: rgba(255,255,255,0.02); border-radius: 8px; padding: 12px; }
     .earnings-expand-full { grid-column: 1 / -1; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.04); margin-top: 4px; }
+    .report-count { font-size: 11px; color: var(--text-muted); }
 
     @media (max-width: 768px) {
       nav { padding: 0 16px; }
@@ -149,9 +140,6 @@
       .expand-grid { grid-template-columns: 1fr; gap: 8px; }
       .earnings-header-row { display: none; }
       .earnings-main { grid-template-columns: 1fr auto; grid-template-rows: auto auto; gap: 6px; }
-      .earn-ticker-col { grid-column: 1; }
-      .earn-status-col { grid-column: 2; text-align: right; }
-      .earn-note-col { grid-column: 1 / -1; }
       .earn-eps-col, .earn-rev-col, .earn-arrow-col { display: none; }
       .earnings-item.open .earnings-expand { max-height: 280px; }
       .earnings-expand-grid { grid-template-columns: 1fr; }
@@ -207,11 +195,14 @@
       <button class="tab-btn" onclick="switchTab('earnings', this)">📈 公司財報</button>
     </div>
 
+    <!-- 機構研報 -->
     <div id="tab-research" class="tab-content active">
       <div class="glass-card">
         <div class="card-header">
-          <div class="card-title"><div class="icon icon-blue">🏛</div>最新機構評級</div>
+          <div class="card-title">🏛 最新機構評級</div>
+          <span class="report-count" id="research-count"></span>
         </div>
+        <div class="range-info">累積最近30天內的機構評級，每日 brief 自動追加去重</div>
         <div class="filter-row">
           <button class="filter-btn active" onclick="filterReports('all', this)">全部</button>
           <button class="filter-btn bull-filter" onclick="filterReports('bull', this)">▲ 看多</button>
@@ -224,11 +215,14 @@
       </div>
     </div>
 
+    <!-- 公司財報 -->
     <div id="tab-earnings" class="tab-content">
       <div class="glass-card">
         <div class="card-header">
-          <div class="card-title"><div class="icon icon-green">📈</div>財報追蹤</div>
+          <div class="card-title">📈 財報追蹤</div>
+          <span class="report-count" id="earnings-count"></span>
         </div>
+        <div class="range-info">累積所有財報記錄，已公布保留30天，即將公布持續追蹤</div>
         <div id="earnings-reported-section" style="display:none;">
           <div class="earnings-section-title">✅ 已公布財報</div>
           <div class="earnings-header-row">
@@ -243,6 +237,7 @@
           </div>
           <div id="earnings-upcoming"></div>
         </div>
+        <div id="earnings-empty" style="display:none;color:var(--text-muted);font-size:13px;padding:20px 0;text-align:center;">尚無財報資料，觸發 brief 後自動累積</div>
       </div>
     </div>
   </main>
@@ -286,31 +281,22 @@
     function filterReports(type, btn) {
       document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
-
       var items = document.querySelectorAll('.report-item');
+      var count = 0;
       items.forEach(function(item) {
-        if (type === 'all') {
-          item.classList.remove('hidden');
-        } else if (type === 'bull') {
-          var ratingType = item.getAttribute('data-rating-type');
-          var isBull = ['buy', 'outperform', 'overweight'].includes(ratingType);
-          item.classList.toggle('hidden', !isBull);
-        } else if (type === 'bear') {
-          var ratingType = item.getAttribute('data-rating-type');
-          var isBear = ['sell', 'underperform', 'underweight'].includes(ratingType);
-          item.classList.toggle('hidden', !isBear);
-        } else if (type === 'hold') {
-          var ratingType = item.getAttribute('data-rating-type');
-          var isHold = ['hold', 'neutral', 'equalweight'].includes(ratingType);
-          item.classList.toggle('hidden', !isHold);
-        } else if (type === 'up') {
-          var change = item.getAttribute('data-change');
-          item.classList.toggle('hidden', change !== '上調');
-        } else if (type === 'down') {
-          var change = item.getAttribute('data-change');
-          item.classList.toggle('hidden', change !== '下調');
-        }
+        var ratingType = item.getAttribute('data-rating-type');
+        var change = item.getAttribute('data-change');
+        var show = false;
+        if (type === 'all') show = true;
+        else if (type === 'bull') show = ['buy', 'outperform', 'overweight'].includes(ratingType);
+        else if (type === 'bear') show = ['sell', 'underperform', 'underweight'].includes(ratingType);
+        else if (type === 'hold') show = ['hold', 'neutral', 'equalweight'].includes(ratingType);
+        else if (type === 'up') show = change === '上調';
+        else if (type === 'down') show = change === '下調';
+        item.classList.toggle('hidden', !show);
+        if (show) count++;
       });
+      document.getElementById('research-count').textContent = count + ' 則';
     }
 
     function renderEarningsItem(e) {
@@ -344,15 +330,34 @@
     }
 
     async function loadData() {
-      var res = await fetch('../data/daily.json');
-      var data = await res.json();
+      var dailyRes = await fetch('../data/daily.json');
+      var daily = await dailyRes.json();
 
-      var d = new Date(data.date);
+      var d = new Date(daily.date);
       document.getElementById('inst-date').innerHTML =
         d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) + '<br>UTC+8 台北時間';
 
-      if (data.institutional && data.institutional.research) {
-        document.getElementById('research-list').innerHTML = data.institutional.research.map(function(r) {
+      var research = [];
+      var earnings = [];
+
+      // 優先讀 accumulated.json
+      try {
+        var accRes = await fetch('../data/accumulated.json');
+        if (accRes.ok) {
+          var acc = await accRes.json();
+          if (acc.research && acc.research.length > 0) research = acc.research;
+          if (acc.earnings && acc.earnings.length > 0) earnings = acc.earnings;
+        }
+      } catch(e) {}
+
+      // fallback：若 accumulated 還沒有，讀 daily.json
+      if (research.length === 0 && daily.institutional?.research) research = daily.institutional.research;
+      if (earnings.length === 0 && daily.institutional?.earnings) earnings = daily.institutional.earnings;
+
+      // ── 渲染機構研報
+      if (research.length > 0) {
+        document.getElementById('research-count').textContent = research.length + ' 則';
+        document.getElementById('research-list').innerHTML = research.map(function(r) {
           var changeClass = r.rating_change === '上調' ? 'rating-change-up' : r.rating_change === '下調' ? 'rating-change-down' : 'rating-change-hold';
           var changeIcon = r.rating_change === '上調' ? '▲ 上調' : r.rating_change === '下調' ? '▼ 下調' : '— 維持';
           return '<div class="report-item" data-rating-type="' + (r.rating_type || '') + '" data-change="' + (r.rating_change || '') + '" onclick="toggleReport(this)">' +
@@ -371,7 +376,7 @@
                     (r.prev_target ? '<span class="report-prev-target">' + r.prev_target + '</span>' : '') +
                   '</div>' +
                 '</div>' +
-                '<div class="report-date">' + r.date + '</div>' +
+                '<div class="report-date">' + (r.date || r._added || '') + '</div>' +
               '</div>' +
               '<div class="report-note">' + r.note + '</div>' +
               '<div class="report-expand">' +
@@ -390,11 +395,16 @@
             '<div class="expand-arrow">›</div>' +
           '</div>';
         }).join('');
+      } else {
+        document.getElementById('research-list').innerHTML = '<div style="color:var(--text-muted);font-size:13px;padding:20px 0;text-align:center;">尚無研報資料，觸發 brief 後自動累積</div>';
       }
 
-      if (data.institutional && data.institutional.earnings) {
-        var reported = data.institutional.earnings.filter(function(e) { return e.status_type === 'reported' || e.status_type === 'today'; });
-        var upcoming = data.institutional.earnings.filter(function(e) { return e.status_type === 'upcoming'; });
+      // ── 渲染財報
+      if (earnings.length > 0) {
+        var reported = earnings.filter(function(e) { return e.status_type === 'reported' || e.status_type === 'today'; });
+        var upcoming = earnings.filter(function(e) { return e.status_type === 'upcoming'; });
+        var total = reported.length + upcoming.length;
+        document.getElementById('earnings-count').textContent = total + ' 筆';
 
         if (reported.length > 0) {
           document.getElementById('earnings-reported-section').style.display = 'block';
@@ -404,6 +414,11 @@
           document.getElementById('earnings-upcoming-section').style.display = 'block';
           document.getElementById('earnings-upcoming').innerHTML = upcoming.map(renderEarningsItem).join('');
         }
+        if (reported.length === 0 && upcoming.length === 0) {
+          document.getElementById('earnings-empty').style.display = 'block';
+        }
+      } else {
+        document.getElementById('earnings-empty').style.display = 'block';
       }
     }
 

@@ -39,16 +39,9 @@
     .top-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; }
     .top-bar h1 { font-size: 20px; font-weight: 600; }
     .top-bar .meta { font-size: 12px; color: var(--text-muted); text-align: right; line-height: 1.8; }
-    .calendar-layout { display: grid; grid-template-columns: 1fr 360px; gap: 20px; align-items: start; }
     .glass-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); margin-bottom: 16px; }
     .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
     .card-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
-    .icon { width: 20px; height: 20px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; }
-    .icon-blue { background: rgba(77,166,255,0.15); }
-    .icon-red { background: rgba(252,129,129,0.15); }
-    .icon-purple { background: rgba(159,122,234,0.15); }
-
-    /* 篩選按鈕 */
     .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
     .filter-btn { padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-family: 'Inter', sans-serif; transition: all 0.2s; white-space: nowrap; }
     .filter-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
@@ -58,8 +51,13 @@
     .filter-btn.data-filter.active { background: rgba(72,187,120,0.1); border-color: var(--accent-green); color: var(--accent-green); }
     .filter-btn.tw-filter.active { background: rgba(56,178,172,0.1); border-color: var(--accent-teal); color: var(--accent-teal); }
     .filter-btn.geo-filter.active { background: rgba(246,173,85,0.1); border-color: var(--accent-orange); color: var(--accent-orange); }
+    .filter-btn.past-filter.active { background: rgba(136,136,170,0.1); border-color: var(--text-secondary); color: var(--text-secondary); }
 
-    /* 事件列表 */
+    /* 日期分組標題 */
+    .date-group-header { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; padding: 16px 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.04); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+    .date-group-header.today-header { color: var(--accent-blue); }
+    .date-group-header.past-header { color: var(--text-muted); opacity: 0.6; }
+
     .event-item { display: flex; gap: 14px; padding: 14px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); border-radius: 8px; cursor: pointer; transition: all 0.2s; margin: 0 -6px; }
     .event-item:last-child { border-bottom: none; }
     .event-item:hover { background: rgba(255,255,255,0.02); }
@@ -67,6 +65,8 @@
     .event-item.hidden { display: none; }
     .event-item.today-event { background: rgba(77,166,255,0.04); border-left: 2px solid rgba(77,166,255,0.4); padding-left: 12px; border-radius: 0 8px 8px 0; margin-left: -2px; }
     .event-item.today-event:hover { background: rgba(77,166,255,0.07); }
+    .event-item.past-event { opacity: 0.65; }
+    .event-item.past-event .event-day { color: var(--text-muted); }
     .event-item.high-impact-event { border-left: 2px solid rgba(252,129,129,0.3); padding-left: 12px; border-radius: 0 8px 8px 0; margin-left: -2px; }
 
     .event-date-col { min-width: 60px; text-align: center; padding-top: 2px; flex-shrink: 0; }
@@ -74,17 +74,14 @@
     .event-day { font-size: 24px; font-weight: 700; line-height: 1.1; }
     .event-weekday { font-size: 10px; color: var(--text-muted); }
     .event-time-label { font-size: 10px; color: var(--accent-blue); margin-top: 4px; font-weight: 600; }
-
     .event-body { flex: 1; min-width: 0; }
     .event-title-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
     .event-title { font-size: 14px; font-weight: 700; }
     .event-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
-
     .impact-badge { font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 20px; white-space: nowrap; letter-spacing: 0.5px; }
     .impact-high { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.2); }
     .impact-mid { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
     .impact-low { background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
-
     .type-badge { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; letter-spacing: 0.5px; flex-shrink: 0; }
     .type-fed { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.15); }
     .type-earnings { background: rgba(77,166,255,0.1); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.15); }
@@ -92,9 +89,8 @@
     .type-tw { background: rgba(56,178,172,0.1); color: var(--accent-teal); border: 1px solid rgba(56,178,172,0.15); }
     .type-crypto { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.15); }
     .type-geo { background: rgba(246,173,85,0.1); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
-
     .today-badge { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: rgba(77,166,255,0.15); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.3); }
-
+    .past-badge { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: rgba(136,136,170,0.1); color: var(--text-muted); border: 1px solid rgba(136,136,170,0.2); }
     .event-expand { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; opacity: 0; }
     .event-item.open .event-expand { max-height: 280px; opacity: 1; }
     .expand-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 12px 0; }
@@ -106,27 +102,7 @@
     .expand-cell-value.orange { color: var(--accent-orange); }
     .expand-full { margin-top: 10px; padding: 8px 10px; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 2px solid var(--accent-orange); }
     .expand-arrow { font-size: 14px; color: var(--text-muted); transition: transform 0.3s ease; flex-shrink: 0; align-self: flex-start; margin-top: 4px; }
-
-    /* 高影響力事件 */
-    .high-impact-item { padding: 14px; border-radius: 10px; margin-bottom: 10px; border: 1px solid rgba(252,129,129,0.15); background: rgba(252,129,129,0.04); transition: all 0.2s; }
-    .high-impact-item:hover { background: rgba(252,129,129,0.07); }
-    .high-impact-item:last-child { margin-bottom: 0; }
-    .hi-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
-    .hi-date { font-size: 10px; color: var(--accent-red); font-weight: 600; letter-spacing: 0.5px; }
-    .hi-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-    .hi-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px; }
-    .hi-assets { display: flex; flex-wrap: wrap; gap: 4px; }
-    .hi-asset-tag { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
-
-    /* 遠期預告 */
-    .future-item { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; gap: 12px; align-items: flex-start; }
-    .future-item:last-child { border-bottom: none; }
-    .future-date-col { min-width: 50px; flex-shrink: 0; }
-    .future-date-month { font-size: 9px; color: var(--text-muted); text-transform: uppercase; }
-    .future-date-day { font-size: 18px; font-weight: 700; line-height: 1.1; }
-    .future-body { flex: 1; }
-    .future-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
-    .future-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .range-info { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; padding: 8px 12px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid var(--border); }
 
     @media (max-width: 768px) {
       nav { padding: 0 16px; }
@@ -135,7 +111,6 @@
       main { padding: 16px 16px 40px; }
       .top-bar { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 16px; }
       .top-bar .meta { text-align: left; font-size: 11px; }
-      .calendar-layout { grid-template-columns: 1fr; gap: 0; }
       .glass-card { padding: 14px; border-radius: 12px; margin-bottom: 12px; }
       .event-date-col { min-width: 50px; }
       .event-day { font-size: 20px; }
@@ -188,43 +163,30 @@
       <div class="meta" id="cal-date"></div>
     </div>
 
-    <div class="calendar-layout">
-      <div>
-        <div class="glass-card">
-          <div class="card-header">
-            <div class="card-title"><div class="icon icon-blue">📅</div>近期重要事件</div>
-            <span id="event-count" style="font-size:11px;color:var(--text-muted);"></span>
-          </div>
-          <div class="filter-row">
-            <button class="filter-btn active" onclick="filterEvents('all', this)">全部</button>
-            <button class="filter-btn fed-filter" onclick="filterEvents('fed', this)">🏛 Fed</button>
-            <button class="filter-btn earnings-filter" onclick="filterEvents('earnings', this)">📊 財報</button>
-            <button class="filter-btn data-filter" onclick="filterEvents('data', this)">📈 數據</button>
-            <button class="filter-btn tw-filter" onclick="filterEvents('tw', this)">🇹🇼 台股</button>
-            <button class="filter-btn geo-filter" onclick="filterEvents('geo', this)">🌐 地緣</button>
-          </div>
-          <div id="events-list"></div>
-        </div>
+    <div class="glass-card">
+      <div class="card-header">
+        <div class="card-title">📅 近期重要事件</div>
+        <span id="event-count" style="font-size:11px;color:var(--text-muted);"></span>
       </div>
-
-      <div>
-        <div class="glass-card">
-          <div class="card-header">
-            <div class="card-title"><div class="icon icon-red">⚡</div>高影響力事件</div>
-          </div>
-          <div id="high-impact-list"></div>
-        </div>
-        <div class="glass-card">
-          <div class="card-header">
-            <div class="card-title"><div class="icon icon-purple">🔭</div>遠期預告</div>
-          </div>
-          <div id="future-list"></div>
-        </div>
+      <div class="range-info" id="range-info">載入中...</div>
+      <div class="filter-row">
+        <button class="filter-btn active" onclick="filterEvents('all', this)">全部</button>
+        <button class="filter-btn fed-filter" onclick="filterEvents('fed', this)">🏛 Fed</button>
+        <button class="filter-btn earnings-filter" onclick="filterEvents('earnings', this)">📊 財報</button>
+        <button class="filter-btn data-filter" onclick="filterEvents('data', this)">📈 數據</button>
+        <button class="filter-btn tw-filter" onclick="filterEvents('tw', this)">🇹🇼 台股</button>
+        <button class="filter-btn geo-filter" onclick="filterEvents('geo', this)">🌐 地緣</button>
+        <button class="filter-btn past-filter" onclick="filterEvents('past', this)">⏮ 過去</button>
+        <button class="filter-btn" onclick="filterEvents('future', this)">⏭ 未來</button>
       </div>
+      <div id="events-list"></div>
     </div>
   </main>
 
   <script>
+    var TODAY = '';
+    var allEvents = [];
+
     function toggleMenu() {
       var menu = document.getElementById('mobile-menu');
       var hamburger = document.getElementById('hamburger');
@@ -251,17 +213,32 @@
       document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
       var items = document.querySelectorAll('.event-item');
+      var groups = document.querySelectorAll('.date-group-header');
       var count = 0;
       items.forEach(function(item) {
-        if (type === 'all' || item.getAttribute('data-type') === type) {
-          item.classList.remove('hidden');
-          count++;
-        } else {
-          item.classList.add('hidden');
-        }
+        var eType = item.getAttribute('data-type');
+        var eDate = item.getAttribute('data-date');
+        var isPast = eDate < TODAY;
+        var isFuture = eDate > TODAY;
+        var show = false;
+        if (type === 'all') show = true;
+        else if (type === 'past') show = isPast;
+        else if (type === 'future') show = isFuture;
+        else show = eType === type;
+        item.classList.toggle('hidden', !show);
+        if (show) count++;
+      });
+      // 隱藏空的日期分組
+      groups.forEach(function(g) {
+        var groupDate = g.getAttribute('data-group-date');
+        var hasVisible = false;
+        document.querySelectorAll('.event-item[data-date="' + groupDate + '"]').forEach(function(item) {
+          if (!item.classList.contains('hidden')) hasVisible = true;
+        });
+        g.style.display = hasVisible ? '' : 'none';
       });
       var countEl = document.getElementById('event-count');
-      if (countEl) countEl.textContent = type !== 'all' ? count + ' 則' : '';
+      if (countEl) countEl.textContent = count + ' 則';
     }
 
     function formatEventDate(dateStr) {
@@ -270,9 +247,7 @@
         var months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
         var weekdays = ['日','一','二','三','四','五','六'];
         return { month: months[d.getMonth()], day: d.getDate(), weekday: '週' + weekdays[d.getDay()] };
-      } catch(e) {
-        return { month: '--', day: '--', weekday: '--' };
-      }
+      } catch(e) { return { month: '--', day: '--', weekday: '--' }; }
     }
 
     function getTypeLabel(type) {
@@ -285,22 +260,33 @@
       return map[impact] || impact;
     }
 
-    async function loadData() {
-      var res = await fetch('../data/daily.json');
-      var data = await res.json();
-      var today = data.date;
+    function renderEvents(events, today) {
+      if (!events || events.length === 0) {
+        document.getElementById('events-list').innerHTML = '<div style="color:var(--text-muted);font-size:13px;padding:20px 0;text-align:center;">尚無事件資料，觸發 brief 後自動累積</div>';
+        return;
+      }
 
-      var d = new Date(today + 'T00:00:00');
-      document.getElementById('cal-date').innerHTML =
-        d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) + '<br>UTC+8 台北時間';
+      // 按日期分組
+      var groups = {};
+      events.forEach(function(e) {
+        if (!groups[e.date]) groups[e.date] = [];
+        groups[e.date].push(e);
+      });
 
-      if (data.calendar && data.calendar.events) {
-        document.getElementById('events-list').innerHTML = data.calendar.events.map(function(e) {
-          var dt = formatEventDate(e.date);
-          var isToday = e.date === today;
+      var sortedDates = Object.keys(groups).sort();
+      var html = '';
+
+      sortedDates.forEach(function(date) {
+        var isToday = date === today;
+        var isPast = date < today;
+        var dt = formatEventDate(date);
+        var groupLabel = isToday ? '📌 今日 — ' + date : (isPast ? '⏮ ' + date : '⏭ ' + date);
+        html += '<div class="date-group-header ' + (isToday ? 'today-header' : isPast ? 'past-header' : '') + '" data-group-date="' + date + '">' + groupLabel + '</div>';
+
+        groups[date].forEach(function(e) {
           var isHigh = e.impact === 'high';
-          var extraClass = isToday ? ' today-event' : (isHigh ? ' high-impact-event' : '');
-          return '<div class="event-item' + extraClass + '" data-type="' + e.type + '" onclick="toggleEvent(this)">' +
+          var extraClass = isToday ? ' today-event' : (isPast ? ' past-event' : (isHigh ? ' high-impact-event' : ''));
+          html += '<div class="event-item' + extraClass + '" data-type="' + e.type + '" data-date="' + e.date + '" onclick="toggleEvent(this)">' +
             '<div class="event-date-col">' +
               '<div class="event-month">' + dt.month + '</div>' +
               '<div class="event-day" style="' + (isToday ? 'color:var(--accent-blue);' : '') + '">' + dt.day + '</div>' +
@@ -311,6 +297,7 @@
               '<div class="event-title-row">' +
                 '<span class="type-badge type-' + e.type + '">' + getTypeLabel(e.type) + '</span>' +
                 (isToday ? '<span class="today-badge">今日</span>' : '') +
+                (isPast ? '<span class="past-badge">已過</span>' : '') +
                 (isHigh ? '<span class="impact-badge impact-high">高影響</span>' : '') +
                 '<span class="event-title">' + e.title + '</span>' +
               '</div>' +
@@ -328,44 +315,51 @@
             '</div>' +
             '<div class="expand-arrow">›</div>' +
           '</div>';
-        }).join('');
+        });
+      });
+
+      document.getElementById('events-list').innerHTML = html;
+      document.getElementById('event-count').textContent = events.length + ' 則';
+    }
+
+    async function loadData() {
+      // 讀 daily.json 取得今日日期
+      var dailyRes = await fetch('../data/daily.json');
+      var daily = await dailyRes.json();
+      TODAY = daily.date;
+
+      var d = new Date(TODAY + 'T00:00:00');
+      document.getElementById('cal-date').innerHTML =
+        d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) + '<br>UTC+8 台北時間';
+
+      // 計算前後15天
+      var past15 = new Date(d); past15.setDate(past15.getDate() - 15);
+      var future15 = new Date(d); future15.setDate(future15.getDate() + 15);
+      var past15Str = past15.toISOString().split('T')[0];
+      var future15Str = future15.toISOString().split('T')[0];
+
+      document.getElementById('range-info').textContent =
+        '顯示範圍：' + past15Str + ' 至 ' + future15Str + '（前後各15天，每日觸發 brief 自動累積）';
+
+      // 優先讀 accumulated.json
+      var events = [];
+      try {
+        var accRes = await fetch('../data/accumulated.json');
+        if (accRes.ok) {
+          var acc = await accRes.json();
+          if (acc.events && acc.events.length > 0) {
+            events = acc.events;
+          }
+        }
+      } catch(e) {}
+
+      // fallback：若 accumulated 還沒有，讀 daily.json 的 calendar.events
+      if (events.length === 0 && daily.calendar && daily.calendar.events) {
+        events = daily.calendar.events;
       }
 
-      if (data.calendar && data.calendar.high_impact) {
-        document.getElementById('high-impact-list').innerHTML = data.calendar.high_impact.map(function(e) {
-          var assets = e.affect_assets ? e.affect_assets.split('/') : [];
-          return '<div class="high-impact-item">' +
-            '<div class="hi-header">' +
-              '<div class="hi-date">📍 ' + e.date + '</div>' +
-              '<span class="impact-badge impact-' + e.impact + '">' + (e.impact === 'high' ? '高影響' : '中影響') + '</span>' +
-            '</div>' +
-            '<div class="hi-title">' + e.title + '</div>' +
-            '<div class="hi-desc">' + e.desc + '</div>' +
-            (assets.length > 0 ?
-              '<div class="hi-assets">' +
-                assets.map(function(a) { return '<span class="hi-asset-tag">' + a.trim() + '</span>'; }).join('') +
-              '</div>' : '') +
-          '</div>';
-        }).join('');
-      }
-
-      if (data.calendar && data.calendar.future) {
-        document.getElementById('future-list').innerHTML = data.calendar.future.map(function(e) {
-          var dateParts = e.date ? e.date.split('-') : ['--','--','--'];
-          var month = dateParts[1] ? ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(dateParts[1])-1] : '--';
-          var day = dateParts[2] || '--';
-          return '<div class="future-item">' +
-            '<div class="future-date-col">' +
-              '<div class="future-date-month">' + month + '</div>' +
-              '<div class="future-date-day">' + day + '</div>' +
-            '</div>' +
-            '<div class="future-body">' +
-              '<div class="future-title">' + e.title + '</div>' +
-              '<div class="future-desc">' + e.desc + '</div>' +
-            '</div>' +
-          '</div>';
-        }).join('');
-      }
+      allEvents = events;
+      renderEvents(events, TODAY);
     }
 
     loadData();
