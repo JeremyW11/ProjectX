@@ -205,6 +205,40 @@
       "_added": "2026-05-08"
     },
     {
+      "ticker": "MSFT",
+      "name": "Microsoft",
+      "firm": "華爾街共識",
+      "firm_background": "38位分析師綜合評級",
+      "rating": "Strong Buy",
+      "rating_type": "buy",
+      "rating_change": "維持",
+      "prev_target": "",
+      "target": "569.46",
+      "date": "2026-05-07",
+      "note": "AI營收年化突破370億美元，年增123%",
+      "core_logic": "FY26Q3營收年增18%，營業利潤年增20%",
+      "risk_note": "AI功能用戶反彈風險",
+      "action": "逢回買進",
+      "_added": "2026-05-08"
+    },
+    {
+      "ticker": "GS",
+      "name": "Goldman Sachs",
+      "firm": "BMO Capital",
+      "firm_background": "加拿大大型投行，金融股研究專業",
+      "rating": "Buy",
+      "rating_type": "buy",
+      "rating_change": "上調",
+      "prev_target": "905",
+      "target": "972",
+      "date": "2026-05-07",
+      "note": "投行業務復甦，交易收入強勁",
+      "core_logic": "金融股預計連續第三年跑贏S&P500",
+      "risk_note": "利率政策不確定性",
+      "action": "金融股首選",
+      "_added": "2026-05-08"
+    },
+    {
       "ticker": "NVDA",
       "name": "輝達",
       "firm": "Rosenblatt Securities",
@@ -254,6 +288,23 @@
       "risk_note": "台海地緣政治風險需持續關注",
       "action": "逢低布局,長線看好",
       "_added": "2026-05-08"
+    },
+    {
+      "ticker": "META",
+      "name": "Meta Platforms",
+      "firm": "Evercore ISI",
+      "firm_background": "美國獨立研究機構，網路股權威",
+      "rating": "Outperform",
+      "rating_type": "outperform",
+      "rating_change": "維持",
+      "prev_target": "",
+      "target": "900",
+      "date": "2026-05-06",
+      "note": "19.8倍遠期本益比為Mag7最低估值",
+      "core_logic": "Q1廣告營收550億美元年增33%，AI變現加速",
+      "risk_note": "資本支出翻倍壓力",
+      "action": "估值優勢明顯可加碼",
+      "_added": "2026-05-08"
     }
   ],
   "earnings": [
@@ -276,17 +327,17 @@
     },
     {
       "ticker": "NVDA",
-      "name": "NVIDIA",
-      "note": "Q1 FY27財報預計營收788億年增78.6%，EPS預期1.77",
+      "name": "Nvidia",
+      "note": "管理層預測Q1營收780億美元年增77%",
       "eps": "",
-      "eps_est": "1.77",
+      "eps_est": "",
       "eps_result": "",
       "eps_surprise": "",
-      "revenue": "",
-      "rev_est": "788億",
-      "guidance": "市場預期將超預期並上調指引",
+      "revenue": "預期780億美元",
+      "rev_est": "",
+      "guidance": "Q2預期營收866億美元年增85%",
       "market_reaction": "待公布",
-      "key_metric": "FY26全年營收2159億",
+      "key_metric": "AI基礎設施龍頭",
       "status": "5月20日公布",
       "status_type": "upcoming",
       "_added": "2026-05-08"
@@ -375,6 +426,23 @@
       "status": "已公布",
       "status_type": "reported",
       "_added": "2026-05-08"
+    },
+    {
+      "ticker": "NET",
+      "name": "Cloudflare",
+      "note": "營收年增34%但宣布裁員20%擁抱agentic AI",
+      "eps": "",
+      "eps_est": "",
+      "eps_result": "",
+      "eps_surprise": "",
+      "revenue": "6.398億美元",
+      "rev_est": "",
+      "guidance": "裁員1100人轉型AI優先運營",
+      "market_reaction": "盤後波動",
+      "key_metric": "客戶年付10萬+年增25%",
+      "status": "5月7日已公布",
+      "status_type": "reported",
+      "_added": "2026-05-08"
     }
   ],
   "events": [
@@ -449,6 +517,20 @@
       "_added": "2026-05-08"
     },
     {
+      "date": "2026-05-08",
+      "time": "全天",
+      "title": "美股財報日81家公司發布",
+      "desc": "多家公司將發布財報",
+      "type": "earnings",
+      "tag": "財報季",
+      "impact": "mid",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "個股",
+      "watch": "關注各產業龍頭表現",
+      "_added": "2026-05-08"
+    },
+    {
       "date": "2026-05-12",
       "time": "08:30 ET",
       "title": "美國4月CPI數據",
@@ -519,6 +601,20 @@
       "_added": "2026-05-08"
     },
     {
+      "date": "2026-05-14",
+      "time": "",
+      "title": "Apple股息發放日",
+      "desc": "新季度股息0.27美元",
+      "type": "earnings",
+      "tag": "股息",
+      "impact": "low",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "AAPL",
+      "watch": "",
+      "_added": "2026-05-08"
+    },
+    {
       "date": "2026-05-15",
       "time": "",
       "title": "Powell卸任Fed主席",
@@ -558,6 +654,34 @@
       "prev": "",
       "affect_assets": "美股 美債 美元",
       "watch": "貨幣政策方向變化",
+      "_added": "2026-05-08"
+    },
+    {
+      "date": "2026-05-15",
+      "time": "",
+      "title": "Powell主席任期結束",
+      "desc": "Kevin Warsh預計接任Fed主席",
+      "type": "fed",
+      "tag": "央行人事",
+      "impact": "high",
+      "expect": "政策延續性待觀察",
+      "prev": "",
+      "affect_assets": "美股債市美元",
+      "watch": "新主席政策立場",
+      "_added": "2026-05-08"
+    },
+    {
+      "date": "2026-05-15",
+      "time": "",
+      "title": "荷爾木茲海峽通航預期",
+      "desc": "Polymarket預測95%機率恢復正常",
+      "type": "geo",
+      "tag": "地緣政治",
+      "impact": "high",
+      "expect": "恢復通航",
+      "prev": "",
+      "affect_assets": "原油航運股",
+      "watch": "美伊協議進展",
       "_added": "2026-05-08"
     },
     {
@@ -601,10 +725,36 @@
       "affect_assets": "NVDA 半導體ETF",
       "watch": "AI需求與毛利率指引",
       "_added": "2026-05-08"
+    },
+    {
+      "date": "2026-05-20",
+      "time": "盤後",
+      "title": "Nvidia FY27Q1財報",
+      "desc": "預期營收780億美元年增77%",
+      "type": "earnings",
+      "tag": "AI龍頭",
+      "impact": "high",
+      "expect": "EPS大幅成長",
+      "prev": "",
+      "affect_assets": "NVDA TSM AMD半導體",
+      "watch": "AI需求指引",
+      "_added": "2026-05-08"
     }
   ],
   "updated": "2026-05-08",
   "earnings_calls": [
+    {
+      "ticker": "ABNB",
+      "name": "Airbnb",
+      "date": "2026-05-07",
+      "ceo": "Brian Chesky",
+      "key_quote": "Q1法說會由CEO和CFO主持",
+      "guidance": "待確認",
+      "market_reaction": "待觀察",
+      "watch_note": "旅遊需求趨勢",
+      "sentiment": "neutral",
+      "_added": "2026-05-08"
+    },
     {
       "ticker": "AMD",
       "name": "超微半導體",
