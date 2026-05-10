@@ -1,368 +1,437 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProjectX — 市場日曆</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    :root {
-      --bg-base: #05060f; --bg-card: rgba(255,255,255,0.04); --bg-card-hover: rgba(255,255,255,0.07);
-      --border: rgba(255,255,255,0.08); --text-primary: #f0f0f5; --text-secondary: #a8a8c8;
-      --text-muted: #7070a0; --accent-blue: #4da6ff; --accent-purple: #9f7aea;
-      --accent-green: #48bb78; --accent-red: #fc8181; --accent-orange: #f6ad55; --accent-teal: #38b2ac;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-base); color: var(--text-primary); min-height: 100vh; background-image: radial-gradient(ellipse 80% 50% at 20% 0%, rgba(77,99,255,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 0%, rgba(159,122,234,0.06) 0%, transparent 50%); }
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 0 40px; height: 60px; border-bottom: 1px solid var(--border); background: rgba(5,6,15,0.95); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 200; }
-    .logo { font-size: 18px; font-weight: 700; letter-spacing: 2px; background: linear-gradient(135deg, #4da6ff, #9f7aea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; flex-shrink: 0; }
-    .nav-links { display: flex; gap: 24px; list-style: none; }
-    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 17px; font-weight: 500; transition: color 0.2s; white-space: nowrap; }
-    .nav-links a:hover { color: var(--text-primary); }
-    .nav-links a.active { color: var(--text-primary); border-bottom: 2px solid var(--accent-blue); padding-bottom: 2px; }
-    .nav-right { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
-    .btn { padding: 7px 16px; border-radius: 8px; font-size: 17px; font-weight: 500; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: all 0.2s; }
-    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
-    .btn-glow { background: linear-gradient(135deg, #4da6ff, #9f7aea); color: #fff; box-shadow: 0 0 20px rgba(77,166,255,0.3); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s; }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-    .mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; bottom: 0; background: rgba(5,6,15,0.98); backdrop-filter: blur(20px); z-index: 199; padding: 24px; flex-direction: column; gap: 8px; overflow-y: auto; }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { color: var(--text-secondary); text-decoration: none; font-size: 18px; font-weight: 600; padding: 14px 0; border-bottom: 1px solid var(--border); }
-    .mobile-menu a.active { color: var(--accent-blue); }
-    .mobile-menu-btns { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
-    .mobile-menu-btns .btn { width: 100%; padding: 12px; font-size: 17px; text-align: center; }
-    main { max-width: 1440px; margin: 0 auto; padding: 28px 40px 60px; }
-    .top-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; }
-    .top-bar h1 { font-size: 20px; font-weight: 600; }
-    .top-bar .meta { font-size: 16px; color: var(--text-muted); text-align: right; line-height: 1.8; }
-    .glass-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; backdrop-filter: blur(10px); margin-bottom: 16px; }
-    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
-    .card-title { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 600; }
-    .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-    .filter-btn { padding: 5px 12px; border-radius: 20px; font-size: 15px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-family: 'Inter', sans-serif; transition: all 0.2s; white-space: nowrap; }
-    .filter-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
-    .filter-btn.active { background: rgba(77,166,255,0.1); border-color: var(--accent-blue); color: var(--accent-blue); }
-    .filter-btn.fed-filter.active { background: rgba(252,129,129,0.1); border-color: var(--accent-red); color: var(--accent-red); }
-    .filter-btn.earnings-filter.active { background: rgba(77,166,255,0.1); border-color: var(--accent-blue); color: var(--accent-blue); }
-    .filter-btn.data-filter.active { background: rgba(72,187,120,0.1); border-color: var(--accent-green); color: var(--accent-green); }
-    .filter-btn.tw-filter.active { background: rgba(56,178,172,0.1); border-color: var(--accent-teal); color: var(--accent-teal); }
-    .filter-btn.geo-filter.active { background: rgba(246,173,85,0.1); border-color: var(--accent-orange); color: var(--accent-orange); }
-    .filter-btn.past-filter.active { background: rgba(136,136,170,0.1); border-color: var(--text-secondary); color: var(--text-secondary); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X · 市場日曆</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-950:#070d1c; --navy-900:#0d1630; --navy-800:#152244;
+  --navy-700:#1d2d5a; --navy-600:#1e3a8a; --navy-500:#2563eb;
+  --navy-400:#3b82f6; --navy-300:#93c5fd; --navy-100:#dbeafe; --navy-50:#eff6ff;
+  --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569;
+  --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1;
+  --gray-200:#e2e8f0; --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
+  --green-700:#15803d; --green-600:#16a34a; --green-100:#dcfce7;
+  --red-700:#b91c1c; --red-600:#dc2626; --red-100:#fee2e2;
+  --amber-700:#b45309; --amber-600:#d97706; --amber-100:#fef3c7;
+  --purple-600:#7c3aed; --teal-600:#0891b2;
 
-    /* 日期分組標題 */
-    .date-group-header { font-size: 15px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; padding: 16px 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.04); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-    .date-group-header.today-header { color: var(--accent-blue); }
-    .date-group-header.past-header { color: var(--text-muted); opacity: 0.6; }
+  /* JS 相容變數 */
+  --bg-base:#f7f8fc; --bg-card:#ffffff; --border:#e2e8f0;
+  --text-primary:#0f172a; --text-secondary:#475569; --text-muted:#94a3b8;
+  --accent-blue:#2563eb; --accent-green:#16a34a; --accent-red:#dc2626;
+  --accent-orange:#d97706; --accent-teal:#0891b2; --accent-purple:#7c3aed;
 
-    .event-item { display: flex; gap: 14px; padding: 14px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); border-radius: 8px; cursor: pointer; transition: all 0.2s; margin: 0 -6px; }
-    .event-item:last-child { border-bottom: none; }
-    .event-item:hover { background: rgba(255,255,255,0.02); }
-    .event-item.open { background: rgba(255,255,255,0.02); }
-    .event-item.hidden { display: none; }
-    .event-item.today-event { background: rgba(77,166,255,0.04); border-left: 2px solid rgba(77,166,255,0.4); padding-left: 12px; border-radius: 0 8px 8px 0; margin-left: -2px; }
-    .event-item.today-event:hover { background: rgba(77,166,255,0.07); }
-    .event-item.past-event { opacity: 0.65; }
-    .event-item.past-event .event-day { color: var(--text-muted); }
-    .event-item.high-impact-event { border-left: 2px solid rgba(252,129,129,0.3); padding-left: 12px; border-radius: 0 8px 8px 0; margin-left: -2px; }
+  --font-en:'DM Sans',sans-serif; --font-zh:'Noto Sans TC',sans-serif;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --r-sm:6px; --r-md:10px; --r-lg:16px;
+  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+  --shadow-hover:0 4px 24px rgba(15,23,42,.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;-webkit-font-smoothing:antialiased;}
+body{font-family:var(--font-zh);background:var(--bg-base);color:var(--text-primary);min-height:100vh;background-image:none;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;font-family:inherit;}
+ul{list-style:none;}
 
-    .event-date-col { min-width: 60px; text-align: center; padding-top: 2px; flex-shrink: 0; }
-    .event-month { font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-    .event-day { font-size: 24px; font-weight: 700; line-height: 1.1; }
-    .event-weekday { font-size: 14px; color: var(--text-muted); }
-    .event-time-label { font-size: 14px; color: var(--accent-blue); margin-top: 4px; font-weight: 600; }
-    .event-body { flex: 1; min-width: 0; }
-    .event-title-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
-    .event-title { font-size: 16px; font-weight: 700; }
-    .event-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.6; }
-    .impact-badge { font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 20px; white-space: nowrap; letter-spacing: 0.5px; }
-    .impact-high { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.2); }
-    .impact-mid { background: rgba(246,173,85,0.08); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
-    .impact-low { background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
-    .type-badge { font-size: 13px; font-weight: 700; padding: 2px 7px; border-radius: 4px; letter-spacing: 0.5px; flex-shrink: 0; }
-    .type-fed { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.15); }
-    .type-earnings { background: rgba(77,166,255,0.1); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.15); }
-    .type-data { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.15); }
-    .type-tw { background: rgba(56,178,172,0.1); color: var(--accent-teal); border: 1px solid rgba(56,178,172,0.15); }
-    .type-crypto { background: rgba(159,122,234,0.1); color: var(--accent-purple); border: 1px solid rgba(159,122,234,0.15); }
-    .type-geo { background: rgba(246,173,85,0.1); color: var(--accent-orange); border: 1px solid rgba(246,173,85,0.15); }
-    .today-badge { font-size: 13px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: rgba(77,166,255,0.15); color: var(--accent-blue); border: 1px solid rgba(77,166,255,0.3); }
-    .past-badge { font-size: 13px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: rgba(136,136,170,0.1); color: var(--text-muted); border: 1px solid rgba(136,136,170,0.2); }
-    .event-expand { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; opacity: 0; }
-    .event-item.open .event-expand { max-height: 280px; opacity: 1; }
-    .expand-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 12px 0; }
-    .expand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .expand-cell-label { font-size: 14px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; font-weight: 600; }
-    .expand-cell-value { font-size: 16px; color: var(--text-secondary); line-height: 1.5; }
-    .expand-cell-value.green { color: var(--accent-green); font-weight: 600; }
-    .expand-cell-value.blue { color: var(--accent-blue); font-weight: 600; }
-    .expand-cell-value.orange { color: var(--accent-orange); }
-    .expand-full { margin-top: 10px; padding: 8px 10px; background: rgba(255,255,255,0.02); border-radius: 6px; border-left: 2px solid var(--accent-orange); }
-    .expand-arrow { font-size: 16px; color: var(--text-muted); transition: transform 0.3s ease; flex-shrink: 0; align-self: flex-start; margin-top: 4px; }
-    .range-info { font-size: 15px; color: var(--text-muted); margin-bottom: 12px; padding: 8px 12px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid var(--border); }
+/* ── TOPBAR ── */
+nav{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:200;}
+.logo{display:flex;align-items:center;gap:10px;margin-right:36px;flex-shrink:0;}
+.logo-mark{width:32px;height:32px;background:var(--navy-700);border-radius:8px;display:grid;place-items:center;transition:transform .3s;}
+.logo-mark:hover{transform:rotate(45deg) scale(1.05);}
+.logo-main{font-family:var(--font-en);font-size:13.5px;font-weight:600;color:var(--navy-800);letter-spacing:.05em;}
+.logo-sub{font-size:9.5px;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1;}
+.nav-links a{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--gray-500);font-weight:400;transition:all .15s;white-space:nowrap;font-family:var(--font-zh);border-bottom:none;}
+.nav-links a:hover{background:var(--navy-50);color:var(--navy-700);}
+.nav-links a.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);display:inline-block;}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-dot{width:5px;height:5px;background:var(--green-600);border-radius:50%;animation:pulse 2s infinite;display:inline-block;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.header-time{font-family:var(--font-en);font-size:12px;color:var(--gray-400);}
+.btn{padding:7px 16px;border-radius:var(--r-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font-en);}
+.btn-ghost{background:var(--white);border:1px solid var(--gray-300);color:var(--gray-700);}
+.btn-ghost:hover{border-color:var(--navy-400);color:var(--navy-700);}
+.btn-glow{background:var(--navy-700);color:var(--white);border:none;box-shadow:none;}
+.btn-glow:hover{background:var(--navy-600);transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--gray-700);border-radius:2px;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);z-index:199;padding:24px;flex-direction:column;gap:4px;overflow-y:auto;border-top:1px solid var(--gray-200);}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--gray-600);font-size:16px;font-weight:500;padding:13px 0;border-bottom:1px solid var(--gray-100);font-family:var(--font-zh);}
+.mobile-menu a.active{color:var(--navy-600);}
+.mobile-menu-btns{margin-top:20px;display:flex;flex-direction:column;gap:10px;}
+.mobile-menu-btns .btn{width:100%;padding:12px;font-size:14px;text-align:center;}
 
-    @media (max-width: 768px) {
-      nav { padding: 0 16px; }
-      .nav-links { display: none; } .nav-right { display: none; }
-      .hamburger { display: flex; }
-      main { padding: 16px 16px 40px; }
-      .top-bar { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 16px; }
-      .top-bar .meta { text-align: left; font-size: 15px; }
-      .glass-card { padding: 14px; border-radius: 12px; margin-bottom: 12px; }
-      .event-date-col { min-width: 50px; }
-      .event-day { font-size: 20px; }
-      .event-item.open .event-expand { max-height: 320px; }
-      .expand-grid { grid-template-columns: 1fr; gap: 8px; }
-      .filter-row { gap: 6px; }
-      .filter-btn { padding: 4px 10px; font-size: 14px; }
-    }
-  </style>
+/* ── PAGE ── */
+main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding:28px 24px 60px;}
+.top-bar{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;}
+.top-bar h1{font-family:var(--font-display);font-size:26px;color:var(--navy-950);}
+.top-bar .meta{font-size:12px;color:var(--gray-400);text-align:right;line-height:1.8;font-family:var(--font-en);}
+
+/* ── CARD ── */
+.glass-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:18px 20px;backdrop-filter:none;margin-bottom:12px;box-shadow:var(--shadow-card);}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--gray-100);}
+.card-title{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--gray-900);font-family:var(--font-zh);}
+
+/* ── RANGE INFO ── */
+.range-info{font-size:11.5px;color:var(--gray-400);margin-bottom:12px;padding:7px 12px;background:var(--gray-50);border-radius:var(--r-sm);border:1px solid var(--gray-200);font-family:var(--font-zh);}
+
+/* ── FILTER ROW ── */
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.filter-btn{padding:4px 12px;border-radius:20px;font-size:11.5px;font-weight:500;cursor:pointer;border:1px solid var(--gray-200);background:var(--white);color:var(--gray-500);font-family:var(--font-en);transition:all .15s;white-space:nowrap;}
+.filter-btn:hover{border-color:var(--navy-300);color:var(--navy-600);}
+.filter-btn.active{background:var(--navy-700);border-color:var(--navy-700);color:var(--white);}
+.filter-btn.fed-filter.active{background:var(--red-100);border-color:#fecaca;color:var(--red-700);}
+.filter-btn.earnings-filter.active{background:var(--navy-50);border-color:var(--navy-100);color:var(--navy-600);}
+.filter-btn.data-filter.active{background:var(--green-100);border-color:#bbf7d0;color:var(--green-700);}
+.filter-btn.tw-filter.active{background:#ccfbf1;border-color:#99f6e4;color:#0f766e;}
+.filter-btn.geo-filter.active{background:var(--amber-100);border-color:#fde68a;color:var(--amber-700);}
+.filter-btn.past-filter.active{background:var(--gray-100);border-color:var(--gray-300);color:var(--gray-600);}
+
+/* ── DATE GROUP HEADER ── */
+.date-group-header{font-size:11px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.08em;padding:14px 4px 7px;border-bottom:1px solid var(--gray-100);margin-bottom:3px;display:flex;align-items:center;gap:8px;font-family:var(--font-en);}
+.date-group-header.today-header{color:var(--navy-500);}
+.date-group-header.past-header{color:var(--gray-300);}
+
+/* ── EVENT ITEMS ── */
+.event-item{display:flex;gap:12px;padding:12px 4px;border-bottom:1px solid var(--gray-100);border-radius:var(--r-sm);cursor:pointer;transition:all .15s;margin:0 -4px;}
+.event-item:last-child{border-bottom:none;}
+.event-item:hover{background:var(--navy-50);}
+.event-item.open{background:var(--navy-50);}
+.event-item.hidden{display:none;}
+.event-item.today-event{background:var(--navy-50);border-left:2px solid var(--navy-300);padding-left:10px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin-left:-2px;}
+.event-item.today-event:hover{background:var(--navy-100);}
+.event-item.past-event{opacity:.6;}
+.event-item.high-impact-event{border-left:2px solid #fecaca;padding-left:10px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin-left:-2px;}
+
+/* Event date col */
+.event-date-col{min-width:52px;text-align:center;padding-top:2px;flex-shrink:0;}
+.event-month{font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.06em;font-family:var(--font-en);}
+.event-day{font-size:22px;font-weight:600;line-height:1.1;font-family:var(--font-en);}
+.event-weekday{font-size:10px;color:var(--gray-400);font-family:var(--font-en);}
+.event-time-label{font-size:10px;color:var(--navy-500);margin-top:3px;font-weight:600;font-family:var(--font-en);}
+
+/* Event body */
+.event-body{flex:1;min-width:0;}
+.event-title-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:3px;}
+.event-title{font-size:13.5px;font-weight:600;color:var(--gray-900);font-family:var(--font-zh);}
+.event-desc{font-size:12.5px;color:var(--gray-600);line-height:1.6;font-family:var(--font-zh);}
+
+/* Badges */
+.impact-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap;letter-spacing:.04em;font-family:var(--font-en);}
+.impact-high{background:var(--red-100);color:var(--red-700);border:1px solid #fecaca;}
+.impact-mid{background:var(--amber-100);color:var(--amber-700);border:1px solid #fde68a;}
+.impact-low{background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);}
+.type-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:.04em;flex-shrink:0;font-family:var(--font-en);}
+.type-fed{background:var(--red-100);color:var(--red-700);border:1px solid #fecaca;}
+.type-earnings{background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);}
+.type-data{background:var(--green-100);color:var(--green-700);border:1px solid #bbf7d0;}
+.type-tw{background:#ccfbf1;color:#0f766e;border:1px solid #99f6e4;}
+.type-crypto{background:#fdf4ff;color:#7e22ce;border:1px solid #e9d5ff;}
+.type-geo{background:var(--amber-100);color:var(--amber-700);border:1px solid #fde68a;}
+.today-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);font-family:var(--font-en);}
+.past-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);font-family:var(--font-en);}
+
+/* Expand */
+.event-expand{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s;opacity:0;}
+.event-item.open .event-expand{max-height:280px;opacity:1;}
+.expand-divider{height:1px;background:var(--gray-100);margin:10px 0;}
+.expand-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.expand-cell-label{font-size:10px;color:var(--gray-400);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px;font-weight:600;font-family:var(--font-en);}
+.expand-cell-value{font-size:12.5px;color:var(--gray-600);line-height:1.5;font-family:var(--font-zh);}
+.expand-cell-value.green{color:var(--green-600);font-weight:600;}
+.expand-cell-value.blue{color:var(--navy-500);font-weight:600;}
+.expand-cell-value.orange{color:var(--amber-600);}
+.expand-full{margin-top:8px;padding:7px 10px;background:var(--gray-50);border-radius:5px;border-left:2px solid var(--amber-600);}
+.expand-arrow{font-size:13px;color:var(--gray-400);transition:transform .3s;flex-shrink:0;align-self:flex-start;margin-top:3px;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:0 16px;}
+  .nav-links,.nav-right{display:none;}
+  .hamburger{display:flex;}
+  main{padding:16px 16px 40px;}
+  .top-bar{flex-direction:column;align-items:flex-start;gap:4px;margin-bottom:14px;}
+  .top-bar .meta{text-align:left;font-size:11px;}
+  .glass-card{padding:14px 16px;}
+  .event-date-col{min-width:44px;}
+  .event-day{font-size:18px;}
+  .event-item.open .event-expand{max-height:320px;}
+  .expand-grid{grid-template-columns:1fr;gap:7px;}
+  .filter-row{gap:5px;}
+  .filter-btn{padding:3px 9px;font-size:11px;}
+}
+</style>
 </head>
 <body>
-  <nav>
-    <div class="logo"><svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4da6ff"/><stop offset="100%" stop-color="#9f7aea"/></linearGradient><linearGradient id="lgh" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4da6ff"/><stop offset="100%" stop-color="#9f7aea"/></linearGradient></defs><g transform="translate(20,20)"><polygon points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" fill="rgba(77,166,255,0.08)" stroke="url(#lg)" stroke-width="1.5"/><line x1="-5.5" y1="-5.5" x2="5.5" y2="5.5" stroke="url(#lg)" stroke-width="2.2" stroke-linecap="round"/><line x1="5.5" y1="-5.5" x2="-5.5" y2="5.5" stroke="url(#lg)" stroke-width="2.2" stroke-linecap="round"/></g><text x="40" y="17" font-family="Inter,sans-serif" font-size="13" font-weight="700" letter-spacing="2.5" fill="#f0f0f5">PROJECT <tspan fill="url(#lgh)">X</tspan></text><text x="41" y="30" font-family="Inter,sans-serif" font-size="5.5" font-weight="400" letter-spacing="3" fill="#7070a0">INTELLIGENCE</text></svg></div>
-    <ul class="nav-links">
-      <li><a href="/index.html">總覽</a></li>
-      <li><a href="/pages/market.html">市場</a></li>
-      <li><a href="/pages/industry.html">產業</a></li>
-      <li><a href="/pages/institutional.html">機構報告</a></li>
-      <li><a href="/pages/calendar.html" class="active">市場日曆</a></li>
-      <li><a href="/pages/targets.html">標的追蹤</a></li>
-    </ul>
-    <div class="nav-right">
-      <a href="/pages/login.html" class="btn btn-ghost" style="text-decoration:none;">登入</a>
-      <button class="btn btn-glow">訂閱 Pro</button>
-    </div>
-    <button class="hamburger" onclick="toggleMenu()" id="hamburger">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
 
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="/index.html">📊 總覽</a>
-    <a href="/pages/market.html">📈 市場</a>
-    <a href="/pages/industry.html">🏭 產業</a>
-    <a href="/pages/institutional.html">🏛 機構報告</a>
-    <a href="/pages/calendar.html" class="active">📅 市場日曆</a>
-    <a href="/pages/targets.html">🎯 標的追蹤</a>
-    <div class="mobile-menu-btns">
-      <a href="/pages/login.html" class="btn btn-ghost" style="text-decoration:none;">登入</a>
-      <button class="btn btn-glow">訂閱 Pro</button>
+<nav>
+  <div class="logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M2 9L9 2L16 9L9 16L2 9Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M9 5.5L12.5 9L9 12.5L5.5 9L9 5.5Z" fill="white" opacity="0.6"/>
+        <circle cx="9" cy="9" r="1.5" fill="white"/>
+      </svg>
+    </div>
+    <div style="display:flex;flex-direction:column;line-height:1.1">
+      <span class="logo-main">PROJECT X</span>
+      <span class="logo-sub">INTELLIGENCE</span>
     </div>
   </div>
+  <ul class="nav-links">
+    <li><a href="/index.html">總覽</a></li>
+    <li><a href="/pages/market.html">市場</a></li>
+    <li><a href="/pages/industry.html">產業</a></li>
+    <li><a href="/pages/institutional.html">機構研報</a></li>
+    <li><a href="/pages/calendar.html" class="active"><span class="nav-dot"></span>市場日曆</a></li>
+    <li><a href="/pages/targets.html">標的追蹤</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+    <span class="header-time" id="clock">—</span>
+    <a href="/pages/login.html" class="btn btn-ghost" style="text-decoration:none;">登入</a>
+    <button class="btn btn-glow">訂閱 Pro</button>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  <main>
-    <div class="top-bar">
-      <div>
-        <h1>市場日曆</h1>
-        <div style="font-size:12px; color:var(--text-muted); margin-top:3px;">央行決策 · 財報日期 · 重要數據 · 台股股務事件</div>
-      </div>
-      <div class="meta" id="cal-date"></div>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/index.html">總覽</a>
+  <a href="/pages/market.html">市場</a>
+  <a href="/pages/industry.html">產業</a>
+  <a href="/pages/institutional.html">機構研報</a>
+  <a href="/pages/calendar.html" class="active">市場日曆</a>
+  <a href="/pages/targets.html">標的追蹤</a>
+  <div class="mobile-menu-btns">
+    <a href="/pages/login.html" class="btn btn-ghost" style="text-align:center;">登入</a>
+    <button class="btn btn-glow">訂閱 Pro</button>
+  </div>
+</div>
+
+<main>
+  <div class="top-bar">
+    <div>
+      <h1>市場日曆</h1>
+      <div style="font-size:11px;color:var(--gray-400);margin-top:3px;font-family:var(--font-zh);">央行決策 · 財報日期 · 重要數據 · 台股股務事件</div>
     </div>
+    <div class="meta" id="cal-date"></div>
+  </div>
 
-    <div class="glass-card">
-      <div class="card-header">
-        <div class="card-title">📅 近期重要事件</div>
-        <span id="event-count" style="font-size:11px;color:var(--text-muted);"></span>
-      </div>
-      <div class="range-info" id="range-info">載入中...</div>
-      <div class="filter-row">
-        <button class="filter-btn active" onclick="filterEvents('all', this)">全部</button>
-        <button class="filter-btn fed-filter" onclick="filterEvents('fed', this)">🏛 Fed</button>
-        <button class="filter-btn earnings-filter" onclick="filterEvents('earnings', this)">📊 財報</button>
-        <button class="filter-btn data-filter" onclick="filterEvents('data', this)">📈 數據</button>
-        <button class="filter-btn tw-filter" onclick="filterEvents('tw', this)">🇹🇼 台股</button>
-        <button class="filter-btn geo-filter" onclick="filterEvents('geo', this)">🌐 地緣</button>
-        <button class="filter-btn past-filter" onclick="filterEvents('past', this)">⏮ 過去</button>
-        <button class="filter-btn" onclick="filterEvents('future', this)">⏭ 未來</button>
-      </div>
-      <div id="events-list"></div>
+  <div class="glass-card">
+    <div class="card-header">
+      <div class="card-title">📅 近期重要事件</div>
+      <span id="event-count" style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);"></span>
     </div>
-  </main>
+    <div class="range-info" id="range-info">載入中...</div>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterEvents('all',this)">全部</button>
+      <button class="filter-btn fed-filter" onclick="filterEvents('fed',this)">🏛 Fed</button>
+      <button class="filter-btn earnings-filter" onclick="filterEvents('earnings',this)">📊 財報</button>
+      <button class="filter-btn data-filter" onclick="filterEvents('data',this)">📈 數據</button>
+      <button class="filter-btn tw-filter" onclick="filterEvents('tw',this)">🇹🇼 台股</button>
+      <button class="filter-btn geo-filter" onclick="filterEvents('geo',this)">🌐 地緣</button>
+      <button class="filter-btn past-filter" onclick="filterEvents('past',this)">⏮ 過去</button>
+      <button class="filter-btn" onclick="filterEvents('future',this)">⏭ 未來</button>
+    </div>
+    <div id="events-list"></div>
+  </div>
+</main>
 
-  <script>
-    var TODAY = '';
-    var allEvents = [];
+<script>
+// Clock
+function tick(){
+  const t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
+  const el=document.getElementById('clock');
+  if(el) el.textContent=t+' CST';
+}
+tick(); setInterval(tick,1000);
 
-    function toggleMenu() {
-      var menu = document.getElementById('mobile-menu');
-      var hamburger = document.getElementById('hamburger');
-      menu.classList.toggle('open');
-      hamburger.classList.toggle('open');
-      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+// Mobile menu
+function toggleMenu(){
+  var menu=document.getElementById('mobile-menu');
+  var hamburger=document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  hamburger.classList.toggle('open');
+  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
+}
+document.getElementById('mobile-menu').querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click',function(){
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow='';
+  });
+});
+window.addEventListener('scroll',function(){
+  document.querySelector('nav').style.boxShadow=window.scrollY>10?'0 2px 20px rgba(15,23,42,.08)':'';
+});
+</script>
+
+<!-- 原有 JS 邏輯完整保留 -->
+<script>
+var TODAY='';
+var allEvents=[];
+
+function toggleEvent(el){
+  var isOpen=el.classList.contains('open');
+  document.querySelectorAll('.event-item.open').forEach(function(item){
+    item.classList.remove('open');
+    var arrow=item.querySelector('.expand-arrow');
+    if(arrow) arrow.style.transform='rotate(0deg)';
+  });
+  if(!isOpen){
+    el.classList.add('open');
+    var arrow=el.querySelector('.expand-arrow');
+    if(arrow) arrow.style.transform='rotate(90deg)';
+  }
+}
+
+function filterEvents(type,btn){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  var items=document.querySelectorAll('.event-item');
+  var groups=document.querySelectorAll('.date-group-header');
+  var count=0;
+  items.forEach(function(item){
+    var eType=item.getAttribute('data-type');
+    var eDate=item.getAttribute('data-date');
+    var isPast=eDate<TODAY;
+    var isFuture=eDate>TODAY;
+    var show=false;
+    if(type==='all') show=true;
+    else if(type==='past') show=isPast;
+    else if(type==='future') show=isFuture;
+    else show=eType===type;
+    item.classList.toggle('hidden',!show);
+    if(show) count++;
+  });
+  groups.forEach(function(g){
+    var groupDate=g.getAttribute('data-group-date');
+    var hasVisible=false;
+    document.querySelectorAll('.event-item[data-date="'+groupDate+'"]').forEach(function(item){
+      if(!item.classList.contains('hidden')) hasVisible=true;
+    });
+    g.style.display=hasVisible?'':'none';
+  });
+  var countEl=document.getElementById('event-count');
+  if(countEl) countEl.textContent=count+' 則';
+}
+
+function formatEventDate(dateStr){
+  try{
+    var d=new Date(dateStr+'T00:00:00');
+    var months=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+    var weekdays=['日','一','二','三','四','五','六'];
+    return{month:months[d.getMonth()],day:d.getDate(),weekday:'週'+weekdays[d.getDay()]};
+  }catch(e){return{month:'--',day:'--',weekday:'--'};}
+}
+
+function getTypeLabel(type){
+  var map={fed:'Fed',earnings:'財報',data:'數據',tw:'台股',crypto:'加密',geo:'地緣'};
+  return map[type]||type;
+}
+
+function getImpactLabel(impact){
+  var map={high:'🔴 高度關注',mid:'🟡 中度關注',low:'⚪ 一般關注'};
+  return map[impact]||impact;
+}
+
+function renderEvents(events,today){
+  if(!events||events.length===0){
+    document.getElementById('events-list').innerHTML='<div style="color:var(--gray-400);font-size:13px;padding:20px 0;text-align:center;">尚無事件資料，觸發 brief 後自動累積</div>';
+    return;
+  }
+  var groups={};
+  events.forEach(function(e){
+    if(!groups[e.date]) groups[e.date]=[];
+    groups[e.date].push(e);
+  });
+  var sortedDates=Object.keys(groups).sort();
+  var html='';
+  sortedDates.forEach(function(date){
+    var isToday=date===today;
+    var isPast=date<today;
+    var dt=formatEventDate(date);
+    var groupLabel=isToday?'📌 今日 — '+date:(isPast?'⏮ '+date:'⏭ '+date);
+    html+='<div class="date-group-header '+(isToday?'today-header':isPast?'past-header':'')+'" data-group-date="'+date+'">'+groupLabel+'</div>';
+    groups[date].forEach(function(e){
+      var isHigh=e.impact==='high';
+      var extraClass=isToday?' today-event':(isPast?' past-event':(isHigh?' high-impact-event':''));
+      html+='<div class="event-item'+extraClass+'" data-type="'+e.type+'" data-date="'+e.date+'" onclick="toggleEvent(this)">'+
+        '<div class="event-date-col">'+
+          '<div class="event-month">'+dt.month+'</div>'+
+          '<div class="event-day" style="'+(isToday?'color:var(--navy-500);':'')+'">'+dt.day+'</div>'+
+          '<div class="event-weekday">'+dt.weekday+'</div>'+
+          (e.time?'<div class="event-time-label">'+e.time+'</div>':'')+
+        '</div>'+
+        '<div class="event-body">'+
+          '<div class="event-title-row">'+
+            '<span class="type-badge type-'+e.type+'">'+getTypeLabel(e.type)+'</span>'+
+            (isToday?'<span class="today-badge">今日</span>':'')+
+            (isPast?'<span class="past-badge">已過</span>':'')+
+            (isHigh?'<span class="impact-badge impact-high">高影響</span>':'')+
+            '<span class="event-title">'+e.title+'</span>'+
+          '</div>'+
+          '<div class="event-desc">'+e.desc+'</div>'+
+          '<div class="event-expand">'+
+            '<div class="expand-divider"></div>'+
+            '<div class="expand-grid">'+
+              '<div><div class="expand-cell-label">市場預期</div><div class="expand-cell-value green">'+(e.expect||'—')+'</div></div>'+
+              '<div><div class="expand-cell-label">前次數值</div><div class="expand-cell-value">'+(e.prev||'—')+'</div></div>'+
+              '<div><div class="expand-cell-label">受影響標的</div><div class="expand-cell-value blue">'+(e.affect_assets||'—')+'</div></div>'+
+              '<div><div class="expand-cell-label">影響程度</div><div class="expand-cell-value orange">'+getImpactLabel(e.impact)+'</div></div>'+
+            '</div>'+
+            (e.watch?'<div class="expand-full"><div class="expand-cell-label" style="margin-bottom:3px;">持續觀察</div><div class="expand-cell-value">'+e.watch+'</div></div>':'')+
+          '</div>'+
+        '</div>'+
+        '<div class="expand-arrow">›</div>'+
+      '</div>';
+    });
+  });
+  document.getElementById('events-list').innerHTML=html;
+  document.getElementById('event-count').textContent=events.length+' 則';
+}
+
+async function loadData(){
+  var dailyRes=await fetch('../data/daily.json');
+  var daily=await dailyRes.json();
+  TODAY=daily.date;
+  var d=new Date(TODAY+'T00:00:00');
+  document.getElementById('cal-date').innerHTML=
+    d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'<br>UTC+8 台北時間';
+  var past15=new Date(d); past15.setDate(past15.getDate()-15);
+  var future15=new Date(d); future15.setDate(future15.getDate()+15);
+  var past15Str=past15.toISOString().split('T')[0];
+  var future15Str=future15.toISOString().split('T')[0];
+  document.getElementById('range-info').textContent=
+    '顯示範圍：'+past15Str+' 至 '+future15Str+'（前後各15天，每日觸發 brief 自動累積）';
+  var events=[];
+  try{
+    var accRes=await fetch('../data/accumulated.json');
+    if(accRes.ok){
+      var acc=await accRes.json();
+      if(acc.events&&acc.events.length>0) events=acc.events;
     }
+  }catch(e){}
+  if(events.length===0&&daily.calendar&&daily.calendar.events) events=daily.calendar.events;
+  allEvents=events;
+  renderEvents(events,TODAY);
+}
 
-    function toggleEvent(el) {
-      var isOpen = el.classList.contains('open');
-      document.querySelectorAll('.event-item.open').forEach(function(item) {
-        item.classList.remove('open');
-        var arrow = item.querySelector('.expand-arrow');
-        if (arrow) arrow.style.transform = 'rotate(0deg)';
-      });
-      if (!isOpen) {
-        el.classList.add('open');
-        var arrow = el.querySelector('.expand-arrow');
-        if (arrow) arrow.style.transform = 'rotate(90deg)';
-      }
-    }
-
-    function filterEvents(type, btn) {
-      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      var items = document.querySelectorAll('.event-item');
-      var groups = document.querySelectorAll('.date-group-header');
-      var count = 0;
-      items.forEach(function(item) {
-        var eType = item.getAttribute('data-type');
-        var eDate = item.getAttribute('data-date');
-        var isPast = eDate < TODAY;
-        var isFuture = eDate > TODAY;
-        var show = false;
-        if (type === 'all') show = true;
-        else if (type === 'past') show = isPast;
-        else if (type === 'future') show = isFuture;
-        else show = eType === type;
-        item.classList.toggle('hidden', !show);
-        if (show) count++;
-      });
-      // 隱藏空的日期分組
-      groups.forEach(function(g) {
-        var groupDate = g.getAttribute('data-group-date');
-        var hasVisible = false;
-        document.querySelectorAll('.event-item[data-date="' + groupDate + '"]').forEach(function(item) {
-          if (!item.classList.contains('hidden')) hasVisible = true;
-        });
-        g.style.display = hasVisible ? '' : 'none';
-      });
-      var countEl = document.getElementById('event-count');
-      if (countEl) countEl.textContent = count + ' 則';
-    }
-
-    function formatEventDate(dateStr) {
-      try {
-        var d = new Date(dateStr + 'T00:00:00');
-        var months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-        var weekdays = ['日','一','二','三','四','五','六'];
-        return { month: months[d.getMonth()], day: d.getDate(), weekday: '週' + weekdays[d.getDay()] };
-      } catch(e) { return { month: '--', day: '--', weekday: '--' }; }
-    }
-
-    function getTypeLabel(type) {
-      var map = { 'fed':'Fed', 'earnings':'財報', 'data':'數據', 'tw':'台股', 'crypto':'加密', 'geo':'地緣' };
-      return map[type] || type;
-    }
-
-    function getImpactLabel(impact) {
-      var map = { 'high':'🔴 高度關注', 'mid':'🟡 中度關注', 'low':'⚪ 一般關注' };
-      return map[impact] || impact;
-    }
-
-    function renderEvents(events, today) {
-      if (!events || events.length === 0) {
-        document.getElementById('events-list').innerHTML = '<div style="color:var(--text-muted);font-size:13px;padding:20px 0;text-align:center;">尚無事件資料，觸發 brief 後自動累積</div>';
-        return;
-      }
-
-      // 按日期分組
-      var groups = {};
-      events.forEach(function(e) {
-        if (!groups[e.date]) groups[e.date] = [];
-        groups[e.date].push(e);
-      });
-
-      var sortedDates = Object.keys(groups).sort();
-      var html = '';
-
-      sortedDates.forEach(function(date) {
-        var isToday = date === today;
-        var isPast = date < today;
-        var dt = formatEventDate(date);
-        var groupLabel = isToday ? '📌 今日 — ' + date : (isPast ? '⏮ ' + date : '⏭ ' + date);
-        html += '<div class="date-group-header ' + (isToday ? 'today-header' : isPast ? 'past-header' : '') + '" data-group-date="' + date + '">' + groupLabel + '</div>';
-
-        groups[date].forEach(function(e) {
-          var isHigh = e.impact === 'high';
-          var extraClass = isToday ? ' today-event' : (isPast ? ' past-event' : (isHigh ? ' high-impact-event' : ''));
-          html += '<div class="event-item' + extraClass + '" data-type="' + e.type + '" data-date="' + e.date + '" onclick="toggleEvent(this)">' +
-            '<div class="event-date-col">' +
-              '<div class="event-month">' + dt.month + '</div>' +
-              '<div class="event-day" style="' + (isToday ? 'color:var(--accent-blue);' : '') + '">' + dt.day + '</div>' +
-              '<div class="event-weekday">' + dt.weekday + '</div>' +
-              (e.time ? '<div class="event-time-label">' + e.time + '</div>' : '') +
-            '</div>' +
-            '<div class="event-body">' +
-              '<div class="event-title-row">' +
-                '<span class="type-badge type-' + e.type + '">' + getTypeLabel(e.type) + '</span>' +
-                (isToday ? '<span class="today-badge">今日</span>' : '') +
-                (isPast ? '<span class="past-badge">已過</span>' : '') +
-                (isHigh ? '<span class="impact-badge impact-high">高影響</span>' : '') +
-                '<span class="event-title">' + e.title + '</span>' +
-              '</div>' +
-              '<div class="event-desc">' + e.desc + '</div>' +
-              '<div class="event-expand">' +
-                '<div class="expand-divider"></div>' +
-                '<div class="expand-grid">' +
-                  '<div><div class="expand-cell-label">市場預期</div><div class="expand-cell-value green">' + (e.expect || '—') + '</div></div>' +
-                  '<div><div class="expand-cell-label">前次數值</div><div class="expand-cell-value">' + (e.prev || '—') + '</div></div>' +
-                  '<div><div class="expand-cell-label">受影響標的</div><div class="expand-cell-value blue">' + (e.affect_assets || '—') + '</div></div>' +
-                  '<div><div class="expand-cell-label">影響程度</div><div class="expand-cell-value orange">' + getImpactLabel(e.impact) + '</div></div>' +
-                '</div>' +
-                (e.watch ? '<div class="expand-full"><div class="expand-cell-label" style="margin-bottom:4px;">持續觀察</div><div class="expand-cell-value">' + e.watch + '</div></div>' : '') +
-              '</div>' +
-            '</div>' +
-            '<div class="expand-arrow">›</div>' +
-          '</div>';
-        });
-      });
-
-      document.getElementById('events-list').innerHTML = html;
-      document.getElementById('event-count').textContent = events.length + ' 則';
-    }
-
-    async function loadData() {
-      // 讀 daily.json 取得今日日期
-      var dailyRes = await fetch('../data/daily.json');
-      var daily = await dailyRes.json();
-      TODAY = daily.date;
-
-      var d = new Date(TODAY + 'T00:00:00');
-      document.getElementById('cal-date').innerHTML =
-        d.toLocaleDateString('zh-TW', { year:'numeric', month:'long', day:'numeric', weekday:'long' }) + '<br>UTC+8 台北時間';
-
-      // 計算前後15天
-      var past15 = new Date(d); past15.setDate(past15.getDate() - 15);
-      var future15 = new Date(d); future15.setDate(future15.getDate() + 15);
-      var past15Str = past15.toISOString().split('T')[0];
-      var future15Str = future15.toISOString().split('T')[0];
-
-      document.getElementById('range-info').textContent =
-        '顯示範圍：' + past15Str + ' 至 ' + future15Str + '（前後各15天，每日觸發 brief 自動累積）';
-
-      // 優先讀 accumulated.json
-      var events = [];
-      try {
-        var accRes = await fetch('../data/accumulated.json');
-        if (accRes.ok) {
-          var acc = await accRes.json();
-          if (acc.events && acc.events.length > 0) {
-            events = acc.events;
-          }
-        }
-      } catch(e) {}
-
-      // fallback：若 accumulated 還沒有，讀 daily.json 的 calendar.events
-      if (events.length === 0 && daily.calendar && daily.calendar.events) {
-        events = daily.calendar.events;
-      }
-
-      allEvents = events;
-      renderEvents(events, TODAY);
-    }
-
-    loadData();
-  </script>
+loadData();
+</script>
 </body>
 </html>
