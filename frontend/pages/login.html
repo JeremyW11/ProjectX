@@ -1,220 +1,306 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProjectX — 登入</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    :root {
-      --bg-base: #05060f; --border: rgba(255,255,255,0.08);
-      --text-primary: #f0f0f5; --text-secondary: #a8a8c8; --text-muted: #7070a0;
-      --accent-blue: #4da6ff; --accent-purple: #9f7aea;
-      --accent-green: #48bb78; --accent-red: #fc8181;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: var(--bg-base); color: var(--text-primary); min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      background-image: radial-gradient(ellipse 80% 50% at 20% 0%, rgba(77,99,255,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 0%, rgba(159,122,234,0.06) 0%, transparent 50%);
-    }
-    .container { width: 100%; max-width: 420px; padding: 24px; }
-    .logo {
-      font-size: 24px; font-weight: 700; letter-spacing: 2px;
-      background: linear-gradient(135deg, #4da6ff, #9f7aea);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      text-align: center; margin-bottom: 8px;
-    }
-    .subtitle { text-align: center; font-size: 17px; color: var(--text-muted); margin-bottom: 32px; }
-    .card {
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      border-radius: 20px; padding: 32px;
-    }
-    .tabs { display: flex; gap: 0; margin-bottom: 28px; border-bottom: 1px solid var(--border); }
-    .tab-btn {
-      flex: 1; padding: 10px; font-size: 16px; font-weight: 600; cursor: pointer;
-      border: none; background: transparent; color: var(--text-muted);
-      border-bottom: 2px solid transparent; transition: all 0.2s; font-family: 'Inter', sans-serif;
-    }
-    .tab-btn.active { color: var(--text-primary); border-bottom-color: var(--accent-blue); }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .form-group { margin-bottom: 18px; }
-    label { display: block; font-size: 16px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; letter-spacing: 0.5px; text-transform: uppercase; }
-    input {
-      width: 100%; padding: 12px 14px; border-radius: 10px;
-      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-      color: var(--text-primary); font-size: 16px; font-family: 'Inter', sans-serif;
-      transition: border-color 0.2s; outline: none;
-    }
-    input:focus { border-color: var(--accent-blue); }
-    input::placeholder { color: var(--text-muted); }
-    .btn-primary {
-      width: 100%; padding: 13px; border-radius: 10px; font-size: 16px; font-weight: 600;
-      cursor: pointer; border: none; font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #4da6ff, #9f7aea);
-      color: #fff; box-shadow: 0 0 20px rgba(77,166,255,0.3); transition: all 0.2s;
-      margin-top: 8px;
-    }
-    .btn-primary:hover { box-shadow: 0 0 30px rgba(77,166,255,0.5); transform: translateY(-1px); }
-    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .msg { font-size: 17px; text-align: center; margin-top: 14px; padding: 10px; border-radius: 8px; display: none; }
-    .msg.success { background: rgba(72,187,120,0.1); color: var(--accent-green); border: 1px solid rgba(72,187,120,0.2); }
-    .msg.error { background: rgba(252,129,129,0.1); color: var(--accent-red); border: 1px solid rgba(252,129,129,0.2); }
-    .back-link { text-align: center; margin-top: 20px; font-size: 17px; color: var(--text-muted); }
-    .back-link a { color: var(--accent-blue); text-decoration: none; }
-    .divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
-    .divider-line { flex: 1; height: 1px; background: var(--border); }
-    .divider-text { font-size: 16px; color: var(--text-muted); }
-    .user-info { text-align: center; }
-    .user-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, rgba(77,166,255,0.3), rgba(159,122,234,0.3)); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; color: var(--accent-blue); margin: 0 auto 12px; border: 2px solid rgba(77,166,255,0.3); }
-    .user-email { font-size: 16px; color: var(--text-secondary); margin-bottom: 20px; }
-    .btn-logout { width: 100%; padding: 12px; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font-family: 'Inter', sans-serif; transition: all 0.2s; }
-    .btn-logout:hover { border-color: var(--accent-red); color: var(--accent-red); }
-    .btn-goto { display: block; width: 100%; padding: 12px; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; border: none; background: rgba(77,166,255,0.1); color: var(--accent-blue); font-family: 'Inter', sans-serif; transition: all 0.2s; text-align: center; text-decoration: none; margin-bottom: 10px; }
-    .btn-goto:hover { background: rgba(77,166,255,0.2); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X · 登入</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-950:#070d1c; --navy-700:#1d2d5a; --navy-600:#1e3a8a;
+  --navy-400:#3b82f6; --navy-300:#93c5fd; --navy-100:#dbeafe; --navy-50:#eff6ff;
+  --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569;
+  --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1;
+  --gray-200:#e2e8f0; --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
+  --green-700:#15803d; --green-600:#16a34a; --green-100:#dcfce7;
+  --red-600:#dc2626; --red-100:#fee2e2;
+  --font-en:'DM Sans',sans-serif;
+  --font-zh:'Noto Sans TC',sans-serif;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;-webkit-font-smoothing:antialiased;}
+body{
+  font-family:var(--font-zh);
+  background:#f7f8fc;
+  color:var(--gray-900);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 20% 0%,rgba(37,99,235,.05) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 0%,rgba(124,58,237,.04) 0%,transparent 50%);
+}
+
+.container{width:100%;max-width:420px;padding:24px;}
+
+/* Logo */
+.logo-wrap{text-align:center;margin-bottom:10px;}
+.logo-mark-center{
+  width:44px;height:44px;background:var(--navy-700);border-radius:12px;
+  display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px;
+}
+.logo-main-text{
+  font-family:var(--font-en);font-size:15px;font-weight:600;
+  color:var(--navy-800,#152244);letter-spacing:.05em;display:block;
+}
+.logo-sub-text{
+  font-size:10px;color:var(--gray-400);letter-spacing:.08em;
+  font-family:var(--font-en);display:block;
+}
+.subtitle{
+  text-align:center;font-size:13px;color:var(--gray-400);
+  margin-bottom:28px;font-family:var(--font-zh);
+}
+
+/* Card */
+.card{
+  background:var(--white);border:1px solid var(--gray-200);
+  border-radius:20px;padding:28px 30px;
+  box-shadow:0 4px 24px rgba(15,23,42,.08);
+}
+
+/* Tabs */
+.tabs{display:flex;gap:0;margin-bottom:24px;border-bottom:1px solid var(--gray-200);}
+.tab-btn{
+  flex:1;padding:9px;font-size:14px;font-weight:500;cursor:pointer;
+  border:none;background:transparent;color:var(--gray-400);
+  border-bottom:2px solid transparent;transition:all .2s;
+  font-family:var(--font-zh);
+}
+.tab-btn.active{color:var(--navy-600);border-bottom-color:var(--navy-500);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* Form */
+.form-group{margin-bottom:16px;}
+label{
+  display:block;font-size:12px;font-weight:600;color:var(--gray-600);
+  margin-bottom:5px;letter-spacing:.04em;text-transform:uppercase;
+  font-family:var(--font-en);
+}
+input{
+  width:100%;padding:10px 13px;border-radius:8px;
+  background:var(--white);border:1px solid var(--gray-300);
+  color:var(--gray-900);font-size:14px;font-family:var(--font-en);
+  transition:all .15s;outline:none;
+}
+input:focus{border-color:var(--navy-400);box-shadow:0 0 0 3px rgba(59,130,246,.1);}
+input::placeholder{color:var(--gray-400);}
+
+/* Buttons */
+.btn-primary{
+  width:100%;padding:11px;border-radius:8px;font-size:14px;font-weight:600;
+  cursor:pointer;border:none;font-family:var(--font-en);
+  background:var(--navy-700);color:var(--white);
+  transition:all .2s;margin-top:6px;
+}
+.btn-primary:hover{background:var(--navy-600);transform:translateY(-1px);box-shadow:0 4px 14px rgba(29,45,90,.2);}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* Messages */
+.msg{
+  font-size:13px;text-align:center;margin-top:12px;
+  padding:9px;border-radius:7px;display:none;font-family:var(--font-zh);
+}
+.msg.success{background:var(--green-100);color:var(--green-700);border:1px solid #bbf7d0;}
+.msg.error{background:var(--red-100);color:var(--red-600);border:1px solid #fecaca;}
+
+/* Back link */
+.back-link{
+  text-align:center;margin-top:18px;font-size:13px;color:var(--gray-400);
+  font-family:var(--font-en);
+}
+.back-link a{color:var(--navy-500);text-decoration:none;}
+.back-link a:hover{text-decoration:underline;}
+
+/* Logged in view */
+.user-info{text-align:center;}
+.user-avatar{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--navy-50);border:2px solid var(--navy-100);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:700;color:var(--navy-600);
+  margin:0 auto 10px;font-family:var(--font-en);
+}
+.user-email{font-size:13px;color:var(--gray-500);margin-bottom:18px;font-family:var(--font-en);}
+.btn-goto{
+  display:block;width:100%;padding:10px;border-radius:8px;font-size:13.5px;
+  font-weight:500;cursor:pointer;border:1px solid var(--gray-200);
+  background:var(--navy-50);color:var(--navy-700);
+  font-family:var(--font-zh);transition:all .15s;text-align:center;
+  text-decoration:none;margin-bottom:8px;
+}
+.btn-goto:hover{background:var(--navy-100);border-color:var(--navy-200,#c7d7fd);}
+.btn-logout{
+  width:100%;padding:10px;border-radius:8px;font-size:13.5px;font-weight:500;
+  cursor:pointer;border:1px solid var(--gray-200);background:var(--white);
+  color:var(--gray-500);font-family:var(--font-zh);transition:all .15s;
+}
+.btn-logout:hover{border-color:#fecaca;color:var(--red-600);}
+
+/* Loading */
+#loading-view{text-align:center;padding:20px;color:var(--gray-400);font-size:13px;font-family:var(--font-en);}
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo"><svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4da6ff"/><stop offset="100%" stop-color="#9f7aea"/></linearGradient><linearGradient id="lgh" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4da6ff"/><stop offset="100%" stop-color="#9f7aea"/></linearGradient></defs><g transform="translate(20,20)"><polygon points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" fill="rgba(77,166,255,0.08)" stroke="url(#lg)" stroke-width="1.5"/><line x1="-5.5" y1="-5.5" x2="5.5" y2="5.5" stroke="url(#lg)" stroke-width="2.2" stroke-linecap="round"/><line x1="5.5" y1="-5.5" x2="-5.5" y2="5.5" stroke="url(#lg)" stroke-width="2.2" stroke-linecap="round"/></g><text x="40" y="17" font-family="Inter,sans-serif" font-size="13" font-weight="700" letter-spacing="2.5" fill="#f0f0f5">PROJECT <tspan fill="url(#lgh)">X</tspan></text><text x="41" y="30" font-family="Inter,sans-serif" font-size="5.5" font-weight="400" letter-spacing="3" fill="#7070a0">INTELLIGENCE</text></svg></div>
-    <div class="subtitle">每日全球投資情報</div>
+<div class="container">
 
-    <div class="card" id="auth-card">
-      <!-- 登入中 -->
-      <div id="loading-view" style="text-align:center; padding:20px; color:var(--text-muted);">載入中...</div>
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <div class="logo-mark-center">
+      <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
+        <path d="M2 9L9 2L16 9L9 16L2 9Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M9 5.5L12.5 9L9 12.5L5.5 9L9 5.5Z" fill="white" opacity="0.6"/>
+        <circle cx="9" cy="9" r="1.5" fill="white"/>
+      </svg>
+    </div>
+    <span class="logo-main-text">PROJECT X</span>
+    <span class="logo-sub-text">INTELLIGENCE</span>
+  </div>
+  <div class="subtitle">每日全球投資情報</div>
 
-      <!-- 已登入 -->
-      <div id="logged-in-view" style="display:none;">
-        <div class="user-info">
-          <div class="user-avatar" id="user-initial">U</div>
-          <div id="user-email-display" class="user-email"></div>
-          <a href="/pages/targets.html" class="btn-goto">🎯 前往標的追蹤</a>
-          <a href="/index.html" class="btn-goto">📊 前往總覽</a>
-          <button class="btn-logout" onclick="signOut()">登出</button>
-        </div>
-      </div>
+  <div class="card" id="auth-card">
 
-      <!-- 未登入 -->
-      <div id="logged-out-view" style="display:none;">
-        <div class="tabs">
-          <button class="tab-btn active" onclick="switchTab('login', this)">登入</button>
-          <button class="tab-btn" onclick="switchTab('signup', this)">註冊</button>
-        </div>
+    <!-- 載入中 -->
+    <div id="loading-view">載入中...</div>
 
-        <!-- 登入表單 -->
-        <div id="tab-login" class="tab-content active">
-          <div class="form-group">
-            <label>電子郵件</label>
-            <input type="email" id="login-email" placeholder="your@email.com">
-          </div>
-          <div class="form-group">
-            <label>密碼</label>
-            <input type="password" id="login-password" placeholder="••••••••">
-          </div>
-          <button class="btn-primary" onclick="signIn()">登入</button>
-          <div class="msg" id="login-msg"></div>
-        </div>
-
-        <!-- 註冊表單 -->
-        <div id="tab-signup" class="tab-content">
-          <div class="form-group">
-            <label>電子郵件</label>
-            <input type="email" id="signup-email" placeholder="your@email.com">
-          </div>
-          <div class="form-group">
-            <label>密碼（至少6位）</label>
-            <input type="password" id="signup-password" placeholder="••••••••">
-          </div>
-          <div class="form-group">
-            <label>確認密碼</label>
-            <input type="password" id="signup-confirm" placeholder="••••••••">
-          </div>
-          <button class="btn-primary" onclick="signUp()">建立帳號</button>
-          <div class="msg" id="signup-msg"></div>
-        </div>
+    <!-- 已登入 -->
+    <div id="logged-in-view" style="display:none;">
+      <div class="user-info">
+        <div class="user-avatar" id="user-initial">U</div>
+        <div id="user-email-display" class="user-email"></div>
+        <a href="/pages/targets.html" class="btn-goto">🎯 前往標的追蹤</a>
+        <a href="/index.html" class="btn-goto">📊 前往總覽</a>
+        <button class="btn-logout" onclick="signOut()">登出</button>
       </div>
     </div>
 
-    <div class="back-link"><a href="/index.html">← 返回首頁</a></div>
+    <!-- 未登入 -->
+    <div id="logged-out-view" style="display:none;">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('login',this)">登入</button>
+        <button class="tab-btn" onclick="switchTab('signup',this)">註冊</button>
+      </div>
+
+      <!-- 登入 -->
+      <div id="tab-login" class="tab-content active">
+        <div class="form-group">
+          <label>電子郵件</label>
+          <input type="email" id="login-email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>密碼</label>
+          <input type="password" id="login-password" placeholder="••••••••">
+        </div>
+        <button class="btn-primary" onclick="signIn()">登入</button>
+        <div class="msg" id="login-msg"></div>
+      </div>
+
+      <!-- 註冊 -->
+      <div id="tab-signup" class="tab-content">
+        <div class="form-group">
+          <label>電子郵件</label>
+          <input type="email" id="signup-email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>密碼（至少6位）</label>
+          <input type="password" id="signup-password" placeholder="••••••••">
+        </div>
+        <div class="form-group">
+          <label>確認密碼</label>
+          <input type="password" id="signup-confirm" placeholder="••••••••">
+        </div>
+        <button class="btn-primary" onclick="signUp()">建立帳號</button>
+        <div class="msg" id="signup-msg"></div>
+      </div>
+    </div>
+
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    var SUPABASE_URL = 'https://eezhmeccakaeiprviqra.supabase.co';
-    var SUPABASE_KEY = 'sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
-    var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  <div class="back-link"><a href="/index.html">← 返回首頁</a></div>
+</div>
 
-    function switchTab(tab, btn) {
-      document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.remove('active'); });
-      document.querySelectorAll('.tab-btn').forEach(function(el) { el.classList.remove('active'); });
-      document.getElementById('tab-' + tab).classList.add('active');
-      btn.classList.add('active');
-    }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    function showMsg(id, text, type) {
-      var el = document.getElementById(id);
-      el.textContent = text;
-      el.className = 'msg ' + type;
-      el.style.display = 'block';
-    }
+<!-- 原有 Supabase auth 邏輯完整保留 -->
+<script>
+var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
+var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+var supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-    async function checkUser() {
-      var session = await supabase.auth.getSession();
-      var user = session.data.session ? session.data.session.user : null;
-      document.getElementById('loading-view').style.display = 'none';
-      if (user) {
-        document.getElementById('logged-in-view').style.display = 'block';
-        document.getElementById('user-email-display').textContent = user.email;
-        document.getElementById('user-initial').textContent = user.email[0].toUpperCase();
-      } else {
-        document.getElementById('logged-out-view').style.display = 'block';
-      }
-    }
+function switchTab(tab,btn){
+  document.querySelectorAll('.tab-content').forEach(function(el){el.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(el){el.classList.remove('active');});
+  document.getElementById('tab-'+tab).classList.add('active');
+  btn.classList.add('active');
+}
 
-    async function signIn() {
-      var email = document.getElementById('login-email').value.trim();
-      var password = document.getElementById('login-password').value;
-      if (!email || !password) { showMsg('login-msg', '請填寫所有欄位', 'error'); return; }
-      var btn = document.querySelector('#tab-login .btn-primary');
-      btn.disabled = true; btn.textContent = '登入中...';
-      var result = await supabase.auth.signInWithPassword({ email: email, password: password });
-      if (result.error) {
-        showMsg('login-msg', '登入失敗：' + result.error.message, 'error');
-        btn.disabled = false; btn.textContent = '登入';
-      } else {
-        showMsg('login-msg', '登入成功！跳轉中...', 'success');
-        setTimeout(function() { window.location.href = '/pages/targets.html'; }, 1000);
-      }
-    }
+function showMsg(id,text,type){
+  var el=document.getElementById(id);
+  el.textContent=text;
+  el.className='msg '+type;
+  el.style.display='block';
+}
 
-    async function signUp() {
-      var email = document.getElementById('signup-email').value.trim();
-      var password = document.getElementById('signup-password').value;
-      var confirm = document.getElementById('signup-confirm').value;
-      if (!email || !password || !confirm) { showMsg('signup-msg', '請填寫所有欄位', 'error'); return; }
-      if (password !== confirm) { showMsg('signup-msg', '兩次密碼不一致', 'error'); return; }
-      if (password.length < 6) { showMsg('signup-msg', '密碼至少需要6位', 'error'); return; }
-      var btn = document.querySelector('#tab-signup .btn-primary');
-      btn.disabled = true; btn.textContent = '建立中...';
-      var result = await supabase.auth.signUp({ email: email, password: password });
-      if (result.error) {
-        showMsg('signup-msg', '註冊失敗：' + result.error.message, 'error');
-        btn.disabled = false; btn.textContent = '建立帳號';
-      } else {
-        showMsg('signup-msg', '✅ 註冊成功！請查看信箱確認連結', 'success');
-        btn.disabled = false; btn.textContent = '建立帳號';
-      }
-    }
+async function checkUser(){
+  var session=await supabase.auth.getSession();
+  var user=session.data.session?session.data.session.user:null;
+  document.getElementById('loading-view').style.display='none';
+  if(user){
+    document.getElementById('logged-in-view').style.display='block';
+    document.getElementById('user-email-display').textContent=user.email;
+    document.getElementById('user-initial').textContent=user.email[0].toUpperCase();
+  }else{
+    document.getElementById('logged-out-view').style.display='block';
+  }
+}
 
-    async function signOut() {
-      await supabase.auth.signOut();
-      window.location.reload();
-    }
+async function signIn(){
+  var email=document.getElementById('login-email').value.trim();
+  var password=document.getElementById('login-password').value;
+  if(!email||!password){showMsg('login-msg','請填寫所有欄位','error');return;}
+  var btn=document.querySelector('#tab-login .btn-primary');
+  btn.disabled=true;btn.textContent='登入中...';
+  var result=await supabase.auth.signInWithPassword({email:email,password:password});
+  if(result.error){
+    showMsg('login-msg','登入失敗：'+result.error.message,'error');
+    btn.disabled=false;btn.textContent='登入';
+  }else{
+    showMsg('login-msg','登入成功！跳轉中...','success');
+    setTimeout(function(){window.location.href='/pages/targets.html';},1000);
+  }
+}
 
-    checkUser();
-  </script>
+async function signUp(){
+  var email=document.getElementById('signup-email').value.trim();
+  var password=document.getElementById('signup-password').value;
+  var confirm=document.getElementById('signup-confirm').value;
+  if(!email||!password||!confirm){showMsg('signup-msg','請填寫所有欄位','error');return;}
+  if(password!==confirm){showMsg('signup-msg','兩次密碼不一致','error');return;}
+  if(password.length<6){showMsg('signup-msg','密碼至少需要6位','error');return;}
+  var btn=document.querySelector('#tab-signup .btn-primary');
+  btn.disabled=true;btn.textContent='建立中...';
+  var result=await supabase.auth.signUp({email:email,password:password});
+  if(result.error){
+    showMsg('signup-msg','註冊失敗：'+result.error.message,'error');
+    btn.disabled=false;btn.textContent='建立帳號';
+  }else{
+    showMsg('signup-msg','✅ 註冊成功！請查看信箱確認連結','success');
+    btn.disabled=false;btn.textContent='建立帳號';
+  }
+}
+
+async function signOut(){
+  await supabase.auth.signOut();
+  window.location.reload();
+}
+
+checkUser();
+</script>
 </body>
 </html>
