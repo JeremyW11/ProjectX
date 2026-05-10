@@ -1,0 +1,1011 @@
+{
+  "date": "2026-05-10",
+  "tickers": [
+    {
+      "label": "BTC / USD",
+      "value": "$81,500",
+      "change": "+2.5%",
+      "dir": "up"
+    },
+    {
+      "label": "ETH / USD",
+      "value": "$3,200",
+      "change": "+1.8%",
+      "dir": "up"
+    },
+    {
+      "label": "S&P 500",
+      "value": "$737.62",
+      "change": "+0.52%",
+      "dir": "up"
+    },
+    {
+      "label": "NASDAQ",
+      "value": "$711.23",
+      "change": "+2.22%",
+      "dir": "up"
+    },
+    {
+      "label": "台股加權",
+      "value": "40,000",
+      "change": "+4.65%",
+      "dir": "up"
+    },
+    {
+      "label": "Brent 原油",
+      "value": "$120",
+      "change": "+1.2%",
+      "dir": "up"
+    }
+  ],
+  "macro": [
+    {
+      "tag": "Fed人事",
+      "type": "macro",
+      "text": "參議院本週投票Warsh接任Fed主席 Powell任期5/15届滿",
+      "time": "2026-05-11",
+      "impact": "貨幣政策不確定性升高",
+      "expand_analysis": "Warsh傾向縮減資產負債表 可能改變Fed對通膨看法 市場需重新評估利率路徑",
+      "expand_impact_pos": "美元 金融股",
+      "expand_impact_neg": "成長股 債券 加密貨幣",
+      "expand_tickers": "TLT XLF DXY",
+      "expand_action": "關注確認投票結果 減少槓桿部位",
+      "expand_watch": "5/15 Powell正式卸任"
+    },
+    {
+      "tag": "美伊衝突",
+      "type": "macro",
+      "text": "霍爾木茲海峽僵局持續 Brent原油維持$120高檔",
+      "time": "2026-05-10",
+      "impact": "能源成本推升通膨壓力",
+      "expand_analysis": "油價較衝突前上漲60% 壓縮企業利潤並延後降息預期 AI資料中心成本上升",
+      "expand_impact_pos": "能源股 石油公司 國防股",
+      "expand_impact_neg": "航空 運輸 消費",
+      "expand_tickers": "XLE XOM CVX LMT",
+      "expand_action": "能源股可逢回布局 消費股謹慎",
+      "expand_watch": "美伊談判進展 Polymarket和平協議概率"
+    },
+    {
+      "tag": "通膨數據",
+      "type": "macro",
+      "text": "3月PCE年增3.5%創新高 核心PCE達3.2%",
+      "time": "2026-05-10",
+      "impact": "Fed降息時程延後至2027",
+      "expand_analysis": "美銀預測Fed今年不降息 通膨黏性與就業韌性壓縮政策空間",
+      "expand_impact_pos": "銀行股 價值股",
+      "expand_impact_neg": "高估值成長股 REITs",
+      "expand_tickers": "XLF KRE VTV",
+      "expand_action": "減持利率敏感資產",
+      "expand_watch": "5月CPI及就業數據"
+    }
+  ],
+  "industry": [
+    {
+      "tag": "半導體",
+      "type": "semi",
+      "text": "TSMC Q1營收年增40% 全球晶圓代工市佔72%",
+      "time": "2026-05-10",
+      "impact": "AI需求持續爆發支撐產業",
+      "expand_analysis": "記憶體支出預計從2160億躍升至6330億 半導體成新石油 台灣出口創16年最大成長",
+      "expand_impact_pos": "NVDA TSM AMD MU",
+      "expand_impact_neg": "傳統消費電子",
+      "expand_tickers": "NVDA TSM AMD AVGO MU",
+      "expand_action": "AI晶片龍頭持續加碼",
+      "expand_watch": "5/20 NVDA財報"
+    },
+    {
+      "tag": "AI基建",
+      "type": "ai",
+      "text": "Nvidia投資Corning 32億美元及IREN 21億美元部署5GW",
+      "time": "2026-05-09",
+      "impact": "AI基礎設施投資加速",
+      "expand_analysis": "Meta資本支出預計達1450億美元 CSP持續擴大AI投資 帶動整體供應鏈",
+      "expand_impact_pos": "網通 電源 散熱 光通訊",
+      "expand_impact_neg": "傳統伺服器",
+      "expand_tickers": "NVDA META GLW IREN",
+      "expand_action": "佈局AI基建供應鏈",
+      "expand_watch": "各大CSP資本支出指引"
+    }
+  ],
+  "persons": [
+    {
+      "initials": "MS",
+      "name": "Michael Saylor",
+      "title": "執行主席｜Strategy",
+      "note": "首度表態可能出售BTC支付股息 逆轉永不賣出策略",
+      "expand_watch": "Strategy持有818,334 BTC 平均成本$75,500"
+    },
+    {
+      "initials": "KW",
+      "name": "Kevin Warsh",
+      "title": "Fed主席提名人｜前Fed理事",
+      "note": "參議院最早5/11投票確認 計劃縮減Fed資產負債表",
+      "expand_watch": "貨幣政策轉向風險"
+    },
+    {
+      "initials": "WB",
+      "name": "Warren Buffett",
+      "title": "CEO｜Berkshire",
+      "note": "現金部位達歷史最高$3970億 Q1淨賣出$81億股票",
+      "expand_watch": "防禦性配置訊號"
+    }
+  ],
+  "signals": [
+    {
+      "name": "半導體/AI",
+      "signal": "bull",
+      "label": "看多",
+      "reason": "AI需求爆發 財報超預期"
+    },
+    {
+      "name": "加密貨幣",
+      "signal": "watch",
+      "label": "觀察",
+      "reason": "多空比0.74 空頭仍佔優"
+    },
+    {
+      "name": "能源",
+      "signal": "bull",
+      "label": "看多",
+      "reason": "地緣溢價支撐油價"
+    },
+    {
+      "name": "金融",
+      "signal": "watch",
+      "label": "觀察",
+      "reason": "Fed人事不確定性高"
+    }
+  ],
+  "market": {
+    "crypto": [
+      {
+        "symbol": "BTC",
+        "name": "Bitcoin",
+        "price": "$81,500",
+        "change": "+2.5%",
+        "dir": "up",
+        "high": "--",
+        "low": "--",
+        "market_cap": "$1.6T",
+        "volume": "$35B",
+        "signal": "watch",
+        "signal_label": "觀察",
+        "support": "$79,228",
+        "resistance": "$85,200",
+        "tech_note": "RSI 69 中性偏多 需突破$85K確認趨勢",
+        "watch_note": "多空比0.74空頭仍佔優 ETF持續流入"
+      },
+      {
+        "symbol": "ETH",
+        "name": "Ethereum",
+        "price": "$3,200",
+        "change": "+1.8%",
+        "dir": "up",
+        "high": "--",
+        "low": "--",
+        "market_cap": "$385B",
+        "volume": "$15B",
+        "signal": "watch",
+        "signal_label": "觀察",
+        "support": "$3,000",
+        "resistance": "$3,500",
+        "tech_note": "跟隨BTC走勢 清算$0.95億",
+        "watch_note": "觀察BTC突破後連動表現"
+      },
+      {
+        "symbol": "SOL",
+        "name": "Solana",
+        "price": "$180",
+        "change": "+3.2%",
+        "dir": "up",
+        "high": "--",
+        "low": "--",
+        "market_cap": "$78B",
+        "volume": "$3.5B",
+        "signal": "bull",
+        "signal_label": "看多",
+        "support": "$165",
+        "resistance": "$200",
+        "tech_note": "鏈上活躍度維持高檔",
+        "watch_note": "生態發展與DEX交易量"
+      }
+    ],
+    "crypto_news": [
+      {
+        "text": "比特幣ETF單日淨流入$5.32億 BlackRock IBIT吸引$3.35億",
+        "time": "2026-05-04"
+      },
+      {
+        "text": "交易所BTC持有量降至269.3萬枚 六個月減少17萬枚",
+        "time": "2026-05-10"
+      },
+      {
+        "text": "Saylor首度表態可能出售BTC支付股息 Strategy持有818,334枚",
+        "time": "2026-05-07"
+      },
+      {
+        "text": "5月4日全網24小時清算$3.7億 空頭佔$3.02億",
+        "time": "2026-05-04"
+      },
+      {
+        "text": "Coinbase宣布裁員14% 轉向AI原生營運",
+        "time": "2026-05-10"
+      }
+    ],
+    "us_stocks": [
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "price": "$215.20",
+        "change": "+3.55%",
+        "dir": "up",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "投資Corning 32億及IREN 21億 5/20財報",
+        "watch_note": "Q1 FY27財報指引",
+        "tech_note": "創歷史新高 動能強勁",
+        "action": "持有待財報確認"
+      },
+      {
+        "ticker": "TSM",
+        "name": "台積電ADR",
+        "price": "$411.68",
+        "change": "-1.86%",
+        "dir": "down",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "Q1營收年增40% AI驅動 市佔72%",
+        "watch_note": "AI晶片產能配置",
+        "tech_note": "短線回檔整理",
+        "action": "逢回分批布局"
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft",
+        "price": "$415.12",
+        "change": "+0.28%",
+        "dir": "up",
+        "tag": "server",
+        "tag_label": "雲端",
+        "note": "Copilot ARR破百億 2026基建支出千億",
+        "watch_note": "Azure AI成長率",
+        "tech_note": "高檔震盪整理",
+        "action": "持有觀望"
+      },
+      {
+        "ticker": "AAPL",
+        "name": "Apple",
+        "price": "$293.32",
+        "change": "+2.02%",
+        "dir": "up",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "Q2財報超預期 iPhone 17需求非凡",
+        "watch_note": "AI功能整合進度",
+        "tech_note": "突破前高 趨勢向上",
+        "action": "突破加碼"
+      },
+      {
+        "ticker": "META",
+        "name": "Meta",
+        "price": "$609.63",
+        "change": "-0.53%",
+        "dir": "down",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "Q1營收563億年增33% 資本支出達1450億",
+        "watch_note": "AI推薦引擎效益",
+        "tech_note": "高檔小幅回檔",
+        "action": "持有"
+      },
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "price": "$421.39（前收）",
+        "change": "+8.02%",
+        "dir": "up",
+        "tag": "ai",
+        "tag_label": "額外",
+        "note": "Q1營收102.5億 Data Center年增57% 多家上調目標價",
+        "watch_note": "Meta及OpenAI合作進展",
+        "tech_note": "前收盤價",
+        "action": "",
+        "isExtra": true
+      },
+      {
+        "ticker": "MU",
+        "name": "Micron",
+        "price": "$666.59（前收）",
+        "change": "+12.03%",
+        "dir": "up",
+        "tag": "semi",
+        "tag_label": "額外",
+        "note": "創16年最佳單週表現 五日漲30% 市值超越JPM",
+        "watch_note": "HBM產能及定價",
+        "tech_note": "前收盤價",
+        "action": "",
+        "isExtra": true
+      },
+      {
+        "ticker": "AVGO",
+        "name": "Broadcom",
+        "price": "$425.44（前收）",
+        "change": "+1.07%",
+        "dir": "up",
+        "tag": "ai",
+        "tag_label": "額外",
+        "note": "OpenAI 180億晶片交易傳融資困難 股價承壓",
+        "watch_note": "客製化AI晶片訂單",
+        "tech_note": "前收盤價",
+        "action": "",
+        "isExtra": true
+      }
+    ],
+    "us_news": [
+      {
+        "text": "Nvidia與國防部簽署AI軍事用途協議 允許目標鎖定輔助",
+        "time": "2026-05-09"
+      },
+      {
+        "text": "AMD獲Bernstein升級至Outperform 目標價525美元",
+        "time": "2026-05-08"
+      },
+      {
+        "text": "Micron創16年最佳單週表現 市值超越JPMorgan",
+        "time": "2026-05-09"
+      },
+      {
+        "text": "Intel股價一年漲逾5倍 處理器需求超過供應",
+        "time": "2026-05-10"
+      },
+      {
+        "text": "Broadcom與OpenAI 180億晶片交易傳融資困難",
+        "time": "2026-05-09"
+      }
+    ],
+    "tw_stocks": [
+      {
+        "ticker": "2330",
+        "name": "台積電",
+        "price": "1250",
+        "change": "+6.56%",
+        "dir": "up",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "台股站上4萬點主要貢獻者 外資大舉買超",
+        "watch_note": "AI產能配置",
+        "tech_note": "外資連續買超",
+        "action": "持有核心部位"
+      },
+      {
+        "ticker": "2317",
+        "name": "鴻海",
+        "price": "235",
+        "change": "+5.22%",
+        "dir": "up",
+        "tag": "server",
+        "tag_label": "伺服器",
+        "note": "4月營收8320億創同期新高 帶動鴻家軍",
+        "watch_note": "美國投資進度",
+        "tech_note": "外資買超前五大",
+        "action": "逢回布局"
+      },
+      {
+        "ticker": "2454",
+        "name": "聯發科",
+        "price": "2800",
+        "change": "+10%",
+        "dir": "up",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "首度遭處置 5/7至5/20處置期 市值逾5.5兆",
+        "watch_note": "處置期間波動",
+        "tech_note": "漲停鎖死",
+        "action": "處置期避免追高"
+      },
+      {
+        "ticker": "2308",
+        "name": "台達電",
+        "price": "680",
+        "change": "+2.54%",
+        "dir": "up",
+        "tag": "server",
+        "tag_label": "電源",
+        "note": "AI電源需求強勁 貢獻大盤漲點",
+        "watch_note": "資料中心訂單",
+        "tech_note": "外資買超",
+        "action": "持有"
+      },
+      {
+        "ticker": "3711",
+        "name": "日月光",
+        "price": "220",
+        "change": "+4.5%",
+        "dir": "up",
+        "tag": "semi",
+        "tag_label": "封裝",
+        "note": "IC封測族群全面噴出 受惠AI需求",
+        "watch_note": "先進封裝產能",
+        "tech_note": "法人買超",
+        "action": "跟隨半導體趨勢"
+      }
+    ],
+    "tw_news": [
+      {
+        "text": "台股首度站上4萬點 勁揚1778點創史上最大漲點紀錄",
+        "time": "2026-05-07"
+      },
+      {
+        "text": "聯發科首度遭處置 5/7至5/20 市值逾5.5兆罕見案例",
+        "time": "2026-05-07"
+      },
+      {
+        "text": "智邦股價2505元鎖漲停超越股號創歷史新高",
+        "time": "2026-05-07"
+      },
+      {
+        "text": "外資單日買超751億 聯發科鴻海台達電居前",
+        "time": "2026-05-06"
+      },
+      {
+        "text": "台股開戶數突破1408萬戶 投資普及率逾六成",
+        "time": "2026-05-10"
+      }
+    ]
+  },
+  "tw_market_summary": {
+    "trade_value": "--",
+    "foreign_net": "--"
+  },
+  "sentiment": {
+    "fear_greed": {
+      "value": "67",
+      "label": "貪婪",
+      "change": "+40",
+      "note": "一個月前僅27處於恐懼區 現已大幅回升至貪婪"
+    },
+    "polymarket": [
+      {
+        "title": "美伊和平協議6月底前達成",
+        "prob": "51%",
+        "trend": "up",
+        "note": "市場預期年底前達成機率78%"
+      },
+      {
+        "title": "民主黨控制眾議院",
+        "prob": "78.5%",
+        "trend": "up",
+        "note": "交易量達578萬美元"
+      },
+      {
+        "title": "共和黨維持參議院",
+        "prob": "54.5%",
+        "trend": "flat",
+        "note": "兩黨拉鋸態勢"
+      }
+    ],
+    "coinglass": {
+      "btc_long_liq": "179M",
+      "btc_short_liq": "302M",
+      "eth_long_liq": "95M",
+      "eth_short_liq": "未取得",
+      "funding_rate": "未取得",
+      "long_short_ratio": "BTC 多空比 0.74（多:42.5% 空:57.5%）",
+      "note": "空單清算302M遠超多單 但多空比顯示空頭仍佔優勢"
+    }
+  },
+  "industry_detail": {
+    "news": [
+      {
+        "tag": "AI國防合約",
+        "type": "ai",
+        "text": "Nvidia、Microsoft、Amazon與美國國防部簽署合法軍事用途AI協議，允許五角大樓廣泛使用先進AI技術",
+        "time": "2026-05-10",
+        "impact": "AI軍事應用市場打開，科技巨頭國防營收來源擴大",
+        "expand_analysis": "國防AI應用從輔助決策擴展至目標鎖定，顯示AI軍事化進程加速，預算規模可觀",
+        "expand_impact_pos": "NVDA、MSFT、AMZN、PLTR",
+        "expand_impact_neg": "傳統國防承包商",
+        "expand_tickers": "NVDA、MSFT、AMZN",
+        "expand_action": "關注國防AI訂單規模與毛利率",
+        "expand_watch": "國防預算審議進度"
+      },
+      {
+        "tag": "台股破4萬點",
+        "type": "tw",
+        "text": "台股首度站上4萬點大關，勁揚1778點創史上最大漲點紀錄，外資單日買超751億元",
+        "time": "2026-05-07",
+        "impact": "台股資金動能強勁，權值股全面噴發帶動指數創高",
+        "expand_analysis": "AI硬體需求結構性爆發，台灣半導體供應鏈受惠最深，外資連續大舉回補",
+        "expand_impact_pos": "2330台積電、2454聯發科、2317鴻海",
+        "expand_impact_neg": "高估值成長股面臨獲利了結壓力",
+        "expand_tickers": "2330、2454、2317、2345",
+        "expand_action": "關注聯發科處置期間波動風險",
+        "expand_watch": "外資買超持續性及成交量能"
+      },
+      {
+        "tag": "Fed主席交接",
+        "type": "finance",
+        "text": "參議院最早5月11日投票確認Kevin Warsh接任Fed主席，Powell任期5月15日結束",
+        "time": "2026-05-10",
+        "impact": "貨幣政策風格可能轉變，Warsh傾向縮減資產負債表",
+        "expand_analysis": "Warsh偏鷹派立場可能改變Fed對通膨容忍度，市場預期降息延後至2027年",
+        "expand_impact_pos": "美元、短債",
+        "expand_impact_neg": "高成長股、長債、黃金",
+        "expand_tickers": "TLT、GLD、QQQ",
+        "expand_action": "降低久期敞口，觀望新主席政策方向",
+        "expand_watch": "5月11日參議院投票結果"
+      },
+      {
+        "tag": "伊朗戰爭油價",
+        "type": "energy",
+        "text": "Brent原油維持120美元附近，霍爾木茲海峽僵局持續，油價較衝突前上漲近60%",
+        "time": "2026-05-10",
+        "impact": "能源成本高企壓制消費及企業利潤，通膨黏性增強",
+        "expand_analysis": "全球20%能源經荷姆茲海峽運輸，封鎖風險持續推高風險溢價",
+        "expand_impact_pos": "XOM、CVX、能源ETF",
+        "expand_impact_neg": "航空、運輸、高耗能製造業",
+        "expand_tickers": "XLE、XOM、CVX",
+        "expand_action": "能源股維持超配，避開高油價敏感產業",
+        "expand_watch": "美伊談判進展及海峽通行狀況"
+      },
+      {
+        "tag": "Nvidia投資布局",
+        "type": "semi",
+        "text": "Nvidia本週投資Corning最高32億美元及IREN 21億美元，部署5GW AI基礎設施",
+        "time": "2026-05-10",
+        "impact": "AI基礎設施投資持續擴張，供應鏈受惠明顯",
+        "expand_analysis": "Nvidia透過股權投資綁定關鍵供應商，鞏固AI生態系統護城河",
+        "expand_impact_pos": "GLW、IREN、AI基建概念股",
+        "expand_impact_neg": "無直接負面標的",
+        "expand_tickers": "NVDA、GLW、IREN",
+        "expand_action": "關注NVDA 5月20日財報驗證投資回報",
+        "expand_watch": "AI資本支出增速與客戶訂單"
+      }
+    ],
+    "top_companies": [
+      {
+        "name": "NVIDIA",
+        "ticker": "NVDA·NASDAQ",
+        "industry": "半導體",
+        "event_type": "earnings",
+        "event_label": "財報將至",
+        "note": "今日漲3.55%創新高，本週投資Corning及IREN共53億美元，5月20日將公布Q1財報",
+        "core_business": "AI GPU及資料中心晶片龍頭",
+        "recent_event": "與國防部簽AI協議，Q4營收681億美元年增73%",
+        "industry_impact": "AI算力需求指數成長，帶動整體半導體產業估值",
+        "risk_note": "估值極高，財報預期已充分反映"
+      },
+      {
+        "name": "台積電",
+        "ticker": "2330·TWSE",
+        "industry": "半導體",
+        "event_type": "watch",
+        "event_label": "權值領漲",
+        "note": "ADR下跌1.86%但台股漲6.56%，Q1營收年增40%由AI驅動",
+        "core_business": "全球最大晶圓代工廠控制72%市場",
+        "recent_event": "帶動台股站上4萬點，外資連續大買",
+        "industry_impact": "AI晶片製造核心供應商地位無可取代",
+        "risk_note": "地緣政治風險及客戶集中度"
+      },
+      {
+        "name": "聯發科",
+        "ticker": "2454·TWSE",
+        "industry": "半導體",
+        "event_type": "watch",
+        "event_label": "遭處置",
+        "note": "首度遭證交所列入處置名單，處置期間5月7日至5月20日，股價漲停",
+        "core_business": "全球前五大IC設計公司",
+        "recent_event": "市值超過5.5兆元仍遭處置，為罕見大型權值股案例",
+        "industry_impact": "手機及AI邊緣運算晶片需求回升",
+        "risk_note": "處置期間流動性受限，波動加劇"
+      },
+      {
+        "name": "AMD",
+        "ticker": "AMD·NASDAQ",
+        "industry": "半導體",
+        "event_type": "watch",
+        "event_label": "財報利多",
+        "note": "過去一週漲9.92%，Q1財報後單日飆漲17%，Data Center營收年增57%",
+        "core_business": "CPU及GPU晶片設計，資料中心擴張",
+        "recent_event": "Bernstein升級至買進目標價525美元，Meta及OpenAI訂單加持",
+        "industry_impact": "AI GPU市場份額持續擴大挑戰NVDA",
+        "risk_note": "競爭激烈，毛利率壓力"
+      },
+      {
+        "name": "智邦",
+        "ticker": "2345·TWSE",
+        "industry": "網通設備",
+        "event_type": "watch",
+        "event_label": "股價創高",
+        "note": "股價2505元鎖漲停創歷史新高，首度超越股號數字",
+        "core_business": "高速網路交換器及AI資料中心設備",
+        "recent_event": "受惠AI資料中心建設及高速網路升級趨勢",
+        "industry_impact": "AI伺服器網通需求帶動產業鏈估值重估",
+        "risk_note": "估值偏高，訂單能見度需持續驗證"
+      },
+      {
+        "name": "Meta",
+        "ticker": "META·NASDAQ",
+        "industry": "社群媒體/AI",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "Q1營收563億美元年增33%，資本支出將暴增至1450億美元",
+        "core_business": "社群平台Facebook/Instagram/WhatsApp及AI廣告推薦系統",
+        "recent_event": "AI推薦引擎使Reels互動提升逾40%，EPS年增61%至10.44美元",
+        "industry_impact": "AI廣告技術領先帶動數位廣告產業效率提升",
+        "risk_note": "資本支出激增壓縮短期利潤，監管風險持續"
+      },
+      {
+        "name": "台積電",
+        "ticker": "TSM·NYSE",
+        "industry": "半導體代工",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "今日下跌1.86%，Q1營收年增40%由AI驅動",
+        "core_business": "全球最大晶圓代工廠，控制72%市場份額",
+        "recent_event": "台股首度站上4萬點，台積電漲6.56%創歷史新高",
+        "industry_impact": "AI晶片需求爆發使先進製程產能持續吃緊",
+        "risk_note": "地緣政治風險及客戶集中度偏高"
+      },
+      {
+        "name": "Broadcom",
+        "ticker": "AVGO·NASDAQ",
+        "industry": "半導體/網通",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "OpenAI 180億美元AI晶片交易傳融資困難，股價跌4%",
+        "core_business": "客製化AI晶片ASIC及網通半導體解決方案",
+        "recent_event": "28位分析師給予強力買入，平均目標價451美元",
+        "industry_impact": "AI基礎設施關鍵供應商，受惠超大規模資料中心建設",
+        "risk_note": "大型交易融資不確定性及客戶依賴風險"
+      },
+      {
+        "name": "沙烏地阿美",
+        "ticker": "2222·TADAWUL",
+        "industry": "石油天然氣",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "市值約1.7兆美元，受惠油價飆升至120美元/桶",
+        "core_business": "全球最大石油生產商，日產量逾1000萬桶",
+        "recent_event": "霍爾木茲海峽僵局推升油價較衝突前上漲約50%",
+        "industry_impact": "能源價格高漲推升全球通膨及AI資料中心營運成本",
+        "risk_note": "地緣政治風險及能源轉型長期壓力"
+      },
+      {
+        "name": "特斯拉",
+        "ticker": "TSLA·NASDAQ",
+        "industry": "電動車/機器人",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "停產Model S和X，聚焦Optimus人形機器人業務",
+        "core_business": "電動車製造及自動駕駛技術開發",
+        "recent_event": "2026年1月宣布產品線重組，轉向機器人及AI業務",
+        "industry_impact": "人形機器人商業化進程加速，重塑製造業勞動力結構",
+        "risk_note": "核心電動車業務收縮及機器人商業化時程不確定"
+      }
+    ],
+    "corp_events": [
+      {
+        "date": "2026-05-11",
+        "title": "Fed主席提名投票",
+        "desc": "參議院投票表決Kevin Warsh接任Fed主席提名案"
+      },
+      {
+        "date": "2026-05-15",
+        "title": "Powell任期結束",
+        "desc": "現任Fed主席Powell正式卸任"
+      },
+      {
+        "date": "2026-05-20",
+        "title": "NVIDIA財報",
+        "desc": "NVIDIA公布Q1 FY27財報，盤後發布"
+      },
+      {
+        "date": "2026-05-20",
+        "title": "聯發科處置結束",
+        "desc": "聯發科證交所處置期間結束"
+      },
+      {
+        "date": "2026-05-25",
+        "title": "美股休市",
+        "desc": "美國陣亡將士紀念日NYSE休市"
+      }
+    ],
+    "rotation": [
+      {
+        "from": "科技成長股",
+        "to": "能源股",
+        "strength": "明顯",
+        "reason": "伊朗戰爭推升油價，能源股今年漲近30%而科技股持平"
+      },
+      {
+        "from": "美股",
+        "to": "台股",
+        "strength": "強烈",
+        "reason": "外資連續大買台股，AI硬體供應鏈集中台灣，資金明顯回流"
+      },
+      {
+        "from": "長天期債券",
+        "to": "短天期債券",
+        "strength": "中等",
+        "reason": "Fed降息預期延後至2027年，長債承壓資金轉向短債避險"
+      }
+    ]
+  },
+  "institutional": {
+    "research": [
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "firm": "Bernstein",
+        "firm_background": "華爾街知名獨立研究機構",
+        "rating": "Outperform",
+        "rating_type": "outperform",
+        "rating_change": "上調",
+        "prev_target": "265",
+        "target": "525",
+        "date": "2026-05-06",
+        "note": "預估2027年EPS超過14美元，Meta與OpenAI合作推升估值",
+        "core_logic": "Data Center年增57%，AI GPU市占擴大",
+        "risk_note": "Nvidia競爭壓力與供應鏈風險",
+        "action": "逢低買入，目標價525美元"
+      },
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "firm": "Barclays",
+        "firm_background": "英國跨國投行",
+        "rating": "Overweight",
+        "rating_type": "buy",
+        "rating_change": "上調",
+        "prev_target": "",
+        "target": "500",
+        "date": "2026-05-06",
+        "note": "Meta 6GW合作與Oracle Helios超級電腦推升前景",
+        "core_logic": "AI伺服器訂單能見度提升",
+        "risk_note": "毛利率壓力",
+        "action": "買入持有"
+      },
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "firm": "Cantor Fitzgerald",
+        "firm_background": "美國中型投行",
+        "rating": "Overweight",
+        "rating_type": "buy",
+        "rating_change": "上調",
+        "prev_target": "",
+        "target": "500",
+        "date": "2026-05-06",
+        "note": "Q1財報後上調目標價，Data Center成長強勁",
+        "core_logic": "AI推論市場份額擴張",
+        "risk_note": "客戶集中度風險",
+        "action": "買入"
+      },
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "firm": "BofA",
+        "firm_background": "美國銀行證券部門",
+        "rating": "Buy",
+        "rating_type": "buy",
+        "rating_change": "上調",
+        "prev_target": "",
+        "target": "450",
+        "date": "2026-05-06",
+        "note": "OpenAI部署與雲端客戶擴張支撐成長",
+        "core_logic": "MI系列GPU競爭力提升",
+        "risk_note": "定價競爭加劇",
+        "action": "買入"
+      },
+      {
+        "ticker": "AVGO",
+        "name": "Broadcom",
+        "firm": "TipRanks Consensus",
+        "firm_background": "華爾街分析師共識平台",
+        "rating": "Strong Buy",
+        "rating_type": "buy",
+        "rating_change": "維持",
+        "prev_target": "",
+        "target": "468",
+        "date": "2026-05-09",
+        "note": "28位分析師給予強力買入，AI網通晶片需求穩健",
+        "core_logic": "AI ASIC與網通晶片雙引擎成長",
+        "risk_note": "OpenAI晶片交易融資不確定性",
+        "action": "持有觀望融資進展"
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "firm": "Wall Street Consensus",
+        "firm_background": "華爾街分析師共識",
+        "rating": "Strong Buy",
+        "rating_type": "buy",
+        "rating_change": "維持",
+        "prev_target": "",
+        "target": "",
+        "date": "2026-05-09",
+        "note": "48個買入評級零賣出，市場最一致看多共識",
+        "core_logic": "AI推論王者地位穩固，Grace Blackwell熱銷",
+        "risk_note": "估值偏高與地緣風險",
+        "action": "核心持有，5/20財報前勿追高"
+      }
+    ],
+    "earnings": [
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "note": "Q1營收102.5億美元年增38%，Data Center年增57%",
+        "eps": "1.37",
+        "eps_est": "1.25",
+        "eps_result": "beat",
+        "eps_surprise": "+9.6%",
+        "revenue": "102.5億美元",
+        "rev_est": "98億美元",
+        "guidance": "Q2營收指引優於預期",
+        "market_reaction": "財報日股價+17.46%",
+        "key_metric": "Data Center營收57.75億",
+        "status": "已公布",
+        "status_type": "reported"
+      },
+      {
+        "ticker": "AAPL",
+        "name": "Apple",
+        "note": "Q2財報超預期，iPhone 17需求非凡",
+        "eps": "",
+        "eps_est": "",
+        "eps_result": "beat",
+        "eps_surprise": "",
+        "revenue": "",
+        "rev_est": "",
+        "guidance": "維持樂觀展望",
+        "market_reaction": "盤前+3%",
+        "key_metric": "iPhone 17銷售強勁",
+        "status": "已公布",
+        "status_type": "reported"
+      },
+      {
+        "ticker": "META",
+        "name": "Meta",
+        "note": "Q1營收563億美元年增33%，EPS年增61%至10.44美元",
+        "eps": "10.44",
+        "eps_est": "",
+        "eps_result": "beat",
+        "eps_surprise": "",
+        "revenue": "563億美元",
+        "rev_est": "",
+        "guidance": "2026年CapEx最高1450億美元",
+        "market_reaction": "股價反應平淡",
+        "key_metric": "AI推薦引擎提升40%互動",
+        "status": "已公布",
+        "status_type": "reported"
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "note": "Q1 FY27財報即將公布，市場高度關注",
+        "eps": "",
+        "eps_est": "",
+        "eps_result": "",
+        "eps_surprise": "",
+        "revenue": "",
+        "rev_est": "",
+        "guidance": "待公布",
+        "market_reaction": "待公布",
+        "key_metric": "Data Center與Blackwell出貨",
+        "status": "5/20盤後公布",
+        "status_type": "upcoming"
+      }
+    ],
+    "earnings_calls": [
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "date": "2026-02-25",
+        "ceo": "Jensen Huang",
+        "key_quote": "運算需求指數成長，agentic AI轉折點已到來",
+        "guidance": "FY27持續強勁，Vera Rubin延續領先",
+        "market_reaction": "股價持續創新高",
+        "watch_note": "Blackwell產能與Data Center佔比",
+        "sentiment": "positive"
+      }
+    ]
+  },
+  "calendar": {
+    "events": [
+      {
+        "date": "2026-05-11",
+        "time": "",
+        "title": "參議院投票Kevin Warsh Fed主席提名",
+        "desc": "Powell任期5/15結束，Warsh接任投票",
+        "type": "fed",
+        "tag": "央行人事",
+        "impact": "high",
+        "expect": "預期通過",
+        "prev": "",
+        "affect_assets": "美股、美債、黃金、BTC",
+        "watch": "貨幣政策方向變化"
+      },
+      {
+        "date": "2026-05-15",
+        "time": "",
+        "title": "Powell Fed主席任期結束",
+        "desc": "Warsh正式接任Fed主席",
+        "type": "fed",
+        "tag": "央行人事",
+        "impact": "high",
+        "expect": "政策轉向風險",
+        "prev": "",
+        "affect_assets": "全市場",
+        "watch": "縮表與通膨政策立場"
+      },
+      {
+        "date": "2026-05-20",
+        "time": "盤後",
+        "title": "NVIDIA Q1 FY27財報",
+        "desc": "全球市值最大公司季度財報",
+        "type": "earnings",
+        "tag": "AI龍頭",
+        "impact": "high",
+        "expect": "營收持續高成長",
+        "prev": "Q4營收681億美元",
+        "affect_assets": "NVDA、SMH、AI概念股、台積電",
+        "watch": "Blackwell出貨與毛利率"
+      },
+      {
+        "date": "2026-05-25",
+        "time": "全天",
+        "title": "美國陣亡將士紀念日",
+        "desc": "NYSE休市",
+        "type": "data",
+        "tag": "美國假日",
+        "impact": "low",
+        "expect": "休市",
+        "prev": "",
+        "affect_assets": "美股",
+        "watch": "節後交易量變化"
+      },
+      {
+        "date": "2026-05-31",
+        "time": "",
+        "title": "美伊和平協議Polymarket預測截止",
+        "desc": "5月底前達成協議概率28%",
+        "type": "geo",
+        "tag": "地緣政治",
+        "impact": "high",
+        "expect": "協議機率偏低",
+        "prev": "",
+        "affect_assets": "原油、能源股、航運",
+        "watch": "霍爾木茲海峽通行狀況"
+      }
+    ],
+    "high_impact": [
+      {
+        "date": "2026-05-11",
+        "title": "參議院投票Warsh Fed主席提名",
+        "desc": "決定Fed未來政策方向",
+        "impact": "high",
+        "affect_assets": "美股、美債、黃金"
+      },
+      {
+        "date": "2026-05-20",
+        "title": "NVIDIA Q1 FY27財報",
+        "desc": "AI產業風向標",
+        "impact": "high",
+        "affect_assets": "NVDA、半導體、AI概念股"
+      }
+    ],
+    "future": [
+      {
+        "date": "2026-06-30",
+        "title": "美伊和平協議關鍵觀察點",
+        "desc": "Polymarket預測51%機率達成協議"
+      },
+      {
+        "date": "2026-12-31",
+        "title": "美伊和平協議年度預測",
+        "desc": "Polymarket預測78%機率年底前達成"
+      }
+    ]
+  }
+}
