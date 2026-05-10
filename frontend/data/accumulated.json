@@ -86,6 +86,40 @@
       "_added": "2026-05-09"
     },
     {
+      "ticker": "AVGO",
+      "name": "Broadcom",
+      "firm": "TipRanks Consensus",
+      "firm_background": "華爾街分析師共識平台",
+      "rating": "Strong Buy",
+      "rating_type": "buy",
+      "rating_change": "維持",
+      "prev_target": "",
+      "target": "468",
+      "date": "2026-05-09",
+      "note": "28位分析師給予強力買入，AI網通晶片需求穩健",
+      "core_logic": "AI ASIC與網通晶片雙引擎成長",
+      "risk_note": "OpenAI晶片交易融資不確定性",
+      "action": "持有觀望融資進展",
+      "_added": "2026-05-10"
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA",
+      "firm": "Wall Street Consensus",
+      "firm_background": "華爾街分析師共識",
+      "rating": "Strong Buy",
+      "rating_type": "buy",
+      "rating_change": "維持",
+      "prev_target": "",
+      "target": "",
+      "date": "2026-05-09",
+      "note": "48個買入評級零賣出，市場最一致看多共識",
+      "core_logic": "AI推論王者地位穩固，Grace Blackwell熱銷",
+      "risk_note": "估值偏高與地緣風險",
+      "action": "核心持有，5/20財報前勿追高",
+      "_added": "2026-05-10"
+    },
+    {
       "ticker": "TSM",
       "name": "台積電",
       "firm": "Barclays",
@@ -509,6 +543,74 @@
       "risk_note": "資本支出翻倍壓力",
       "action": "估值優勢明顯可加碼",
       "_added": "2026-05-08"
+    },
+    {
+      "ticker": "AMD",
+      "name": "AMD",
+      "firm": "Bernstein",
+      "firm_background": "華爾街知名獨立研究機構",
+      "rating": "Outperform",
+      "rating_type": "outperform",
+      "rating_change": "上調",
+      "prev_target": "265",
+      "target": "525",
+      "date": "2026-05-06",
+      "note": "預估2027年EPS超過14美元，Meta與OpenAI合作推升估值",
+      "core_logic": "Data Center年增57%，AI GPU市占擴大",
+      "risk_note": "Nvidia競爭壓力與供應鏈風險",
+      "action": "逢低買入，目標價525美元",
+      "_added": "2026-05-10"
+    },
+    {
+      "ticker": "AMD",
+      "name": "AMD",
+      "firm": "Barclays",
+      "firm_background": "英國跨國投行",
+      "rating": "Overweight",
+      "rating_type": "buy",
+      "rating_change": "上調",
+      "prev_target": "",
+      "target": "500",
+      "date": "2026-05-06",
+      "note": "Meta 6GW合作與Oracle Helios超級電腦推升前景",
+      "core_logic": "AI伺服器訂單能見度提升",
+      "risk_note": "毛利率壓力",
+      "action": "買入持有",
+      "_added": "2026-05-10"
+    },
+    {
+      "ticker": "AMD",
+      "name": "AMD",
+      "firm": "Cantor Fitzgerald",
+      "firm_background": "美國中型投行",
+      "rating": "Overweight",
+      "rating_type": "buy",
+      "rating_change": "上調",
+      "prev_target": "",
+      "target": "500",
+      "date": "2026-05-06",
+      "note": "Q1財報後上調目標價，Data Center成長強勁",
+      "core_logic": "AI推論市場份額擴張",
+      "risk_note": "客戶集中度風險",
+      "action": "買入",
+      "_added": "2026-05-10"
+    },
+    {
+      "ticker": "AMD",
+      "name": "AMD",
+      "firm": "BofA",
+      "firm_background": "美國銀行證券部門",
+      "rating": "Buy",
+      "rating_type": "buy",
+      "rating_change": "上調",
+      "prev_target": "",
+      "target": "450",
+      "date": "2026-05-06",
+      "note": "OpenAI部署與雲端客戶擴張支撐成長",
+      "core_logic": "MI系列GPU競爭力提升",
+      "risk_note": "定價競爭加劇",
+      "action": "買入",
+      "_added": "2026-05-10"
     }
   ],
   "earnings": [
@@ -532,7 +634,7 @@
     {
       "ticker": "NVDA",
       "name": "NVIDIA",
-      "note": "下一家主要科技股財報,日期待確認",
+      "note": "Q1 FY27財報即將公布，市場高度關注",
       "eps": "",
       "eps_est": "",
       "eps_result": "",
@@ -541,10 +643,10 @@
       "rev_est": "",
       "guidance": "待公布",
       "market_reaction": "待公布",
-      "key_metric": "AI晶片市佔81%",
-      "status": "日期待確認",
+      "key_metric": "Data Center與Blackwell出貨",
+      "status": "5/20盤後公布",
       "status_type": "upcoming",
-      "_added": "2026-05-09"
+      "_added": "2026-05-10"
     },
     {
       "ticker": "AAPL",
@@ -882,6 +984,20 @@
       "_added": "2026-05-09"
     },
     {
+      "date": "2026-05-11",
+      "time": "",
+      "title": "參議院投票Kevin Warsh Fed主席提名",
+      "desc": "Powell任期5/15結束，Warsh接任投票",
+      "type": "fed",
+      "tag": "央行人事",
+      "impact": "high",
+      "expect": "預期通過",
+      "prev": "",
+      "affect_assets": "美股、美債、黃金、BTC",
+      "watch": "貨幣政策方向變化",
+      "_added": "2026-05-10"
+    },
+    {
       "date": "2026-05-12",
       "time": "08:30 ET",
       "title": "美國4月CPI數據",
@@ -1092,6 +1208,20 @@
       "_added": "2026-05-09"
     },
     {
+      "date": "2026-05-15",
+      "time": "",
+      "title": "Powell Fed主席任期結束",
+      "desc": "Warsh正式接任Fed主席",
+      "type": "fed",
+      "tag": "央行人事",
+      "impact": "high",
+      "expect": "政策轉向風險",
+      "prev": "",
+      "affect_assets": "全市場",
+      "watch": "縮表與通膨政策立場",
+      "_added": "2026-05-10"
+    },
+    {
       "date": "2026-05-20",
       "time": "盤後",
       "title": "Nvidia Q1財報",
@@ -1148,6 +1278,20 @@
       "_added": "2026-05-08"
     },
     {
+      "date": "2026-05-20",
+      "time": "盤後",
+      "title": "NVIDIA Q1 FY27財報",
+      "desc": "全球市值最大公司季度財報",
+      "type": "earnings",
+      "tag": "AI龍頭",
+      "impact": "high",
+      "expect": "營收持續高成長",
+      "prev": "Q4營收681億美元",
+      "affect_assets": "NVDA、SMH、AI概念股、台積電",
+      "watch": "Blackwell出貨與毛利率",
+      "_added": "2026-05-10"
+    },
+    {
       "date": "2026-05-21",
       "time": "",
       "title": "Microsoft除息日",
@@ -1160,9 +1304,23 @@
       "affect_assets": "MSFT",
       "watch": "股價調整",
       "_added": "2026-05-09"
+    },
+    {
+      "date": "2026-05-25",
+      "time": "全天",
+      "title": "美國陣亡將士紀念日",
+      "desc": "NYSE休市",
+      "type": "data",
+      "tag": "美國假日",
+      "impact": "low",
+      "expect": "休市",
+      "prev": "",
+      "affect_assets": "美股",
+      "watch": "節後交易量變化",
+      "_added": "2026-05-10"
     }
   ],
-  "updated": "2026-05-09",
+  "updated": "2026-05-10",
   "earnings_calls": [
     {
       "ticker": "AAPL",
@@ -1331,6 +1489,18 @@
       "watch_note": "OpenAI相關RPO占比達45%",
       "sentiment": "positive",
       "_added": "2026-05-08"
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA",
+      "date": "2026-02-25",
+      "ceo": "Jensen Huang",
+      "key_quote": "運算需求指數成長，agentic AI轉折點已到來",
+      "guidance": "FY27持續強勁，Vera Rubin延續領先",
+      "market_reaction": "股價持續創新高",
+      "watch_note": "Blackwell產能與Data Center佔比",
+      "sentiment": "positive",
+      "_added": "2026-05-10"
     }
   ]
 }
