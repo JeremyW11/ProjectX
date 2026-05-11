@@ -224,18 +224,18 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .ft-head th{padding:14px 20px;font-size:12px;font-weight:600;font-family:var(--font-en);letter-spacing:.06em;text-align:left;border-bottom:1px solid var(--gray-200);}
 .ft-head th:nth-child(2),.ft-head th:nth-child(3){text-align:center;width:130px;}
 .ft-col-free{color:var(--gray-600);}
-.ft-col-pro{color:var(--pro-gold-dark);display:flex;align-items:center;justify-content:center;gap:5px;}
+.ft-col-pro{color:var(--pro-gold-dark);display:flex;align-items:center;justify-content:center;gap:5px;background:var(--pro-gold-light);border-radius:6px;padding:4px 14px;}
 .ft-group-row td{padding:10px 20px 4px;font-size:10.5px;font-weight:700;color:var(--gray-400);letter-spacing:.1em;font-family:var(--font-en);text-transform:uppercase;border-top:1px solid var(--gray-100);background:var(--gray-50);}
 .ft-row{transition:background .15s;cursor:default;}
 .ft-row:hover{background:var(--navy-50);}
-.ft-row td{padding:12px 20px;font-size:13.5px;color:var(--gray-700);font-family:var(--font-zh);border-bottom:1px solid var(--gray-100);vertical-align:middle;}
+.ft-row td{padding:15px 20px;font-size:14px;color:var(--gray-700);font-family:var(--font-zh);border-bottom:1px solid var(--gray-100);vertical-align:middle;}
 .ft-row td:last-child{border-bottom:none;}
 .ft-row:last-child td{border-bottom:none;}
 .ft-row td:nth-child(2),.ft-row td:nth-child(3){text-align:center;}
 .ft-check-free{font-size:17px;color:var(--green-600);}
-.ft-check-pro{font-size:17px;color:var(--navy-600);}
-.ft-lock{font-size:14px;color:var(--gray-300);}
-.ft-partial{font-size:11px;color:var(--amber-600);background:var(--amber-50);border-radius:4px;padding:2px 7px;font-weight:600;font-family:var(--font-en);}
+.ft-check-pro{font-size:17px;color:var(--pro-gold);}
+.ft-lock{font-size:12px;color:var(--gray-400);background:var(--gray-100);border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;}
+.ft-partial{font-size:11px;color:var(--pro-gold-dark);background:var(--pro-gold-light);border-radius:20px;padding:3px 10px;font-weight:600;font-family:var(--font-en);}
 .pro-col-header{background:linear-gradient(135deg,var(--navy-800),var(--navy-700));border-radius:var(--r-sm) var(--r-sm) 0 0;padding:6px 14px 4px;display:inline-block;}
 
 /* ── PRICING ── */
@@ -575,14 +575,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <tr class="ft-row"><td>風險矩陣 + VIX 情緒追蹤</td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr class="ft-row"><td>每日情報則數</td><td><span class="ft-partial">2 則</span></td><td><span class="ft-check-pro" style="font-size:13px;color:var(--navy-600)">完整 12 則</span></td></tr>
           <tr><td colspan="3" class="ft-group-row">機構情報</td></tr>
-          <tr class="ft-row"><td>機構研報摘要（GS / MS / UBS 等）</td><td><span class="ft-lock">○</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td>財報 EPS 預估 vs 實際對比</td><td><span class="ft-lock">○</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td>法說會重點摘要 + 前瞻指引</td><td><span class="ft-lock">○</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td>機構研報摘要（GS / MS / UBS 等）</td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td>財報 EPS 預估 vs 實際對比</td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td>法說會重點摘要 + 前瞻指引</td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr><td colspan="3" class="ft-group-row">個人化功能</td></tr>
-          <tr class="ft-row"><td>標的追蹤看板（自選股 + 幣）</td><td><span class="ft-lock">○</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td>市場日曆完整版（31天滾動窗口）</td><td><span class="ft-lock">○</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td>推演記錄儲存 + 跨裝置同步</td><td><span class="ft-lock">○</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td>每日 Email 推送</td><td><span class="ft-lock">○</span></td><td><span class="ft-partial">即將推出</span></td></tr>
+          <tr class="ft-row"><td>標的追蹤看板（自選股 + 幣）</td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td>市場日曆完整版（31天滾動窗口）</td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td>推演記錄儲存 + 跨裝置同步</td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td>每日 Email 推送</td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">即將推出</span></td></tr>
         </tbody>
       </table>
     </div>
