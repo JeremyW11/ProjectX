@@ -1120,6 +1120,22 @@ function scrollToDate(dateKey){
 buildCalendar(currentYear,currentMonth);
 
 // Filter
+function initDateWindow(){
+  const today=new Date(2026,4,10);
+  const past15=new Date(today); past15.setDate(today.getDate()-15);
+  const future15=new Date(today); future15.setDate(today.getDate()+15);
+  document.querySelectorAll('.date-group').forEach(function(group){
+    const code=group.getAttribute('data-date');
+    if(!code) return;
+    const month=parseInt(code.slice(0,2))-1;
+    const day=parseInt(code.slice(2,4));
+    const year=code.length===8?parseInt(code.slice(4,8)):2026;
+    const d=new Date(year,month,day);
+    if(d<past15||d>future15) group.style.display='none';
+  });
+}
+initDateWindow();
+
 function filterEvents(type,el){
   document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
