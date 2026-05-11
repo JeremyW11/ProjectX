@@ -239,6 +239,23 @@
       "_added": "2026-05-09"
     },
     {
+      "ticker": "UPWK",
+      "name": "Upwork",
+      "firm": "Canaccord Genuity",
+      "firm_background": "加拿大獨立投資銀行",
+      "rating": "Hold",
+      "rating_type": "hold",
+      "rating_change": "下調",
+      "prev_target": "22",
+      "target": "10",
+      "date": "2026-05-08",
+      "note": "目標價從22美元大幅下調至10美元",
+      "core_logic": "AI衝擊自由職業平台商業模式",
+      "risk_note": "AI替代人力風險持續",
+      "action": "降級至持有建議觀望",
+      "_added": "2026-05-11"
+    },
+    {
       "ticker": "PLTR",
       "name": "Palantir",
       "firm": "Bank of America",
@@ -611,6 +628,23 @@
       "risk_note": "定價競爭加劇",
       "action": "買入",
       "_added": "2026-05-10"
+    },
+    {
+      "ticker": "SNDK",
+      "name": "SanDisk",
+      "firm": "Bernstein",
+      "firm_background": "華爾街知名半導體研究機構",
+      "rating": "Outperform",
+      "rating_type": "outperform",
+      "rating_change": "維持",
+      "prev_target": "",
+      "target": "1700",
+      "date": "2026-05-04",
+      "note": "預期12個月內有8.84%上漲空間",
+      "core_logic": "記憶體需求受惠AI伺服器擴張",
+      "risk_note": "記憶體價格波動風險",
+      "action": "維持持有看好中長期",
+      "_added": "2026-05-11"
     }
   ],
   "earnings": [
@@ -634,19 +668,19 @@
     {
       "ticker": "NVDA",
       "name": "NVIDIA",
-      "note": "Q1 FY27財報即將公布，市場高度關注",
+      "note": "預計5月20日公布Q1 FY2027財報",
       "eps": "",
       "eps_est": "",
       "eps_result": "",
       "eps_surprise": "",
       "revenue": "",
       "rev_est": "",
-      "guidance": "待公布",
+      "guidance": "",
       "market_reaction": "待公布",
-      "key_metric": "Data Center與Blackwell出貨",
-      "status": "5/20盤後公布",
+      "key_metric": "AI晶片需求指標",
+      "status": "5月20日公布",
       "status_type": "upcoming",
-      "_added": "2026-05-10"
+      "_added": "2026-05-11"
     },
     {
       "ticker": "AAPL",
@@ -868,6 +902,23 @@
       "status": "5/13盤後公布",
       "status_type": "upcoming",
       "_added": "2026-05-09"
+    },
+    {
+      "ticker": "AMAT",
+      "name": "Applied Materials",
+      "note": "5月14日公布財報預期EPS 2.68年增約12%",
+      "eps": "",
+      "eps_est": "2.68",
+      "eps_result": "",
+      "eps_surprise": "",
+      "revenue": "",
+      "rev_est": "",
+      "guidance": "",
+      "market_reaction": "待公布",
+      "key_metric": "半導體資本支出領先指標",
+      "status": "5月14日公布",
+      "status_type": "upcoming",
+      "_added": "2026-05-11"
     }
   ],
   "events": [
@@ -1054,6 +1105,34 @@
       "_added": "2026-05-09"
     },
     {
+      "date": "2026-05-12",
+      "time": "08:30 ET",
+      "title": "美國4月CPI數據公布",
+      "desc": "預期月增0.6%年增3.7%為本週最大催化劑",
+      "type": "data",
+      "tag": "通膨",
+      "impact": "high",
+      "expect": "月增0.6% 年增3.7%",
+      "prev": "月增0.9% 年增3.3%",
+      "affect_assets": "SPY QQQ BTC 美債",
+      "watch": "通膨是否因油價續升",
+      "_added": "2026-05-11"
+    },
+    {
+      "date": "2026-05-12",
+      "time": "",
+      "title": "MSCI指數再平衡公告",
+      "desc": "指數成分股調整影響被動資金流向",
+      "type": "data",
+      "tag": "指數",
+      "impact": "mid",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "台積電 權值股",
+      "watch": "台股權重變化",
+      "_added": "2026-05-11"
+    },
+    {
       "date": "2026-05-13",
       "time": "10:30 ET",
       "title": "EIA週度石油庫存報告",
@@ -1082,6 +1161,34 @@
       "_added": "2026-05-09"
     },
     {
+      "date": "2026-05-13",
+      "time": "",
+      "title": "川普訪華國事訪問開始",
+      "desc": "近9年來美國總統首次訪華議題含貿易台灣AI",
+      "type": "geo",
+      "tag": "地緣政治",
+      "impact": "high",
+      "expect": "貿易談判與台海議題",
+      "prev": "",
+      "affect_assets": "TSM 中概股 人民幣",
+      "watch": "台灣議題與關稅談判",
+      "_added": "2026-05-11"
+    },
+    {
+      "date": "2026-05-13",
+      "time": "16:00 ET",
+      "title": "Cisco財報公布",
+      "desc": "網路設備巨頭Q3財報",
+      "type": "earnings",
+      "tag": "財報",
+      "impact": "mid",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "CSCO",
+      "watch": "企業IT支出趨勢",
+      "_added": "2026-05-11"
+    },
+    {
       "date": "2026-05-14",
       "time": "",
       "title": "International Roadcheck檢查結束",
@@ -1108,6 +1215,34 @@
       "affect_assets": "AAPL",
       "watch": "",
       "_added": "2026-05-08"
+    },
+    {
+      "date": "2026-05-14",
+      "time": "16:00 ET",
+      "title": "Applied Materials財報公布",
+      "desc": "半導體設備龍頭預期EPS 2.68",
+      "type": "earnings",
+      "tag": "財報",
+      "impact": "high",
+      "expect": "EPS 2.68",
+      "prev": "",
+      "affect_assets": "AMAT ASML LRCX",
+      "watch": "半導體資本支出展望",
+      "_added": "2026-05-11"
+    },
+    {
+      "date": "2026-05-14",
+      "time": "",
+      "title": "Alibaba財報公布",
+      "desc": "中國電商巨頭季度業績",
+      "type": "earnings",
+      "tag": "財報",
+      "impact": "mid",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "BABA 中概股",
+      "watch": "中國消費復甦力道",
+      "_added": "2026-05-11"
     },
     {
       "date": "2026-05-15",
@@ -1222,6 +1357,34 @@
       "_added": "2026-05-10"
     },
     {
+      "date": "2026-05-15",
+      "time": "",
+      "title": "川普訪華結束",
+      "desc": "美中峰會結果與聯合聲明",
+      "type": "geo",
+      "tag": "地緣政治",
+      "impact": "high",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "中概股 TSM 美股",
+      "watch": "貿易協議與台海表態",
+      "_added": "2026-05-11"
+    },
+    {
+      "date": "2026-05-15",
+      "time": "",
+      "title": "Kevin Warsh宣誓就任Fed主席",
+      "desc": "接替Powell成為第14任聯準會主席",
+      "type": "fed",
+      "tag": "央行",
+      "impact": "high",
+      "expect": "政策立場偏鷹派",
+      "prev": "",
+      "affect_assets": "美債 美元 黃金 SPY",
+      "watch": "新主席貨幣政策立場",
+      "_added": "2026-05-11"
+    },
+    {
       "date": "2026-05-20",
       "time": "盤後",
       "title": "Nvidia Q1財報",
@@ -1292,6 +1455,20 @@
       "_added": "2026-05-10"
     },
     {
+      "date": "2026-05-20",
+      "time": "16:00 ET",
+      "title": "NVIDIA Q1 FY2027財報",
+      "desc": "全球市值最高公司財報為市場重大事件",
+      "type": "earnings",
+      "tag": "財報",
+      "impact": "high",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "NVDA TSM AMD 半導體",
+      "watch": "AI晶片需求與指引",
+      "_added": "2026-05-11"
+    },
+    {
       "date": "2026-05-21",
       "time": "",
       "title": "Microsoft除息日",
@@ -1320,7 +1497,7 @@
       "_added": "2026-05-10"
     }
   ],
-  "updated": "2026-05-10",
+  "updated": "2026-05-11",
   "earnings_calls": [
     {
       "ticker": "AAPL",
@@ -1429,6 +1606,18 @@
       "watch_note": "手機業務放緩影響",
       "sentiment": "positive",
       "_added": "2026-05-09"
+    },
+    {
+      "ticker": "AMD",
+      "name": "AMD",
+      "date": "2026-05-06",
+      "ceo": "Lisa Su",
+      "key_quote": "AI基礎設施加速需求推動業績Data Center為主要驅動力",
+      "guidance": "持續受惠AI基建需求擴張",
+      "market_reaction": "股價本週漲26.3%",
+      "watch_note": "Data Center營收佔比與AI晶片出貨",
+      "sentiment": "positive",
+      "_added": "2026-05-11"
     },
     {
       "ticker": "AMD",
