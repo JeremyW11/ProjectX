@@ -16,168 +16,389 @@
   --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1;
   --gray-200:#e2e8f0; --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
   --green-700:#15803d; --green-600:#16a34a; --green-100:#dcfce7;
-  --red-700:#b91c1c; --red-600:#dc2626; --red-100:#fee2e2;
+  --red-600:#dc2626; --red-100:#fee2e2;
   --amber-700:#b45309; --amber-600:#d97706; --amber-100:#fef3c7;
-  --purple-600:#7c3aed; --teal-600:#0891b2;
-
-  /* JS 相容變數 */
-  --bg-base:#f7f8fc; --bg-card:#ffffff; --border:#e2e8f0;
-  --text-primary:#0f172a; --text-secondary:#475569; --text-muted:#94a3b8;
-  --accent-blue:#2563eb; --accent-green:#16a34a; --accent-red:#dc2626;
-  --accent-orange:#d97706; --accent-teal:#0891b2; --accent-purple:#7c3aed;
-
-  --font-en:'DM Sans',sans-serif; --font-zh:'Noto Sans TC',sans-serif;
+  --purple-700:#6d28d9; --purple-600:#7c3aed; --purple-100:#ede9fe;
+  --blue-600:#2563eb; --blue-100:#dbeafe;
+  --orange-600:#ea580c; --orange-100:#ffedd5;
+  --font-en:'DM Sans',sans-serif;
+  --font-zh:'Noto Sans TC',sans-serif;
   --font-display:'DM Serif Display',Georgia,serif;
-  --r-sm:6px; --r-md:10px; --r-lg:16px;
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:24px;
   --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
   --shadow-hover:0 4px 24px rgba(15,23,42,.10);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:16px;-webkit-font-smoothing:antialiased;}
-body{font-family:var(--font-zh);background:var(--bg-base);color:var(--text-primary);min-height:100vh;background-image:none;}
+body{background:#f7f8fc;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
 a{text-decoration:none;color:inherit;}
-button{cursor:pointer;border:none;font-family:inherit;}
-ul{list-style:none;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 /* ── TOPBAR ── */
-nav{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:200;}
-.logo{display:flex;align-items:center;gap:10px;margin-right:36px;flex-shrink:0;}
-.logo-mark{width:32px;height:32px;background:var(--navy-700);border-radius:8px;display:grid;place-items:center;transition:transform .3s;}
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:100;}
+.topbar-logo{display:flex;align-items:center;gap:10px;margin-right:36px;}
+.logo-mark{width:32px;height:32px;background:var(--navy-700);border-radius:8px;display:grid;place-items:center;flex-shrink:0;transition:transform .3s;}
 .logo-mark:hover{transform:rotate(45deg) scale(1.05);}
 .logo-main{font-family:var(--font-en);font-size:13.5px;font-weight:600;color:var(--navy-800);letter-spacing:.05em;}
 .logo-sub{font-size:9.5px;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);}
-.nav-links{display:flex;align-items:center;gap:2px;flex:1;}
-.nav-links a{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--gray-500);font-weight:400;transition:all .15s;white-space:nowrap;font-family:var(--font-zh);border-bottom:none;}
-.nav-links a:hover{background:var(--navy-50);color:var(--navy-700);}
-.nav-links a.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
-.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);display:inline-block;}
-.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.header-nav{display:flex;align-items:center;gap:2px;flex:1;}
+.nav-item{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--gray-500);transition:all .15s;white-space:nowrap;font-family:var(--font-zh);}
+.nav-item:hover{background:var(--navy-50);color:var(--navy-700);}
+.nav-item.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);opacity:0;}
+.nav-item.active .nav-dot{opacity:1;}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
 .live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
-.live-dot{width:5px;height:5px;background:var(--green-600);border-radius:50%;animation:pulse 2s infinite;display:inline-block;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.live-dot{width:5px;height:5px;background:var(--green-600);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 .header-time{font-family:var(--font-en);font-size:12px;color:var(--gray-400);}
-.btn{padding:7px 16px;border-radius:var(--r-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font-en);}
-.btn-ghost{background:var(--white);border:1px solid var(--gray-300);color:var(--gray-700);}
-.btn-ghost:hover{border-color:var(--navy-400);color:var(--navy-700);}
-.btn-glow{background:var(--navy-700);color:var(--white);border:none;box-shadow:none;}
-.btn-glow:hover{background:var(--navy-600);transform:translateY(-1px);}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--gray-700);border-radius:2px;transition:all .3s;}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-.mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);z-index:199;padding:24px;flex-direction:column;gap:4px;overflow-y:auto;border-top:1px solid var(--gray-200);}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{color:var(--gray-600);font-size:16px;font-weight:500;padding:13px 0;border-bottom:1px solid var(--gray-100);font-family:var(--font-zh);}
-.mobile-menu a.active{color:var(--navy-600);}
-.mobile-menu-btns{margin-top:20px;display:flex;flex-direction:column;gap:10px;}
-.mobile-menu-btns .btn{width:100%;padding:12px;font-size:14px;text-align:center;}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;font-family:var(--font-en);}
 
 /* ── PAGE ── */
-main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding:28px 24px 60px;}
-.top-bar{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;}
-.top-bar h1{font-family:var(--font-display);font-size:26px;color:var(--navy-950);}
-.top-bar .meta{font-size:12px;color:var(--gray-400);text-align:right;line-height:1.8;font-family:var(--font-en);}
-
-/* ── CARD ── */
-.glass-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:18px 20px;backdrop-filter:none;margin-bottom:12px;box-shadow:var(--shadow-card);}
-.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--gray-100);}
-.card-title{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--gray-900);font-family:var(--font-zh);}
-
-/* ── RANGE INFO ── */
-.range-info{font-size:11.5px;color:var(--gray-400);margin-bottom:12px;padding:7px 12px;background:var(--gray-50);border-radius:var(--r-sm);border:1px solid var(--gray-200);font-family:var(--font-zh);}
+.page{margin-top:56px;max-width:1280px;margin-left:auto;margin-right:auto;padding:28px 24px 60px;}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;}
+.page-title{font-family:var(--font-display);font-size:28px;color:var(--navy-950);}
+.page-title-sub{font-family:var(--font-zh);font-size:13px;font-weight:300;color:var(--gray-400);margin-top:4px;}
+.page-update{font-size:11.5px;color:var(--gray-400);font-family:var(--font-en);}
 
 /* ── FILTER ROW ── */
-.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
-.filter-btn{padding:4px 12px;border-radius:20px;font-size:11.5px;font-weight:500;cursor:pointer;border:1px solid var(--gray-200);background:var(--white);color:var(--gray-500);font-family:var(--font-en);transition:all .15s;white-space:nowrap;}
-.filter-btn:hover{border-color:var(--navy-300);color:var(--navy-600);}
-.filter-btn.active{background:var(--navy-700);border-color:var(--navy-700);color:var(--white);}
-.filter-btn.fed-filter.active{background:var(--red-100);border-color:#fecaca;color:var(--red-700);}
-.filter-btn.earnings-filter.active{background:var(--navy-50);border-color:var(--navy-100);color:var(--navy-600);}
-.filter-btn.data-filter.active{background:var(--green-100);border-color:#bbf7d0;color:var(--green-700);}
-.filter-btn.tw-filter.active{background:#ccfbf1;border-color:#99f6e4;color:#0f766e;}
-.filter-btn.geo-filter.active{background:var(--amber-100);border-color:#fde68a;color:var(--amber-700);}
-.filter-btn.past-filter.active{background:var(--gray-100);border-color:var(--gray-300);color:var(--gray-600);}
+.filter-row{display:flex;align-items:center;gap:8px;margin-bottom:22px;flex-wrap:wrap;}
+.filter-chip{font-size:12px;padding:6px 14px;border-radius:20px;border:1px solid var(--gray-200);color:var(--gray-500);background:var(--white);cursor:pointer;transition:all .15s;font-family:var(--font-zh);display:flex;align-items:center;gap:5px;}
+.filter-chip:hover{border-color:var(--navy-300);color:var(--navy-600);}
+.filter-chip.active{background:var(--navy-700);border-color:var(--navy-700);color:var(--white);font-weight:500;}
+.filter-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 
-/* ── DATE GROUP HEADER ── */
-.date-group-header{font-size:11px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.08em;padding:14px 4px 7px;border-bottom:1px solid var(--gray-100);margin-bottom:3px;display:flex;align-items:center;gap:8px;font-family:var(--font-en);}
-.date-group-header.today-header{color:var(--navy-500);}
-.date-group-header.past-header{color:var(--gray-300);}
+/* ── MAIN LAYOUT ── */
+.cal-layout{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;}
 
-/* ── EVENT ITEMS ── */
-.event-item{display:flex;gap:12px;padding:12px 4px;border-bottom:1px solid var(--gray-100);border-radius:var(--r-sm);cursor:pointer;transition:all .15s;margin:0 -4px;}
-.event-item:last-child{border-bottom:none;}
-.event-item:hover{background:var(--navy-50);}
-.event-item.open{background:var(--navy-50);}
-.event-item.hidden{display:none;}
-.event-item.today-event{background:var(--navy-50);border-left:2px solid var(--navy-300);padding-left:10px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin-left:-2px;}
-.event-item.today-event:hover{background:var(--navy-100);}
-.event-item.past-event{opacity:.6;}
-.event-item.high-impact-event{border-left:2px solid #fecaca;padding-left:10px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin-left:-2px;}
+/* ── TIMELINE ── */
+.timeline{display:flex;flex-direction:column;gap:0;}
 
-/* Event date col */
-.event-date-col{min-width:52px;text-align:center;padding-top:2px;flex-shrink:0;}
-.event-month{font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.06em;font-family:var(--font-en);}
-.event-day{font-size:22px;font-weight:600;line-height:1.1;font-family:var(--font-en);}
-.event-weekday{font-size:10px;color:var(--gray-400);font-family:var(--font-en);}
-.event-time-label{font-size:10px;color:var(--navy-500);margin-top:3px;font-weight:600;font-family:var(--font-en);}
+/* Date group header */
+.date-group{margin-bottom:6px;}
+.date-group-header{display:flex;align-items:center;gap:12px;padding:10px 0 8px;position:sticky;top:56px;background:#f7f8fc;z-index:10;}
+.dg-date-pill{background:var(--navy-700);color:var(--white);font-family:var(--font-en);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.04em;flex-shrink:0;}
+.dg-date-pill.today{background:var(--navy-500);}
+.dg-date-pill.past{background:var(--gray-400);}
+.dg-weekday{font-size:12px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
+.dg-today-badge{font-size:10px;font-weight:600;color:var(--navy-500);background:var(--navy-50);border:1px solid var(--navy-100);border-radius:4px;padding:2px 7px;font-family:var(--font-en);}
+.dg-line{flex:1;height:1px;background:var(--gray-200);}
 
-/* Event body */
-.event-body{flex:1;min-width:0;}
-.event-title-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:3px;}
-.event-title{font-size:13.5px;font-weight:600;color:var(--gray-900);font-family:var(--font-zh);}
-.event-desc{font-size:12.5px;color:var(--gray-600);line-height:1.6;font-family:var(--font-zh);}
+/* Event card */
+.event-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:13px 16px;margin-bottom:6px;display:flex;gap:14px;align-items:flex-start;transition:all .15s;cursor:default;box-shadow:var(--shadow-card);}
+.event-card:hover{border-color:var(--navy-300);box-shadow:var(--shadow-hover);}
+.event-card.done{opacity:.55;}
+.event-card.done .ec-title{text-decoration:line-through;color:var(--gray-400);}
+.event-card.high-impact{border-left:3px solid var(--red-600);}
+.event-card.med-impact{border-left:3px solid var(--amber-600);}
+.event-card.low-impact{border-left:3px solid var(--green-600);}
 
-/* Badges */
-.impact-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap;letter-spacing:.04em;font-family:var(--font-en);}
-.impact-high{background:var(--red-100);color:var(--red-700);border:1px solid #fecaca;}
-.impact-mid{background:var(--amber-100);color:var(--amber-700);border:1px solid #fde68a;}
-.impact-low{background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);}
-.type-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:.04em;flex-shrink:0;font-family:var(--font-en);}
-.type-fed{background:var(--red-100);color:var(--red-700);border:1px solid #fecaca;}
-.type-earnings{background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);}
-.type-data{background:var(--green-100);color:var(--green-700);border:1px solid #bbf7d0;}
-.type-tw{background:#ccfbf1;color:#0f766e;border:1px solid #99f6e4;}
-.type-crypto{background:#fdf4ff;color:#7e22ce;border:1px solid #e9d5ff;}
-.type-geo{background:var(--amber-100);color:var(--amber-700);border:1px solid #fde68a;}
-.today-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);font-family:var(--font-en);}
-.past-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);font-family:var(--font-en);}
+/* Type dot */
+.ec-type-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px;}
 
-/* Expand */
-.event-expand{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s;opacity:0;}
-.event-item.open .event-expand{max-height:280px;opacity:1;}
-.expand-divider{height:1px;background:var(--gray-100);margin:10px 0;}
-.expand-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.expand-cell-label{font-size:10px;color:var(--gray-400);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px;font-weight:600;font-family:var(--font-en);}
-.expand-cell-value{font-size:12.5px;color:var(--gray-600);line-height:1.5;font-family:var(--font-zh);}
-.expand-cell-value.green{color:var(--green-600);font-weight:600;}
-.expand-cell-value.blue{color:var(--navy-500);font-weight:600;}
-.expand-cell-value.orange{color:var(--amber-600);}
-.expand-full{margin-top:8px;padding:7px 10px;background:var(--gray-50);border-radius:5px;border-left:2px solid var(--amber-600);}
-.expand-arrow{font-size:13px;color:var(--gray-400);transition:transform .3s;flex-shrink:0;align-self:flex-start;margin-top:3px;}
+.ec-content{flex:1;min-width:0;}
+.ec-meta{display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap;}
+.ec-type-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);letter-spacing:.04em;}
+.ec-time{font-size:11px;color:var(--gray-400);font-family:var(--font-en);}
+.ec-market{font-size:10px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
+.ec-title{font-size:13.5px;font-weight:500;color:var(--gray-800);font-family:var(--font-zh);line-height:1.45;margin-bottom:3px;}
+.ec-desc{font-size:12px;color:var(--gray-500);font-family:var(--font-zh);line-height:1.55;font-weight:300;}
+.ec-tickers{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
+.ec-ticker{font-family:var(--font-en);font-size:10px;font-weight:600;padding:1px 7px;background:var(--gray-100);color:var(--navy-700);border-radius:3px;border:1px solid var(--gray-200);}
 
-/* ── RESPONSIVE ── */
-@media(max-width:768px){
-  nav{padding:0 16px;}
-  .nav-links,.nav-right{display:none;}
-  .hamburger{display:flex;}
-  main{padding:16px 16px 40px;}
-  .top-bar{flex-direction:column;align-items:flex-start;gap:4px;margin-bottom:14px;}
-  .top-bar .meta{text-align:left;font-size:11px;}
-  .glass-card{padding:14px 16px;}
-  .event-date-col{min-width:44px;}
-  .event-day{font-size:18px;}
-  .event-item.open .event-expand{max-height:320px;}
-  .expand-grid{grid-template-columns:1fr;gap:7px;}
-  .filter-row{gap:5px;}
-  .filter-btn{padding:3px 9px;font-size:11px;}
+.ec-right{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+.ec-impact-label{font-size:9.5px;font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);letter-spacing:.04em;}
+.impact-high{background:var(--red-100);color:var(--red-600);}
+.impact-med{background:var(--amber-100);color:var(--amber-700);}
+.impact-low{background:var(--green-100);color:var(--green-700);}
+.impact-info{background:var(--gray-100);color:var(--gray-500);}
+.ec-done-badge{font-size:10px;color:var(--gray-400);font-family:var(--font-en);}
+
+/* Type badge colors */
+.t-fed{background:#dbeafe;color:#1d4ed8;}
+.t-econ{background:#f0fdf4;color:#166534;}
+.t-earnings{background:#fef3c7;color:#92400e;}
+.t-tw{background:#fdf4ff;color:#7e22ce;}
+.t-crypto{background:#fff7ed;color:#9a3412;}
+.t-opex{background:#fce7f3;color:#9d174d;}
+.t-macro{background:#eff6ff;color:#1d4ed8;}
+
+/* ── SIDEBAR ── */
+.sidebar-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow-card);margin-bottom:14px;}
+.sc-title{font-size:13px;font-weight:600;color:var(--gray-900);font-family:var(--font-zh);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;}
+.sc-title-en{font-family:var(--font-en);font-size:10px;font-weight:400;color:var(--gray-400);letter-spacing:.05em;}
+
+/* Legend */
+.legend-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--gray-100);}
+.legend-row:last-child{border-bottom:none;}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.legend-label{font-size:12px;color:var(--gray-600);font-family:var(--font-zh);}
+.legend-count{font-size:11px;color:var(--gray-400);font-family:var(--font-en);margin-left:auto;}
+
+/* This week summary */
+.week-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--gray-100);}
+.week-item:last-child{border-bottom:none;}
+.wi-date{font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--navy-700);width:44px;flex-shrink:0;padding-top:1px;}
+.wi-text{font-size:12px;color:var(--gray-600);font-family:var(--font-zh);line-height:1.5;}
+
+/* Countdown */
+.countdown-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);}
+.countdown-item:last-child{border-bottom:none;}
+.ci-left{display:flex;flex-direction:column;gap:2px;}
+.ci-name{font-size:12.5px;color:var(--gray-700);font-family:var(--font-zh);}
+.ci-date{font-size:10.5px;color:var(--gray-400);font-family:var(--font-en);}
+.ci-days{font-family:var(--font-en);font-size:13px;font-weight:600;color:var(--navy-700);}
+.ci-days.soon{color:var(--red-600);}
+
+@media(max-width:1024px){.cal-layout{grid-template-columns:1fr;}}
+@media(max-width:768px){.header-nav{display:none;}}
+
+/* ── MONTHLY CALENDAR GRID ── */
+.month-cal-wrap {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-xl);
+  padding: 20px 22px 16px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 22px;
 }
+
+.month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.month-nav-btn {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  color: var(--gray-500);
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all .15s;
+}
+.month-nav-btn:hover { background: var(--gray-100); color: var(--gray-900); }
+
+.month-title {
+  font-family: var(--font-en);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-900);
+  letter-spacing: .02em;
+}
+
+.month-title em {
+  font-style: normal;
+  color: var(--navy-600);
+}
+
+/* Weekday headers */
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 6px;
+}
+
+.cal-wd {
+  text-align: center;
+  font-family: var(--font-en);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--gray-400);
+  letter-spacing: .06em;
+  padding: 4px 0;
+}
+
+.cal-wd:first-child { color: #ef4444; } /* SUN */
+.cal-wd:last-child  { color: #6366f1; } /* SAT */
+
+/* Day grid */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .15s;
+  position: relative;
+  min-height: 36px;
+}
+
+.cal-day:hover:not(.cal-day-empty):not(.cal-day-today) {
+  background: var(--navy-50);
+}
+
+.cal-day-empty { cursor: default; }
+
+.cal-day-num {
+  font-family: var(--font-en);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-700);
+  line-height: 1;
+}
+
+.cal-day.sun .cal-day-num { color: #ef4444; }
+.cal-day.sat .cal-day-num { color: #6366f1; }
+.cal-day.other-month .cal-day-num { color: var(--gray-300); }
+.cal-day.past .cal-day-num { color: var(--gray-400); }
+
+/* Today circle */
+.cal-day-today {
+  background: var(--navy-600) !important;
+  border-radius: 10px;
+}
+.cal-day-today .cal-day-num { color: var(--white) !important; font-weight: 700; }
+
+/* Has-event dots */
+.cal-day-dots {
+  display: flex;
+  gap: 2px;
+  margin-top: 3px;
+  height: 5px;
+  align-items: center;
+}
+
+.cal-event-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Active (clicked) state */
+.cal-day.selected:not(.cal-day-today) {
+  background: var(--navy-50);
+  border: 1.5px solid var(--navy-300);
+}
+
+/* Impact legend strip under calendar */
+.cal-legend-strip {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--gray-100);
+  flex-wrap: wrap;
+}
+.cls-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  color: var(--gray-500);
+  font-family: var(--font-en);
+}
+.cls-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+
+/* ── COMPACT SIDEBAR CALENDAR ── */
+.sc-cal-wrap {
+  margin-top: 0;
+}
+.sc-cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.sc-cal-nav-btn {
+  width: 22px; height: 22px;
+  border-radius: 5px;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  color: var(--gray-500);
+  font-size: 12px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all .15s;
+}
+.sc-cal-nav-btn:hover { background: var(--gray-100); }
+.sc-cal-month-title {
+  font-family: var(--font-en);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+.sc-cal-month-title em { font-style: normal; color: var(--navy-600); }
+.sc-cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 3px;
+}
+.sc-cal-wd {
+  text-align: center;
+  font-family: var(--font-en);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--gray-400);
+  letter-spacing: .04em;
+  padding: 2px 0;
+}
+.sc-cal-wd:first-child { color: #ef4444; }
+.sc-cal-wd:last-child  { color: #6366f1; }
+.sc-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+.sc-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: default;
+  transition: background .12s;
+  position: relative;
+  min-height: 0;
+}
+.sc-day.has-event { cursor: pointer; }
+.sc-day.has-event:hover:not(.sc-day-today) { background: var(--navy-50); }
+.sc-day-num {
+  font-family: var(--font-en);
+  font-size: 10.5px;
+  font-weight: 400;
+  color: var(--gray-600);
+  line-height: 1;
+}
+.sc-day.sun .sc-day-num { color: #ef4444; }
+.sc-day.sat .sc-day-num { color: #6366f1; }
+.sc-day.other-month .sc-day-num { color: var(--gray-300); }
+.sc-day.past-day .sc-day-num { color: var(--gray-400); }
+.sc-day-today { background: var(--navy-600) !important; border-radius: 6px; }
+.sc-day-today .sc-day-num { color: var(--white) !important; font-weight: 700; }
+.sc-day.selected:not(.sc-day-today) {
+  background: var(--navy-50);
+  border: 1px solid var(--navy-300);
+}
+.sc-day-dot {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  margin-top: 2px;
+}
+
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo">
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-logo">
     <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
       <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
       <line x1="10" y1="10" x2="30" y2="30" stroke="white" stroke-width="6" stroke-linecap="round"/>
@@ -188,64 +409,589 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
       <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
     </svg>
   </div>
-  <ul class="nav-links">
-    <li><a href="/brief.html">總覽</a></li>
-    <li><a href="/pages/market.html">市場</a></li>
-    <li><a href="/pages/industry.html">產業</a></li>
-    <li><a href="/pages/institutional.html">機構研報</a></li>
-    <li><a href="/pages/calendar.html" class="active"><span class="nav-dot"></span>市場日曆</a></li>
-    <li><a href="/pages/targets.html">標的追蹤</a></li>
-  </ul>
-  <div class="nav-right">
+  <nav class="header-nav">
+    <a href="/brief.html" class="nav-item">總覽</a>
+    <a href="/pages/market.html" class="nav-item">市場</a>
+    <a href="/pages/industry.html" class="nav-item">產業</a>
+    <a href="/pages/institutional.html" class="nav-item">機構研報</a>
+    <a href="/pages/calendar.html" class="nav-item active"><span class="nav-dot"></span>市場日曆</a>
+    <a href="/pages/targets.html" class="nav-item">標的追蹤</a>
+  </nav>
+  <div class="header-right">
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
     <span class="header-time" id="clock">—</span>
-    <a href="/pages/login.html" class="btn btn-ghost" style="text-decoration:none;">登入</a>
-    <button class="btn btn-glow">訂閱 Pro</button>
+    <a href="/pages/login.html" class="btn-login">登入</a>
   </div>
-  <button class="hamburger" onclick="toggleMenu()" id="hamburger">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+</header>
 
-<div class="mobile-menu" id="mobile-menu">
-  <a href="/brief.html">總覽</a>
-  <a href="/pages/market.html">市場</a>
-  <a href="/pages/industry.html">產業</a>
-  <a href="/pages/institutional.html">機構研報</a>
-  <a href="/pages/calendar.html" class="active">市場日曆</a>
-  <a href="/pages/targets.html">標的追蹤</a>
-  <div class="mobile-menu-btns">
-    <a href="/pages/login.html" class="btn btn-ghost" style="text-align:center;">登入</a>
-    <button class="btn btn-glow">訂閱 Pro</button>
-  </div>
-</div>
+<main class="page">
 
-<main>
-  <div class="top-bar">
+  <div class="page-header">
     <div>
-      <h1>市場日曆</h1>
-      <div style="font-size:11px;color:var(--gray-400);margin-top:3px;font-family:var(--font-zh);">央行決策 · 財報日期 · 重要數據 · 台股股務事件</div>
+      <h1 class="page-title">市場日曆 <span class="page-title-sub">Market Calendar</span></h1>
+      <div class="page-update">台北時間基準 · 31天滾動窗口 · 2026-05-10</div>
     </div>
-    <div class="meta" id="cal-date"></div>
+  </div>
+  <!-- Filter chips -->
+  <div class="filter-row">
+    <button class="filter-chip active" onclick="filterEvents('all',this)">全部</button>
+    <button class="filter-chip" onclick="filterEvents('fed',this)">
+      <span class="filter-dot" style="background:#3b82f6"></span>央行 / Fed
+    </button>
+    <button class="filter-chip" onclick="filterEvents('econ',this)">
+      <span class="filter-dot" style="background:#16a34a"></span>總經數據
+    </button>
+    <button class="filter-chip" onclick="filterEvents('earnings',this)">
+      <span class="filter-dot" style="background:#d97706"></span>財報
+    </button>
+    <button class="filter-chip" onclick="filterEvents('tw',this)">
+      <span class="filter-dot" style="background:#7c3aed"></span>台股事件
+    </button>
+    <button class="filter-chip" onclick="filterEvents('crypto',this)">
+      <span class="filter-dot" style="background:#ea580c"></span>加密
+    </button>
+    <button class="filter-chip" onclick="filterEvents('high',this)">
+      🔴 高影響
+    </button>
   </div>
 
-  <div class="glass-card">
-    <div class="card-header">
-      <div class="card-title">📅 近期重要事件</div>
-      <span id="event-count" style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);"></span>
+  <div class="cal-layout">
+
+    <!-- Timeline -->
+    <div class="timeline" id="timeline">
+
+      <!-- ── MAY 10 TODAY ── -->
+      <div class="date-group" data-date="0510">
+        <div class="date-group-header">
+          <span class="dg-date-pill today">MAY 10</span>
+          <span class="dg-weekday">SUN</span>
+          <span class="dg-today-badge">TODAY</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card low-impact done" data-type="tw" data-impact="low">
+          <span class="ec-type-dot" style="background:#7c3aed"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-tw">台股事件</span>
+              <span class="ec-market">TWSE</span>
+              <span class="ec-time">全天</span>
+            </div>
+            <div class="ec-title">台股週末休市</div>
+            <div class="ec-desc">台灣證交所週末休市，下個交易日為 5/12（一）。</div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-info">INFO</span>
+            <span class="ec-done-badge">✓ done</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAY 12 ── -->
+      <div class="date-group" data-date="0512">
+        <div class="date-group-header">
+          <span class="dg-date-pill">MAY 12</span>
+          <span class="dg-weekday">MON</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card high-impact" data-type="econ" data-impact="high">
+          <span class="ec-type-dot" style="background:#16a34a"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-econ">總經數據</span>
+              <span class="ec-market">US</span>
+              <span class="ec-time">20:30 CST</span>
+            </div>
+            <div class="ec-title">美國 4 月 CPI 通膨數據</div>
+            <div class="ec-desc">市場預期核心 CPI 年增 3.6%，前值 3.8%。若數據高於預期，Fed 降息預期將進一步延後，美元可能再度走強。為本週最高影響力事件。</div>
+            <div class="ec-tickers"><span class="ec-ticker">DXY</span><span class="ec-ticker">TLT</span><span class="ec-ticker">SPY</span><span class="ec-ticker">GLD</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-high">HIGH</span>
+          </div>
+        </div>
+
+        <div class="event-card low-impact" data-type="econ" data-impact="low">
+          <span class="ec-type-dot" style="background:#16a34a"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-econ">總經數據</span>
+              <span class="ec-market">US</span>
+              <span class="ec-time">22:00 CST</span>
+            </div>
+            <div class="ec-title">美國 5 月 NY Empire State 製造業指數</div>
+            <div class="ec-desc">前值 -8.1，市場預期 -9.5。製造業景氣持續低迷，對市場影響有限。</div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-low">LOW</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAY 13 ── -->
+      <div class="date-group" data-date="0513">
+        <div class="date-group-header">
+          <span class="dg-date-pill">MAY 13</span>
+          <span class="dg-weekday">TUE</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card high-impact" data-type="earnings" data-impact="high">
+          <span class="ec-type-dot" style="background:#d97706"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-earnings">財報</span>
+              <span class="ec-market">US · 盤前</span>
+              <span class="ec-time">盤前</span>
+            </div>
+            <div class="ec-title">Walmart (WMT) Q1 FY2026 財報</div>
+            <div class="ec-desc">EPS 預估 $0.64，營收預估 $158.5B。消費者支出趨勢與廣告收入為兩大關注點。前次財報小幅 Miss，市場預期謹慎。</div>
+            <div class="ec-tickers"><span class="ec-ticker">WMT</span><span class="ec-ticker">TGT</span><span class="ec-ticker">COST</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-high">HIGH</span>
+          </div>
+        </div>
+
+        <div class="event-card med-impact" data-type="econ" data-impact="med">
+          <span class="ec-type-dot" style="background:#16a34a"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-econ">總經數據</span>
+              <span class="ec-market">US</span>
+              <span class="ec-time">20:30 CST</span>
+            </div>
+            <div class="ec-title">美國 4 月 PPI 生產者物價指數</div>
+            <div class="ec-desc">前值 +0.2% MoM，搭配 CPI 數據共同觀察通膨路徑。若 PPI 同步偏高，進一步強化 Fed 鷹派立場。</div>
+            <div class="ec-tickers"><span class="ec-ticker">DXY</span><span class="ec-ticker">TLT</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-med">MED</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAY 14 ── -->
+      <div class="date-group" data-date="0514">
+        <div class="date-group-header">
+          <span class="dg-date-pill">MAY 14</span>
+          <span class="dg-weekday">WED</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card med-impact" data-type="econ" data-impact="med">
+          <span class="ec-type-dot" style="background:#16a34a"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-econ">總經數據</span>
+              <span class="ec-market">US</span>
+              <span class="ec-time">20:30 CST</span>
+            </div>
+            <div class="ec-title">美國 4 月零售銷售數據</div>
+            <div class="ec-desc">前值 +0.7% MoM，市場預期 +0.4%。消費者支出動能關鍵指標，將影響 Q2 GDP 預估。</div>
+            <div class="ec-tickers"><span class="ec-ticker">XLY</span><span class="ec-ticker">WMT</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-med">MED</span>
+          </div>
+        </div>
+
+        <div class="event-card med-impact" data-type="fed" data-impact="med">
+          <span class="ec-type-dot" style="background:#3b82f6"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-fed">Fed 官員</span>
+              <span class="ec-market">US</span>
+              <span class="ec-time">22:00 CST</span>
+            </div>
+            <div class="ec-title">Fed 鮑威爾出席外國銀行家協會演講</div>
+            <div class="ec-desc">鮑威爾預計就當前貨幣政策立場發表演說，市場將密切關注是否釋放降息時間表訊號。本週 CPI / PPI 數據公布後首次公開發言，具重要指引意義。</div>
+            <div class="ec-tickers"><span class="ec-ticker">DXY</span><span class="ec-ticker">SPY</span><span class="ec-ticker">GLD</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-med">MED</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAY 15 ── -->
+      <div class="date-group" data-date="0515">
+        <div class="date-group-header">
+          <span class="dg-date-pill">MAY 15</span>
+          <span class="dg-weekday">THU</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card high-impact" data-type="tw" data-impact="high">
+          <span class="ec-type-dot" style="background:#7c3aed"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-tw">台股事件</span>
+              <span class="ec-market">TWSE · 2330</span>
+              <span class="ec-time">09:00 CST</span>
+            </div>
+            <div class="ec-title">台積電股東常會 (2330)</div>
+            <div class="ec-desc">議程包含現金股利每股 4.5 元決議、董事會改選、2025 年財務報告等。外資動向與股利政策為兩大市場關注焦點。</div>
+            <div class="ec-tickers"><span class="ec-ticker">2330</span><span class="ec-ticker">TSM</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-high">HIGH</span>
+          </div>
+        </div>
+
+        <div class="event-card med-impact" data-type="econ" data-impact="med">
+          <span class="ec-type-dot" style="background:#16a34a"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-econ">總經數據</span>
+              <span class="ec-market">US</span>
+              <span class="ec-time">20:30 CST</span>
+            </div>
+            <div class="ec-title">美國 5 月費城 Fed 製造業指數</div>
+            <div class="ec-desc">前值 15.5，市場預期 10.2。關稅不確定性影響製造業景氣，與 Empire State 指數共同反映工業面動能。</div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-med">MED</span>
+          </div>
+        </div>
+
+        <div class="event-card low-impact" data-type="tw" data-impact="low">
+          <span class="ec-type-dot" style="background:#7c3aed"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-tw">台股事件</span>
+              <span class="ec-market">TWSE</span>
+              <span class="ec-time">全天</span>
+            </div>
+            <div class="ec-title">聯發科 (2454) 除息交易日</div>
+            <div class="ec-desc">聯發科每股配息 NT$35，除息基準日為 5/15，預估填息天數參考值 45 日。</div>
+            <div class="ec-tickers"><span class="ec-ticker">2454</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-low">LOW</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAY 19 ── -->
+      <div class="date-group" data-date="0519">
+        <div class="date-group-header">
+          <span class="dg-date-pill">MAY 19</span>
+          <span class="dg-weekday">MON</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card med-impact" data-type="crypto" data-impact="med">
+          <span class="ec-type-dot" style="background:#ea580c"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-crypto">加密</span>
+              <span class="ec-market">SEC</span>
+              <span class="ec-time">美東時間</span>
+            </div>
+            <div class="ec-title">SEC 以太坊現貨 ETF 選擇權審核截止</div>
+            <div class="ec-desc">SEC 延後裁決以太坊現貨 ETF 選擇權至 6/22，本日為中間審查節點。市場預期最終批准機率 75%+，批准後將進一步帶動 ETH 機構資金流入。</div>
+            <div class="ec-tickers"><span class="ec-ticker">ETH</span><span class="ec-ticker">ETHA</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-med">MED</span>
+          </div>
+        </div>
+
+        <div class="event-card low-impact" data-type="econ" data-impact="low">
+          <span class="ec-type-dot" style="background:#16a34a"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-econ">總經數據</span>
+              <span class="ec-market">US</span>
+              <span class="ec-time">22:00 CST</span>
+            </div>
+            <div class="ec-title">美國 5 月 NAHB 房屋市場指數</div>
+            <div class="ec-desc">前值 40，市場預期 41。房市持續受高利率壓制，對科技股影響有限。</div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-low">LOW</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAY 20 ── -->
+      <div class="date-group" data-date="0520">
+        <div class="date-group-header">
+          <span class="dg-date-pill">MAY 20</span>
+          <span class="dg-weekday">TUE</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card med-impact" data-type="econ" data-impact="med">
+          <span class="ec-type-dot" style="background:#16a34a"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-econ">總經數據</span>
+              <span class="ec-market">TW</span>
+              <span class="ec-time">16:00 CST</span>
+            </div>
+            <div class="ec-title">台灣 4 月出口訂單數據</div>
+            <div class="ec-desc">前值年增 8.2%，市場預期年增 10%+。AI 伺服器與半導體訂單為主要觀察項目，直接反映台積電、鴻海未來訂單能見度。</div>
+            <div class="ec-tickers"><span class="ec-ticker">2330</span><span class="ec-ticker">2317</span><span class="ec-ticker">3008</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-med">MED</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAY 21 ── -->
+      <div class="date-group" data-date="0521">
+        <div class="date-group-header">
+          <span class="dg-date-pill">MAY 21</span>
+          <span class="dg-weekday">WED</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card high-impact" data-type="fed" data-impact="high">
+          <span class="ec-type-dot" style="background:#3b82f6"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-fed">FOMC</span>
+              <span class="ec-market">US · Fed</span>
+              <span class="ec-time">02:00 CST (隔日)</span>
+            </div>
+            <div class="ec-title">FOMC 5 月會議紀要公布</div>
+            <div class="ec-desc">5/7 FOMC 會議紀要發布，市場將審視委員對通膨路徑與降息時點的最新看法分歧程度。任何鴿派委員聲音都可能觸發債市反彈。</div>
+            <div class="ec-tickers"><span class="ec-ticker">DXY</span><span class="ec-ticker">TLT</span><span class="ec-ticker">GLD</span><span class="ec-ticker">SPY</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-high">HIGH</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAY 22 ── -->
+      <div class="date-group" data-date="0522">
+        <div class="date-group-header">
+          <span class="dg-date-pill">MAY 22</span>
+          <span class="dg-weekday">THU</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card high-impact" data-type="earnings" data-impact="high">
+          <span class="ec-type-dot" style="background:#d97706"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-earnings">財報</span>
+              <span class="ec-market">US · 盤後</span>
+              <span class="ec-time">盤後</span>
+            </div>
+            <div class="ec-title">NVIDIA (NVDA) Q1 FY2026 財報</div>
+            <div class="ec-desc">EPS 預估 $5.58，營收預估 $24.6B。Blackwell 出貨量與資料中心業務為核心觀察點。本季財報為全市場最高關注度事件之一。</div>
+            <div class="ec-tickers"><span class="ec-ticker">NVDA</span><span class="ec-ticker">AMD</span><span class="ec-ticker">SMCI</span><span class="ec-ticker">2330</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-high">HIGH</span>
+          </div>
+        </div>
+
+        <div class="event-card med-impact" data-type="econ" data-impact="med">
+          <span class="ec-type-dot" style="background:#16a34a"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-econ">總經數據</span>
+              <span class="ec-market">US</span>
+              <span class="ec-time">20:30 CST</span>
+            </div>
+            <div class="ec-title">美國 4 月既有房屋銷售</div>
+            <div class="ec-desc">前值 429 萬戶，房市景氣持續受高房貸利率壓制，預計維持低位。</div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-med">MED</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAY 28 ── -->
+      <div class="date-group" data-date="0528">
+        <div class="date-group-header">
+          <span class="dg-date-pill">MAY 28</span>
+          <span class="dg-weekday">WED</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card med-impact" data-type="earnings" data-impact="med">
+          <span class="ec-type-dot" style="background:#d97706"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-earnings">財報</span>
+              <span class="ec-market">US · 盤後</span>
+              <span class="ec-time">盤後</span>
+            </div>
+            <div class="ec-title">Costco (COST) Q3 FY2026 財報</div>
+            <div class="ec-desc">EPS 預估 $3.82，會員費調漲效應與電商成長為觀察重點。</div>
+            <div class="ec-tickers"><span class="ec-ticker">COST</span><span class="ec-ticker">WMT</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-med">MED</span>
+          </div>
+        </div>
+
+        <div class="event-card med-impact" data-type="econ" data-impact="med">
+          <span class="ec-type-dot" style="background:#16a34a"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-econ">總經數據</span>
+              <span class="ec-market">US</span>
+              <span class="ec-time">20:30 CST</span>
+            </div>
+            <div class="ec-title">美國 Q1 GDP 二次估值</div>
+            <div class="ec-desc">初值年化 +1.6%，市場預期二次估值上修至 +2.0%。若下修則加深衰退擔憂，上修則支撐市場信心。</div>
+            <div class="ec-tickers"><span class="ec-ticker">SPY</span><span class="ec-ticker">DXY</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-med">MED</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── JUN 6 ── -->
+      <div class="date-group" data-date="0606">
+        <div class="date-group-header">
+          <span class="dg-date-pill">JUN 6</span>
+          <span class="dg-weekday">SAT</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card high-impact" data-type="fed" data-impact="high">
+          <span class="ec-type-dot" style="background:#3b82f6"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-fed">央行</span>
+              <span class="ec-market">EUR · ECB</span>
+              <span class="ec-time">19:15 CST</span>
+            </div>
+            <div class="ec-title">歐洲央行 (ECB) 利率決議</div>
+            <div class="ec-desc">市場預期 ECB 6 月降息 25bps，為今年第三次降息。ECB 與 Fed 政策分歧持續擴大，歐元走勢與歐洲股市均受影響。</div>
+            <div class="ec-tickers"><span class="ec-ticker">EUR</span><span class="ec-ticker">EZU</span><span class="ec-ticker">DXY</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-high">HIGH</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── JUN 12 ── -->
+      <div class="date-group" data-date="0612">
+        <div class="date-group-header">
+          <span class="dg-date-pill">JUN 12</span>
+          <span class="dg-weekday">FRI</span>
+          <span class="dg-line"></span>
+        </div>
+
+        <div class="event-card med-impact" data-type="earnings" data-impact="med">
+          <span class="ec-type-dot" style="background:#d97706"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-earnings">財報</span>
+              <span class="ec-market">TW · 台股</span>
+              <span class="ec-time">盤後</span>
+            </div>
+            <div class="ec-title">聯發科 (2454) Q1 2026 財報</div>
+            <div class="ec-desc">EPS 預估 NT$68.4，AI 手機晶片出貨量與 MediaTek Dimensity 9400 滲透率為核心觀察點。法人預估毛利率持平於 50% 附近。</div>
+            <div class="ec-tickers"><span class="ec-ticker">2454</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-med">MED</span>
+          </div>
+        </div>
+
+        <div class="event-card high-impact" data-type="fed" data-impact="high">
+          <span class="ec-type-dot" style="background:#3b82f6"></span>
+          <div class="ec-content">
+            <div class="ec-meta">
+              <span class="ec-type-badge t-econ">總經數據</span>
+              <span class="ec-market">US</span>
+              <span class="ec-time">20:30 CST</span>
+            </div>
+            <div class="ec-title">美國 5 月 CPI 通膨數據</div>
+            <div class="ec-desc">下一個關鍵通膨數據，將決定 Fed 6 月 FOMC 前最後一份重要數據參考。市場屆時對降息預期的調整方向高度敏感。</div>
+            <div class="ec-tickers"><span class="ec-ticker">TLT</span><span class="ec-ticker">DXY</span><span class="ec-ticker">GLD</span></div>
+          </div>
+          <div class="ec-right">
+            <span class="ec-impact-label impact-high">HIGH</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end timeline -->
+
+    <!-- Sidebar -->
+    <div>
+
+      <!-- Sidebar Mini Calendar -->
+      <div class="sidebar-card sc-cal-wrap">
+        <div class="sc-cal-nav">
+          <button class="sc-cal-nav-btn" onclick="changeMonth(-1)">&#8249;</button>
+          <div class="sc-cal-month-title" id="sc-month-title"><em>May</em> 2026</div>
+          <button class="sc-cal-nav-btn" onclick="changeMonth(1)">&#8250;</button>
+        </div>
+        <div class="sc-cal-weekdays">
+          <div class="sc-cal-wd">S</div>
+          <div class="sc-cal-wd">M</div>
+          <div class="sc-cal-wd">T</div>
+          <div class="sc-cal-wd">W</div>
+          <div class="sc-cal-wd">T</div>
+          <div class="sc-cal-wd">F</div>
+          <div class="sc-cal-wd">S</div>
+        </div>
+        <div class="sc-cal-grid" id="sc-cal-grid"></div>
+      </div>
+
+      <!-- Legend -->
+      <div class="sidebar-card">
+        <div class="sc-title">事件類型 <span class="sc-title-en">LEGEND</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#3b82f6"></span><span class="legend-label">央行 / Fed / FOMC</span><span class="legend-count">4</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#16a34a"></span><span class="legend-label">總經數據</span><span class="legend-count">9</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#d97706"></span><span class="legend-label">財報</span><span class="legend-count">4</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#7c3aed"></span><span class="legend-label">台股事件</span><span class="legend-count">3</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#ea580c"></span><span class="legend-label">加密</span><span class="legend-count">1</span></div>
+      </div>
+
+      <!-- Countdown to key events -->
+      <div class="sidebar-card">
+        <div class="sc-title">重要倒數 <span class="sc-title-en">COUNTDOWN</span></div>
+        <div class="countdown-item">
+          <div class="ci-left"><div class="ci-name">美國 CPI（4月）</div><div class="ci-date">MAY 12 · 20:30 CST</div></div>
+          <span class="ci-days soon" id="cd-cpi">2 天</span>
+        </div>
+        <div class="countdown-item">
+          <div class="ci-left"><div class="ci-name">台積電股東常會</div><div class="ci-date">MAY 15 · 09:00 CST</div></div>
+          <span class="ci-days" id="cd-tsmc">5 天</span>
+        </div>
+        <div class="countdown-item">
+          <div class="ci-left"><div class="ci-name">FOMC 會議紀要</div><div class="ci-date">MAY 21 · 02:00 CST</div></div>
+          <span class="ci-days" id="cd-fomc">11 天</span>
+        </div>
+        <div class="countdown-item">
+          <div class="ci-left"><div class="ci-name">NVIDIA 財報</div><div class="ci-date">MAY 22 · 盤後</div></div>
+          <span class="ci-days" id="cd-nvda">12 天</span>
+        </div>
+        <div class="countdown-item">
+          <div class="ci-left"><div class="ci-name">ECB 利率決議</div><div class="ci-date">JUN 6</div></div>
+          <span class="ci-days" id="cd-ecb">27 天</span>
+        </div>
+      </div>
+
+      <!-- This week summary -->
+      <div class="sidebar-card">
+        <div class="sc-title">本週重點 <span class="sc-title-en">THIS WEEK</span></div>
+        <div class="week-item"><span class="wi-date">MON 5/12</span><span class="wi-text">美國 4 月 CPI（最高影響）</span></div>
+        <div class="week-item"><span class="wi-date">TUE 5/13</span><span class="wi-text">WMT 財報 + PPI 數據</span></div>
+        <div class="week-item"><span class="wi-date">WED 5/14</span><span class="wi-text">零售銷售 + 鮑威爾演講</span></div>
+        <div class="week-item"><span class="wi-date">THU 5/15</span><span class="wi-text">台積電股東常會 + 聯發科除息</span></div>
+      </div>
+
     </div>
-    <div class="range-info" id="range-info">載入中...</div>
-    <div class="filter-row">
-      <button class="filter-btn active" onclick="filterEvents('all',this)">全部</button>
-      <button class="filter-btn fed-filter" onclick="filterEvents('fed',this)">🏛 Fed</button>
-      <button class="filter-btn earnings-filter" onclick="filterEvents('earnings',this)">📊 財報</button>
-      <button class="filter-btn data-filter" onclick="filterEvents('data',this)">📈 數據</button>
-      <button class="filter-btn tw-filter" onclick="filterEvents('tw',this)">🇹🇼 台股</button>
-      <button class="filter-btn geo-filter" onclick="filterEvents('geo',this)">🌐 地緣</button>
-      <button class="filter-btn past-filter" onclick="filterEvents('past',this)">⏮ 過去</button>
-      <button class="filter-btn" onclick="filterEvents('future',this)">⏭ 未來</button>
-    </div>
-    <div id="events-list"></div>
+
   </div>
 </main>
 
@@ -253,183 +999,158 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
 // Clock
 function tick(){
   const t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
-  const el=document.getElementById('clock');
-  if(el) el.textContent=t+' CST';
+  document.getElementById('clock').textContent=t+' CST';
 }
 tick(); setInterval(tick,1000);
 
-// Mobile menu
-function toggleMenu(){
-  var menu=document.getElementById('mobile-menu');
-  var hamburger=document.getElementById('hamburger');
-  menu.classList.toggle('open');
-  hamburger.classList.toggle('open');
-  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
+// ── CALENDAR DATA ──
+const CAL_EVENTS = {
+  '2026-05-10': [{type:'tw',    impact:'low'}],
+  '2026-05-12': [{type:'econ',  impact:'high'},{type:'econ',impact:'low'}],
+  '2026-05-13': [{type:'earn',  impact:'high'},{type:'econ',impact:'med'}],
+  '2026-05-14': [{type:'econ',  impact:'med'}, {type:'fed', impact:'med'}],
+  '2026-05-15': [{type:'tw',    impact:'high'},{type:'tw',  impact:'low'},{type:'econ',impact:'med'}],
+  '2026-05-19': [{type:'crypto',impact:'med'}, {type:'econ',impact:'low'}],
+  '2026-05-20': [{type:'econ',  impact:'med'}],
+  '2026-05-21': [{type:'fed',   impact:'high'}],
+  '2026-05-22': [{type:'earn',  impact:'high'},{type:'econ',impact:'med'}],
+  '2026-05-28': [{type:'earn',  impact:'med'}, {type:'econ',impact:'med'}],
+  '2026-06-06': [{type:'fed',   impact:'high'}],
+  '2026-06-12': [{type:'earn',  impact:'med'}, {type:'econ',impact:'high'}],
+};
+
+const TYPE_COLOR = {
+  fed:'#3b82f6', econ:'#16a34a', earn:'#d97706',
+  tw:'#7c3aed', crypto:'#ea580c'
+};
+const IMPACT_COLOR = {high:'#dc2626', med:'#d97706', low:'#16a34a'};
+const MONTH_NAMES = ['January','February','March','April','May','June',
+  'July','August','September','October','November','December'];
+
+let currentYear=2026, currentMonth=4;
+const TODAY=new Date(2026,4,10);
+
+function buildCalendar(year,month){
+  const grid=document.getElementById('sc-cal-grid');
+  const titleEl=document.getElementById('sc-month-title');
+  if(!grid||!titleEl) return;
+  grid.innerHTML='';
+  titleEl.innerHTML='<em>'+MONTH_NAMES[month].slice(0,3)+'</em> '+year;
+
+  const firstDay=new Date(year,month,1).getDay();
+  const daysInMonth=new Date(year,month+1,0).getDate();
+  const daysInPrev=new Date(year,month,0).getDate();
+
+  for(let i=0;i<firstDay;i++){
+    grid.appendChild(makeDay(year,month-1,daysInPrev-firstDay+1+i,true));
+  }
+  for(let d=1;d<=daysInMonth;d++){
+    grid.appendChild(makeDay(year,month,d,false));
+  }
+  const total=firstDay+daysInMonth;
+  const rem=total%7===0?0:7-(total%7);
+  for(let d=1;d<=rem;d++) grid.appendChild(makeDay(year,month+1,d,true));
 }
-document.getElementById('mobile-menu').querySelectorAll('a').forEach(function(a){
-  a.addEventListener('click',function(){
-    document.getElementById('mobile-menu').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-    document.body.style.overflow='';
-  });
-});
-window.addEventListener('scroll',function(){
-  document.querySelector('nav').style.boxShadow=window.scrollY>10?'0 2px 20px rgba(15,23,42,.08)':'';
-});
-</script>
 
-<!-- 原有 JS 邏輯完整保留 -->
-<script>
-var TODAY='';
-var allEvents=[];
+function makeDay(year,month,day,isOther){
+  const cell=document.createElement('div');
+  cell.className='sc-day';
 
-function toggleEvent(el){
-  var isOpen=el.classList.contains('open');
-  document.querySelectorAll('.event-item.open').forEach(function(item){
-    item.classList.remove('open');
-    var arrow=item.querySelector('.expand-arrow');
-    if(arrow) arrow.style.transform='rotate(0deg)';
-  });
-  if(!isOpen){
-    el.classList.add('open');
-    var arrow=el.querySelector('.expand-arrow');
-    if(arrow) arrow.style.transform='rotate(90deg)';
+  const rm=((month%12)+12)%12;
+  const ry=year+Math.floor(month/12);
+  const dow=new Date(ry,rm,day).getDay();
+  if(dow===0) cell.classList.add('sun');
+  if(dow===6) cell.classList.add('sat');
+  if(isOther) cell.classList.add('other-month');
+
+  const dateKey=`${ry}-${String(rm+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+  const cellDate=new Date(ry,rm,day);
+  const isToday=cellDate.getTime()===TODAY.getTime();
+  const isPast=cellDate<TODAY&&!isToday;
+
+  if(isToday)  cell.classList.add('sc-day-today');
+  if(isPast&&!isOther) cell.classList.add('past-day');
+
+  const numEl=document.createElement('div');
+  numEl.className='sc-day-num';
+  numEl.textContent=day;
+  cell.appendChild(numEl);
+
+  const evs=CAL_EVENTS[dateKey];
+  if(evs&&evs.length>0&&!isOther){
+    cell.classList.add('has-event');
+    // Single dot: highest impact color
+    const sorted=[...evs].sort((a,b)=>({high:0,med:1,low:2}[a.impact]-{high:0,med:1,low:2}[b.impact]));
+    const dot=document.createElement('div');
+    dot.className='sc-day-dot';
+    dot.style.background=sorted[0].impact==='high'?IMPACT_COLOR.high:TYPE_COLOR[sorted[0].type]||'#94a3b8';
+    cell.appendChild(dot);
+
+    cell.addEventListener('click',()=>{
+      scrollToDate(dateKey);
+      document.querySelectorAll('.sc-day.selected').forEach(el=>el.classList.remove('selected'));
+      cell.classList.add('selected');
+    });
+  }
+  return cell;
+}
+
+function changeMonth(delta){
+  currentMonth+=delta;
+  if(currentMonth>11){currentMonth=0;currentYear++;}
+  if(currentMonth<0) {currentMonth=11;currentYear--;}
+  buildCalendar(currentYear,currentMonth);
+}
+
+function scrollToDate(dateKey){
+  const parts=dateKey.split('-');
+  const code=parts[1]+parts[2];
+  const group=document.querySelector('.date-group[data-date="'+code+'"]');
+  if(group){
+    group.scrollIntoView({behavior:'smooth',block:'start'});
+    group.style.transition='background .3s';
+    group.style.background='var(--navy-50)';
+    setTimeout(()=>{group.style.background='';},1200);
   }
 }
 
-function filterEvents(type,btn){
-  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
-  var items=document.querySelectorAll('.event-item');
-  var groups=document.querySelectorAll('.date-group-header');
-  var count=0;
-  items.forEach(function(item){
-    var eType=item.getAttribute('data-type');
-    var eDate=item.getAttribute('data-date');
-    var isPast=eDate<TODAY;
-    var isFuture=eDate>TODAY;
-    var show=false;
+buildCalendar(currentYear,currentMonth);
+
+// Filter
+function filterEvents(type,el){
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.event-card').forEach(card=>{
+    let show=false;
     if(type==='all') show=true;
-    else if(type==='past') show=isPast;
-    else if(type==='future') show=isFuture;
-    else show=eType===type;
-    item.classList.toggle('hidden',!show);
-    if(show) count++;
+    else if(type==='high') show=card.dataset.impact==='high';
+    else show=card.dataset.type===type;
+    card.style.display=show?'':'none';
   });
-  groups.forEach(function(g){
-    var groupDate=g.getAttribute('data-group-date');
-    var hasVisible=false;
-    document.querySelectorAll('.event-item[data-date="'+groupDate+'"]').forEach(function(item){
-      if(!item.classList.contains('hidden')) hasVisible=true;
-    });
-    g.style.display=hasVisible?'':'none';
+  document.querySelectorAll('.date-group').forEach(group=>{
+    const visible=Array.from(group.querySelectorAll('.event-card')).some(c=>c.style.display!=='none');
+    group.style.display=visible?'':'none';
   });
-  var countEl=document.getElementById('event-count');
-  if(countEl) countEl.textContent=count+' 則';
 }
 
-function formatEventDate(dateStr){
-  try{
-    var d=new Date(dateStr+'T00:00:00');
-    var months=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-    var weekdays=['日','一','二','三','四','五','六'];
-    return{month:months[d.getMonth()],day:d.getDate(),weekday:'週'+weekdays[d.getDay()]};
-  }catch(e){return{month:'--',day:'--',weekday:'--'};}
-}
-
-function getTypeLabel(type){
-  var map={fed:'Fed',earnings:'財報',data:'數據',tw:'台股',crypto:'加密',geo:'地緣'};
-  return map[type]||type;
-}
-
-function getImpactLabel(impact){
-  var map={high:'🔴 高度關注',mid:'🟡 中度關注',low:'⚪ 一般關注'};
-  return map[impact]||impact;
-}
-
-function renderEvents(events,today){
-  if(!events||events.length===0){
-    document.getElementById('events-list').innerHTML='<div style="color:var(--gray-400);font-size:13px;padding:20px 0;text-align:center;">尚無事件資料，觸發 brief 後自動累積</div>';
-    return;
-  }
-  var groups={};
-  events.forEach(function(e){
-    if(!groups[e.date]) groups[e.date]=[];
-    groups[e.date].push(e);
+// Countdown
+function updateCountdowns(){
+  const today=new Date(2026,4,10);
+  [{id:'cd-cpi',date:new Date(2026,4,12)},
+   {id:'cd-tsmc',date:new Date(2026,4,15)},
+   {id:'cd-fomc',date:new Date(2026,4,21)},
+   {id:'cd-nvda',date:new Date(2026,4,22)},
+   {id:'cd-ecb',date:new Date(2026,5,6)}
+  ].forEach(e=>{
+    const el=document.getElementById(e.id);
+    if(!el) return;
+    const diff=Math.round((e.date-today)/(1000*60*60*24));
+    if(diff===0){el.textContent='今天';el.classList.add('soon');}
+    else if(diff<0){el.textContent='已過';el.style.color='var(--gray-300)';}
+    else{el.textContent=diff+' 天';if(diff<=3)el.classList.add('soon');}
   });
-  var sortedDates=Object.keys(groups).sort();
-  var html='';
-  sortedDates.forEach(function(date){
-    var isToday=date===today;
-    var isPast=date<today;
-    var dt=formatEventDate(date);
-    var groupLabel=isToday?'📌 今日 — '+date:(isPast?'⏮ '+date:'⏭ '+date);
-    html+='<div class="date-group-header '+(isToday?'today-header':isPast?'past-header':'')+'" data-group-date="'+date+'">'+groupLabel+'</div>';
-    groups[date].forEach(function(e){
-      var isHigh=e.impact==='high';
-      var extraClass=isToday?' today-event':(isPast?' past-event':(isHigh?' high-impact-event':''));
-      html+='<div class="event-item'+extraClass+'" data-type="'+e.type+'" data-date="'+e.date+'" onclick="toggleEvent(this)">'+
-        '<div class="event-date-col">'+
-          '<div class="event-month">'+dt.month+'</div>'+
-          '<div class="event-day" style="'+(isToday?'color:var(--navy-500);':'')+'">'+dt.day+'</div>'+
-          '<div class="event-weekday">'+dt.weekday+'</div>'+
-          (e.time?'<div class="event-time-label">'+e.time+'</div>':'')+
-        '</div>'+
-        '<div class="event-body">'+
-          '<div class="event-title-row">'+
-            '<span class="type-badge type-'+e.type+'">'+getTypeLabel(e.type)+'</span>'+
-            (isToday?'<span class="today-badge">今日</span>':'')+
-            (isPast?'<span class="past-badge">已過</span>':'')+
-            (isHigh?'<span class="impact-badge impact-high">高影響</span>':'')+
-            '<span class="event-title">'+e.title+'</span>'+
-          '</div>'+
-          '<div class="event-desc">'+e.desc+'</div>'+
-          '<div class="event-expand">'+
-            '<div class="expand-divider"></div>'+
-            '<div class="expand-grid">'+
-              '<div><div class="expand-cell-label">市場預期</div><div class="expand-cell-value green">'+(e.expect||'—')+'</div></div>'+
-              '<div><div class="expand-cell-label">前次數值</div><div class="expand-cell-value">'+(e.prev||'—')+'</div></div>'+
-              '<div><div class="expand-cell-label">受影響標的</div><div class="expand-cell-value blue">'+(e.affect_assets||'—')+'</div></div>'+
-              '<div><div class="expand-cell-label">影響程度</div><div class="expand-cell-value orange">'+getImpactLabel(e.impact)+'</div></div>'+
-            '</div>'+
-            (e.watch?'<div class="expand-full"><div class="expand-cell-label" style="margin-bottom:3px;">持續觀察</div><div class="expand-cell-value">'+e.watch+'</div></div>':'')+
-          '</div>'+
-        '</div>'+
-        '<div class="expand-arrow">›</div>'+
-      '</div>';
-    });
-  });
-  document.getElementById('events-list').innerHTML=html;
-  document.getElementById('event-count').textContent=events.length+' 則';
 }
-
-async function loadData(){
-  var dailyRes=await fetch('../data/daily.json');
-  var daily=await dailyRes.json();
-  TODAY=daily.date;
-  var d=new Date(TODAY+'T00:00:00');
-  document.getElementById('cal-date').innerHTML=
-    d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'<br>UTC+8 台北時間';
-  var past15=new Date(d); past15.setDate(past15.getDate()-15);
-  var future15=new Date(d); future15.setDate(future15.getDate()+15);
-  var past15Str=past15.toISOString().split('T')[0];
-  var future15Str=future15.toISOString().split('T')[0];
-  document.getElementById('range-info').textContent=
-    '顯示範圍：'+past15Str+' 至 '+future15Str+'（前後各15天，每日觸發 brief 自動累積）';
-  var events=[];
-  try{
-    var accRes=await fetch('../data/accumulated.json');
-    if(accRes.ok){
-      var acc=await accRes.json();
-      if(acc.events&&acc.events.length>0) events=acc.events;
-    }
-  }catch(e){}
-  if(events.length===0&&daily.calendar&&daily.calendar.events) events=daily.calendar.events;
-  allEvents=events;
-  renderEvents(events,TODAY);
-}
-
-loadData();
+updateCountdowns();
 </script>
 </body>
 </html>

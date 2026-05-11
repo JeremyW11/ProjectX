@@ -15,222 +15,234 @@
   --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569;
   --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1;
   --gray-200:#e2e8f0; --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
-  --green-700:#15803d; --green-600:#16a34a; --green-100:#dcfce7;
-  --red-700:#b91c1c; --red-600:#dc2626; --red-100:#fee2e2;
-  --amber-700:#b45309; --amber-600:#d97706; --amber-100:#fef3c7;
-
-  /* 原有 JS 相容變數 */
-  --bg-base:#f7f8fc; --bg-card:#ffffff; --bg-card-hover:#f1f5f9;
-  --border:#e2e8f0; --text-primary:#0f172a; --text-secondary:#475569;
-  --text-muted:#94a3b8; --accent-blue:#2563eb; --accent-purple:#7c3aed;
-  --accent-green:#16a34a; --accent-red:#dc2626; --accent-orange:#d97706;
-  --accent-teal:#0891b2;
-
-  --font-en:'DM Sans',sans-serif; --font-zh:'Noto Sans TC',sans-serif;
+  --green-700:#15803d; --green-600:#16a34a; --green-100:#dcfce7; --green-50:#f0fdf4;
+  --red-700:#b91c1c; --red-600:#dc2626; --red-100:#fee2e2; --red-50:#fef2f2;
+  --amber-600:#d97706; --amber-100:#fef3c7; --amber-50:#fffbeb;
+  --orange-500:#f97316;
+  --font-en:'DM Sans',sans-serif;
+  --font-zh:'Noto Sans TC',sans-serif;
   --font-display:'DM Serif Display',Georgia,serif;
-  --r-sm:6px; --r-md:10px; --r-lg:16px;
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:24px;
   --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
   --shadow-hover:0 4px 24px rgba(15,23,42,.10);
+  --ease:cubic-bezier(0.4,0,0.2,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:16px;-webkit-font-smoothing:antialiased;}
-body{font-family:var(--font-zh);background:var(--bg-base);color:var(--text-primary);min-height:100vh;background-image:none;}
+body{background:#f7f8fc;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
 a{text-decoration:none;color:inherit;}
-button{cursor:pointer;border:none;font-family:inherit;}
-ul{list-style:none;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 /* ── TOPBAR ── */
-nav{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:200;}
-.logo{display:flex;align-items:center;gap:10px;margin-right:36px;flex-shrink:0;}
-.logo-mark{width:32px;height:32px;background:var(--navy-700);border-radius:8px;display:grid;place-items:center;transition:transform .3s;}
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:100;gap:0;}
+.topbar-logo{display:flex;align-items:center;gap:10px;margin-right:36px;}
+.logo-mark{width:32px;height:32px;background:var(--navy-700);border-radius:8px;display:grid;place-items:center;flex-shrink:0;transition:transform .3s;}
 .logo-mark:hover{transform:rotate(45deg) scale(1.05);}
 .logo-main{font-family:var(--font-en);font-size:13.5px;font-weight:600;color:var(--navy-800);letter-spacing:.05em;}
 .logo-sub{font-size:9.5px;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);}
-.nav-links{display:flex;align-items:center;gap:2px;flex:1;}
-.nav-links a{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--gray-500);font-weight:400;transition:all .15s;white-space:nowrap;font-family:var(--font-zh);border-bottom:none;}
-.nav-links a:hover{background:var(--navy-50);color:var(--navy-700);}
-.nav-links a.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
-.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);display:inline-block;}
-.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
-.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
-.live-dot{width:5px;height:5px;background:var(--green-600);border-radius:50%;animation:pulse 2s infinite;display:inline-block;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.header-nav{display:flex;align-items:center;gap:2px;flex:1;}
+.nav-item{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--gray-500);font-weight:400;transition:all .15s;white-space:nowrap;font-family:var(--font-zh);}
+.nav-item:hover{background:var(--navy-50);color:var(--navy-700);}
+.nav-item.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);opacity:0;transition:opacity .15s;}
+.nav-item.active .nav-dot{opacity:1;}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);letter-spacing:.04em;}
+.live-dot{width:5px;height:5px;background:var(--green-600);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 .header-time{font-family:var(--font-en);font-size:12px;color:var(--gray-400);}
-.btn{padding:7px 16px;border-radius:var(--r-sm);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font-en);}
-.btn-ghost{background:var(--white);border:1px solid var(--gray-300);color:var(--gray-700);}
-.btn-ghost:hover{border-color:var(--navy-400);color:var(--navy-700);}
-.btn-glow{background:var(--navy-700);color:var(--white);box-shadow:none;border:none;}
-.btn-glow:hover{background:var(--navy-600);transform:translateY(-1px);}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--gray-700);border-radius:2px;transition:all .3s;}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
-.mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);z-index:199;padding:24px;flex-direction:column;gap:4px;overflow-y:auto;border-top:1px solid var(--gray-200);}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{color:var(--gray-600);font-size:16px;font-weight:500;padding:13px 0;border-bottom:1px solid var(--gray-100);font-family:var(--font-zh);}
-.mobile-menu a.active{color:var(--navy-600);}
-.mobile-menu-btns{margin-top:20px;display:flex;flex-direction:column;gap:10px;}
-.mobile-menu-btns .btn{width:100%;padding:12px;font-size:14px;text-align:center;}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;font-family:var(--font-en);transition:background .15s;}
+.btn-login:hover{background:var(--navy-600);}
 
-/* ── PAGE ── */
-main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding:28px 24px 60px;}
-.top-bar{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;}
-.top-bar h1{font-family:var(--font-display);font-size:26px;color:var(--navy-950);}
-.top-bar .meta{font-size:12px;color:var(--gray-400);text-align:right;line-height:1.8;font-family:var(--font-en);}
+/* ── PAGE BODY ── */
+.page{margin-top:56px;max-width:1280px;margin-left:auto;margin-right:auto;padding:28px 24px 60px;}
+
+/* ── PAGE HEADER ── */
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;}
+.page-title{font-family:var(--font-display);font-size:28px;color:var(--navy-950);line-height:1.2;}
+.page-title-sub{font-family:var(--font-zh);font-size:13px;font-weight:300;color:var(--gray-400);margin-top:4px;font-style:normal;}
+.page-update{font-size:11.5px;color:var(--gray-400);font-family:var(--font-en);}
 
 /* ── TAB BAR ── */
-.tabs{display:flex;gap:0;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:5px;margin-bottom:22px;box-shadow:var(--shadow-card);width:fit-content;}
-.tab-btn{display:flex;align-items:center;gap:7px;padding:9px 22px;border-radius:var(--r-md);font-size:14px;font-weight:500;color:var(--gray-500);font-family:var(--font-zh);transition:all .2s;cursor:pointer;white-space:nowrap;border:none;background:transparent;border-bottom:none;}
+.tab-bar{display:flex;gap:0;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:5px;margin-bottom:24px;box-shadow:var(--shadow-card);width:fit-content;}
+.tab-btn{display:flex;align-items:center;gap:7px;padding:9px 22px;border-radius:var(--r-md);font-size:14px;font-weight:500;color:var(--gray-500);font-family:var(--font-zh);transition:all .2s;cursor:pointer;white-space:nowrap;}
 .tab-btn:hover{color:var(--navy-700);background:var(--navy-50);}
 .tab-btn.active{background:var(--navy-700);color:var(--white);box-shadow:0 2px 8px rgba(29,45,90,.2);}
-.tab-content{display:none;}
-.tab-content.active{display:block;}
+.tab-icon{font-size:15px;line-height:1;}
 
-/* ── CARDS ── */
-.glass-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:18px 20px;backdrop-filter:none;margin-bottom:12px;box-shadow:var(--shadow-card);}
-.glass-card:hover{box-shadow:var(--shadow-hover);}
-.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--gray-100);}
-.card-title{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--gray-900);font-family:var(--font-zh);}
+/* ── TAB PANELS ── */
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
 
-/* ── INDEX GRID ── */
-.index-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;}
-.index-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow-card);position:relative;overflow:hidden;}
-.index-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
-.index-card.up::before{background:var(--green-600);}
-.index-card.down::before{background:var(--red-600);}
-.index-card.flat::before{background:var(--gray-300);}
-.ic-label{font-size:10px;color:var(--gray-400);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px;font-family:var(--font-en);}
-.ic-value{font-size:26px;font-weight:600;color:var(--gray-900);margin-bottom:4px;font-family:var(--font-en);letter-spacing:-.01em;}
-.ic-change{font-size:13px;font-weight:600;margin-bottom:10px;font-family:var(--font-en);}
-.ic-stats{display:flex;gap:14px;}
-.ic-stat-label{font-size:9.5px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;margin-bottom:1px;font-family:var(--font-en);}
-.ic-stat-value{font-size:12px;font-weight:500;color:var(--gray-500);font-family:var(--font-en);}
+/* ── SUMMARY STRIP (top of each tab) ── */
+.summary-strip{display:grid;gap:10px;margin-bottom:22px;}
+.summary-strip.cols-3{grid-template-columns:repeat(3,1fr);}
+.summary-strip.cols-4{grid-template-columns:repeat(4,1fr);}
+.summary-strip.cols-5{grid-template-columns:repeat(5,1fr);}
 
-/* ── SENTIMENT BAR ── */
-.sentiment-bar-us,.sentiment-bar-tw{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
-.sentiment-bar-crypto{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
-.sent-item{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:12px 14px;text-align:center;box-shadow:var(--shadow-card);}
-.sent-label{font-size:10px;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;font-weight:600;font-family:var(--font-en);}
-.sent-value{font-size:18px;font-weight:700;margin-bottom:2px;font-family:var(--font-en);}
-.sent-sub{font-size:11px;color:var(--gray-400);font-family:var(--font-en);}
+.sum-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;box-shadow:var(--shadow-card);transition:all .2s;}
+.sum-card:hover{border-color:var(--navy-300);box-shadow:var(--shadow-hover);}
+.sum-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.sum-tag{font-family:var(--font-en);font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;background:var(--gray-100);padding:2px 7px;border-radius:4px;}
+.sum-category{font-size:9.5px;color:var(--gray-400);font-family:var(--font-en);}
+.sum-name{font-size:11.5px;color:var(--gray-500);font-family:var(--font-zh);margin-bottom:2px;}
+.sum-price{font-family:var(--font-en);font-size:22px;font-weight:600;color:var(--gray-900);letter-spacing:-.02em;line-height:1.15;}
+.sum-row{display:flex;align-items:center;gap:8px;margin-top:4px;}
+.sum-chg{font-family:var(--font-en);font-size:12.5px;font-weight:500;}
+.sum-chg.up{color:var(--green-600);}
+.sum-chg.dn{color:var(--red-600);}
+.sum-chg.flat{color:var(--gray-400);}
+.sum-extra{font-size:11px;color:var(--gray-400);font-family:var(--font-en);}
 
-/* ── TWO COL ── */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+/* ── SECTION BLOCK ── */
+.section-block{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-card);margin-bottom:16px;}
+.section-block-header{padding:14px 20px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;}
+.sbh-title{font-size:13px;font-weight:600;color:var(--gray-900);font-family:var(--font-zh);display:flex;align-items:center;gap:7px;}
+.sbh-title-en{font-family:var(--font-en);font-size:11px;font-weight:400;color:var(--gray-400);letter-spacing:.05em;}
+.sbh-right{display:flex;align-items:center;gap:8px;}
+.sbh-badge{font-size:10px;font-weight:600;font-family:var(--font-en);padding:2px 8px;border-radius:4px;letter-spacing:.04em;}
+.section-block-body{padding:0;}
 
-/* ── STOCK TABLE ── */
-.stock-header-row{display:grid;grid-template-columns:160px 1fr 100px 100px 80px 20px;gap:12px;padding:7px 6px;border-bottom:1px solid var(--gray-100);margin-bottom:3px;}
-.stock-header-row span{font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);}
-.stock-item{display:grid;grid-template-columns:160px 1fr 100px 100px 80px 20px;gap:12px;align-items:center;padding:12px 6px;border-bottom:1px solid var(--gray-100);border-radius:var(--r-sm);cursor:pointer;transition:background .15s;margin:0 -6px;}
-.stock-item:last-child{border-bottom:none;}
-.stock-item:hover{background:var(--navy-50);}
-.stock-item.open{background:var(--navy-50);}
-.s-ticker{font-size:14px;font-weight:700;color:var(--gray-900);font-family:var(--font-en);}
-.s-name{font-size:11px;color:var(--gray-400);margin-top:1px;font-family:var(--font-zh);}
-.s-price{font-size:14px;font-weight:600;font-family:var(--font-en);}
-.s-change{font-size:13px;font-weight:600;font-family:var(--font-en);}
-.s-tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;display:inline-block;margin-top:3px;font-family:var(--font-en);}
-.tag-ai{background:#ede9fe;color:#6d28d9;}
-.tag-semi{background:var(--navy-50);color:var(--navy-600);}
-.tag-server{background:var(--green-100);color:var(--green-700);}
-.tag-energy{background:var(--amber-100);color:var(--amber-700);}
-.s-note{font-size:12.5px;color:var(--gray-600);font-family:var(--font-zh);}
-.expand-arrow{font-size:13px;color:var(--gray-400);transition:transform .3s;}
-.stock-expand{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .3s;opacity:0;}
-.stock-item.open .stock-expand{max-height:160px;opacity:1;}
-.stock-expand-inner{padding-top:10px;border-top:1px solid var(--gray-100);margin-top:4px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.se-label{font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px;font-weight:600;font-family:var(--font-en);}
-.se-value{font-size:12.5px;color:var(--gray-600);line-height:1.5;font-family:var(--font-zh);}
+/* ── DATA TABLE ── */
+.data-table{width:100%;border-collapse:collapse;}
+.data-table th{padding:10px 18px;font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:.06em;font-family:var(--font-en);text-align:left;background:var(--gray-50);border-bottom:1px solid var(--gray-100);}
+.data-table th.r{text-align:right;}
+.data-table td{padding:12px 18px;font-size:13.5px;color:var(--gray-700);border-bottom:1px solid var(--gray-100);vertical-align:middle;}
+.data-table td.r{text-align:right;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr{transition:background .12s;cursor:default;}
+.data-table tr:hover td{background:var(--navy-50);}
 
-/* ── CRYPTO CARDS ── */
-.crypto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
-.crypto-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:16px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;box-shadow:var(--shadow-card);}
-.crypto-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
-.crypto-card.up::before{background:var(--green-600);}
-.crypto-card.down::before{background:var(--red-600);}
-.crypto-card:hover{box-shadow:var(--shadow-hover);}
-.crypto-card.open{border-color:var(--navy-300);}
-.cc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
-.cc-symbol{font-size:15px;font-weight:700;color:var(--gray-900);font-family:var(--font-en);}
-.cc-name{font-size:11px;color:var(--gray-400);margin-top:1px;font-family:var(--font-zh);}
-.cc-signal{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;font-family:var(--font-en);}
-.cc-price{font-size:22px;font-weight:600;margin-bottom:3px;font-family:var(--font-en);letter-spacing:-.01em;}
-.cc-change{font-size:13px;font-weight:600;margin-bottom:12px;font-family:var(--font-en);}
-.cc-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.cc-stat-label{font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px;font-family:var(--font-en);}
-.cc-stat-value{font-size:12.5px;font-weight:600;color:var(--gray-600);font-family:var(--font-en);}
-.cc-expand{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .3s;opacity:0;}
-.crypto-card.open .cc-expand{max-height:180px;opacity:1;}
-.cc-divider{height:1px;background:var(--gray-100);margin:12px 0;}
-.cc-expand-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.cc-expand-label{font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px;font-weight:600;font-family:var(--font-en);}
-.cc-expand-value{font-size:12.5px;color:var(--gray-600);line-height:1.5;font-family:var(--font-zh);}
+.dt-sym{font-family:var(--font-en);font-size:13px;font-weight:600;color:var(--gray-900);letter-spacing:.02em;}
+.dt-name{font-size:11.5px;color:var(--gray-400);font-family:var(--font-zh);margin-top:1px;}
+.dt-price{font-family:var(--font-en);font-size:14px;font-weight:600;color:var(--gray-900);}
+.dt-chg{font-family:var(--font-en);font-size:13px;font-weight:500;}
+.dt-chg.up{color:var(--green-600);}
+.dt-chg.dn{color:var(--red-600);}
+.dt-chg.flat{color:var(--gray-400);}
+.dt-val{font-family:var(--font-en);font-size:13px;color:var(--gray-500);}
+.dt-badge{font-size:10px;font-weight:600;font-family:var(--font-en);padding:2px 7px;border-radius:4px;letter-spacing:.04em;}
+.b-buy{background:var(--green-100);color:var(--green-700);}
+.b-hold{background:var(--amber-100);color:var(--amber-600);}
+.b-sell{background:var(--red-100);color:var(--red-700);}
+.b-beat{background:var(--green-100);color:var(--green-700);}
+.b-miss{background:var(--red-100);color:var(--red-700);}
 
-/* ── CRYPTO OVERVIEW ── */
-.crypto-overview{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
-.co-item{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:13px 15px;box-shadow:var(--shadow-card);}
-.co-label{font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;font-weight:600;font-family:var(--font-en);}
-.co-value{font-size:17px;font-weight:600;color:var(--gray-900);margin-bottom:2px;font-family:var(--font-en);}
-.co-sub{font-size:11px;color:var(--gray-400);font-family:var(--font-en);}
+/* Mini bar inside table */
+.mini-bar-wrap{display:flex;align-items:center;gap:8px;}
+.mini-bar-track{flex:1;max-width:80px;height:4px;background:var(--gray-100);border-radius:2px;overflow:hidden;}
+.mini-bar-fill{height:100%;border-radius:2px;}
+.bar-green{background:var(--green-600);}
+.bar-red{background:var(--red-600);}
+.bar-blue{background:var(--navy-400);}
+.bar-amber{background:var(--amber-600);}
 
-/* ── NEWS STRIP ── */
-.news-strip{margin-top:2px;}
-.news-strip-item{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--gray-100);align-items:flex-start;}
-.news-strip-item:last-child{border-bottom:none;}
-.news-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);flex-shrink:0;margin-top:5px;}
-.news-strip-text{font-size:13px;color:var(--gray-600);line-height:1.6;flex:1;font-family:var(--font-zh);}
-.news-strip-time{font-size:11px;color:var(--gray-400);white-space:nowrap;flex-shrink:0;font-family:var(--font-en);}
+/* Sentiment chip */
+.sent-chip{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.s-bull{background:var(--green-100);color:var(--green-700);}
+.s-bear{background:var(--red-100);color:var(--red-700);}
+.s-neut{background:var(--amber-100);color:var(--amber-600);}
 
-/* ── ROTATION ── */
-.rotation-item{padding:10px 0;border-bottom:1px solid var(--gray-100);}
-.rotation-item:last-child{border-bottom:none;}
-.rotation-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
-.rotation-from{font-size:13px;color:var(--red-600);font-weight:700;font-family:var(--font-en);}
-.rotation-arrow{color:var(--gray-400);font-size:13px;}
-.rotation-to{font-size:13px;color:var(--green-600);font-weight:700;font-family:var(--font-en);}
-.rotation-strength{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--amber-100);color:var(--amber-700);font-family:var(--font-en);}
-.rotation-reason{font-size:12.5px;color:var(--gray-500);line-height:1.5;font-family:var(--font-zh);}
+/* ── TWO COLUMN LAYOUT ── */
+.two-col{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start;}
+.full-col{grid-column:1/-1;}
 
-/* ── SIGNALS ── */
-.up{color:var(--green-600);}
-.down{color:var(--red-600);}
-.flat{color:var(--gray-400);}
-.bull{background:var(--green-100);color:var(--green-700);border:1px solid #bbf7d0;}
-.bear{background:var(--red-100);color:var(--red-700);border:1px solid #fecaca;}
-.watch{background:var(--amber-100);color:var(--amber-700);border:1px solid #fde68a;}
-.neutral{background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);}
+/* ── SIGNAL CARD ── */
+.signal-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--shadow-card);}
+.signal-card-title{font-size:13px;font-weight:600;color:var(--gray-900);font-family:var(--font-zh);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
+.signal-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);}
+.signal-row:last-child{border-bottom:none;}
+.sr-label{font-size:13px;color:var(--gray-600);font-family:var(--font-zh);}
+.sr-val{font-family:var(--font-en);font-size:13px;font-weight:500;}
+.sr-val.up{color:var(--green-600);}
+.sr-val.dn{color:var(--red-600);}
+.sr-val.flat{color:var(--gray-500);}
+
+/* ── CRYPTO EXTRAS ── */
+.crypto-metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:16px;}
+.cm-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:12px 14px;}
+.cm-label{font-size:10.5px;color:var(--gray-500);font-family:var(--font-en);letter-spacing:.04em;margin-bottom:4px;}
+.cm-val{font-family:var(--font-en);font-size:17px;font-weight:600;color:var(--gray-900);}
+.cm-sub{font-size:11px;color:var(--gray-400);font-family:var(--font-en);margin-top:2px;}
+.cm-badge{display:inline-block;margin-top:4px;font-size:10px;font-weight:600;font-family:var(--font-en);padding:2px 7px;border-radius:4px;}
+
+/* ── COIN DETAIL PANEL ── */
+.coin-tabs{display:flex;gap:4px;padding:14px 16px 0;border-bottom:1px solid var(--gray-100);}
+.coin-tab{font-size:13px;font-weight:500;color:var(--gray-400);padding:7px 14px;border-bottom:2px solid transparent;font-family:var(--font-en);cursor:pointer;transition:all .15s;}
+.coin-tab:hover{color:var(--navy-600);}
+.coin-tab.active{color:var(--navy-700);border-bottom-color:var(--navy-700);}
+.coin-panel{display:none;padding:16px;}
+.coin-panel.active{display:block;}
+
+/* funding rate bar */
+.fr-bar-wrap{display:flex;align-items:center;gap:10px;margin-top:6px;}
+.fr-bar-track{flex:1;height:6px;background:var(--gray-100);border-radius:3px;overflow:hidden;position:relative;}
+.fr-bar-center{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--gray-300);}
+.fr-bar-fill{position:absolute;top:0;bottom:0;border-radius:3px;}
+
+/* ── SECTOR RADAR ── */
+.sector-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:16px;}
+.sector-item{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:10px 12px;transition:all .15s;cursor:default;}
+.sector-item:hover{border-color:var(--navy-300);background:var(--navy-50);}
+.sector-name{font-size:11.5px;color:var(--gray-600);font-family:var(--font-zh);margin-bottom:6px;}
+.sector-chg-row{display:flex;align-items:center;justify-content:space-between;}
+.sector-chg{font-family:var(--font-en);font-size:13px;font-weight:600;}
+.sector-bar{width:100%;height:3px;border-radius:2px;margin-top:6px;}
+
+/* ── FOREIGN FLOW ── */
+.flow-row{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:1px solid var(--gray-100);}
+.flow-row:last-child{border-bottom:none;}
+.flow-sym{font-family:var(--font-en);font-size:12px;font-weight:600;color:var(--gray-700);width:44px;flex-shrink:0;}
+.flow-name{font-size:12px;color:var(--gray-500);font-family:var(--font-zh);flex:1;}
+.flow-bar-wrap{width:120px;flex-shrink:0;}
+.flow-bar-track{height:5px;background:var(--gray-100);border-radius:3px;overflow:hidden;}
+.flow-bar-fill{height:100%;border-radius:3px;}
+.flow-val{font-family:var(--font-en);font-size:12px;font-weight:600;width:64px;text-align:right;flex-shrink:0;}
+.flow-val.up{color:var(--green-600);}
+.flow-val.dn{color:var(--red-600);}
+
+/* ── MINI CHART PLACEHOLDER ── */
+.mini-chart{height:48px;display:flex;align-items:flex-end;gap:2px;padding:0 2px;}
+.mc-bar{flex:1;border-radius:2px 2px 0 0;min-width:3px;transition:opacity .2s;}
+.mc-bar:hover{opacity:.7;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){.two-col{grid-template-columns:1fr;}}
 @media(max-width:768px){
-  nav{padding:0 16px;}
-  .nav-links,.nav-right{display:none;}
-  .hamburger{display:flex;}
-  main{padding:16px 16px 40px;}
-  .top-bar{flex-direction:column;align-items:flex-start;gap:4px;margin-bottom:14px;}
-  .top-bar .meta{text-align:left;font-size:11px;}
-  .tabs{overflow-x:auto;gap:0;width:100%;}
-  .tab-btn{padding:9px 14px;font-size:13px;}
-  .index-grid{grid-template-columns:1fr;gap:8px;}
-  .sentiment-bar-us,.sentiment-bar-tw,.sentiment-bar-crypto{grid-template-columns:repeat(2,1fr);gap:8px;}
-  .crypto-overview{grid-template-columns:repeat(2,1fr);gap:8px;}
-  .crypto-grid{grid-template-columns:1fr;gap:10px;}
-  .stock-header-row{display:none;}
-  .stock-item{grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:6px;padding:12px 6px;}
-  .s-ticker-col{grid-column:1;grid-row:1;display:flex;align-items:center;gap:8px;}
-  .s-price-col{grid-column:2;grid-row:1;text-align:right;}
-  .s-note-col{grid-column:1/-1;grid-row:2;}
-  .s-arrow-col{display:none;}
-  .stock-item.open .stock-expand{max-height:200px;}
-  .stock-expand-inner{grid-template-columns:1fr;}
-  .glass-card{padding:14px 16px;}
+  .summary-strip.cols-5,.summary-strip.cols-4{grid-template-columns:repeat(2,1fr);}
+  .summary-strip.cols-3{grid-template-columns:repeat(2,1fr);}
+  .sector-grid{grid-template-columns:repeat(2,1fr);}
+  .header-nav{display:none;}
+  .crypto-metric-grid{grid-template-columns:1fr;}
 }
+
+/* ── NEWS LIST ── */
+.news-list{display:flex;flex-direction:column;gap:0;}
+.news-item{display:flex;gap:14px;align-items:flex-start;padding:13px 18px;border-bottom:1px solid var(--gray-100);transition:background .12s;cursor:default;}
+.news-item:last-child{border-bottom:none;}
+.news-item:hover{background:var(--navy-50);}
+.news-num{font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-300);width:16px;flex-shrink:0;margin-top:2px;}
+.news-content{flex:1;min-width:0;}
+.news-meta{display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap;}
+.news-badge{font-family:var(--font-en);font-size:9px;font-weight:600;padding:2px 7px;border-radius:3px;letter-spacing:.04em;}
+.news-source{font-size:10.5px;color:var(--gray-400);font-family:var(--font-en);}
+.news-time{font-size:10.5px;color:var(--gray-300);font-family:var(--font-en);}
+.news-headline{font-size:13.5px;font-weight:500;color:var(--gray-800);font-family:var(--font-zh);line-height:1.5;margin-bottom:3px;}
+.news-body{font-size:12px;color:var(--gray-500);line-height:1.6;font-family:var(--font-zh);font-weight:300;}
+.news-tickers{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
+.news-chip{font-family:var(--font-en);font-size:10px;font-weight:600;padding:1px 7px;background:var(--gray-100);color:var(--navy-700);border-radius:3px;border:1px solid var(--gray-200);letter-spacing:.03em;}
+.b-us-n{background:#f0fdf4;color:#166534;}
+.b-tw-n{background:#fdf4ff;color:#7e22ce;}
+.b-cr-n{background:#fef3c7;color:#92400e;}
+.b-mac-n{background:#eff6ff;color:#1d4ed8;}
+
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo">
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-logo">
     <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
       <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
       <line x1="10" y1="10" x2="30" y2="30" stroke="white" stroke-width="6" stroke-linecap="round"/>
@@ -241,360 +253,554 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
       <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
     </svg>
   </div>
-  <ul class="nav-links">
-    <li><a href="/brief.html">總覽</a></li>
-    <li><a href="/pages/market.html" class="active"><span class="nav-dot"></span>市場</a></li>
-    <li><a href="/pages/industry.html">產業</a></li>
-    <li><a href="/pages/institutional.html">機構研報</a></li>
-    <li><a href="/pages/calendar.html">市場日曆</a></li>
-    <li><a href="/pages/targets.html">標的追蹤</a></li>
-  </ul>
-  <div class="nav-right">
+    <nav class="header-nav">
+    <a href="/brief.html" class="nav-item">總覽</a>
+    <a href="/pages/market.html" class="nav-item active"><span class="nav-dot"></span>市場</a>
+    <a href="/pages/industry.html" class="nav-item">產業</a>
+    <a href="/pages/institutional.html" class="nav-item">機構研報</a>
+    <a href="/pages/calendar.html" class="nav-item">市場日曆</a>
+    <a href="/pages/targets.html" class="nav-item">標的追蹤</a>
+  </nav>
+  <div class="header-right">
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
     <span class="header-time" id="clock">—</span>
-    <a href="/pages/login.html" class="btn btn-ghost" style="text-decoration:none;">登入</a>
-    <button class="btn btn-glow">訂閱 Pro</button>
+    <a href="/pages/login.html" class="btn-login">登入</a>
   </div>
-  <button class="hamburger" onclick="toggleMenu()" id="hamburger">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+</header>
 
-<div class="mobile-menu" id="mobile-menu">
-  <a href="/brief.html">總覽</a>
-  <a href="/pages/market.html" class="active">市場</a>
-  <a href="/pages/industry.html">產業</a>
-  <a href="/pages/institutional.html">機構研報</a>
-  <a href="/pages/calendar.html">市場日曆</a>
-  <a href="/pages/targets.html">標的追蹤</a>
-  <div class="mobile-menu-btns">
-    <a href="/pages/login.html" class="btn btn-ghost" style="text-align:center;">登入</a>
-    <button class="btn btn-glow">訂閱 Pro</button>
-  </div>
-</div>
+<!-- PAGE -->
+<main class="page">
 
-<main>
-  <div class="top-bar">
+  <div class="page-header">
     <div>
-      <h1>市場數據</h1>
-      <div style="font-size:11px;color:var(--gray-400);margin-top:3px;font-family:var(--font-en);">
-        <span class="live-dot"></span>&nbsp;美股 · 台股 · 加密貨幣
+      <h1 class="page-title">市場數據 <span class="page-title-sub">Market Data</span></h1>
+      <div class="page-update">更新於 08:14 CST · 2026-05-10</div>
+    </div>
+  </div>
+
+  <!-- TAB BAR -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="us" onclick="switchTab('us')">
+      <span class="tab-icon">📈</span>美股
+    </button>
+    <button class="tab-btn" data-tab="tw" onclick="switchTab('tw')">
+      <span class="tab-icon">🇹🇼</span>台股
+    </button>
+    <button class="tab-btn" data-tab="crypto" onclick="switchTab('crypto')">
+      <span class="tab-icon">₿</span>加密貨幣
+    </button>
+  </div>
+
+  <!-- ═══════════════ US EQUITY TAB ═══════════════ -->
+  <div class="tab-panel active" id="tab-us">
+    <div class="summary-strip cols-4">
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">SPX</span><span class="sum-category">Index</span></div>
+        <div class="sum-name">S&amp;P 500</div>
+        <div class="sum-price">5,214</div>
+        <div class="sum-row"><span class="sum-chg dn">▼ −0.48%</span><span class="sum-extra">前收</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">NDX</span><span class="sum-category">Index</span></div>
+        <div class="sum-name">NASDAQ 100</div>
+        <div class="sum-price">18,290</div>
+        <div class="sum-row"><span class="sum-chg dn">▼ −0.21%</span><span class="sum-extra">前收</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">DJI</span><span class="sum-category">Index</span></div>
+        <div class="sum-name">Dow Jones</div>
+        <div class="sum-price">38,820</div>
+        <div class="sum-row"><span class="sum-chg dn">▼ −0.34%</span><span class="sum-extra">前收</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">VIX</span><span class="sum-category">Volatility</span></div>
+        <div class="sum-name">恐慌指數</div>
+        <div class="sum-price">18.4</div>
+        <div class="sum-row"><span class="sum-chg flat">― Neutral</span><span class="sum-extra">CBOE</span></div>
       </div>
     </div>
-    <div class="meta" id="market-date"></div>
-  </div>
 
-  <!-- Tab bar：順序改為美股→台股→加密 -->
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('us',this)">📈 美股</button>
-    <button class="tab-btn" onclick="switchTab('tw',this)">🇹🇼 台股</button>
-    <button class="tab-btn" onclick="switchTab('crypto',this)">₿ 加密貨幣</button>
-  </div>
-
-  <!-- 美股 -->
-  <div id="tab-us" class="tab-content active">
-    <div class="index-grid" id="us-index-grid"></div>
-    <div class="sentiment-bar-us" id="us-sentiment-bar"></div>
     <div class="two-col">
       <div>
-        <div class="glass-card">
-          <div class="card-header"><div class="card-title">🏆 重點追蹤標的</div></div>
-          <div class="stock-header-row">
-            <span>標的</span><span>今日重點</span><span>股價</span><span>漲跌幅</span><span>板塊</span><span></span>
+        <!-- Core stocks table -->
+        <div class="section-block" style="margin-bottom:16px;">
+          <div class="section-block-header">
+            <div class="sbh-title">核心個股 <span class="sbh-title-en">CORE WATCHLIST</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut">前收 · 昨日</span></div>
           </div>
-          <div id="us-stocks-list"></div>
+          <table class="data-table">
+            <thead>
+              <tr><th>股票</th><th class="r">前收價</th><th class="r">漲跌</th><th class="r">成交量</th><th class="r">市值</th><th class="r">本益比</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><div class="dt-sym">NVDA</div><div class="dt-name">NVIDIA Corporation</div></td><td class="r"><span class="dt-price">890.40</span></td><td class="r"><span class="dt-chg up">▲ +9.21%</span></td><td class="r"><span class="dt-val">482M</span></td><td class="r"><span class="dt-val">$2.19T</span></td><td class="r"><span class="dt-val">68.4x</span></td></tr>
+              <tr><td><div class="dt-sym">AAPL</div><div class="dt-name">Apple Inc.</div></td><td class="r"><span class="dt-price">189.30</span></td><td class="r"><span class="dt-chg dn">▼ −0.62%</span></td><td class="r"><span class="dt-val">58M</span></td><td class="r"><span class="dt-val">$2.91T</span></td><td class="r"><span class="dt-val">29.1x</span></td></tr>
+              <tr><td><div class="dt-sym">MSFT</div><div class="dt-name">Microsoft Corp.</div></td><td class="r"><span class="dt-price">415.80</span></td><td class="r"><span class="dt-chg up">▲ +0.43%</span></td><td class="r"><span class="dt-val">22M</span></td><td class="r"><span class="dt-val">$3.09T</span></td><td class="r"><span class="dt-val">34.8x</span></td></tr>
+              <tr><td><div class="dt-sym">AMZN</div><div class="dt-name">Amazon.com Inc.</div></td><td class="r"><span class="dt-price">182.60</span></td><td class="r"><span class="dt-chg up">▲ +1.15%</span></td><td class="r"><span class="dt-val">44M</span></td><td class="r"><span class="dt-val">$1.92T</span></td><td class="r"><span class="dt-val">41.2x</span></td></tr>
+              <tr><td><div class="dt-sym">META</div><div class="dt-name">Meta Platforms</div></td><td class="r"><span class="dt-price">524.10</span></td><td class="r"><span class="dt-chg up">▲ +0.88%</span></td><td class="r"><span class="dt-val">16M</span></td><td class="r"><span class="dt-val">$1.33T</span></td><td class="r"><span class="dt-val">25.6x</span></td></tr>
+              <tr><td><div class="dt-sym">SMCI</div><div class="dt-name">Super Micro Computer</div></td><td class="r"><span class="dt-price">84.20</span></td><td class="r"><span class="dt-chg dn">▼ −2.14%</span></td><td class="r"><span class="dt-val">32M</span></td><td class="r"><span class="dt-val">$49.2B</span></td><td class="r"><span class="dt-val">22.1x</span></td></tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-      <div>
-        <div class="glass-card">
-          <div class="card-header"><div class="card-title">📰 今日美股新聞</div></div>
-          <div id="us-news-list"></div>
-        </div>
-        <div class="glass-card">
-          <div class="card-header"><div class="card-title">🔄 資金輪動觀察</div></div>
-          <div id="us-rotation"></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- 台股 -->
-  <div id="tab-tw" class="tab-content">
-    <div class="index-grid" id="tw-index-grid"></div>
-    <div class="sentiment-bar-tw" id="tw-sentiment-bar"></div>
-    <div class="two-col">
-      <div>
-        <div class="glass-card">
-          <div class="card-header"><div class="card-title">🏆 重點追蹤標的</div></div>
-          <div class="stock-header-row">
-            <span>標的</span><span>今日重點</span><span>股價</span><span>漲跌幅</span><span>板塊</span><span></span>
+        <!-- Earnings table -->
+        <div class="section-block">
+          <div class="section-block-header">
+            <div class="sbh-title">近期財報 <span class="sbh-title-en">RECENT EARNINGS</span></div>
           </div>
-          <div id="tw-stocks-list"></div>
+          <table class="data-table">
+            <thead>
+              <tr><th>公司</th><th class="r">EPS 實際</th><th class="r">EPS 預期</th><th class="r">結果</th><th class="r">營收</th><th class="r">股價反應</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><div class="dt-sym">NVDA</div><div class="dt-name">Q1 FY2026</div></td><td class="r"><span class="dt-price">6.12</span></td><td class="r"><span class="dt-val">5.58</span></td><td class="r"><span class="dt-badge b-beat">Beat +10%</span></td><td class="r"><span class="dt-val">$26.0B</span></td><td class="r"><span class="dt-chg up">▲ +9.2%</span></td></tr>
+              <tr><td><div class="dt-sym">WMT</div><div class="dt-name">Q1 FY2026</div></td><td class="r"><span class="dt-price">0.61</span></td><td class="r"><span class="dt-val">0.64</span></td><td class="r"><span class="dt-badge b-miss">Miss −5%</span></td><td class="r"><span class="dt-val">$159.9B</span></td><td class="r"><span class="dt-chg dn">▼ −2.1%</span></td></tr>
+              <tr><td><div class="dt-sym">AAPL</div><div class="dt-name">Q2 FY2025</div></td><td class="r"><span class="dt-price">1.65</span></td><td class="r"><span class="dt-val">1.61</span></td><td class="r"><span class="dt-badge b-beat">Beat +2%</span></td><td class="r"><span class="dt-val">$95.4B</span></td><td class="r"><span class="dt-chg up">▲ +1.8%</span></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
+
+      <!-- Sidebar -->
       <div>
-        <div class="glass-card">
-          <div class="card-header"><div class="card-title">📰 今日台股新聞</div></div>
-          <div id="tw-news-list"></div>
+        <div class="signal-card" style="margin-bottom:14px;">
+          <div class="signal-card-title">美股訊號 <span class="sent-chip s-neut">中性</span></div>
+          <div class="signal-row"><span class="sr-label">VIX 水位</span><span class="sr-val flat">18.4 · 正常</span></div>
+          <div class="signal-row"><span class="sr-label">SPX vs 200MA</span><span class="sr-val up">+4.2% 上方</span></div>
+          <div class="signal-row"><span class="sr-label">Put/Call Ratio</span><span class="sr-val flat">0.82 · 中性</span></div>
+          <div class="signal-row"><span class="sr-label">10Y 殖利率</span><span class="sr-val dn">4.52%</span></div>
+          <div class="signal-row"><span class="sr-label">DXY 美元指數</span><span class="sr-val dn">105.2 ↑</span></div>
+          <div class="signal-row"><span class="sr-label">AI / 半導體</span><span class="sr-val up">強勢板塊</span></div>
         </div>
-        <div class="glass-card">
-          <div class="card-header"><div class="card-title">🔄 資金輪動觀察</div></div>
-          <div id="tw-rotation"></div>
+        <div class="signal-card">
+          <div class="signal-card-title" style="margin-bottom:4px;">
+            資金流向
+            <span style="font-family:var(--font-en);font-size:10px;font-weight:400;color:var(--gray-400);letter-spacing:.05em;">SECTOR FLOW · 今日</span>
+          </div>
+          <div style="font-size:10.5px;color:var(--gray-400);font-family:var(--font-zh);margin-bottom:12px;">ETF 資金淨流入排行</div>
+
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Technology</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">科技</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:100%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$4.2B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Comm. Services</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">通訊服務</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:62%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$2.6B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Energy</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">能源</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:45%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$1.1B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Industrials</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">工業</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:30%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$0.7B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Consumer Disc.</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">非必需消費</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:18%;background:var(--amber-600)"></div></div></div>
+            <span class="flow-val" style="color:var(--amber-600);">+$0.2B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Financials</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">金融</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:24%;background:var(--red-600)"></div></div></div>
+            <span class="flow-val dn">−$0.8B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Healthcare</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">醫療保健</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:18%;background:var(--red-600)"></div></div></div>
+            <span class="flow-val dn">−$0.6B</span>
+          </div>
+          <div class="flow-row" style="border-bottom:none;">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Real Estate</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">房地產</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:12%;background:var(--red-600)"></div></div></div>
+            <span class="flow-val dn">−$0.4B</span>
+          </div>
         </div>
       </div>
     </div>
+          
+    
+        <div class="section-block" style="margin-top:16px;">
+          <div class="section-block-header">
+            <div class="sbh-title">美股新聞 <span class="sbh-title-en">US MARKET NEWS</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut">今日 5 則</span></div>
+          </div>
+          <div class="news-list">
+            <div class="news-item"><span class="news-num">01</span><div class="news-content"><div class="news-meta"><span class="news-badge b-us-n">US EQUITY</span><span class="news-source">Bloomberg</span><span class="news-time">07:44</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">NVIDIA Q1財報大幅超預期，資料中心營收年增427%創歷史新高</div><div class="news-body">Q1 EPS 達 6.12 美元（預期 5.58），資料中心營收 226 億美元。CEO 黃仁勳表示 Blackwell 出貨量持續爬坡，下季指引 280 億美元超市場共識，盤後股價大漲 9%。</div><div class="news-tickers"><span class="news-chip">NVDA</span><span class="news-chip">AMD</span><span class="news-chip">SMCI</span></div></div></div>
+            <div class="news-item"><span class="news-num">02</span><div class="news-content"><div class="news-meta"><span class="news-badge b-mac-n">MACRO</span><span class="news-source">Reuters</span><span class="news-time">07:22</span><span class="sent-chip s-bear">利空</span></div><div class="news-headline">聯準會官員鷹派表態，市場首次降息預期延至Q4</div><div class="news-body">多位 Fed 官員重申通膨預期仍具黏性，年內降息次數壓縮至1次。美元指數 DXY 突破 105，十年期公債殖利率回升至 4.52%，成長股普遍承壓。</div><div class="news-tickers"><span class="news-chip">DXY</span><span class="news-chip">TLT</span><span class="news-chip">SPY</span></div></div></div>
+            <div class="news-item"><span class="news-num">03</span><div class="news-content"><div class="news-meta"><span class="news-badge b-us-n">US EQUITY</span><span class="news-source">CNBC</span><span class="news-time">06:58</span><span class="sent-chip s-bear">利空</span></div><div class="news-headline">Walmart Q1 EPS小幅不及預期，消費者支出趨於謹慎</div><div class="news-body">WMT Q1 EPS 0.61 美元（預期 0.64），管理層表示高收入消費者消費偏保守，下季指引持平市場預期，盤後股價下跌約 2%。</div><div class="news-tickers"><span class="news-chip">WMT</span><span class="news-chip">TGT</span><span class="news-chip">COST</span></div></div></div>
+            <div class="news-item"><span class="news-num">04</span><div class="news-content"><div class="news-meta"><span class="news-badge b-us-n">US EQUITY</span><span class="news-source">Barclays</span><span class="news-time">06:30</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">Barclays 上調 Meta 目標價至 620 美元，看好 AI 廣告變現</div><div class="news-body">Barclays 研究報告指出 Meta AI 廣告精準度提升帶動 CPM 上漲 18%，Llama 開源生態持續擴張，維持增持評級並上調目標價至 620 美元。</div><div class="news-tickers"><span class="news-chip">META</span><span class="news-chip">GOOGL</span></div></div></div>
+            <div class="news-item"><span class="news-num">05</span><div class="news-content"><div class="news-meta"><span class="news-badge b-mac-n">MACRO</span><span class="news-source">WSJ</span><span class="news-time">05:55</span><span class="sent-chip s-neut">中性</span></div><div class="news-headline">美中貿易協商傳出積極訊號，關稅暫緩預期升溫</div><div class="news-body">WSJ 報導美中雙方代表在瑞士舉行非正式磋商，市場對90天關稅暫緩期預期升溫，工業股與原物料股出現短暫反彈。</div><div class="news-tickers"><span class="news-chip">XLI</span><span class="news-chip">XLB</span><span class="news-chip">FXI</span></div></div></div>
+          </div>
+        </div>
   </div>
 
-  <!-- 加密貨幣 -->
-  <div id="tab-crypto" class="tab-content">
-    <div class="sentiment-bar-crypto" id="crypto-sentiment-bar"></div>
-    <div class="crypto-overview" id="crypto-overview"></div>
-    <div class="glass-card">
-      <div class="card-header"><div class="card-title">₿ 加密貨幣行情</div></div>
-      <div class="crypto-grid" id="crypto-grid"></div>
+  <!-- ═══════════════ TW EQUITY TAB ═══════════════ -->
+  <div class="tab-panel" id="tab-tw">
+    <div class="summary-strip cols-4">
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">TAIEX</span><span class="sum-category">加權指數</span></div>
+        <div class="sum-name">台灣加權指數</div>
+        <div class="sum-price">21,330</div>
+        <div class="sum-row"><span class="sum-chg up">▲ +0.72%</span><span class="sum-extra">前收</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">成交量</span><span class="sum-category">全市場</span></div>
+        <div class="sum-name">昨日成交量</div>
+        <div class="sum-price">3,842</div>
+        <div class="sum-row"><span class="sum-chg flat">億元</span><span class="sum-extra">TWD</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">外資</span><span class="sum-category">買賣超</span></div>
+        <div class="sum-name">外資昨日買賣超</div>
+        <div class="sum-price">+142</div>
+        <div class="sum-row"><span class="sum-chg up">▲ 買超</span><span class="sum-extra">億元 TWD</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">投信</span><span class="sum-category">買賣超</span></div>
+        <div class="sum-name">投信昨日買賣超</div>
+        <div class="sum-price">+38</div>
+        <div class="sum-row"><span class="sum-chg up">▲ 買超</span><span class="sum-extra">億元 TWD</span></div>
+      </div>
     </div>
+
     <div class="two-col">
-      <div class="glass-card">
-        <div class="card-header"><div class="card-title">📰 今日加密新聞</div></div>
-        <div id="crypto-news-list"></div>
+      <div>
+        <!-- Core TW stocks -->
+        <div class="section-block" style="margin-bottom:16px;">
+          <div class="section-block-header">
+            <div class="sbh-title">核心個股 <span class="sbh-title-en">CORE TW STOCKS</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut">前收 · 昨日 TWD</span></div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr><th>股票</th><th class="r">前收價</th><th class="r">漲跌</th><th class="r">成交量</th><th class="r">外資買超</th><th class="r">法人評等</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><div class="dt-sym">2330</div><div class="dt-name">台積電 TSMC</div></td><td class="r"><span class="dt-price">950</span></td><td class="r"><span class="dt-chg up">▲ +0.84%</span></td><td class="r"><span class="dt-val">28,420張</span></td><td class="r"><span class="dt-chg up">+82億</span></td><td class="r"><span class="dt-badge b-buy">買進</span></td></tr>
+              <tr><td><div class="dt-sym">2317</div><div class="dt-name">鴻海 Foxconn</div></td><td class="r"><span class="dt-price">182</span></td><td class="r"><span class="dt-chg up">▲ +0.55%</span></td><td class="r"><span class="dt-val">18,210張</span></td><td class="r"><span class="dt-chg up">+14億</span></td><td class="r"><span class="dt-badge b-hold">中立</span></td></tr>
+              <tr><td><div class="dt-sym">2454</div><div class="dt-name">聯發科 MediaTek</div></td><td class="r"><span class="dt-price">1,285</span></td><td class="r"><span class="dt-chg up">▲ +1.18%</span></td><td class="r"><span class="dt-val">8,840張</span></td><td class="r"><span class="dt-chg up">+62億</span></td><td class="r"><span class="dt-badge b-buy">買進</span></td></tr>
+              <tr><td><div class="dt-sym">2382</div><div class="dt-name">廣達 Quanta</div></td><td class="r"><span class="dt-price">310</span></td><td class="r"><span class="dt-chg dn">▼ −0.32%</span></td><td class="r"><span class="dt-val">6,120張</span></td><td class="r"><span class="dt-chg dn">−8億</span></td><td class="r"><span class="dt-badge b-hold">中立</span></td></tr>
+              <tr><td><div class="dt-sym">2412</div><div class="dt-name">中華電 Chunghwa</div></td><td class="r"><span class="dt-price">122</span></td><td class="r"><span class="dt-chg flat">— 0.00%</span></td><td class="r"><span class="dt-val">2,440張</span></td><td class="r"><span class="dt-chg dn">−2億</span></td><td class="r"><span class="dt-badge b-hold">中立</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Sector radar -->
+        <div class="section-block">
+          <div class="section-block-header">
+            <div class="sbh-title">23板塊雷達 <span class="sbh-title-en">TWSE SECTOR RADAR</span></div>
+          </div>
+          <div class="sector-grid">
+            <div class="sector-item"><div class="sector-name">半導體</div><div class="sector-chg-row"><span class="sector-chg up">▲ +1.24%</span><span class="sent-chip s-bull" style="font-size:9px;">強勢</span></div><div class="sector-bar" style="background:var(--green-600);opacity:.7;"></div></div>
+            <div class="sector-item"><div class="sector-name">電子零組件</div><div class="sector-chg-row"><span class="sector-chg up">▲ +0.82%</span><span class="sent-chip s-bull" style="font-size:9px;">偏多</span></div><div class="sector-bar" style="background:var(--green-600);opacity:.5;"></div></div>
+            <div class="sector-item"><div class="sector-name">電腦及週邊</div><div class="sector-chg-row"><span class="sector-chg dn">▼ −0.14%</span><span class="sent-chip s-neut" style="font-size:9px;">中性</span></div><div class="sector-bar" style="background:var(--gray-300);"></div></div>
+            <div class="sector-item"><div class="sector-name">光電</div><div class="sector-chg-row"><span class="sector-chg up">▲ +0.46%</span><span class="sent-chip s-bull" style="font-size:9px;">偏多</span></div><div class="sector-bar" style="background:var(--green-600);opacity:.3;"></div></div>
+            <div class="sector-item"><div class="sector-name">金融保險</div><div class="sector-chg-row"><span class="sector-chg dn">▼ −0.38%</span><span class="sent-chip s-neut" style="font-size:9px;">中性</span></div><div class="sector-bar" style="background:var(--red-600);opacity:.3;"></div></div>
+            <div class="sector-item"><div class="sector-name">航運</div><div class="sector-chg-row"><span class="sector-chg dn">▼ −1.04%</span><span class="sent-chip s-bear" style="font-size:9px;">偏空</span></div><div class="sector-bar" style="background:var(--red-600);opacity:.6;"></div></div>
+            <div class="sector-item"><div class="sector-name">鋼鐵</div><div class="sector-chg-row"><span class="sector-chg dn">▼ −0.62%</span><span class="sent-chip s-bear" style="font-size:9px;">偏空</span></div><div class="sector-bar" style="background:var(--red-600);opacity:.4;"></div></div>
+            <div class="sector-item"><div class="sector-name">建材營造</div><div class="sector-chg-row"><span class="sector-chg up">▲ +0.28%</span><span class="sent-chip s-neut" style="font-size:9px;">中性</span></div><div class="sector-bar" style="background:var(--green-600);opacity:.2;"></div></div>
+          </div>
+        </div>
       </div>
-      <div class="glass-card">
-        <div class="card-header"><div class="card-title">💥 清算詳情</div></div>
-        <div id="crypto-liquidation"></div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="signal-card" style="margin-bottom:14px;">
+          <div class="signal-card-title">台股訊號 <span class="sent-chip s-bull">偏多</span></div>
+          <div class="signal-row"><span class="sr-label">外資連買天數</span><span class="sr-val up">3 日連買</span></div>
+          <div class="signal-row"><span class="sr-label">本週外資合計</span><span class="sr-val up">+312億</span></div>
+          <div class="signal-row"><span class="sr-label">融資餘額</span><span class="sr-val flat">2,840億</span></div>
+          <div class="signal-row"><span class="sr-label">融券餘額</span><span class="sr-val flat">42億</span></div>
+          <div class="signal-row"><span class="sr-label">台積電 ADR</span><span class="sr-val up">夜盤 +1.2%</span></div>
+          <div class="signal-row"><span class="sr-label">加權指數支撐</span><span class="sr-val flat">21,000</span></div>
+        </div>
+
+        <div class="signal-card">
+          <div class="signal-card-title" style="margin-bottom:12px;">外資買超前5</div>
+          <div class="flow-row"><span class="flow-sym">2330</span><span class="flow-name">台積電</span><div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:100%;background:var(--green-600)"></div></div></div><span class="flow-val up">+82億</span></div>
+          <div class="flow-row"><span class="flow-sym">2454</span><span class="flow-name">聯發科</span><div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:76%;background:var(--green-600)"></div></div></div><span class="flow-val up">+62億</span></div>
+          <div class="flow-row"><span class="flow-sym">2317</span><span class="flow-name">鴻海</span><div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:17%;background:var(--green-600)"></div></div></div><span class="flow-val up">+14億</span></div>
+          <div class="flow-row"><span class="flow-sym">2308</span><span class="flow-name">台達電</span><div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:13%;background:var(--green-600)"></div></div></div><span class="flow-val up">+10億</span></div>
+          <div class="flow-row"><span class="flow-sym">2382</span><span class="flow-name">廣達</span><div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:9%;background:var(--red-600)"></div></div></div><span class="flow-val dn">−8億</span></div>
+        </div>
       </div>
     </div>
+        <div class="section-block" style="margin-top:16px;">
+          <div class="section-block-header">
+            <div class="sbh-title">台股新聞 <span class="sbh-title-en">TW MARKET NEWS</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut">今日 5 則</span></div>
+          </div>
+          <div class="news-list">
+            <div class="news-item"><span class="news-num">01</span><div class="news-content"><div class="news-meta"><span class="news-badge b-tw-n">台股</span><span class="news-source">經濟日報</span><span class="news-time">08:05</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">外資連三日買超逾百億，台積電與聯發科為主力標的</div><div class="news-body">外資本週累積買超台積電（2330）達 142 億元、聯發科（2454）62 億元，加權指數在 21,330 點獲得支撐。ADR 夜盤台積電 +1.2%，法人預估 Q2 財測將優於預期。</div><div class="news-tickers"><span class="news-chip">2330</span><span class="news-chip">2454</span><span class="news-chip">TSM</span></div></div></div>
+            <div class="news-item"><span class="news-num">02</span><div class="news-content"><div class="news-meta"><span class="news-badge b-tw-n">台股</span><span class="news-source">MoneyDJ</span><span class="news-time">07:40</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">CoWoS 封裝需求強勁，台積電先進封裝產能滿載至 2026Q2</div><div class="news-body">Morgan Stanley 報告指出台積電 CoWoS 產能供不應求，AI 伺服器客戶已鎖定 2026 上半年產能。法人上調台積電目標價至 1,050 元，維持超配評級。</div><div class="news-tickers"><span class="news-chip">2330</span><span class="news-chip">3711</span><span class="news-chip">2379</span></div></div></div>
+            <div class="news-item"><span class="news-num">03</span><div class="news-content"><div class="news-meta"><span class="news-badge b-tw-n">台股</span><span class="news-source">工商時報</span><span class="news-time">07:15</span><span class="sent-chip s-bear">利空</span></div><div class="news-headline">航運族群面臨壓力，長榮海運運費指數連續三週下滑</div><div class="news-body">上海出口集裝箱運費指數（SCFI）本週跌幅擴大至 3.2%，主因美歐航線需求走弱與船隊供給過剩。長榮（2603）、陽明（2609）股價同步回落。</div><div class="news-tickers"><span class="news-chip">2603</span><span class="news-chip">2609</span><span class="news-chip">2615</span></div></div></div>
+            <div class="news-item"><span class="news-num">04</span><div class="news-content"><div class="news-meta"><span class="news-badge b-tw-n">台股</span><span class="news-source">證交所</span><span class="news-time">06:50</span><span class="sent-chip s-neut">中性</span></div><div class="news-headline">台積電股東常會訂於 5 月 15 日，每股配息 4.5 元</div><div class="news-body">台積電公告股東常會相關議程，今年度擬配發現金股利每股 4.5 元，除權息日預計於 6 月中旬，法人預估殖利率約 1.89%。</div><div class="news-tickers"><span class="news-chip">2330</span></div></div></div>
+            <div class="news-item"><span class="news-num">05</span><div class="news-content"><div class="news-meta"><span class="news-badge b-mac-n">宏觀</span><span class="news-source">金十數據</span><span class="news-time">06:20</span><span class="sent-chip s-neut">中性</span></div><div class="news-headline">台灣4月出口年增12.4%，AI伺服器與半導體持續帶動成長</div><div class="news-body">財政部公布 4 月出口達 428 億美元，年增 12.4%，連續 14 個月正成長。AI 相關產品出口額創單月歷史新高。</div><div class="news-tickers"><span class="news-chip">2330</span><span class="news-chip">2317</span><span class="news-chip">3008</span></div></div></div>
+          </div>
+        </div>
+  </div>
+
+  <!-- ═══════════════ CRYPTO TAB ═══════════════ -->
+  <div class="tab-panel" id="tab-crypto">
+    <!-- Summary strip -->
+    <div class="summary-strip cols-3">
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">BTC</span><span class="sum-category">Crypto</span></div>
+        <div class="sum-name">比特幣 Bitcoin</div>
+        <div class="sum-price" id="btc-price">102,840</div>
+        <div class="sum-row">
+          <span class="sum-chg up" id="btc-chg">▲ +2.31%</span>
+          <span class="sum-extra">24H · USD</span>
+        </div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">ETH</span><span class="sum-category">Crypto</span></div>
+        <div class="sum-name">以太坊 Ethereum</div>
+        <div class="sum-price" id="eth-price">3,215</div>
+        <div class="sum-row">
+          <span class="sum-chg up" id="eth-chg">▲ +1.62%</span>
+          <span class="sum-extra">24H · USD</span>
+        </div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">SOL</span><span class="sum-category">Crypto</span></div>
+        <div class="sum-name">Solana</div>
+        <div class="sum-price" id="sol-price">168.40</div>
+        <div class="sum-row">
+          <span class="sum-chg dn" id="sol-chg">▼ −0.88%</span>
+          <span class="sum-extra">24H · USD</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <!-- Coin detail tabs -->
+        <div class="section-block">
+          <div class="coin-tabs">
+            <div class="coin-tab active" onclick="switchCoin('btc',this)">BTC</div>
+            <div class="coin-tab" onclick="switchCoin('eth',this)">ETH</div>
+            <div class="coin-tab" onclick="switchCoin('sol',this)">SOL</div>
+          </div>
+
+          <!-- BTC -->
+          <div class="coin-panel active" id="coin-btc">
+            <div class="crypto-metric-grid">
+              <div class="cm-card">
+                <div class="cm-label">MARKET CAP</div>
+                <div class="cm-val">$2.03T</div>
+                <div class="cm-sub">USD</div>
+              </div>
+              <div class="cm-card">
+                <div class="cm-label">24H VOLUME</div>
+                <div class="cm-val">$48.2B</div>
+                <div class="cm-sub">USD</div>
+              </div>
+              <div class="cm-card">
+                <div class="cm-label">FUNDING RATE</div>
+                <div class="cm-val">+0.010%</div>
+                <div class="cm-sub">8H · Binance</div>
+                <div class="fr-bar-wrap">
+                  <div class="fr-bar-track">
+                    <div class="fr-bar-center"></div>
+                    <div class="fr-bar-fill" style="left:50%;width:18%;background:var(--green-600);"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="cm-card">
+                <div class="cm-label">LONG/SHORT RATIO</div>
+                <div class="cm-val">1.24</div>
+                <div class="cm-sub">多/空比 · Binance</div>
+                <div class="cm-badge s-bull">多方主導</div>
+              </div>
+              <div class="cm-card">
+                <div class="cm-label">ETF 今日淨流入</div>
+                <div class="cm-val">+$1.3B</div>
+                <div class="cm-sub">IBIT $820M · FBTC $310M</div>
+                <div class="cm-badge s-bull" style="margin-top:4px">歷史新高</div>
+              </div>
+              <div class="cm-card">
+                <div class="cm-label">鏈上清算量</div>
+                <div class="cm-val">$32M</div>
+                <div class="cm-sub">24H · 多空各半</div>
+                <div class="cm-badge s-neut" style="margin-top:4px;background:var(--amber-100);color:var(--amber-600);">低位</div>
+              </div>
+            </div>
+
+            <!-- Mini bar chart -->
+            <div style="padding:0 16px 16px;">
+              <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">7D PRICE TREND</div>
+              <div class="mini-chart" id="btc-chart"></div>
+            </div>
+          </div>
+
+          <!-- ETH -->
+          <div class="coin-panel" id="coin-eth">
+            <div class="crypto-metric-grid">
+              <div class="cm-card"><div class="cm-label">MARKET CAP</div><div class="cm-val">$386B</div><div class="cm-sub">USD</div></div>
+              <div class="cm-card"><div class="cm-label">24H VOLUME</div><div class="cm-val">$18.4B</div><div class="cm-sub">USD</div></div>
+              <div class="cm-card"><div class="cm-label">FUNDING RATE</div><div class="cm-val">+0.008%</div><div class="cm-sub">8H · Binance</div><div class="fr-bar-wrap"><div class="fr-bar-track"><div class="fr-bar-center"></div><div class="fr-bar-fill" style="left:50%;width:14%;background:var(--green-600);"></div></div></div></div>
+              <div class="cm-card"><div class="cm-label">STAKING RATE</div><div class="cm-val">28.3%</div><div class="cm-sub">ETH質押率</div><div class="cm-badge s-bull" style="margin-top:4px">創新高</div></div>
+              <div class="cm-card"><div class="cm-label">GAS FEE (Blob)</div><div class="cm-val">0.003</div><div class="cm-sub">Gwei · 坎昆升級後新低</div></div>
+              <div class="cm-card"><div class="cm-label">L2 日活交易</div><div class="cm-val">4.2M</div><div class="cm-sub">Arbitrum + Base 合計</div><div class="cm-badge s-bull" style="margin-top:4px">創新高</div></div>
+            </div>
+            <div style="padding:0 16px 16px;"><div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">7D PRICE TREND</div><div class="mini-chart" id="eth-chart"></div></div>
+          </div>
+
+          <!-- SOL -->
+          <div class="coin-panel" id="coin-sol">
+            <div class="crypto-metric-grid">
+              <div class="cm-card"><div class="cm-label">MARKET CAP</div><div class="cm-val">$78.2B</div><div class="cm-sub">USD</div></div>
+              <div class="cm-card"><div class="cm-label">24H VOLUME</div><div class="cm-val">$5.1B</div><div class="cm-sub">USD</div></div>
+              <div class="cm-card"><div class="cm-label">FUNDING RATE</div><div class="cm-val">−0.004%</div><div class="cm-sub">8H · Binance</div><div class="fr-bar-wrap"><div class="fr-bar-track"><div class="fr-bar-center"></div><div class="fr-bar-fill" style="right:50%;width:8%;background:var(--red-600);"></div></div></div></div>
+              <div class="cm-card"><div class="cm-label">TPS (Peak)</div><div class="cm-val">6,540</div><div class="cm-sub">網路吞吐量</div></div>
+              <div class="cm-card"><div class="cm-label">DEX 交易量</div><div class="cm-val">$2.8B</div><div class="cm-sub">24H · Raydium主導</div></div>
+              <div class="cm-card"><div class="cm-label">LONG/SHORT</div><div class="cm-val">0.94</div><div class="cm-sub">空方略佔優</div><div class="cm-badge s-bear" style="margin-top:4px;background:var(--red-100);color:var(--red-700);">偏空</div></div>
+            </div>
+            <div style="padding:0 16px 16px;"><div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">7D PRICE TREND</div><div class="mini-chart" id="sol-chart"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar signals -->
+      <div>
+        <div class="signal-card" style="margin-bottom:14px;">
+          <div class="signal-card-title">加密市場訊號 <span class="sent-chip s-bull">強看多</span></div>
+          <div class="signal-row"><span class="sr-label">BTC 市佔率</span><span class="sr-val flat">54.2%</span></div>
+          <div class="signal-row"><span class="sr-label">總市值</span><span class="sr-val up">$2.64T</span></div>
+          <div class="signal-row"><span class="sr-label">Fear & Greed</span><span class="sr-val up">72 · Greed</span></div>
+          <div class="signal-row"><span class="sr-label">ETF 累積流入</span><span class="sr-val up">+$18.4B</span></div>
+          <div class="signal-row"><span class="sr-label">BTC 下一阻力</span><span class="sr-val flat">$108K</span></div>
+          <div class="signal-row"><span class="sr-label">BTC 支撐位</span><span class="sr-val flat">$96K</span></div>
+        </div>
+
+        <div class="signal-card">
+          <div class="signal-card-title" style="margin-bottom:12px;">ETF 今日流量</div>
+          <div class="flow-row">
+            <span class="flow-sym">IBIT</span>
+            <span class="flow-name">BlackRock</span>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:82%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$820M</span>
+          </div>
+          <div class="flow-row">
+            <span class="flow-sym">FBTC</span>
+            <span class="flow-name">Fidelity</span>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:38%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$310M</span>
+          </div>
+          <div class="flow-row">
+            <span class="flow-sym">ARKB</span>
+            <span class="flow-name">ARK Invest</span>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:20%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$164M</span>
+          </div>
+          <div class="flow-row">
+            <span class="flow-sym">GBTC</span>
+            <span class="flow-name">Grayscale</span>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:5%;background:var(--red-600)"></div></div></div>
+            <span class="flow-val dn">−$42M</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+        <div class="section-block" style="margin-top:16px;">
+          <div class="section-block-header">
+            <div class="sbh-title">加密新聞 <span class="sbh-title-en">CRYPTO NEWS</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut">今日 5 則</span></div>
+          </div>
+          <div class="news-list">
+            <div class="news-item"><span class="news-num">01</span><div class="news-content"><div class="news-meta"><span class="news-badge b-cr-n">CRYPTO</span><span class="news-source">CoinDesk</span><span class="news-time">08:14</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">比特幣現貨ETF單日淨流入13億美元，創近期單日新高</div><div class="news-body">BlackRock IBIT 單日淨流入 8.2 億美元，Fidelity FBTC 3.1 億美元，合計流入創近三個月單日新高。BTC 成功站穩 100K 心理關卡，市場情緒指數升至 72（貪婪）。</div><div class="news-tickers"><span class="news-chip">BTC</span><span class="news-chip">IBIT</span><span class="news-chip">FBTC</span></div></div></div>
+            <div class="news-item"><span class="news-num">02</span><div class="news-content"><div class="news-meta"><span class="news-badge b-cr-n">CRYPTO</span><span class="news-source">The Block</span><span class="news-time">07:55</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">以太坊坎昆升級後Gas費創歷史新低，L2生態活躍度大幅提升</div><div class="news-body">Dencun 升級後 Blob Gas 均價降至 0.003 Gwei，Arbitrum 與 Base 日活交易量分別達 180 萬與 240 萬筆。ETH 質押率突破 28%。</div><div class="news-tickers"><span class="news-chip">ETH</span><span class="news-chip">ARB</span><span class="news-chip">ETHA</span></div></div></div>
+            <div class="news-item"><span class="news-num">03</span><div class="news-content"><div class="news-meta"><span class="news-badge b-cr-n">CRYPTO</span><span class="news-source">Decrypt</span><span class="news-time">07:30</span><span class="sent-chip s-neut">中性</span></div><div class="news-headline">SEC 延後以太坊現貨ETF選擇權審核，最終決定推至六月下旬</div><div class="news-body">SEC 發布通知將 ETH 現貨 ETF 選擇權審核期限延後至 6 月 22 日，市場反應平淡。分析師認為最終批准機率仍高，短期影響有限。</div><div class="news-tickers"><span class="news-chip">ETH</span><span class="news-chip">ETHA</span></div></div></div>
+            <div class="news-item"><span class="news-num">04</span><div class="news-content"><div class="news-meta"><span class="news-badge b-cr-n">CRYPTO</span><span class="news-source">CoinTelegraph</span><span class="news-time">06:45</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">Solana DEX 交易量單週達 140 億美元，超越以太坊主網</div><div class="news-body">Raydium 與 Jupiter 主導 Solana DEX 生態，本週合計交易量 140 億美元，首次超越以太坊主網。SOL 代幣因獲利了結小幅回調，資金費率轉負。</div><div class="news-tickers"><span class="news-chip">SOL</span><span class="news-chip">RAY</span><span class="news-chip">JUP</span></div></div></div>
+            <div class="news-item"><span class="news-num">05</span><div class="news-content"><div class="news-meta"><span class="news-badge b-mac-n">監管</span><span class="news-source">Reuters</span><span class="news-time">05:40</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">美國參議院穩定幣法案取得進展，兩黨達成初步共識</div><div class="news-body">GENIUS Act 穩定幣監管法案在參議院獲得跨黨派支持，要求發行方持有等額美元或國債儲備。通過後預計為 Tether、Circle 等機構帶來合規利多。</div><div class="news-tickers"><span class="news-chip">BTC</span><span class="news-chip">USDT</span><span class="news-chip">USDC</span></div></div></div>
+          </div>
+        </div>
   </div>
 </main>
 
+
 <script>
-// Clock
+/* Clock */
 function tick(){
   const t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
-  const el=document.getElementById('clock');
-  if(el) el.textContent=t+' CST';
+  document.getElementById('clock').textContent=t+' CST';
 }
 tick(); setInterval(tick,1000);
 
-// Mobile menu
-function toggleMenu(){
-  var menu=document.getElementById('mobile-menu');
-  var hamburger=document.getElementById('hamburger');
-  menu.classList.toggle('open');
-  hamburger.classList.toggle('open');
-  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
+/* Tab switch */
+function switchTab(id){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id==='tab-'+id));
 }
-document.getElementById('mobile-menu').querySelectorAll('a').forEach(function(a){
-  a.addEventListener('click',function(){
-    document.getElementById('mobile-menu').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-    document.body.style.overflow='';
-  });
-});
 
-// Topbar shadow
-window.addEventListener('scroll',function(){
-  document.querySelector('nav').style.boxShadow=window.scrollY>10?'0 2px 20px rgba(15,23,42,.08)':'';
-});
-</script>
+/* Coin tab switch */
+function switchCoin(id,el){
+  document.querySelectorAll('.coin-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.coin-panel').forEach(p=>p.classList.toggle('active',p.id==='coin-'+id));
+}
 
-<!-- 原有所有 JS 邏輯完整保留 -->
-<script>
-function switchTab(tab,btn){
-  document.querySelectorAll('.tab-content').forEach(function(el){el.classList.remove('active');});
-  document.querySelectorAll('.tab-btn').forEach(function(el){el.classList.remove('active');});
-  document.getElementById('tab-'+tab).classList.add('active');
-  btn.classList.add('active');
-}
-function toggleStock(el){
-  var isOpen=el.classList.contains('open');
-  document.querySelectorAll('.stock-item.open').forEach(function(item){
-    item.classList.remove('open');
-    var arrow=item.querySelector('.expand-arrow');
-    if(arrow) arrow.style.transform='rotate(0deg)';
-  });
-  if(!isOpen){
-    el.classList.add('open');
-    var arrow=el.querySelector('.expand-arrow');
-    if(arrow) arrow.style.transform='rotate(90deg)';
-  }
-}
-function toggleCrypto(el){
-  var isOpen=el.classList.contains('open');
-  document.querySelectorAll('.crypto-card.open').forEach(function(item){item.classList.remove('open');});
-  if(!isOpen) el.classList.add('open');
-}
-function renderStocks(containerId,stocks){
-  var container=document.getElementById(containerId);
-  container.innerHTML=stocks.map(function(s){
-    var dirClass=s.dir==='up'?'up':s.dir==='down'?'down':'flat';
-    var dirIcon=s.dir==='up'?'▲':s.dir==='down'?'▼':'—';
-    return '<div class="stock-item" onclick="toggleStock(this)">'+
-      '<div class="s-ticker-col"><div><div class="s-ticker">'+s.ticker+'</div><div class="s-name">'+s.name+'</div></div></div>'+
-      '<div class="s-note-col s-note">'+s.note+'</div>'+
-      '<div class="s-price '+dirClass+'">'+s.price+'</div>'+
-      '<div class="s-change '+dirClass+'">'+dirIcon+' '+s.change+'</div>'+
-      '<div><span class="s-tag tag-'+(s.tag||'ai')+'">'+(s.tag_label||s.tag)+'</span></div>'+
-      '<div class="s-arrow-col expand-arrow">›</div>'+
-      '<div class="stock-expand" style="grid-column:1/-1;">'+
-        '<div class="stock-expand-inner">'+
-          '<div><div class="se-label">觀察重點</div><div class="se-value">'+(s.watch_note||'—')+'</div></div>'+
-          '<div><div class="se-label">技術面 / 籌碼</div><div class="se-value">'+(s.tech_note||'—')+'</div></div>'+
-          (s.action?'<div style="grid-column:1/-1;margin-top:8px;padding:8px 12px;background:var(--amber-100);border-radius:8px;border-left:2px solid var(--amber-600);"><div class="se-label" style="color:var(--amber-700);margin-bottom:3px;">操作建議</div><div class="se-value" style="color:var(--amber-700);font-weight:600;">'+s.action+'</div></div>':'')+
-        '</div>'+
-      '</div>'+
-    '</div>';
+/* Mini bar charts */
+function drawChart(elId, data, color){
+  const el=document.getElementById(elId);
+  if(!el)return;
+  const max=Math.max(...data), min=Math.min(...data), range=max-min||1;
+  el.innerHTML=data.map(v=>{
+    const h=Math.max(8,Math.round(((v-min)/range)*36)+8);
+    return `<div class="mc-bar" style="height:${h}px;background:${color};opacity:.7;border-radius:2px 2px 0 0;flex:1;min-width:3px;"></div>`;
   }).join('');
 }
-function renderNews(containerId,newsItems){
-  var container=document.getElementById(containerId);
-  if(!container||!newsItems) return;
-  container.innerHTML='<div class="news-strip">'+
-    newsItems.map(function(n){
-      return '<div class="news-strip-item"><div class="news-dot"></div><div class="news-strip-text">'+n.text+'</div><div class="news-strip-time">'+n.time+'</div></div>';
-    }).join('')+'</div>';
-}
-function renderRotation(containerId,rotation){
-  var container=document.getElementById(containerId);
-  if(!container||!rotation) return;
-  container.innerHTML=rotation.map(function(r){
-    return '<div class="rotation-item">'+
-      '<div class="rotation-row"><span class="rotation-from">'+r.from+'</span><span class="rotation-arrow">→</span><span class="rotation-to">'+r.to+'</span><span class="rotation-strength">'+r.strength+'</span></div>'+
-      '<div class="rotation-reason">'+r.reason+'</div></div>';
-  }).join('');
-}
-function renderIndexCard(label,value,change,dir,sub){
-  var dirClass=dir==='up'?'up':dir==='down'?'down':'flat';
-  var dirIcon=dir==='up'?'▲':dir==='down'?'▼':'—';
-  return '<div class="index-card '+dirClass+'">'+
-    '<div class="ic-label">'+label+'</div>'+
-    '<div class="ic-value">'+value+'</div>'+
-    '<div class="ic-change '+dirClass+'">'+dirIcon+' '+change+'</div>'+
-    '<div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">來源</div><div class="ic-stat-value">'+sub+'</div></div></div>'+
-  '</div>';
-}
-async function loadData(){
-  var res=await fetch('../data/daily.json');
-  var data=await res.json();
-  var d=new Date(data.date);
-  document.getElementById('market-date').innerHTML=
-    d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'<br>UTC+8 台北時間';
-  var spx=data.tickers?data.tickers.find(function(t){return t.label==='S&P 500';}):null;
-  var ndx=data.tickers?data.tickers.find(function(t){return t.label==='NASDAQ';}):null;
-  var brent=data.tickers?data.tickers.find(function(t){return t.label==='Brent 原油';}):null;
-  var fg=data.sentiment&&data.sentiment.fear_greed?data.sentiment.fear_greed:null;
-  var cg=data.sentiment&&data.sentiment.coinglass?data.sentiment.coinglass:null;
-  var spxVal=spx&&spx.value!=='--'?spx.value:'--';
-  var spxChange=spx&&spx.change!=='--'?spx.change:'--';
-  var spxDir=spx?spx.dir:'flat';
-  var ndxVal=ndx&&ndx.value!=='--'?ndx.value:'--';
-  var ndxChange=ndx&&ndx.change!=='--'?ndx.change:'--';
-  var ndxDir=ndx?ndx.dir:'flat';
-  document.getElementById('us-index-grid').innerHTML=
-    renderIndexCard('S&P 500',spxVal,spxChange,spxDir,'Polygon / SPY')+
-    renderIndexCard('NASDAQ',ndxVal,ndxChange,ndxDir,'Polygon / QQQ')+
-    '<div class="index-card '+(fg?(parseInt(fg.value)>=50?'up':'down'):'flat')+'">'+
-      '<div class="ic-label">市場情緒</div>'+
-      '<div class="ic-value" style="font-size:32px;color:'+(fg?(parseInt(fg.value)>=50?'var(--green-600)':parseInt(fg.value)>=30?'var(--amber-600)':'var(--red-600)'):'var(--gray-400)')+';">'+(fg?fg.value:'--')+'</div>'+
-      '<div class="ic-change '+(fg?(parseInt(fg.value)>=50?'up':'down'):'flat')+'">'+(fg?fg.label:'Fear & Greed')+'</div>'+
-      '<div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">較昨日</div><div class="ic-stat-value">'+(fg?(fg.change||'--'):'--')+'</div></div></div>'+
-    '</div>';
-  var brentDisplay=brent?brent.value:'--';
-  var brentChange=brent?brent.change:'--';
-  document.getElementById('us-sentiment-bar').innerHTML=
-    '<div class="sent-item"><div class="sent-label">Fear & Greed</div><div class="sent-value" style="color:var(--amber-600);">'+(fg?fg.value:'--')+'</div><div class="sent-sub">'+(fg?fg.label:'--')+'</div></div>'+
-    '<div class="sent-item"><div class="sent-label">NASDAQ 漲跌</div><div class="sent-value '+ndxDir+'" style="font-size:15px;">'+(ndxChange!=='--'?(ndxDir==='up'?'▲ ':ndxDir==='down'?'▼ ':'— ')+ndxChange:'--')+'</div><div class="sent-sub">今日表現</div></div>'+
-    '<div class="sent-item"><div class="sent-label">Brent 原油</div><div class="sent-value" style="color:var(--amber-600);font-size:16px;">'+brentDisplay+'</div><div class="sent-sub">'+brentChange+'</div></div>';
-  if(data.market&&data.market.us_stocks) renderStocks('us-stocks-list',data.market.us_stocks);
-  if(data.market&&data.market.us_news) renderNews('us-news-list',data.market.us_news);
-  if(data.industry_detail&&data.industry_detail.rotation) renderRotation('us-rotation',data.industry_detail.rotation);
-  var twIdx=data.tickers?data.tickers.find(function(t){return t.label==='台股加權';}):null;
-  var twSummary=data.tw_market_summary||{};
-  var tradeVal=twSummary.trade_value||'--';
-  var foreignNet=twSummary.foreign_net||'--';
-  var foreignDir=foreignNet.indexOf('買超')>=0?'up':foreignNet.indexOf('賣超')>=0?'down':'flat';
-  var foreignColor=foreignDir==='up'?'var(--green-600)':foreignDir==='down'?'var(--red-600)':'var(--gray-400)';
-  document.getElementById('tw-index-grid').innerHTML=
-    renderIndexCard('台股加權指數',twIdx?twIdx.value:'--',twIdx?twIdx.change:'--',twIdx?twIdx.dir:'flat','TAIEX')+
-    '<div class="index-card flat">'+
-      '<div class="ic-label">今日成交量</div>'+
-      '<div class="ic-value" style="font-size:'+(tradeVal==='--'?'26px':'18px')+';">'+tradeVal+'</div>'+
-      '<div class="ic-change flat">台股總成交</div>'+
-      '<div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">來源</div><div class="ic-stat-value">TWSE</div></div></div>'+
-    '</div>'+
-    '<div class="index-card '+foreignDir+'">'+
-      '<div class="ic-label">外資動向</div>'+
-      '<div class="ic-value" style="font-size:'+(foreignNet==='--'?'26px':'16px')+';color:'+foreignColor+';">'+foreignNet+'</div>'+
-      '<div class="ic-change flat">三大法人</div>'+
-      '<div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">來源</div><div class="ic-stat-value">TWSE BFI82U</div></div></div>'+
-    '</div>';
-  document.getElementById('tw-sentiment-bar').innerHTML=
-    '<div class="sent-item"><div class="sent-label">加權指數</div><div class="sent-value '+(twIdx?twIdx.dir:'flat')+'" style="font-size:14px;">'+(twIdx?(twIdx.dir==='up'?'▲ ':twIdx.dir==='down'?'▼ ':'— ')+twIdx.change:'--')+'</div><div class="sent-sub">'+(twIdx?twIdx.value:'--')+'</div></div>'+
-    '<div class="sent-item"><div class="sent-label">今日成交量</div><div class="sent-value" style="font-size:13px;color:var(--navy-500);">'+tradeVal+'</div><div class="sent-sub">TWSE</div></div>'+
-    '<div class="sent-item"><div class="sent-label">外資買賣超</div><div class="sent-value" style="font-size:12px;color:'+foreignColor+';">'+foreignNet+'</div><div class="sent-sub">三大法人</div></div>';
-  if(data.market&&data.market.tw_stocks) renderStocks('tw-stocks-list',data.market.tw_stocks);
-  if(data.market&&data.market.tw_news) renderNews('tw-news-list',data.market.tw_news);
-  if(data.industry_detail&&data.industry_detail.rotation) renderRotation('tw-rotation',data.industry_detail.rotation);
-  document.getElementById('crypto-sentiment-bar').innerHTML=
-    '<div class="sent-item"><div class="sent-label">Fear & Greed</div><div class="sent-value" style="color:var(--amber-600);">'+(fg?fg.value:'--')+'</div><div class="sent-sub">'+(fg?fg.label:'--')+'</div></div>'+
-    '<div class="sent-item"><div class="sent-label">BTC 多空比</div><div class="sent-value" style="color:var(--navy-500);font-size:12px;line-height:1.3;">'+(cg&&cg.long_short_ratio?cg.long_short_ratio:'未取得')+'</div><div class="sent-sub">CoinGlass</div></div>'+
-    '<div class="sent-item"><div class="sent-label">BTC 資金費率</div><div class="sent-value" style="font-size:13px;color:var(--green-600);">'+(cg&&cg.funding_rate?cg.funding_rate:'未取得')+'</div><div class="sent-sub">永續合約</div></div>'+
-    '<div class="sent-item"><div class="sent-label">BTC 多單清算</div><div class="sent-value" style="font-size:13px;color:var(--red-600);">'+(cg?(cg.btc_long_liq||'--'):'--')+'</div><div class="sent-sub">空單 '+(cg?(cg.btc_short_liq||'--'):'--')+'</div></div>';
-  var btc=data.market&&data.market.crypto?data.market.crypto.find(function(c){return c.symbol==='BTC';}):null;
-  var eth=data.market&&data.market.crypto?data.market.crypto.find(function(c){return c.symbol==='ETH';}):null;
-  document.getElementById('crypto-overview').innerHTML=
-    '<div class="co-item"><div class="co-label">BTC 市值</div><div class="co-value">'+(btc?btc.market_cap:'--')+'</div><div class="co-sub">Bitcoin</div></div>'+
-    '<div class="co-item"><div class="co-label">BTC 24H 交易量</div><div class="co-value">'+(btc?btc.volume:'--')+'</div><div class="co-sub">全球成交量</div></div>'+
-    '<div class="co-item"><div class="co-label">ETH 市值</div><div class="co-value">'+(eth?eth.market_cap:'--')+'</div><div class="co-sub">Ethereum</div></div>';
-  if(data.market&&data.market.crypto){
-    document.getElementById('crypto-grid').innerHTML=data.market.crypto.map(function(c){
-      var dirClass=c.dir==='up'?'up':c.dir==='down'?'down':'flat';
-      var dirIcon=c.dir==='up'?'▲':c.dir==='down'?'▼':'—';
-      return '<div class="crypto-card '+dirClass+'" onclick="toggleCrypto(this)">'+
-        '<div class="cc-header"><div><div class="cc-symbol">'+c.symbol+'</div><div class="cc-name">'+c.name+'</div></div><span class="cc-signal '+(c.signal||'watch')+'">'+(c.signal_label||'觀察')+'</span></div>'+
-        '<div class="cc-price '+dirClass+'">'+c.price+'</div>'+
-        '<div class="cc-change '+dirClass+'">'+dirIcon+' '+c.change+'</div>'+
-        '<div class="cc-stats">'+
-          '<div><div class="cc-stat-label">市值</div><div class="cc-stat-value">'+(c.market_cap||'--')+'</div></div>'+
-          '<div><div class="cc-stat-label">成交量</div><div class="cc-stat-value">'+(c.volume||'--')+'</div></div>'+
-        '</div>'+
-        '<div class="cc-expand"><div class="cc-divider"></div>'+
-          '<div class="cc-expand-grid">'+
-            '<div><div class="cc-expand-label">支撐位</div><div class="cc-expand-value">'+(c.support||'—')+'</div></div>'+
-            '<div><div class="cc-expand-label">壓力位</div><div class="cc-expand-value">'+(c.resistance||'—')+'</div></div>'+
-            '<div><div class="cc-expand-label">技術面</div><div class="cc-expand-value">'+(c.tech_note||'—')+'</div></div>'+
-            '<div><div class="cc-expand-label">觀察重點</div><div class="cc-expand-value">'+(c.watch_note||'—')+'</div></div>'+
-          '</div>'+
-        '</div>'+
-      '</div>';
-    }).join('');
-  }
-  if(data.market&&data.market.crypto_news) renderNews('crypto-news-list',data.market.crypto_news);
-  document.getElementById('crypto-liquidation').innerHTML=
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">'+
-      '<div style="background:var(--green-100);border:1px solid #bbf7d0;border-radius:8px;padding:11px;">'+
-        '<div style="font-size:10px;color:var(--green-700);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;font-weight:600;">BTC 多單清算</div>'+
-        '<div style="font-size:16px;font-weight:700;color:var(--green-600);">'+(cg?(cg.btc_long_liq||'--'):'--')+'</div>'+
-      '</div>'+
-      '<div style="background:var(--red-100);border:1px solid #fecaca;border-radius:8px;padding:11px;">'+
-        '<div style="font-size:10px;color:var(--red-700);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;font-weight:600;">BTC 空單清算</div>'+
-        '<div style="font-size:16px;font-weight:700;color:var(--red-600);">'+(cg?(cg.btc_short_liq||'--'):'--')+'</div>'+
-      '</div>'+
-      '<div style="background:var(--green-100);border:1px solid #bbf7d0;border-radius:8px;padding:11px;">'+
-        '<div style="font-size:10px;color:var(--green-700);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;font-weight:600;">ETH 多單清算</div>'+
-        '<div style="font-size:16px;font-weight:700;color:var(--green-600);">'+(cg?(cg.eth_long_liq||'--'):'--')+'</div>'+
-      '</div>'+
-      '<div style="background:var(--red-100);border:1px solid #fecaca;border-radius:8px;padding:11px;">'+
-        '<div style="font-size:10px;color:var(--red-700);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;font-weight:600;">ETH 空單清算</div>'+
-        '<div style="font-size:16px;font-weight:700;color:var(--red-600);">'+(cg?(cg.eth_short_liq||'--'):'--')+'</div>'+
-      '</div>'+
-    '</div>'+
-    '<div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;font-weight:600;">資金費率</div>'+
-    '<div style="font-size:14px;color:var(--green-600);font-weight:600;margin-bottom:10px;">'+(cg?(cg.funding_rate||'未取得'):'未取得')+'</div>'+
-    '<div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;font-weight:600;">多空比</div>'+
-    '<div style="font-size:12.5px;color:var(--gray-600);margin-bottom:10px;">'+(cg?(cg.long_short_ratio||'未取得'):'未取得')+'</div>'+
-    (cg&&cg.note?'<div style="font-size:11.5px;color:var(--gray-400);padding-top:8px;border-top:1px solid var(--gray-100);font-family:var(--font-zh);">'+cg.note+'</div>':'');
-}
-loadData();
+const btcD=[96200,97800,99100,101200,100400,102100,102840];
+const ethD=[3050,3120,3080,3200,3180,3220,3215];
+const solD=[172,169,165,171,168,170,168.4];
+drawChart('btc-chart',btcD,'#2563eb');
+drawChart('eth-chart',ethD,'#7c3aed');
+drawChart('sol-chart',solD,'#0891b2');
+
+/* Live ticker jitter */
+const prices={btc:{base:102840,chg:2.31},eth:{base:3215,chg:1.62},sol:{base:168.4,chg:-0.88}};
+function fmt(n){return n>=1000?n.toLocaleString('en-US',{maximumFractionDigits:0}):n.toFixed(2);}
+setInterval(()=>{
+  Object.entries(prices).forEach(([k,t])=>{
+    t.base+=(Math.random()-.48)*t.base*.0003;
+    t.chg+=(Math.random()-.48)*.04;
+    const pe=document.getElementById(k+'-price');
+    const ce=document.getElementById(k+'-chg');
+    if(pe)pe.textContent=fmt(t.base);
+    if(ce){const up=t.chg>=0;ce.className='sum-chg '+(up?'up':'dn');ce.textContent=(up?'▲ +':'▼ ')+Math.abs(t.chg).toFixed(2)+'%';}
+  });
+},3200);
 </script>
 </body>
 </html>
