@@ -849,19 +849,19 @@ async function loadData(){
       var bearItems=inst.research.filter(function(r){return r.rating_type==='sell'||r.rating_change==='下調';});
       var html='';
       if(buyItems.length>0){
-        var bullText=buyItems.slice(0,2).map(function(r){return r.name+'('+r.ticker+')';}).join('、');
-        var bullLogic=buyItems[0].core_logic||buyItems[0].note||'';
+        // 用最新的 buy 研報的 core_logic
+        var topBull=buyItems.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');})[0];
+        var bullNames=buyItems.slice(0,3).map(function(r){return r.ticker;}).join(' / ');
         html+='<div style="background:var(--green-50);border:1px solid var(--green-100);border-radius:8px;padding:10px 12px;">'+
           '<div style="font-size:10px;font-weight:600;color:var(--green-700);font-family:var(--font-en);margin-bottom:4px;">CONSENSUS BULL</div>'+
-          '<div style="font-size:12.5px;color:var(--green-900);line-height:1.5;font-family:var(--font-zh);">'+bullLogic+'，'+bullText+' 持續看多</div>'+
+          '<div style="font-size:12.5px;color:var(--green-900);line-height:1.5;font-family:var(--font-zh);">'+(topBull.core_logic||topBull.note||'')+'，'+bullNames+' 持續受惠</div>'+
         '</div>';
       }
       if(bearItems.length>0){
-        var riskText=bearItems.slice(0,2).map(function(r){return r.name;}).join('、');
-        var riskLogic=bearItems[0].risk_note||bearItems[0].core_logic||'';
+        var topRisk=bearItems.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');})[0];
         html+='<div style="background:var(--red-50);border:1px solid var(--red-100);border-radius:8px;padding:10px 12px;">'+
           '<div style="font-size:10px;font-weight:600;color:var(--red-700);font-family:var(--font-en);margin-bottom:4px;">KEY RISK</div>'+
-          '<div style="font-size:12.5px;color:var(--red-900);line-height:1.5;font-family:var(--font-zh);">'+riskLogic+'</div>'+
+          '<div style="font-size:12.5px;color:var(--red-900);line-height:1.5;font-family:var(--font-zh);">'+(topRisk.risk_note||topRisk.core_logic||'')+'</div>'+
         '</div>';
       }
       consensusEl.innerHTML=html||'<div style="font-size:12px;color:var(--gray-400);">數據生成中...</div>';
@@ -870,7 +870,12 @@ async function loadData(){
     // 即將發布側欄
     var upSidebar=document.getElementById('upcoming-sidebar');
     if(upSidebar){
-      var upcoming=(inst.earnings||[]).filter(function(e){return e.status_type!=='reported';}).slice(0,5);
+      var today=new Date(); today.setHours(0,0,0,0);
+      var upcoming=(inst.earnings||[]).filter(function(e){
+        if(e.status_type==='reported') return false;
+        var d=new Date(e._added||e.date||'');
+        return isNaN(d)||d>=today;
+      }).slice(0,5);
       var months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
       upSidebar.innerHTML=upcoming.map(function(e){
         var dateStr=e._added||e.date||'';
