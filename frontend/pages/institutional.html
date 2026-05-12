@@ -279,7 +279,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="two-col">
       <div>
         <!-- Firm filter -->
-        <div class="firm-chips" id="firm-chips"></div>
+        <div style="margin-bottom:16px;">
+          <input type="text" id="research-search" placeholder="搜尋機構、標的、關鍵字..." 
+            oninput="searchCards('research-search','research-list','.research-card')"
+            style="width:100%;padding:9px 14px;border:1px solid var(--gray-200);border-radius:var(--r-md);font-size:13.5px;font-family:var(--font-zh);color:var(--gray-900);outline:none;transition:border-color .15s;background:var(--white);"
+            onfocus="this.style.borderColor='var(--navy-400)'" onblur="this.style.borderColor='var(--gray-200)'">
+        </div>
 
         <!-- Research cards -->
         <div id="research-list">
@@ -314,11 +319,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="two-col">
       <div>
         <!-- Sector filter -->
-        <div class="sector-chips">
-          <button class="sector-chip active" onclick="filterSector('all',this)">全部</button>
-          <button class="sector-chip" onclick="filterSector('us',this)">美股</button>
-          <button class="sector-chip" onclick="filterSector('tw',this)">台股</button>
-          <button class="sector-chip" onclick="filterSector('upcoming',this)">即將發布</button>
+        <div style="margin-bottom:16px;">
+          <input type="text" id="earnings-search" placeholder="搜尋標的、公司名稱..." 
+            oninput="searchCards('earnings-search','earnings-list','.earnings-card')"
+            style="width:100%;padding:9px 14px;border:1px solid var(--gray-200);border-radius:var(--r-md);font-size:13.5px;font-family:var(--font-zh);color:var(--gray-900);outline:none;transition:border-color .15s;background:var(--white);"
+            onfocus="this.style.borderColor='var(--navy-400)'" onblur="this.style.borderColor='var(--gray-200)'">
         </div>
 
         <div id="earnings-list">
@@ -543,7 +548,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <!-- ═══════════════ EARNINGS CALLS TAB ═══════════════ -->
   <div class="tab-panel" id="tab-calls">
     <div class="section-block">
-      <div id="calls-list"></div>
+      <div style="margin-bottom:16px;">
+          <input type="text" id="calls-search" placeholder="搜尋公司、CEO、關鍵字..." 
+            oninput="searchCards('calls-search','calls-list','.call-card')"
+            style="width:100%;padding:9px 14px;border:1px solid var(--gray-200);border-radius:var(--r-md);font-size:13.5px;font-family:var(--font-zh);color:var(--gray-900);outline:none;transition:border-color .15s;background:var(--white);"
+            onfocus="this.style.borderColor='var(--navy-400)'" onblur="this.style.borderColor='var(--gray-200)'">
+        </div>
+        <div id="calls-list"></div>
     </div>
   </div>
 
@@ -731,6 +742,24 @@ function _old_renderCalls(list){
       '</div>'+
     '</div>';
   }).join('');
+}
+
+function searchCards(inputId, listId, selector){
+  var q=document.getElementById(inputId).value.toLowerCase();
+  document.querySelectorAll('#'+listId+' '+selector).forEach(function(card){
+    var text=card.innerText.toLowerCase();
+    card.style.display=(!q||text.includes(q))?'':'none';
+  });
+  // hide empty section titles
+  document.querySelectorAll('#'+listId+' .earnings-section-title').forEach(function(title){
+    var next=title.nextElementSibling;
+    var hasVisible=false;
+    while(next&&!next.classList.contains('earnings-section-title')){
+      if(next.style.display!=='none') hasVisible=true;
+      next=next.nextElementSibling;
+    }
+    title.style.display=hasVisible?'':'none';
+  });
 }
 
 function filterFirm(firm,btn){
