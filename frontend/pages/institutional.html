@@ -760,7 +760,7 @@ function renderResearch(list){
     var impactScore=r.impact_score||3;
     var dots='';
     for(var i=1;i<=5;i++) dots+='<span class="rc-impact-dot" style="background:'+(i<=impactScore?'var(--green-600)':'var(--gray-200)')+'"></span>';
-    return '<div class="research-card">'+
+    return '<div class="research-card" data-firm="'+r.firm.split(' ')[0].toUpperCase()+'" onclick="toggleResearchCard(this)" style="cursor:pointer;">'+  
       '<div class="rc-firm-row">'+
         '<span class="rc-firm">'+r.firm.toUpperCase()+'</span>'+
         '<span class="rc-date">'+r.date+'</span>'+
@@ -792,7 +792,7 @@ function renderEarnings(list){
     var isReported=e.status_type==='reported';
     var beatClass=e.eps_result==='beat'?'beat':e.eps_result==='miss'?'miss':'';
     var epsVsClass=e.eps_result==='beat'?'beat':e.eps_result==='miss'?'miss':'';
-    return '<div class="earnings-card" data-status="'+(isReported?'reported':'upcoming')+'">'+
+    return '<div class="earnings-card" data-market="us" data-status="'+(isReported?'reported':'upcoming')+'">'+  
       '<div class="ec-header">'+
         '<div class="ec-company">'+
           '<span class="ec-ticker">'+e.ticker+'</span>'+
@@ -903,6 +903,50 @@ function _old_renderCalls(list){
       '</div>'+
     '</div>';
   }).join('');
+}
+
+function filterFirm(firm,btn){
+  document.querySelectorAll('.firm-chip').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.querySelectorAll('.research-card').forEach(function(card){
+    var f=card.getAttribute('data-firm')||'';
+    card.style.display=(firm==='all'||f===firm)?'':'none';
+  });
+}
+
+function filterSector(sector,btn){
+  document.querySelectorAll('.sector-chip').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.querySelectorAll('.earnings-card').forEach(function(card){
+    var s=card.getAttribute('data-market')||'';
+    var st=card.getAttribute('data-status')||'';
+    var show=false;
+    if(sector==='all') show=true;
+    else if(sector==='us') show=s==='us';
+    else if(sector==='tw') show=s==='tw';
+    else if(sector==='upcoming') show=st==='upcoming';
+    card.style.display=show?'':'none';
+  });
+  // hide/show section titles
+  document.querySelectorAll('.earnings-section-title').forEach(function(title){
+    var next=title.nextElementSibling;
+    var hasVisible=false;
+    while(next&&!next.classList.contains('earnings-section-title')){
+      if(next.style.display!=='none') hasVisible=true;
+      next=next.nextElementSibling;
+    }
+    title.style.display=hasVisible?'':'none';
+  });
+}
+
+function toggleResearchCard(card){
+  var body=card.querySelector('.rc-body');
+  var impact=card.querySelector('.rc-impact');
+  if(!body) return;
+  var isOpen=card.classList.contains('open');
+  card.classList.toggle('open',!isOpen);
+  body.style.display=isOpen?'none':'block';
+  if(impact) impact.style.display=isOpen?'none':'flex';
 }
 
 async function loadData(){
