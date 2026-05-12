@@ -648,25 +648,11 @@ function renderEarnings(list){
         '</div>'+
       '</div>'+
       '<div class="ec-body">'+
-        '<div class="ec-metric">'+
-          '<div class="ec-metric-label">'+(isReported?'EPS ACTUAL':'EPS 預期')+'</div>'+
-          '<div class="ec-metric-val">'+(e.eps||e.eps_est||'--')+'</div>'+
-          (isReported&&e.eps_est?'<div class="ec-metric-vs '+epsVsClass+'">vs 預期 '+e.eps_est+'</div>':'')+
-          (e.eps_surprise?'<span class="ec-beat-badge '+(e.eps_result==='beat'?'bb-beat':'bb-miss')+'">'+e.eps_surprise+'</span>':'')+
-        '</div>'+
-        '<div class="ec-metric">'+
-          '<div class="ec-metric-label">REVENUE</div>'+
-          '<div class="ec-metric-val">'+(e.revenue||e.rev_est||'--')+'</div>'+
-          (isReported&&e.rev_est&&e.revenue?'<div class="ec-metric-vs beat">vs 預期 '+e.rev_est+'</div>':'')+
-        '</div>'+
-        '<div class="ec-metric">'+
-          '<div class="ec-metric-label">'+(isReported?'STOCK REACTION':'KEY METRIC')+'</div>'+
-          '<div class="ec-metric-val" style="font-size:13px;">'+(isReported?(e.market_reaction||'--'):(e.key_metric||'--'))+'</div>'+
-        '</div>'+
-        '<div class="ec-metric">'+
-          '<div class="ec-metric-label">GUIDANCE</div>'+
-          '<div class="ec-metric-val" style="font-size:12px;line-height:1.4;">'+(e.guidance||'--')+'</div>'+
-        '</div>'+
+        (e.eps||e.eps_est?'<div class="ec-metric"><div class="ec-metric-label">'+(isReported?'EPS ACTUAL':'EPS 預期')+'</div><div class="ec-metric-val">'+(e.eps||e.eps_est)+'</div>'+(e.eps_surprise?'<span class="ec-beat-badge '+(e.eps_result==='beat'?'bb-beat':'bb-miss')+'">'+e.eps_surprise+'</span>':'')+'</div>':'')+
+        (e.revenue||e.rev_est?'<div class="ec-metric"><div class="ec-metric-label">REVENUE</div><div class="ec-metric-val">'+(e.revenue||e.rev_est)+'</div>'+(e.rev_est&&e.revenue?'<div class="ec-metric-vs beat">vs 預期 '+e.rev_est+'</div>':'')+'</div>':'')+
+        (e.market_reaction&&e.market_reaction!=='待公布'?'<div class="ec-metric"><div class="ec-metric-label">市場反應</div><div class="ec-metric-val" style="font-size:13px;">'+e.market_reaction+'</div></div>':'')+
+        (e.key_metric?'<div class="ec-metric"><div class="ec-metric-label">關鍵指標</div><div class="ec-metric-val" style="font-size:12px;">'+e.key_metric+'</div></div>':'')+
+        (e.guidance?'<div class="ec-metric"><div class="ec-metric-label">GUIDANCE</div><div class="ec-metric-val" style="font-size:12px;line-height:1.4;">'+e.guidance+'</div></div>':'')+
       '</div>'+
       '<div class="ec-footer">'+
         '<span class="ec-footer-label">NOTE</span>'+
