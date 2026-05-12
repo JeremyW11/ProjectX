@@ -270,268 +270,594 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 <!-- PAGE -->
 <main class="page">
-  <div class="top-bar">
+
+  <div class="page-header">
     <div>
-      <h1>市場數據 <span style="font-family:var(--font-en);font-size:14px;font-weight:400;color:var(--gray-400);">Market Data</span></h1>
-      <div style="font-size:11px;color:var(--gray-400);margin-top:3px;font-family:var(--font-en);">
-        <span class="live-dot"></span>&nbsp;美股 · 台股 · 加密貨幣
+      <h1 class="page-title">市場數據 <span class="page-title-sub">Market Data</span></h1>
+      <div class="page-update" id="page-update">—</div>
+    </div>
+  </div>
+
+  <!-- TAB BAR -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="us" onclick="switchTab('us')">
+      <span class="tab-icon">📈</span>美股
+    </button>
+    <button class="tab-btn" data-tab="tw" onclick="switchTab('tw')">
+      <span class="tab-icon">🇹🇼</span>台股
+    </button>
+    <button class="tab-btn" data-tab="crypto" onclick="switchTab('crypto')">
+      <span class="tab-icon">₿</span>加密貨幣
+    </button>
+  </div>
+
+  <!-- ═══════════════ US EQUITY TAB ═══════════════ -->
+  <div class="tab-panel active" id="tab-us">
+    <div class="summary-strip cols-4" id="us-summary-strip">
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">SPX</span><span class="sum-category">Index</span></div>
+        <div class="sum-name">S&amp;P 500</div>
+        <div class="sum-price">5,214</div>
+        <div class="sum-row"><span class="sum-chg dn">▼ −0.48%</span><span class="sum-extra">前收</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">NDX</span><span class="sum-category">Index</span></div>
+        <div class="sum-name">NASDAQ 100</div>
+        <div class="sum-price">18,290</div>
+        <div class="sum-row"><span class="sum-chg dn">▼ −0.21%</span><span class="sum-extra">前收</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">DJI</span><span class="sum-category">Index</span></div>
+        <div class="sum-name">Dow Jones</div>
+        <div class="sum-price">38,820</div>
+        <div class="sum-row"><span class="sum-chg dn">▼ −0.34%</span><span class="sum-extra">前收</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">VIX</span><span class="sum-category">Volatility</span></div>
+        <div class="sum-name">恐慌指數</div>
+        <div class="sum-price">18.4</div>
+        <div class="sum-row"><span class="sum-chg flat">― Neutral</span><span class="sum-extra">CBOE</span></div>
       </div>
     </div>
-    <div class="meta" id="market-date"></div>
-  </div>
 
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('us',this)">📈 美股</button>
-    <button class="tab-btn" onclick="switchTab('tw',this)">🇹🇼 台股</button>
-    <button class="tab-btn" onclick="switchTab('crypto',this)">₿ 加密貨幣</button>
-  </div>
-
-  <!-- 美股 -->
-  <div id="tab-us" class="tab-content active">
-    <div id="us-index-grid" class="index-grid"></div>
-    <div id="us-sentiment-bar" class="sentiment-bar-us"></div>
     <div class="two-col">
       <div>
-        <div class="glass-card">
-          <div class="card-header"><div class="card-title">🏆 重點追蹤標的</div></div>
-          <div class="stock-header-row">
-            <span>標的</span><span>今日重點</span><span>股價</span><span>漲跌幅</span><span>板塊</span><span></span>
+        <!-- Core stocks table -->
+        <div class="section-block" style="margin-bottom:16px;">
+          <div class="section-block-header">
+            <div class="sbh-title">核心個股 <span class="sbh-title-en">CORE WATCHLIST</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut">前收 · 昨日</span></div>
           </div>
-          <div id="us-stocks-list"></div>
+          <table class="data-table">
+            <thead>
+              <tr><th>股票</th><th class="r">前收價</th><th class="r">漲跌</th><th class="r">成交量</th><th class="r">市值</th><th class="r">本益比</th></tr>
+            </thead>
+            <tbody id="us-stocks-tbody">
+              <tr><td><div class="dt-sym">NVDA</div><div class="dt-name">NVIDIA Corporation</div></td><td class="r"><span class="dt-price">890.40</span></td><td class="r"><span class="dt-chg up">▲ +9.21%</span></td><td class="r"><span class="dt-val">482M</span></td><td class="r"><span class="dt-val">$2.19T</span></td><td class="r"><span class="dt-val">68.4x</span></td></tr>
+              <tr><td><div class="dt-sym">AAPL</div><div class="dt-name">Apple Inc.</div></td><td class="r"><span class="dt-price">189.30</span></td><td class="r"><span class="dt-chg dn">▼ −0.62%</span></td><td class="r"><span class="dt-val">58M</span></td><td class="r"><span class="dt-val">$2.91T</span></td><td class="r"><span class="dt-val">29.1x</span></td></tr>
+              <tr><td><div class="dt-sym">MSFT</div><div class="dt-name">Microsoft Corp.</div></td><td class="r"><span class="dt-price">415.80</span></td><td class="r"><span class="dt-chg up">▲ +0.43%</span></td><td class="r"><span class="dt-val">22M</span></td><td class="r"><span class="dt-val">$3.09T</span></td><td class="r"><span class="dt-val">34.8x</span></td></tr>
+              <tr><td><div class="dt-sym">AMZN</div><div class="dt-name">Amazon.com Inc.</div></td><td class="r"><span class="dt-price">182.60</span></td><td class="r"><span class="dt-chg up">▲ +1.15%</span></td><td class="r"><span class="dt-val">44M</span></td><td class="r"><span class="dt-val">$1.92T</span></td><td class="r"><span class="dt-val">41.2x</span></td></tr>
+              <tr><td><div class="dt-sym">META</div><div class="dt-name">Meta Platforms</div></td><td class="r"><span class="dt-price">524.10</span></td><td class="r"><span class="dt-chg up">▲ +0.88%</span></td><td class="r"><span class="dt-val">16M</span></td><td class="r"><span class="dt-val">$1.33T</span></td><td class="r"><span class="dt-val">25.6x</span></td></tr>
+              <tr><td><div class="dt-sym">SMCI</div><div class="dt-name">Super Micro Computer</div></td><td class="r"><span class="dt-price">84.20</span></td><td class="r"><span class="dt-chg dn">▼ −2.14%</span></td><td class="r"><span class="dt-val">32M</span></td><td class="r"><span class="dt-val">$49.2B</span></td><td class="r"><span class="dt-val">22.1x</span></td></tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-      <div>
-        <div class="glass-card">
-          <div class="card-header"><div class="card-title">📰 今日美股新聞</div></div>
-          <div id="us-news-list"></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- 台股 -->
-  <div id="tab-tw" class="tab-content">
-    <div id="tw-index-grid" class="index-grid"></div>
-    <div id="tw-sentiment-bar" class="sentiment-bar-tw"></div>
-    <div class="two-col">
-      <div>
-        <div class="glass-card">
-          <div class="card-header"><div class="card-title">🏆 重點追蹤標的</div></div>
-          <div class="stock-header-row">
-            <span>標的</span><span>今日重點</span><span>股價</span><span>漲跌幅</span><span>板塊</span><span></span>
+        <!-- Earnings table -->
+        <div class="section-block">
+          <div class="section-block-header">
+            <div class="sbh-title">近期財報 <span class="sbh-title-en">RECENT EARNINGS</span></div>
           </div>
-          <div id="tw-stocks-list"></div>
+          <table class="data-table">
+            <thead>
+              <tr><th>公司</th><th class="r">EPS 實際</th><th class="r">EPS 預期</th><th class="r">結果</th><th class="r">營收</th><th class="r">股價反應</th></tr>
+            </thead>
+            <tbody id="us-stocks-tbody">
+              <tr><td><div class="dt-sym">NVDA</div><div class="dt-name">Q1 FY2026</div></td><td class="r"><span class="dt-price">6.12</span></td><td class="r"><span class="dt-val">5.58</span></td><td class="r"><span class="dt-badge b-beat">Beat +10%</span></td><td class="r"><span class="dt-val">$26.0B</span></td><td class="r"><span class="dt-chg up">▲ +9.2%</span></td></tr>
+              <tr><td><div class="dt-sym">WMT</div><div class="dt-name">Q1 FY2026</div></td><td class="r"><span class="dt-price">0.61</span></td><td class="r"><span class="dt-val">0.64</span></td><td class="r"><span class="dt-badge b-miss">Miss −5%</span></td><td class="r"><span class="dt-val">$159.9B</span></td><td class="r"><span class="dt-chg dn">▼ −2.1%</span></td></tr>
+              <tr><td><div class="dt-sym">AAPL</div><div class="dt-name">Q2 FY2025</div></td><td class="r"><span class="dt-price">1.65</span></td><td class="r"><span class="dt-val">1.61</span></td><td class="r"><span class="dt-badge b-beat">Beat +2%</span></td><td class="r"><span class="dt-val">$95.4B</span></td><td class="r"><span class="dt-chg up">▲ +1.8%</span></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
+
+      <!-- Sidebar -->
       <div>
-        <div class="glass-card">
-          <div class="card-header"><div class="card-title">📰 今日台股新聞</div></div>
-          <div id="tw-news-list"></div>
+        <div class="signal-card" style="margin-bottom:14px;">
+          <div class="signal-card-title">美股訊號 <span class="sent-chip s-neut">中性</span></div>
+          <div class="signal-row"><span class="sr-label">VIX 水位</span><span class="sr-val flat">18.4 · 正常</span></div>
+          <div class="signal-row"><span class="sr-label">SPX vs 200MA</span><span class="sr-val up">+4.2% 上方</span></div>
+          <div class="signal-row"><span class="sr-label">Put/Call Ratio</span><span class="sr-val flat">0.82 · 中性</span></div>
+          <div class="signal-row"><span class="sr-label">10Y 殖利率</span><span class="sr-val dn">4.52%</span></div>
+          <div class="signal-row"><span class="sr-label">DXY 美元指數</span><span class="sr-val dn">105.2 ↑</span></div>
+          <div class="signal-row"><span class="sr-label">AI / 半導體</span><span class="sr-val up">強勢板塊</span></div>
+        </div>
+        <div class="signal-card">
+          <div class="signal-card-title" style="margin-bottom:4px;">
+            資金流向
+            <span style="font-family:var(--font-en);font-size:10px;font-weight:400;color:var(--gray-400);letter-spacing:.05em;">SECTOR FLOW · 今日</span>
+          </div>
+          <div style="font-size:10.5px;color:var(--gray-400);font-family:var(--font-zh);margin-bottom:12px;">ETF 資金淨流入排行</div>
+
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Technology</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">科技</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:100%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$4.2B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Comm. Services</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">通訊服務</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:62%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$2.6B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Energy</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">能源</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:45%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$1.1B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Industrials</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">工業</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:30%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$0.7B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Consumer Disc.</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">非必需消費</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:18%;background:var(--amber-600)"></div></div></div>
+            <span class="flow-val" style="color:var(--amber-600);">+$0.2B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Financials</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">金融</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:24%;background:var(--red-600)"></div></div></div>
+            <span class="flow-val dn">−$0.8B</span>
+          </div>
+          <div class="flow-row">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Healthcare</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">醫療保健</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:18%;background:var(--red-600)"></div></div></div>
+            <span class="flow-val dn">−$0.6B</span>
+          </div>
+          <div class="flow-row" style="border-bottom:none;">
+            <div style="display:flex;flex-direction:column;width:88px;flex-shrink:0;">
+              <span style="font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--gray-700);">Real Estate</span>
+              <span style="font-size:10px;color:var(--gray-400);font-family:var(--font-zh);">房地產</span>
+            </div>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:12%;background:var(--red-600)"></div></div></div>
+            <span class="flow-val dn">−$0.4B</span>
+          </div>
         </div>
       </div>
     </div>
+          
+    
+        <div class="section-block" style="margin-top:16px;">
+          <div class="section-block-header">
+            <div class="sbh-title">美股新聞 <span class="sbh-title-en">US MARKET NEWS</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut">今日 5 則</span></div>
+          </div>
+          <div class="news-list">
+            <div class="news-item"><span class="news-num">01</span><div class="news-content"><div class="news-meta"><span class="news-badge b-us-n">US EQUITY</span><span class="news-source">Bloomberg</span><span class="news-time">07:44</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">NVIDIA Q1財報大幅超預期，資料中心營收年增427%創歷史新高</div><div class="news-body">Q1 EPS 達 6.12 美元（預期 5.58），資料中心營收 226 億美元。CEO 黃仁勳表示 Blackwell 出貨量持續爬坡，下季指引 280 億美元超市場共識，盤後股價大漲 9%。</div><div class="news-tickers"><span class="news-chip">NVDA</span><span class="news-chip">AMD</span><span class="news-chip">SMCI</span></div></div></div>
+            <div class="news-item"><span class="news-num">02</span><div class="news-content"><div class="news-meta"><span class="news-badge b-mac-n">MACRO</span><span class="news-source">Reuters</span><span class="news-time">07:22</span><span class="sent-chip s-bear">利空</span></div><div class="news-headline">聯準會官員鷹派表態，市場首次降息預期延至Q4</div><div class="news-body">多位 Fed 官員重申通膨預期仍具黏性，年內降息次數壓縮至1次。美元指數 DXY 突破 105，十年期公債殖利率回升至 4.52%，成長股普遍承壓。</div><div class="news-tickers"><span class="news-chip">DXY</span><span class="news-chip">TLT</span><span class="news-chip">SPY</span></div></div></div>
+            <div class="news-item"><span class="news-num">03</span><div class="news-content"><div class="news-meta"><span class="news-badge b-us-n">US EQUITY</span><span class="news-source">CNBC</span><span class="news-time">06:58</span><span class="sent-chip s-bear">利空</span></div><div class="news-headline">Walmart Q1 EPS小幅不及預期，消費者支出趨於謹慎</div><div class="news-body">WMT Q1 EPS 0.61 美元（預期 0.64），管理層表示高收入消費者消費偏保守，下季指引持平市場預期，盤後股價下跌約 2%。</div><div class="news-tickers"><span class="news-chip">WMT</span><span class="news-chip">TGT</span><span class="news-chip">COST</span></div></div></div>
+            <div class="news-item"><span class="news-num">04</span><div class="news-content"><div class="news-meta"><span class="news-badge b-us-n">US EQUITY</span><span class="news-source">Barclays</span><span class="news-time">06:30</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">Barclays 上調 Meta 目標價至 620 美元，看好 AI 廣告變現</div><div class="news-body">Barclays 研究報告指出 Meta AI 廣告精準度提升帶動 CPM 上漲 18%，Llama 開源生態持續擴張，維持增持評級並上調目標價至 620 美元。</div><div class="news-tickers"><span class="news-chip">META</span><span class="news-chip">GOOGL</span></div></div></div>
+            <div class="news-item"><span class="news-num">05</span><div class="news-content"><div class="news-meta"><span class="news-badge b-mac-n">MACRO</span><span class="news-source">WSJ</span><span class="news-time">05:55</span><span class="sent-chip s-neut">中性</span></div><div class="news-headline">美中貿易協商傳出積極訊號，關稅暫緩預期升溫</div><div class="news-body">WSJ 報導美中雙方代表在瑞士舉行非正式磋商，市場對90天關稅暫緩期預期升溫，工業股與原物料股出現短暫反彈。</div><div class="news-tickers"><span class="news-chip">XLI</span><span class="news-chip">XLB</span><span class="news-chip">FXI</span></div></div></div>
+          </div>
+        </div>
   </div>
 
-  <!-- 加密貨幣 -->
-  <div id="tab-crypto" class="tab-content">
-    <div id="crypto-sentiment-bar" class="sentiment-bar-crypto"></div>
-    <div class="glass-card">
-      <div class="card-header"><div class="card-title">₿ 加密貨幣行情</div></div>
-      <div class="crypto-grid" id="crypto-grid"></div>
+  <!-- ═══════════════ TW EQUITY TAB ═══════════════ -->
+  <div class="tab-panel" id="tab-tw">
+    <div class="summary-strip cols-4" id="tw-summary-strip">
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">TAIEX</span><span class="sum-category">加權指數</span></div>
+        <div class="sum-name">台灣加權指數</div>
+        <div class="sum-price">21,330</div>
+        <div class="sum-row"><span class="sum-chg up">▲ +0.72%</span><span class="sum-extra">前收</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">成交量</span><span class="sum-category">全市場</span></div>
+        <div class="sum-name">昨日成交量</div>
+        <div class="sum-price">3,842</div>
+        <div class="sum-row"><span class="sum-chg flat">億元</span><span class="sum-extra">TWD</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">外資</span><span class="sum-category">買賣超</span></div>
+        <div class="sum-name">外資昨日買賣超</div>
+        <div class="sum-price">+142</div>
+        <div class="sum-row"><span class="sum-chg up">▲ 買超</span><span class="sum-extra">億元 TWD</span></div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">投信</span><span class="sum-category">買賣超</span></div>
+        <div class="sum-name">投信昨日買賣超</div>
+        <div class="sum-price">+38</div>
+        <div class="sum-row"><span class="sum-chg up">▲ 買超</span><span class="sum-extra">億元 TWD</span></div>
+      </div>
     </div>
+
     <div class="two-col">
-      <div class="glass-card">
-        <div class="card-header"><div class="card-title">📰 今日加密新聞</div></div>
-        <div id="crypto-news-list"></div>
+      <div>
+        <!-- Core TW stocks -->
+        <div class="section-block" style="margin-bottom:16px;">
+          <div class="section-block-header">
+            <div class="sbh-title">核心個股 <span class="sbh-title-en">CORE TW STOCKS</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut">前收 · 昨日 TWD</span></div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr><th>股票</th><th class="r">前收價</th><th class="r">漲跌</th><th class="r">成交量</th><th class="r">外資買超</th><th class="r">法人評等</th></tr>
+            </thead>
+            <tbody id="tw-stocks-tbody">
+              <tr><td><div class="dt-sym">2330</div><div class="dt-name">台積電 TSMC</div></td><td class="r"><span class="dt-price">950</span></td><td class="r"><span class="dt-chg up">▲ +0.84%</span></td><td class="r"><span class="dt-val">28,420張</span></td><td class="r"><span class="dt-chg up">+82億</span></td><td class="r"><span class="dt-badge b-buy">買進</span></td></tr>
+              <tr><td><div class="dt-sym">2317</div><div class="dt-name">鴻海 Foxconn</div></td><td class="r"><span class="dt-price">182</span></td><td class="r"><span class="dt-chg up">▲ +0.55%</span></td><td class="r"><span class="dt-val">18,210張</span></td><td class="r"><span class="dt-chg up">+14億</span></td><td class="r"><span class="dt-badge b-hold">中立</span></td></tr>
+              <tr><td><div class="dt-sym">2454</div><div class="dt-name">聯發科 MediaTek</div></td><td class="r"><span class="dt-price">1,285</span></td><td class="r"><span class="dt-chg up">▲ +1.18%</span></td><td class="r"><span class="dt-val">8,840張</span></td><td class="r"><span class="dt-chg up">+62億</span></td><td class="r"><span class="dt-badge b-buy">買進</span></td></tr>
+              <tr><td><div class="dt-sym">2382</div><div class="dt-name">廣達 Quanta</div></td><td class="r"><span class="dt-price">310</span></td><td class="r"><span class="dt-chg dn">▼ −0.32%</span></td><td class="r"><span class="dt-val">6,120張</span></td><td class="r"><span class="dt-chg dn">−8億</span></td><td class="r"><span class="dt-badge b-hold">中立</span></td></tr>
+              <tr><td><div class="dt-sym">2412</div><div class="dt-name">中華電 Chunghwa</div></td><td class="r"><span class="dt-price">122</span></td><td class="r"><span class="dt-chg flat">— 0.00%</span></td><td class="r"><span class="dt-val">2,440張</span></td><td class="r"><span class="dt-chg dn">−2億</span></td><td class="r"><span class="dt-badge b-hold">中立</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Sector radar -->
+        <div class="section-block">
+          <div class="section-block-header">
+            <div class="sbh-title">23板塊雷達 <span class="sbh-title-en">TWSE SECTOR RADAR</span></div>
+          </div>
+          <div class="sector-grid">
+            <div class="sector-item"><div class="sector-name">半導體</div><div class="sector-chg-row"><span class="sector-chg up">▲ +1.24%</span><span class="sent-chip s-bull" style="font-size:9px;">強勢</span></div><div class="sector-bar" style="background:var(--green-600);opacity:.7;"></div></div>
+            <div class="sector-item"><div class="sector-name">電子零組件</div><div class="sector-chg-row"><span class="sector-chg up">▲ +0.82%</span><span class="sent-chip s-bull" style="font-size:9px;">偏多</span></div><div class="sector-bar" style="background:var(--green-600);opacity:.5;"></div></div>
+            <div class="sector-item"><div class="sector-name">電腦及週邊</div><div class="sector-chg-row"><span class="sector-chg dn">▼ −0.14%</span><span class="sent-chip s-neut" style="font-size:9px;">中性</span></div><div class="sector-bar" style="background:var(--gray-300);"></div></div>
+            <div class="sector-item"><div class="sector-name">光電</div><div class="sector-chg-row"><span class="sector-chg up">▲ +0.46%</span><span class="sent-chip s-bull" style="font-size:9px;">偏多</span></div><div class="sector-bar" style="background:var(--green-600);opacity:.3;"></div></div>
+            <div class="sector-item"><div class="sector-name">金融保險</div><div class="sector-chg-row"><span class="sector-chg dn">▼ −0.38%</span><span class="sent-chip s-neut" style="font-size:9px;">中性</span></div><div class="sector-bar" style="background:var(--red-600);opacity:.3;"></div></div>
+            <div class="sector-item"><div class="sector-name">航運</div><div class="sector-chg-row"><span class="sector-chg dn">▼ −1.04%</span><span class="sent-chip s-bear" style="font-size:9px;">偏空</span></div><div class="sector-bar" style="background:var(--red-600);opacity:.6;"></div></div>
+            <div class="sector-item"><div class="sector-name">鋼鐵</div><div class="sector-chg-row"><span class="sector-chg dn">▼ −0.62%</span><span class="sent-chip s-bear" style="font-size:9px;">偏空</span></div><div class="sector-bar" style="background:var(--red-600);opacity:.4;"></div></div>
+            <div class="sector-item"><div class="sector-name">建材營造</div><div class="sector-chg-row"><span class="sector-chg up">▲ +0.28%</span><span class="sent-chip s-neut" style="font-size:9px;">中性</span></div><div class="sector-bar" style="background:var(--green-600);opacity:.2;"></div></div>
+          </div>
+        </div>
       </div>
-      <div class="glass-card">
-        <div class="card-header"><div class="card-title">💥 清算詳情</div></div>
-        <div id="crypto-liquidation"></div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="signal-card" style="margin-bottom:14px;">
+          <div class="signal-card-title">台股訊號 <span class="sent-chip s-bull">偏多</span></div>
+          <div class="signal-row"><span class="sr-label">外資連買天數</span><span class="sr-val up">3 日連買</span></div>
+          <div class="signal-row"><span class="sr-label">本週外資合計</span><span class="sr-val up">+312億</span></div>
+          <div class="signal-row"><span class="sr-label">融資餘額</span><span class="sr-val flat">2,840億</span></div>
+          <div class="signal-row"><span class="sr-label">融券餘額</span><span class="sr-val flat">42億</span></div>
+          <div class="signal-row"><span class="sr-label">台積電 ADR</span><span class="sr-val up">夜盤 +1.2%</span></div>
+          <div class="signal-row"><span class="sr-label">加權指數支撐</span><span class="sr-val flat">21,000</span></div>
+        </div>
+
+        <div class="signal-card">
+          <div class="signal-card-title" style="margin-bottom:12px;">外資買超前5</div>
+          <div class="flow-row"><span class="flow-sym">2330</span><span class="flow-name">台積電</span><div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:100%;background:var(--green-600)"></div></div></div><span class="flow-val up">+82億</span></div>
+          <div class="flow-row"><span class="flow-sym">2454</span><span class="flow-name">聯發科</span><div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:76%;background:var(--green-600)"></div></div></div><span class="flow-val up">+62億</span></div>
+          <div class="flow-row"><span class="flow-sym">2317</span><span class="flow-name">鴻海</span><div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:17%;background:var(--green-600)"></div></div></div><span class="flow-val up">+14億</span></div>
+          <div class="flow-row"><span class="flow-sym">2308</span><span class="flow-name">台達電</span><div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:13%;background:var(--green-600)"></div></div></div><span class="flow-val up">+10億</span></div>
+          <div class="flow-row"><span class="flow-sym">2382</span><span class="flow-name">廣達</span><div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:9%;background:var(--red-600)"></div></div></div><span class="flow-val dn">−8億</span></div>
+        </div>
       </div>
     </div>
+        <div class="section-block" style="margin-top:16px;">
+          <div class="section-block-header">
+            <div class="sbh-title">台股新聞 <span class="sbh-title-en">TW MARKET NEWS</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut">今日 5 則</span></div>
+          </div>
+          <div class="news-list" id="tw-news-list">
+            <div class="news-item"><span class="news-num">01</span><div class="news-content"><div class="news-meta"><span class="news-badge b-tw-n">台股</span><span class="news-source">經濟日報</span><span class="news-time">08:05</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">外資連三日買超逾百億，台積電與聯發科為主力標的</div><div class="news-body">外資本週累積買超台積電（2330）達 142 億元、聯發科（2454）62 億元，加權指數在 21,330 點獲得支撐。ADR 夜盤台積電 +1.2%，法人預估 Q2 財測將優於預期。</div><div class="news-tickers"><span class="news-chip">2330</span><span class="news-chip">2454</span><span class="news-chip">TSM</span></div></div></div>
+            <div class="news-item"><span class="news-num">02</span><div class="news-content"><div class="news-meta"><span class="news-badge b-tw-n">台股</span><span class="news-source">MoneyDJ</span><span class="news-time">07:40</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">CoWoS 封裝需求強勁，台積電先進封裝產能滿載至 2026Q2</div><div class="news-body">Morgan Stanley 報告指出台積電 CoWoS 產能供不應求，AI 伺服器客戶已鎖定 2026 上半年產能。法人上調台積電目標價至 1,050 元，維持超配評級。</div><div class="news-tickers"><span class="news-chip">2330</span><span class="news-chip">3711</span><span class="news-chip">2379</span></div></div></div>
+            <div class="news-item"><span class="news-num">03</span><div class="news-content"><div class="news-meta"><span class="news-badge b-tw-n">台股</span><span class="news-source">工商時報</span><span class="news-time">07:15</span><span class="sent-chip s-bear">利空</span></div><div class="news-headline">航運族群面臨壓力，長榮海運運費指數連續三週下滑</div><div class="news-body">上海出口集裝箱運費指數（SCFI）本週跌幅擴大至 3.2%，主因美歐航線需求走弱與船隊供給過剩。長榮（2603）、陽明（2609）股價同步回落。</div><div class="news-tickers"><span class="news-chip">2603</span><span class="news-chip">2609</span><span class="news-chip">2615</span></div></div></div>
+            <div class="news-item"><span class="news-num">04</span><div class="news-content"><div class="news-meta"><span class="news-badge b-tw-n">台股</span><span class="news-source">證交所</span><span class="news-time">06:50</span><span class="sent-chip s-neut">中性</span></div><div class="news-headline">台積電股東常會訂於 5 月 15 日，每股配息 4.5 元</div><div class="news-body">台積電公告股東常會相關議程，今年度擬配發現金股利每股 4.5 元，除權息日預計於 6 月中旬，法人預估殖利率約 1.89%。</div><div class="news-tickers"><span class="news-chip">2330</span></div></div></div>
+            <div class="news-item"><span class="news-num">05</span><div class="news-content"><div class="news-meta"><span class="news-badge b-mac-n">宏觀</span><span class="news-source">金十數據</span><span class="news-time">06:20</span><span class="sent-chip s-neut">中性</span></div><div class="news-headline">台灣4月出口年增12.4%，AI伺服器與半導體持續帶動成長</div><div class="news-body">財政部公布 4 月出口達 428 億美元，年增 12.4%，連續 14 個月正成長。AI 相關產品出口額創單月歷史新高。</div><div class="news-tickers"><span class="news-chip">2330</span><span class="news-chip">2317</span><span class="news-chip">3008</span></div></div></div>
+          </div>
+        </div>
+  </div>
+
+  <!-- ═══════════════ CRYPTO TAB ═══════════════ -->
+  <div class="tab-panel" id="tab-crypto">
+    <!-- Summary strip -->
+    <div class="summary-strip cols-3">
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">BTC</span><span class="sum-category">Crypto</span></div>
+        <div class="sum-name">比特幣 Bitcoin</div>
+        <div class="sum-price" id="btc-price">102,840</div>
+        <div class="sum-row">
+          <span class="sum-chg up" id="btc-chg">▲ +2.31%</span>
+          <span class="sum-extra">24H · USD</span>
+        </div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">ETH</span><span class="sum-category">Crypto</span></div>
+        <div class="sum-name">以太坊 Ethereum</div>
+        <div class="sum-price" id="eth-price">3,215</div>
+        <div class="sum-row">
+          <span class="sum-chg up" id="eth-chg">▲ +1.62%</span>
+          <span class="sum-extra">24H · USD</span>
+        </div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-card-top"><span class="sum-tag">SOL</span><span class="sum-category">Crypto</span></div>
+        <div class="sum-name">Solana</div>
+        <div class="sum-price" id="sol-price">168.40</div>
+        <div class="sum-row">
+          <span class="sum-chg dn" id="sol-chg">▼ −0.88%</span>
+          <span class="sum-extra">24H · USD</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <!-- Coin detail tabs -->
+        <div class="section-block">
+          <div class="coin-tabs">
+            <div class="coin-tab active" onclick="switchCoin('btc',this)">BTC</div>
+            <div class="coin-tab" onclick="switchCoin('eth',this)">ETH</div>
+            <div class="coin-tab" onclick="switchCoin('sol',this)">SOL</div>
+          </div>
+
+          <!-- BTC -->
+          <div class="coin-panel active" id="coin-btc">
+            <div class="crypto-metric-grid">
+              <div class="cm-card">
+                <div class="cm-label">MARKET CAP</div>
+                <div class="cm-val">$2.03T</div>
+                <div class="cm-sub">USD</div>
+              </div>
+              <div class="cm-card">
+                <div class="cm-label">24H VOLUME</div>
+                <div class="cm-val">$48.2B</div>
+                <div class="cm-sub">USD</div>
+              </div>
+              <div class="cm-card">
+                <div class="cm-label">FUNDING RATE</div>
+                <div class="cm-val">+0.010%</div>
+                <div class="cm-sub">8H · Binance</div>
+                <div class="fr-bar-wrap">
+                  <div class="fr-bar-track">
+                    <div class="fr-bar-center"></div>
+                    <div class="fr-bar-fill" style="left:50%;width:18%;background:var(--green-600);"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="cm-card">
+                <div class="cm-label">LONG/SHORT RATIO</div>
+                <div class="cm-val">1.24</div>
+                <div class="cm-sub">多/空比 · Binance</div>
+                <div class="cm-badge s-bull">多方主導</div>
+              </div>
+              <div class="cm-card">
+                <div class="cm-label">ETF 今日淨流入</div>
+                <div class="cm-val">+$1.3B</div>
+                <div class="cm-sub">IBIT $820M · FBTC $310M</div>
+                <div class="cm-badge s-bull" style="margin-top:4px">歷史新高</div>
+              </div>
+              <div class="cm-card">
+                <div class="cm-label">鏈上清算量</div>
+                <div class="cm-val">$32M</div>
+                <div class="cm-sub">24H · 多空各半</div>
+                <div class="cm-badge s-neut" style="margin-top:4px;background:var(--amber-100);color:var(--amber-600);">低位</div>
+              </div>
+            </div>
+
+            <!-- Mini bar chart -->
+            <div style="padding:0 16px 16px;">
+              <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">7D PRICE TREND</div>
+              <div class="mini-chart" id="btc-chart"></div>
+            </div>
+          </div>
+
+          <!-- ETH -->
+          <div class="coin-panel" id="coin-eth">
+            <div class="crypto-metric-grid">
+              <div class="cm-card"><div class="cm-label">MARKET CAP</div><div class="cm-val">$386B</div><div class="cm-sub">USD</div></div>
+              <div class="cm-card"><div class="cm-label">24H VOLUME</div><div class="cm-val">$18.4B</div><div class="cm-sub">USD</div></div>
+              <div class="cm-card"><div class="cm-label">FUNDING RATE</div><div class="cm-val">+0.008%</div><div class="cm-sub">8H · Binance</div><div class="fr-bar-wrap"><div class="fr-bar-track"><div class="fr-bar-center"></div><div class="fr-bar-fill" style="left:50%;width:14%;background:var(--green-600);"></div></div></div></div>
+              <div class="cm-card"><div class="cm-label">STAKING RATE</div><div class="cm-val">28.3%</div><div class="cm-sub">ETH質押率</div><div class="cm-badge s-bull" style="margin-top:4px">創新高</div></div>
+              <div class="cm-card"><div class="cm-label">GAS FEE (Blob)</div><div class="cm-val">0.003</div><div class="cm-sub">Gwei · 坎昆升級後新低</div></div>
+              <div class="cm-card"><div class="cm-label">L2 日活交易</div><div class="cm-val">4.2M</div><div class="cm-sub">Arbitrum + Base 合計</div><div class="cm-badge s-bull" style="margin-top:4px">創新高</div></div>
+            </div>
+            <div style="padding:0 16px 16px;"><div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">7D PRICE TREND</div><div class="mini-chart" id="eth-chart"></div></div>
+          </div>
+
+          <!-- SOL -->
+          <div class="coin-panel" id="coin-sol">
+            <div class="crypto-metric-grid">
+              <div class="cm-card"><div class="cm-label">MARKET CAP</div><div class="cm-val">$78.2B</div><div class="cm-sub">USD</div></div>
+              <div class="cm-card"><div class="cm-label">24H VOLUME</div><div class="cm-val">$5.1B</div><div class="cm-sub">USD</div></div>
+              <div class="cm-card"><div class="cm-label">FUNDING RATE</div><div class="cm-val">−0.004%</div><div class="cm-sub">8H · Binance</div><div class="fr-bar-wrap"><div class="fr-bar-track"><div class="fr-bar-center"></div><div class="fr-bar-fill" style="right:50%;width:8%;background:var(--red-600);"></div></div></div></div>
+              <div class="cm-card"><div class="cm-label">TPS (Peak)</div><div class="cm-val">6,540</div><div class="cm-sub">網路吞吐量</div></div>
+              <div class="cm-card"><div class="cm-label">DEX 交易量</div><div class="cm-val">$2.8B</div><div class="cm-sub">24H · Raydium主導</div></div>
+              <div class="cm-card"><div class="cm-label">LONG/SHORT</div><div class="cm-val">0.94</div><div class="cm-sub">空方略佔優</div><div class="cm-badge s-bear" style="margin-top:4px;background:var(--red-100);color:var(--red-700);">偏空</div></div>
+            </div>
+            <div style="padding:0 16px 16px;"><div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">7D PRICE TREND</div><div class="mini-chart" id="sol-chart"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar signals -->
+      <div>
+        <div class="signal-card" style="margin-bottom:14px;">
+          <div class="signal-card-title">加密市場訊號 <span class="sent-chip s-bull">強看多</span></div>
+          <div class="signal-row"><span class="sr-label">BTC 市佔率</span><span class="sr-val flat">54.2%</span></div>
+          <div class="signal-row"><span class="sr-label">總市值</span><span class="sr-val up">$2.64T</span></div>
+          <div class="signal-row"><span class="sr-label">Fear & Greed</span><span class="sr-val up">72 · Greed</span></div>
+          <div class="signal-row"><span class="sr-label">ETF 累積流入</span><span class="sr-val up">+$18.4B</span></div>
+          <div class="signal-row"><span class="sr-label">BTC 下一阻力</span><span class="sr-val flat">$108K</span></div>
+          <div class="signal-row"><span class="sr-label">BTC 支撐位</span><span class="sr-val flat">$96K</span></div>
+        </div>
+
+        <div class="signal-card">
+          <div class="signal-card-title" style="margin-bottom:12px;">ETF 今日流量</div>
+          <div class="flow-row">
+            <span class="flow-sym">IBIT</span>
+            <span class="flow-name">BlackRock</span>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:82%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$820M</span>
+          </div>
+          <div class="flow-row">
+            <span class="flow-sym">FBTC</span>
+            <span class="flow-name">Fidelity</span>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:38%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$310M</span>
+          </div>
+          <div class="flow-row">
+            <span class="flow-sym">ARKB</span>
+            <span class="flow-name">ARK Invest</span>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:20%;background:var(--green-600)"></div></div></div>
+            <span class="flow-val up">+$164M</span>
+          </div>
+          <div class="flow-row">
+            <span class="flow-sym">GBTC</span>
+            <span class="flow-name">Grayscale</span>
+            <div class="flow-bar-wrap"><div class="flow-bar-track"><div class="flow-bar-fill" style="width:5%;background:var(--red-600)"></div></div></div>
+            <span class="flow-val dn">−$42M</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+        <div class="section-block" style="margin-top:16px;">
+          <div class="section-block-header">
+            <div class="sbh-title">加密新聞 <span class="sbh-title-en">CRYPTO NEWS</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut">今日 5 則</span></div>
+          </div>
+          <div class="news-list">
+            <div class="news-item"><span class="news-num">01</span><div class="news-content"><div class="news-meta"><span class="news-badge b-cr-n">CRYPTO</span><span class="news-source">CoinDesk</span><span class="news-time">08:14</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">比特幣現貨ETF單日淨流入13億美元，創近期單日新高</div><div class="news-body">BlackRock IBIT 單日淨流入 8.2 億美元，Fidelity FBTC 3.1 億美元，合計流入創近三個月單日新高。BTC 成功站穩 100K 心理關卡，市場情緒指數升至 72（貪婪）。</div><div class="news-tickers"><span class="news-chip">BTC</span><span class="news-chip">IBIT</span><span class="news-chip">FBTC</span></div></div></div>
+            <div class="news-item"><span class="news-num">02</span><div class="news-content"><div class="news-meta"><span class="news-badge b-cr-n">CRYPTO</span><span class="news-source">The Block</span><span class="news-time">07:55</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">以太坊坎昆升級後Gas費創歷史新低，L2生態活躍度大幅提升</div><div class="news-body">Dencun 升級後 Blob Gas 均價降至 0.003 Gwei，Arbitrum 與 Base 日活交易量分別達 180 萬與 240 萬筆。ETH 質押率突破 28%。</div><div class="news-tickers"><span class="news-chip">ETH</span><span class="news-chip">ARB</span><span class="news-chip">ETHA</span></div></div></div>
+            <div class="news-item"><span class="news-num">03</span><div class="news-content"><div class="news-meta"><span class="news-badge b-cr-n">CRYPTO</span><span class="news-source">Decrypt</span><span class="news-time">07:30</span><span class="sent-chip s-neut">中性</span></div><div class="news-headline">SEC 延後以太坊現貨ETF選擇權審核，最終決定推至六月下旬</div><div class="news-body">SEC 發布通知將 ETH 現貨 ETF 選擇權審核期限延後至 6 月 22 日，市場反應平淡。分析師認為最終批准機率仍高，短期影響有限。</div><div class="news-tickers"><span class="news-chip">ETH</span><span class="news-chip">ETHA</span></div></div></div>
+            <div class="news-item"><span class="news-num">04</span><div class="news-content"><div class="news-meta"><span class="news-badge b-cr-n">CRYPTO</span><span class="news-source">CoinTelegraph</span><span class="news-time">06:45</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">Solana DEX 交易量單週達 140 億美元，超越以太坊主網</div><div class="news-body">Raydium 與 Jupiter 主導 Solana DEX 生態，本週合計交易量 140 億美元，首次超越以太坊主網。SOL 代幣因獲利了結小幅回調，資金費率轉負。</div><div class="news-tickers"><span class="news-chip">SOL</span><span class="news-chip">RAY</span><span class="news-chip">JUP</span></div></div></div>
+            <div class="news-item"><span class="news-num">05</span><div class="news-content"><div class="news-meta"><span class="news-badge b-mac-n">監管</span><span class="news-source">Reuters</span><span class="news-time">05:40</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">美國參議院穩定幣法案取得進展，兩黨達成初步共識</div><div class="news-body">GENIUS Act 穩定幣監管法案在參議院獲得跨黨派支持，要求發行方持有等額美元或國債儲備。通過後預計為 Tether、Circle 等機構帶來合規利多。</div><div class="news-tickers"><span class="news-chip">BTC</span><span class="news-chip">USDT</span><span class="news-chip">USDC</span></div></div></div>
+          </div>
+        </div>
   </div>
 </main>
+
 
 <script>
 function tick(){
   const t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
-  const el=document.getElementById('clock');
-  if(el) el.textContent=t+' CST';
+  const el=document.getElementById('clock');if(el)el.textContent=t+' CST';
 }
-tick(); setInterval(tick,1000);
+tick();setInterval(tick,1000);
 
 function toggleMenu(){
-  var menu=document.getElementById('mobile-menu');
-  var hamburger=document.getElementById('hamburger');
-  menu.classList.toggle('open');
-  hamburger.classList.toggle('open');
-  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
+  var m=document.getElementById('mobile-menu'),h=document.getElementById('hamburger');
+  m.classList.toggle('open');h.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
 }
-
+document.getElementById('mobile-menu').querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click',function(){
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow='';
+  });
+});
 window.addEventListener('scroll',function(){
-  document.querySelector('nav').style.boxShadow=window.scrollY>10?'0 2px 20px rgba(15,23,42,.08)':'';
+  var nav=document.querySelector('.topbar');
+  if(nav) nav.style.boxShadow=window.scrollY>10?'0 2px 20px rgba(15,23,42,.08)':'';
 });
 
-function switchTab(tab,btn){
-  document.querySelectorAll('.tab-content').forEach(function(el){el.classList.remove('active');});
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(function(el){el.classList.remove('active');});
   document.querySelectorAll('.tab-btn').forEach(function(el){el.classList.remove('active');});
-  document.getElementById('tab-'+tab).classList.add('active');
+  document.getElementById(id).classList.add('active');
   btn.classList.add('active');
 }
 
-function toggleStock(el){
-  var isOpen=el.classList.contains('open');
-  document.querySelectorAll('.stock-item.open').forEach(function(item){
-    item.classList.remove('open');
-    var arrow=item.querySelector('.expand-arrow');
-    if(arrow) arrow.style.transform='rotate(0deg)';
-  });
-  if(!isOpen){
-    el.classList.add('open');
-    var arrow=el.querySelector('.expand-arrow');
-    if(arrow) arrow.style.transform='rotate(90deg)';
-  }
+function getTicker(tickers,label){return tickers.find(function(t){return t.label===label;})||null;}
+
+function sumCard(tag,cat,name,val,chg,dir,extra){
+  var dc=dir==='up'?'up':dir==='down'?'dn':'flat';
+  var di=dir==='up'?'▲ ':dir==='down'?'▼ ':'― ';
+  return '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">'+tag+'</span><span class="sum-category">'+cat+'</span></div><div class="sum-name">'+name+'</div><div class="sum-price">'+val+'</div><div class="sum-row"><span class="sum-chg '+dc+'">'+di+chg+'</span><span class="sum-extra">'+extra+'</span></div></div>';
 }
 
-function toggleCrypto(el){
-  var isOpen=el.classList.contains('open');
-  document.querySelectorAll('.crypto-card.open').forEach(function(item){item.classList.remove('open');});
-  if(!isOpen) el.classList.add('open');
-}
-
-function renderStocks(containerId,stocks){
-  var container=document.getElementById(containerId);
-  if(!container||!stocks) return;
-  container.innerHTML=stocks.map(function(s){
-    var dirClass=s.dir==='up'?'up':s.dir==='down'?'down':'flat';
-    var dirIcon=s.dir==='up'?'▲':s.dir==='down'?'▼':'—';
-    return '<div class="stock-item" onclick="toggleStock(this)">'+
-      '<div class="s-ticker-col"><div><div class="s-ticker">'+s.ticker+'</div><div class="s-name">'+s.name+'</div></div></div>'+
-      '<div class="s-note-col s-note">'+s.note+'</div>'+
-      '<div class="s-price '+dirClass+'">'+s.price+'</div>'+
-      '<div class="s-change '+dirClass+'">'+dirIcon+' '+s.change+'</div>'+
-      '<div><span class="s-tag tag-'+(s.tag||'ai')+'">'+(s.tag_label||s.tag)+'</span></div>'+
-      '<div class="s-arrow-col expand-arrow">›</div>'+
-      '<div class="stock-expand" style="grid-column:1/-1;">'+
-        '<div class="stock-expand-inner">'+
-          '<div><div class="se-label">觀察重點</div><div class="se-value">'+(s.watch_note||'—')+'</div></div>'+
-          '<div><div class="se-label">技術面</div><div class="se-value">'+(s.tech_note||'—')+'</div></div>'+
-          (s.action?'<div style="grid-column:1/-1;margin-top:8px;padding:8px 12px;background:var(--amber-100);border-radius:8px;border-left:2px solid var(--amber-600);"><div class="se-label" style="color:var(--amber-700);margin-bottom:3px;">操作建議</div><div class="se-value" style="color:var(--amber-700);font-weight:600;">'+s.action+'</div></div>':'')+
-        '</div>'+
-      '</div>'+
-    '</div>';
-  }).join('');
-}
-
-function renderNews(containerId,newsItems){
-  var container=document.getElementById(containerId);
-  if(!container||!newsItems) return;
-  container.innerHTML='<div class="news-strip">'+
-    newsItems.map(function(n){
-      return '<div class="news-strip-item"><div class="news-dot"></div><div class="news-strip-text">'+(n.text||n.title||'')+'</div><div class="news-strip-time">'+(n.time||n.date||'')+'</div></div>';
-    }).join('')+'</div>';
-}
-
-function renderIndexCard(label,value,change,dir,sub){
-  var dirClass=dir==='up'?'up':dir==='down'?'down':'flat';
-  var dirIcon=dir==='up'?'▲':dir==='down'?'▼':'—';
-  return '<div class="index-card '+dirClass+'">'+
-    '<div class="ic-label">'+label+'</div>'+
-    '<div class="ic-value">'+value+'</div>'+
-    '<div class="ic-change '+dirClass+'">'+dirIcon+' '+change+'</div>'+
-    '<div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">來源</div><div class="ic-stat-value">'+sub+'</div></div></div>'+
-  '</div>';
+function renderStockRow(s){
+  var dc=s.dir==='up'?'up':s.dir==='down'?'dn':'flat';
+  var di=s.dir==='up'?'▲ ':s.dir==='down'?'▼ ':'— ';
+  return '<tr><td><div class="dt-sym">'+s.ticker+'</div><div class="dt-name">'+s.name+'</div></td>'+
+    '<td class="r"><span class="dt-price">'+s.price+'</span></td>'+
+    '<td class="r"><span class="dt-chg '+dc+'">'+di+s.change+'</span></td>'+
+    '<td class="r"><span class="dt-val">'+s.note+'</span></td>'+
+    '<td class="r"><span class="dt-val">'+s.tag_label+'</span></td>'+
+    '<td class="r"><span class="dt-val">'+(s.watch_note||'—')+'</span></td></tr>';
 }
 
 async function loadData(){
-  var res=await fetch('../data/daily.json');
-  var data=await res.json();
-  var d=new Date(data.date);
-  document.getElementById('market-date').innerHTML=
-    d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'<br>UTC+8 台北時間';
+  try{
+    var res=await fetch('../data/daily.json');
+    var data=await res.json();
+    var tickers=data.tickers||[];
+    var spx=getTicker(tickers,'S&P 500');
+    var ndx=getTicker(tickers,'NASDAQ');
+    var twx=getTicker(tickers,'台股加權');
+    var fg=data.sentiment&&data.sentiment.fear_greed?data.sentiment.fear_greed:null;
+    var cg=data.sentiment&&data.sentiment.coinglass?data.sentiment.coinglass:null;
+    var ts=data.tw_market_summary||{};
+    var d=new Date(data.date);
 
-  var tickers=data.tickers||[];
-  var spx=tickers.find(function(t){return t.label==='S&P 500';});
-  var ndx=tickers.find(function(t){return t.label==='NASDAQ';});
-  var twx=tickers.find(function(t){return t.label==='台股加權';});
-  var fg=data.sentiment&&data.sentiment.fear_greed?data.sentiment.fear_greed:null;
-  var cg=data.sentiment&&data.sentiment.coinglass?data.sentiment.coinglass:null;
+    var upEl=document.getElementById('page-update');
+    if(upEl) upEl.textContent='更新於 '+d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+' · UTC+8';
 
-  // US index
-  document.getElementById('us-index-grid').innerHTML=
-    renderIndexCard('S&P 500',spx?spx.value:'--',spx?spx.change:'--',spx?spx.dir:'flat','Polygon')+
-    renderIndexCard('NASDAQ',ndx?ndx.value:'--',ndx?ndx.change:'--',ndx?ndx.dir:'flat','Polygon')+
-    '<div class="index-card '+(fg?(parseInt(fg.value)>=50?'up':'down'):'flat')+'">'+
-      '<div class="ic-label">市場情緒</div>'+
-      '<div class="ic-value" style="font-size:32px;color:'+(fg?(parseInt(fg.value)>=50?'var(--green-600)':parseInt(fg.value)>=30?'var(--amber-600)':'var(--red-600)'):'var(--gray-400)')+';">'+(fg?fg.value:'--')+'</div>'+
-      '<div class="ic-change '+(fg?(parseInt(fg.value)>=50?'up':'down'):'flat')+'">'+(fg?fg.label:'--')+'</div>'+
-      '<div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">Fear & Greed</div><div class="ic-stat-value">'+(fg?fg.change:'--')+'</div></div></div>'+
-    '</div>';
+    // US summary
+    var usStrip=document.getElementById('us-summary-strip');
+    if(usStrip) usStrip.innerHTML=
+      sumCard('SPX','Index','S&P 500',spx?spx.value:'--',spx?spx.change:'--',spx?spx.dir:'flat','前收')+
+      sumCard('NDX','Index','NASDAQ 100',ndx?ndx.value:'--',ndx?ndx.change:'--',ndx?ndx.dir:'flat','前收')+
+      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">F&G</span><span class="sum-category">Sentiment</span></div><div class="sum-name">恐懼貪婪指數</div><div class="sum-price" style="color:'+(fg?parseInt(fg.value)>=50?'var(--green-600)':'var(--red-600)':'var(--gray-400)')+';">'+(fg?fg.value:'--')+'</div><div class="sum-row"><span class="sum-chg '+(fg?parseInt(fg.value)>=50?'up':'dn':'flat')+'">'+(fg?fg.label:'--')+'</span></div></div>'+
+      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">VIX</span><span class="sum-category">Volatility</span></div><div class="sum-name">恐慌指數</div><div class="sum-price">--</div><div class="sum-row"><span class="sum-chg flat">CBOE</span></div></div>';
 
-  document.getElementById('us-sentiment-bar').innerHTML=
-    '<div class="sent-item"><div class="sent-label">Fear & Greed</div><div class="sent-value" style="color:var(--amber-600);">'+(fg?fg.value:'--')+'</div><div class="sent-sub">'+(fg?fg.label:'--')+'</div></div>'+
-    '<div class="sent-item"><div class="sent-label">NASDAQ</div><div class="sent-value '+(ndx?ndx.dir:'flat')+'" style="font-size:15px;">'+(ndx?(ndx.dir==='up'?'▲ ':ndx.dir==='down'?'▼ ':'— ')+ndx.change:'--')+'</div><div class="sent-sub">今日表現</div></div>'+
-    '<div class="sent-item"><div class="sent-label">VIX 情緒</div><div class="sent-value" style="font-size:14px;color:var(--navy-500);">'+(fg?fg.note||'--':'--')+'</div><div class="sent-sub">市場情緒</div></div>';
+    // US stocks
+    var usTbody=document.getElementById('us-stocks-tbody');
+    if(usTbody&&data.market&&data.market.us_stocks){
+      usTbody.innerHTML=data.market.us_stocks.map(renderStockRow).join('');
+      var th=document.querySelector('#tab-us .data-table thead tr');
+      if(th) th.innerHTML='<th>標的</th><th class="r">股價</th><th class="r">漲跌</th><th class="r">今日重點</th><th class="r">板塊</th><th class="r">觀察重點</th>';
+    }
 
-  if(data.market&&data.market.us_stocks) renderStocks('us-stocks-list',data.market.us_stocks);
-  if(data.market&&data.market.us_news) renderNews('us-news-list',data.market.us_news);
+    // TW summary
+    var twStrip=document.getElementById('tw-summary-strip');
+    if(twStrip) twStrip.innerHTML=
+      sumCard('TAIEX','加權指數','台灣加權指數',twx?twx.value:'--',twx?twx.change:'--',twx?twx.dir:'flat','前收')+
+      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">成交量</span><span class="sum-category">全市場</span></div><div class="sum-name">今日成交量</div><div class="sum-price" style="font-size:16px;">'+(ts.trade_value||'--')+'</div><div class="sum-row"><span class="sum-chg flat">TWD TWSE</span></div></div>'+
+      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">外資</span><span class="sum-category">買賣超</span></div><div class="sum-name">外資買賣超</div><div class="sum-price" style="font-size:16px;">'+(ts.foreign_net||'--')+'</div><div class="sum-row"><span class="sum-chg flat">三大法人</span></div></div>'+
+      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">投信</span><span class="sum-category">買賣超</span></div><div class="sum-name">投信動向</div><div class="sum-price">--</div><div class="sum-row"><span class="sum-chg flat">億元 TWD</span></div></div>';
 
-  // TW index
-  document.getElementById('tw-index-grid').innerHTML=
-    renderIndexCard('台股加權',twx?twx.value:'--',twx?twx.change:'--',twx?twx.dir:'flat','TAIEX')+
-    '<div class="index-card flat"><div class="ic-label">今日成交量</div><div class="ic-value" style="font-size:18px;">'+(data.tw_market_summary?data.tw_market_summary.trade_value:'--')+'</div><div class="ic-change flat">台股總成交</div><div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">來源</div><div class="ic-stat-value">TWSE</div></div></div></div>'+
-    '<div class="index-card flat"><div class="ic-label">外資動向</div><div class="ic-value" style="font-size:16px;">'+(data.tw_market_summary?data.tw_market_summary.foreign_net:'--')+'</div><div class="ic-change flat">三大法人</div><div class="ic-stats"><div class="ic-stat"><div class="ic-stat-label">來源</div><div class="ic-stat-value">TWSE</div></div></div></div>';
+    // TW stocks
+    var twTbody=document.getElementById('tw-stocks-tbody');
+    if(twTbody&&data.market&&data.market.tw_stocks){
+      twTbody.innerHTML=data.market.tw_stocks.map(renderStockRow).join('');
+      var twTh=document.querySelector('#tab-tw .data-table thead tr');
+      if(twTh) twTh.innerHTML='<th>標的</th><th class="r">股價</th><th class="r">漲跌</th><th class="r">今日重點</th><th class="r">板塊</th><th class="r">觀察重點</th>';
+    }
 
-  document.getElementById('tw-sentiment-bar').innerHTML=
-    '<div class="sent-item"><div class="sent-label">加權指數</div><div class="sent-value '+(twx?twx.dir:'flat')+'" style="font-size:14px;">'+(twx?(twx.dir==='up'?'▲ ':twx.dir==='down'?'▼ ':'— ')+twx.change:'--')+'</div><div class="sent-sub">'+(twx?twx.value:'--')+'</div></div>'+
-    '<div class="sent-item"><div class="sent-label">今日成交量</div><div class="sent-value" style="font-size:13px;color:var(--navy-500);">'+(data.tw_market_summary?data.tw_market_summary.trade_value:'--')+'</div><div class="sent-sub">TWSE</div></div>'+
-    '<div class="sent-item"><div class="sent-label">外資買賣超</div><div class="sent-value" style="font-size:12px;">'+(data.tw_market_summary?data.tw_market_summary.foreign_net:'--')+'</div><div class="sent-sub">三大法人</div></div>';
+    // TW news
+    var twNews=document.getElementById('tw-news-list');
+    if(twNews&&data.market&&data.market.tw_news){
+      twNews.innerHTML=data.market.tw_news.map(function(n,i){
+        return '<div class="news-item"><span class="news-num">0'+(i+1)+'</span><div class="news-content"><div class="news-meta"><span class="news-badge b-tw-n">台股</span><span class="news-time">'+(n.time||n.date||'')+'</span></div><div class="news-headline">'+(n.text||'')+'</div></div></div>';
+      }).join('');
+    }
 
-  if(data.market&&data.market.tw_stocks) renderStocks('tw-stocks-list',data.market.tw_stocks);
-  if(data.market&&data.market.tw_news) renderNews('tw-news-list',data.market.tw_news);
-
-  // Crypto
-  document.getElementById('crypto-sentiment-bar').innerHTML=
-    '<div class="sent-item"><div class="sent-label">Fear & Greed</div><div class="sent-value" style="color:var(--amber-600);">'+(fg?fg.value:'--')+'</div><div class="sent-sub">'+(fg?fg.label:'--')+'</div></div>'+
-    '<div class="sent-item"><div class="sent-label">多空比</div><div class="sent-value" style="font-size:11px;color:var(--navy-500);line-height:1.3;">'+(cg?cg.long_short_ratio||'--':'--')+'</div><div class="sent-sub">CoinGlass</div></div>'+
-    '<div class="sent-item"><div class="sent-label">資金費率</div><div class="sent-value" style="font-size:13px;color:var(--green-600);">'+(cg?cg.funding_rate||'--':'--')+'</div><div class="sent-sub">永續合約</div></div>'+
-    '<div class="sent-item"><div class="sent-label">BTC多單清算</div><div class="sent-value" style="font-size:13px;color:var(--red-600);">'+(cg?cg.btc_long_liq||'--':'--')+'</div><div class="sent-sub">空單 '+(cg?cg.btc_short_liq||'--':'--')+'</div></div>';
-
-  if(data.market&&data.market.crypto){
-    document.getElementById('crypto-grid').innerHTML=data.market.crypto.map(function(c){
-      var dirClass=c.dir==='up'?'up':c.dir==='down'?'down':'flat';
-      var dirIcon=c.dir==='up'?'▲':c.dir==='down'?'▼':'—';
-      return '<div class="crypto-card '+dirClass+'" onclick="toggleCrypto(this)">'+
-        '<div class="cc-header"><div><div class="cc-symbol">'+c.symbol+'</div><div class="cc-name">'+c.name+'</div></div><span class="cc-signal '+(c.signal||'watch')+'">'+(c.signal_label||'觀察')+'</span></div>'+
-        '<div class="cc-price '+dirClass+'">'+c.price+'</div>'+
-        '<div class="cc-change '+dirClass+'">'+dirIcon+' '+c.change+'</div>'+
-        '<div class="cc-stats"><div><div class="cc-stat-label">市值</div><div class="cc-stat-value">'+(c.market_cap||'--')+'</div></div><div><div class="cc-stat-label">成交量</div><div class="cc-stat-value">'+(c.volume||'--')+'</div></div></div>'+
-        '<div class="cc-expand"><div class="cc-divider"></div><div class="cc-expand-grid">'+
-          '<div><div class="cc-expand-label">支撐位</div><div class="cc-expand-value">'+(c.support||'—')+'</div></div>'+
-          '<div><div class="cc-expand-label">壓力位</div><div class="cc-expand-value">'+(c.resistance||'—')+'</div></div>'+
-          '<div><div class="cc-expand-label">技術面</div><div class="cc-expand-value">'+(c.tech_note||'—')+'</div></div>'+
-          '<div><div class="cc-expand-label">觀察重點</div><div class="cc-expand-value">'+(c.watch_note||'—')+'</div></div>'+
-        '</div></div>'+
-      '</div>';
-    }).join('');
-  }
-
-  if(data.market&&data.market.crypto_news) renderNews('crypto-news-list',data.market.crypto_news);
-
-  document.getElementById('crypto-liquidation').innerHTML=
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">'+
-      '<div style="background:var(--green-100);border:1px solid #bbf7d0;border-radius:8px;padding:11px;"><div style="font-size:10px;color:var(--green-700);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;font-weight:600;">BTC多單清算</div><div style="font-size:16px;font-weight:700;color:var(--green-600);">'+(cg?cg.btc_long_liq||'--':'--')+'</div></div>'+
-      '<div style="background:var(--red-100);border:1px solid #fecaca;border-radius:8px;padding:11px;"><div style="font-size:10px;color:var(--red-700);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;font-weight:600;">BTC空單清算</div><div style="font-size:16px;font-weight:700;color:var(--red-600);">'+(cg?cg.btc_short_liq||'--':'--')+'</div></div>'+
-      '<div style="background:var(--green-100);border:1px solid #bbf7d0;border-radius:8px;padding:11px;"><div style="font-size:10px;color:var(--green-700);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;font-weight:600;">ETH多單清算</div><div style="font-size:16px;font-weight:700;color:var(--green-600);">'+(cg?cg.eth_long_liq||'--':'--')+'</div></div>'+
-      '<div style="background:var(--red-100);border:1px solid #fecaca;border-radius:8px;padding:11px;"><div style="font-size:10px;color:var(--red-700);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;font-weight:600;">ETH空單清算</div><div style="font-size:16px;font-weight:700;color:var(--red-600);">'+(cg?cg.eth_short_liq||'--':'--')+'</div></div>'+
-    '</div>'+
-    '<div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;font-weight:600;">資金費率</div>'+
-    '<div style="font-size:14px;color:var(--green-600);font-weight:600;margin-bottom:10px;">'+(cg?cg.funding_rate||'未取得':'未取得')+'</div>'+
-    '<div style="font-size:10px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;font-weight:600;">多空比</div>'+
-    '<div style="font-size:12.5px;color:var(--gray-600);margin-bottom:10px;">'+(cg?cg.long_short_ratio||'未取得':'未取得')+'</div>'+
-    (cg&&cg.note?'<div style="font-size:11.5px;color:var(--gray-400);padding-top:8px;border-top:1px solid var(--gray-100);">'+cg.note+'</div>':'');
+  }catch(e){console.error('loadData error:',e);}
 }
-
 loadData();
 </script>
 </body>
