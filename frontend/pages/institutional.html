@@ -634,7 +634,7 @@ function renderEarnings(list){
     var isReported=e.status_type==='reported';
     var beatClass=e.eps_result==='beat'?'beat':e.eps_result==='miss'?'miss':'';
     var epsVsClass=e.eps_result==='beat'?'beat':e.eps_result==='miss'?'miss':'';
-    return '<div class="earnings-card" data-market="us" data-status="'+(isReported?'reported':'upcoming')+'">'+  
+    var mkt=(/^\d+$/.test(e.ticker)||e.ticker==='TSM'||e.ticker==='2330')?'tw':'us'; return '<div class="earnings-card" data-market="'+mkt+'" data-status="'+(isReported?'reported':'upcoming')+'">'+  
       '<div class="ec-header">'+
         '<div class="ec-company">'+
           '<span class="ec-ticker">'+e.ticker+'</span>'+
