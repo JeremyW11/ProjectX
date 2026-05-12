@@ -86,6 +86,74 @@
       "_added": "2026-05-12"
     },
     {
+      "ticker": "SPX",
+      "name": "S&P 500",
+      "firm": "HSBC",
+      "firm_background": "全球性投資銀行與金融服務機構",
+      "rating": "Overweight",
+      "rating_type": "buy",
+      "rating_change": "上調",
+      "prev_target": "7500",
+      "target": "7650",
+      "date": "2026-05-11",
+      "note": "Q1強勁業績推動目標價上調 EPS增長預測上調8%",
+      "core_logic": "企業獲利優於預期 但警告漲勢仍過度集中於科技股",
+      "risk_note": "市場集中度風險 科技股估值偏高",
+      "action": "維持加碼但注意分散配置",
+      "_added": "2026-05-12"
+    },
+    {
+      "ticker": "SOX",
+      "name": "費城半導體指數",
+      "firm": "BTIG",
+      "firm_background": "美國中型投資銀行專注技術與成長股研究",
+      "rating": "Cautious",
+      "rating_type": "neutral",
+      "rating_change": "下調",
+      "prev_target": "",
+      "target": "",
+      "date": "2026-05-11",
+      "note": "半導體漲勢類似1999年 警告可能面臨25-30%回調",
+      "core_logic": "指數今年已漲66% 估值過度擴張接近泡沫區間",
+      "risk_note": "短期回調風險高 建議減碼",
+      "action": "建議獲利了結或減持半導體部位",
+      "_added": "2026-05-12"
+    },
+    {
+      "ticker": "CRWD",
+      "name": "CrowdStrike",
+      "firm": "Seeking Alpha",
+      "firm_background": "美國知名投資研究與分析平台",
+      "rating": "Buy",
+      "rating_type": "buy",
+      "rating_change": "上調",
+      "prev_target": "",
+      "target": "",
+      "date": "2026-05-10",
+      "note": "在行業拋售中展現韌性 網路安全需求持續強勁",
+      "core_logic": "企業資安支出剛性強 市場領導地位穩固",
+      "risk_note": "科技股整體估值承壓",
+      "action": "逢低買入",
+      "_added": "2026-05-12"
+    },
+    {
+      "ticker": "GOOG",
+      "name": "Alphabet",
+      "firm": "Seeking Alpha",
+      "firm_background": "美國知名投資研究與分析平台",
+      "rating": "Hold",
+      "rating_type": "hold",
+      "rating_change": "下調",
+      "prev_target": "",
+      "target": "",
+      "date": "2026-05-10",
+      "note": "當前估值被視為激進 建議持有觀望",
+      "core_logic": "AI競爭加劇 廣告業務成長放緩",
+      "risk_note": "估值偏高 成長動能減弱",
+      "action": "持有觀望 不建議追高",
+      "_added": "2026-05-12"
+    },
+    {
       "ticker": "IREN",
       "name": "IREN",
       "firm": "BTIG Research",
@@ -753,17 +821,17 @@
     {
       "ticker": "NVDA",
       "name": "NVIDIA",
-      "note": "5/20公布Q1 FY27財報管理層指引營收780億",
+      "note": "Q1 FY27財報將於5/20盤後公布 市場高度關注",
       "eps": "",
       "eps_est": "",
       "eps_result": "",
       "eps_surprise": "",
       "revenue": "",
-      "rev_est": "780億",
-      "guidance": "Blackwell和Rubin需求強勁",
+      "rev_est": "78B",
+      "guidance": "預期營收780億美元",
       "market_reaction": "待公布",
-      "key_metric": "數據中心營收",
-      "status": "5月20日公布",
+      "key_metric": "Blackwell出貨量",
+      "status": "5月20日盤後公布",
       "status_type": "upcoming",
       "_added": "2026-05-12"
     },
@@ -1038,6 +1106,40 @@
       "status": "已公布",
       "status_type": "reported",
       "_added": "2026-05-12"
+    },
+    {
+      "ticker": "BABA",
+      "name": "阿里巴巴",
+      "note": "FY26 Q4財報即將公布 預期營收363.6億年增4.5%",
+      "eps": "",
+      "eps_est": "0.84",
+      "eps_result": "",
+      "eps_surprise": "",
+      "revenue": "",
+      "rev_est": "36.36B",
+      "guidance": "",
+      "market_reaction": "待公布",
+      "key_metric": "雲業務成長率",
+      "status": "本週公布",
+      "status_type": "upcoming",
+      "_added": "2026-05-12"
+    },
+    {
+      "ticker": "CBRS",
+      "name": "Cerebras",
+      "note": "2026年迄今最大IPO 認購超額20倍以上",
+      "eps": "",
+      "eps_est": "",
+      "eps_result": "",
+      "eps_surprise": "",
+      "revenue": "",
+      "rev_est": "",
+      "guidance": "IPO價格區間上調至150-160美元",
+      "market_reaction": "5/14上市交易",
+      "key_metric": "AI晶片競爭力",
+      "status": "5月13-14日IPO",
+      "status_type": "upcoming",
+      "_added": "2026-05-12"
     }
   ],
   "events": [
@@ -1280,6 +1382,20 @@
       "_added": "2026-05-12"
     },
     {
+      "date": "2026-05-12",
+      "time": "",
+      "title": "日本央行4月會議紀要",
+      "desc": "BOJ維持利率0.75%不變 通膨展望偏鷹",
+      "type": "data",
+      "tag": "央行",
+      "impact": "mid",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "日圓 日股",
+      "watch": "升息路徑暗示",
+      "_added": "2026-05-12"
+    },
+    {
       "date": "2026-05-13",
       "time": "10:30 ET",
       "title": "EIA週度石油庫存報告",
@@ -1347,6 +1463,34 @@
       "prev": "",
       "affect_assets": "美股 美債",
       "watch": "成本端壓力",
+      "_added": "2026-05-12"
+    },
+    {
+      "date": "2026-05-13",
+      "time": "",
+      "title": "美國PPI數據發布",
+      "desc": "生產者物價指數反映上游通膨壓力",
+      "type": "data",
+      "tag": "通膨",
+      "impact": "mid",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "美股 美債",
+      "watch": "能源價格影響",
+      "_added": "2026-05-12"
+    },
+    {
+      "date": "2026-05-13",
+      "time": "",
+      "title": "Cerebras IPO定價",
+      "desc": "2026年最大IPO 認購超額20倍",
+      "type": "earnings",
+      "tag": "IPO",
+      "impact": "high",
+      "expect": "150-160美元",
+      "prev": "原區間115-125",
+      "affect_assets": "CBRS AI半導體股",
+      "watch": "開盤溢價幅度",
       "_added": "2026-05-12"
     },
     {
@@ -1445,6 +1589,34 @@
       "prev": "",
       "affect_assets": "美股 陸股 台股",
       "watch": "關稅與科技政策",
+      "_added": "2026-05-12"
+    },
+    {
+      "date": "2026-05-14",
+      "time": "",
+      "title": "Cerebras正式上市",
+      "desc": "AI晶片新星Nasdaq掛牌交易",
+      "type": "earnings",
+      "tag": "IPO",
+      "impact": "high",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "CBRS NVDA AMD",
+      "watch": "首日交易表現",
+      "_added": "2026-05-12"
+    },
+    {
+      "date": "2026-05-14",
+      "time": "",
+      "title": "Trump訪華開始",
+      "desc": "美中峰會討論貿易伊朗台灣AI議題",
+      "type": "geo",
+      "tag": "地緣",
+      "impact": "high",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "中概股 台股 油價",
+      "watch": "荷莫茲海峽談判",
       "_added": "2026-05-12"
     },
     {
@@ -1599,6 +1771,20 @@
       "prev": "",
       "affect_assets": "美股 陸股",
       "watch": "聯合聲明內容",
+      "_added": "2026-05-12"
+    },
+    {
+      "date": "2026-05-15",
+      "time": "",
+      "title": "Warsh宣誓就任Fed主席",
+      "desc": "第14任聯準會主席正式上任",
+      "type": "fed",
+      "tag": "央行",
+      "impact": "high",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "美股 美債 美元",
+      "watch": "首次政策聲明",
       "_added": "2026-05-12"
     },
     {
@@ -1985,6 +2171,18 @@
       "_added": "2026-05-08"
     },
     {
+      "ticker": "AMD",
+      "name": "AMD",
+      "date": "2026-04",
+      "ceo": "Lisa Su",
+      "key_quote": "預計伺服器CPU市場年增超35% 2030年將超1200億美元",
+      "guidance": "數據中心業務持續高成長",
+      "market_reaction": "2026年股價已漲112%",
+      "watch_note": "AI晶片市佔率變化",
+      "sentiment": "positive",
+      "_added": "2026-05-12"
+    },
+    {
       "ticker": "NVDA",
       "name": "NVIDIA",
       "date": "2026-02-25",
@@ -1995,6 +2193,18 @@
       "watch_note": "Blackwell產能與Data Center佔比",
       "sentiment": "positive",
       "_added": "2026-05-10"
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA",
+      "date": "2026-02",
+      "ceo": "Jensen Huang",
+      "key_quote": "預計2026日曆年將實現連續營收增長 超過5000億美元機會",
+      "guidance": "Q1營收指引780億美元正負2%",
+      "market_reaction": "股價今年僅漲15%落後同業",
+      "watch_note": "Blackwell和Rubin出貨進度",
+      "sentiment": "positive",
+      "_added": "2026-05-12"
     }
   ]
 }
