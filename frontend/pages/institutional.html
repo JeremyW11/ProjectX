@@ -27,7 +27,7 @@
   --shadow-hover:0 4px 24px rgba(15,23,42,.10);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{font-size:20px;zoom:1.2;-webkit-font-smoothing:antialiased;}
+html{font-size:16px;-webkit-font-smoothing:antialiased;}
 body{background:#f7f8fc;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
 a{text-decoration:none;color:inherit;}
 button{cursor:pointer;border:none;background:none;font-family:inherit;}
@@ -193,16 +193,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 @media(max-width:1024px){.two-col{grid-template-columns:1fr;}}
 @media(max-width:768px){.ec-body{grid-template-columns:repeat(2,1fr);}.header-nav{display:none;}}
-
-.logo-link{transition:opacity .2s,transform .2s;display:inline-flex;}
-.logo-link:hover{opacity:.75;transform:scale(1.04);}
 </style>
 </head>
 <body>
 
 <!-- TOPBAR -->
 <header class="topbar">
-  <a href="https://projectxbrief.netlify.app/" class="logo-link" style="text-decoration:none;"><div class="topbar-logo">
+  <div class="topbar-logo">
     <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
       <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
       <line x1="10" y1="10" x2="30" y2="30" stroke="white" stroke-width="6" stroke-linecap="round"/>
@@ -212,7 +209,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <text x="48" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" letter-spacing="0.3" fill="#0f172a">PROJECT </text>
       <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
     </svg>
-  </div></a>
+  </div>
   <nav class="header-nav">
     <a href="/brief.html" class="nav-item">總覽</a>
     <a href="/pages/market.html" class="nav-item">市場</a>
@@ -676,164 +673,185 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
   <!-- ═══════════════ EARNINGS CALLS TAB ═══════════════ -->
   <div class="tab-panel" id="tab-calls">
-    <div class="two-col">
-      <div>
-
-        <div class="call-card">
-          <div class="cc-header">
-            <div>
-              <div class="cc-company">
-                <span class="cc-ticker">NVDA</span>
-                <span class="cc-name">NVIDIA Corporation</span>
-              </div>
-              <div class="cc-date">Q1 FY2026 法說會 · 2026-05-08 盤後</div>
-            </div>
-            <span class="cc-badge s-bull">利多</span>
-          </div>
-          <div class="cc-highlight">
-            <div class="cc-highlight-label">KEY QUOTE · 黃仁勳</div>
-            <div class="cc-highlight-text">「Blackwell 需求非常強勁，我們正在以最快速度增加產能，但供給仍落後於需求。AI 是我們這個時代最重大的技術平台轉型。」</div>
-          </div>
-          <div class="cc-points">
-            <div class="cc-point"><span class="cc-point-dot"></span>Blackwell GPU 出貨量持續爬坡，Q2 供給瓶頸仍未解除，預計 Q3 才能逐步緩解</div>
-            <div class="cc-point"><span class="cc-point-dot"></span>微軟、Google、Meta、Amazon 四大雲端客戶 CapEx 均維持上修，NVDA 為最大受益方</div>
-            <div class="cc-point"><span class="cc-point-dot"></span>推論市場（Inference）需求超預期，NVDA 認為將成為與訓練市場同等規模的新成長引擎</div>
-            <div class="cc-point"><span class="cc-point-dot"></span>NIM 軟體平台訂閱收入開始放量，毛利率有望維持在 72%+ 高水位</div>
-          </div>
-          <div class="cc-footer">
-            <span class="rc-ticker">NVDA</span>
-            <span class="rc-ticker">AMD</span>
-            <span class="rc-ticker">SMCI</span>
-            <span style="margin-left:auto;font-size:11px;color:var(--gray-400);font-family:var(--font-en);">盤後 +9.21%</span>
-          </div>
-        </div>
-
-        <div class="call-card">
-          <div class="cc-header">
-            <div>
-              <div class="cc-company">
-                <span class="cc-ticker">2330</span>
-                <span class="cc-name">台積電 TSMC</span>
-              </div>
-              <div class="cc-date">Q1 2026 法說會 · 2026-04-17</div>
-            </div>
-            <span class="cc-badge s-bull">利多</span>
-          </div>
-          <div class="cc-highlight">
-            <div class="cc-highlight-label">KEY QUOTE · 魏哲家</div>
-            <div class="cc-highlight-text">「AI 相關需求非常強勁且廣泛，我們預期 2026 年 AI 晶片收入將佔總營收超過 25%。2nm 製程進展順利，良率表現優於預期。」</div>
-          </div>
-          <div class="cc-points">
-            <div class="cc-point"><span class="cc-point-dot"></span>CoWoS 先進封裝產能全年滿載，AI 客戶已鎖定至 2026Q3，議價能力強勢</div>
-            <div class="cc-point"><span class="cc-point-dot"></span>2nm 試產良率優於內部目標，預計 2025 年底開始量產，2026 年出貨放量</div>
-            <div class="cc-point"><span class="cc-point-dot"></span>美國亞利桑那廠 N4 製程量產，政府補貼確認到位，有助毛利率維持 57-59%</div>
-            <div class="cc-point"><span class="cc-point-dot"></span>全年資本支出上限維持 420 億美元，重心在台灣先進製程與海外擴產並行</div>
-          </div>
-          <div class="cc-footer">
-            <span class="rc-ticker">2330</span>
-            <span class="rc-ticker">TSM</span>
-            <span class="rc-ticker">3711</span>
-            <span style="margin-left:auto;font-size:11px;color:var(--gray-400);font-family:var(--font-en);">法說後 +2.8%</span>
-          </div>
-        </div>
-
-        <div class="call-card">
-          <div class="cc-header">
-            <div>
-              <div class="cc-company">
-                <span class="cc-ticker">META</span>
-                <span class="cc-name">Meta Platforms</span>
-              </div>
-              <div class="cc-date">Q1 2026 法說會 · 2026-04-30 盤後</div>
-            </div>
-            <span class="cc-badge s-bull">利多</span>
-          </div>
-          <div class="cc-highlight">
-            <div class="cc-highlight-label">KEY QUOTE · Mark Zuckerberg</div>
-            <div class="cc-highlight-text">「2026 年將是 Meta 在 AI 上投入最多的一年。我們相信這是正確的選擇，AI 廣告精準度正在帶來真實的 ROI 提升。」</div>
-          </div>
-          <div class="cc-points">
-            <div class="cc-point"><span class="cc-point-dot"></span>全年 CapEx 指引上調至 640-720 億美元，AI 基礎設施投資為主要用途</div>
-            <div class="cc-point"><span class="cc-point-dot"></span>Advantage+ 廣告工具 CPM 提升 18%，廣告主滿意度創新高</div>
-            <div class="cc-point"><span class="cc-point-dot"></span>Llama 開源模型下載量突破 10 億次，開發者生態系持續壯大</div>
-            <div class="cc-point"><span class="cc-point-dot"></span>Ray-Ban Meta 智慧眼鏡銷量超預期，AR/VR 硬體業務虧損收窄</div>
-          </div>
-          <div class="cc-footer">
-            <span class="rc-ticker">META</span>
-            <span class="rc-ticker">GOOGL</span>
-            <span style="margin-left:auto;font-size:11px;color:var(--gray-400);font-family:var(--font-en);">盤後 +5.4%</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Sidebar -->
-      <div>
-        
-
-        <div class="sidebar-card">
-          <div class="sc-title">共同主題 <span class="sc-title-en">KEY THEMES</span></div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
-            <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid var(--gray-100);">
-              <span style="font-size:14px;flex-shrink:0;">🤖</span>
-              <span style="font-size:12px;color:var(--gray-700);font-family:var(--font-zh);line-height:1.5;">AI CapEx 超級週期持續，三大科技公司全部上修資本支出</span>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid var(--gray-100);">
-              <span style="font-size:14px;flex-shrink:0;">⚡</span>
-              <span style="font-size:12px;color:var(--gray-700);font-family:var(--font-zh);line-height:1.5;">推論（Inference）需求崛起，成為與訓練並列的新成長引擎</span>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid var(--gray-100);">
-              <span style="font-size:14px;flex-shrink:0;">📦</span>
-              <span style="font-size:12px;color:var(--gray-700);font-family:var(--font-zh);line-height:1.5;">先進封裝（CoWoS/HBM）供給瓶頸，台積電最大受益方</span>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;">
-              <span style="font-size:14px;flex-shrink:0;">💰</span>
-              <span style="font-size:12px;color:var(--gray-700);font-family:var(--font-zh);line-height:1.5;">AI 廣告精準度提升，Meta 廣告 ROI 改善帶動 CPM 上漲</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="section-block">
+      <div id="calls-list"></div>
     </div>
   </div>
 
 </main>
 
 <script>
-// Clock
 function tick(){
   const t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
-  document.getElementById('clock').textContent=t+' CST';
+  const el=document.getElementById('clock');if(el)el.textContent=t+' CST';
 }
-tick(); setInterval(tick,1000);
+tick();setInterval(tick,1000);
 
-// Tab switch
+function toggleMenu(){
+  var m=document.getElementById('mobile-menu'),h=document.getElementById('hamburger');
+  if(!m||!h)return;
+  m.classList.toggle('open');h.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
+var mm=document.getElementById('mobile-menu');
+if(mm) mm.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click',function(){
+    mm.classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow='';
+  });
+});
+window.addEventListener('scroll',function(){
+  var nav=document.querySelector('.topbar');
+  if(nav) nav.style.boxShadow=window.scrollY>10?'0 2px 20px rgba(15,23,42,.08)':'';
+});
+
 function switchTab(id){
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id==='tab-'+id));
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.toggle('active',p.id==='tab-'+id);});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-tab')===id);});
 }
 
-// Firm filter
-function filterFirm(firm, el){
-  document.querySelectorAll('.firm-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('#research-list .research-card').forEach(card=>{
-    card.style.display=(firm==='all'||card.dataset.firm===firm)?'':'none';
-  });
+function renderRating(type){
+  var map={buy:'rating-buy',outperform:'rating-outperform',hold:'rating-hold',neutral:'rating-neutral',sell:'rating-sell'};
+  return map[type]||'rating-hold';
 }
 
-// Earnings sector filter
-function filterSector(filter, el){
-  document.querySelectorAll('.sector-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('#earnings-list .earnings-card').forEach(card=>{
-    let show = false;
-    if(filter==='all') show=true;
-    else if(filter==='us') show=card.dataset.market==='us';
-    else if(filter==='tw') show=card.dataset.market==='tw';
-    else if(filter==='upcoming') show=card.dataset.status==='upcoming';
-    card.style.display=show?'':'none';
-  });
+function renderChangeClass(change){
+  return change==='上調'?'change-up':change==='下調'?'change-dn':'change-hold';
 }
+
+function renderResearch(list){
+  if(!list||!list.length) return '<div class="empty-state">暫無研報數據</div>';
+  return list.map(function(r){
+    var ratingClass=renderRating(r.rating_type);
+    var changeClass=renderChangeClass(r.rating_change);
+    var changeIcon=r.rating_change==='上調'?'▲':r.rating_change==='下調'?'▼':'—';
+    return '<div class="research-card">'+
+      '<div class="rc-header">'+
+        '<div class="rc-left">'+
+          '<div class="rc-ticker">'+r.ticker+'</div>'+
+          '<div class="rc-name">'+r.name+'</div>'+
+        '</div>'+
+        '<div class="rc-right">'+
+          '<span class="rc-rating '+ratingClass+'">'+r.rating+'</span>'+
+          '<span class="rc-change '+changeClass+'">'+changeIcon+' '+r.rating_change+'</span>'+
+        '</div>'+
+      '</div>'+
+      '<div class="rc-firm">'+r.firm+'</div>'+
+      (r.target?'<div class="rc-target">目標價 <strong>'+r.target+'</strong>'+(r.prev_target?' <span class="rc-prev">'+r.prev_target+'</span>':'')+'</div>':'')+
+      '<div class="rc-note">'+r.note+'</div>'+
+      '<div class="rc-meta">'+
+        '<span class="rc-date">'+r.date+'</span>'+
+        (r.action?'<span class="rc-action">'+r.action+'</span>':'')+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+function renderEarnings(list){
+  if(!list||!list.length) return '<div class="empty-state">暫無財報數據</div>';
+  var reported=list.filter(function(e){return e.status_type==='reported';});
+  var upcoming=list.filter(function(e){return e.status_type==='upcoming';});
+  var html='';
+  if(reported.length){
+    html+='<div class="earnings-section-title">✅ 已公布財報</div>';
+    html+=reported.map(function(e){
+      var beatClass=e.eps_result==='beat'?'beat':e.eps_result==='miss'?'miss':'inline';
+      return '<div class="earnings-card reported">'+
+        '<div class="ec-header">'+
+          '<div><div class="ec-ticker">'+e.ticker+'</div><div class="ec-name">'+e.name+'</div></div>'+
+          '<span class="status-pill status-reported">'+e.status+'</span>'+
+        '</div>'+
+        '<div class="ec-note">'+e.note+'</div>'+
+        '<div class="ec-grid">'+
+          '<div><div class="ec-label">營收</div><div class="ec-val">'+(e.revenue||'--')+'</div></div>'+
+          '<div><div class="ec-label">EPS</div><div class="ec-val '+(beatClass)+'">'+(e.eps||e.eps_est||'--')+'</div></div>'+
+          '<div><div class="ec-label">市場反應</div><div class="ec-val">'+(e.market_reaction||'--')+'</div></div>'+
+          '<div><div class="ec-label">指引</div><div class="ec-val">'+(e.guidance||'--')+'</div></div>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  }
+  if(upcoming.length){
+    html+='<div class="earnings-section-title" style="margin-top:16px;">📅 即將公布</div>';
+    html+=upcoming.map(function(e){
+      return '<div class="earnings-card upcoming">'+
+        '<div class="ec-header">'+
+          '<div><div class="ec-ticker">'+e.ticker+'</div><div class="ec-name">'+e.name+'</div></div>'+
+          '<span class="status-pill status-upcoming">'+e.status+'</span>'+
+        '</div>'+
+        '<div class="ec-note">'+e.note+'</div>'+
+        '<div class="ec-grid">'+
+          '<div><div class="ec-label">營收預期</div><div class="ec-val">'+(e.rev_est||'--')+'</div></div>'+
+          '<div><div class="ec-label">EPS預期</div><div class="ec-val">'+(e.eps_est||'--')+'</div></div>'+
+          '<div><div class="ec-label">關鍵指標</div><div class="ec-val">'+(e.key_metric||'--')+'</div></div>'+
+          '<div><div class="ec-label">預計時間</div><div class="ec-val">'+(e.guidance||e.status||'--')+'</div></div>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  }
+  return html;
+}
+
+function renderCalls(list){
+  if(!list||!list.length) return '<div class="empty-state">暫無法說會數據</div>';
+  return list.map(function(c){
+    var sentClass=c.sentiment==='positive'?'positive':c.sentiment==='negative'?'negative':'neutral';
+    var sentLabel=c.sentiment==='positive'?'📈 正面':c.sentiment==='negative'?'📉 負面':'➡ 中性';
+    return '<div class="call-card '+sentClass+'">'+
+      '<div class="call-header">'+
+        '<div>'+
+          '<div class="call-ticker">'+c.ticker+' <span class="call-name">'+c.name+'</span></div>'+
+          (c.ceo?'<div class="call-ceo">CEO: '+c.ceo+'</div>':'')+
+        '</div>'+
+        '<div style="display:flex;align-items:center;gap:8px;">'+
+          '<span class="call-sentiment-pill sentiment-'+sentClass+'">'+sentLabel+'</span>'+
+          '<span class="call-date">'+(c.date||'')+'</span>'+
+        '</div>'+
+      '</div>'+
+      (c.key_quote?'<div class="call-quote">"'+c.key_quote+'"</div>':'')+
+      '<div class="call-meta">'+
+        (c.guidance?'<div>指引：<span>'+c.guidance+'</span></div>':'')+
+        (c.market_reaction?'<div>市場反應：<span>'+c.market_reaction+'</span></div>':'')+
+        (c.watch_note?'<div>觀察：<span>'+c.watch_note+'</span></div>':'')+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+async function loadData(){
+  try{
+    var res=await fetch('../data/daily.json');
+    var data=await res.json();
+    var inst=data.institutional||{};
+
+    // try accumulated.json for more data
+    try{
+      var accRes=await fetch('../data/accumulated.json');
+      if(accRes.ok){
+        var acc=await accRes.json();
+        if(acc.research&&acc.research.length>0) inst.research=acc.research;
+        if(acc.earnings&&acc.earnings.length>0) inst.earnings=acc.earnings;
+        if(acc.earnings_calls&&acc.earnings_calls.length>0) inst.earnings_calls=acc.earnings_calls;
+      }
+    }catch(e){}
+
+    var d=new Date(data.date);
+    var dateEl=document.querySelector('.page-update');
+    if(dateEl) dateEl.textContent='更新於 '+d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})+' · UTC+8';
+
+    var resEl=document.getElementById('research-list');
+    if(resEl) resEl.innerHTML=renderResearch(inst.research);
+
+    var earnEl=document.getElementById('earnings-list');
+    if(earnEl) earnEl.innerHTML=renderEarnings(inst.earnings);
+
+    var callsEl=document.getElementById('calls-list');
+    if(callsEl) callsEl.innerHTML=renderCalls(inst.earnings_calls);
+
+  }catch(e){console.error('loadData error:',e);}
+}
+loadData();
 </script>
 </body>
 </html>
