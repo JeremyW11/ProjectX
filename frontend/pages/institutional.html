@@ -279,168 +279,10 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="two-col">
       <div>
         <!-- Firm filter -->
-        <div class="firm-chips">
-          <button class="firm-chip active" onclick="filterFirm('all',this)">全部</button>
-          <button class="firm-chip" onclick="filterFirm('GS',this)">Goldman Sachs</button>
-          <button class="firm-chip" onclick="filterFirm('MS',this)">Morgan Stanley</button>
-          <button class="firm-chip" onclick="filterFirm('JPM',this)">J.P. Morgan</button>
-          <button class="firm-chip" onclick="filterFirm('UBS',this)">UBS</button>
-          <button class="firm-chip" onclick="filterFirm('BARC',this)">Barclays</button>
-        </div>
+        <div class="firm-chips" id="firm-chips"></div>
 
         <!-- Research cards -->
         <div id="research-list">
-
-          <div class="research-card" data-firm="GS" data-sector="tech">
-            <div class="rc-firm-row">
-              <span class="rc-firm">GOLDMAN SACHS</span>
-              <span class="rc-date">2026-05-10</span>
-              <span class="rc-sector">Semiconductors</span>
-            </div>
-            <div class="rc-title">NVIDIA：AI基礎設施超級週期仍在早期，Blackwell供需持續緊俏</div>
-            <div class="rc-body">Q1 EPS 大幅超預期，資料中心營收年增 427%。GS 認為 Blackwell GPU 供給瓶頸仍持續至 2026 年底，微軟、Google、Meta 三大雲端客戶資本支出均維持上修趨勢。AI 訓練與推論需求結構性成長，維持買入評級並上調目標價。</div>
-            <div class="rc-meta">
-              <span class="rc-rating rating-buy">BUY</span>
-              <span class="rc-target">目標價 <span>$1,100 → $1,250</span></span>
-              <span class="sent-chip s-bull">利多</span>
-              <div class="rc-tickers"><span class="rc-ticker">NVDA</span><span class="rc-ticker">AMD</span></div>
-            </div>
-            <hr class="rc-divider">
-            <div class="rc-impact">
-              <span class="rc-impact-label">IMPACT</span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--gray-200)"></span>
-            </div>
-          </div>
-
-          <div class="research-card" data-firm="MS" data-sector="tech">
-            <div class="rc-firm-row">
-              <span class="rc-firm">MORGAN STANLEY</span>
-              <span class="rc-date">2026-05-10</span>
-              <span class="rc-sector">Semiconductors · TW</span>
-            </div>
-            <div class="rc-title">台積電：CoWoS 先進封裝供不應求，上調至超配</div>
-            <div class="rc-body">CoWoS 封裝產能滿載至 2026Q2，AI 伺服器客戶搶先鎖定產能。MS 預估台積電 2025 年全年 EPS 成長 28%，2nm 製程良率提升優於預期。外資連三日買超，ADR 夜盤+1.2%，法人一致看好後市。</div>
-            <div class="rc-meta">
-              <span class="rc-rating rating-ow">OVERWEIGHT</span>
-              <span class="rc-target">目標價 <span>NT$950 → NT$1,050</span></span>
-              <span class="sent-chip s-bull">利多</span>
-              <div class="rc-tickers"><span class="rc-ticker">2330</span><span class="rc-ticker">TSM</span></div>
-            </div>
-            <hr class="rc-divider">
-            <div class="rc-impact">
-              <span class="rc-impact-label">IMPACT</span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-            </div>
-          </div>
-
-          <div class="research-card" data-firm="JPM" data-sector="macro">
-            <div class="rc-firm-row">
-              <span class="rc-firm">J.P. MORGAN</span>
-              <span class="rc-date">2026-05-09</span>
-              <span class="rc-sector">Macro · Fixed Income</span>
-            </div>
-            <div class="rc-title">Fed 降息時間表再度延後：JPM 預測首次降息移至 2026Q4</div>
-            <div class="rc-body">通膨數據持續高於預期，核心PCE維持在 2.8%。JPM 將全年降息預測從 3 次壓縮至 1 次，首次降息時點移至 Q4。美元指數有望維持強勢至年底，新興市場面臨資金外流壓力，建議減持長期公債。</div>
-            <div class="rc-meta">
-              <span class="rc-rating rating-hold">NEUTRAL</span>
-              <span class="rc-target">10Y 目標殖利率 <span>4.65%</span></span>
-              <span class="sent-chip s-bear">利空</span>
-              <div class="rc-tickers"><span class="rc-ticker">TLT</span><span class="rc-ticker">DXY</span></div>
-            </div>
-            <hr class="rc-divider">
-            <div class="rc-impact">
-              <span class="rc-impact-label">IMPACT</span>
-              <span class="rc-impact-dot" style="background:var(--red-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--red-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--red-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--gray-200)"></span>
-              <span class="rc-impact-dot" style="background:var(--gray-200)"></span>
-            </div>
-          </div>
-
-          <div class="research-card" data-firm="BARC" data-sector="tech">
-            <div class="rc-firm-row">
-              <span class="rc-firm">BARCLAYS</span>
-              <span class="rc-date">2026-05-09</span>
-              <span class="rc-sector">Internet · Social Media</span>
-            </div>
-            <div class="rc-title">Meta：AI 廣告變現加速，Llama 生態系壁壘持續擴張</div>
-            <div class="rc-body">Meta AI 廣告精準度提升帶動 CPM 上漲 18%，Advantage+ 廣告工具滲透率創新高。Barclays 認為 Llama 開源策略正建立長期競爭護城河，2026 年 EBITDA margin 有望突破 46%。上調目標價至 620 美元。</div>
-            <div class="rc-meta">
-              <span class="rc-rating rating-buy">BUY</span>
-              <span class="rc-target">目標價 <span>$560 → $620</span></span>
-              <span class="sent-chip s-bull">利多</span>
-              <div class="rc-tickers"><span class="rc-ticker">META</span></div>
-            </div>
-            <hr class="rc-divider">
-            <div class="rc-impact">
-              <span class="rc-impact-label">IMPACT</span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--gray-200)"></span>
-              <span class="rc-impact-dot" style="background:var(--gray-200)"></span>
-            </div>
-          </div>
-
-          <div class="research-card" data-firm="UBS" data-sector="crypto">
-            <div class="rc-firm-row">
-              <span class="rc-firm">UBS</span>
-              <span class="rc-date">2026-05-08</span>
-              <span class="rc-sector">Digital Assets</span>
-            </div>
-            <div class="rc-title">比特幣：現貨 ETF 累積流入突破 180 億美元，機構採用加速</div>
-            <div class="rc-body">UBS 數位資產研究報告指出，比特幣現貨 ETF 獲批後機構資金持續流入，BlackRock IBIT 規模已超越黃金 ETF。BTC 鏈上持有者結構趨於長期化，短期持有者比例創歷史新低，供給收縮信號明確。</div>
-            <div class="rc-meta">
-              <span class="rc-rating rating-buy">POSITIVE</span>
-              <span class="rc-target">中期目標 <span>$120,000</span></span>
-              <span class="sent-chip s-bull">利多</span>
-              <div class="rc-tickers"><span class="rc-ticker">BTC</span><span class="rc-ticker">IBIT</span></div>
-            </div>
-            <hr class="rc-divider">
-            <div class="rc-impact">
-              <span class="rc-impact-label">IMPACT</span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--green-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--gray-200)"></span>
-            </div>
-          </div>
-
-          <div class="research-card" data-firm="GS" data-sector="energy">
-            <div class="rc-firm-row">
-              <span class="rc-firm">GOLDMAN SACHS</span>
-              <span class="rc-date">2026-05-08</span>
-              <span class="rc-sector">Energy · Commodities</span>
-            </div>
-            <div class="rc-title">油價三情境框架：地緣風險上升，布蘭特基本情境維持 $85</div>
-            <div class="rc-body">GS 維持油價三情境框架：樂觀情境（中東升溫）$95、基本情境 $85、悲觀情境（需求走弱）$72。OPEC+ 延長減產協議提供下檔支撐，但全球需求增速放緩將限制上行空間。LNG 市場受歐洲儲氣量回升影響趨於平衡。</div>
-            <div class="rc-meta">
-              <span class="rc-rating rating-hold">NEUTRAL</span>
-              <span class="rc-target">布蘭特目標 <span>$85/桶</span></span>
-              <span class="sent-chip s-neut">中性</span>
-              <div class="rc-tickers"><span class="rc-ticker">BRENT</span><span class="rc-ticker">XLE</span></div>
-            </div>
-            <hr class="rc-divider">
-            <div class="rc-impact">
-              <span class="rc-impact-label">IMPACT</span>
-              <span class="rc-impact-dot" style="background:var(--amber-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--amber-600)"></span>
-              <span class="rc-impact-dot" style="background:var(--gray-200)"></span>
-              <span class="rc-impact-dot" style="background:var(--gray-200)"></span>
-              <span class="rc-impact-dot" style="background:var(--gray-200)"></span>
-            </div>
-          </div>
-
         </div>
       </div>
 
@@ -760,7 +602,7 @@ function renderResearch(list){
     var impactScore=r.impact_score||3;
     var dots='';
     for(var i=1;i<=5;i++) dots+='<span class="rc-impact-dot" style="background:'+(i<=impactScore?'var(--green-600)':'var(--gray-200)')+'"></span>';
-    return '<div class="research-card" data-firm="'+r.firm.split(' ')[0].toUpperCase()+'" onclick="toggleResearchCard(this)" style="cursor:pointer;">'+  
+    return '<div class="research-card" data-firm="'+r.firm+'" onclick="toggleResearchCard(this)" style="cursor:pointer;">'+  
       '<div class="rc-firm-row">'+
         '<span class="rc-firm">'+r.firm.toUpperCase()+'</span>'+
         '<span class="rc-date">'+r.date+'</span>'+
@@ -972,6 +814,14 @@ async function loadData(){
     if(resEl){
       var sorted=(inst.research||[]).slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
       resEl.innerHTML=renderResearch(sorted);
+      // 動態生成篩選按鈕
+      var firms=['全部'];
+      sorted.forEach(function(r){ if(r.firm&&firms.indexOf(r.firm)===-1) firms.push(r.firm); });
+      var chipsEl=document.getElementById('firm-chips');
+      if(chipsEl) chipsEl.innerHTML=firms.map(function(f,i){
+        var val=i===0?'all':f;
+        return '<button class="firm-chip'+(i===0?' active':'')+'" onclick="filterFirm(''+val+'',this)">'+f+'</button>';
+      }).join('');
     }
 
     var earnEl=document.getElementById('earnings-list');
