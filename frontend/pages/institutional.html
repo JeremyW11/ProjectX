@@ -514,10 +514,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <div>
         
 
-        <div class="sidebar-card">
-          <div class="sc-title">即將發布 <span class="sc-title-en">UPCOMING</span></div>
-          <div class="upcoming-item">
-            <div class="ui-date"><div class="ui-date-d">22</div><div class="ui-date-m">MAY</div></div>
+        <div class="sidebar-card"><div class="sc-title">即將發布 <span class="sc-title-en">UPCOMING</span></div><div id="upcoming-sidebar"></div></div>
             <div class="ui-info">
               <div class="ui-ticker">AAPL</div>
               <div class="ui-name">Apple Inc.</div>
@@ -851,6 +848,28 @@ async function loadData(){
     if(callsEl){
       var sortedCalls=(inst.earnings_calls||[]).slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
       callsEl.innerHTML=renderCalls(sortedCalls);
+    }
+
+
+    // 即將發布側欄
+    var upSidebar=document.getElementById('upcoming-sidebar');
+    if(upSidebar){
+      var upcoming=(inst.earnings||[]).filter(function(e){return e.status_type!=='reported';}).slice(0,5);
+      var months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      upSidebar.innerHTML=upcoming.map(function(e){
+        var dateStr=e._added||e.date||'';
+        var d=new Date(dateStr);
+        var day=isNaN(d)?'--':d.getDate();
+        var mon=isNaN(d)?'--':months[d.getMonth()];
+        return '<div class="upcoming-item">'+
+          '<div class="ui-date"><div class="ui-date-d">'+day+'</div><div class="ui-date-m">'+mon+'</div></div>'+
+          '<div class="ui-info">'+
+            '<div class="ui-ticker">'+e.ticker+'</div>'+
+            '<div class="ui-name">'+e.name+'</div>'+
+            '<div class="ui-eps">EPS 預估 '+(e.eps_est||'--')+'</div>'+
+          '</div>'+
+        '</div>';
+      }).join('');
     }
 
   }catch(e){console.error('loadData error:',e);}
