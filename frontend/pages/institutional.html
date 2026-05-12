@@ -941,12 +941,10 @@ function filterSector(sector,btn){
 
 function toggleResearchCard(card){
   var body=card.querySelector('.rc-body');
-  var impact=card.querySelector('.rc-impact');
   if(!body) return;
-  var isOpen=card.classList.contains('open');
-  card.classList.toggle('open',!isOpen);
+  var isOpen=body.style.display!=='none'&&body.style.display!=='';
   body.style.display=isOpen?'none':'block';
-  if(impact) impact.style.display=isOpen?'none':'flex';
+  card.style.borderColor=isOpen?'':'var(--navy-300)';
 }
 
 async function loadData(){
@@ -971,13 +969,19 @@ async function loadData(){
     if(dateEl) dateEl.textContent='更新於 '+d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})+' · UTC+8';
 
     var resEl=document.getElementById('research-list');
-    if(resEl) resEl.innerHTML=renderResearch(inst.research);
+    if(resEl){
+      var sorted=(inst.research||[]).slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+      resEl.innerHTML=renderResearch(sorted);
+    }
 
     var earnEl=document.getElementById('earnings-list');
     if(earnEl) earnEl.innerHTML=renderEarnings(inst.earnings);
 
     var callsEl=document.getElementById('calls-list');
-    if(callsEl) callsEl.innerHTML=renderCalls(inst.earnings_calls);
+    if(callsEl){
+      var sortedCalls=(inst.earnings_calls||[]).slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+      callsEl.innerHTML=renderCalls(sortedCalls);
+    }
 
   }catch(e){console.error('loadData error:',e);}
 }
