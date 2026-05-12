@@ -299,16 +299,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
         <div class="sidebar-card">
           <div class="sc-title">機構觀點摘要</div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
-            <div style="background:var(--green-50);border:1px solid var(--green-100);border-radius:8px;padding:10px 12px;">
-              <div style="font-size:10px;font-weight:600;color:var(--green-700);font-family:var(--font-en);margin-bottom:4px;">CONSENSUS BULL</div>
-              <div style="font-size:12px;color:var(--gray-700);font-family:var(--font-zh);line-height:1.5;">AI 算力需求結構性成長，NVDA / TSM 持續受惠</div>
-            </div>
-            <div style="background:var(--red-100);border:1px solid #fecaca;border-radius:8px;padding:10px 12px;">
-              <div style="font-size:10px;font-weight:600;color:var(--red-700);font-family:var(--font-en);margin-bottom:4px;">KEY RISK</div>
-              <div style="font-size:12px;color:var(--gray-700);font-family:var(--font-zh);line-height:1.5;">Fed 降息延後 + 美元走強，壓制成長股估值</div>
-            </div>
-          </div>
+          <div id="consensus-summary" style="display:flex;flex-direction:column;gap:8px;margin-top:4px;"></div>
         </div>
       </div>
     </div>
@@ -850,6 +841,31 @@ async function loadData(){
       callsEl.innerHTML=renderCalls(sortedCalls);
     }
 
+
+    // 機構觀點摘要 - 從 research 自動生成
+    var consensusEl=document.getElementById('consensus-summary');
+    if(consensusEl&&inst.research&&inst.research.length>0){
+      var buyItems=inst.research.filter(function(r){return r.rating_type==='buy'||r.rating_type==='outperform';});
+      var bearItems=inst.research.filter(function(r){return r.rating_type==='sell'||r.rating_change==='下調';});
+      var html='';
+      if(buyItems.length>0){
+        var bullText=buyItems.slice(0,2).map(function(r){return r.name+'('+r.ticker+')';}).join('、');
+        var bullLogic=buyItems[0].core_logic||buyItems[0].note||'';
+        html+='<div style="background:var(--green-50);border:1px solid var(--green-100);border-radius:8px;padding:10px 12px;">'+
+          '<div style="font-size:10px;font-weight:600;color:var(--green-700);font-family:var(--font-en);margin-bottom:4px;">CONSENSUS BULL</div>'+
+          '<div style="font-size:12.5px;color:var(--green-900);line-height:1.5;font-family:var(--font-zh);">'+bullLogic+'，'+bullText+' 持續看多</div>'+
+        '</div>';
+      }
+      if(bearItems.length>0){
+        var riskText=bearItems.slice(0,2).map(function(r){return r.name;}).join('、');
+        var riskLogic=bearItems[0].risk_note||bearItems[0].core_logic||'';
+        html+='<div style="background:var(--red-50);border:1px solid var(--red-100);border-radius:8px;padding:10px 12px;">'+
+          '<div style="font-size:10px;font-weight:600;color:var(--red-700);font-family:var(--font-en);margin-bottom:4px;">KEY RISK</div>'+
+          '<div style="font-size:12.5px;color:var(--red-900);line-height:1.5;font-family:var(--font-zh);">'+riskLogic+'</div>'+
+        '</div>';
+      }
+      consensusEl.innerHTML=html||'<div style="font-size:12px;color:var(--gray-400);">數據生成中...</div>';
+    }
 
     // 即將發布側欄
     var upSidebar=document.getElementById('upcoming-sidebar');
