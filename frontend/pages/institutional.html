@@ -626,8 +626,9 @@ function renderResearch(list){
 
 function renderEarnings(list){
   if(!list||!list.length) return '<div class="empty-state">暫無財報數據</div>';
-  var reported=list.filter(function(e){return e.status_type==='reported';});
-  var upcoming=list.filter(function(e){return e.status_type!=='reported';});
+  // support both array and {upcoming, reported} object
+  var reported=Array.isArray(list)?list.filter(function(e){return e.status_type==='reported';}):list.reported||[];
+  var upcoming=Array.isArray(list)?list.filter(function(e){return e.status_type!=='reported';}):list.upcoming||[];
   var html='';
 
   function renderCard(e){
@@ -811,7 +812,13 @@ async function loadData(){
     }
 
     var earnEl=document.getElementById('earnings-list');
-    if(earnEl) earnEl.innerHTML=renderEarnings(inst.earnings);
+    if(earnEl){
+      var earnings=(inst.earnings||[]).slice();
+      // 即將發布置頂，已公布按日期降序
+      var upcoming=earnings.filter(function(e){return e.status_type!=='reported';});
+      var reported=earnings.filter(function(e){return e.status_type==='reported';}).sort(function(a,b){return (b._added||b.date||'').localeCompare(a._added||a.date||'');});
+      earnEl.innerHTML=renderEarnings({upcoming:upcoming, reported:reported});
+    }
 
     var callsEl=document.getElementById('calls-list');
     if(callsEl){
