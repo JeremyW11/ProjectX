@@ -512,22 +512,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
               <div class="ui-est">EPS 預估 $1.62</div>
             </div>
           </div>
-          <div class="upcoming-item">
-            <div class="ui-date"><div class="ui-date-d">28</div><div class="ui-date-m">MAY</div></div>
-            <div class="ui-info">
-              <div class="ui-ticker">COST</div>
-              <div class="ui-name">Costco Wholesale</div>
-              <div class="ui-est">EPS 預估 $3.82</div>
-            </div>
-          </div>
-          <div class="upcoming-item">
-            <div class="ui-date"><div class="ui-date-d">12</div><div class="ui-date-m">JUN</div></div>
-            <div class="ui-info">
-              <div class="ui-ticker">2454</div>
-              <div class="ui-name">聯發科 MediaTek</div>
-              <div class="ui-est">EPS 預估 NT$68.4</div>
-            </div>
-          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -870,12 +855,7 @@ async function loadData(){
     // 即將發布側欄
     var upSidebar=document.getElementById('upcoming-sidebar');
     if(upSidebar){
-      var today=new Date(); today.setHours(0,0,0,0);
-      var upcoming=(inst.earnings||[]).filter(function(e){
-        if(e.status_type==='reported') return false;
-        var d=new Date(e._added||e.date||'');
-        return isNaN(d)||d>=today;
-      }).slice(0,5);
+      var upcoming=(inst.earnings||[]).filter(function(e){return e.status_type==='upcoming';}).slice(0,5);
       var months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
       upSidebar.innerHTML=upcoming.map(function(e){
         var dateStr=e._added||e.date||'';
