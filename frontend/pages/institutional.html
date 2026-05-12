@@ -749,27 +749,34 @@ function renderChangeClass(change){
 
 function renderResearch(list){
   if(!list||!list.length) return '<div class="empty-state">暫無研報數據</div>';
+  var ratingClassMap={buy:'rating-buy',outperform:'rating-ow',overweight:'rating-ow',hold:'rating-hold',neutral:'rating-hold',sell:'rating-sell'};
+  var sentMap={buy:'s-bull',outperform:'s-bull',overweight:'s-bull',hold:'s-neut',neutral:'s-neut',sell:'s-bear'};
+  var sentLabel={buy:'利多',outperform:'利多',overweight:'利多',hold:'中性',neutral:'中性',sell:'利空'};
   return list.map(function(r){
-    var ratingClass=renderRating(r.rating_type);
-    var changeClass=renderChangeClass(r.rating_change);
-    var changeIcon=r.rating_change==='上調'?'▲':r.rating_change==='下調'?'▼':'—';
+    var rc=ratingClassMap[r.rating_type]||'rating-hold';
+    var sc=sentMap[r.rating_type]||'s-neut';
+    var sl=sentLabel[r.rating_type]||'中性';
+    var changeIcon=r.rating_change==='上調'?'▲ 上調':r.rating_change==='下調'?'▼ 下調':'— 維持';
+    var impactScore=r.impact_score||3;
+    var dots='';
+    for(var i=1;i<=5;i++) dots+='<span class="rc-impact-dot" style="background:'+(i<=impactScore?'var(--green-600)':'var(--gray-200)')+'"></span>';
     return '<div class="research-card">'+
-      '<div class="rc-header">'+
-        '<div class="rc-left">'+
-          '<div class="rc-ticker">'+r.ticker+'</div>'+
-          '<div class="rc-name">'+r.name+'</div>'+
-        '</div>'+
-        '<div class="rc-right">'+
-          '<span class="rc-rating '+ratingClass+'">'+r.rating+'</span>'+
-          '<span class="rc-change '+changeClass+'">'+changeIcon+' '+r.rating_change+'</span>'+
-        '</div>'+
-      '</div>'+
-      '<div class="rc-firm">'+r.firm+'</div>'+
-      (r.target?'<div class="rc-target">目標價 <strong>'+r.target+'</strong>'+(r.prev_target?' <span class="rc-prev">'+r.prev_target+'</span>':'')+'</div>':'')+
-      '<div class="rc-note">'+r.note+'</div>'+
-      '<div class="rc-meta">'+
+      '<div class="rc-firm-row">'+
+        '<span class="rc-firm">'+r.firm.toUpperCase()+'</span>'+
         '<span class="rc-date">'+r.date+'</span>'+
-        (r.action?'<span class="rc-action">'+r.action+'</span>':'')+
+        '<span class="rc-sector">'+(r.rating_change==='上調'?'▲ 上調':r.rating_change==='下調'?'▼ 下調':'— 維持')+'</span>'+
+      '</div>'+
+      '<div class="rc-title">'+r.name+'（'+r.ticker+'）'+': '+r.note+'</div>'+
+      '<div class="rc-body">'+(r.core_logic||r.note)+'</div>'+
+      '<div class="rc-meta">'+
+        '<span class="rc-rating '+rc+'">'+r.rating+'</span>'+
+        (r.target?'<span class="rc-target">目標價 <span>'+r.target+(r.prev_target?' → '+r.target:'')+'</span></span>':'')+
+        '<span class="sent-chip '+sc+'">'+sl+'</span>'+
+      '</div>'+
+      '<hr class="rc-divider">'+
+      '<div class="rc-impact">'+
+        '<span class="rc-impact-label">IMPACT</span>'+dots+
+        (r.action?'<span style="margin-left:auto;font-size:11px;color:var(--amber-600);font-weight:600;">'+r.action+'</span>':'')+
       '</div>'+
     '</div>';
   }).join('');
@@ -778,49 +785,101 @@ function renderResearch(list){
 function renderEarnings(list){
   if(!list||!list.length) return '<div class="empty-state">暫無財報數據</div>';
   var reported=list.filter(function(e){return e.status_type==='reported';});
-  var upcoming=list.filter(function(e){return e.status_type==='upcoming';});
+  var upcoming=list.filter(function(e){return e.status_type!=='reported';});
   var html='';
+
+  function renderCard(e){
+    var isReported=e.status_type==='reported';
+    var beatClass=e.eps_result==='beat'?'beat':e.eps_result==='miss'?'miss':'';
+    var epsVsClass=e.eps_result==='beat'?'beat':e.eps_result==='miss'?'miss':'';
+    return '<div class="earnings-card" data-status="'+(isReported?'reported':'upcoming')+'">'+
+      '<div class="ec-header">'+
+        '<div class="ec-company">'+
+          '<span class="ec-ticker">'+e.ticker+'</span>'+
+          '<div>'+
+            '<div class="ec-name">'+e.name+'</div>'+
+            '<div style="font-size:10px;color:var(--gray-400);font-family:var(--font-en);">'+(e.date||e.status||'')+'</div>'+
+          '</div>'+
+        '</div>'+
+        '<div style="display:flex;align-items:center;gap:8px;">'+
+          '<span class="ec-status '+(isReported?'status-reported':'status-upcoming')+'">'+e.status+'</span>'+
+        '</div>'+
+      '</div>'+
+      '<div class="ec-body">'+
+        '<div class="ec-metric">'+
+          '<div class="ec-metric-label">'+(isReported?'EPS ACTUAL':'EPS 預期')+'</div>'+
+          '<div class="ec-metric-val">'+(e.eps||e.eps_est||'--')+'</div>'+
+          (isReported&&e.eps_est?'<div class="ec-metric-vs '+epsVsClass+'">vs 預期 '+e.eps_est+'</div>':'')+
+          (e.eps_surprise?'<span class="ec-beat-badge '+(e.eps_result==='beat'?'bb-beat':'bb-miss')+'">'+e.eps_surprise+'</span>':'')+
+        '</div>'+
+        '<div class="ec-metric">'+
+          '<div class="ec-metric-label">REVENUE</div>'+
+          '<div class="ec-metric-val">'+(e.revenue||e.rev_est||'--')+'</div>'+
+          (isReported&&e.rev_est&&e.revenue?'<div class="ec-metric-vs beat">vs 預期 '+e.rev_est+'</div>':'')+
+        '</div>'+
+        '<div class="ec-metric">'+
+          '<div class="ec-metric-label">'+(isReported?'STOCK REACTION':'KEY METRIC')+'</div>'+
+          '<div class="ec-metric-val" style="font-size:13px;">'+(isReported?(e.market_reaction||'--'):(e.key_metric||'--'))+'</div>'+
+        '</div>'+
+        '<div class="ec-metric">'+
+          '<div class="ec-metric-label">GUIDANCE</div>'+
+          '<div class="ec-metric-val" style="font-size:12px;line-height:1.4;">'+(e.guidance||'--')+'</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="ec-footer">'+
+        '<span class="ec-footer-label">NOTE</span>'+
+        '<span class="ec-guidance">'+e.note+'</span>'+
+      '</div>'+
+    '</div>';
+  }
+
   if(reported.length){
     html+='<div class="earnings-section-title">✅ 已公布財報</div>';
-    html+=reported.map(function(e){
-      var beatClass=e.eps_result==='beat'?'beat':e.eps_result==='miss'?'miss':'inline';
-      return '<div class="earnings-card reported">'+
-        '<div class="ec-header">'+
-          '<div><div class="ec-ticker">'+e.ticker+'</div><div class="ec-name">'+e.name+'</div></div>'+
-          '<span class="status-pill status-reported">'+e.status+'</span>'+
-        '</div>'+
-        '<div class="ec-note">'+e.note+'</div>'+
-        '<div class="ec-grid">'+
-          '<div><div class="ec-label">營收</div><div class="ec-val">'+(e.revenue||'--')+'</div></div>'+
-          '<div><div class="ec-label">EPS</div><div class="ec-val '+(beatClass)+'">'+(e.eps||e.eps_est||'--')+'</div></div>'+
-          '<div><div class="ec-label">市場反應</div><div class="ec-val">'+(e.market_reaction||'--')+'</div></div>'+
-          '<div><div class="ec-label">指引</div><div class="ec-val">'+(e.guidance||'--')+'</div></div>'+
-        '</div>'+
-      '</div>';
-    }).join('');
+    html+=reported.map(renderCard).join('');
   }
   if(upcoming.length){
     html+='<div class="earnings-section-title" style="margin-top:16px;">📅 即將公布</div>';
-    html+=upcoming.map(function(e){
-      return '<div class="earnings-card upcoming">'+
-        '<div class="ec-header">'+
-          '<div><div class="ec-ticker">'+e.ticker+'</div><div class="ec-name">'+e.name+'</div></div>'+
-          '<span class="status-pill status-upcoming">'+e.status+'</span>'+
-        '</div>'+
-        '<div class="ec-note">'+e.note+'</div>'+
-        '<div class="ec-grid">'+
-          '<div><div class="ec-label">營收預期</div><div class="ec-val">'+(e.rev_est||'--')+'</div></div>'+
-          '<div><div class="ec-label">EPS預期</div><div class="ec-val">'+(e.eps_est||'--')+'</div></div>'+
-          '<div><div class="ec-label">關鍵指標</div><div class="ec-val">'+(e.key_metric||'--')+'</div></div>'+
-          '<div><div class="ec-label">預計時間</div><div class="ec-val">'+(e.guidance||e.status||'--')+'</div></div>'+
-        '</div>'+
-      '</div>';
-    }).join('');
+    html+=upcoming.map(renderCard).join('');
   }
   return html;
 }
 
 function renderCalls(list){
+  if(!list||!list.length) return '<div class="empty-state">暫無法說會數據</div>';
+  var sentMap={positive:'s-bull',negative:'s-bear',neutral:'s-neut'};
+  var sentLabel={positive:'利多',negative:'利空',neutral:'中性'};
+  return list.map(function(c){
+    var sc=sentMap[c.sentiment]||'s-neut';
+    var sl=sentLabel[c.sentiment]||'中性';
+    return '<div class="call-card">'+
+      '<div class="cc-header">'+
+        '<div>'+
+          '<div class="cc-company">'+
+            '<span class="cc-ticker">'+c.ticker+'</span>'+
+            '<span class="cc-name">'+c.name+'</span>'+
+          '</div>'+
+          '<div class="cc-date">法說會 · '+(c.date||'')+(c.ceo?' · CEO: '+c.ceo:'')+'</div>'+
+        '</div>'+
+        '<span class="cc-badge '+sc+'">'+sl+'</span>'+
+      '</div>'+
+      (c.key_quote?
+        '<div class="cc-highlight">'+
+          '<div class="cc-highlight-label">KEY QUOTE'+(c.ceo?' · '+c.ceo:'')+'</div>'+
+          '<div class="cc-highlight-text">「'+c.key_quote+'」</div>'+
+        '</div>':'')+
+      '<div class="cc-points">'+
+        (c.guidance?'<div class="cc-point"><span class="cc-point-dot"></span>指引：'+c.guidance+'</div>':'')+
+        (c.market_reaction?'<div class="cc-point"><span class="cc-point-dot"></span>市場反應：'+c.market_reaction+'</div>':'')+
+        (c.watch_note?'<div class="cc-point"><span class="cc-point-dot"></span>觀察重點：'+c.watch_note+'</div>':'')+
+      '</div>'+
+      '<div class="cc-footer">'+
+        '<span class="rc-ticker">'+c.ticker+'</span>'+
+        (c.market_reaction?'<span style="margin-left:auto;font-size:11px;color:var(--gray-400);font-family:var(--font-en);">'+c.market_reaction+'</span>':'')+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+function _old_renderCalls(list){
   if(!list||!list.length) return '<div class="empty-state">暫無法說會數據</div>';
   return list.map(function(c){
     var sentClass=c.sentiment==='positive'?'positive':c.sentiment==='negative'?'negative':'neutral';
