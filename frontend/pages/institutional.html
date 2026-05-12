@@ -820,7 +820,7 @@ async function loadData(){
       var chipsEl=document.getElementById('firm-chips');
       if(chipsEl) chipsEl.innerHTML=firms.map(function(f,i){
         var val=i===0?'all':f;
-        return '<button class="firm-chip'+(i===0?' active':'')+'" onclick="filterFirm(''+val+'',this)">'+f+'</button>';
+        return '<button class="firm-chip'+(i===0?' active':'')+'" onclick="filterFirm(\'' + val + '\',this)">'+f+'</button>';
       }).join('');
     }
 
