@@ -714,14 +714,14 @@ var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 var currentUser=null;
 
 async function initAuth(){
-  // 先用 onAuthStateChange 監聽，確保 session 恢復後觸發
+  // onAuthStateChange 會在 INITIAL_SESSION 事件時帶入已存的 session
   _supabase.auth.onAuthStateChange(function(event,session){
-    setAuthState(session?session.user:null);
+    if(event==='INITIAL_SESSION'||event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){
+      setAuthState(session?session.user:null);
+    } else if(event==='SIGNED_OUT'){
+      setAuthState(null);
+    }
   });
-  // 再主動取一次（處理頁面直接載入的情況）
-  var sessionRes=await _supabase.auth.getSession();
-  var user=sessionRes.data.session?sessionRes.data.session.user:null;
-  setAuthState(user);
 }
 
 function setAuthState(user){
