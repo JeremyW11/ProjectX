@@ -330,12 +330,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <div class="wl-title">
         我的看板
         <span class="wl-user-badge">✦ PRO</span>
-        <span style="font-size:12px;color:var(--gray-400);font-weight:400;">jeremy@projectx.ai</span>
+        <span style="font-size:12px;color:var(--gray-400);font-weight:400;" id="wl-user-email"></span>
       </div>
       <div class="wl-actions">
         <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
-        <button class="btn-outline-sm">↓ 匯出</button>
-        <button class="btn-outline-sm" onclick="toggleLogin()" style="color:var(--red-600);border-color:var(--red-100);">登出</button>
+        <button class="btn-outline-sm" onclick="signOutUser()" style="color:var(--red-600);border-color:var(--red-100);">登出</button>
       </div>
     </div>
 
@@ -347,9 +346,16 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <button class="cat-tab" onclick="filterCat('crypto',this)">加密 (3)</button>
     </div>
 
+    <!-- Category tabs dynamic -->
+    <div class="cat-tabs" id="cat-tabs-dynamic" style="display:none;">
+      <button class="cat-tab active" onclick="filterCat('all',this)">全部 <span id="cnt-all">0</span></button>
+      <button class="cat-tab" onclick="filterCat('us',this)">美股 <span id="cnt-us">0</span></button>
+      <button class="cat-tab" onclick="filterCat('tw',this)">台股 <span id="cnt-tw">0</span></button>
+      <button class="cat-tab" onclick="filterCat('crypto',this)">加密 <span id="cnt-crypto">0</span></button>
+    </div>
+
     <!-- Target cards grid -->
     <div class="target-grid" id="target-grid">
-
       <!-- NVDA -->
       <div class="target-card up-card" data-cat="us">
         <div class="tc-top">
@@ -678,7 +684,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       </div>
       <div class="m-group">
         <label class="m-label">類別</label>
-        <select class="m-select">
+        <select class="m-select" id="add-cat">
           <option>美股 US Equity</option>
           <option>台股 TW Equity</option>
           <option>加密貨幣 Crypto</option>
@@ -686,9 +692,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       </div>
       <div class="m-group">
         <label class="m-label">備註（選填）</label>
-        <input class="m-input" type="text" placeholder="進場邏輯或追蹤原因">
+        <input class="m-input" type="text" placeholder="進場邏輯或追蹤原因" id="add-note">
       </div>
-      <button class="m-submit" onclick="closeModal()">新增至看板</button>
+      <button class="m-submit" onclick="addWatchlistItem()">新增至看板</button>
     </div>
   </div>
 </div>
@@ -747,9 +753,133 @@ async function signOutUser(){
   window.location.reload();
 }
 
-function loadWatchlist(){
-  // ② 後續實作：從 Supabase 載入自選標的
-  console.log('loadWatchlist - user:', currentUser.email);
+async function loadWatchlist(){
+  if(!currentUser) return;
+  document.getElementById('wl-user-email').textContent = currentUser.email;
+
+  // 載入 daily.json 價格資料
+  var dailyData = {};
+  try {
+    var res = await fetch('/data/daily.json');
+    var d = await res.json();
+    var m = d.market || {};
+    (m.us_stocks||[]).forEach(function(s){ dailyData[s.ticker] = s; });
+    (m.tw_stocks||[]).forEach(function(s){ dailyData[s.ticker] = s; });
+    (m.crypto||[]).forEach(function(s){ dailyData[s.symbol] = s; });
+  } catch(e){ console.log('daily.json load error', e); }
+
+  // 從 Supabase 載入 watchlist
+  var result = await _supabase.from('watchlist').select('*').order('created_at', {ascending: true});
+  if(result.error){ console.error('watchlist error', result.error); return; }
+
+  var items = result.data || [];
+  renderWatchlist(items, dailyData);
+}
+
+function renderWatchlist(items, dailyData){
+  var grid = document.getElementById('target-grid');
+  var tabsDyn = document.getElementById('cat-tabs-dynamic');
+  var staticTabs = document.querySelector('.cat-tabs:not(#cat-tabs-dynamic)');
+
+  if(!items.length){
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray-400);"><div style="font-size:32px;margin-bottom:12px;">🎯</div><div style="font-size:15px;margin-bottom:8px;">尚未新增任何標的</div><div style="font-size:13px;">點擊「+ 新增標的」開始追蹤</div></div>';
+    if(tabsDyn) tabsDyn.style.display='none';
+    if(staticTabs) staticTabs.style.display='none';
+    return;
+  }
+
+  if(tabsDyn) tabsDyn.style.display='flex';
+  if(staticTabs) staticTabs.style.display='none';
+
+  // 更新計數
+  var counts = {all:items.length, us:0, tw:0, crypto:0};
+  items.forEach(function(item){ if(counts[item.category]!==undefined) counts[item.category]++; });
+  ['all','us','tw','crypto'].forEach(function(k){
+    var el = document.getElementById('cnt-'+k);
+    if(el) el.textContent = counts[k];
+  });
+
+  grid.innerHTML = items.map(function(item){
+    var price = dailyData[item.ticker];
+    var priceVal = price ? (price.price||price.value||'—') : '—';
+    var changeVal = price ? (price.change||'—') : '—';
+    var dir = price ? (price.dir||'flat') : 'flat';
+    var cardClass = dir==='up'?'up-card':dir==='down'?'dn-card':'';
+    var currency = item.category==='tw' ? 'TWD' : item.category==='crypto' ? 'USD' : 'USD';
+    var badgeText = item.category==='tw'?'台股':item.category==='crypto'?'Crypto':'US';
+    var badgeClass = item.category==='tw'?'cat-tw':item.category==='crypto'?'cat-crypto':'cat-us';
+    var changeClass = dir==='up'?'up':dir==='down'?'dn':'flat';
+    var changeIcon = dir==='up'?'▲':dir==='down'?'▼':'—';
+    var techNote = price ? (price.tech_note||price.watch_note||'') : '';
+    return '<div class="target-card '+cardClass+'" data-cat="'+item.category+'" data-id="'+item.id+'">'+
+      '<div class="tc-top">'+
+        '<div>'+
+          '<div class="tc-sym">'+item.ticker+'</div>'+
+          '<div class="tc-name">'+(item.name||item.ticker)+'</div>'+
+        '</div>'+
+        '<span class="tc-cat-badge '+badgeClass+'">'+badgeText+'</span>'+
+      '</div>'+
+      '<div class="tc-price-row">'+
+        '<div class="tc-price">'+priceVal+'</div>'+
+        '<div class="tc-currency">'+currency+'</div>'+
+      '</div>'+
+      '<div class="tc-chg-row">'+
+        '<span class="tc-chg '+changeClass+'">'+changeIcon+' '+changeVal+'</span>'+
+      '</div>'+
+      (techNote?'<div style="font-size:11px;color:var(--gray-500);margin:6px 0 4px;line-height:1.5;font-family:var(--font-zh);">'+techNote+'</div>':'')+
+      (item.note?'<div style="font-size:11px;color:var(--navy-600);margin-top:4px;padding:5px 8px;background:var(--navy-50);border-radius:5px;">📌 '+item.note+'</div>':'')+
+      '<div class="tc-meta">'+
+        '<span class="tc-remove" onclick="removeWatchlistItem(''+item.id+'',this)" title="移除">✕</span>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+async function removeWatchlistItem(id, el){
+  var card = el.closest('.target-card');
+  card.style.transition='all .3s';
+  card.style.opacity='0';
+  card.style.transform='scale(.95)';
+  var result = await _supabase.from('watchlist').delete().eq('id', id);
+  if(result.error){ card.style.opacity='1'; card.style.transform=''; alert('刪除失敗'); return; }
+  setTimeout(function(){ card.remove(); loadWatchlist(); }, 300);
+}
+
+async function addWatchlistItem(){
+  if(!currentUser){ alert('請先登入'); return; }
+  var ticker = document.getElementById('add-sym').value.trim().toUpperCase();
+  var category = document.getElementById('add-cat').value;
+  var note = document.getElementById('add-note').value.trim();
+  if(!ticker){ alert('請輸入股票代碼'); return; }
+
+  // 嘗試從 daily.json 找名稱
+  var name = ticker;
+  try {
+    var res = await fetch('/data/daily.json');
+    var d = await res.json();
+    var m = d.market || {};
+    var all = (m.us_stocks||[]).concat(m.tw_stocks||[]).concat(m.crypto||[]);
+    var found = all.find(function(s){ return (s.ticker||s.symbol||'').toUpperCase()===ticker; });
+    if(found) name = found.name || ticker;
+  } catch(e){}
+
+  var result = await _supabase.from('watchlist').insert({
+    user_id: currentUser.id,
+    ticker: ticker,
+    name: name,
+    category: category,
+    note: note
+  });
+
+  if(result.error){
+    if(result.error.code==='23505') alert('此標的已在看板中');
+    else alert('新增失敗：'+result.error.message);
+    return;
+  }
+  closeModal();
+  document.getElementById('add-sym').value='';
+  document.getElementById('add-note').value='';
+  loadWatchlist();
 }
 
 initAuth();
