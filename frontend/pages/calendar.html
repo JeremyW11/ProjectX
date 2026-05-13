@@ -1177,7 +1177,7 @@ async function loadCalendarData(){
     var res = await fetch('../data/daily.json');
     var data = await res.json();
     var cal = data.calendar || {};
-    var allEvents = (cal.events||[]).concat(cal.high_impact||[]).concat(cal.future||[]);
+    var allEvents = (cal.events||[]);
 
     // 更新日期顯示
     var d = new Date(data.date);
