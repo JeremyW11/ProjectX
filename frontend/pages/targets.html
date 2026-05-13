@@ -830,7 +830,7 @@ function renderWatchlist(items, dailyData){
       (techNote?'<div style="font-size:11px;color:var(--gray-500);margin:6px 0 4px;line-height:1.5;font-family:var(--font-zh);">'+techNote+'</div>':'')+
       (item.note?'<div style="font-size:11px;color:var(--navy-600);margin-top:4px;padding:5px 8px;background:var(--navy-50);border-radius:5px;">📌 '+item.note+'</div>':'')+
       '<div class="tc-meta">'+
-        '<span class="tc-remove" onclick="removeWatchlistItem(''+item.id+'',this)" title="移除">✕</span>'+
+        '<span class="tc-remove" onclick="removeWatchlistItem(\"'+item.id+'\",this)" title="移除">✕</span>'+
       '</div>'+
     '</div>';
   }).join('');
