@@ -834,7 +834,19 @@ async function loadData(){
       upSidebar.innerHTML=upcoming.map(function(e){
         return '<div class="upcoming-item">'+
           '<div class="ui-date" style="min-width:44px;text-align:center;">'+
-            '<div style="font-size:10px;font-weight:700;color:var(--navy-700);line-height:1.3;font-family:var(--font-zh);">'+(e.status||'--').replace('公布','').replace('盤後','').replace('盤前','').trim()+'</div>'+
+(function(s){
+  var date='--', session='';
+  var m;
+  m=s.match(/(\d+)月(\d+)日/);
+  if(m){ date=m[1]+'/'+m[2]; }
+  else{ m=s.match(/(\d+)\/(\d+)/); if(m) date=m[1]+'/'+m[2]; }
+  if(s.indexOf('盤前')!==-1) session='盤前';
+  else if(s.indexOf('盤後')!==-1) session='盤後';
+  else if(s.indexOf('IPO')!==-1) session='IPO';
+  else if(s.indexOf('本週')!==-1){ date='本週'; }
+  return '<div style="font-size:11px;font-weight:700;color:var(--navy-700);line-height:1.4;font-family:var(--font-en);">'+date+'</div>'+
+         (session?'<div style="font-size:9px;color:var(--gray-400);font-family:var(--font-zh);margin-top:1px;">'+session+'</div>':'');
+})(e.status||'--')+
           '</div>'+
           '<div class="ui-info">'+
             '<div class="ui-ticker">'+e.ticker+'</div>'+
