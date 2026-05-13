@@ -1170,6 +1170,157 @@ function updateCountdowns(){
   });
 }
 updateCountdowns();
+
+// ── DYNAMIC DATA ──────────────────────────────────────
+async function loadCalendarData(){
+  try{
+    var res = await fetch('../data/daily.json');
+    var data = await res.json();
+    var cal = data.calendar || {};
+    var allEvents = (cal.events||[]).concat(cal.high_impact||[]).concat(cal.future||[]);
+
+    // 更新日期顯示
+    var d = new Date(data.date);
+    var dateEl = document.querySelector('.page-update');
+    if(dateEl) dateEl.textContent = '更新於 '+d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})+' · UTC+8';
+
+    if(!allEvents.length) return;
+
+    // 按日期分組
+    var groups = {};
+    allEvents.forEach(function(ev){
+      var key = ev.date || '';
+      if(!key) return;
+      if(!groups[key]) groups[key] = [];
+      groups[key].push(ev);
+    });
+
+    // 排序日期
+    var sortedDates = Object.keys(groups).sort();
+    var todayStr = data.date;
+
+    // type → CSS class / color / badge
+    function typeInfo(type){
+      var map = {
+        'data':  {cls:'econ',   color:'#16a34a', badge:'總經數據'},
+        'econ':  {cls:'econ',   color:'#16a34a', badge:'總經數據'},
+        'fed':   {cls:'fed',    color:'#2563eb', badge:'央行'},
+        'earnings':{cls:'earnings',color:'#d97706',badge:'財報'},
+        'ipo':   {cls:'earnings',color:'#d97706', badge:'IPO'},
+        'tw':    {cls:'tw',     color:'#7c3aed', badge:'台股事件'},
+        'corp':  {cls:'tw',     color:'#7c3aed', badge:'企業事件'},
+        'holiday':{cls:'tw',   color:'#94a3b8', badge:'休市'},
+      };
+      return map[(type||'').toLowerCase()] || {cls:'econ', color:'#64748b', badge:'事件'};
+    }
+
+    function impactClass(impact){
+      var m = {'high':'high-impact','med':'med-impact','mid':'med-impact','low':'low-impact'};
+      return m[(impact||'').toLowerCase()] || 'low-impact';
+    }
+    function impactLabel(impact){
+      var m = {'high':'HIGH','med':'MED','mid':'MED','low':'LOW'};
+      return m[(impact||'').toLowerCase()] || 'INFO';
+    }
+    function impactLabelClass(impact){
+      var m = {'high':'impact-high','med':'impact-med','mid':'impact-med','low':'impact-low'};
+      return m[(impact||'').toLowerCase()] || 'impact-info';
+    }
+
+    function weekday(dateStr){
+      var days=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+      var d=new Date(dateStr+'T00:00:00');
+      return days[d.getDay()];
+    }
+    function datePill(dateStr){
+      var months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      var d=new Date(dateStr+'T00:00:00');
+      return months[d.getMonth()]+' '+d.getDate();
+    }
+    function isPast(dateStr){ return dateStr < todayStr; }
+    function isToday(dateStr){ return dateStr === todayStr; }
+
+    function renderEvent(ev){
+      var ti = typeInfo(ev.type);
+      var ic = impactClass(ev.impact);
+      var il = impactLabel(ev.impact);
+      var ilc = impactLabelClass(ev.impact);
+      var past = isPast(ev.date) ? ' done' : '';
+      var tickers = (ev.affect_assets||'').split(',').filter(Boolean).map(function(t){
+        return '<span class="ec-ticker">'+t.trim()+'</span>';
+      }).join('');
+      return '<div class="event-card '+ic+past+'" data-type="'+ti.cls+'" data-impact="'+(ev.impact||'low').toLowerCase()+'">'+
+        '<span class="ec-type-dot" style="background:'+ti.color+'"></span>'+
+        '<div class="ec-content">'+
+          '<div class="ec-meta">'+
+            '<span class="ec-type-badge t-'+ti.cls+'">'+ti.badge+'</span>'+
+            (ev.market?'<span class="ec-market">'+ev.market+'</span>':'')+
+            (ev.time?'<span class="ec-time">'+ev.time+'</span>':'')+
+          '</div>'+
+          '<div class="ec-title">'+ev.title+'</div>'+
+          (ev.desc?'<div class="ec-desc">'+ev.desc+'</div>':'')+
+          (tickers?'<div class="ec-tickers">'+tickers+'</div>':'')+
+          (ev.expect?'<div class="ec-desc" style="color:var(--navy-600);font-size:12px;">📌 預期：'+ev.expect+(ev.prev?' ／ 前值：'+ev.prev:'')+'</div>':'')+
+          (ev.watch?'<div class="ec-desc" style="color:var(--amber-700);font-size:12px;">👁 觀察：'+ev.watch+'</div>':'')+
+        '</div>'+
+        '<div class="ec-right">'+
+          '<span class="ec-impact-label '+ilc+'">'+il+'</span>'+
+          (past?'<span class="ec-done-badge">✓ done</span>':'')+
+        '</div>'+
+      '</div>';
+    }
+
+    // 建立 timeline HTML
+    var html = '';
+    sortedDates.forEach(function(dateStr){
+      var evs = groups[dateStr];
+      var pillClass = isToday(dateStr)?'today':isPast(dateStr)?'past':'';
+      html += '<div class="date-group" data-date="'+dateStr.replace(/-/g,'')+'">';
+      html += '<div class="date-group-header">'+
+        '<span class="dg-date-pill '+pillClass+'">'+datePill(dateStr)+'</span>'+
+        '<span class="dg-weekday">'+weekday(dateStr)+'</span>'+
+        (isToday(dateStr)?'<span class="dg-today-badge">TODAY</span>':'')+
+        '<span class="dg-line"></span>'+
+      '</div>';
+      evs.forEach(function(ev){ html += renderEvent(ev); });
+      html += '</div>';
+    });
+
+    var timeline = document.getElementById('timeline');
+    if(timeline && html) timeline.innerHTML = html;
+
+    // 動態更新 countdown sidebar
+    updateCountdownsDynamic(allEvents, todayStr);
+
+  } catch(e){ console.error('calendar loadData error',e); }
+}
+
+function updateCountdownsDynamic(events, todayStr){
+  // 找 high impact 事件做 countdown
+  var highEvents = events.filter(function(e){ return (e.impact||'').toLowerCase()==='high' && e.date >= todayStr; });
+  highEvents.sort(function(a,b){ return a.date.localeCompare(b.date); });
+
+  var countdownEl = document.querySelector('.sidebar-card:nth-child(3)');
+  if(!countdownEl) return;
+
+  var today = new Date(todayStr+'T00:00:00');
+  var cdHTML = '<div class="sc-section-title">重要倒數</div>';
+  highEvents.slice(0,5).forEach(function(ev){
+    var evDate = new Date(ev.date+'T00:00:00');
+    var diff = Math.round((evDate-today)/(1000*60*60*24));
+    var daysText = diff===0?'今天':diff+' 天';
+    var soonClass = diff<=3?' soon':'';
+    cdHTML += '<div class="countdown-item">'+
+      '<span class="ci-label">'+ev.title.slice(0,16)+(ev.title.length>16?'…':'')+'</span>'+
+      '<span class="ci-days'+soonClass+'">'+daysText+'</span>'+
+    '</div>';
+  });
+  countdownEl.innerHTML = cdHTML;
+}
+
+loadCalendarData();
+// ── END DYNAMIC DATA ──────────────────────────────────
+
 </script>
 </body>
 </html>
