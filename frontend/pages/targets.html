@@ -261,9 +261,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div class="header-right">
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
     <span class="header-time" id="clock">—</span>
-    <button class="btn-login" onclick="toggleLogin()">登入預覽</button>
+    <a href="/pages/login.html" class="btn-login" id="auth-btn">登入</a>
   </div>
 </header>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <main class="page">
 
@@ -699,14 +701,59 @@ function tick(){
 }
 tick(); setInterval(tick,1000);
 
-// Toggle login state
-let loggedIn = false;
-function toggleLogin(){
-  loggedIn = !loggedIn;
-  document.getElementById('pro-gate-view').style.display = loggedIn ? 'none' : 'block';
-  document.getElementById('targets-view').classList.toggle('active', loggedIn);
-  document.querySelector('.header-right .btn-login').textContent = loggedIn ? '登出' : '登入預覽';
+// ── Supabase Auth ──────────────────────────────────
+var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
+var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+var currentUser=null;
+
+async function initAuth(){
+  var session=await _supabase.auth.getSession();
+  var user=session.data.session?session.data.session.user:null;
+  setAuthState(user);
+
+  _supabase.auth.onAuthStateChange(function(event,session){
+    setAuthState(session?session.user:null);
+  });
 }
+
+function setAuthState(user){
+  currentUser=user;
+  var gateEl=document.getElementById('pro-gate-view');
+  var viewEl=document.getElementById('targets-view');
+  var btnEl=document.getElementById('auth-btn');
+  if(user){
+    if(gateEl) gateEl.style.display='none';
+    if(viewEl) viewEl.classList.add('active');
+    if(btnEl){
+      btnEl.textContent='登出';
+      btnEl.href='#';
+      btnEl.onclick=function(e){e.preventDefault();signOutUser();};
+    }
+    loadWatchlist();
+  } else {
+    if(gateEl) gateEl.style.display='block';
+    if(viewEl) viewEl.classList.remove('active');
+    if(btnEl){
+      btnEl.textContent='登入';
+      btnEl.href='/pages/login.html';
+      btnEl.onclick=null;
+    }
+  }
+}
+
+async function signOutUser(){
+  await _supabase.auth.signOut();
+  window.location.reload();
+}
+
+function loadWatchlist(){
+  // ② 後續實作：從 Supabase 載入自選標的
+  console.log('loadWatchlist - user:', currentUser.email);
+}
+
+initAuth();
+// ── End Auth ───────────────────────────────────────
 
 // Category filter
 function filterCat(cat, el){
