@@ -714,13 +714,14 @@ var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 var currentUser=null;
 
 async function initAuth(){
-  var session=await _supabase.auth.getSession();
-  var user=session.data.session?session.data.session.user:null;
-  setAuthState(user);
-
+  // 先用 onAuthStateChange 監聽，確保 session 恢復後觸發
   _supabase.auth.onAuthStateChange(function(event,session){
     setAuthState(session?session.user:null);
   });
+  // 再主動取一次（處理頁面直接載入的情況）
+  var sessionRes=await _supabase.auth.getSession();
+  var user=sessionRes.data.session?sessionRes.data.session.user:null;
+  setAuthState(user);
 }
 
 function setAuthState(user){
