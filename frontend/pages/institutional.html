@@ -837,7 +837,7 @@ async function loadData(){
 (function(s){
   var date='--', session='';
   var m;
-  m=s.match(/(\d+)月(\d+)日/);
+  m=s.match(/(\d+)月(\d+)/);
   if(m){ date=m[1]+'/'+m[2]; }
   else{ m=s.match(/(\d+)\/(\d+)/); if(m) date=m[1]+'/'+m[2]; }
   if(s.indexOf('盤前')!==-1) session='盤前';
