@@ -490,9 +490,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <div class="m-group">
         <label class="m-label">類別</label>
         <select class="m-select" id="add-cat">
-          <option>美股 US Equity</option>
-          <option>台股 TW Equity</option>
-          <option>加密貨幣 Crypto</option>
+          <option value="us">美股 US Equity</option>
+          <option value="tw">台股 TW Equity</option>
+          <option value="crypto">加密貨幣 Crypto</option>
         </select>
       </div>
       <div class="m-group">
@@ -738,7 +738,7 @@ function renderWatchlist(items, dailyData){
       '</div>'+
       (techNote?'<div style="font-size:11px;color:var(--gray-500);margin:6px 0 4px;line-height:1.5;font-family:var(--font-zh);">'+techNote+'</div>':'')+
       (item.note?'<div style="font-size:11px;color:var(--navy-600);margin-top:4px;padding:5px 8px;background:var(--navy-50);border-radius:5px;">📌 '+item.note+'</div>':'')+
-      '<div id="analysis-'+item.id+'" style="display:none;margin:8px 0 4px;padding:10px 12px;background:var(--navy-50);border-radius:8px;font-size:12px;color:var(--gray-700);line-height:1.7;font-family:var(--font-zh);border-left:3px solid var(--navy-400);"></div>'+
+      '<div id="analysis-'+item.id+'" style="'+(item.analysis?'':'display:none;')+'margin:8px 0 4px;padding:10px 12px;background:var(--navy-50);border-radius:8px;font-size:12px;color:var(--gray-700);line-height:1.7;font-family:var(--font-zh);border-left:3px solid var(--navy-400);">'+(item.analysis?'<div style="white-space:pre-wrap;">'+item.analysis+'</div>':'')+'</div>'+
       '<div class="tc-meta">'+
         '<button class="tc-analyze-btn" onclick="analyzeTarget(event,\''+item.ticker+'\',\''+item.category+'\',\''+item.id+'\')" style="font-size:11px;color:var(--navy-600);padding:3px 8px;border:1px solid var(--navy-200,#c7d7fd);border-radius:4px;background:var(--navy-50);cursor:pointer;font-family:var(--font-zh);">🔍 分析</button>'+
         '<span class="tc-remove" onclick="removeWatchlistItem(\"'+item.id+'\",this)" title="移除">✕</span>'+
@@ -778,6 +778,9 @@ async function analyzeTarget(e, ticker, category, id){
     var found = all.find(function(s){ return (s.ticker||s.symbol||'')===ticker; });
     if(found){
       context = JSON.stringify(found);
+    } else {
+      // 標的不在 daily.json，用基本資訊組 context
+      context = JSON.stringify({ticker: ticker, market: category, note: '今日資料未收錄於 daily.json，請根據最新市場資訊分析'});
     }
     // 宏觀背景
     var macro = (d.macro||[]).slice(0,3).map(function(x){ return x.text||''; }).join('；');
@@ -794,6 +797,8 @@ async function analyzeTarget(e, ticker, category, id){
     if(data.success && data.analysis){
       resultEl.innerHTML = '<div style="white-space:pre-wrap;">'+data.analysis+'</div>';
       btn.textContent = '🔼 收起';
+      // 存分析結果到 Supabase
+      await _supabase.from('watchlist').update({ analysis: data.analysis }).eq('id', id);
     } else {
       resultEl.textContent = '分析失敗：'+(data.error||'未知錯誤');
       btn.textContent = '🔍 分析';
