@@ -828,24 +828,18 @@ async function generateMorningBrief(items, dailyData){
     '語氣專業但簡潔，重點突出，不要冗長。';
 
   try {
-    var res = await fetch('https://api.anthropic.com/v1/messages', {
+    var res = await fetch('https://projectx-backend-o2pl.onrender.com/morning-brief', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }]
-      })
+      body: JSON.stringify({ watchlist: watchData })
     });
     var data = await res.json();
-    var text = (data.content||[]).map(function(b){ return b.text||''; }).join('');
-    if(text){
-      // 格式化輸出
+    if(data.success && data.brief){
       content.innerHTML = '<div style="white-space:pre-wrap;line-height:1.9;">'+
-        text.replace(/①/g,'<br><strong style="color:var(--navy-700);">① ').replace(/②/g,'<br><strong style="color:var(--navy-700);">② ').replace(/③/g,'<br><strong style="color:var(--navy-700);">③ ') +
+        data.brief.replace(/①/g,'<br><strong style="color:var(--navy-700);">① ').replace(/②/g,'<br><strong style="color:var(--navy-700);">② ').replace(/③/g,'<br><strong style="color:var(--navy-700);">③ ') +
         '</div>';
     } else {
-      content.innerHTML = '<div style="color:var(--red-600);padding:10px;">生成失敗，請稍後重試</div>';
+      content.innerHTML = '<div style="color:var(--red-600);padding:10px;">生成失敗：'+(data.error||'未知錯誤')+'</div>';
     }
   } catch(e){
     content.innerHTML = '<div style="color:var(--red-600);padding:10px;">連線錯誤：' + e.message + '</div>';
