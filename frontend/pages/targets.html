@@ -744,14 +744,12 @@ function setAuthState(user){
   var viewEl=document.getElementById('targets-view');
   var btnEl=document.getElementById('auth-btn');
   if(user){
-    if(gateEl) gateEl.style.display='none';
-    if(viewEl) viewEl.classList.add('active');
     if(btnEl){
       btnEl.textContent='登出';
       btnEl.href='#';
       btnEl.onclick=function(e){e.preventDefault();signOutUser();};
     }
-    loadWatchlist();
+    checkProStatus(user, gateEl, viewEl);
   } else {
     if(gateEl) gateEl.style.display='block';
     if(viewEl) viewEl.classList.remove('active');
@@ -760,6 +758,29 @@ function setAuthState(user){
       btnEl.href='/pages/login.html';
       btnEl.onclick=null;
     }
+  }
+}
+
+async function checkProStatus(user, gateEl, viewEl){
+  var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
+  var isPro = result.data && result.data.is_pro === true;
+  currentUser.isPro = isPro;
+  if(isPro){
+    if(gateEl) gateEl.style.display='none';
+    if(viewEl) viewEl.classList.add('active');
+    loadWatchlist();
+  } else {
+    // 已登入但非付費會員，顯示升級提示
+    if(gateEl){
+      gateEl.style.display='block';
+      var gateTitle = gateEl.querySelector('.pro-gate-title');
+      var gateDesc = gateEl.querySelector('.pro-gate-desc');
+      var gateBtns = gateEl.querySelector('.pro-gate-btns');
+      if(gateTitle) gateTitle.innerHTML='你好，<em>'+user.email.split('@')[0]+'</em>！';
+      if(gateDesc) gateDesc.textContent='你目前使用的是免費方案。升級為付費會員即可解鎖標的追蹤、Morning Brief、個股分析等全部功能。';
+      if(gateBtns) gateBtns.innerHTML='<a href="mailto:jermy831102@gmail.com?subject=ProjectX付費申請" class="btn-pro-upgrade">✦ 聯繫升級 Pro</a>';
+    }
+    if(viewEl) viewEl.classList.remove('active');
   }
 }
 
