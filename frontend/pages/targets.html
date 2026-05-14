@@ -798,9 +798,10 @@ async function analyzeTarget(e, ticker, category, id){
     var data = await res2.json();
     if(data.success && data.analysis){
       var md = data.analysis
-        .replace(/## (.*?)\n/g, '<div style="font-weight:700;color:var(--navy-700);margin:10px 0 4px;font-size:13px;">$1</div>')
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/^- (.*?)$/gm, '<div style="padding-left:8px;margin:2px 0;">• $1</div>')
+        .replace(/^#{1,2} (.*?)$/gm, '<div style="font-weight:700;color:var(--navy-800);margin:12px 0 5px;font-size:14px;border-bottom:1px solid var(--navy-100);padding-bottom:3px;">$1</div>')
+        .replace(/^---$/gm, '<hr style="border:none;border-top:1px solid var(--gray-200);margin:8px 0;">')
+        .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--gray-800);">$1</strong>')
+        .replace(/^- (.*?)$/gm, '<div style="padding-left:10px;margin:3px 0;">• $1</div>')
         .replace(/\n/g, '<br>');
       resultEl.innerHTML = md;
       resultEl.style.display = 'block';
