@@ -738,13 +738,73 @@ function renderWatchlist(items, dailyData){
       '</div>'+
       (techNote?'<div style="font-size:11px;color:var(--gray-500);margin:6px 0 4px;line-height:1.5;font-family:var(--font-zh);">'+techNote+'</div>':'')+
       (item.note?'<div style="font-size:11px;color:var(--navy-600);margin-top:4px;padding:5px 8px;background:var(--navy-50);border-radius:5px;">📌 '+item.note+'</div>':'')+
+      '<div id="analysis-'+item.id+'" style="display:none;margin:8px 0 4px;padding:10px 12px;background:var(--navy-50);border-radius:8px;font-size:12px;color:var(--gray-700);line-height:1.7;font-family:var(--font-zh);border-left:3px solid var(--navy-400);"></div>'+
       '<div class="tc-meta">'+
+        '<button class="tc-analyze-btn" onclick="analyzeTarget(event,\''+item.ticker+'\',\''+item.category+'\',\''+item.id+'\')" style="font-size:11px;color:var(--navy-600);padding:3px 8px;border:1px solid var(--navy-200,#c7d7fd);border-radius:4px;background:var(--navy-50);cursor:pointer;font-family:var(--font-zh);">🔍 分析</button>'+
         '<span class="tc-remove" onclick="removeWatchlistItem(\"'+item.id+'\",this)" title="移除">✕</span>'+
       '</div>'+
     '</div>';
   }).join('');
 }
 
+
+// ── 個股分析 ──────────────────────────────────────
+async function analyzeTarget(e, ticker, category, id){
+  e.stopPropagation();
+  var btn = e.target;
+  var resultEl = document.getElementById('analysis-'+id);
+  if(!resultEl) return;
+
+  // toggle
+  if(resultEl.style.display !== 'none' && resultEl.style.display !== ''){
+    resultEl.style.display = 'none';
+    btn.textContent = '🔍 分析';
+    return;
+  }
+
+  btn.textContent = '分析中...';
+  btn.disabled = true;
+  resultEl.style.display = 'block';
+  resultEl.textContent = '⚡ AI 分析中，請稍候...';
+
+  // 從 daily.json 取標的資料
+  var context = '';
+  var marketContext = '';
+  try {
+    var res = await fetch('/data/daily.json');
+    var d = await res.json();
+    var m = d.market || {};
+    var all = (m.us_stocks||[]).concat(m.tw_stocks||[]).concat(m.crypto||[]);
+    var found = all.find(function(s){ return (s.ticker||s.symbol||'')===ticker; });
+    if(found){
+      context = JSON.stringify(found);
+    }
+    // 宏觀背景
+    var macro = (d.macro||[]).slice(0,3).map(function(x){ return x.text||''; }).join('；');
+    marketContext = macro;
+  } catch(e2){}
+
+  try {
+    var res2 = await fetch('https://projectx-backend-o2pl.onrender.com/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ symbol: ticker, market: category, context: context, marketContext: marketContext })
+    });
+    var data = await res2.json();
+    if(data.success && data.analysis){
+      resultEl.innerHTML = '<div style="white-space:pre-wrap;">'+data.analysis+'</div>';
+      btn.textContent = '🔼 收起';
+    } else {
+      resultEl.textContent = '分析失敗：'+(data.error||'未知錯誤');
+      btn.textContent = '🔍 分析';
+    }
+  } catch(e3){
+    resultEl.textContent = '連線錯誤：'+e3.message;
+    btn.textContent = '🔍 分析';
+  }
+  btn.disabled = false;
+}
+// ── End 個股分析 ───────────────────────────────────
 async function removeWatchlistItem(id, el){
   var card = el.closest('.target-card');
   card.style.transition='all .3s';
