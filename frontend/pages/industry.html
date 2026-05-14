@@ -503,5 +503,27 @@ async function loadData(){
 
 loadData();
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
+  var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+  var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  sb.auth.onAuthStateChange(function(event,session){
+    var btn=document.querySelector('.btn-login');
+    if(!btn) return;
+    if(session&&session.user){
+      btn.textContent='登出';
+      btn.href='#';
+      btn.onclick=function(e){e.preventDefault();sb.auth.signOut().then(function(){window.location.reload();});};
+    } else {
+      btn.textContent='登入';
+      btn.href='/pages/login.html';
+      btn.onclick=null;
+    }
+  });
+})();
+</script>
 </body>
 </html>
