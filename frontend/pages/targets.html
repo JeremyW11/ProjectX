@@ -423,48 +423,56 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       </div>
     </div>
 
-    <!-- Signal strength -->
-    <div class="section-block">
+    <!-- Signal Radar - 動態 -->
+    <div class="section-block" style="margin-bottom:16px;">
       <div class="section-block-header">
         <div class="sbh-title">訊號強度雷達 <span class="sbh-title-en">SIGNAL RADAR</span></div>
-        <span class="sbh-badge s-bull">整體偏多</span>
+        <span class="sbh-badge" id="signal-overall-badge">—</span>
       </div>
-      <div class="signal-grid">
-        <div class="signal-item">
-          <div class="si-sym">NVDA <span style="color:var(--green-600);font-size:11px;font-weight:500;">強看多</span></div>
-          <div class="si-label">SIGNAL STRENGTH</div>
-          <div class="si-bar-track"><div class="si-bar-fill" style="width:92%;background:var(--green-600);"></div></div>
-          <div class="si-val">92 / 100</div>
+      <div class="signal-grid" id="signal-grid">
+        <div style="padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
+      </div>
+    </div>
+
+    <!-- 勝率儀表板 -->
+    <div class="section-block">
+      <div class="section-block-header">
+        <div class="sbh-title">勝率儀表板 <span class="sbh-title-en">WIN RATE</span></div>
+        <span class="sbh-badge" id="winrate-badge" style="background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);">統計中</span>
+      </div>
+      <div id="winrate-content" style="padding:16px 20px;">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
+          <div style="text-align:center;padding:12px;background:var(--gray-50);border-radius:10px;">
+            <div style="font-size:22px;font-weight:700;color:var(--navy-700);" id="wr-total">—</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">總推演</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:var(--green-50);border-radius:10px;">
+            <div style="font-size:22px;font-weight:700;color:var(--green-600);" id="wr-hit">—</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">Hit ✓</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:var(--red-100);border-radius:10px;">
+            <div style="font-size:22px;font-weight:700;color:var(--red-600);" id="wr-miss">—</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">Miss ✗</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:var(--amber-100);border-radius:10px;">
+            <div style="font-size:22px;font-weight:700;color:var(--amber-600);" id="wr-pending">—</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">觀察中</div>
+          </div>
         </div>
-        <div class="signal-item">
-          <div class="si-sym">BTC <span style="color:var(--green-600);font-size:11px;font-weight:500;">看多</span></div>
-          <div class="si-label">SIGNAL STRENGTH</div>
-          <div class="si-bar-track"><div class="si-bar-fill" style="width:80%;background:var(--green-600);"></div></div>
-          <div class="si-val">80 / 100</div>
+        <!-- 勝率進度條 -->
+        <div style="margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-500);margin-bottom:6px;">
+            <span>勝率</span>
+            <span id="wr-pct" style="font-weight:700;color:var(--navy-700);">—</span>
+          </div>
+          <div style="background:var(--gray-200);border-radius:20px;height:8px;overflow:hidden;">
+            <div id="wr-bar" style="height:100%;width:0%;background:var(--green-600);border-radius:20px;transition:width .5s;"></div>
+          </div>
         </div>
-        <div class="signal-item">
-          <div class="si-sym">2330 <span style="color:var(--green-600);font-size:11px;font-weight:500;">偏多</span></div>
-          <div class="si-label">SIGNAL STRENGTH</div>
-          <div class="si-bar-track"><div class="si-bar-fill" style="width:74%;background:var(--green-600);"></div></div>
-          <div class="si-val">74 / 100</div>
-        </div>
-        <div class="signal-item">
-          <div class="si-sym">META <span style="color:var(--green-600);font-size:11px;font-weight:500;">偏多</span></div>
-          <div class="si-label">SIGNAL STRENGTH</div>
-          <div class="si-bar-track"><div class="si-bar-fill" style="width:68%;background:var(--green-600);"></div></div>
-          <div class="si-val">68 / 100</div>
-        </div>
-        <div class="signal-item">
-          <div class="si-sym">ETH <span style="color:var(--amber-600);font-size:11px;font-weight:500;">中性</span></div>
-          <div class="si-label">SIGNAL STRENGTH</div>
-          <div class="si-bar-track"><div class="si-bar-fill" style="width:54%;background:var(--amber-600);"></div></div>
-          <div class="si-val">54 / 100</div>
-        </div>
-        <div class="signal-item">
-          <div class="si-sym">SMCI <span style="color:var(--red-600);font-size:11px;font-weight:500;">偏空</span></div>
-          <div class="si-label">SIGNAL STRENGTH</div>
-          <div class="si-bar-track"><div class="si-bar-fill" style="width:32%;background:var(--red-600);"></div></div>
-          <div class="si-val">32 / 100</div>
+        <!-- 各標的勝率 -->
+        <div id="wr-by-ticker" style="display:none;">
+          <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.06em;margin-bottom:8px;">各標的勝率</div>
+          <div id="wr-ticker-list"></div>
         </div>
       </div>
     </div>
@@ -703,6 +711,7 @@ async function saveInference(){
   if(result.error){ alert('儲存失敗：'+result.error.message); return; }
   closeInferenceModal();
   loadInferences();
+  loadSignalAndWinrate();
 }
 
 async function updateInferenceStatus(id, status){
@@ -737,6 +746,93 @@ async function deleteInference(id){
   loadInferences();
 }
 // ── End 推演記錄 ───────────────────────────────────
+
+// ── 訊號雷達 + 勝率儀表板 ─────────────────────────
+async function loadSignalAndWinrate(){
+  // 訊號雷達：從 daily.json signals 撈
+  try {
+    var res = await fetch('/data/daily.json');
+    var d = await res.json();
+    var signals = d.signals || [];
+    var grid = document.getElementById('signal-grid');
+    var badge = document.getElementById('signal-overall-badge');
+    if(grid && signals.length){
+      var bullCount = signals.filter(function(s){ return s.signal==='bull'; }).length;
+      var bearCount = signals.filter(function(s){ return s.signal==='bear'; }).length;
+      var overall = bullCount > bearCount ? '整體偏多' : bearCount > bullCount ? '整體偏空' : '多空分歧';
+      var overallColor = bullCount > bearCount ? 'var(--green-600)' : bearCount > bullCount ? 'var(--red-600)' : 'var(--amber-600)';
+      if(badge){ badge.textContent = overall; badge.style.color = overallColor; badge.style.background = 'var(--gray-50)'; badge.style.border = '1px solid var(--gray-200)'; }
+      grid.innerHTML = signals.map(function(s){
+        var color = s.signal==='bull'?'var(--green-600)':s.signal==='bear'?'var(--red-600)':s.signal==='watch'?'var(--amber-600)':'var(--gray-400)';
+        var pct = s.signal==='bull'?75:s.signal==='bear'?30:s.signal==='watch'?55:50;
+        return '<div class="signal-item">'+
+          '<div class="si-sym">'+s.name+' <span style="color:'+color+';font-size:11px;font-weight:500;">'+s.label+'</span></div>'+
+          '<div class="si-label">'+(s.reason||'SIGNAL')+'</div>'+
+          '<div class="si-bar-track"><div class="si-bar-fill" style="width:'+pct+'%;background:'+color+';"></div></div>'+
+        '</div>';
+      }).join('');
+    }
+  } catch(e){ console.log('signal load error', e); }
+
+  // 勝率儀表板：從 inferences 計算
+  if(!currentUser) return;
+  var result = await _supabase.from('inferences').select('status,result_pct,ticker').eq('user_id', currentUser.id);
+  if(result.error) return;
+  var items = result.data || [];
+
+  var total = items.length;
+  var hit = items.filter(function(i){ return i.status==='hit'; }).length;
+  var miss = items.filter(function(i){ return i.status==='miss'; }).length;
+  var pending = items.filter(function(i){ return i.status==='pending'; }).length;
+  var closed = hit + miss;
+  var winPct = closed > 0 ? Math.round(hit/closed*100) : 0;
+
+  document.getElementById('wr-total').textContent = total;
+  document.getElementById('wr-hit').textContent = hit;
+  document.getElementById('wr-miss').textContent = miss;
+  document.getElementById('wr-pending').textContent = pending;
+
+  var pctEl = document.getElementById('wr-pct');
+  var barEl = document.getElementById('wr-bar');
+  var wbadge = document.getElementById('winrate-badge');
+  if(closed > 0){
+    pctEl.textContent = winPct + '%';
+    barEl.style.width = winPct + '%';
+    barEl.style.background = winPct>=60?'var(--green-600)':winPct>=40?'var(--amber-600)':'var(--red-600)';
+    if(wbadge){ wbadge.textContent = winPct+'% 勝率'; wbadge.style.color = winPct>=60?'var(--green-700)':winPct>=40?'var(--amber-700)':'var(--red-700)'; wbadge.style.background = winPct>=60?'var(--green-100)':winPct>=40?'var(--amber-100)':'var(--red-100)'; }
+  } else {
+    pctEl.textContent = '尚無結案';
+    if(wbadge) wbadge.textContent = '累積中';
+  }
+
+  // 各標的勝率
+  if(closed > 0){
+    var tickerMap = {};
+    items.forEach(function(i){
+      if(!tickerMap[i.ticker]) tickerMap[i.ticker] = {hit:0,miss:0};
+      if(i.status==='hit') tickerMap[i.ticker].hit++;
+      if(i.status==='miss') tickerMap[i.ticker].miss++;
+    });
+    var tickerList = Object.keys(tickerMap).filter(function(t){ return tickerMap[t].hit+tickerMap[t].miss>0; });
+    if(tickerList.length){
+      document.getElementById('wr-by-ticker').style.display = 'block';
+      document.getElementById('wr-ticker-list').innerHTML = tickerList.map(function(t){
+        var th = tickerMap[t].hit; var tm = tickerMap[t].miss; var tc = th+tm;
+        var tp = Math.round(th/tc*100);
+        var tc2 = tp>=60?'var(--green-600)':tp>=40?'var(--amber-600)':'var(--red-600)';
+        return '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--gray-100);">'+
+          '<span style="font-family:var(--font-en);font-weight:700;font-size:13px;width:50px;">'+t+'</span>'+
+          '<div style="flex:1;background:var(--gray-200);border-radius:20px;height:6px;overflow:hidden;">'+
+            '<div style="height:100%;width:'+tp+'%;background:'+tc2+';border-radius:20px;"></div>'+
+          '</div>'+
+          '<span style="font-size:12px;color:'+tc2+';font-weight:600;width:35px;text-align:right;">'+tp+'%</span>'+
+          '<span style="font-size:11px;color:var(--gray-400);">'+th+'/'+tc+'</span>'+
+        '</div>';
+      }).join('');
+    }
+  }
+}
+// ── End 勝率儀表板 ─────────────────────────────────
 async function loadWatchlist(){
   if(!currentUser) return;
   document.getElementById('wl-user-email').textContent = currentUser.email;
