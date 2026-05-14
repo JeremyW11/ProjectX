@@ -589,74 +589,26 @@ async function generateMorningBrief(items, dailyData){
   var dateEl = document.getElementById('brief-date');
   if(!block||!content) return;
 
-  // 如果沒有傳入參數，重新從 Supabase 載入
-  if(!items){
-    var result = await _supabase.from('watchlist').select('*');
-    items = result.data || [];
+  block.style.display = 'block';
+  if(btn) btn.style.display = 'none'; // 隱藏重新生成按鈕（內容每日固定）
+
+  // 從 daily.json 讀取 morning_brief
+  try {
     var res = await fetch('/data/daily.json');
     var d = await res.json();
-    var m = d.market || {};
-    dailyData = {};
-    (m.us_stocks||[]).forEach(function(s){ dailyData[s.ticker]=s; });
-    (m.tw_stocks||[]).forEach(function(s){ dailyData[s.ticker]=s; });
-    (m.crypto||[]).forEach(function(s){ dailyData[s.symbol]=s; });
-  }
+    var brief = d.morning_brief || '';
+    var date = d.date || '';
 
-  block.style.display = 'block';
-  if(dateEl) dateEl.textContent = new Date().toLocaleDateString('zh-TW',{month:'long',day:'numeric'});
-  if(btn) btn.disabled = true;
-  content.innerHTML = '<div style="text-align:center;color:var(--gray-400);padding:20px;">⚡ AI 分析中...</div>';
+    if(dateEl) dateEl.textContent = new Date(date+'T00:00:00').toLocaleDateString('zh-TW',{month:'long',day:'numeric'});
 
-  // 整理自選標的的今日資料
-  var watchData = items.map(function(item){
-    var p = dailyData[item.ticker] || {};
-    return {
-      ticker: item.ticker,
-      name: item.name || item.ticker,
-      category: item.category,
-      price: p.price || p.value || '--',
-      change: p.change || '--',
-      dir: p.dir || 'flat',
-      note: p.note || '',
-      tech_note: p.tech_note || '',
-      watch_note: p.watch_note || '',
-      action: p.action || '',
-      user_note: item.note || ''
-    };
-  });
-
-  var prompt = '你是一位專業的金融分析師。以下是用戶今日自選標的的最新資料：\n\n' +
-    watchData.map(function(w){
-      return '【' + w.ticker + ' ' + w.name + '】' +
-        ' 價格：' + w.price + '（' + w.change + '）' +
-        (w.note ? ' 重點：' + w.note : '') +
-        (w.tech_note ? ' 技術：' + w.tech_note : '') +
-        (w.watch_note ? ' 觀察：' + w.watch_note : '') +
-        (w.action ? ' 建議：' + w.action : '') +
-        (w.user_note ? ' 用戶備註：' + w.user_note : '');
-    }).join('\n') +
-    '\n\n請用繁體中文撰寫一份簡潔的今日早報（300字以內），' +
-    '格式：①整體市場氛圍 ②各標的重點提示 ③今日需要特別關注的事項。' +
-    '語氣專業但簡潔，重點突出，不要冗長。';
-
-  try {
-    var res = await fetch('https://projectx-backend-o2pl.onrender.com/morning-brief', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ watchlist: watchData })
-    });
-    var data = await res.json();
-    if(data.success && data.brief){
-      content.innerHTML = '<div style="white-space:pre-wrap;line-height:1.9;">'+
-        data.brief.replace(/①/g,'<br><strong style="color:var(--navy-700);">① ').replace(/②/g,'<br><strong style="color:var(--navy-700);">② ').replace(/③/g,'<br><strong style="color:var(--navy-700);">③ ') +
-        '</div>';
+    if(brief){
+      content.innerHTML = '<div style="line-height:1.9;white-space:pre-wrap;font-size:13.5px;">'+brief+'</div>';
     } else {
-      content.innerHTML = '<div style="color:var(--red-600);padding:10px;">生成失敗：'+(data.error||'未知錯誤')+'</div>';
+      content.innerHTML = '<div style="color:var(--gray-400);padding:20px;text-align:center;">今日早報尚未產出，請稍後再試</div>';
     }
   } catch(e){
-    content.innerHTML = '<div style="color:var(--red-600);padding:10px;">連線錯誤：' + e.message + '</div>';
+    content.innerHTML = '<div style="color:var(--red-600);padding:10px;">載入失敗：' + e.message + '</div>';
   }
-  if(btn) btn.disabled = false;
 }
 // ── End Morning Brief ───────────────────────────────
 async function loadWatchlist(){
