@@ -373,54 +373,52 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </div>
 
     <!-- Inference / 推演記錄 -->
-    <div class="section-block" style="margin-bottom:16px;">
+    <div class="section-block" style="margin-bottom:16px;" id="inference-block">
       <div class="section-block-header">
         <div class="sbh-title">推演記錄 <span class="sbh-title-en">INFERENCE LOG</span></div>
-        <button class="btn-outline-sm">+ 新增推演</button>
+        <button class="btn-outline-sm" onclick="openInferenceModal()">+ 新增推演</button>
       </div>
-      <div class="inference-card">
-        <div class="inf-left">
-          <div class="inf-target-row">
-            <span class="inf-sym">NVDA</span>
-            <span class="inf-date">2026-05-08</span>
-            <span class="inf-status inf-st-hit">✓ Hit</span>
+      <div id="inference-list"><div style="text-align:center;padding:30px 20px;color:var(--gray-400);font-size:13px;">載入中...</div></div>
+    </div>
+
+    <!-- Inference Modal -->
+    <div class="modal-overlay" id="inferenceModal" onclick="closeInferenceModalBg(event)">
+      <div class="modal" style="max-width:480px;">
+        <button class="m-close" onclick="closeInferenceModal()">✕</button>
+        <div class="modal-header"><div class="modal-title" id="inference-modal-title">新增推演記錄</div></div>
+        <div class="modal-body">
+          <div class="m-group">
+            <label class="m-label">股票代碼 / 幣種</label>
+            <input class="m-input" type="text" id="inf-ticker" placeholder="e.g. NVDA · BTC · 2330">
           </div>
-          <div class="inf-title">Q1財報超預期後短期動能仍強，Blackwell供需缺口至少延續至Q3</div>
-          <div class="inf-body">法說會確認 Blackwell 出貨量加速，推論股價在財報後至少維持 +5% 上行動能。Q2 指引 280 億美元超出市場預期，短線目標 920 美元。</div>
-        </div>
-        <div class="inf-right">
-          <span class="inf-signal up">▲ +9.21%</span>
-          <span class="inf-conf">信心度 HIGH</span>
-        </div>
-      </div>
-      <div class="inference-card">
-        <div class="inf-left">
-          <div class="inf-target-row">
-            <span class="inf-sym">BTC</span>
-            <span class="inf-date">2026-05-06</span>
-            <span class="inf-status inf-st-pending">⏳ Pending</span>
+          <div class="m-group">
+            <label class="m-label">推演標題</label>
+            <input class="m-input" type="text" id="inf-title" placeholder="簡述你的推演邏輯">
           </div>
-          <div class="inf-title">ETF 流量持續創高，100K 支撐確立，下一目標 108K</div>
-          <div class="inf-body">BlackRock IBIT 累積流入突破 180 億美元，鏈上長期持有者比例創歷史新高。供給壓縮信號明確，預計 2-3 週內測試 108K 阻力位。</div>
-        </div>
-        <div class="inf-right">
-          <span class="inf-signal up">目標 108K</span>
-          <span class="inf-conf">信心度 MED</span>
-        </div>
-      </div>
-      <div class="inference-card">
-        <div class="inf-left">
-          <div class="inf-target-row">
-            <span class="inf-sym">2330</span>
-            <span class="inf-date">2026-04-18</span>
-            <span class="inf-status inf-st-hit">✓ Hit</span>
+          <div class="m-group">
+            <label class="m-label">詳細說明</label>
+            <textarea class="m-input" id="inf-body" rows="3" style="resize:vertical;" placeholder="根據哪些訊號？預期如何發展？"></textarea>
           </div>
-          <div class="inf-title">法說會確認 CoWoS 滿載，法人上調目標價後外資持續買超</div>
-          <div class="inf-body">台積電 Q1 法說會確認先進封裝需求強勁，Morgan Stanley 上調評級至超配，目標價 1,050 元。外資連續買超預計帶動股價突破 960 元整數關卡。</div>
-        </div>
-        <div class="inf-right">
-          <span class="inf-signal up">▲ +2.8%</span>
-          <span class="inf-conf">信心度 HIGH</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="m-group">
+              <label class="m-label">目標價（選填）</label>
+              <input class="m-input" type="text" id="inf-target" placeholder="e.g. $950 / 108K">
+            </div>
+            <div class="m-group">
+              <label class="m-label">停損（選填）</label>
+              <input class="m-input" type="text" id="inf-stop" placeholder="e.g. $850 / 95K">
+            </div>
+          </div>
+          <div class="m-group">
+            <label class="m-label">信心度</label>
+            <select class="m-select" id="inf-confidence">
+              <option value="HIGH">HIGH 高</option>
+              <option value="MED" selected>MED 中</option>
+              <option value="LOW">LOW 低</option>
+            </select>
+          </div>
+          <input type="hidden" id="inf-edit-id">
+          <button class="m-submit" onclick="saveInference()">儲存推演</button>
         </div>
       </div>
     </div>
@@ -611,6 +609,134 @@ async function generateMorningBrief(items, dailyData){
   }
 }
 // ── End Morning Brief ───────────────────────────────
+
+// ── 推演記錄 ──────────────────────────────────────
+async function loadInferences(){
+  var list = document.getElementById('inference-list');
+  if(!list || !currentUser) return;
+
+  var result = await _supabase.from('inferences').select('*')
+    .eq('user_id', currentUser.id)
+    .order('created_at', {ascending: false});
+
+  if(result.error){ list.innerHTML = '<div style="padding:20px;color:var(--red-600);">載入失敗</div>'; return; }
+  var items = result.data || [];
+
+  if(!items.length){
+    list.innerHTML = '<div style="text-align:center;padding:30px 20px;color:var(--gray-400);font-size:13px;"><div style="font-size:24px;margin-bottom:8px;">📝</div>尚無推演記錄<br>點擊「+ 新增推演」開始記錄你的投資邏輯</div>';
+    return;
+  }
+
+  list.innerHTML = items.map(function(item){
+    var statusMap = {pending:'⏳ 觀察中', hit:'✓ Hit', miss:'✗ Miss', cancelled:'取消'};
+    var statusClass = {pending:'inf-st-pending', hit:'inf-st-hit', miss:'inf-st-miss', cancelled:'inf-st-miss'};
+    var confColor = {HIGH:'var(--green-600)', MED:'var(--amber-600)', LOW:'var(--gray-400)'};
+    var date = (item.created_at||'').slice(0,10);
+    return '<div class="inference-card" data-id="'+item.id+'">'+
+      '<div class="inf-left">'+
+        '<div class="inf-target-row">'+
+          '<span class="inf-sym">'+item.ticker+'</span>'+
+          '<span class="inf-date">'+date+'</span>'+
+          '<span class="inf-status '+(statusClass[item.status]||'inf-st-pending')+'">'+statusMap[item.status]+'</span>'+
+        '</div>'+
+        '<div class="inf-title">'+item.title+'</div>'+
+        (item.body?'<div class="inf-body">'+item.body+'</div>':'')+
+        '<div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;">'+
+          (item.target_price?'<span style="font-size:11px;color:var(--navy-600);background:var(--navy-50);padding:2px 7px;border-radius:4px;">目標 '+item.target_price+'</span>':'')+
+          (item.stop_loss?'<span style="font-size:11px;color:var(--red-600);background:var(--red-100);padding:2px 7px;border-radius:4px;">停損 '+item.stop_loss+'</span>':'')+
+        '</div>'+
+        '<div style="display:flex;gap:6px;margin-top:8px;">'+
+          (item.status==='pending'?'<button onclick="updateInferenceStatus(''+item.id+'','hit')" style="font-size:11px;padding:2px 8px;border:1px solid var(--green-600);color:var(--green-600);border-radius:4px;background:none;cursor:pointer;">✓ Hit</button>':'') +
+          (item.status==='pending'?'<button onclick="updateInferenceStatus(''+item.id+'','miss')" style="font-size:11px;padding:2px 8px;border:1px solid var(--red-600);color:var(--red-600);border-radius:4px;background:none;cursor:pointer;">✗ Miss</button>':'') +
+          '<button onclick="editInference(''+item.id+'')" style="font-size:11px;padding:2px 8px;border:1px solid var(--gray-300);color:var(--gray-500);border-radius:4px;background:none;cursor:pointer;">編輯</button>'+
+          '<button onclick="deleteInference(''+item.id+'')" style="font-size:11px;padding:2px 8px;border:1px solid var(--red-100);color:var(--red-600);border-radius:4px;background:none;cursor:pointer;">刪除</button>'+
+        '</div>'+
+      '</div>'+
+      '<div class="inf-right">'+
+        (item.result_pct?'<span class="inf-signal '+(item.result_pct.startsWith('-')?'dn':'up')+'">'+item.result_pct+'</span>':'<span class="inf-signal" style="color:var(--gray-400);">—</span>')+
+        '<span class="inf-conf" style="color:'+confColor[item.confidence]+';">信心度 '+item.confidence+'</span>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+function openInferenceModal(){
+  document.getElementById('inf-edit-id').value = '';
+  document.getElementById('inf-ticker').value = '';
+  document.getElementById('inf-title').value = '';
+  document.getElementById('inf-body').value = '';
+  document.getElementById('inf-target').value = '';
+  document.getElementById('inf-stop').value = '';
+  document.getElementById('inf-confidence').value = 'MED';
+  document.getElementById('inference-modal-title').textContent = '新增推演記錄';
+  document.getElementById('inferenceModal').classList.add('open');
+}
+
+function closeInferenceModal(){
+  document.getElementById('inferenceModal').classList.remove('open');
+}
+
+function closeInferenceModalBg(e){
+  if(e.target===document.getElementById('inferenceModal')) closeInferenceModal();
+}
+
+async function saveInference(){
+  var editId = document.getElementById('inf-edit-id').value;
+  var ticker = document.getElementById('inf-ticker').value.trim().toUpperCase();
+  var title = document.getElementById('inf-title').value.trim();
+  var body = document.getElementById('inf-body').value.trim();
+  var target = document.getElementById('inf-target').value.trim();
+  var stop = document.getElementById('inf-stop').value.trim();
+  var confidence = document.getElementById('inf-confidence').value;
+
+  if(!ticker||!title){ alert('請填寫代碼和標題'); return; }
+
+  var data = { ticker, title, body, target_price: target, stop_loss: stop, confidence };
+
+  var result;
+  if(editId){
+    result = await _supabase.from('inferences').update({...data, updated_at: new Date().toISOString()}).eq('id', editId);
+  } else {
+    result = await _supabase.from('inferences').insert({...data, user_id: currentUser.id});
+  }
+
+  if(result.error){ alert('儲存失敗：'+result.error.message); return; }
+  closeInferenceModal();
+  loadInferences();
+}
+
+async function updateInferenceStatus(id, status){
+  var resultPct = '';
+  if(status==='hit'||status==='miss'){
+    resultPct = prompt('實際報酬率（例如 +12.5% 或 -5.2%）：') || '';
+  }
+  var update = { status, updated_at: new Date().toISOString() };
+  if(resultPct) update.result_pct = resultPct;
+  await _supabase.from('inferences').update(update).eq('id', id);
+  loadInferences();
+}
+
+async function editInference(id){
+  var result = await _supabase.from('inferences').select('*').eq('id', id).single();
+  if(result.error) return;
+  var item = result.data;
+  document.getElementById('inf-edit-id').value = item.id;
+  document.getElementById('inf-ticker').value = item.ticker;
+  document.getElementById('inf-title').value = item.title;
+  document.getElementById('inf-body').value = item.body||'';
+  document.getElementById('inf-target').value = item.target_price||'';
+  document.getElementById('inf-stop').value = item.stop_loss||'';
+  document.getElementById('inf-confidence').value = item.confidence||'MED';
+  document.getElementById('inference-modal-title').textContent = '編輯推演記錄';
+  document.getElementById('inferenceModal').classList.add('open');
+}
+
+async function deleteInference(id){
+  if(!confirm('確定刪除這筆推演記錄？')) return;
+  await _supabase.from('inferences').delete().eq('id', id);
+  loadInferences();
+}
+// ── End 推演記錄 ───────────────────────────────────
 async function loadWatchlist(){
   if(!currentUser) return;
   document.getElementById('wl-user-email').textContent = currentUser.email;
@@ -633,9 +759,9 @@ async function loadWatchlist(){
   var items = result.data || [];
   renderWatchlist(items, dailyData);
   // 自動產生 Morning Brief
-  if(items.length > 0){
-    generateMorningBrief(items, dailyData);
-  }
+  generateMorningBrief(items, dailyData);
+  // 載入推演記錄
+  loadInferences();
 }
 
 function renderWatchlist(items, dailyData){
