@@ -234,6 +234,16 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .logo-link{transition:opacity .2s,transform .2s;display:inline-flex;}
 .logo-link:hover{opacity:.75;transform:scale(1.04);}
 
+/* ── 組合風險雷達 ── */
+.risk-dim{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--gray-100);}
+.risk-dim:last-child{border-bottom:none;}
+.risk-dim-name{font-size:12px;font-weight:600;color:var(--gray-700);width:80px;flex-shrink:0;font-family:var(--font-zh);}
+.risk-dim-bar{flex:1;}
+.risk-dim-track{background:var(--gray-200);border-radius:20px;height:8px;overflow:hidden;}
+.risk-dim-fill{height:100%;border-radius:20px;transition:width .5s;}
+.risk-dim-score{font-size:13px;font-weight:700;width:32px;text-align:right;flex-shrink:0;}
+.risk-suggestion{margin-top:12px;padding:10px 12px;background:var(--amber-50);border-radius:8px;border-left:3px solid var(--amber-600);}
+
 /* ── 不對稱機會 ── */
 .opp-card{padding:14px 0;border-bottom:1px solid var(--gray-100);}
 .opp-card:last-child{border-bottom:none;}
@@ -498,6 +508,17 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.06em;margin-bottom:8px;">各標的勝率</div>
           <div id="wr-ticker-list"></div>
         </div>
+      </div>
+    </div>
+
+    <!-- 組合風險雷達 -->
+    <div class="section-block" style="margin-bottom:16px;">
+      <div class="section-block-header">
+        <div class="sbh-title">組合風險雷達 <span class="sbh-title-en">RISK RADAR</span></div>
+        <span class="sbh-badge" id="risk-overall" style="background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);">評估中</span>
+      </div>
+      <div id="risk-content" style="padding:16px 20px;">
+        <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
       </div>
     </div>
 
@@ -1111,6 +1132,106 @@ async function loadOpportunities(){
   }
 }
 // ── End 不對稱機會 ─────────────────────────────────
+
+// ── 組合風險雷達 ──────────────────────────────────────
+async function loadRiskRadar(watchlistItems){
+  var el = document.getElementById('risk-content');
+  var badge = document.getElementById('risk-overall');
+  if(!el) return;
+
+  if(!watchlistItems || !watchlistItems.length){
+    el.innerHTML = '<div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">新增自選標的後即可查看風險評估</div>';
+    return;
+  }
+
+  try {
+    var res = await fetch('/data/daily.json');
+    var d = await res.json();
+    var signals = d.signals || [];
+    var macro = d.macro || [];
+    var market = d.market || {};
+
+    // ① 集中度風險
+    var catCount = {us:0, tw:0, crypto:0};
+    watchlistItems.forEach(function(item){ if(catCount[item.category]!==undefined) catCount[item.category]++; });
+    var total = watchlistItems.length;
+    var maxCat = Math.max(catCount.us, catCount.tw, catCount.crypto);
+    var concentrationScore = total > 0 ? Math.round((maxCat/total)*100) : 50;
+
+    // ② 相關性風险
+    var semiTickers = ['NVDA','TSM','AMD','INTC','2330','2454','2303'];
+    var semiCount = watchlistItems.filter(function(i){ return semiTickers.includes(i.ticker); }).length;
+    var correlationScore = total > 0 ? Math.min(100, Math.round((semiCount/total)*100) + 20) : 50;
+
+    // ③ 宏觀逆風風險
+    var bearSignals = signals.filter(function(s){ return s.signal==='bear'; }).length;
+    var watchSignals = signals.filter(function(s){ return s.signal==='watch'; }).length;
+    var macroScore = Math.min(100, Math.round((bearSignals*25) + (watchSignals*10)));
+
+    // ④ 流動性風險
+    var cryptoItems = watchlistItems.filter(function(i){ return i.category==='crypto'; });
+    var smallCrypto = cryptoItems.filter(function(i){ return !['BTC','ETH','SOL','BNB'].includes(i.ticker); });
+    var liquidityScore = Math.min(100, (smallCrypto.length * 20) + (catCount.tw * 5));
+
+    // ⑤ 波動性風險
+    var allStocks = (market.us_stocks||[]).concat(market.tw_stocks||[]).concat(market.crypto||[]);
+    var myStocks = watchlistItems.map(function(item){
+      return allStocks.find(function(s){ return (s.ticker||s.symbol)===item.ticker; });
+    }).filter(Boolean);
+    var downCount = myStocks.filter(function(s){ return s.dir==='down'; }).length;
+    var volatilityScore = myStocks.length > 0 ? Math.round((downCount/myStocks.length)*60 + macroScore*0.4) : 50;
+
+    var dims = [
+      {name:'集中度', score: concentrationScore, tip:'建議分散至不同板塊'},
+      {name:'相關性', score: correlationScore, tip:'標的間相關性過高'},
+      {name:'宏觀逆風', score: macroScore, tip:'當前宏觀環境評估'},
+      {name:'流動性', score: liquidityScore, tip:'冷門標的流動性風險'},
+      {name:'波動性', score: volatilityScore, tip:'組合整體波動評估'},
+    ];
+
+    var avgScore = Math.round(dims.reduce(function(a,b){ return a+b.score; },0) / dims.length);
+    var overallLabel = avgScore >= 70 ? '高風險' : avgScore >= 45 ? '中風險' : '低風險';
+    var overallColor = avgScore >= 70 ? 'var(--red-600)' : avgScore >= 45 ? 'var(--amber-600)' : 'var(--green-600)';
+    var overallBg = avgScore >= 70 ? 'var(--red-100)' : avgScore >= 45 ? 'var(--amber-100)' : 'var(--green-100)';
+
+    if(badge){
+      badge.textContent = overallLabel+' '+avgScore;
+      badge.style.color = overallColor;
+      badge.style.background = overallBg;
+      badge.style.border = '1px solid '+overallColor+'44';
+    }
+
+    // 找出最高風險維度給建議
+    var maxDim = dims.reduce(function(a,b){ return a.score>b.score?a:b; });
+    var suggestions = [];
+    if(concentrationScore > 60) suggestions.push('集中度過高，建議加入其他板塊標的');
+    if(correlationScore > 60) suggestions.push('半導體持倉過重，考慮加入防禦性資產');
+    if(macroScore > 40) suggestions.push('當前宏觀逆風，建議控制倉位');
+    if(liquidityScore > 40) suggestions.push('部分標的流動性較低，注意風險');
+
+    el.innerHTML =
+      dims.map(function(dim){
+        var dc = dim.score>=70?'var(--red-600)':dim.score>=45?'var(--amber-600)':'var(--green-600)';
+        return '<div class="risk-dim">'+
+          '<div class="risk-dim-name">'+dim.name+'</div>'+
+          '<div class="risk-dim-bar">'+
+            '<div class="risk-dim-track">'+
+              '<div class="risk-dim-fill" style="width:'+dim.score+'%;background:'+dc+';"></div>'+
+            '</div>'+
+          '</div>'+
+          '<div class="risk-dim-score" style="color:'+dc+';">'+dim.score+'</div>'+
+        '</div>';
+      }).join('') +
+      (suggestions.length ? '<div class="risk-suggestion">'+
+        '<div style="font-size:11px;font-weight:700;color:var(--amber-700);margin-bottom:4px;">建議</div>'+
+        suggestions.map(function(s){ return '<div style="font-size:12px;color:var(--amber-700);margin:2px 0;">• '+s+'</div>'; }).join('')+
+      '</div>' : '');
+
+  } catch(e){
+    el.innerHTML = '<div style="color:var(--red-600);padding:10px;">載入失敗：'+e.message+'</div>';
+  }
+}
+// ── End 組合風險雷達 ───────────────────────────────────
 async function loadWatchlist(){
   if(!currentUser) return;
   document.getElementById('wl-user-email').textContent = currentUser.email;
@@ -1143,6 +1264,8 @@ async function loadWatchlist(){
   loadConsensusMeter(items);
   // 載入不對稱機會
   loadOpportunities();
+  // 載入組合風險雷達
+  loadRiskRadar(items);
 }
 
 function renderWatchlist(items, dailyData){
