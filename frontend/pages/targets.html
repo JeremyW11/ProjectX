@@ -333,6 +333,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <span style="font-size:12px;color:var(--gray-400);font-weight:400;" id="wl-user-email"></span>
       </div>
       <div class="wl-actions">
+        <span id="credits-display" style="font-size:11px;color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:20px;font-family:var(--font-en);">⚡ — 點</span>
         <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
         <button class="btn-outline-sm" onclick="signOutUser()" style="color:var(--red-600);border-color:var(--red-100);">登出</button>
       </div>
@@ -559,9 +560,12 @@ function setAuthState(user){
 }
 
 async function checkProStatus(user, gateEl, viewEl){
-  var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
+  var result = await _supabase.from('profiles').select('is_pro,subscription_credits,purchased_credits,credits_reset_date').eq('id', user.id).single();
   var isPro = result.data && result.data.is_pro === true;
   currentUser.isPro = isPro;
+  currentUser.subCredits = (result.data && result.data.subscription_credits) || 0;
+  currentUser.purCredits = (result.data && result.data.purchased_credits) || 0;
+  currentUser.totalCredits = currentUser.subCredits + currentUser.purCredits;
   if(isPro){
     if(gateEl) gateEl.style.display='none';
     if(viewEl) viewEl.classList.add('active');
@@ -833,9 +837,37 @@ async function loadSignalAndWinrate(){
   }
 }
 // ── End 勝率儀表板 ─────────────────────────────────
+
+// ── 點數系統 ──────────────────────────────────────
+async function deductCredits(amount){
+  if(!currentUser) return false;
+  var total = (currentUser.subCredits||0) + (currentUser.purCredits||0);
+  if(total < amount){
+    alert('點數不足（剩餘 '+total+' 點，需要 '+amount+' 點）\n請聯繫客服儲值：jermy831102@gmail.com');
+    return false;
+  }
+  var result = await _supabase.rpc('deduct_credits', { user_uuid: currentUser.id, amount: amount });
+  if(result.error || !result.data.success){
+    alert('點數扣除失敗：'+(result.data?.error||result.error?.message||'未知錯誤'));
+    return false;
+  }
+  // 更新本地點數
+  currentUser.subCredits = result.data.subscription_credits_remaining;
+  currentUser.purCredits = result.data.purchased_credits_remaining;
+  currentUser.totalCredits = currentUser.subCredits + currentUser.purCredits;
+  updateCreditsDisplay();
+  return true;
+}
+
+function updateCreditsDisplay(){
+  var el = document.getElementById('credits-display');
+  if(el && currentUser) el.textContent = '⚡ '+(currentUser.totalCredits||0)+' 點';
+}
+// ── End 點數系統 ───────────────────────────────────
 async function loadWatchlist(){
   if(!currentUser) return;
   document.getElementById('wl-user-email').textContent = currentUser.email;
+  updateCreditsDisplay();
 
   // 載入 daily.json 價格資料
   var dailyData = {};
@@ -940,6 +972,9 @@ async function analyzeTarget(e, ticker, category, id){
     return;
   }
 
+  // 扣除1點
+  var ok = await deductCredits(1);
+  if(!ok){ btn.disabled=false; return; }
   btn.textContent = '分析中...';
   btn.disabled = true;
   resultEl.style.display = 'block';
