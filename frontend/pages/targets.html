@@ -234,6 +234,17 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .logo-link{transition:opacity .2s,transform .2s;display:inline-flex;}
 .logo-link:hover{opacity:.75;transform:scale(1.04);}
 
+/* ── 不對稱機會 ── */
+.opp-card{padding:14px 0;border-bottom:1px solid var(--gray-100);}
+.opp-card:last-child{border-bottom:none;}
+.opp-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;}
+.opp-ticker{font-family:var(--font-en);font-size:15px;font-weight:700;color:var(--gray-900);}
+.opp-name{font-size:11px;color:var(--gray-400);font-family:var(--font-zh);margin-left:6px;}
+.opp-conf{font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;font-family:var(--font-en);}
+.opp-thesis{font-size:13px;color:var(--gray-700);line-height:1.6;margin-bottom:6px;font-family:var(--font-zh);}
+.opp-meta{display:flex;gap:8px;flex-wrap:wrap;}
+.opp-tag{font-size:11px;padding:2px 8px;border-radius:4px;font-family:var(--font-zh);}
+
 /* ── 共識溫度計 ── */
 .consensus-item{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--gray-100);}
 .consensus-item:last-child{border-bottom:none;}
@@ -487,6 +498,17 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.06em;margin-bottom:8px;">各標的勝率</div>
           <div id="wr-ticker-list"></div>
         </div>
+      </div>
+    </div>
+
+    <!-- 不對稱機會 -->
+    <div class="section-block" style="margin-bottom:16px;">
+      <div class="section-block-header">
+        <div class="sbh-title">不對稱機會 <span class="sbh-title-en">OPPORTUNITIES</span></div>
+        <span class="sbh-badge" id="opp-date" style="background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);font-size:10px;font-family:var(--font-en);"></span>
+      </div>
+      <div id="opp-list" style="padding:0 20px 8px;">
+        <div style="text-align:center;padding:30px 20px;color:var(--gray-400);font-size:13px;">今日機會尚未產出，請明日 Trigger 後查看</div>
       </div>
     </div>
 
@@ -1033,6 +1055,62 @@ async function loadConsensusMeter(watchlistItems){
   }).join('');
 }
 // ── End 共識溫度計 ─────────────────────────────────
+
+// ── 不對稱機會 ──────────────────────────────────────
+async function loadOpportunities(){
+  var el = document.getElementById('opp-list');
+  var dateEl = document.getElementById('opp-date');
+  if(!el) return;
+
+  try {
+    var res = await fetch('/data/daily.json');
+    var d = await res.json();
+    var opps = d.opportunities || [];
+    var date = d.date || '';
+
+    if(dateEl) dateEl.textContent = new Date(date+'T00:00:00').toLocaleDateString('zh-TW',{month:'long',day:'numeric'});
+
+    if(!opps.length){
+      el.innerHTML = '<div style="text-align:center;padding:30px 20px;color:var(--gray-400);font-size:13px;">今日機會尚未產出</div>';
+      return;
+    }
+
+    var confColor = {HIGH:'var(--green-600)',MED:'var(--amber-600)',LOW:'var(--gray-400)'};
+    var confBg = {HIGH:'var(--green-100)',MED:'var(--amber-100)',LOW:'var(--gray-100)'};
+    var catLabel = {us:'美股',tw:'台股',crypto:'加密',sector:'板塊'};
+    var catColor = {us:'var(--navy-600)',tw:'var(--purple-600,#7c3aed)',crypto:'var(--amber-600)',sector:'var(--green-600)'};
+    var catBg = {us:'var(--navy-50)',tw:'var(--purple-100,#ede9fe)',crypto:'var(--amber-100)',sector:'var(--green-100)'};
+
+    el.innerHTML = opps.map(function(opp, i){
+      var cc = confColor[opp.confidence]||'var(--gray-400)';
+      var cb = confBg[opp.confidence]||'var(--gray-100)';
+      var cat = opp.category||'us';
+      return '<div class="opp-card">'+
+        '<div class="opp-top">'+
+          '<div style="display:flex;align-items:baseline;gap:6px;">'+
+            '<span style="font-size:12px;color:var(--gray-400);font-family:var(--font-en);font-weight:600;">'+(i+1)+'.</span>'+
+            '<span class="opp-ticker">'+opp.ticker+'</span>'+
+            '<span class="opp-name">'+opp.name+'</span>'+
+          '</div>'+
+          '<div style="display:flex;gap:6px;align-items:center;">'+
+            '<span class="opp-tag" style="background:'+catBg[cat]+';color:'+catColor[cat]+';">'+catLabel[cat]+'</span>'+
+            '<span class="opp-conf" style="background:'+cb+';color:'+cc+';">'+opp.confidence+'</span>'+
+          '</div>'+
+        '</div>'+
+        '<div class="opp-thesis">'+opp.thesis+'</div>'+
+        '<div class="opp-meta">'+
+          (opp.catalyst?'<span class="opp-tag" style="background:var(--navy-50);color:var(--navy-600);">⚡ '+opp.catalyst+'</span>':'')+
+          (opp.target?'<span class="opp-tag" style="background:var(--green-100);color:var(--green-700);">🎯 '+opp.target+'</span>':'')+
+          (opp.risk?'<span class="opp-tag" style="background:var(--red-100);color:var(--red-600);">⚠️ '+opp.risk+'</span>':'')+
+          (opp.timeframe?'<span class="opp-tag" style="background:var(--gray-100);color:var(--gray-500);">⏱ '+opp.timeframe+'</span>':'')+
+        '</div>'+
+      '</div>';
+    }).join('');
+  } catch(e){
+    el.innerHTML = '<div style="color:var(--red-600);padding:20px;">載入失敗：'+e.message+'</div>';
+  }
+}
+// ── End 不對稱機會 ─────────────────────────────────
 async function loadWatchlist(){
   if(!currentUser) return;
   document.getElementById('wl-user-email').textContent = currentUser.email;
@@ -1063,6 +1141,8 @@ async function loadWatchlist(){
   loadSignalAndWinrate();
   // 載入共識溫度計
   loadConsensusMeter(items);
+  // 載入不對稱機會
+  loadOpportunities();
 }
 
 function renderWatchlist(items, dailyData){
