@@ -858,6 +858,8 @@ async function loadWatchlist(){
   generateMorningBrief(items, dailyData);
   // 載入推演記錄
   loadInferences();
+  // 載入訊號雷達 + 勝率
+  loadSignalAndWinrate();
 }
 
 function renderWatchlist(items, dailyData){
