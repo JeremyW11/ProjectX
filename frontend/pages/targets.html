@@ -1264,22 +1264,19 @@ async function loadEventTracker(watchlistItems){
   if(!el) return;
 
   try {
-    // 載入事件資料
     var res = await fetch('/data/daily.json');
     var d = await res.json();
     var events = (d.calendar||{}).events || [];
+    var aiPredictions = d.event_predictions || [];
     var todayStr = d.date || '';
 
-    // 載入用戶的事件預判記錄
-    var predResult = await _supabase.from('event_predictions')
-      .select('*').eq('user_id', currentUser.id)
-      .order('created_at', {ascending: false});
-    var predictions = predResult.data || [];
+    var res2 = await fetch('/data/accumulated.json');
+    var acc = await res2.json();
+    var predHistory = acc.prediction_history || [];
 
-    // 自選標的 ticker 列表
     var myTickers = (watchlistItems||[]).map(function(i){ return i.ticker; });
 
-    // 篩選相關事件（影響自選標的 或 high impact）
+    // 篩選相關事件
     var relevantEvents = events.filter(function(ev){
       if(ev.impact === 'high') return true;
       var assets = (ev.affect_assets||'').split(',').map(function(a){ return a.trim(); });
@@ -1288,104 +1285,84 @@ async function loadEventTracker(watchlistItems){
 
     if(countBadge) countBadge.textContent = relevantEvents.length + ' 個相關事件';
 
-    if(!relevantEvents.length){
-      el.innerHTML = '<div style="text-align:center;padding:30px;color:var(--gray-400);font-size:13px;">本週無重大相關事件</div>';
-      return;
-    }
-
     var impactColor = {high:'var(--red-600)',mid:'var(--amber-600)',low:'var(--green-600)'};
     var impactBg = {high:'var(--red-100)',mid:'var(--amber-100)',low:'var(--green-100)'};
+    var dirIcon = {positive:'▲',negative:'▼',neutral:'—'};
+    var dirColor = {positive:'var(--green-600)',negative:'var(--red-600)',neutral:'var(--amber-600)'};
     var accColor = {hit:'var(--green-600)',miss:'var(--red-600)',partial:'var(--amber-600)',pending:'var(--gray-400)'};
-    var accLabel = {hit:'✓ 命中',miss:'✗ 未中',partial:'~ 部分',pending:'⏳ 待驗證'};
+    var accLabel = {hit:'✓ 命中',miss:'✗ 未中',partial:'~ 部分命中',pending:'⏳ 待驗證'};
+    var confColor = {HIGH:'var(--green-600)',MED:'var(--amber-600)',LOW:'var(--gray-400)'};
 
-    el.innerHTML = relevantEvents.map(function(ev){
+    var eventsHTML = relevantEvents.length ? relevantEvents.map(function(ev){
       var isPast = ev.date < todayStr;
       var isToday = ev.date === todayStr;
+      var dateLabel = isToday ? 'TODAY' : isPast ? ev.date.slice(5)+' 已過' : ev.date.slice(5);
+      var dateBg = isToday ? 'var(--navy-700)' : isPast ? 'var(--gray-200)' : 'var(--gray-50)';
+      var dateColor = isToday ? '#fff' : isPast ? 'var(--gray-400)' : 'var(--gray-500)';
 
-      // 找對應的預判記錄
-      var pred = predictions.find(function(p){ return p.event_title === ev.title; });
+      // 找 AI 預判
+      var pred = aiPredictions.find(function(p){ return p.event_title === ev.title; });
+      // 找歷史驗證結果
+      var verified = predHistory.find(function(p){ return p.event_title === ev.title; });
 
-      // 影響的自選標的
       var assets = (ev.affect_assets||'').split(',').map(function(a){ return a.trim(); });
       var myAffected = myTickers.filter(function(t){
         return assets.some(function(a){ return a.includes(t)||t.includes(a); });
       });
 
-      var dateLabel = isToday ? '今天' : isPast ? ev.date.slice(5) + ' 已過' : ev.date.slice(5);
-      var dateLabelColor = isToday ? 'var(--navy-600)' : isPast ? 'var(--gray-300)' : 'var(--gray-400)';
-
       return '<div class="event-track-card">'+
-        '<div class="et-header">'+
-          '<div style="flex:1;">'+
-            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'+
-              '<span class="et-date" style="color:'+dateLabelColor+';">'+dateLabel+'</span>'+
-              '<span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;background:'+(impactBg[ev.impact]||'var(--gray-100)')+';color:'+(impactColor[ev.impact]||'var(--gray-400)')+';">'+(ev.impact||'').toUpperCase()+'</span>'+
-              (isToday?'<span style="font-size:10px;background:var(--navy-700);color:#fff;padding:2px 7px;border-radius:3px;">TODAY</span>':'')+
-            '</div>'+
-            '<div class="et-title">'+ev.title+'</div>'+
-            (ev.desc?'<div class="et-desc">'+ev.desc+'</div>':'')+
-          '</div>'+
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">'+
+          '<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;background:'+dateBg+';color:'+dateColor+';">'+dateLabel+'</span>'+
+          '<span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;background:'+(impactBg[ev.impact]||'var(--gray-100)')+';color:'+(impactColor[ev.impact]||'var(--gray-500)')+';">'+(ev.impact||'').toUpperCase()+'</span>'+
         '</div>'+
-        (myAffected.length?'<div class="et-tickers">'+
+        '<div class="et-title">'+ev.title+'</div>'+
+        (ev.desc?'<div class="et-desc">'+ev.desc+'</div>':'')+
+        (myAffected.length?'<div class="et-tickers" style="margin:4px 0;">'+
           '<span style="font-size:11px;color:var(--gray-400);">影響你的標的：</span>'+
-          myAffected.map(function(t){
-            return '<span class="et-ticker-tag" style="background:var(--navy-50);color:var(--navy-700);">'+t+'</span>';
-          }).join('')+
+          myAffected.map(function(t){ return '<span class="et-ticker-tag" style="background:var(--navy-50);color:var(--navy-700);">'+t+'</span>'; }).join('')+
         '</div>':'')+
-        (ev.watch?'<div style="font-size:11px;color:var(--amber-700);margin-bottom:6px;">👁 '+ev.watch+'</div>':'')+
-        '<div class="et-prediction">'+
-          (pred ?
-            '<span class="et-pred-label">預判：'+pred.prediction_note+'</span>'+
-            '<span class="et-acc-badge" style="background:'+(accColor[pred.accuracy]||'var(--gray-400)')+'22;color:'+(accColor[pred.accuracy]||'var(--gray-400)')+';">'+(accLabel[pred.accuracy]||'待驗證')+'</span>'+
-            (isPast && pred.accuracy==='pending' ?
-              '<button data-evid="'+pred.id+'" onclick="updateEventAccuracy(this.dataset.evid)" style="font-size:11px;padding:2px 8px;border:1px solid var(--gray-300);border-radius:4px;color:var(--gray-500);background:none;cursor:pointer;">更新結果</button>' : ''
-            )
-          :
-            '<button data-evtitle="'+ev.title+'" data-evdate="'+ev.date+'" data-evtype="'+(ev.type||'')+'" onclick="addEventPrediction(this.dataset.evtitle,this.dataset.evdate,this.dataset.evtype)" style="font-size:11px;padding:2px 8px;border:1px solid var(--navy-200,#c7d7fd);border-radius:4px;color:var(--navy-600);background:var(--navy-50);cursor:pointer;">+ 記錄預判</button>'
-          )+
-        '</div>'+
+        // AI 預判區塊
+        (pred ?
+          '<div style="margin-top:8px;padding:8px 10px;background:var(--navy-50);border-radius:7px;border-left:3px solid var(--navy-400);">'+
+            '<div style="font-size:10px;font-weight:700;color:var(--navy-500);margin-bottom:4px;font-family:var(--font-en);">AI PREDICTION</div>'+
+            '<div style="font-size:12px;color:var(--gray-700);margin-bottom:5px;">'+pred.prediction+'</div>'+
+            '<div style="display:flex;gap:8px;flex-wrap:wrap;">'+
+              '<span style="font-size:11px;font-weight:700;color:'+(dirColor[pred.direction]||'var(--gray-500)')+';">'+(dirIcon[pred.direction]||'—')+' '+(pred.direction||'')+'</span>'+
+              '<span style="font-size:11px;color:var(--gray-400);">幅度：'+(pred.magnitude||'—')+'</span>'+
+              '<span style="font-size:11px;font-weight:700;color:'+(confColor[pred.confidence]||'var(--gray-400)')+';">'+pred.confidence+'</span>'+
+            '</div>'+
+            (pred.reasoning?'<div style="font-size:11px;color:var(--gray-400);margin-top:3px;">根據：'+pred.reasoning+'</div>':'')+
+            // 顯示驗證結果
+            (verified ?
+              '<div style="margin-top:6px;padding:5px 8px;border-radius:5px;background:'+(accColor[verified.accuracy]||'var(--gray-200)')+'22;">'+
+                '<span style="font-size:11px;font-weight:700;color:'+(accColor[verified.accuracy]||'var(--gray-400)')+';">'+(accLabel[verified.accuracy]||'待驗證')+'</span>'+
+                (verified.actual_result?'<span style="font-size:11px;color:var(--gray-500);margin-left:6px;">'+verified.actual_result+'</span>':'')+
+              '</div>' : ''
+            )+
+          '</div>'
+        : '<div style="margin-top:6px;font-size:11px;color:var(--gray-400);">AI 預判將於下次 Trigger 後產出</div>')+
       '</div>';
-    }).join('');
+    }).join('') : '<div style="text-align:center;padding:30px;color:var(--gray-400);font-size:13px;">本週無重大相關事件</div>';
+
+    // 命中率統計
+    var totalPred = predHistory.length;
+    var hitPred = predHistory.filter(function(p){ return p.accuracy==='hit'; }).length;
+    var partialPred = predHistory.filter(function(p){ return p.accuracy==='partial'; }).length;
+    var closedPred = predHistory.filter(function(p){ return p.accuracy!=='pending'; }).length;
+    var hitRate = closedPred > 0 ? Math.round((hitPred + partialPred*0.5)/closedPred*100) : null;
+
+    var statsHTML = totalPred > 0 ?
+      '<div style="margin-bottom:12px;padding:10px 12px;background:var(--gray-50);border-radius:8px;display:flex;gap:16px;align-items:center;">'+
+        '<div style="font-size:11px;color:var(--gray-400);">AI 預判歷史命中率</div>'+
+        '<div style="font-size:18px;font-weight:700;color:'+(hitRate>=60?'var(--green-600)':hitRate>=40?'var(--amber-600)':'var(--red-600)')+';">'+(hitRate!==null?hitRate+'%':'—')+'</div>'+
+        '<div style="font-size:11px;color:var(--gray-400);">共 '+closedPred+' 筆結案</div>'+
+      '</div>' : '';
+
+    el.innerHTML = statsHTML + eventsHTML;
 
   } catch(e){
     el.innerHTML = '<div style="color:var(--red-600);padding:10px;">載入失敗：'+e.message+'</div>';
   }
-}
-
-async function addEventPrediction(title, date, type){
-  var note = prompt('你對「'+title+'」的預判是？\n（例如：利多美股，預期SPY上漲1-2%）');
-  if(!note) return;
-  var direction = prompt('方向？輸入 positive / negative / neutral');
-  if(!['positive','negative','neutral'].includes(direction)) direction = 'neutral';
-  var magnitude = prompt('幅度？輸入 large / medium / small');
-  if(!['large','medium','small'].includes(magnitude)) magnitude = 'medium';
-
-  var result = await _supabase.from('event_predictions').insert({
-    user_id: currentUser.id,
-    event_date: date,
-    event_title: title,
-    event_type: type,
-    prediction_direction: direction,
-    prediction_magnitude: magnitude,
-    prediction_note: note,
-    accuracy: 'pending'
-  });
-
-  if(result.error){ alert('儲存失敗：'+result.error.message); return; }
-  await loadWatchlist();
-}
-
-async function updateEventAccuracy(id){
-  var accuracy = prompt('實際結果？輸入 hit / miss / partial');
-  if(!['hit','miss','partial'].includes(accuracy)) return;
-  var actual = prompt('實際市場反應（簡述）：') || '';
-
-  await _supabase.from('event_predictions').update({
-    accuracy: accuracy,
-    actual_result: actual
-  }).eq('id', id);
-
-  await loadWatchlist();
 }
 // ── End 事件驅動追蹤 ───────────────────────────────────
 async function loadWatchlist(){
