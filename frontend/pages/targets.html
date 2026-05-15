@@ -387,8 +387,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <span style="font-size:12px;color:var(--gray-400);font-weight:400;" id="wl-user-email"></span>
       </div>
       <div class="wl-actions">
-        <span id="credits-display" style="font-size:11px;color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:20px;font-family:var(--font-en);">⚡ — 點</span>
-        <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
         <button class="btn-outline-sm" onclick="signOutUser()" style="color:var(--red-600);border-color:var(--red-100);">登出</button>
       </div>
     </div>
@@ -471,7 +469,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
     <div class="tab-panel" id="tab-watchlist">
     <!-- ═══ 我的自選標的 ═══ -->
-    <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;margin:20px 0 12px;font-family:var(--font-en);">🎯 我的自選標的</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px;">
+      <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-en);">🎯 我的自選標的</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span id="credits-display" style="font-size:11px;color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:20px;font-family:var(--font-en);">⚡ — 點</span>
+        <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
+      </div>
+    </div>
     <div class="target-grid" id="target-grid">
     </div><!-- end target-grid -->
 
