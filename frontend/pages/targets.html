@@ -234,6 +234,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .logo-link{transition:opacity .2s,transform .2s;display:inline-flex;}
 .logo-link:hover{opacity:.75;transform:scale(1.04);}
 
+/* ── 主題 Tab ── */
+.main-tabs{display:flex;gap:0;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:4px;margin-bottom:20px;box-shadow:var(--shadow-card);width:fit-content;}
+.main-tab-btn{padding:8px 24px;border-radius:var(--r-md);font-size:13.5px;font-weight:500;color:var(--gray-500);transition:all .15s;cursor:pointer;font-family:var(--font-zh);border:none;background:none;}
+.main-tab-btn:hover{color:var(--navy-700);background:var(--navy-50);}
+.main-tab-btn.active{background:var(--navy-700);color:var(--white);box-shadow:0 2px 8px rgba(29,45,90,.2);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
 /* ── 事件驅動追蹤 ── */
 .event-track-card{padding:12px 0;border-bottom:1px solid var(--gray-100);}
 .event-track-card:last-child{border-bottom:none;}
@@ -402,6 +410,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </div>
 
     <!-- Target cards grid -->
+    <!-- 主題 Tab -->
+    <div class="main-tabs">
+      <button class="main-tab-btn active" onclick="switchMainTab('tab-daily',this)">📡 今日情報</button>
+      <button class="main-tab-btn" onclick="switchMainTab('tab-watchlist',this)">🎯 自選觀察</button>
+    </div>
+
+    <!-- 今日情報 Tab -->
+    <div class="tab-panel active" id="tab-daily">
     <!-- ═══ 每日市場情報 ═══ -->
     <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;margin:8px 0 12px;font-family:var(--font-en);">📡 每日市場情報</div>
     <div class="section-block" id="morning-brief-block" style="margin-bottom:16px;display:none;">
@@ -450,33 +466,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       </div>
     </div>
 
-    <!-- ═══ 我的自選標的 ═══ -->
-    <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;margin:20px 0 12px;font-family:var(--font-en);">🎯 我的自選標的</div>
-    <div class="target-grid" id="target-grid">
-    </div><!-- end target-grid -->
-
-    <!-- Morning Brief -->
-    <!-- 共識溫度計 -->
-    <div class="section-block" style="margin-bottom:16px;">
-      <div class="section-block-header">
-        <div class="sbh-title">共識溫度計 <span class="sbh-title-en">CONSENSUS METER</span></div>
-        <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">自選標的 · 免費</span>
-      </div>
-      <div id="consensus-list" style="padding:16px 20px;">
-        <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
-      </div>
-    </div>
-
-    <!-- 組合風險雷達 -->
-    <div class="section-block" style="margin-bottom:16px;">
-      <div class="section-block-header">
-        <div class="sbh-title">組合風險雷達 <span class="sbh-title-en">RISK RADAR</span></div>
-        <span class="sbh-badge" id="risk-overall" style="background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);">評估中</span>
-      </div>
-      <div id="risk-content" style="padding:16px 20px;">
-        <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
-      </div>
-    </div>
 
     <!-- ═══ 我的記錄 ═══ -->
     <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;margin:20px 0 12px;font-family:var(--font-en);">📝 我的記錄</div>
@@ -572,6 +561,42 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <div id="wr-ticker-list"></div>
         </div>
       </div>
+    </div>
+
+
+    </div>
+
+    <!-- 自選觀察 Tab -->
+    <div class="tab-panel" id="tab-watchlist">
+    <!-- ═══ 我的自選標的 ═══ -->
+    <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;margin:20px 0 12px;font-family:var(--font-en);">🎯 我的自選標的</div>
+    <div class="target-grid" id="target-grid">
+    </div><!-- end target-grid -->
+
+    <!-- Morning Brief -->
+    <!-- 共識溫度計 -->
+    <div class="section-block" style="margin-bottom:16px;">
+      <div class="section-block-header">
+        <div class="sbh-title">共識溫度計 <span class="sbh-title-en">CONSENSUS METER</span></div>
+        <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">自選標的 · 免費</span>
+      </div>
+      <div id="consensus-list" style="padding:16px 20px;">
+        <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
+      </div>
+    </div>
+
+    <!-- 組合風險雷達 -->
+    <div class="section-block" style="margin-bottom:16px;">
+      <div class="section-block-header">
+        <div class="sbh-title">組合風險雷達 <span class="sbh-title-en">RISK RADAR</span></div>
+        <span class="sbh-badge" id="risk-overall" style="background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);">評估中</span>
+      </div>
+      <div id="risk-content" style="padding:16px 20px;">
+        <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
+      </div>
+    </div>
+
+
     </div>
 
   </div><!-- end targets-view -->
@@ -1595,6 +1620,13 @@ async function addWatchlistItem(){
   document.getElementById('add-sym').value='';
   document.getElementById('add-note').value='';
   loadWatchlist();
+}
+
+function switchMainTab(tabId, btn){
+  document.querySelectorAll('.main-tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById(tabId).classList.add('active');
 }
 
 initAuth();
