@@ -233,6 +233,18 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 .logo-link{transition:opacity .2s,transform .2s;display:inline-flex;}
 .logo-link:hover{opacity:.75;transform:scale(1.04);}
+
+/* ── 共識溫度計 ── */
+.consensus-item{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--gray-100);}
+.consensus-item:last-child{border-bottom:none;}
+.cs-ticker{font-family:var(--font-en);font-size:14px;font-weight:700;color:var(--gray-900);width:52px;flex-shrink:0;}
+.cs-meter{flex:1;}
+.cs-label{display:flex;justify-content:space-between;font-size:11px;color:var(--gray-500);margin-bottom:4px;}
+.cs-bar-track{background:var(--gray-200);border-radius:20px;height:10px;overflow:hidden;position:relative;}
+.cs-bar-fill{height:100%;border-radius:20px;transition:width .6s;}
+.cs-score{font-family:var(--font-en);font-size:16px;font-weight:700;width:40px;text-align:right;flex-shrink:0;}
+.cs-dims{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap;}
+.cs-dim{font-size:10px;padding:2px 6px;border-radius:3px;font-family:var(--font-en);}
 </style>
 </head>
 <body>
@@ -475,6 +487,17 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.06em;margin-bottom:8px;">各標的勝率</div>
           <div id="wr-ticker-list"></div>
         </div>
+      </div>
+    </div>
+
+    <!-- 共識溫度計 -->
+    <div class="section-block" style="margin-bottom:16px;">
+      <div class="section-block-header">
+        <div class="sbh-title">共識溫度計 <span class="sbh-title-en">CONSENSUS METER</span></div>
+        <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">自選標的 · 免費</span>
+      </div>
+      <div id="consensus-list" style="padding:16px 20px;">
+        <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
       </div>
     </div>
 
@@ -864,6 +887,152 @@ function updateCreditsDisplay(){
   if(el && currentUser) el.textContent = '⚡ '+(currentUser.totalCredits||0)+' 點';
 }
 // ── End 點數系統 ───────────────────────────────────
+
+// ── 共識溫度計 ──────────────────────────────────────
+async function loadConsensusMeter(watchlistItems){
+  var el = document.getElementById('consensus-list');
+  if(!el || !watchlistItems || !watchlistItems.length){
+    if(el) el.innerHTML = '<div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">新增自選標的後即可查看共識溫度</div>';
+    return;
+  }
+
+  // 載入 daily.json + accumulated.json
+  var dailyData = {}, accResearch = [], accEarnings = [], signals = [];
+  try {
+    var r1 = await fetch('/data/daily.json');
+    var d1 = await r1.json();
+    var m = d1.market || {};
+    (m.us_stocks||[]).forEach(function(s){ dailyData[s.ticker] = s; });
+    (m.tw_stocks||[]).forEach(function(s){ dailyData[s.ticker] = s; });
+    (m.crypto||[]).forEach(function(s){ dailyData[s.symbol] = s; });
+    signals = d1.signals || [];
+
+    var r2 = await fetch('/data/accumulated.json');
+    var d2 = await r2.json();
+    accResearch = d2.research || [];
+    accEarnings = d2.earnings || [];
+  } catch(e){ console.log('consensus data error', e); }
+
+  function calcConsensus(ticker){
+    var scores = {};
+
+    // ① 機構研報維度（0-100）
+    var related = accResearch.filter(function(r){ return r.ticker === ticker; });
+    if(related.length){
+      var rScore = 50;
+      related.slice(0,3).forEach(function(r){
+        if(r.rating_type==='buy'||r.rating_type==='outperform') rScore += 15;
+        else if(r.rating_type==='sell') rScore -= 15;
+        if(r.rating_change==='上調') rScore += 10;
+        else if(r.rating_change==='下調') rScore -= 10;
+      });
+      scores.research = Math.max(0, Math.min(100, rScore));
+    } else {
+      scores.research = null;
+    }
+
+    // ② 新聞情緒維度（0-100）
+    var stock = dailyData[ticker];
+    if(stock){
+      var nScore = 50;
+      if(stock.dir==='up') nScore += 15;
+      else if(stock.dir==='down') nScore -= 15;
+      var note = (stock.note||'').toLowerCase();
+      var positiveKW = ['突破','創高','上調','買進','強勢','看多','利多','超預期'];
+      var negativeKW = ['下跌','看空','利空','低迷','風險','警示','賣出','miss'];
+      positiveKW.forEach(function(kw){ if(note.includes(kw)) nScore += 8; });
+      negativeKW.forEach(function(kw){ if(note.includes(kw)) nScore -= 8; });
+      scores.sentiment = Math.max(0, Math.min(100, nScore));
+    } else {
+      scores.sentiment = null;
+    }
+
+    // ③ 技術面維度（0-100）
+    if(stock){
+      var tScore = 50;
+      var tech = (stock.tech_note||'').toLowerCase();
+      var action = (stock.action||'').toLowerCase();
+      var posTech = ['突破','多頭','買進','支撐','強勢'];
+      var negTech = ['壓力','空頭','觀望','弱勢','跌破'];
+      posTech.forEach(function(kw){ if(tech.includes(kw)||action.includes(kw)) tScore += 10; });
+      negTech.forEach(function(kw){ if(tech.includes(kw)||action.includes(kw)) tScore -= 10; });
+      scores.technical = Math.max(0, Math.min(100, tScore));
+    } else {
+      scores.technical = null;
+    }
+
+    // ④ 市場信號維度（0-100）
+    var sigScore = null;
+    signals.forEach(function(s){
+      var nm = s.name.toLowerCase();
+      var tk = ticker.toLowerCase();
+      if(nm.includes('半導體')||nm.includes('ai')) {
+        if(['nvda','tsm','amd','intc','2330','2454'].includes(tk)){
+          sigScore = s.signal==='bull'?75:s.signal==='bear'?25:50;
+        }
+      }
+      if(nm.includes('加密')) {
+        if(['btc','eth','sol','bnb'].includes(tk)){
+          sigScore = s.signal==='bull'?75:s.signal==='bear'?25:50;
+        }
+      }
+    });
+    scores.signal = sigScore;
+
+    // 綜合溫度（加權平均）
+    var validScores = Object.values(scores).filter(function(v){ return v !== null; });
+    var total = validScores.length > 0 ? Math.round(validScores.reduce(function(a,b){ return a+b; },0) / validScores.length) : 50;
+
+    return { total: total, dims: scores };
+  }
+
+  function tempColor(score){
+    if(score >= 75) return 'var(--red-600)';
+    if(score >= 60) return 'var(--amber-600)';
+    if(score >= 40) return 'var(--green-600)';
+    return 'var(--navy-400)';
+  }
+
+  function tempLabel(score){
+    if(score >= 80) return '過熱⚠️';
+    if(score >= 65) return '偏熱';
+    if(score >= 50) return '中性';
+    if(score >= 35) return '偏冷';
+    return '低迷';
+  }
+
+  function dimLabel(key){
+    var m = {research:'研報',sentiment:'情緒',technical:'技術',signal:'信號'};
+    return m[key]||key;
+  }
+
+  el.innerHTML = watchlistItems.map(function(item){
+    var r = calcConsensus(item.ticker);
+    var color = tempColor(r.total);
+    var label = tempLabel(r.total);
+    var dimHtml = Object.entries(r.dims).map(function(kv){
+      if(kv[1]===null) return '';
+      var dc = tempColor(kv[1]);
+      return '<span class="cs-dim" style="background:'+dc+'22;color:'+dc+';">'+dimLabel(kv[0])+' '+kv[1]+'</span>';
+    }).join('');
+
+    return '<div class="consensus-item">'+
+      '<div class="cs-ticker">'+item.ticker+'</div>'+
+      '<div class="cs-meter">'+
+        '<div class="cs-label">'+
+          '<span>'+(item.name||item.ticker)+'</span>'+
+          '<span style="color:'+color+';font-weight:600;">'+label+'</span>'+
+        '</div>'+
+        '<div class="cs-bar-track">'+
+          '<div class="cs-bar-fill" style="width:'+r.total+'%;background:'+color+';"></div>'+
+        '</div>'+
+        '<div class="cs-dims">'+dimHtml+'</div>'+
+      '</div>'+
+      '<div class="cs-score" style="color:'+color+';">'+r.total+'</div>'+
+    '</div>';
+  }).join('');
+}
+// ── End 共識溫度計 ─────────────────────────────────
 async function loadWatchlist(){
   if(!currentUser) return;
   document.getElementById('wl-user-email').textContent = currentUser.email;
@@ -892,6 +1061,8 @@ async function loadWatchlist(){
   loadInferences();
   // 載入訊號雷達 + 勝率
   loadSignalAndWinrate();
+  // 載入共識溫度計
+  loadConsensusMeter(items);
 }
 
 function renderWatchlist(items, dailyData){
