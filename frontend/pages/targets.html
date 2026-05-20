@@ -1521,7 +1521,37 @@ async function analyzeTarget(e, ticker, category, id){
     return;
   }
 
-  // 扣除1點
+  // ── 當日 cache 檢查（不打 API 也要扣 1 點，符合產品邏輯）──
+  var today = new Date().toISOString().slice(0,10);
+  var cacheCheck;
+  try {
+    cacheCheck = await _supabase.from('watchlist')
+      .select('analysis, analysis_date')
+      .eq('id', id)
+      .single();
+  } catch(eCache){ /* cache 查詢失敗時走原流程 */ }
+
+  var hasCachedToday = cacheCheck && cacheCheck.data
+    && cacheCheck.data.analysis
+    && cacheCheck.data.analysis_date === today;
+
+  if(hasCachedToday){
+    // 命中當日 cache：扣 1 點 + 顯示已存內容（不打 API）
+    var okCache = await deductCredits(1);
+    if(!okCache){ btn.disabled=false; return; }
+    var mdCache = cacheCheck.data.analysis
+      .replace(/^#{1,2} (.*?)$/gm, '<div style="font-weight:700;color:var(--navy-800);margin:12px 0 5px;font-size:14px;border-bottom:1px solid var(--navy-100);padding-bottom:3px;">$1</div>')
+      .replace(/^---$/gm, '<hr style="border:none;border-top:1px solid var(--gray-200);margin:8px 0;">')
+      .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--gray-800);">$1</strong>')
+      .replace(/^- (.*?)$/gm, '<div style="padding-left:10px;margin:3px 0;">• $1</div>')
+      .replace(/\n/g, '<br>');
+    resultEl.innerHTML = mdCache;
+    resultEl.style.display = 'block';
+    btn.textContent = '🔼 收起';
+    return;
+  }
+
+  // ── 未命中當日 cache：扣點 + 打 API ──
   var ok = await deductCredits(1);
   if(!ok){ btn.disabled=false; return; }
   btn.textContent = '分析中...';
@@ -1566,7 +1596,8 @@ async function analyzeTarget(e, ticker, category, id){
       resultEl.innerHTML = md;
       resultEl.style.display = 'block';
       btn.textContent = '🔼 收起';
-      await _supabase.from('watchlist').update({ analysis: data.analysis }).eq('id', id);
+      // 寫入時帶上 analysis_date，下次當日點擊可命中 cache
+      await _supabase.from('watchlist').update({ analysis: data.analysis, analysis_date: today }).eq('id', id);
     } else {
       resultEl.textContent = '分析失敗：'+(data.error||'未知錯誤');
       btn.textContent = '🔍 分析';
