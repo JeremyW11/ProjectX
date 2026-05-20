@@ -1536,9 +1536,7 @@ async function analyzeTarget(e, ticker, category, id){
     && cacheCheck.data.analysis_date === today;
 
   if(hasCachedToday){
-    // 命中當日 cache：扣 1 點 + 顯示已存內容（不打 API）
-    var okCache = await deductCredits(1);
-    if(!okCache){ btn.disabled=false; return; }
+    // 命中當日 cache：直接顯示已存內容（不扣點、不打 API）
     var mdCache = cacheCheck.data.analysis
       .replace(/^#{1,2} (.*?)$/gm, '<div style="font-weight:700;color:var(--navy-800);margin:12px 0 5px;font-size:14px;border-bottom:1px solid var(--navy-100);padding-bottom:3px;">$1</div>')
       .replace(/^---$/gm, '<hr style="border:none;border-top:1px solid var(--gray-200);margin:8px 0;">')
