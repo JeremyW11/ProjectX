@@ -36,6 +36,40 @@
     },
     {
       "ticker": "NVDA",
+      "name": "Nvidia",
+      "firm": "Bank of America",
+      "firm_background": "美國四大銀行之一的投行研究部門",
+      "rating": "買入",
+      "rating_type": "buy",
+      "rating_change": "上調",
+      "prev_target": "",
+      "target": "320",
+      "date": "2026-05-19",
+      "note": "基於2030年AI數據中心市場將達1.7兆美元上調目標價",
+      "core_logic": "AI基礎設施長期成長潛力支撐估值",
+      "risk_note": "短期供應限制與高期望風險",
+      "action": "維持買入等待財報確認方向",
+      "_added": "2026-05-20"
+    },
+    {
+      "ticker": "NVDA",
+      "name": "Nvidia",
+      "firm": "Morgan Stanley",
+      "firm_background": "全球頂級投資銀行",
+      "rating": "",
+      "rating_type": "neutral",
+      "rating_change": "維持",
+      "prev_target": "",
+      "target": "",
+      "date": "2026-05-19",
+      "note": "數據中心營收預估與共識存在差距暗示可能有驚喜",
+      "core_logic": "營收預估差距顯示上行空間",
+      "risk_note": "市場預期已高",
+      "action": "關注財報後指引調整",
+      "_added": "2026-05-20"
+    },
+    {
+      "ticker": "NVDA",
       "name": "NVIDIA",
       "firm": "Susquehanna",
       "firm_background": "美國大型衍生品與股票交易機構",
@@ -678,6 +712,23 @@
       "core_logic": "AI晶片需求持續強勁數據中心業務主導",
       "risk_note": "估值過高及供應限制",
       "action": "維持持有或加碼",
+      "_added": "2026-05-20"
+    },
+    {
+      "ticker": "NVDA",
+      "name": "Nvidia",
+      "firm": "Citi",
+      "firm_background": "全球領先跨國投資銀行",
+      "rating": "買入",
+      "rating_type": "buy",
+      "rating_change": "維持",
+      "prev_target": "300",
+      "target": "300",
+      "date": "2026-05-12",
+      "note": "預估銷售達800億美元高於共識786億",
+      "core_logic": "數據中心需求持續強勁超預期",
+      "risk_note": "競爭加劇與客戶自研晶片",
+      "action": "財報前維持持股靜待指引",
       "_added": "2026-05-20"
     },
     {
@@ -2096,7 +2147,7 @@
     {
       "ticker": "COST",
       "name": "Costco",
-      "note": "Q3財報預計公布",
+      "note": "會員制零售龍頭Q3財報將於5月28日公布",
       "eps": "",
       "eps_est": "",
       "eps_result": "",
@@ -2104,9 +2155,9 @@
       "revenue": "",
       "rev_est": "",
       "guidance": "",
-      "market_reaction": "",
-      "key_metric": "會員續約率 同店銷售",
-      "status": "預計5月29日公布",
+      "market_reaction": "待公布",
+      "key_metric": "會員續約率與同店銷售",
+      "status": "5月28日盤後公布",
       "status_type": "upcoming",
       "_added": "2026-05-20"
     }
@@ -3135,6 +3186,48 @@
       "_added": "2026-05-20"
     },
     {
+      "date": "2026-05-20",
+      "time": "14:00ET",
+      "title": "Fed四月會議紀要公布",
+      "desc": "市場關注通膨與利率路徑討論",
+      "type": "fed",
+      "tag": "貨幣政策",
+      "impact": "high",
+      "expect": "維持鷹派基調",
+      "prev": "利率維持3.50-3.75%",
+      "affect_assets": "SPY QQQ TLT BTC",
+      "watch": "降息時點暗示",
+      "_added": "2026-05-20"
+    },
+    {
+      "date": "2026-05-20",
+      "time": "",
+      "title": "Warren要求Meta說明穩定幣計畫",
+      "desc": "參議員要求Meta在今日前回應",
+      "type": "crypto",
+      "tag": "加密監管",
+      "impact": "mid",
+      "expect": "監管審查加強",
+      "prev": "",
+      "affect_assets": "META BTC ETH",
+      "watch": "監管立場變化",
+      "_added": "2026-05-20"
+    },
+    {
+      "date": "2026-05-20",
+      "time": "",
+      "title": "ZRO與KAITO代幣解鎖",
+      "desc": "ZRO解鎖5.07%約3340萬美元",
+      "type": "crypto",
+      "tag": "代幣解鎖",
+      "impact": "low",
+      "expect": "短期賣壓",
+      "prev": "",
+      "affect_assets": "ZRO KAITO",
+      "watch": "解鎖後拋售情況",
+      "_added": "2026-05-20"
+    },
+    {
       "date": "2026-05-21",
       "time": "",
       "title": "Microsoft除息日",
@@ -3219,6 +3312,20 @@
       "_added": "2026-05-20"
     },
     {
+      "date": "2026-05-21",
+      "time": "",
+      "title": "Samsung工人罷工開始",
+      "desc": "超過4.7萬員工罷工預計18天",
+      "type": "data",
+      "tag": "半導體供應鏈",
+      "impact": "high",
+      "expect": "記憶體供應緊張",
+      "prev": "",
+      "affect_assets": "005930.KS MU NVDA",
+      "watch": "罷工持續時間",
+      "_added": "2026-05-20"
+    },
+    {
       "date": "2026-05-22",
       "time": "10:00 ET",
       "title": "Conference Board領先指標",
@@ -3230,6 +3337,20 @@
       "prev": "",
       "affect_assets": "SPY QQQ DXY",
       "watch": "經濟衰退信號",
+      "_added": "2026-05-20"
+    },
+    {
+      "date": "2026-05-22",
+      "time": "",
+      "title": "日本四月CPI數據",
+      "desc": "關注通膨與日銀政策走向",
+      "type": "data",
+      "tag": "亞洲經濟",
+      "impact": "mid",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "USDJPY EWJ",
+      "watch": "核心CPI變化",
       "_added": "2026-05-20"
     },
     {
@@ -3303,6 +3424,34 @@
       "_added": "2026-05-20"
     },
     {
+      "date": "2026-05-28",
+      "time": "盤後",
+      "title": "Costco Q3財報",
+      "desc": "會員制零售龍頭季度業績",
+      "type": "earnings",
+      "tag": "零售",
+      "impact": "mid",
+      "expect": "",
+      "prev": "",
+      "affect_assets": "COST XRT",
+      "watch": "會員數與同店銷售",
+      "_added": "2026-05-20"
+    },
+    {
+      "date": "2026-05-28",
+      "time": "",
+      "title": "美國Q1 GDP二次修正值",
+      "desc": "經濟成長率修正數據",
+      "type": "data",
+      "tag": "經濟數據",
+      "impact": "high",
+      "expect": "",
+      "prev": "初值2.0%",
+      "affect_assets": "SPY TLT DXY",
+      "watch": "消費與投資修正",
+      "_added": "2026-05-20"
+    },
+    {
       "date": "2026-05-29",
       "time": "收盤後",
       "title": "MSCI半年度調整生效",
@@ -3342,6 +3491,20 @@
       "prev": "權重57.77%",
       "affect_assets": "TSM 2330.TW EWT",
       "watch": "外資被動買盤規模",
+      "_added": "2026-05-20"
+    },
+    {
+      "date": "2026-05-29",
+      "time": "",
+      "title": "MSCI調整生效",
+      "desc": "台積電權重升至58.33%創新高",
+      "type": "tw",
+      "tag": "指數調整",
+      "impact": "high",
+      "expect": "約2500億被動買盤",
+      "prev": "權重57.77%",
+      "affect_assets": "TSM 2330.TW EWT",
+      "watch": "外資被動買超規模",
       "_added": "2026-05-20"
     },
     {
