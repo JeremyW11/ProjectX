@@ -90,6 +90,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .rating-uw{background:var(--red-100);color:var(--red-700);}
 .rc-target{font-size:11px;color:var(--gray-500);font-family:var(--font-en);}
 .rc-target span{color:var(--navy-700);font-weight:600;}
+.rc-source-link{font-size:11px;font-family:var(--font-zh);font-weight:600;color:var(--navy-600);text-decoration:none;padding:3px 9px;border:1px solid var(--navy-200,#c7d7fd);border-radius:4px;background:var(--navy-50);transition:all .15s;display:inline-flex;align-items:center;gap:3px;margin-left:auto;}
+.rc-source-link:hover{background:var(--navy-100);border-color:var(--navy-400);color:var(--navy-800);}
 .rc-tickers{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto;}
 .rc-ticker{font-family:var(--font-en);font-size:10px;font-weight:600;padding:2px 7px;background:var(--gray-100);color:var(--navy-700);border-radius:3px;border:1px solid var(--gray-200);}
 .rc-divider{border:none;border-top:1px solid var(--gray-100);margin:10px 0;}
@@ -552,6 +554,7 @@ function renderResearch(list){
         '<span class="rc-rating '+rc+'">'+r.rating+'</span>'+
         (r.target?'<span class="rc-target">目標價 <span>'+r.target+(r.prev_target?' → '+r.target:'')+'</span></span>':'')+
         '<span class="sent-chip '+sc+'">'+sl+'</span>'+
+        (r.source_url?'<a class="rc-source-link" href="'+r.source_url+'" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" title="查看原文">📎 原文</a>':'')+
       '</div>'+
       '<hr class="rc-divider">'+
       '<div class="rc-impact">'+
