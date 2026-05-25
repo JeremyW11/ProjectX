@@ -472,7 +472,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px;">
       <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-en);">🎯 我的自選標的</div>
       <div style="display:flex;align-items:center;gap:8px;">
-        <span id="credits-display" style="font-size:11px;color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:20px;font-family:var(--font-en);">⚡ — 點</span>
+        <a href="/pages/credits.html" id="credits-display" title="查看點數詳情" style="font-size:11px;color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:20px;font-family:var(--font-en);text-decoration:none;cursor:pointer;">⚡ — 點</a>
         <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
       </div>
     </div>
@@ -695,6 +695,23 @@ async function checkProStatus(user, gateEl, viewEl){
   currentUser.isPro = isPro;
   currentUser.subCredits = (result.data && result.data.subscription_credits) || 0;
   currentUser.purCredits = (result.data && result.data.purchased_credits) || 0;
+  currentUser.resetDate = (result.data && result.data.credits_reset_date) || null;
+
+  // 訂閱點數到期自動重置
+  if(isPro && currentUser.resetDate){
+    var resetDate=new Date(currentUser.resetDate+'T00:00:00');
+    var today=new Date(); today.setHours(0,0,0,0);
+    if(today>=resetDate){
+      var nextReset=new Date(today); nextReset.setDate(nextReset.getDate()+30);
+      var nextResetStr=nextReset.toISOString().split('T')[0];
+      var resetRes=await _supabase.from('profiles').update({subscription_credits:30,credits_reset_date:nextResetStr}).eq('id',user.id);
+      if(!resetRes.error){
+        currentUser.subCredits=30;
+        currentUser.resetDate=nextResetStr;
+      }
+    }
+  }
+
   currentUser.totalCredits = currentUser.subCredits + currentUser.purCredits;
   if(isPro){
     if(gateEl) gateEl.style.display='none';
@@ -973,7 +990,9 @@ async function deductCredits(amount){
   if(!currentUser) return false;
   var total = (currentUser.subCredits||0) + (currentUser.purCredits||0);
   if(total < amount){
-    alert('點數不足（剩餘 '+total+' 點，需要 '+amount+' 點）\n請聯繫客服儲值：jermy831102@gmail.com');
+    if(confirm('點數不足（剩餘 '+total+' 點，需要 '+amount+' 點）\n\n前往購點頁面？')){
+      window.location.href='/pages/credits.html';
+    }
     return false;
   }
   var result = await _supabase.rpc('deduct_credits', { user_uuid: currentUser.id, amount: amount });
@@ -991,7 +1010,11 @@ async function deductCredits(amount){
 
 function updateCreditsDisplay(){
   var el = document.getElementById('credits-display');
-  if(el && currentUser) el.textContent = '⚡ '+(currentUser.totalCredits||0)+' 點';
+  if(!el || !currentUser) return;
+  el.textContent = '⚡ '+(currentUser.totalCredits||0)+' 點';
+  el.title = currentUser.resetDate
+    ? '訂閱點數將於 '+currentUser.resetDate+' 重置 · 點擊購點'
+    : '點擊前往購點頁面';
 }
 // ── End 點數系統 ───────────────────────────────────
 

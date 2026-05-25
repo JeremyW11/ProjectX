@@ -675,7 +675,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <div id="form-l">
         <div class="m-group"><label class="m-label">Email</label><input class="m-input" id="l-email" type="email" placeholder="your@email.com"></div>
         <div class="m-group"><label class="m-label">密碼</label><input class="m-input" id="l-pw" type="password" placeholder="••••••••"></div>
-        <button class="m-submit" onclick="doLogin()">登入</button>
+        <button class="m-submit" id="btn-login" onclick="doLogin()">登入</button>
+        <p id="l-msg" style="display:none;font-size:12px;color:#dc2626;margin-top:8px;text-align:center;"></p>
         <div class="m-div"><div class="m-div-line"></div><span class="m-div-text">or</span><div class="m-div-line"></div></div>
         <button class="m-guest" onclick="window.location.href='/brief.html'">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -686,7 +687,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <div id="form-s" style="display:none">
         <div class="m-group"><label class="m-label">Email</label><input class="m-input" id="s-email" type="email" placeholder="your@email.com"></div>
         <div class="m-group"><label class="m-label">設定密碼</label><input class="m-input" id="s-pw" type="password" placeholder="至少8個字元"></div>
-        <button class="m-submit" onclick="doSignup()">建立帳號 · 免費開始</button>
+        <button class="m-submit" id="btn-signup" onclick="doSignup()">建立帳號 · 免費開始</button>
+        <p id="s-msg" style="display:none;font-size:12px;color:#dc2626;margin-top:8px;text-align:center;"></p>
         <div class="m-div"><div class="m-div-line"></div><span class="m-div-text">or</span><div class="m-div-line"></div></div>
         <button class="m-guest" onclick="window.location.href='/brief.html'">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -698,6 +700,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 /* scroll */
 window.addEventListener('scroll',()=>{
@@ -706,20 +709,34 @@ window.addEventListener('scroll',()=>{
 const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-/* live tickers hero */
-const T={btc:{b:102840,c:2.31},spx:{b:5214,c:-0.48},twx:{b:21330,c:0.72}};
-function fmt(n){return n>=1000?n.toLocaleString('en-US',{maximumFractionDigits:0}):n.toFixed(2);}
-setInterval(()=>{
-  ['btc','spx','twx'].forEach(k=>{
-    const t=T[k];
-    const j=(Math.random()-.48)*t.b*.0003;
-    t.b+=j; t.c+=(Math.random()-.48)*.04;
-    const ve=document.getElementById('h-'+k);
-    const ce=document.getElementById('h-'+k+'-c');
-    if(ve)ve.textContent=fmt(t.b);
-    if(ce){const up=t.c>=0;ce.className='pc-ticker-chg '+(up?'tc-up':'tc-dn');ce.textContent=(up?'▲ +':'▼ ')+Math.abs(t.c).toFixed(2)+'%';}
-  });
-},3000);
+/* Supabase */
+const _sb=window.supabase.createClient('https://eezhmeccakaeiprviqra.supabase.co','sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM');
+
+/* real tickers from daily.json */
+async function loadRealTickers(){
+  try{
+    const res=await fetch('/data/daily.json?t='+Date.now());
+    const d=await res.json();
+    const setTicker=(valId,chgId,val,chg,dir)=>{
+      const ve=document.getElementById(valId);
+      const ce=document.getElementById(chgId);
+      if(ve)ve.textContent=val;
+      if(ce){
+        const up=dir==='up';
+        ce.className='pc-ticker-chg '+(up?'tc-up':'tc-dn');
+        const pct=chg.replace(/^[+-]/,'').replace('%','');
+        ce.textContent=(up?'▲ +':'▼ -')+pct+'%';
+      }
+    };
+    const btc=(d.market?.crypto||[]).find(c=>c.symbol==='BTC');
+    if(btc)setTicker('h-btc','h-btc-c',btc.price.replace('$','').replace(/,/g,','),btc.change,btc.dir);
+    const spx=(d.tickers||[]).find(t=>t.label==='S&P 500');
+    if(spx)setTicker('h-spx','h-spx-c',spx.value,spx.change,spx.dir);
+    const twx=(d.tickers||[]).find(t=>t.label==='台股加權');
+    if(twx)setTicker('h-twx','h-twx-c',twx.value,twx.change,twx.dir);
+  }catch(e){console.log('ticker load failed',e);}
+}
+loadRealTickers();
 
 /* billing toggle */
 let annual=false;
@@ -744,11 +761,44 @@ function switchTab(t){
   document.getElementById('tab-s').classList.toggle('active',!l);
   document.getElementById('form-l').style.display=l?'block':'none';
   document.getElementById('form-s').style.display=l?'none':'block';
+  document.getElementById('l-msg').style.display='none';
+  document.getElementById('s-msg').style.display='none';
 }
 function ve(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
 function shk(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');}
-function doLogin(){const e=document.getElementById('l-email'),p=document.getElementById('l-pw');if(!ve(e.value)){shk(e);return;}if(p.value.length<6){shk(p);return;}window.location.href='/brief.html';}
-function doSignup(){const e=document.getElementById('s-email'),p=document.getElementById('s-pw');if(!ve(e.value)){shk(e);return;}if(p.value.length<8){shk(p);return;}window.location.href='/brief.html';}
+function showMsg(id,text,color){const m=document.getElementById(id);m.textContent=text;m.style.color=color||'#dc2626';m.style.display='block';}
+
+async function doLogin(){
+  const e=document.getElementById('l-email'),p=document.getElementById('l-pw');
+  if(!ve(e.value)){shk(e);return;}
+  if(p.value.length<6){shk(p);return;}
+  const btn=document.getElementById('btn-login');
+  btn.disabled=true;btn.textContent='登入中...';
+  const r=await _sb.auth.signInWithPassword({email:e.value.trim(),password:p.value});
+  if(r.error){
+    btn.disabled=false;btn.textContent='登入';
+    showMsg('l-msg','登入失敗：'+r.error.message);
+    return;
+  }
+  window.location.href='/pages/targets.html';
+}
+
+async function doSignup(){
+  const e=document.getElementById('s-email'),p=document.getElementById('s-pw');
+  if(!ve(e.value)){shk(e);return;}
+  if(p.value.length<8){shk(p);return;}
+  const btn=document.getElementById('btn-signup');
+  btn.disabled=true;btn.textContent='建立中...';
+  const r=await _sb.auth.signUp({email:e.value.trim(),password:p.value});
+  if(r.error){
+    btn.disabled=false;btn.textContent='建立帳號 · 免費開始';
+    showMsg('s-msg','註冊失敗：'+r.error.message);
+    return;
+  }
+  btn.textContent='✅ 請查看信箱確認連結';
+  showMsg('s-msg','帳號建立成功！請至信箱點擊確認連結後即可登入。','#16a34a');
+}
+
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 </script>
 </body>
