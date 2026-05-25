@@ -726,7 +726,7 @@ async function checkProStatus(user, gateEl, viewEl){
       var gateBtns = gateEl.querySelector('.pro-gate-btns');
       if(gateTitle) gateTitle.innerHTML='你好，<em>'+user.email.split('@')[0]+'</em>！';
       if(gateDesc) gateDesc.textContent='你目前使用的是免費方案。升級為付費會員即可解鎖標的追蹤、Morning Brief、個股分析等全部功能。';
-      if(gateBtns) gateBtns.innerHTML='<a href="mailto:jermy831102@gmail.com?subject=ProjectX付費申請" class="btn-pro-upgrade">✦ 聯繫升級 Pro</a>';
+      if(gateBtns) gateBtns.innerHTML='<a href="mailto:support@projectx.com?subject=ProjectX付費申請" class="btn-pro-upgrade">✦ 聯繫升級 Pro</a>';
     }
     if(viewEl) viewEl.classList.remove('active');
   }
@@ -1754,5 +1754,6 @@ setInterval(()=>{
   });
 },3500);
 </script>
+<script src="/js/support.js"></script>
 </body>
 </html>

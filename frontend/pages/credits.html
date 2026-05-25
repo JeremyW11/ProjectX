@@ -178,7 +178,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       </div>
       <div class="how-step">
         <div class="how-step-num">2</div>
-        <div class="how-step-text">確認內容後送出，Jeremy 將在 24 小時內回覆付款方式</div>
+        <div class="how-step-text">確認內容後送出，客服將在 24 小時內回覆付款方式</div>
       </div>
       <div class="how-step">
         <div class="how-step-num">3</div>
@@ -190,7 +190,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <!-- 注意事項 -->
   <div class="notice">
     <strong>訂閱點數 vs 購買點數：</strong>Pro 訂閱方案每月自動提供 30 點（訂閱點數），於每個週期開始時重置。另外購買的點數（購買點數）不會過期，可跨月累積使用。扣點時優先消耗訂閱點數，再消耗購買點數。<br><br>
-    <strong>退款政策：</strong>已購買但未使用的點數可於 7 天內申請退款，請聯繫 jermy831102@gmail.com。
+    <strong>退款政策：</strong>已購買但未使用的點數可於 7 天內申請退款，請聯繫 support@projectx.com。
   </div>
 
 </div>
@@ -250,11 +250,12 @@ function setupBuyButtons(email){
     if(!btn) return;
     var subject='ProjectX 點數購買 — '+pkg.pts+'點 ('+pkg.price+')';
     var body='您好 Jeremy，\n\n我想購買 ProjectX '+pkg.pts+' 點（'+pkg.price+'）。\n\n帳號 Email：'+(email||'（請填寫）')+'\n\n請提供付款方式，謝謝！';
-    btn.href='mailto:jermy831102@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    btn.href='mailto:support@projectx.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   });
 }
 
 initCreditsPage();
 </script>
+<script src="/js/support.js"></script>
 </body>
 </html>
