@@ -1,6 +1,42 @@
 {
   "research": [
     {
+      "ticker": "CNC",
+      "name": "Centene",
+      "firm": "UBS",
+      "firm_background": "瑞士頂級投資銀行，醫療保險股研究受重視",
+      "rating": "Neutral",
+      "rating_type": "neutral",
+      "rating_change": "維持",
+      "prev_target": "55",
+      "target": "61",
+      "date": "2026-05-24",
+      "note": "維持中立，目標價由55上調至61元",
+      "core_logic": "醫保估值修復，但Medicaid政策不確定性仍存",
+      "risk_note": "Medicaid政策變動風險",
+      "action": "持有等待政策明朗，目標61",
+      "source_url": "https://www.investing.com/news/analyst-ratings",
+      "_added": "2026-05-26"
+    },
+    {
+      "ticker": "ZM",
+      "name": "Zoom Video Communications",
+      "firm": "RBC Capital Markets",
+      "firm_background": "加拿大皇家銀行旗下投行，科技股評級具參考性",
+      "rating": "Outperform",
+      "rating_type": "outperform",
+      "rating_change": "維持",
+      "prev_target": "110",
+      "target": "130",
+      "date": "2026-05-24",
+      "note": "維持優於大盤，目標價由110上調至130",
+      "core_logic": "AI功能整合提升企業黏性，ARPU成長可期",
+      "risk_note": "Teams與Meet持續競爭蠶食市場",
+      "action": "小倉位配置，AI功能升級是催化劑",
+      "source_url": "https://www.investing.com/news/analyst-ratings",
+      "_added": "2026-05-26"
+    },
+    {
       "ticker": "NVDA",
       "name": "NVIDIA Corporation",
       "firm": "Benzinga Analyst Consensus (62 analysts)",
@@ -197,6 +233,24 @@
       "action": "賣出目標價160美元",
       "source_url": "https://www.cnbc.com/2026/05/18/jim-cramer-wants-to-stick-with-salesforce-despite-this-analyst-downgrade-.html",
       "_added": "2026-05-21"
+    },
+    {
+      "ticker": "NOW",
+      "name": "ServiceNow",
+      "firm": "Bank of America",
+      "firm_background": "全球頂尖投資銀行，科技股研究具市場影響力",
+      "rating": "Buy",
+      "rating_type": "buy",
+      "rating_change": "上調",
+      "prev_target": "",
+      "target": "1130",
+      "date": "2026-05-18",
+      "note": "AI工作流程自動化需求強勁，上調評級",
+      "core_logic": "AI自動化嵌入企業IT工作流，訂單能見度高",
+      "risk_note": "估值偏高，宏觀緊縮風險",
+      "action": "可逢回佈局，AI企業工作流優先受益",
+      "source_url": "",
+      "_added": "2026-05-26"
     }
   ],
   "earnings": [
@@ -542,6 +596,76 @@
       "_added": "2026-05-25"
     },
     {
+      "date": "2026-05-26",
+      "time": "08:30",
+      "title": "費城聯儲非製造業調查",
+      "desc": "費城聯儲5月非製造業景氣調查",
+      "type": "data",
+      "tag": "製造業",
+      "impact": "low",
+      "expect": "持平或略降",
+      "prev": "",
+      "affect_assets": "USD, SPY",
+      "watch": "服務業景氣方向",
+      "_added": "2026-05-26"
+    },
+    {
+      "date": "2026-05-26",
+      "time": "10:00",
+      "title": "Conference Board消費者信心指數",
+      "desc": "5月消費者信心，通膨與就業感受指標",
+      "type": "data",
+      "tag": "消費信心",
+      "impact": "high",
+      "expect": "市場觀察降息預期影響",
+      "prev": "",
+      "affect_assets": "SPY, QQQ, 消費股",
+      "watch": "通膨預期與就業信心",
+      "_added": "2026-05-26"
+    },
+    {
+      "date": "2026-05-26",
+      "time": "10:30",
+      "title": "達拉斯聯儲製造業調查",
+      "desc": "5月德州製造業景氣調查",
+      "type": "data",
+      "tag": "製造業",
+      "impact": "mid",
+      "expect": "持平",
+      "prev": "",
+      "affect_assets": "USD, 工業股",
+      "watch": "製造業擴張或收縮信號",
+      "_added": "2026-05-26"
+    },
+    {
+      "date": "2026-05-26",
+      "time": "盤前",
+      "title": "AutoZone Q3 2026財報",
+      "desc": "AZO盤前公布，共識EPS $36.13",
+      "type": "earnings",
+      "tag": "財報",
+      "impact": "mid",
+      "expect": "EPS $36.13，消費韌性測試",
+      "prev": "",
+      "affect_assets": "AZO",
+      "watch": "同店銷售與消費者支出",
+      "_added": "2026-05-26"
+    },
+    {
+      "date": "2026-05-26",
+      "time": "盤後",
+      "title": "Zscaler Q3 FY2026財報",
+      "desc": "ZS盤後公布，雲端安全支出動能",
+      "type": "earnings",
+      "tag": "財報",
+      "impact": "mid",
+      "expect": "ARR成長與企業安全指引",
+      "prev": "",
+      "affect_assets": "ZS, 雲端安全股",
+      "watch": "ARR增速與企業安全支出",
+      "_added": "2026-05-26"
+    },
+    {
       "date": "2026-05-27",
       "time": "10:00 ET",
       "title": "新屋銷售數據",
@@ -568,6 +692,34 @@
       "affect_assets": "CRM, 雲端SaaS ETF, 科技股",
       "watch": "AI CRM滲透率與訂閱成長",
       "_added": "2026-05-25"
+    },
+    {
+      "date": "2026-05-27",
+      "time": "08:30",
+      "title": "美國Q1 GDP二次修正",
+      "desc": "Q1 GDP年化成長二次修正，前值+2.0%",
+      "type": "data",
+      "tag": "GDP",
+      "impact": "high",
+      "expect": "維持+2.0%附近",
+      "prev": "+2.0%",
+      "affect_assets": "SPY, QQQ, USD, 債券",
+      "watch": "私人需求與消費修正幅度",
+      "_added": "2026-05-26"
+    },
+    {
+      "date": "2026-05-27",
+      "time": "盤後",
+      "title": "Salesforce Q1 FY2027財報",
+      "desc": "CRM盤後公布，AI vs SaaS競爭焦點",
+      "type": "earnings",
+      "tag": "財報",
+      "impact": "mid",
+      "expect": "營收$11.06B，AI滲透率",
+      "prev": "",
+      "affect_assets": "CRM, SaaS股",
+      "watch": "AI訂閱增長與NRR",
+      "_added": "2026-05-26"
     },
     {
       "date": "2026-05-28",
@@ -626,6 +778,34 @@
       "_added": "2026-05-25"
     },
     {
+      "date": "2026-05-28",
+      "time": "08:30",
+      "title": "美國核心PCE通膨數據",
+      "desc": "4月核心PCE，Fed最重視通膨指標",
+      "type": "fed",
+      "tag": "通膨",
+      "impact": "high",
+      "expect": "前值+2.7%，觀察降息預期",
+      "prev": "+2.7%",
+      "affect_assets": "SPY, QQQ, BTC, 債券, USD",
+      "watch": "降息時間表重新定價",
+      "_added": "2026-05-26"
+    },
+    {
+      "date": "2026-05-28",
+      "time": "盤後",
+      "title": "Costco Q3 FY2026財報",
+      "desc": "COST盤後公布，共識EPS $4.98",
+      "type": "earnings",
+      "tag": "財報",
+      "impact": "mid",
+      "expect": "EPS $4.98，會員費與同店銷售",
+      "prev": "",
+      "affect_assets": "COST, 零售股",
+      "watch": "會員費收入與消費者健康度",
+      "_added": "2026-05-26"
+    },
+    {
       "date": "2026-05-29",
       "time": "",
       "title": "比特幣60億美元選擇權到期",
@@ -668,6 +848,20 @@
       "_added": "2026-05-21"
     },
     {
+      "date": "2026-06-08",
+      "time": "全天",
+      "title": "Apple WWDC 2026開幕",
+      "desc": "iOS 27及AI多模型戰略發布，持續至6/12",
+      "type": "data",
+      "tag": "科技事件",
+      "impact": "high",
+      "expect": "iOS 27多AI模型選擇，可折疊iPhone預告",
+      "prev": "",
+      "affect_assets": "AAPL, MSFT, GOOG, AI股",
+      "watch": "AI生態整合深度與新硬體發布",
+      "_added": "2026-05-26"
+    },
+    {
       "date": "2026-06-09",
       "time": "",
       "title": "EIA短期能源展望",
@@ -696,6 +890,20 @@
       "_added": "2026-05-21"
     },
     {
+      "date": "2026-06-11",
+      "time": "盤後",
+      "title": "SpaceX IPO訂價（SPCX）",
+      "desc": "SpaceX Nasdaq上市訂價，估值$1.75-2T",
+      "type": "data",
+      "tag": "IPO",
+      "impact": "high",
+      "expect": "估值$1.75-2T，籌資$80B",
+      "prev": "",
+      "affect_assets": "SPCX, 航太股, QQQ",
+      "watch": "訂價區間與機構認購熱度",
+      "_added": "2026-05-26"
+    },
+    {
       "date": "2026-06-12",
       "time": "TBD",
       "title": "SpaceX (SPCX) 目標Nasdaq掛牌",
@@ -708,9 +916,37 @@
       "affect_assets": "SPCX, 航太防禦ETF, 風險情緒",
       "watch": "散戶認購熱度與機構定價",
       "_added": "2026-05-25"
+    },
+    {
+      "date": "2026-06-12",
+      "time": "開盤",
+      "title": "SpaceX Nasdaq掛牌（SPCX）",
+      "desc": "SpaceX正式掛牌，代碼SPCX",
+      "type": "data",
+      "tag": "IPO",
+      "impact": "high",
+      "expect": "帶動航太與科技板塊情緒",
+      "prev": "",
+      "affect_assets": "SPCX, 航太股, QQQ",
+      "watch": "開盤溢價與散戶參與度",
+      "_added": "2026-05-26"
+    },
+    {
+      "date": "2026-06-17",
+      "time": "全天",
+      "title": "FOMC利率決策會議",
+      "desc": "6月FOMC，Warsh首次主持，持續至6/18",
+      "type": "fed",
+      "tag": "利率",
+      "impact": "high",
+      "expect": "維持3.5-3.75%，觀察點陣圖",
+      "prev": "3.5-3.75%",
+      "affect_assets": "SPY, QQQ, BTC, 債券, USD, 金",
+      "watch": "Warsh首次聲明與點陣圖修正",
+      "_added": "2026-05-26"
     }
   ],
-  "updated": "2026-05-25",
+  "updated": "2026-05-26",
   "prediction_history": [
     {
       "event_title": "Nvidia Q1 FY2027財報",
@@ -807,6 +1043,78 @@
       "reasoning": "IPO尚未正式掛牌",
       "date": "2026-05-20",
       "verified_at": "2026-05-21"
+    },
+    {
+      "event_title": "美股 Memorial Day 休市",
+      "accuracy": "miss",
+      "actual_result": "聯發科+9.97%漲停、日月光+9.98%、台達電+9.31%，半導體全線噴出非收斂",
+      "reasoning": "台股外資+495億強力買超，AI題材爆發遠超預期整理",
+      "date": "2026-05-25",
+      "verified_at": "2026-05-26"
+    },
+    {
+      "event_title": "Philadelphia Fed 非製造業調查",
+      "accuracy": "partial",
+      "actual_result": "SPY+0.59%、QQQ+0.62%，美股偏正面符合預測方向，但缺具體數據",
+      "reasoning": "市場方向吻合，惟Philly Fed具體數值未確認",
+      "date": "2026-05-25",
+      "verified_at": "2026-05-26"
+    },
+    {
+      "event_title": "消費者信心指數",
+      "accuracy": "pending",
+      "actual_result": "市場整體正面（SPY+0.59%），消費板塊具體反應數據未取得",
+      "reasoning": "具體指數公布結果尚未確認",
+      "date": "2026-05-25",
+      "verified_at": "2026-05-26"
+    },
+    {
+      "event_title": "新屋銷售數據",
+      "accuracy": "pending",
+      "actual_result": "事件尚未發生（2026-05-27）",
+      "reasoning": "明日事件，無法驗證",
+      "date": "2026-05-25",
+      "verified_at": "2026-05-26"
+    },
+    {
+      "event_title": "Salesforce (CRM) Q1財報",
+      "accuracy": "pending",
+      "actual_result": "事件尚未發生（2026-05-27盤後）",
+      "reasoning": "明日盤後，無法驗證",
+      "date": "2026-05-25",
+      "verified_at": "2026-05-26"
+    },
+    {
+      "event_title": "GDP Q1二次修正 + PCE通膨",
+      "accuracy": "pending",
+      "actual_result": "Brent今日-7.90%至$95.36，能源壓通膨邏輯成立，PCE本身待28日公布",
+      "reasoning": "2026-05-28事件，油價走勢支撐假設前提",
+      "date": "2026-05-25",
+      "verified_at": "2026-05-26"
+    },
+    {
+      "event_title": "初次申請失業救濟人數",
+      "accuracy": "pending",
+      "actual_result": "事件尚未發生（2026-05-28）",
+      "reasoning": "後天事件，無法驗證",
+      "date": "2026-05-25",
+      "verified_at": "2026-05-26"
+    },
+    {
+      "event_title": "NVIDIA Computex主題演講",
+      "accuracy": "pending",
+      "actual_result": "事件尚未發生（2026-06-01）",
+      "reasoning": "六天後事件，無法驗證",
+      "date": "2026-05-25",
+      "verified_at": "2026-05-26"
+    },
+    {
+      "event_title": "SpaceX (SPCX) 目標Nasdaq掛牌",
+      "accuracy": "pending",
+      "actual_result": "事件尚未發生（2026-06-12）",
+      "reasoning": "十七天後事件，無法驗證",
+      "date": "2026-05-25",
+      "verified_at": "2026-05-26"
     }
   ]
 }
