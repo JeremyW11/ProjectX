@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X · 我的推演</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-950:#070d1c; --navy-900:#0d1630; --navy-800:#152244;
+  --navy-700:#1d2d5a; --navy-600:#1e3a8a; --navy-500:#2563eb;
+  --navy-400:#3b82f6; --navy-300:#93c5fd; --navy-100:#dbeafe; --navy-50:#eff6ff;
+  --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569;
+  --gray-500:#64748b; --gray-400:#94a3b8; --gray-200:#e2e8f0; --gray-100:#f1f5f9;
+  --white:#fff; --red-600:#dc2626; --red-100:#fee2e2; --red-700:#b91c1c;
+  --green-600:#16a34a; --green-100:#dcfce7; --green-700:#15803d;
+  --amber-600:#d97706; --amber-100:#fef3c7;
+  --font-en:'DM Sans',system-ui,sans-serif;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-zh:'Noto Sans TC','PingFang TC',sans-serif;
+  --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:18px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-zh);background:#f8fafc;color:var(--gray-900);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+/* Topbar */
+.topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:12px;padding:0 24px;height:54px;background:var(--white);border-bottom:1px solid var(--gray-200);}
+.header-nav{display:flex;align-items:center;gap:2px;flex:1;}
+.nav-item{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--gray-500);transition:all .15s;white-space:nowrap;}
+.nav-item:hover{background:var(--navy-50);color:var(--navy-700);}
+.nav-item.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);opacity:0;}
+.nav-item.active .nav-dot{opacity:1;}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.live-badge{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--green-600);font-family:var(--font-en);letter-spacing:.06em;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green-600);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.header-time{font-size:12px;font-family:var(--font-en);color:var(--gray-400);}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;font-family:var(--font-en);}
+
+/* Page */
+.page{max-width:900px;margin:0 auto;padding:32px 20px 80px;}
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px;}
+.page-title{font-family:var(--font-display);font-size:26px;color:var(--navy-950);}
+.page-title-sub{font-family:var(--font-en);font-size:13px;font-weight:400;color:var(--gray-400);margin-left:8px;}
+.page-desc{font-size:13px;color:var(--gray-500);margin-top:6px;}
+.btn-new{display:flex;align-items:center;gap:6px;padding:9px 18px;background:var(--navy-700);color:var(--white);border-radius:var(--r-md);font-size:13.5px;font-weight:500;transition:background .15s;}
+.btn-new:hover{background:var(--navy-600);}
+
+/* Stats bar */
+.stats-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;}
+.stat-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:14px 18px;min-width:120px;flex:1;}
+.stat-label{font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);margin-bottom:4px;}
+.stat-value{font-size:24px;font-weight:700;font-family:var(--font-en);color:var(--navy-800);}
+.stat-value.green{color:var(--green-600);}
+.stat-value.red{color:var(--red-600);}
+
+/* Filter tabs */
+.filter-tabs{display:flex;gap:6px;margin-bottom:16px;}
+.filter-tab{padding:6px 14px;border-radius:20px;font-size:13px;border:1px solid var(--gray-200);color:var(--gray-500);transition:all .15s;}
+.filter-tab.active{background:var(--navy-700);color:var(--white);border-color:var(--navy-700);}
+.filter-tab:hover:not(.active){border-color:var(--navy-300);color:var(--navy-600);}
+
+/* Scenario list */
+.sc-list{display:flex;flex-direction:column;gap:12px;}
+.sc-item{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);overflow:hidden;transition:box-shadow .15s;}
+.sc-item:hover{box-shadow:0 2px 12px rgba(0,0,0,.06);}
+
+.sc-item-header{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;user-select:none;}
+.sc-status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.dot-running{background:var(--amber-600);}
+.dot-hit{background:var(--green-600);}
+.dot-miss{background:var(--red-600);}
+.sc-item-question{flex:1;font-size:14px;font-weight:500;color:var(--navy-800);line-height:1.4;}
+.sc-item-meta{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.sc-status-badge{padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600;font-family:var(--font-en);}
+.badge-running{background:var(--amber-100);color:var(--amber-600);}
+.badge-hit{background:var(--green-100);color:var(--green-700);}
+.badge-miss{background:var(--red-100);color:var(--red-600);}
+.sc-verify-date{font-size:11px;color:var(--gray-400);font-family:var(--font-en);}
+.sc-expand-arrow{font-size:12px;color:var(--gray-400);transition:transform .2s;}
+.sc-item.expanded .sc-expand-arrow{transform:rotate(90deg);}
+
+.sc-item-body{display:none;padding:0 16px 16px;border-top:1px solid var(--gray-100);}
+.sc-item.expanded .sc-item-body{display:block;}
+
+.sc-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0;}
+@media(max-width:560px){.sc-mini-grid{grid-template-columns:1fr;}}
+.sc-mini-card{background:var(--gray-100);border-radius:var(--r-md);padding:10px 12px;}
+.sc-mini-title{font-size:12.5px;font-weight:600;color:var(--navy-700);margin-bottom:3px;}
+.sc-mini-prob{font-size:18px;font-weight:700;font-family:var(--font-en);color:var(--navy-500);margin-bottom:4px;}
+.sc-mini-reasoning{font-size:11.5px;color:var(--gray-600);line-height:1.5;}
+
+.sc-detail-row{display:flex;gap:20px;flex-wrap:wrap;margin:8px 0;font-size:12.5px;color:var(--gray-600);}
+.sc-detail-item{display:flex;gap:5px;}
+.sc-detail-label{font-weight:600;color:var(--gray-500);}
+.sc-item-actions{display:flex;gap:8px;margin-top:10px;}
+.btn-delete{padding:5px 12px;border:1px solid var(--red-100);border-radius:var(--r-sm);font-size:12px;color:var(--red-600);transition:all .15s;}
+.btn-delete:hover{background:var(--red-100);}
+
+/* Empty state */
+.empty-state{text-align:center;padding:60px 20px;color:var(--gray-400);}
+.empty-icon{font-size:40px;margin-bottom:12px;}
+.empty-text{font-size:14px;line-height:1.7;margin-bottom:20px;}
+.btn-outline{padding:9px 20px;border:1.5px solid var(--navy-300);color:var(--navy-600);border-radius:var(--r-md);font-size:13.5px;transition:all .15s;}
+.btn-outline:hover{background:var(--navy-50);}
+
+/* Gate */
+.gate{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-xl);padding:48px 36px;text-align:center;max-width:520px;margin:60px auto;}
+.gate-icon{font-size:40px;margin-bottom:16px;}
+.gate-title{font-family:var(--font-display);font-size:22px;color:var(--navy-950);margin-bottom:10px;}
+.gate-desc{font-size:14px;color:var(--gray-500);line-height:1.7;margin-bottom:24px;}
+.btn-primary{padding:10px 24px;background:var(--navy-700);color:var(--white);border-radius:var(--r-md);font-size:14px;font-weight:500;}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="https://projectxbrief.netlify.app/" style="text-decoration:none;"><div>
+    <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
+      <line x1="10" y1="10" x2="30" y2="30" stroke="white" stroke-width="6" stroke-linecap="round"/>
+      <line x1="30" y1="10" x2="10" y2="30" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="3" fill="#2563eb"/>
+      <circle cx="20" cy="20" r="1.5" fill="#93c5fd"/>
+      <text x="48" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" letter-spacing="0.3" fill="#0f172a">PROJECT </text>
+      <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
+    </svg>
+  </div></a>
+  <nav class="header-nav">
+    <a href="/brief.html" class="nav-item">總覽</a>
+    <a href="/pages/scenario.html" class="nav-item active"><span class="nav-dot"></span>AI 推演</a>
+    <a href="/pages/market.html" class="nav-item">市場</a>
+    <a href="/pages/industry.html" class="nav-item">產業</a>
+    <a href="/pages/institutional.html" class="nav-item">機構研報</a>
+    <a href="/pages/calendar.html" class="nav-item">市場日曆</a>
+    <a href="/pages/targets.html" class="nav-item">標的追蹤</a>
+  </nav>
+  <div class="header-right">
+    <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+    <span class="header-time" id="clock">—</span>
+    <a href="/pages/login.html" class="btn-login" id="auth-btn">登入</a>
+  </div>
+</header>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<main class="page">
+
+  <!-- Gate -->
+  <div id="gate-view" style="display:none;">
+    <div class="gate">
+      <div class="gate-icon">📋</div>
+      <h2 class="gate-title">我的推演記錄</h2>
+      <p class="gate-desc">登入後查看你的 AI 推演歷史，追蹤每個情境的命中率。</p>
+      <a href="/pages/login.html" class="btn-primary">登入 / 註冊</a>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div id="main-view" style="display:none;">
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">我的推演 <span class="page-title-sub">My Scenarios</span></h1>
+        <p class="page-desc">追蹤你的 AI 推演記錄與命中率</p>
+      </div>
+      <a href="/pages/scenario.html" class="btn-new">+ 新推演</a>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">總推演數</div>
+        <div class="stat-value" id="stat-total">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">驗證中</div>
+        <div class="stat-value" id="stat-running">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">命中</div>
+        <div class="stat-value green" id="stat-hit">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">未中</div>
+        <div class="stat-value red" id="stat-miss">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">命中率</div>
+        <div class="stat-value green" id="stat-rate">—</div>
+      </div>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterItems('all',this)">全部</button>
+      <button class="filter-tab" onclick="filterItems('running',this)">驗證中</button>
+      <button class="filter-tab" onclick="filterItems('hit',this)">命中 ✓</button>
+      <button class="filter-tab" onclick="filterItems('miss',this)">未中 ✗</button>
+    </div>
+
+    <!-- List -->
+    <div id="sc-list" class="sc-list">
+      <div style="text-align:center;padding:40px;color:var(--gray-400);">載入中...</div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+var SUPABASE_URL = 'https://eezhmeccakaeiprviqra.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVlemhtZWNjYWthZWlwcnZpcXJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUzOTgyMzYsImV4cCI6MjA2MDk3NDIzNn0.vGMoKqAikmqnCcXVFd1TXgk_bN24ePKBiFKOejP4pKA';
+var _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+var currentUser = null;
+var allItems = [];
+var currentFilter = 'all';
+
+function updateClock() {
+  var now = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
+  document.getElementById('clock').textContent = now.toISOString().slice(11,16) + ' TPE';
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+_supabase.auth.onAuthStateChange(function(event, session) {
+  if (session && session.user) {
+    currentUser = session.user;
+    document.getElementById('auth-btn').textContent = '登出';
+    document.getElementById('auth-btn').onclick = function(e) { e.preventDefault(); _supabase.auth.signOut(); };
+    document.getElementById('gate-view').style.display = 'none';
+    document.getElementById('main-view').style.display = 'block';
+    loadScenarios();
+  } else {
+    currentUser = null;
+    document.getElementById('auth-btn').textContent = '登入';
+    document.getElementById('auth-btn').onclick = null;
+    document.getElementById('gate-view').style.display = 'block';
+    document.getElementById('main-view').style.display = 'none';
+  }
+});
+
+async function loadScenarios() {
+  try {
+    // 只載入有 scenario_id 的推演記錄（AI 推演沙盤生成的）
+    var res = await _supabase.from('inferences')
+      .select('*')
+      .eq('user_id', currentUser.id)
+      .not('scenario_id', 'is', null)
+      .order('updated_at', { ascending: false });
+
+    if (res.error) throw res.error;
+    allItems = res.data || [];
+    updateStats(allItems);
+    renderList(allItems, currentFilter);
+  } catch(e) {
+    document.getElementById('sc-list').innerHTML = '<div style="text-align:center;padding:40px;color:var(--red-600);">載入失敗：' + escHtml(e.message) + '</div>';
+  }
+}
+
+function updateStats(items) {
+  var total = items.length;
+  var running = items.filter(function(i) { return i.status === 'running'; }).length;
+  var hit = items.filter(function(i) { return i.status === 'hit'; }).length;
+  var miss = items.filter(function(i) { return i.status === 'miss'; }).length;
+  var verified = hit + miss;
+  var rate = verified > 0 ? Math.round(hit / verified * 100) + '%' : '—';
+
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-running').textContent = running;
+  document.getElementById('stat-hit').textContent = hit;
+  document.getElementById('stat-miss').textContent = miss;
+  document.getElementById('stat-rate').textContent = rate;
+}
+
+function filterItems(status, btn) {
+  currentFilter = status;
+  document.querySelectorAll('.filter-tab').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderList(allItems, status);
+}
+
+function renderList(items, filter) {
+  var filtered = filter === 'all' ? items : items.filter(function(i) { return i.status === filter; });
+  var listEl = document.getElementById('sc-list');
+
+  if (!filtered.length) {
+    listEl.innerHTML = '<div class="empty-state"><div class="empty-icon">🔭</div><p class="empty-text">' +
+      (filter === 'all' ? '還沒有推演記錄。<br>去 AI 推演沙盤建立你的第一個推演。' :
+       filter === 'running' ? '沒有驗證中的推演。' :
+       filter === 'hit' ? '還沒有命中的推演。' : '還沒有未中的推演。') +
+      '</p><a href="/pages/scenario.html" class="btn-outline">+ 新推演</a></div>';
+    return;
+  }
+
+  listEl.innerHTML = filtered.map(function(item, idx) {
+    var statusDot = 'dot-' + (item.status || 'running');
+    var statusBadge = 'badge-' + (item.status || 'running');
+    var statusText = item.status === 'hit' ? '命中 ✓' : item.status === 'miss' ? '未中 ✗' : '驗證中';
+    var question = item.question || item.title || '推演記錄';
+    var verifyDate = item.verify_date || '—';
+    var scenarios = item.scenarios || [];
+    var itemId = item.id;
+
+    var miniCards = scenarios.map(function(s) {
+      return '<div class="sc-mini-card">' +
+        '<div class="sc-mini-title">' + escHtml(s.title || '') + '</div>' +
+        '<div class="sc-mini-prob">' + (s.probability || 0) + '%</div>' +
+        '<div class="sc-mini-reasoning">' + escHtml((s.reasoning || '').slice(0, 80)) + '</div>' +
+        '</div>';
+    }).join('');
+
+    var createdAt = item.updated_at ? item.updated_at.slice(0, 10) : '—';
+
+    return '<div class="sc-item" id="sc-item-' + idx + '">' +
+      '<div class="sc-item-header" onclick="toggleItem(' + idx + ')">' +
+        '<div class="sc-status-dot ' + statusDot + '"></div>' +
+        '<div class="sc-item-question">' + escHtml(question.replace('推演：','')) + '</div>' +
+        '<div class="sc-item-meta">' +
+          '<span class="sc-status-badge ' + statusBadge + '">' + statusText + '</span>' +
+          '<span class="sc-verify-date">驗證 ' + escHtml(verifyDate) + '</span>' +
+          '<span class="sc-expand-arrow">▶</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="sc-item-body">' +
+        (scenarios.length ? '<div class="sc-mini-grid">' + miniCards + '</div>' : '') +
+        '<div class="sc-detail-row">' +
+          '<div class="sc-detail-item"><span class="sc-detail-label">建立：</span>' + escHtml(createdAt) + '</div>' +
+          (item.verify_date ? '<div class="sc-detail-item"><span class="sc-detail-label">驗證日：</span>' + escHtml(item.verify_date) + '</div>' : '') +
+          (item.data_coverage_warning ? '<div class="sc-detail-item" style="color:var(--amber-600);">⚠ ' + escHtml(item.data_coverage_warning) + '</div>' : '') +
+        '</div>' +
+        (item.verify_result ? '<div style="margin-top:8px;padding:8px 10px;background:var(--gray-100);border-radius:var(--r-sm);font-size:12.5px;color:var(--gray-700);">' +
+          '<span style="font-weight:600;">驗證結果：</span>' + escHtml(item.verify_result) + '</div>' : '') +
+        '<div class="sc-item-actions">' +
+          '<button class="btn-delete" onclick="deleteItem(' + JSON.stringify(itemId) + ')">刪除</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function toggleItem(idx) {
+  var el = document.getElementById('sc-item-' + idx);
+  el.classList.toggle('expanded');
+}
+
+async function deleteItem(id) {
+  if (!confirm('確定刪除這筆推演記錄？')) return;
+  try {
+    var res = await _supabase.from('inferences').delete().eq('id', id).eq('user_id', currentUser.id);
+    if (res.error) throw res.error;
+    allItems = allItems.filter(function(i) { return i.id !== id; });
+    updateStats(allItems);
+    renderList(allItems, currentFilter);
+  } catch(e) {
+    alert('刪除失敗：' + e.message);
+  }
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
