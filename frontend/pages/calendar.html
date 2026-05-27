@@ -122,6 +122,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .t-crypto{background:#fff7ed;color:#9a3412;}
 .t-opex{background:#fce7f3;color:#9d174d;}
 .t-macro{background:#eff6ff;color:#1d4ed8;}
+.t-call{background:#e0f2fe;color:#0369a1;}
+.t-agm{background:#ede9fe;color:#6d28d9;}
+.t-ipo{background:#fef9c3;color:#854d0e;}
 
 /* ── SIDEBAR ── */
 .sidebar-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow-card);margin-bottom:14px;}
@@ -452,6 +455,15 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </button>
     <button class="filter-chip" onclick="filterEvents('crypto',this)">
       <span class="filter-dot" style="background:#ea580c"></span>加密
+    </button>
+    <button class="filter-chip" onclick="filterEvents('call',this)">
+      <span class="filter-dot" style="background:#0369a1"></span>法說會
+    </button>
+    <button class="filter-chip" onclick="filterEvents('agm',this)">
+      <span class="filter-dot" style="background:#6d28d9"></span>股東會
+    </button>
+    <button class="filter-chip" onclick="filterEvents('ipo',this)">
+      <span class="filter-dot" style="background:#d97706"></span>IPO
     </button>
     <button class="filter-chip" onclick="filterEvents('high',this)">
       🔴 高影響
@@ -1206,7 +1218,9 @@ async function loadCalendarData(){
         'econ':  {cls:'econ',   color:'#16a34a', badge:'總經數據'},
         'fed':   {cls:'fed',    color:'#2563eb', badge:'央行'},
         'earnings':{cls:'earnings',color:'#d97706',badge:'財報'},
-        'ipo':   {cls:'earnings',color:'#d97706', badge:'IPO'},
+        'call':  {cls:'call',   color:'#0369a1', badge:'法說會'},
+        'agm':   {cls:'agm',    color:'#6d28d9', badge:'股東會'},
+        'ipo':   {cls:'ipo',    color:'#d97706', badge:'IPO'},
         'tw':    {cls:'tw',     color:'#7c3aed', badge:'台股事件'},
         'corp':  {cls:'tw',     color:'#7c3aed', badge:'企業事件'},
         'holiday':{cls:'tw',   color:'#94a3b8', badge:'休市'},
