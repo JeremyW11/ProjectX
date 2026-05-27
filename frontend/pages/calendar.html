@@ -474,468 +474,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
     <!-- Timeline -->
     <div class="timeline" id="timeline">
+      <div id="timeline-loading" style="padding:40px 0;text-align:center;color:var(--gray-400);font-size:13px;font-family:var(--font-en);">載入中...</div>
 
-      <!-- ── MAY 10 TODAY ── -->
-      <div class="date-group" data-date="0510">
-        <div class="date-group-header">
-          <span class="dg-date-pill today">MAY 10</span>
-          <span class="dg-weekday">SUN</span>
-          <span class="dg-today-badge">TODAY</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card low-impact done" data-type="tw" data-impact="low">
-          <span class="ec-type-dot" style="background:#7c3aed"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-tw">台股事件</span>
-              <span class="ec-market">TWSE</span>
-              <span class="ec-time">全天</span>
-            </div>
-            <div class="ec-title">台股週末休市</div>
-            <div class="ec-desc">台灣證交所週末休市，下個交易日為 5/12（一）。</div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-info">INFO</span>
-            <span class="ec-done-badge">✓ done</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── MAY 12 ── -->
-      <div class="date-group" data-date="0512">
-        <div class="date-group-header">
-          <span class="dg-date-pill">MAY 12</span>
-          <span class="dg-weekday">MON</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card high-impact" data-type="econ" data-impact="high">
-          <span class="ec-type-dot" style="background:#16a34a"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-econ">總經數據</span>
-              <span class="ec-market">US</span>
-              <span class="ec-time">20:30 CST</span>
-            </div>
-            <div class="ec-title">美國 4 月 CPI 通膨數據</div>
-            <div class="ec-desc">市場預期核心 CPI 年增 3.6%，前值 3.8%。若數據高於預期，Fed 降息預期將進一步延後，美元可能再度走強。為本週最高影響力事件。</div>
-            <div class="ec-tickers"><span class="ec-ticker">DXY</span><span class="ec-ticker">TLT</span><span class="ec-ticker">SPY</span><span class="ec-ticker">GLD</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-high">HIGH</span>
-          </div>
-        </div>
-
-        <div class="event-card low-impact" data-type="econ" data-impact="low">
-          <span class="ec-type-dot" style="background:#16a34a"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-econ">總經數據</span>
-              <span class="ec-market">US</span>
-              <span class="ec-time">22:00 CST</span>
-            </div>
-            <div class="ec-title">美國 5 月 NY Empire State 製造業指數</div>
-            <div class="ec-desc">前值 -8.1，市場預期 -9.5。製造業景氣持續低迷，對市場影響有限。</div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-low">LOW</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── MAY 13 ── -->
-      <div class="date-group" data-date="0513">
-        <div class="date-group-header">
-          <span class="dg-date-pill">MAY 13</span>
-          <span class="dg-weekday">TUE</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card high-impact" data-type="earnings" data-impact="high">
-          <span class="ec-type-dot" style="background:#d97706"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-earnings">財報</span>
-              <span class="ec-market">US · 盤前</span>
-              <span class="ec-time">盤前</span>
-            </div>
-            <div class="ec-title">Walmart (WMT) Q1 FY2026 財報</div>
-            <div class="ec-desc">EPS 預估 $0.64，營收預估 $158.5B。消費者支出趨勢與廣告收入為兩大關注點。前次財報小幅 Miss，市場預期謹慎。</div>
-            <div class="ec-tickers"><span class="ec-ticker">WMT</span><span class="ec-ticker">TGT</span><span class="ec-ticker">COST</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-high">HIGH</span>
-          </div>
-        </div>
-
-        <div class="event-card med-impact" data-type="econ" data-impact="med">
-          <span class="ec-type-dot" style="background:#16a34a"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-econ">總經數據</span>
-              <span class="ec-market">US</span>
-              <span class="ec-time">20:30 CST</span>
-            </div>
-            <div class="ec-title">美國 4 月 PPI 生產者物價指數</div>
-            <div class="ec-desc">前值 +0.2% MoM，搭配 CPI 數據共同觀察通膨路徑。若 PPI 同步偏高，進一步強化 Fed 鷹派立場。</div>
-            <div class="ec-tickers"><span class="ec-ticker">DXY</span><span class="ec-ticker">TLT</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-med">MED</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── MAY 14 ── -->
-      <div class="date-group" data-date="0514">
-        <div class="date-group-header">
-          <span class="dg-date-pill">MAY 14</span>
-          <span class="dg-weekday">WED</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card med-impact" data-type="econ" data-impact="med">
-          <span class="ec-type-dot" style="background:#16a34a"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-econ">總經數據</span>
-              <span class="ec-market">US</span>
-              <span class="ec-time">20:30 CST</span>
-            </div>
-            <div class="ec-title">美國 4 月零售銷售數據</div>
-            <div class="ec-desc">前值 +0.7% MoM，市場預期 +0.4%。消費者支出動能關鍵指標，將影響 Q2 GDP 預估。</div>
-            <div class="ec-tickers"><span class="ec-ticker">XLY</span><span class="ec-ticker">WMT</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-med">MED</span>
-          </div>
-        </div>
-
-        <div class="event-card med-impact" data-type="fed" data-impact="med">
-          <span class="ec-type-dot" style="background:#3b82f6"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-fed">Fed 官員</span>
-              <span class="ec-market">US</span>
-              <span class="ec-time">22:00 CST</span>
-            </div>
-            <div class="ec-title">Fed 鮑威爾出席外國銀行家協會演講</div>
-            <div class="ec-desc">鮑威爾預計就當前貨幣政策立場發表演說，市場將密切關注是否釋放降息時間表訊號。本週 CPI / PPI 數據公布後首次公開發言，具重要指引意義。</div>
-            <div class="ec-tickers"><span class="ec-ticker">DXY</span><span class="ec-ticker">SPY</span><span class="ec-ticker">GLD</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-med">MED</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── MAY 15 ── -->
-      <div class="date-group" data-date="0515">
-        <div class="date-group-header">
-          <span class="dg-date-pill">MAY 15</span>
-          <span class="dg-weekday">THU</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card high-impact" data-type="tw" data-impact="high">
-          <span class="ec-type-dot" style="background:#7c3aed"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-tw">台股事件</span>
-              <span class="ec-market">TWSE · 2330</span>
-              <span class="ec-time">09:00 CST</span>
-            </div>
-            <div class="ec-title">台積電股東常會 (2330)</div>
-            <div class="ec-desc">議程包含現金股利每股 4.5 元決議、董事會改選、2025 年財務報告等。外資動向與股利政策為兩大市場關注焦點。</div>
-            <div class="ec-tickers"><span class="ec-ticker">2330</span><span class="ec-ticker">TSM</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-high">HIGH</span>
-          </div>
-        </div>
-
-        <div class="event-card med-impact" data-type="econ" data-impact="med">
-          <span class="ec-type-dot" style="background:#16a34a"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-econ">總經數據</span>
-              <span class="ec-market">US</span>
-              <span class="ec-time">20:30 CST</span>
-            </div>
-            <div class="ec-title">美國 5 月費城 Fed 製造業指數</div>
-            <div class="ec-desc">前值 15.5，市場預期 10.2。關稅不確定性影響製造業景氣，與 Empire State 指數共同反映工業面動能。</div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-med">MED</span>
-          </div>
-        </div>
-
-        <div class="event-card low-impact" data-type="tw" data-impact="low">
-          <span class="ec-type-dot" style="background:#7c3aed"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-tw">台股事件</span>
-              <span class="ec-market">TWSE</span>
-              <span class="ec-time">全天</span>
-            </div>
-            <div class="ec-title">聯發科 (2454) 除息交易日</div>
-            <div class="ec-desc">聯發科每股配息 NT$35，除息基準日為 5/15，預估填息天數參考值 45 日。</div>
-            <div class="ec-tickers"><span class="ec-ticker">2454</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-low">LOW</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── MAY 19 ── -->
-      <div class="date-group" data-date="0519">
-        <div class="date-group-header">
-          <span class="dg-date-pill">MAY 19</span>
-          <span class="dg-weekday">MON</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card med-impact" data-type="crypto" data-impact="med">
-          <span class="ec-type-dot" style="background:#ea580c"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-crypto">加密</span>
-              <span class="ec-market">SEC</span>
-              <span class="ec-time">美東時間</span>
-            </div>
-            <div class="ec-title">SEC 以太坊現貨 ETF 選擇權審核截止</div>
-            <div class="ec-desc">SEC 延後裁決以太坊現貨 ETF 選擇權至 6/22，本日為中間審查節點。市場預期最終批准機率 75%+，批准後將進一步帶動 ETH 機構資金流入。</div>
-            <div class="ec-tickers"><span class="ec-ticker">ETH</span><span class="ec-ticker">ETHA</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-med">MED</span>
-          </div>
-        </div>
-
-        <div class="event-card low-impact" data-type="econ" data-impact="low">
-          <span class="ec-type-dot" style="background:#16a34a"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-econ">總經數據</span>
-              <span class="ec-market">US</span>
-              <span class="ec-time">22:00 CST</span>
-            </div>
-            <div class="ec-title">美國 5 月 NAHB 房屋市場指數</div>
-            <div class="ec-desc">前值 40，市場預期 41。房市持續受高利率壓制，對科技股影響有限。</div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-low">LOW</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── MAY 20 ── -->
-      <div class="date-group" data-date="0520">
-        <div class="date-group-header">
-          <span class="dg-date-pill">MAY 20</span>
-          <span class="dg-weekday">TUE</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card med-impact" data-type="econ" data-impact="med">
-          <span class="ec-type-dot" style="background:#16a34a"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-econ">總經數據</span>
-              <span class="ec-market">TW</span>
-              <span class="ec-time">16:00 CST</span>
-            </div>
-            <div class="ec-title">台灣 4 月出口訂單數據</div>
-            <div class="ec-desc">前值年增 8.2%，市場預期年增 10%+。AI 伺服器與半導體訂單為主要觀察項目，直接反映台積電、鴻海未來訂單能見度。</div>
-            <div class="ec-tickers"><span class="ec-ticker">2330</span><span class="ec-ticker">2317</span><span class="ec-ticker">3008</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-med">MED</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── MAY 21 ── -->
-      <div class="date-group" data-date="0521">
-        <div class="date-group-header">
-          <span class="dg-date-pill">MAY 21</span>
-          <span class="dg-weekday">WED</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card high-impact" data-type="fed" data-impact="high">
-          <span class="ec-type-dot" style="background:#3b82f6"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-fed">FOMC</span>
-              <span class="ec-market">US · Fed</span>
-              <span class="ec-time">02:00 CST (隔日)</span>
-            </div>
-            <div class="ec-title">FOMC 5 月會議紀要公布</div>
-            <div class="ec-desc">5/7 FOMC 會議紀要發布，市場將審視委員對通膨路徑與降息時點的最新看法分歧程度。任何鴿派委員聲音都可能觸發債市反彈。</div>
-            <div class="ec-tickers"><span class="ec-ticker">DXY</span><span class="ec-ticker">TLT</span><span class="ec-ticker">GLD</span><span class="ec-ticker">SPY</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-high">HIGH</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── MAY 22 ── -->
-      <div class="date-group" data-date="0522">
-        <div class="date-group-header">
-          <span class="dg-date-pill">MAY 22</span>
-          <span class="dg-weekday">THU</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card high-impact" data-type="earnings" data-impact="high">
-          <span class="ec-type-dot" style="background:#d97706"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-earnings">財報</span>
-              <span class="ec-market">US · 盤後</span>
-              <span class="ec-time">盤後</span>
-            </div>
-            <div class="ec-title">NVIDIA (NVDA) Q1 FY2026 財報</div>
-            <div class="ec-desc">EPS 預估 $5.58，營收預估 $24.6B。Blackwell 出貨量與資料中心業務為核心觀察點。本季財報為全市場最高關注度事件之一。</div>
-            <div class="ec-tickers"><span class="ec-ticker">NVDA</span><span class="ec-ticker">AMD</span><span class="ec-ticker">SMCI</span><span class="ec-ticker">2330</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-high">HIGH</span>
-          </div>
-        </div>
-
-        <div class="event-card med-impact" data-type="econ" data-impact="med">
-          <span class="ec-type-dot" style="background:#16a34a"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-econ">總經數據</span>
-              <span class="ec-market">US</span>
-              <span class="ec-time">20:30 CST</span>
-            </div>
-            <div class="ec-title">美國 4 月既有房屋銷售</div>
-            <div class="ec-desc">前值 429 萬戶，房市景氣持續受高房貸利率壓制，預計維持低位。</div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-med">MED</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── MAY 28 ── -->
-      <div class="date-group" data-date="0528">
-        <div class="date-group-header">
-          <span class="dg-date-pill">MAY 28</span>
-          <span class="dg-weekday">WED</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card med-impact" data-type="earnings" data-impact="med">
-          <span class="ec-type-dot" style="background:#d97706"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-earnings">財報</span>
-              <span class="ec-market">US · 盤後</span>
-              <span class="ec-time">盤後</span>
-            </div>
-            <div class="ec-title">Costco (COST) Q3 FY2026 財報</div>
-            <div class="ec-desc">EPS 預估 $3.82，會員費調漲效應與電商成長為觀察重點。</div>
-            <div class="ec-tickers"><span class="ec-ticker">COST</span><span class="ec-ticker">WMT</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-med">MED</span>
-          </div>
-        </div>
-
-        <div class="event-card med-impact" data-type="econ" data-impact="med">
-          <span class="ec-type-dot" style="background:#16a34a"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-econ">總經數據</span>
-              <span class="ec-market">US</span>
-              <span class="ec-time">20:30 CST</span>
-            </div>
-            <div class="ec-title">美國 Q1 GDP 二次估值</div>
-            <div class="ec-desc">初值年化 +1.6%，市場預期二次估值上修至 +2.0%。若下修則加深衰退擔憂，上修則支撐市場信心。</div>
-            <div class="ec-tickers"><span class="ec-ticker">SPY</span><span class="ec-ticker">DXY</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-med">MED</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── JUN 6 ── -->
-      <div class="date-group" data-date="0606">
-        <div class="date-group-header">
-          <span class="dg-date-pill">JUN 6</span>
-          <span class="dg-weekday">SAT</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card high-impact" data-type="fed" data-impact="high">
-          <span class="ec-type-dot" style="background:#3b82f6"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-fed">央行</span>
-              <span class="ec-market">EUR · ECB</span>
-              <span class="ec-time">19:15 CST</span>
-            </div>
-            <div class="ec-title">歐洲央行 (ECB) 利率決議</div>
-            <div class="ec-desc">市場預期 ECB 6 月降息 25bps，為今年第三次降息。ECB 與 Fed 政策分歧持續擴大，歐元走勢與歐洲股市均受影響。</div>
-            <div class="ec-tickers"><span class="ec-ticker">EUR</span><span class="ec-ticker">EZU</span><span class="ec-ticker">DXY</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-high">HIGH</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── JUN 12 ── -->
-      <div class="date-group" data-date="0612">
-        <div class="date-group-header">
-          <span class="dg-date-pill">JUN 12</span>
-          <span class="dg-weekday">FRI</span>
-          <span class="dg-line"></span>
-        </div>
-
-        <div class="event-card med-impact" data-type="earnings" data-impact="med">
-          <span class="ec-type-dot" style="background:#d97706"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-earnings">財報</span>
-              <span class="ec-market">TW · 台股</span>
-              <span class="ec-time">盤後</span>
-            </div>
-            <div class="ec-title">聯發科 (2454) Q1 2026 財報</div>
-            <div class="ec-desc">EPS 預估 NT$68.4，AI 手機晶片出貨量與 MediaTek Dimensity 9400 滲透率為核心觀察點。法人預估毛利率持平於 50% 附近。</div>
-            <div class="ec-tickers"><span class="ec-ticker">2454</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-med">MED</span>
-          </div>
-        </div>
-
-        <div class="event-card high-impact" data-type="fed" data-impact="high">
-          <span class="ec-type-dot" style="background:#3b82f6"></span>
-          <div class="ec-content">
-            <div class="ec-meta">
-              <span class="ec-type-badge t-econ">總經數據</span>
-              <span class="ec-market">US</span>
-              <span class="ec-time">20:30 CST</span>
-            </div>
-            <div class="ec-title">美國 5 月 CPI 通膨數據</div>
-            <div class="ec-desc">下一個關鍵通膨數據，將決定 Fed 6 月 FOMC 前最後一份重要數據參考。市場屆時對降息預期的調整方向高度敏感。</div>
-            <div class="ec-tickers"><span class="ec-ticker">TLT</span><span class="ec-ticker">DXY</span><span class="ec-ticker">GLD</span></div>
-          </div>
-          <div class="ec-right">
-            <span class="ec-impact-label impact-high">HIGH</span>
-          </div>
-        </div>
-      </div>
+      <!-- all content rendered dynamically via loadCalendarData() -->
 
     </div><!-- end timeline -->
 
@@ -964,45 +505,25 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <!-- Legend -->
       <div class="sidebar-card">
         <div class="sc-title">事件類型 <span class="sc-title-en">LEGEND</span></div>
-        <div class="legend-row"><span class="legend-dot" style="background:#3b82f6"></span><span class="legend-label">央行 / Fed / FOMC</span><span class="legend-count">4</span></div>
-        <div class="legend-row"><span class="legend-dot" style="background:#16a34a"></span><span class="legend-label">總經數據</span><span class="legend-count">9</span></div>
-        <div class="legend-row"><span class="legend-dot" style="background:#d97706"></span><span class="legend-label">財報</span><span class="legend-count">4</span></div>
-        <div class="legend-row"><span class="legend-dot" style="background:#7c3aed"></span><span class="legend-label">台股事件</span><span class="legend-count">3</span></div>
-        <div class="legend-row"><span class="legend-dot" style="background:#ea580c"></span><span class="legend-label">加密</span><span class="legend-count">1</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#3b82f6"></span><span class="legend-label">央行 / Fed / FOMC</span><span class="legend-count" id="lc-fed">–</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#16a34a"></span><span class="legend-label">總經數據</span><span class="legend-count" id="lc-econ">–</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#d97706"></span><span class="legend-label">財報</span><span class="legend-count" id="lc-earnings">–</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#0369a1"></span><span class="legend-label">法說會</span><span class="legend-count" id="lc-call">–</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#6d28d9"></span><span class="legend-label">股東會</span><span class="legend-count" id="lc-agm">–</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#7c3aed"></span><span class="legend-label">台股事件</span><span class="legend-count" id="lc-tw">–</span></div>
+        <div class="legend-row"><span class="legend-dot" style="background:#ea580c"></span><span class="legend-label">加密</span><span class="legend-count" id="lc-crypto">–</span></div>
       </div>
 
-      <!-- Countdown to key events -->
-      <div class="sidebar-card">
+      <!-- Countdown to key events (content replaced by updateCountdownsDynamic) -->
+      <div class="sidebar-card" id="countdown-card">
         <div class="sc-title">重要倒數 <span class="sc-title-en">COUNTDOWN</span></div>
-        <div class="countdown-item">
-          <div class="ci-left"><div class="ci-name">美國 CPI（4月）</div><div class="ci-date">MAY 12 · 20:30 CST</div></div>
-          <span class="ci-days soon" id="cd-cpi">2 天</span>
-        </div>
-        <div class="countdown-item">
-          <div class="ci-left"><div class="ci-name">台積電股東常會</div><div class="ci-date">MAY 15 · 09:00 CST</div></div>
-          <span class="ci-days" id="cd-tsmc">5 天</span>
-        </div>
-        <div class="countdown-item">
-          <div class="ci-left"><div class="ci-name">FOMC 會議紀要</div><div class="ci-date">MAY 21 · 02:00 CST</div></div>
-          <span class="ci-days" id="cd-fomc">11 天</span>
-        </div>
-        <div class="countdown-item">
-          <div class="ci-left"><div class="ci-name">NVIDIA 財報</div><div class="ci-date">MAY 22 · 盤後</div></div>
-          <span class="ci-days" id="cd-nvda">12 天</span>
-        </div>
-        <div class="countdown-item">
-          <div class="ci-left"><div class="ci-name">ECB 利率決議</div><div class="ci-date">JUN 6</div></div>
-          <span class="ci-days" id="cd-ecb">27 天</span>
-        </div>
+        <div style="padding:8px 0;color:var(--gray-400);font-size:12px;font-family:var(--font-en);">載入中...</div>
       </div>
 
-      <!-- This week summary -->
-      <div class="sidebar-card">
+      <!-- This week summary (content replaced by updateThisWeekDynamic) -->
+      <div class="sidebar-card" id="this-week-card">
         <div class="sc-title">本週重點 <span class="sc-title-en">THIS WEEK</span></div>
-        <div class="week-item"><span class="wi-date">MON 5/12</span><span class="wi-text">美國 4 月 CPI（最高影響）</span></div>
-        <div class="week-item"><span class="wi-date">TUE 5/13</span><span class="wi-text">WMT 財報 + PPI 數據</span></div>
-        <div class="week-item"><span class="wi-date">WED 5/14</span><span class="wi-text">零售銷售 + 鮑威爾演講</span></div>
-        <div class="week-item"><span class="wi-date">THU 5/15</span><span class="wi-text">台積電股東常會 + 聯發科除息</span></div>
+        <div style="padding:8px 0;color:var(--gray-400);font-size:12px;font-family:var(--font-en);">載入中...</div>
       </div>
 
     </div>
@@ -1019,31 +540,20 @@ function tick(){
 tick(); setInterval(tick,1000);
 
 // ── CALENDAR DATA ──
-const CAL_EVENTS = {
-  '2026-05-10': [{type:'tw',    impact:'low'}],
-  '2026-05-12': [{type:'econ',  impact:'high'},{type:'econ',impact:'low'}],
-  '2026-05-13': [{type:'earn',  impact:'high'},{type:'econ',impact:'med'}],
-  '2026-05-14': [{type:'econ',  impact:'med'}, {type:'fed', impact:'med'}],
-  '2026-05-15': [{type:'tw',    impact:'high'},{type:'tw',  impact:'low'},{type:'econ',impact:'med'}],
-  '2026-05-19': [{type:'crypto',impact:'med'}, {type:'econ',impact:'low'}],
-  '2026-05-20': [{type:'econ',  impact:'med'}],
-  '2026-05-21': [{type:'fed',   impact:'high'}],
-  '2026-05-22': [{type:'earn',  impact:'high'},{type:'econ',impact:'med'}],
-  '2026-05-28': [{type:'earn',  impact:'med'}, {type:'econ',impact:'med'}],
-  '2026-06-06': [{type:'fed',   impact:'high'}],
-  '2026-06-12': [{type:'earn',  impact:'med'}, {type:'econ',impact:'high'}],
-};
+let CAL_EVENTS = {}; // populated from daily.json via loadCalendarData()
 
 const TYPE_COLOR = {
-  fed:'#3b82f6', econ:'#16a34a', earn:'#d97706',
-  tw:'#7c3aed', crypto:'#ea580c'
+  fed:'#3b82f6', econ:'#16a34a', data:'#16a34a',
+  earnings:'#d97706', earn:'#d97706', call:'#0369a1',
+  agm:'#6d28d9', ipo:'#d97706',
+  tw:'#7c3aed', corp:'#7c3aed', crypto:'#ea580c'
 };
 const IMPACT_COLOR = {high:'#dc2626', med:'#d97706', low:'#16a34a'};
 const MONTH_NAMES = ['January','February','March','April','May','June',
   'July','August','September','October','November','December'];
 
-let currentYear=2026, currentMonth=4;
 const TODAY=new Date();TODAY.setHours(0,0,0,0);
+let currentYear=TODAY.getFullYear(), currentMonth=TODAY.getMonth();
 
 function buildCalendar(year,month){
   const grid=document.getElementById('sc-cal-grid');
@@ -1133,7 +643,7 @@ buildCalendar(currentYear,currentMonth);
 
 // Filter
 function initDateWindow(){
-  const today=new Date(2026,4,10);
+  const today=new Date();today.setHours(0,0,0,0);
   const past15=new Date(today); past15.setDate(today.getDate()-15);
   const future15=new Date(today); future15.setDate(today.getDate()+15);
   document.querySelectorAll('.date-group').forEach(function(group){
@@ -1163,25 +673,6 @@ function filterEvents(type,el){
     group.style.display=visible?'':'none';
   });
 }
-
-// Countdown
-function updateCountdowns(){
-  const today=new Date(2026,4,10);
-  [{id:'cd-cpi',date:new Date(2026,4,12)},
-   {id:'cd-tsmc',date:new Date(2026,4,15)},
-   {id:'cd-fomc',date:new Date(2026,4,21)},
-   {id:'cd-nvda',date:new Date(2026,4,22)},
-   {id:'cd-ecb',date:new Date(2026,5,6)}
-  ].forEach(e=>{
-    const el=document.getElementById(e.id);
-    if(!el) return;
-    const diff=Math.round((e.date-today)/(1000*60*60*24));
-    if(diff===0){el.textContent='今天';el.classList.add('soon');}
-    else if(diff<0){el.textContent='已過';el.style.color='var(--gray-300)';}
-    else{el.textContent=diff+' 天';if(diff<=3)el.classList.add('soon');}
-  });
-}
-updateCountdowns();
 
 // ── DYNAMIC DATA ──────────────────────────────────────
 async function loadCalendarData(){
@@ -1301,12 +792,32 @@ async function loadCalendarData(){
     });
 
     var timeline = document.getElementById('timeline');
-    if(timeline && html) timeline.innerHTML = html;
+    if(timeline){
+      if(html){
+        timeline.innerHTML = html;
+      } else {
+        timeline.innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--gray-400);font-size:13px;font-family:var(--font-en);">今日暫無日曆事件</div>';
+      }
+    }
 
-    // 動態更新 countdown sidebar
+    // 動態更新 mini calendar 的事件標記
+    CAL_EVENTS = {};
+    allEvents.forEach(function(ev){
+      if(!CAL_EVENTS[ev.date]) CAL_EVENTS[ev.date] = [];
+      CAL_EVENTS[ev.date].push({type: ev.type, impact: ev.impact||'low'});
+    });
+    buildCalendar(currentYear, currentMonth);
+
+    // 動態更新 sidebar
+    updateLegendCounts(allEvents);
     updateCountdownsDynamic(allEvents, todayStr);
+    updateThisWeekDynamic(allEvents, todayStr);
 
-  } catch(e){ console.error('calendar loadData error',e); }
+  } catch(e){
+    console.error('calendar loadData error',e);
+    var tl = document.getElementById('timeline');
+    if(tl) tl.innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--gray-400);font-size:13px;font-family:var(--font-zh);">資料載入失敗，請重新整理</div>';
+  }
 }
 
 function updateCountdownsDynamic(events, todayStr){
@@ -1314,7 +825,7 @@ function updateCountdownsDynamic(events, todayStr){
   var highEvents = events.filter(function(e){ return (e.impact||'').toLowerCase()==='high' && e.date >= todayStr; });
   highEvents.sort(function(a,b){ return a.date.localeCompare(b.date); });
 
-  var countdownEl = document.querySelector('.sidebar-card:nth-child(3)');
+  var countdownEl = document.getElementById('countdown-card');
   if(!countdownEl) return;
 
   var today = new Date(todayStr+'T00:00:00');
@@ -1336,6 +847,55 @@ function updateCountdownsDynamic(events, todayStr){
     '</div>';
   });
   countdownEl.innerHTML = cdHTML;
+}
+
+function updateThisWeekDynamic(events, todayStr){
+  var el = document.getElementById('this-week-card');
+  if(!el) return;
+  var today = new Date(todayStr+'T00:00:00');
+  var days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  // get Mon-Sun of current week
+  var dow = today.getDay();
+  var weekStart = new Date(today); weekStart.setDate(today.getDate() - (dow===0?6:dow-1));
+  var weekEnd   = new Date(weekStart); weekEnd.setDate(weekStart.getDate()+6);
+  var pad = function(d){ return d<10?'0'+d:String(d); };
+  var wsStr = weekStart.toISOString().split('T')[0];
+  var weStr = weekEnd.toISOString().split('T')[0];
+  var weekEvs = events.filter(function(e){
+    return e.date >= wsStr && e.date <= weStr && (e.impact||'').toLowerCase() !== 'low';
+  });
+  weekEvs.sort(function(a,b){ return a.date.localeCompare(b.date); });
+  var html = '<div class="sc-title">本週重點 <span class="sc-title-en">THIS WEEK</span></div>';
+  if(!weekEvs.length){
+    html += '<div style="padding:8px 0;color:var(--gray-400);font-size:12px;font-family:var(--font-zh);">本週暫無重要事件</div>';
+  } else {
+    weekEvs.slice(0,6).forEach(function(ev){
+      var d = new Date(ev.date+'T00:00:00');
+      var label = days[d.getDay()]+' '+d.getMonth()+1+'/'+d.getDate();
+      html += '<div class="week-item"><span class="wi-date">'+label+'</span><span class="wi-text">'+ev.title+'</span></div>';
+    });
+  }
+  el.innerHTML = html;
+}
+
+function updateLegendCounts(events){
+  var counts = {fed:0, econ:0, earnings:0, call:0, agm:0, ipo:0, tw:0, crypto:0};
+  events.forEach(function(ev){
+    var t = (ev.type||'').toLowerCase();
+    if(t==='fed') counts.fed++;
+    else if(t==='data'||t==='econ') counts.econ++;
+    else if(t==='earnings') counts.earnings++;
+    else if(t==='call') counts.call++;
+    else if(t==='agm') counts.agm++;
+    else if(t==='ipo') counts.ipo++;
+    else if(t==='tw'||t==='corp') counts.tw++;
+    else if(t==='crypto') counts.crypto++;
+  });
+  Object.keys(counts).forEach(function(k){
+    var el = document.getElementById('lc-'+k);
+    if(el) el.textContent = counts[k] || '–';
+  });
 }
 
 loadCalendarData();
