@@ -198,6 +198,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
 
 .logo-link{transition:opacity .2s,transform .2s;display:inline-flex;}
 .logo-link:hover{opacity:.75;transform:scale(1.04);}
+#stale-banner{display:none;align-items:center;justify-content:center;gap:6px;background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 24px;font-size:12px;color:#92400e;font-family:var(--font-zh);position:fixed;top:56px;left:0;right:0;z-index:99;}
 </style>
 </head>
 <body>
@@ -389,9 +390,13 @@ function clearFilter(){
 
 var allData=null;
 
+function checkDataStaleness(dateStr){var today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei'}).format(new Date());if(dateStr&&dateStr!==today){var b=document.getElementById('stale-banner');if(b){b.style.display='flex';b.querySelector('.stale-date').textContent=dateStr;}}}
+
 async function loadData(){
   var res=await fetch('../data/daily.json');
   allData=await res.json();
+  checkDataStaleness(allData.date);
+
   var d=new Date(allData.date);
   document.getElementById('ind-date').innerHTML=
     d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+'<br>UTC+8 台北時間';

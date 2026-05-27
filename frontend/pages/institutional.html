@@ -222,6 +222,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .call-card.negative{border-left:3px solid var(--red-600);}
 .call-card.neutral{border-left:3px solid var(--gray-300);}
 .empty-state{text-align:center;padding:40px 20px;color:var(--gray-400);font-size:13px;font-family:var(--font-zh);}
+#stale-banner{display:none;align-items:center;justify-content:center;gap:6px;background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 24px;font-size:12px;color:#92400e;font-family:var(--font-zh);position:fixed;top:56px;left:0;right:0;z-index:99;}
 </style>
 </head>
 <body>
@@ -741,10 +742,14 @@ function toggleResearchCard(card){
   }
 }
 
+function checkDataStaleness(dateStr){var today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei'}).format(new Date());if(dateStr&&dateStr!==today){var b=document.getElementById('stale-banner');if(b){b.style.display='flex';b.querySelector('.stale-date').textContent=dateStr;}}}
+
 async function loadData(){
   try{
     var res=await fetch('../data/daily.json');
     var data=await res.json();
+    checkDataStaleness(data.date);
+
     var inst=data.institutional||{};
 
     // try accumulated.json for more data

@@ -269,6 +269,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .cs-score{font-family:var(--font-en);font-size:16px;font-weight:700;width:40px;text-align:right;flex-shrink:0;}
 .cs-dims{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap;}
 .cs-dim{font-size:10px;padding:2px 6px;border-radius:3px;font-family:var(--font-en);}
+#stale-banner{display:none;align-items:center;justify-content:center;gap:6px;background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 24px;font-size:12px;color:#92400e;font-family:var(--font-zh);position:fixed;top:56px;left:0;right:0;z-index:99;}
 </style>
 </head>
 <body>
@@ -656,6 +657,8 @@ async function generateMorningBrief(items, dailyData){
   try {
     var res = await fetch('/data/daily.json');
     var d = await res.json();
+    checkDataStaleness(d.date);
+
     var brief = d.morning_brief || '';
     var date = d.date || '';
 
@@ -1144,6 +1147,8 @@ async function loadEventTracker(watchlistItems){
   }
 }
 // ── End 事件驅動追蹤 ───────────────────────────────────
+function checkDataStaleness(dateStr){var today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei'}).format(new Date());if(dateStr&&dateStr!==today){var b=document.getElementById('stale-banner');if(b){b.style.display='flex';b.querySelector('.stale-date').textContent=dateStr;}}}
+
 async function loadWatchlist(){
   if(!currentUser) return;
   document.getElementById('wl-user-email').textContent = currentUser.email;

@@ -842,6 +842,7 @@ img { display: block; max-width: 100%; }
   .market-bar { grid-template-columns: repeat(2, 1fr); }
   .header-nav { display: none; }
 }
+#stale-banner{display:none;align-items:center;justify-content:center;gap:6px;background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 24px;font-size:12px;color:#92400e;font-family:var(--font-zh);position:fixed;top:56px;left:0;right:0;z-index:99;}
 </style>
 </head>
 <body>
@@ -1040,10 +1041,14 @@ function renderCalendar(calendar) {
   }).join('');
 }
 
+function checkDataStaleness(dateStr){var today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei'}).format(new Date());if(dateStr&&dateStr!==today){var b=document.getElementById('stale-banner');if(b){b.style.display='flex';b.querySelector('.stale-date').textContent=dateStr;}}}
+
 async function loadData() {
   try {
     const res = await fetch('/data/daily.json');
     const data = await res.json();
+    checkDataStaleness(data.date);
+
     const d = new Date(data.date);
     const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
     const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
