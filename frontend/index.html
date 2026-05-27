@@ -487,7 +487,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
               <button class="fls-lock" onclick="openModal('signup')">✦ 升級 Pro</button>
             </div>
             <div class="free-locked-section">
-              <span class="fls-label">🔒 標的追蹤看板</span>
+              <span class="fls-label">🔒 會員中心（自選標的）</span>
+              <button class="fls-lock" onclick="openModal('signup')">✦ 升級 Pro</button>
+            </div>
+            <div class="free-locked-section">
+              <span class="fls-label">🔒 AI 推演沙盤</span>
               <button class="fls-lock" onclick="openModal('signup')">✦ 升級 Pro</button>
             </div>
             <div class="free-locked-section">
@@ -538,14 +542,29 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
             <div class="pro-earnings-row"><div class="per-left"><span class="per-ticker">WMT</span><span class="per-name">Walmart</span></div><div class="per-right"><span class="per-eps">EPS 0.61 vs 預期 0.64</span><span class="per-beat beat-no">Miss ↓5%</span></div></div>
           </div>
 
-          <!-- Target tracker -->
+          <!-- AI 推演沙盤 -->
           <div>
-            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">我的標的追蹤</div>
-            <div class="pro-target-card">
-              <div class="ptc-row"><span class="ptc-sym">BTC</span><div class="ptc-bar-track"><div class="ptc-bar-fill" style="width:82%;background:#4ade80"></div></div><span class="ptc-chg up">+2.31%</span></div>
-              <div class="ptc-row"><span class="ptc-sym">2330</span><div class="ptc-bar-track"><div class="ptc-bar-fill" style="width:60%;background:#60a5fa"></div></div><span class="ptc-chg up">+0.84%</span></div>
-              <div class="ptc-row"><span class="ptc-sym">NVDA</span><div class="ptc-bar-track"><div class="ptc-bar-fill" style="width:90%;background:#4ade80"></div></div><span class="ptc-chg up">+9.21%</span></div>
-              <div class="ptc-row"><span class="ptc-sym">SPX</span><div class="ptc-bar-track"><div class="ptc-bar-fill" style="width:42%;background:#f87171"></div></div><span class="ptc-chg dn">-0.48%</span></div>
+            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">AI 推演沙盤</div>
+            <div class="pro-target-card" style="padding:10px 12px;">
+              <div style="font-size:10.5px;color:rgba(255,255,255,.45);font-family:var(--font-zh);margin-bottom:8px;">「Fed 若6月升息，NVDA 怎麼走？」</div>
+              <div style="display:flex;flex-direction:column;gap:5px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <span style="font-size:10px;color:rgba(255,255,255,.6);font-family:var(--font-zh);">情境A · 市場消化升息</span>
+                  <span style="font-size:10px;font-weight:600;color:#4ade80;font-family:var(--font-en);">45%</span>
+                </div>
+                <div style="background:rgba(255,255,255,.08);border-radius:3px;height:4px;overflow:hidden;"><div style="width:45%;height:100%;background:#4ade80;border-radius:3px;"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;">
+                  <span style="font-size:10px;color:rgba(255,255,255,.6);font-family:var(--font-zh);">情境B · 估值壓縮</span>
+                  <span style="font-size:10px;font-weight:600;color:#f87171;font-family:var(--font-en);">35%</span>
+                </div>
+                <div style="background:rgba(255,255,255,.08);border-radius:3px;height:4px;overflow:hidden;"><div style="width:35%;height:100%;background:#f87171;border-radius:3px;"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;">
+                  <span style="font-size:10px;color:rgba(255,255,255,.6);font-family:var(--font-zh);">情境C · 快速反彈</span>
+                  <span style="font-size:10px;font-weight:600;color:#fbbf24;font-family:var(--font-en);">20%</span>
+                </div>
+                <div style="background:rgba(255,255,255,.08);border-radius:3px;height:4px;overflow:hidden;"><div style="width:20%;height:100%;background:#fbbf24;border-radius:3px;"></div></div>
+              </div>
+              <div style="margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,255,255,.08);font-size:9.5px;color:rgba(255,255,255,.3);font-family:var(--font-en);">驗證日 2026-06-15 · 加權預期 −3.2%</div>
             </div>
           </div>
 
@@ -579,9 +598,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📊</span>財報 EPS 預估 vs 實際對比</td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📞</span>法說會重點摘要 + 前瞻指引</td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr><td colspan="3" class="ft-group-row">個人化功能</td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🎯</span>標的追蹤看板<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">自選股 + 幣</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🎯</span>會員中心<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">自選標的 + 訊號雷達</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🤖</span>AI 推演沙盤<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">三情境機率 + 驗證追蹤</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📅</span>市場日曆完整版<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">31天滾動窗口</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🔄</span>推演記錄儲存 + 跨裝置同步</td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">✉️</span>每日 Email 推送</td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">即將推出</span></td></tr>
         </tbody>
       </table>
@@ -613,7 +632,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">美股 + 台股市場概況</span></li>
           <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">風險矩陣 + 情緒指標</span></li>
           <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">機構研報（Pro 限定）</span></li>
-          <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">標的追蹤 + 個人化（Pro 限定）</span></li>
+          <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">會員中心 + AI 推演沙盤（Pro 限定）</span></li>
         </ul>
         <button class="btn-free" onclick="window.location.href='/brief.html'">免費查看今日簡報</button>
       </div>
@@ -631,8 +650,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">完整 12 則每日情報</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">機構研報 + 法說會摘要</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">財報 EPS 預估 vs 實際</span></li>
-          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">標的追蹤 + 市場日曆完整版</span></li>
-          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">跨裝置同步 + Email 推送</span></li>
+          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">會員中心（自選標的 + 訊號雷達）</span></li>
+          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">AI 推演沙盤 + 情境命中率追蹤</span></li>
+          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">市場日曆完整版 + Email 推送</span></li>
         </ul>
         <button class="btn-pro" onclick="openModal('signup')">7天免費試用 Pro →</button>
       </div>
