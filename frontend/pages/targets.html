@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project X · 標的追蹤</title>
+<title>Project X · 會員中心</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -182,24 +182,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .s-bear{background:var(--red-100);color:var(--red-700);}
 .s-neut{background:var(--amber-100);color:var(--amber-600);}
 
-/* Inference card */
-.inference-card{padding:16px 20px;border-bottom:1px solid var(--gray-100);display:flex;gap:14px;}
-.inference-card:last-child{border-bottom:none;}
-.inf-left{flex:1;}
-.inf-target-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-.inf-sym{font-family:var(--font-en);font-size:13px;font-weight:600;color:var(--gray-900);}
-.inf-date{font-size:11px;color:var(--gray-400);font-family:var(--font-en);}
-.inf-status{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);}
-.inf-st-hit{background:var(--green-100);color:var(--green-700);}
-.inf-st-miss{background:var(--red-100);color:var(--red-700);}
-.inf-st-pending{background:var(--amber-100);color:var(--amber-600);}
-.inf-title{font-size:13.5px;font-weight:500;color:var(--gray-800);font-family:var(--font-zh);line-height:1.5;margin-bottom:4px;}
-.inf-body{font-size:12px;color:var(--gray-500);font-family:var(--font-zh);line-height:1.6;font-weight:300;}
-.inf-right{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
-.inf-signal{font-size:11px;font-weight:500;font-family:var(--font-en);}
-.inf-signal.up{color:var(--green-600);}
-.inf-signal.dn{color:var(--red-600);}
-.inf-conf{font-size:10px;color:var(--gray-400);font-family:var(--font-en);}
 
 /* ── SIGNAL STRENGTH ── */
 .signal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px;}
@@ -306,12 +288,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   </div></a>
   <nav class="header-nav">
     <a href="/brief.html" class="nav-item">總覽</a>
-    <a href="/pages/scenario.html" class="nav-item">AI 推演</a>
     <a href="/pages/market.html" class="nav-item">市場</a>
     <a href="/pages/industry.html" class="nav-item">產業</a>
     <a href="/pages/institutional.html" class="nav-item">機構研報</a>
     <a href="/pages/calendar.html" class="nav-item">市場日曆</a>
-    <a href="/pages/targets.html" class="nav-item active"><span class="nav-dot"></span>標的追蹤</a>
+    <a href="/pages/targets.html" class="nav-item active"><span class="nav-dot"></span>會員中心</a>
   </nav>
   <div class="header-right">
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
@@ -326,7 +307,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
   <div class="page-header">
     <div>
-      <h1 class="page-title">標的追蹤 <span class="page-title-sub">Target Watchlist</span></h1>
+      <h1 class="page-title">會員中心 <span class="page-title-sub">Member Hub</span></h1>
       <div class="page-update">個人化看板 · Pro 功能 · 台北時間基準</div>
     </div>
   </div>
@@ -334,9 +315,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <!-- ── PRO GATE (shown when not logged in) ── -->
   <div id="pro-gate-view">
     <div class="pro-gate">
-      <div class="pro-gate-icon">🎯</div>
-      <h2 class="pro-gate-title">你的專屬<em>標的追蹤</em>看板</h2>
-      <p class="pro-gate-desc">建立自選股與幣種清單，儲存推演記錄，跨裝置同步。Pro 用戶每天早上打開就能看到自己最在意的標的狀況。</p>
+      <div class="pro-gate-icon">✦</div>
+      <h2 class="pro-gate-title">你的專屬<em>會員中心</em></h2>
+      <p class="pro-gate-desc">自選標的追蹤、AI 推演沙盤、Morning Brief，Pro 會員專屬看板，每天早上一站掌握所有重要資訊。</p>
 
       <div class="pro-features">
         <div class="pro-feat">
@@ -345,9 +326,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <div class="pro-feat-desc">美股、台股、加密貨幣無限自選，即時前收價與漲跌</div>
         </div>
         <div class="pro-feat">
-          <div class="pro-feat-icon">🧠</div>
-          <div class="pro-feat-title">推演記錄儲存</div>
-          <div class="pro-feat-desc">記錄每次進場邏輯，事後驗證準確率，累積決策資料庫</div>
+          <div class="pro-feat-icon">🤖</div>
+          <div class="pro-feat-title">AI 推演沙盤</div>
+          <div class="pro-feat-desc">輸入問題，Claude 生成三情境機率推演，追蹤驗證準確率</div>
         </div>
         <div class="pro-feat">
           <div class="pro-feat-icon">🔔</div>
@@ -407,6 +388,23 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <button class="cat-tab" onclick="filterCat('tw',this)">台股 <span id="cnt-tw">0</span></button>
       <button class="cat-tab" onclick="filterCat('crypto',this)">加密 <span id="cnt-crypto">0</span></button>
     </div>
+
+    <!-- AI 推演入口 -->
+    <a href="/pages/scenario.html" style="display:block;text-decoration:none;margin-bottom:16px;">
+      <div style="background:linear-gradient(135deg,var(--navy-800) 0%,var(--navy-600) 100%);border-radius:var(--r-lg);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;transition:opacity .15s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="font-size:26px;">🤖</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--white);font-family:var(--font-zh);">AI 推演沙盤</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:2px;font-family:var(--font-zh);">輸入問題，Claude 生成三情境機率推演</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <a href="/pages/my-scenarios.html" onclick="event.stopPropagation()" style="font-size:12px;color:rgba(255,255,255,.6);font-family:var(--font-en);padding:5px 10px;border:1px solid rgba(255,255,255,.2);border-radius:6px;text-decoration:none;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,.6)'">我的推演</a>
+          <span style="font-size:13px;color:rgba(255,255,255,.5);">→</span>
+        </div>
+      </div>
+    </a>
 
     <!-- Target cards grid -->
     <!-- 主題 Tab -->
@@ -505,102 +503,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 
     </div>
-    <!-- ═══ 我的記錄 ═══ -->
-    <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;margin:20px 0 12px;font-family:var(--font-en);">📝 我的記錄</div>
-    <!-- Inference / 推演記錄 -->
-    <div class="section-block" style="margin-bottom:16px;" id="inference-block">
-      <div class="section-block-header">
-        <div class="sbh-title">推演記錄 <span class="sbh-title-en">INFERENCE LOG</span></div>
-        <button class="btn-outline-sm" onclick="openInferenceModal()">+ 新增推演</button>
-      </div>
-      <div id="inference-list"><div style="text-align:center;padding:30px 20px;color:var(--gray-400);font-size:13px;">載入中...</div></div>
-    </div>
-
-    <!-- Inference Modal -->
-    <div class="modal-overlay" id="inferenceModal" onclick="closeInferenceModalBg(event)">
-      <div class="modal" style="max-width:480px;">
-        <button class="m-close" onclick="closeInferenceModal()">✕</button>
-        <div class="modal-header"><div class="modal-title" id="inference-modal-title">新增推演記錄</div></div>
-        <div class="modal-body">
-          <div class="m-group">
-            <label class="m-label">股票代碼 / 幣種</label>
-            <input class="m-input" type="text" id="inf-ticker" placeholder="e.g. NVDA · BTC · 2330">
-          </div>
-          <div class="m-group">
-            <label class="m-label">推演標題</label>
-            <input class="m-input" type="text" id="inf-title" placeholder="簡述你的推演邏輯">
-          </div>
-          <div class="m-group">
-            <label class="m-label">詳細說明</label>
-            <textarea class="m-input" id="inf-body" rows="3" style="resize:vertical;" placeholder="根據哪些訊號？預期如何發展？"></textarea>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div class="m-group">
-              <label class="m-label">目標價（選填）</label>
-              <input class="m-input" type="text" id="inf-target" placeholder="e.g. $950 / 108K">
-            </div>
-            <div class="m-group">
-              <label class="m-label">停損（選填）</label>
-              <input class="m-input" type="text" id="inf-stop" placeholder="e.g. $850 / 95K">
-            </div>
-          </div>
-          <div class="m-group">
-            <label class="m-label">信心度</label>
-            <select class="m-select" id="inf-confidence">
-              <option value="HIGH">HIGH 高</option>
-              <option value="MED" selected>MED 中</option>
-              <option value="LOW">LOW 低</option>
-            </select>
-          </div>
-          <input type="hidden" id="inf-edit-id">
-          <button class="m-submit" onclick="saveInference()">儲存推演</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 勝率儀表板 -->
-    <div class="section-block">
-      <div class="section-block-header">
-        <div class="sbh-title">勝率儀表板 <span class="sbh-title-en">WIN RATE</span></div>
-        <span class="sbh-badge" id="winrate-badge" style="background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);">統計中</span>
-      </div>
-      <div id="winrate-content" style="padding:16px 20px;">
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
-          <div style="text-align:center;padding:12px;background:var(--gray-50);border-radius:10px;">
-            <div style="font-size:22px;font-weight:700;color:var(--navy-700);" id="wr-total">—</div>
-            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">總推演</div>
-          </div>
-          <div style="text-align:center;padding:12px;background:var(--green-50);border-radius:10px;">
-            <div style="font-size:22px;font-weight:700;color:var(--green-600);" id="wr-hit">—</div>
-            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">Hit ✓</div>
-          </div>
-          <div style="text-align:center;padding:12px;background:var(--red-100);border-radius:10px;">
-            <div style="font-size:22px;font-weight:700;color:var(--red-600);" id="wr-miss">—</div>
-            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">Miss ✗</div>
-          </div>
-          <div style="text-align:center;padding:12px;background:var(--amber-100);border-radius:10px;">
-            <div style="font-size:22px;font-weight:700;color:var(--amber-600);" id="wr-pending">—</div>
-            <div style="font-size:11px;color:var(--gray-400);margin-top:2px;">觀察中</div>
-          </div>
-        </div>
-        <!-- 勝率進度條 -->
-        <div style="margin-bottom:16px;">
-          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-500);margin-bottom:6px;">
-            <span>勝率</span>
-            <span id="wr-pct" style="font-weight:700;color:var(--navy-700);">—</span>
-          </div>
-          <div style="background:var(--gray-200);border-radius:20px;height:8px;overflow:hidden;">
-            <div id="wr-bar" style="height:100%;width:0%;background:var(--green-600);border-radius:20px;transition:width .5s;"></div>
-          </div>
-        </div>
-        <!-- 各標的勝率 -->
-        <div id="wr-by-ticker" style="display:none;">
-          <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.06em;margin-bottom:8px;">各標的勝率</div>
-          <div id="wr-ticker-list"></div>
-        </div>
-      </div>
-    </div>
-
 
     </div>
 
@@ -770,138 +672,9 @@ async function generateMorningBrief(items, dailyData){
 }
 // ── End Morning Brief ───────────────────────────────
 
-// ── 推演記錄 ──────────────────────────────────────
-async function loadInferences(){
-  var list = document.getElementById('inference-list');
-  if(!list || !currentUser) return;
 
-  var result = await _supabase.from('inferences').select('*')
-    .eq('user_id', currentUser.id)
-    .order('created_at', {ascending: false});
-
-  if(result.error){ list.innerHTML = '<div style="padding:20px;color:var(--red-600);">載入失敗</div>'; return; }
-  var items = result.data || [];
-
-  if(!items.length){
-    list.innerHTML = '<div style="text-align:center;padding:30px 20px;color:var(--gray-400);font-size:13px;"><div style="font-size:24px;margin-bottom:8px;">📝</div>尚無推演記錄<br>點擊「+ 新增推演」開始記錄你的投資邏輯</div>';
-    return;
-  }
-
-  list.innerHTML = items.map(function(item){
-    var statusMap = {pending:'⏳ 觀察中', hit:'✓ Hit', miss:'✗ Miss', cancelled:'取消'};
-    var statusClass = {pending:'inf-st-pending', hit:'inf-st-hit', miss:'inf-st-miss', cancelled:'inf-st-miss'};
-    var confColor = {HIGH:'var(--green-600)', MED:'var(--amber-600)', LOW:'var(--gray-400)'};
-    var date = (item.created_at||'').slice(0,10);
-    return '<div class="inference-card" data-id="'+item.id+'">'+
-      '<div class="inf-left">'+
-        '<div class="inf-target-row">'+
-          '<span class="inf-sym">'+item.ticker+'</span>'+
-          '<span class="inf-date">'+date+'</span>'+
-          '<span class="inf-status '+(statusClass[item.status]||'inf-st-pending')+'">'+statusMap[item.status]+'</span>'+
-        '</div>'+
-        '<div class="inf-title">'+item.title+'</div>'+
-        (item.body?'<div class="inf-body">'+item.body+'</div>':'')+
-        '<div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;">'+
-          (item.target_price?'<span style="font-size:11px;color:var(--navy-600);background:var(--navy-50);padding:2px 7px;border-radius:4px;">目標 '+item.target_price+'</span>':'')+
-          (item.stop_loss?'<span style="font-size:11px;color:var(--red-600);background:var(--red-100);padding:2px 7px;border-radius:4px;">停損 '+item.stop_loss+'</span>':'')+
-        '</div>'+
-        '<div style="display:flex;gap:6px;margin-top:8px;">'+
-          (item.status==='pending'?'<button data-id="'+item.id+'" data-st="hit" onclick="updateInferenceStatus(this.dataset.id,this.dataset.st)" style="font-size:11px;padding:2px 8px;border:1px solid var(--green-600);color:var(--green-600);border-radius:4px;background:none;cursor:pointer;">✓ Hit</button>':'')+
-          (item.status==='pending'?'<button data-id="'+item.id+'" data-st="miss" onclick="updateInferenceStatus(this.dataset.id,this.dataset.st)" style="font-size:11px;padding:2px 8px;border:1px solid var(--red-600);color:var(--red-600);border-radius:4px;background:none;cursor:pointer;">✗ Miss</button>':'')+
-          '<button data-id="'+item.id+'" onclick="editInference(this.dataset.id)" style="font-size:11px;padding:2px 8px;border:1px solid var(--gray-300);color:var(--gray-500);border-radius:4px;background:none;cursor:pointer;">編輯</button>'+
-          '<button data-id="'+item.id+'" onclick="deleteInference(this.dataset.id)" style="font-size:11px;padding:2px 8px;border:1px solid var(--red-100);color:var(--red-600);border-radius:4px;background:none;cursor:pointer;">刪除</button>'+
-        '</div>'+
-      '</div>'+
-      '<div class="inf-right">'+
-        (item.result_pct?'<span class="inf-signal '+(item.result_pct.startsWith('-')?'dn':'up')+'">'+item.result_pct+'</span>':'<span class="inf-signal" style="color:var(--gray-400);">—</span>')+
-        '<span class="inf-conf" style="color:'+confColor[item.confidence]+';">信心度 '+item.confidence+'</span>'+
-      '</div>'+
-    '</div>';
-  }).join('');
-}
-
-function openInferenceModal(){
-  document.getElementById('inf-edit-id').value = '';
-  document.getElementById('inf-ticker').value = '';
-  document.getElementById('inf-title').value = '';
-  document.getElementById('inf-body').value = '';
-  document.getElementById('inf-target').value = '';
-  document.getElementById('inf-stop').value = '';
-  document.getElementById('inf-confidence').value = 'MED';
-  document.getElementById('inference-modal-title').textContent = '新增推演記錄';
-  document.getElementById('inferenceModal').classList.add('open');
-}
-
-function closeInferenceModal(){
-  document.getElementById('inferenceModal').classList.remove('open');
-}
-
-function closeInferenceModalBg(e){
-  if(e.target===document.getElementById('inferenceModal')) closeInferenceModal();
-}
-
-async function saveInference(){
-  var editId = document.getElementById('inf-edit-id').value;
-  var ticker = document.getElementById('inf-ticker').value.trim().toUpperCase();
-  var title = document.getElementById('inf-title').value.trim();
-  var body = document.getElementById('inf-body').value.trim();
-  var target = document.getElementById('inf-target').value.trim();
-  var stop = document.getElementById('inf-stop').value.trim();
-  var confidence = document.getElementById('inf-confidence').value;
-
-  if(!ticker||!title){ alert('請填寫代碼和標題'); return; }
-
-  var data = { ticker, title, body, target_price: target, stop_loss: stop, confidence };
-
-  var result;
-  if(editId){
-    result = await _supabase.from('inferences').update({...data, updated_at: new Date().toISOString()}).eq('id', editId);
-  } else {
-    result = await _supabase.from('inferences').insert({...data, user_id: currentUser.id});
-  }
-
-  if(result.error){ alert('儲存失敗：'+result.error.message); return; }
-  closeInferenceModal();
-  loadInferences();
-  loadSignalAndWinrate();
-}
-
-async function updateInferenceStatus(id, status){
-  var resultPct = '';
-  if(status==='hit'||status==='miss'){
-    resultPct = prompt('實際報酬率（例如 +12.5% 或 -5.2%）：') || '';
-  }
-  var update = { status, updated_at: new Date().toISOString() };
-  if(resultPct) update.result_pct = resultPct;
-  await _supabase.from('inferences').update(update).eq('id', id);
-  loadInferences();
-}
-
-async function editInference(id){
-  var result = await _supabase.from('inferences').select('*').eq('id', id).single();
-  if(result.error) return;
-  var item = result.data;
-  document.getElementById('inf-edit-id').value = item.id;
-  document.getElementById('inf-ticker').value = item.ticker;
-  document.getElementById('inf-title').value = item.title;
-  document.getElementById('inf-body').value = item.body||'';
-  document.getElementById('inf-target').value = item.target_price||'';
-  document.getElementById('inf-stop').value = item.stop_loss||'';
-  document.getElementById('inf-confidence').value = item.confidence||'MED';
-  document.getElementById('inference-modal-title').textContent = '編輯推演記錄';
-  document.getElementById('inferenceModal').classList.add('open');
-}
-
-async function deleteInference(id){
-  if(!confirm('確定刪除這筆推演記錄？')) return;
-  await _supabase.from('inferences').delete().eq('id', id);
-  loadInferences();
-}
-// ── End 推演記錄 ───────────────────────────────────
-
-// ── 訊號雷達 + 勝率儀表板 ─────────────────────────
+// ── 訊號雷達 ──────────────────────────────────────
 async function loadSignalAndWinrate(){
-  // 訊號雷達：從 daily.json signals 撈
   try {
     var res = await fetch('/data/daily.json');
     var d = await res.json();
@@ -925,66 +698,8 @@ async function loadSignalAndWinrate(){
       }).join('');
     }
   } catch(e){ console.log('signal load error', e); }
-
-  // 勝率儀表板：從 inferences 計算
-  if(!currentUser) return;
-  var result = await _supabase.from('inferences').select('status,result_pct,ticker').eq('user_id', currentUser.id);
-  if(result.error) return;
-  var items = result.data || [];
-
-  var total = items.length;
-  var hit = items.filter(function(i){ return i.status==='hit'; }).length;
-  var miss = items.filter(function(i){ return i.status==='miss'; }).length;
-  var pending = items.filter(function(i){ return i.status==='pending'; }).length;
-  var closed = hit + miss;
-  var winPct = closed > 0 ? Math.round(hit/closed*100) : 0;
-
-  document.getElementById('wr-total').textContent = total;
-  document.getElementById('wr-hit').textContent = hit;
-  document.getElementById('wr-miss').textContent = miss;
-  document.getElementById('wr-pending').textContent = pending;
-
-  var pctEl = document.getElementById('wr-pct');
-  var barEl = document.getElementById('wr-bar');
-  var wbadge = document.getElementById('winrate-badge');
-  if(closed > 0){
-    pctEl.textContent = winPct + '%';
-    barEl.style.width = winPct + '%';
-    barEl.style.background = winPct>=60?'var(--green-600)':winPct>=40?'var(--amber-600)':'var(--red-600)';
-    if(wbadge){ wbadge.textContent = winPct+'% 勝率'; wbadge.style.color = winPct>=60?'var(--green-700)':winPct>=40?'var(--amber-700)':'var(--red-700)'; wbadge.style.background = winPct>=60?'var(--green-100)':winPct>=40?'var(--amber-100)':'var(--red-100)'; }
-  } else {
-    pctEl.textContent = '尚無結案';
-    if(wbadge) wbadge.textContent = '累積中';
-  }
-
-  // 各標的勝率
-  if(closed > 0){
-    var tickerMap = {};
-    items.forEach(function(i){
-      if(!tickerMap[i.ticker]) tickerMap[i.ticker] = {hit:0,miss:0};
-      if(i.status==='hit') tickerMap[i.ticker].hit++;
-      if(i.status==='miss') tickerMap[i.ticker].miss++;
-    });
-    var tickerList = Object.keys(tickerMap).filter(function(t){ return tickerMap[t].hit+tickerMap[t].miss>0; });
-    if(tickerList.length){
-      document.getElementById('wr-by-ticker').style.display = 'block';
-      document.getElementById('wr-ticker-list').innerHTML = tickerList.map(function(t){
-        var th = tickerMap[t].hit; var tm = tickerMap[t].miss; var tc = th+tm;
-        var tp = Math.round(th/tc*100);
-        var tc2 = tp>=60?'var(--green-600)':tp>=40?'var(--amber-600)':'var(--red-600)';
-        return '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--gray-100);">'+
-          '<span style="font-family:var(--font-en);font-weight:700;font-size:13px;width:50px;">'+t+'</span>'+
-          '<div style="flex:1;background:var(--gray-200);border-radius:20px;height:6px;overflow:hidden;">'+
-            '<div style="height:100%;width:'+tp+'%;background:'+tc2+';border-radius:20px;"></div>'+
-          '</div>'+
-          '<span style="font-size:12px;color:'+tc2+';font-weight:600;width:35px;text-align:right;">'+tp+'%</span>'+
-          '<span style="font-size:11px;color:var(--gray-400);">'+th+'/'+tc+'</span>'+
-        '</div>';
-      }).join('');
-    }
-  }
 }
-// ── End 勝率儀表板 ─────────────────────────────────
+// ── End 訊號雷達 ───────────────────────────────────
 
 // ── 點數系統 ──────────────────────────────────────
 async function deductCredits(amount){
@@ -1453,9 +1168,7 @@ async function loadWatchlist(){
   renderWatchlist(items, dailyData);
   // 自動產生 Morning Brief
   generateMorningBrief(items, dailyData);
-  // 載入推演記錄
-  loadInferences();
-  // 載入訊號雷達 + 勝率
+  // 載入訊號雷達
   loadSignalAndWinrate();
   // 載入共識溫度計
   loadConsensusMeter(items);
