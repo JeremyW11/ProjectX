@@ -132,6 +132,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 /* ── Error state ── */
 .error-bar{background:var(--red-100);border:1px solid #fca5a5;border-radius:var(--r-md);padding:12px 16px;font-size:13px;color:var(--red-600);line-height:1.5;margin-bottom:20px;}
 </style>
+  <script src="/shared/nav.js"></script>
 </head>
 <body>
 
@@ -147,14 +148,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
     </svg>
   </div></a>
-  <nav class="header-nav">
-    <a href="/brief.html" class="nav-item">總覽</a>
-    <a href="/pages/market.html" class="nav-item">市場</a>
-    <a href="/pages/industry.html" class="nav-item">產業</a>
-    <a href="/pages/institutional.html" class="nav-item">機構研報</a>
-    <a href="/pages/calendar.html" class="nav-item">市場日曆</a>
-    <a href="/pages/targets.html" class="nav-item active"><span class="nav-dot"></span>會員中心</a>
-  </nav>
+  <nav class="header-nav" data-active="member"></nav>
   <div class="header-right">
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
     <span class="header-time" id="clock">—</span>

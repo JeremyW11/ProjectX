@@ -200,6 +200,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
 .logo-link:hover{opacity:.75;transform:scale(1.04);}
 #stale-banner{display:none;align-items:center;justify-content:center;gap:6px;background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 24px;font-size:12px;color:#92400e;font-family:var(--font-zh);position:fixed;top:56px;left:0;right:0;z-index:99;}
 </style>
+  <script src="/shared/nav.js"></script>
 </head>
 <body>
 
@@ -215,14 +216,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
       <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
     </svg>
   </div></a>
-  <ul class="nav-links">
-    <li><a href="/brief.html">總覽</a></li>
-    <li><a href="/pages/market.html">市場</a></li>
-    <li><a href="/pages/industry.html" class="active"><span class="nav-dot"></span>產業</a></li>
-    <li><a href="/pages/institutional.html">機構研報</a></li>
-    <li><a href="/pages/calendar.html">市場日曆</a></li>
-    <li><a href="/pages/targets.html">會員中心</a></li>
-  </ul>
+  <ul class="nav-links" data-active="industry"></ul>
   <div class="nav-right">
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
     <span class="header-time" id="clock">—</span>
