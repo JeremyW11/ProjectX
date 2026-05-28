@@ -746,7 +746,8 @@ async function loadData(){
 
     var inst=data.institutional||{};
 
-    // try accumulated.json for more data
+    // try accumulated.json for more data (covers full current month)
+    var accCoverage='';
     try{
       var accRes=await fetch('../data/accumulated.json');
       if(accRes.ok){
@@ -754,12 +755,16 @@ async function loadData(){
         if(acc.research&&acc.research.length>0) inst.research=acc.research;
         if(acc.earnings&&acc.earnings.length>0) inst.earnings=acc.earnings;
         if(acc.earnings_calls&&acc.earnings_calls.length>0) inst.earnings_calls=acc.earnings_calls;
+        // 計算資料覆蓋期間
+        var now=new Date();
+        var monthStart=now.getFullYear()+'年'+(now.getMonth()+1)+'月';
+        accCoverage=monthStart+'當月資料';
       }
     }catch(e){}
 
     var d=new Date(data.date);
     var dateEl=document.querySelector('.page-update');
-    if(dateEl) dateEl.textContent='更新於 '+d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})+' · UTC+8';
+    if(dateEl) dateEl.textContent='更新於 '+d.toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric'})+' · UTC+8'+(accCoverage?' · '+accCoverage:'');
 
     var resEl=document.getElementById('research-list');
     if(resEl){
