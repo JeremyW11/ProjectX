@@ -613,7 +613,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div class="pricing-inner">
     <div class="pricing-header reveal">
       <h2 class="pricing-h2">選擇你的方案</h2>
-      <p class="pricing-sub">7天免費試用 Pro，不滿意隨時取消</p>
+      <p class="pricing-sub">免費試用 Pro 一個月，需綁定付款資訊，試用期滿自動續訂，隨時可取消</p>
     </div>
     <div class="billing-toggle reveal">
       <span class="billing-label active" id="lbl-m">月付</span>
@@ -644,7 +644,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <span class="plan-price-num" id="pro-num">9</span>
           <span class="plan-price-period" id="pro-per">/ 月</span>
         </div>
-        <p class="plan-tagline" id="pro-tag">完整情報 + 個人化追蹤<br>7天免費試用，隨時取消</p>
+        <p class="plan-tagline" id="pro-tag">完整情報 + 個人化追蹤<br>首月免費，到期自動續訂，隨時可取消</p>
         <ul class="plan-feats">
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">包含所有 Free 功能</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">每日情報（宏觀 + 產業 + 個股 + 機構）</span></li>
@@ -654,7 +654,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">AI 推演沙盤 + 情境命中率追蹤</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">市場日曆完整版 + Email 推送</span></li>
         </ul>
-        <button class="btn-pro" onclick="openModal('signup')">7天免費試用 Pro →</button>
+        <button class="btn-pro" onclick="openModal('signup')">開始免費試用一個月 →</button>
       </div>
     </div>
   </div>
@@ -714,7 +714,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           先以訪客身份瀏覽
         </button>
-        <p class="m-fn">建立帳號即表示同意服務條款。Pro 方案7天免費試用，試用期前可隨時取消。</p>
+        <p class="m-fn">建立帳號即表示同意服務條款。Pro 方案首月免費試用，需綁定付款資訊；試用期滿未取消將自動扣款續訂，可於到期前隨時取消。</p>
       </div>
     </div>
   </div>
@@ -768,7 +768,7 @@ function toggleBilling(){
   document.getElementById('lbl-a').classList.toggle('active',annual);
   document.getElementById('pro-num').textContent=annual?'86':'9';
   document.getElementById('pro-per').textContent=annual?'/ 年（USD 7.2/月）':'/ 月';
-  document.getElementById('pro-tag').innerHTML=annual?'完整情報 + 個人化追蹤<br>年付省20%，7天免費試用':'完整情報 + 個人化追蹤<br>7天免費試用，隨時取消';
+  document.getElementById('pro-tag').innerHTML=annual?'完整情報 + 個人化追蹤<br>年付省20%，首月免費試用':'完整情報 + 個人化追蹤<br>首月免費，到期自動續訂，隨時可取消';
 }
 
 /* modal */
