@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X · 歷史報告</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="/shared/nav.js"></script>
+<style>
+:root {
+  --navy-950:#070d1c; --navy-900:#0d1630; --navy-800:#152244;
+  --navy-700:#1d2d5a; --navy-600:#1e3a8a; --navy-500:#2563eb;
+  --navy-400:#3b82f6; --navy-300:#93c5fd; --navy-100:#dbeafe; --navy-50:#eff6ff;
+  --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569;
+  --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1;
+  --gray-200:#e2e8f0; --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
+  --green-700:#15803d; --green-600:#16a34a; --green-100:#dcfce7;
+  --red-600:#dc2626; --red-100:#fee2e2;
+  --amber-600:#d97706; --amber-100:#fef3c7;
+  --font-en:'DM Sans',sans-serif;
+  --font-zh:'Noto Sans TC',sans-serif;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:24px;
+  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;-webkit-font-smoothing:antialiased;}
+body{background:#f7f8fc;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+/* ── TOPBAR ── */
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:100;}
+.topbar-logo{display:flex;align-items:center;gap:10px;margin-right:36px;}
+.logo-mark{width:32px;height:32px;background:var(--navy-700);border-radius:8px;display:grid;place-items:center;flex-shrink:0;transition:transform .3s;}
+.logo-mark:hover{transform:rotate(45deg) scale(1.05);}
+.logo-main{font-family:var(--font-en);font-size:13.5px;font-weight:600;color:var(--navy-800);letter-spacing:.05em;}
+.logo-sub{font-size:9.5px;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);}
+.header-nav{display:flex;align-items:center;gap:2px;flex:1;}
+.nav-item{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--gray-500);transition:all .15s;white-space:nowrap;font-family:var(--font-zh);}
+.nav-item:hover{background:var(--navy-50);color:var(--navy-700);}
+.nav-item.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);opacity:0;}
+.nav-item.active .nav-dot{opacity:1;}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-dot{width:5px;height:5px;background:var(--green-600);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.header-time{font-family:var(--font-en);font-size:12px;color:var(--gray-400);}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;font-family:var(--font-en);}
+
+/* ── LAYOUT ── */
+.page{margin-top:56px;max-width:1200px;margin-left:auto;margin-right:auto;padding:28px 24px 60px;}
+.page-header{margin-bottom:24px;}
+.page-title{font-family:var(--font-display);font-size:28px;color:var(--navy-950);}
+.page-title-sub{font-size:13px;color:var(--gray-400);margin-top:4px;font-family:var(--font-zh);}
+
+.archive-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:start;}
+@media(max-width:768px){.archive-layout{grid-template-columns:1fr;}}
+
+/* ── DATE LIST ── */
+.date-list-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-card);position:sticky;top:72px;}
+.date-list-header{padding:12px 16px;border-bottom:1px solid var(--gray-100);font-size:11px;font-weight:600;color:var(--gray-500);letter-spacing:.06em;font-family:var(--font-en);}
+.date-list{max-height:calc(100vh - 180px);overflow-y:auto;}
+.date-item{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;cursor:pointer;border-bottom:1px solid var(--gray-100);transition:all .15s;}
+.date-item:last-child{border-bottom:none;}
+.date-item:hover{background:var(--navy-50);}
+.date-item.active{background:var(--navy-50);border-left:3px solid var(--navy-500);}
+.di-date{font-family:var(--font-en);font-size:13px;font-weight:500;color:var(--gray-700);}
+.di-wd{font-size:10.5px;color:var(--gray-400);font-family:var(--font-en);}
+
+/* ── REPORT PANEL ── */
+.report-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:28px 32px;box-shadow:var(--shadow-card);}
+.report-date-badge{display:inline-flex;align-items:center;gap:8px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:20px;padding:4px 14px;font-family:var(--font-en);font-size:12px;font-weight:600;color:var(--navy-700);margin-bottom:20px;}
+
+/* Tickers row */
+.ticker-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--gray-100);}
+.ticker-chip{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:8px 14px;min-width:90px;}
+.tc-label{font-size:10px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
+.tc-val{font-size:14px;font-weight:600;color:var(--gray-900);font-family:var(--font-en);margin-top:2px;}
+.tc-chg{font-size:11px;font-family:var(--font-en);}
+.tc-chg.up{color:var(--green-600);}
+.tc-chg.down{color:var(--red-600);}
+
+/* Morning brief */
+.section-label{font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);margin-bottom:10px;}
+.morning-brief-text{font-size:13.5px;line-height:1.9;color:var(--gray-700);font-family:var(--font-zh);white-space:pre-wrap;}
+
+/* Signals */
+.signals-row{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 24px;padding-bottom:20px;border-bottom:1px solid var(--gray-100);}
+.signal-chip{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;font-family:var(--font-zh);}
+.signal-chip.bull{background:var(--green-100);color:var(--green-700);}
+.signal-chip.bear{background:var(--red-100);color:var(--red-600);}
+.signal-chip.neutral{background:var(--gray-100);color:var(--gray-600);}
+
+/* Opportunities */
+.opp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:10px;}
+.opp-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;}
+.oc-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.oc-ticker{font-family:var(--font-en);font-size:13px;font-weight:700;color:var(--navy-700);}
+.oc-conf{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);}
+.conf-HIGH{background:#dcfce7;color:#15803d;}
+.conf-MED{background:#fef3c7;color:#92400e;}
+.conf-LOW{background:var(--gray-100);color:var(--gray-500);}
+.oc-thesis{font-size:12px;color:var(--gray-600);font-family:var(--font-zh);line-height:1.55;}
+.oc-target{font-size:11px;color:var(--navy-600);font-family:var(--font-en);margin-top:4px;font-weight:500;}
+
+/* Empty / loading */
+.empty-state{text-align:center;padding:60px 0;color:var(--gray-400);font-size:13px;font-family:var(--font-zh);}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/" style="text-decoration:none;display:flex;align-items:center;"><div class="topbar-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M2 9L9 2L16 9L9 16L2 9Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M9 5.5L12.5 9L9 12.5L5.5 9L9 5.5Z" fill="white" opacity="0.6"/>
+        <circle cx="9" cy="9" r="1.5" fill="white"/>
+      </svg>
+    </div>
+    <div><span class="logo-main">PROJECT X</span><span class="logo-sub">INTELLIGENCE</span></div>
+  </div></a>
+  <nav class="header-nav" data-active="brief"></nav>
+  <div class="header-right">
+    <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+    <span class="header-time" id="clock">—</span>
+    <a href="/pages/login.html" class="btn-login">登入</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="page-header">
+    <div class="page-title">歷史報告 <span style="font-family:var(--font-en);font-size:16px;font-weight:400;color:var(--gray-400);">Archive</span></div>
+    <div class="page-title-sub">過去 30 天每日 Brief 完整記錄</div>
+  </div>
+
+  <div class="archive-layout">
+
+    <!-- Date list -->
+    <div class="date-list-card">
+      <div class="date-list-header">AVAILABLE DATES</div>
+      <div class="date-list" id="date-list">
+        <div class="empty-state">載入中...</div>
+      </div>
+    </div>
+
+    <!-- Report panel -->
+    <div id="report-panel">
+      <div class="empty-state" style="padding:80px 0;">← 選擇左側日期查看當日報告</div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+function tick(){
+  var t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
+  var el=document.getElementById('clock');if(el)el.textContent=t+' CST';
+}
+tick(); setInterval(tick,1000);
+
+var DAYS = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+var MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+
+function fmtDate(s){
+  var d = new Date(s+'T00:00:00');
+  return MONTHS[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+}
+function weekday(s){
+  return DAYS[new Date(s+'T00:00:00').getDay()];
+}
+
+var currentDate = null;
+
+async function loadDateList(){
+  var list = document.getElementById('date-list');
+  try {
+    var res = await fetch('../data/history-index.json');
+    if(!res.ok) throw new Error('index not found');
+    var dates = await res.json();
+    list.innerHTML = dates.map(function(d){
+      return '<div class="date-item" data-date="'+d+'" onclick="loadReport(\''+d+'\')">'+
+        '<div><div class="di-date">'+fmtDate(d)+'</div><div class="di-wd">'+weekday(d)+'</div></div>'+
+        '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>'+
+      '</div>';
+    }).join('');
+    // Auto-load most recent
+    if(dates.length) loadReport(dates[0]);
+  } catch(e){
+    list.innerHTML = '<div class="empty-state">無法載入日期列表</div>';
+  }
+}
+
+async function loadReport(date){
+  currentDate = date;
+  // Update active state
+  document.querySelectorAll('.date-item').forEach(function(el){
+    el.classList.toggle('active', el.dataset.date === date);
+  });
+  var panel = document.getElementById('report-panel');
+  panel.innerHTML = '<div class="empty-state">載入中...</div>';
+  try {
+    var res = await fetch('../data/history/'+date+'.json');
+    if(!res.ok) throw new Error('not found');
+    var d = await res.json();
+    panel.innerHTML = renderReport(d);
+  } catch(e){
+    panel.innerHTML = '<div class="empty-state">無法載入 '+date+' 的報告</div>';
+  }
+}
+
+function renderReport(d){
+  var html = '<div class="report-card">';
+
+  // Date badge
+  html += '<div class="report-date-badge">📅 '+fmtDate(d.date)+' &nbsp;·&nbsp; '+weekday(d.date)+'</div>';
+
+  // Tickers
+  if(d.tickers && d.tickers.length){
+    html += '<div class="ticker-row">';
+    d.tickers.forEach(function(t){
+      var dir = t.dir==='up'?'up':t.dir==='down'?'down':'';
+      html += '<div class="ticker-chip">'+
+        '<div class="tc-label">'+t.label+'</div>'+
+        '<div class="tc-val">'+t.value+'</div>'+
+        '<div class="tc-chg '+dir+'">'+(dir==='up'?'▲ ':dir==='down'?'▼ ':'')+t.change+'</div>'+
+      '</div>';
+    });
+    html += '</div>';
+  }
+
+  // Signals
+  if(d.signals && d.signals.length){
+    html += '<div class="section-label">訊號雷達</div>';
+    html += '<div class="signals-row">';
+    d.signals.forEach(function(s){
+      html += '<span class="signal-chip '+(s.signal||'neutral')+'">'+s.name+' · '+s.label+'</span>';
+    });
+    html += '</div>';
+  }
+
+  // Morning brief
+  if(d.morning_brief){
+    html += '<div class="section-label">每日摘要</div>';
+    html += '<div class="morning-brief-text">'+escHtml(d.morning_brief)+'</div>';
+  }
+
+  // Opportunities
+  if(d.opportunities && d.opportunities.length){
+    html += '<div class="section-label" style="margin-top:24px;">機會標的</div>';
+    html += '<div class="opp-grid">';
+    d.opportunities.forEach(function(o){
+      html += '<div class="opp-card">'+
+        '<div class="oc-header">'+
+          '<span class="oc-ticker">'+o.ticker+'</span>'+
+          '<span class="oc-conf conf-'+(o.confidence||'MED')+'">'+o.confidence+'</span>'+
+          '<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-zh);">'+o.name+'</span>'+
+        '</div>'+
+        '<div class="oc-thesis">'+escHtml(o.thesis||'')+'</div>'+
+        (o.target?'<div class="oc-target">目標：'+o.target+'</div>':'')+
+      '</div>';
+    });
+    html += '</div>';
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function escHtml(s){
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+loadDateList();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
+  var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+  var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  sb.auth.onAuthStateChange(function(event,session){
+    var btn=document.querySelector('.btn-login');
+    if(!btn) return;
+    if(session&&session.user){
+      btn.textContent='登出';btn.href='#';
+      btn.onclick=function(e){e.preventDefault();sb.auth.signOut().then(function(){window.location.reload();});};
+    } else {
+      btn.textContent='登入';btn.href='/pages/login.html';btn.onclick=null;
+    }
+  });
+})();
+</script>
+</body>
+</html>
