@@ -413,7 +413,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <!-- ═══ 每日市場情報 ═══ -->
     <div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px;">
       <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-en);">📡 每日市場情報</div>
-      <a href="/pages/archive.html" style="font-size:11px;color:var(--navy-600);text-decoration:none;font-family:var(--font-zh);">歷史報告 →</a>
+      <a href="/pages/archive.html" style="font-size:11px;font-weight:600;color:var(--navy-600);text-decoration:none;font-family:var(--font-zh);padding:4px 10px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:6px;white-space:nowrap;">📂 歷史報告</a>
     </div>
     <div class="section-block" id="morning-brief-block" style="margin-bottom:16px;display:none;">
       <div class="section-block-header">
@@ -639,6 +639,43 @@ async function signOutUser(){
 }
 
 
+// ── Morning Brief 渲染 ─────────────────────────────
+function renderMorningBriefHTML(text) {
+  var sections = [
+    { prefix: '宏觀層面', icon: '🌐', label: '宏觀總覽', color: '#3b82f6', bg: '#eff6ff', border: '#bfdbfe' },
+    { prefix: '產業動態', icon: '⚙️', label: '產業動態', color: '#7c3aed', bg: '#f5f3ff', border: '#ddd6fe' },
+    { prefix: '加密市場', icon: '₿',  label: '加密市場', color: '#d97706', bg: '#fffbeb', border: '#fde68a' },
+    { prefix: '台股方面', icon: '🟢', label: '台股市場', color: '#059669', bg: '#ecfdf5', border: '#a7f3d0' },
+    { prefix: '今日需特別留意', icon: '⚡', label: '今日焦點', color: '#dc2626', bg: '#fef2f2', border: '#fecaca' },
+    { prefix: '操作基調', icon: '🎯', label: '操作建議', color: '#4f46e5', bg: '#eef2ff', border: '#c7d2fe' },
+  ];
+  var paras = text.split(/\n\n+/).map(function(p){ return p.trim(); }).filter(Boolean);
+  var html = '';
+  paras.forEach(function(p, i) {
+    // 第一段若含日期標題，渲染為副標題列
+    if (i === 0 && /ProjectX|市場早報/.test(p)) {
+      html += '<div style="font-size:11px;color:var(--gray-400);letter-spacing:.04em;margin-bottom:14px;font-family:var(--font-en);">' + p.replace(/</g,'&lt;') + '</div>';
+      return;
+    }
+    var matched = null;
+    for (var j = 0; j < sections.length; j++) {
+      if (p.indexOf(sections[j].prefix) === 0) { matched = sections[j]; break; }
+    }
+    if (matched) {
+      html += '<div style="margin-bottom:10px;padding:12px 14px;background:' + matched.bg + ';border-radius:8px;border-left:3px solid ' + matched.color + ';">'
+        + '<div style="font-size:10px;font-weight:700;color:' + matched.color + ';letter-spacing:.08em;margin-bottom:5px;text-transform:uppercase;">' + matched.icon + ' ' + matched.label + '</div>'
+        + '<div style="font-size:13px;color:#374151;line-height:1.85;">' + p.replace(/</g,'&lt;') + '</div>'
+        + '</div>';
+    } else {
+      // 導言段落
+      html += '<div style="margin-bottom:10px;padding:14px 16px;background:linear-gradient(135deg,#f0f4ff,#e8f0fe);border-radius:8px;border:1px solid #c7d2fe;">'
+        + '<div style="font-size:13.5px;color:#1e3a6e;line-height:1.9;font-weight:500;">' + p.replace(/</g,'&lt;') + '</div>'
+        + '</div>';
+    }
+  });
+  return html || '<div style="color:var(--gray-400);text-align:center;padding:20px;">無內容</div>';
+}
+
 // ── Morning Brief ──────────────────────────────────
 async function generateMorningBrief(items, dailyData){
   var block = document.getElementById('morning-brief-block');
@@ -662,7 +699,7 @@ async function generateMorningBrief(items, dailyData){
     if(dateEl) dateEl.textContent = new Date(date+'T00:00:00').toLocaleDateString('zh-TW',{month:'long',day:'numeric'});
 
     if(brief){
-      content.innerHTML = '<div style="line-height:1.9;white-space:pre-wrap;font-size:13.5px;">'+brief+'</div>';
+      content.innerHTML = renderMorningBriefHTML(brief);
     } else {
       content.innerHTML = '<div style="color:var(--gray-400);padding:20px;text-align:center;">今日早報尚未產出，請稍後再試</div>';
     }

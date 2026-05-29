@@ -6,6 +6,7 @@
     {key:'research', href:'/pages/institutional.html',    label:'機構研報'},
     {key:'calendar', href:'/pages/calendar.html',         label:'市場日曆'},
     {key:'member',   href:'/pages/targets.html',          label:'會員中心'},
+    {key:'archive',  href:'/pages/archive.html',          label:'歷史報告'},
   ];
 
   window.buildNav = function(activeKey){
