@@ -543,6 +543,15 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 </div>
 
 <script>
+// 共用 daily.json 載入（單次抓取，全頁快取）
+var _dailyPromise = null;
+function getDaily(){
+  if(!_dailyPromise){
+    _dailyPromise = fetch('/data/daily.json').then(function(r){ return r.json(); });
+  }
+  return _dailyPromise;
+}
+
 // Clock
 function tick(){
   const t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
@@ -689,8 +698,7 @@ async function generateMorningBrief(items, dailyData){
 
   // 從 daily.json 讀取 morning_brief
   try {
-    var res = await fetch('/data/daily.json');
-    var d = await res.json();
+    var d = await getDaily();
     checkDataStaleness(d.date);
 
     var brief = d.morning_brief || '';
@@ -713,8 +721,7 @@ async function generateMorningBrief(items, dailyData){
 // ── 訊號雷達 ──────────────────────────────────────
 async function loadSignalAndWinrate(){
   try {
-    var res = await fetch('/data/daily.json');
-    var d = await res.json();
+    var d = await getDaily();
     var signals = d.signals || [];
     var grid = document.getElementById('signal-grid');
     var badge = document.getElementById('signal-overall-badge');
@@ -782,8 +789,7 @@ async function loadConsensusMeter(watchlistItems){
   // 載入 daily.json + accumulated.json
   var dailyData = {}, accResearch = [], accEarnings = [], signals = [];
   try {
-    var r1 = await fetch('/data/daily.json');
-    var d1 = await r1.json();
+    var d1 = await getDaily();
     var m = d1.market || {};
     (m.us_stocks||[]).forEach(function(s){ dailyData[s.ticker] = s; });
     (m.tw_stocks||[]).forEach(function(s){ dailyData[s.ticker] = s; });
@@ -924,8 +930,7 @@ async function loadOpportunities(){
   if(!el) return;
 
   try {
-    var res = await fetch('/data/daily.json');
-    var d = await res.json();
+    var d = await getDaily();
     var opps = d.opportunities || [];
     var date = d.date || '';
 
@@ -985,8 +990,7 @@ async function loadRiskRadar(watchlistItems){
   }
 
   try {
-    var res = await fetch('/data/daily.json');
-    var d = await res.json();
+    var d = await getDaily();
     var signals = d.signals || [];
     var macro = d.macro || [];
     var market = d.market || {};
@@ -1080,8 +1084,7 @@ async function loadEventTracker(watchlistItems){
   if(!el) return;
 
   try {
-    var res = await fetch('/data/daily.json');
-    var d = await res.json();
+    var d = await getDaily();
     var events = (d.calendar||{}).events || [];
     var aiPredictions = d.event_predictions || [];
     var todayStr = d.date || '';
@@ -1191,8 +1194,7 @@ async function loadWatchlist(){
   // 載入 daily.json 價格資料
   var dailyData = {};
   try {
-    var res = await fetch('/data/daily.json');
-    var d = await res.json();
+    var d = await getDaily();
     var m = d.market || {};
     (m.us_stocks||[]).forEach(function(s){ dailyData[s.ticker] = s; });
     (m.tw_stocks||[]).forEach(function(s){ dailyData[s.ticker] = s; });
@@ -1337,8 +1339,7 @@ async function analyzeTarget(e, ticker, category, id){
   var context = '';
   var marketContext = '';
   try {
-    var res = await fetch('/data/daily.json');
-    var d = await res.json();
+    var d = await getDaily();
     var m = d.market || {};
     var all = (m.us_stocks||[]).concat(m.tw_stocks||[]).concat(m.crypto||[]);
     var found = all.find(function(s){ return (s.ticker||s.symbol||'')===ticker; });
@@ -1409,8 +1410,7 @@ async function addWatchlistItem(){
   // 嘗試從 daily.json 找名稱
   var name = ticker;
   try {
-    var res = await fetch('/data/daily.json');
-    var d = await res.json();
+    var d = await getDaily();
     var m = d.market || {};
     var all = (m.us_stocks||[]).concat(m.tw_stocks||[]).concat(m.crypto||[]);
     var found = all.find(function(s){ return (s.ticker||s.symbol||'').toUpperCase()===ticker; });
