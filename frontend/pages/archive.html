@@ -176,8 +176,7 @@ function weekday(s){
 
 var API = 'https://projectx-backend-o2pl.onrender.com';
 var currentDate = null;
-var isPro = false;          // 是否付費會員
-var accessToken = null;     // Supabase access token
+var accessToken = null;     // Supabase access token；是否付費由後端權威判定
 
 async function loadDateList(){
   var list = document.getElementById('date-list');
@@ -212,8 +211,8 @@ async function loadReport(date){
     el.classList.toggle('active', el.dataset.date === date);
   });
   var panel = document.getElementById('report-panel');
-  // 未付費 → 顯示鎖頭，不發內容請求
-  if(!isPro){
+  // 未登入 → 顯示鎖頭，不發內容請求（是否付費由後端判定）
+  if(!accessToken){
     panel.innerHTML = renderLock();
     return;
   }
@@ -313,17 +312,9 @@ loadDateList();
     }
   }
 
-  // 解析 session → 設定 accessToken 與 isPro
+  // 解析 session → 設定 accessToken（付費與否交由後端 /history/:date 判定）
   async function resolveMembership(session){
-    if(session&&session.user){
-      accessToken=session.access_token;
-      try{
-        var r=await sb.from('profiles').select('is_pro').eq('id',session.user.id).single();
-        isPro=!!(r.data&&r.data.is_pro===true);
-      }catch(e){ isPro=false; }
-    } else {
-      accessToken=null; isPro=false;
-    }
+    accessToken = (session && session.user) ? session.access_token : null;
   }
 
   async function boot(){
