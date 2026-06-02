@@ -7,6 +7,7 @@
     {key:'calendar', href:'/pages/calendar.html',         label:'市場日曆'},
     {key:'member',   href:'/pages/targets.html',          label:'會員中心'},
     {key:'archive',  href:'/pages/archive.html',          label:'歷史報告'},
+    {key:'credits',  href:'/pages/credits.html',          label:'方案 / 點數'},
   ];
 
   window.buildNav = function(activeKey){

@@ -33,6 +33,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .logo-main{font-family:var(--font-en);font-size:13.5px;font-weight:600;color:var(--navy-800);letter-spacing:.05em;}
 .topbar-sep{width:1px;height:20px;background:var(--gray-200);margin:0 4px;}
 .topbar-page{font-size:13px;color:var(--gray-500);}
+.header-nav{display:flex;align-items:center;gap:2px;flex:1;margin-left:8px;}
+.nav-item{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--gray-500);transition:all .15s;white-space:nowrap;font-family:var(--font-zh);}
+.nav-item:hover{background:var(--navy-50);color:var(--navy-700);}
+.nav-item.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);opacity:0;}
+.nav-item.active .nav-dot{opacity:1;}
+@media(max-width:768px){.header-nav{display:none;}}
 .topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
 .btn-back{font-size:13px;color:var(--gray-500);padding:6px 14px;border:1px solid var(--gray-200);border-radius:var(--r-md);font-family:var(--font-en);transition:all .15s;}
 .btn-back:hover{border-color:var(--gray-400);color:var(--gray-700);}
@@ -84,6 +91,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .usage-name{flex:1;font-size:13px;color:var(--gray-700);}
 .usage-cost{font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--amber-600);background:var(--amber-100);padding:3px 10px;border-radius:20px;}
 .usage-cost.free{color:var(--green-700);background:var(--green-100);}
+.usage-cost.pro{color:var(--pro-gold-dark);background:var(--pro-gold-light);}
 
 .notice{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:16px 20px;font-size:12px;color:var(--gray-500);line-height:1.7;}
 .notice strong{color:var(--gray-700);}
@@ -132,7 +140,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <span class="logo-main">PROJECT X</span>
   </a>
   <div class="topbar-sep"></div>
-  <span class="topbar-page">點數中心</span>
+  <nav class="header-nav" data-active="credits"></nav>
   <div class="topbar-right">
     <a href="/pages/targets.html" class="btn-back">← 返回看板</a>
   </div>
@@ -157,9 +165,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <span class="pro-price-unit">USD / 月</span>
     </div>
     <ul class="pro-benefits">
-      <li>每月自動發放 30 點訂閱點數，週期開始時重置</li>
+      <li>解鎖會員中心：自選看板、共識溫度計、事件追蹤、訊號雷達</li>
       <li>解鎖全部歷史報告完整內容（免費會員僅能看標題與日期）</li>
-      <li>免費功能全保留：每日早報、機構研報、市場數據、自選看板</li>
+      <li>每月自動發放 30 點訂閱點數，週期開始時重置</li>
     </ul>
     <div id="pro-action">
       <a class="btn-pro" id="btn-pro" href="#">升級 Pro</a>
@@ -181,13 +189,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <div class="col-pro"><span class="ck-yes">✓</span></div>
     </div>
     <div class="compare-row">
-      <div class="feat">機構研報、共識溫度計</div>
+      <div class="feat">機構研報、市場日曆</div>
       <div><span class="ck-yes">✓</span></div>
       <div class="col-pro"><span class="ck-yes">✓</span></div>
     </div>
     <div class="compare-row">
-      <div class="feat">自選看板、事件追蹤</div>
-      <div><span class="ck-yes">✓</span></div>
+      <div class="feat">會員中心：自選看板、共識溫度計、事件追蹤</div>
+      <div><span class="ck-no">✕</span></div>
       <div class="col-pro"><span class="ck-yes">✓</span></div>
     </div>
     <div class="compare-row">
@@ -218,12 +226,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="usage-row">
       <span class="usage-icon">🔄</span>
       <span class="usage-name">AI 個股分析（當日 cache 命中）</span>
-      <span class="usage-cost free">免費</span>
+      <span class="usage-cost pro">Pro 會員</span>
     </div>
     <div class="usage-row">
       <span class="usage-icon">📊</span>
       <span class="usage-name">共識溫度計、事件追蹤、自選看板</span>
-      <span class="usage-cost free">免費</span>
+      <span class="usage-cost pro">Pro 會員</span>
     </div>
     <div class="usage-row">
       <span class="usage-icon">📰</span>
@@ -369,6 +377,7 @@ function setupBuyButtons(email){
 
 initCreditsPage();
 </script>
+<script src="/shared/nav.js"></script>
 <script src="/js/support.js"></script>
 </body>
 </html>

@@ -422,11 +422,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <div class="pc-section-label">TODAY'S BRIEF</div>
       <div class="pc-brief-item"><span class="pc-badge b-cry">CRYPTO</span><span class="pc-brief-text">比特幣ETF單日淨流入13億美元，突破102K</span></div>
       <div class="pc-brief-item"><span class="pc-badge b-mac">MACRO</span><span class="pc-brief-text">Fed鷹派信號，降息時間點延後至Q4</span></div>
-      <div class="pc-brief-item locked"><span class="pc-badge b-tw">台股</span><span class="pc-brief-text">外資連三日買超逾百億，台積電ADR+1.2%，法人上調目標價至1,050元</span><span class="pc-lock-icon">🔒</span></div>
-      <div class="pc-brief-item locked"><span class="pc-badge b-us">US EQ</span><span class="pc-brief-text">NVIDIA Q1 EPS 6.12美元超預期，法說會暗示Blackwell出貨加速</span><span class="pc-lock-icon">🔒</span></div>
+      <div class="pc-brief-item"><span class="pc-badge b-tw">台股</span><span class="pc-brief-text">外資連三日買超逾百億，台積電ADR+1.2%，法人上調目標價至1,050元</span></div>
+      <div class="pc-brief-item"><span class="pc-badge b-us">US EQ</span><span class="pc-brief-text">NVIDIA Q1 EPS 6.12美元超預期，法說會暗示Blackwell出貨加速</span></div>
     </div>
     <div class="pc-fade">
-      <button class="pc-cta" onclick="openModal('signup')">解鎖完整版 → 免費註冊</button>
+      <button class="pc-cta" onclick="window.location.href='/brief.html'">查看今日完整簡報 →</button>
     </div>
   </div>
 </section>
@@ -436,8 +436,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div class="comparison-inner">
     <div class="comparison-header reveal">
       <div class="comparison-eyebrow">FREE vs PRO</div>
-      <h2 class="comparison-h2">你現在看到的，與你可以看到的</h2>
-      <p class="comparison-sub">左側是免費版。右側是 Pro 用戶每天早上打開的畫面。</p>
+      <h2 class="comparison-h2">免費就很完整，Pro 更進一步</h2>
+      <p class="comparison-sub">每日情報、機構研報、市場數據免費看；Pro 解鎖會員中心與 AI 功能、全部歷史報告，每月再送 30 點。</p>
     </div>
 
     <!-- Side-by-side Demo -->
@@ -476,27 +476,29 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
             </div>
           </div>
 
-          <!-- Locked sections -->
+          <!-- 免費可看 -->
+          <div style="margin-bottom:14px">
+            <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">機構研報 · 免費</div>
+            <div class="free-item">
+              <span class="fi-badge" style="background:var(--navy-50);color:var(--navy-600);">研報</span>
+              <span class="fi-text">Goldman Sachs：NVIDIA 維持買入，目標價上調至 $1,250</span>
+              <span class="fi-sent s-bull">BUY</span>
+            </div>
+          </div>
+
+          <!-- 真正受限：歷史報告 + 會員中心 + AI 功能（皆 Pro 專屬） -->
           <div style="display:flex;flex-direction:column;gap:8px">
             <div class="free-locked-section">
-              <span class="fls-label">🔒 機構研報 · 3份</span>
-              <button class="fls-lock" onclick="openModal('signup')">✦ 升級 Pro</button>
+              <span class="fls-label">🔒 歷史報告完整內容</span>
+              <button class="fls-lock" onclick="window.location.href='/pages/credits.html'">✦ 升級 Pro</button>
             </div>
             <div class="free-locked-section">
-              <span class="fls-label">🔒 財報 EPS 對比</span>
-              <button class="fls-lock" onclick="openModal('signup')">✦ 升級 Pro</button>
+              <span class="fls-label">🔒 會員中心：自選看板 / 共識溫度計 / 事件追蹤</span>
+              <button class="fls-lock" onclick="window.location.href='/pages/credits.html'">✦ 升級 Pro</button>
             </div>
             <div class="free-locked-section">
-              <span class="fls-label">🔒 會員中心（自選標的）</span>
-              <button class="fls-lock" onclick="openModal('signup')">✦ 升級 Pro</button>
-            </div>
-            <div class="free-locked-section">
-              <span class="fls-label">🔒 AI 推演沙盤</span>
-              <button class="fls-lock" onclick="openModal('signup')">✦ 升級 Pro</button>
-            </div>
-            <div class="free-locked-section">
-              <span class="fls-label">🔒 市場日曆 · 完整版</span>
-              <button class="fls-lock" onclick="openModal('signup')">✦ 升級 Pro</button>
+              <span class="fls-label">🔒 AI 個股分析 / 推演沙盤</span>
+              <button class="fls-lock" onclick="window.location.href='/pages/credits.html'">✦ 升級 Pro</button>
             </div>
           </div>
 
@@ -587,21 +589,23 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           </tr>
         </thead>
         <tbody>
-          <tr><td colspan="3" class="ft-group-row" style="border-top:none;">宏觀 + 市場</td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🌐</span>每日情報簡報<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">宏觀 + 產業</span></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">₿</span>加密貨幣即時數據<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">BTC / ETH / SOL</span></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📈</span>美股 + 台股市場概況</td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr><td colspan="3" class="ft-group-row" style="border-top:none;">每日情報 + 市場（免費）</td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🌐</span>每日情報簡報<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">宏觀 + 產業 + 個股</span></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">₿</span>加密 + 美股 + 台股即時數據</td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">😱</span>風險矩陣 + VIX 情緒追蹤</td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
-          <tr><td colspan="3" class="ft-group-row">機構情報</td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🏛</span>機構研報摘要<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">GS / MS / UBS 等</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📊</span>財報 EPS 預估 vs 實際對比</td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📞</span>法說會重點摘要 + 前瞻指引</td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr><td colspan="3" class="ft-group-row">個人化功能</td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🎯</span>會員中心<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">自選標的 + 訊號雷達</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🤖</span>AI 推演沙盤<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">三情境機率 + 驗證追蹤</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📅</span>市場日曆完整版<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">31天滾動窗口</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">✉️</span>每日 Email 推送</td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">即將推出</span></td></tr>
+          <tr><td colspan="3" class="ft-group-row">機構情報（免費）</td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🏛</span>機構研報摘要<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">GS / MS / UBS 等</span></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📊</span>財報 EPS 對比 + 法說會摘要</td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📅</span>市場日曆</td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+
+          <tr><td colspan="3" class="ft-group-row">會員中心（Pro 專屬）</td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🎯</span>會員中心<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">自選看板 + 共識溫度計 + 事件追蹤 + 訊號雷達</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🤖</span>AI 個股分析 + 推演沙盤<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">會員中心內，依點數</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">用訂閱點數</span></td></tr>
+
+          <tr><td colspan="3" class="ft-group-row">Pro 專屬</td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📂</span>歷史報告完整內容<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">免費僅看標題與日期</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">⚡</span>每月訂閱點數</td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">30 點 / 月</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -613,26 +617,21 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div class="pricing-inner">
     <div class="pricing-header reveal">
       <h2 class="pricing-h2">選擇你的方案</h2>
-      <p class="pricing-sub">免費試用 Pro 一個月，需綁定付款資訊，試用期滿自動續訂，隨時可取消</p>
-    </div>
-    <div class="billing-toggle reveal">
-      <span class="billing-label active" id="lbl-m">月付</span>
-      <div class="toggle-track" id="billingToggle" onclick="toggleBilling()"><div class="toggle-thumb"></div></div>
-      <span class="billing-label" id="lbl-a">年付</span>
-      <span class="save-badge hidden" id="saveBadge">省 20%</span>
+      <p class="pricing-sub">免費版立即可用；升級 Pro 每月獲得 30 點，並解鎖全部歷史報告</p>
     </div>
     <div class="pricing-cards">
       <div class="price-card reveal">
         <div class="plan-name">FREE</div>
         <div class="plan-price"><span class="plan-price-num">$0</span><span class="plan-price-period">/ 永久免費</span></div>
-        <p class="plan-tagline">宏觀情報 + 市場數據<br>無需信用卡</p>
+        <p class="plan-tagline">每日情報 + 市場數據 + 機構研報<br>無需信用卡</p>
         <ul class="plan-feats">
-          <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">每日簡報（宏觀 + 產業）</span></li>
-          <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">加密貨幣即時數據</span></li>
-          <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">美股 + 台股市場概況</span></li>
-          <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">風險矩陣 + 情緒指標</span></li>
-          <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">機構研報（Pro 限定）</span></li>
-          <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">會員中心 + AI 推演沙盤（Pro 限定）</span></li>
+          <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">每日簡報（宏觀 + 產業 + 個股）</span></li>
+          <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">加密 / 美股 / 台股 即時市場數據</span></li>
+          <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">機構研報 + 財報 + 法說會摘要</span></li>
+          <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">市場日曆</span></li>
+          <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">會員中心（自選看板 / 共識溫度計 / 事件追蹤）為 Pro 專屬</span></li>
+          <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">AI 個股分析 / 推演沙盤為 Pro 專屬</span></li>
+          <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">歷史報告僅顯示標題與日期</span></li>
         </ul>
         <button class="btn-free" onclick="window.location.href='/brief.html'">免費查看今日簡報</button>
       </div>
@@ -641,20 +640,18 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <div class="plan-name">PRO</div>
         <div class="plan-price">
           <span class="plan-price-curr">USD</span>
-          <span class="plan-price-num" id="pro-num">9</span>
-          <span class="plan-price-period" id="pro-per">/ 月</span>
+          <span class="plan-price-num">9.99</span>
+          <span class="plan-price-period">/ 月</span>
         </div>
-        <p class="plan-tagline" id="pro-tag">完整情報 + 個人化追蹤<br>首月免費，到期自動續訂，隨時可取消</p>
+        <p class="plan-tagline">每月 30 點 + 完整歷史報告<br>首月免費試用</p>
         <ul class="plan-feats">
-          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">包含所有 Free 功能</span></li>
-          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">每日情報（宏觀 + 產業 + 個股 + 機構）</span></li>
-          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">機構研報 + 法說會摘要</span></li>
-          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">財報 EPS 預估 vs 實際</span></li>
-          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">會員中心（自選標的 + 訊號雷達）</span></li>
-          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">AI 推演沙盤 + 情境命中率追蹤</span></li>
-          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">市場日曆完整版 + Email 推送</span></li>
+          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">包含所有免費功能</span></li>
+          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">每月 30 訂閱點數（AI 分析 / 推演沙盤）</span></li>
+          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">解鎖全部歷史報告完整內容</span></li>
+          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">訂閱點數每月自動重置</span></li>
         </ul>
-        <button class="btn-pro" onclick="openModal('signup')">開始免費試用一個月 →</button>
+        <button class="btn-pro" onclick="window.location.href='/pages/credits.html'">升級 Pro →</button>
+        <p style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.4);text-align:center;font-family:var(--font-en);">付款功能即將開放</p>
       </div>
     </div>
   </div>
@@ -714,7 +711,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           先以訪客身份瀏覽
         </button>
-        <p class="m-fn">建立帳號即表示同意服務條款。Pro 方案首月免費試用，需綁定付款資訊；試用期滿未取消將自動扣款續訂，可於到期前隨時取消。</p>
+        <p class="m-fn">建立帳號即表示同意服務條款。Pro 方案 USD $9.99 / 月、首月免費試用，付款功能即將開放。</p>
       </div>
     </div>
   </div>
@@ -757,19 +754,6 @@ async function loadRealTickers(){
   }catch(e){console.log('ticker load failed',e);}
 }
 loadRealTickers();
-
-/* billing toggle */
-let annual=false;
-function toggleBilling(){
-  annual=!annual;
-  document.getElementById('billingToggle').classList.toggle('on',annual);
-  document.getElementById('saveBadge').classList.toggle('hidden',!annual);
-  document.getElementById('lbl-m').classList.toggle('active',!annual);
-  document.getElementById('lbl-a').classList.toggle('active',annual);
-  document.getElementById('pro-num').textContent=annual?'86':'9';
-  document.getElementById('pro-per').textContent=annual?'/ 年（USD 7.2/月）':'/ 月';
-  document.getElementById('pro-tag').innerHTML=annual?'完整情報 + 個人化追蹤<br>年付省20%，首月免費試用':'完整情報 + 個人化追蹤<br>首月免費，到期自動續訂，隨時可取消';
-}
 
 /* modal */
 function openModal(tab){document.getElementById('modalOverlay').classList.add('open');switchTab(tab||'login');}
