@@ -312,28 +312,18 @@ loadDateList();
     }
   }
 
-  // 解析 session → 設定 accessToken（付費與否交由後端 /history/:date 判定）
-  async function resolveMembership(session){
+  // 每次取得 session 狀態：更新 token + 登入鈕，並重渲染當前日期（幂等）
+  // 付費與否交由後端 /history/:date 用 service key 權威判定
+  function applyAuth(session){
     accessToken = (session && session.user) ? session.access_token : null;
+    updateLoginBtn(session);
+    if(currentDate) loadReport(currentDate);
   }
 
-  async function boot(){
-    var s=await sb.auth.getSession();
-    var session=s.data?s.data.session:null;
-    updateLoginBtn(session);
-    await resolveMembership(session);         // 解析付費身分
-    if(currentDate) loadReport(currentDate);  // 依最終身分重渲染當前日期
-  }
-
-  var booted=false;
-  sb.auth.onAuthStateChange(async function(event,session){
-    updateLoginBtn(session);
-    await resolveMembership(session);
-    // 登入/登出後重新渲染目前選取的日期（首次由 boot 觸發）
-    if(booted && currentDate) loadReport(currentDate);
-  });
-
-  boot().then(function(){ booted=true; });
+  // onAuthStateChange 會在載入時以 INITIAL_SESSION 觸發，並涵蓋登入/登出
+  sb.auth.onAuthStateChange(function(event,session){ applyAuth(session); });
+  // 保險：直接讀一次目前 session，避免事件時序遺漏
+  sb.auth.getSession().then(function(s){ applyAuth(s.data?s.data.session:null); });
 })();
 </script>
 </body>
