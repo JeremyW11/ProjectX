@@ -174,7 +174,10 @@ function weekday(s){
   return DAYS[new Date(s+'T00:00:00').getDay()];
 }
 
+var API = 'https://projectx-backend-o2pl.onrender.com';
 var currentDate = null;
+var isPro = false;          // 是否付費會員
+var accessToken = null;     // Supabase access token
 
 async function loadDateList(){
   var list = document.getElementById('date-list');
@@ -188,23 +191,36 @@ async function loadDateList(){
         '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>'+
       '</div>';
     }).join('');
-    // Auto-load most recent
     if(dates.length) loadReport(dates[0]);
   } catch(e){
     list.innerHTML = '<div class="empty-state">無法載入日期列表</div>';
   }
 }
 
+function renderLock(){
+  return '<div class="report-card" style="text-align:center;padding:64px 32px;">'+
+    '<div style="font-size:40px;margin-bottom:16px;">🔒</div>'+
+    '<div style="font-size:18px;font-weight:600;color:var(--navy-900);font-family:var(--font-zh);margin-bottom:8px;">歷史報告為付費會員專屬</div>'+
+    '<div style="font-size:13.5px;color:var(--gray-500);font-family:var(--font-zh);line-height:1.7;max-width:420px;margin:0 auto 24px;">升級為付費會員即可解鎖過去 30 天每日 Brief 的完整內容——機會標的、機構研報、市場摘要與事件預判。</div>'+
+    '<a href="/pages/credits.html" style="display:inline-block;padding:11px 28px;background:var(--navy-700);color:#fff;border-radius:var(--r-sm);font-size:14px;font-weight:600;font-family:var(--font-zh);">升級看完整報告</a>'+
+  '</div>';
+}
+
 async function loadReport(date){
   currentDate = date;
-  // Update active state
   document.querySelectorAll('.date-item').forEach(function(el){
     el.classList.toggle('active', el.dataset.date === date);
   });
   var panel = document.getElementById('report-panel');
+  // 未付費 → 顯示鎖頭，不發內容請求
+  if(!isPro){
+    panel.innerHTML = renderLock();
+    return;
+  }
   panel.innerHTML = '<div class="empty-state">載入中...</div>';
   try {
-    var res = await fetch('../data/history/'+date+'.json');
+    var res = await fetch(API+'/history/'+date, { headers: { 'Authorization': 'Bearer '+(accessToken||'') } });
+    if(res.status === 403){ panel.innerHTML = renderLock(); return; }
     if(!res.ok) throw new Error('not found');
     var d = await res.json();
     panel.innerHTML = renderReport(d);
@@ -274,8 +290,6 @@ function renderReport(d){
 function escHtml(s){
   return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
-
-loadDateList();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -284,7 +298,8 @@ loadDateList();
   var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
   var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
   var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-  sb.auth.onAuthStateChange(function(event,session){
+
+  function updateLoginBtn(session){
     var btn=document.querySelector('.btn-login');
     if(!btn) return;
     if(session&&session.user){
@@ -293,7 +308,38 @@ loadDateList();
     } else {
       btn.textContent='登入';btn.href='/pages/login.html';btn.onclick=null;
     }
+  }
+
+  // 解析 session → 設定 accessToken 與 isPro
+  async function resolveMembership(session){
+    if(session&&session.user){
+      accessToken=session.access_token;
+      try{
+        var r=await sb.from('profiles').select('is_pro').eq('id',session.user.id).single();
+        isPro=!!(r.data&&r.data.is_pro===true);
+      }catch(e){ isPro=false; }
+    } else {
+      accessToken=null; isPro=false;
+    }
+  }
+
+  async function boot(){
+    var s=await sb.auth.getSession();
+    var session=s.data?s.data.session:null;
+    updateLoginBtn(session);
+    await resolveMembership(session);
+    loadDateList();
+  }
+
+  var booted=false;
+  sb.auth.onAuthStateChange(async function(event,session){
+    updateLoginBtn(session);
+    await resolveMembership(session);
+    // 登入/登出後重新渲染目前選取的日期（首次由 boot 觸發）
+    if(booted && currentDate) loadReport(currentDate);
   });
+
+  boot().then(function(){ booted=true; });
 })();
 </script>
 </body>
