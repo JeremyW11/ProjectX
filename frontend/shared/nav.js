@@ -5,6 +5,7 @@
     {key:'industry', href:'/pages/industry.html',         label:'產業'},
     {key:'research', href:'/pages/institutional.html',    label:'機構研報'},
     {key:'calendar', href:'/pages/calendar.html',         label:'市場日曆'},
+    {key:'stories',  href:'/pages/stories.html',          label:'全球追蹤'},
     {key:'member',   href:'/pages/targets.html',          label:'會員中心'},
     {key:'archive',  href:'/pages/archive.html',          label:'歷史報告'},
     {key:'credits',  href:'/pages/credits.html',          label:'方案 / 點數'},

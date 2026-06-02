@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X · 全球事件追蹤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-950:#070d1c; --navy-900:#0d1630; --navy-800:#152244;
+  --navy-700:#1d2d5a; --navy-600:#1e3a8a; --navy-500:#2563eb;
+  --navy-400:#3b82f6; --navy-300:#93c5fd; --navy-100:#dbeafe; --navy-50:#eff6ff;
+  --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569;
+  --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1;
+  --gray-200:#e2e8f0; --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
+  --green-700:#15803d; --green-600:#16a34a; --green-100:#dcfce7; --green-50:#f0fdf4;
+  --red-700:#b91c1c; --red-600:#dc2626; --red-100:#fee2e2;
+  --amber-600:#d97706; --amber-100:#fef3c7;
+  --pro-gold:#c9a84c; --pro-gold-light:#f5e9c8; --pro-gold-dark:#8a6a1f;
+  --font-en:'DM Sans',sans-serif;
+  --font-zh:'Noto Sans TC',sans-serif;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:24px;
+  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;-webkit-font-smoothing:antialiased;}
+body{background:#f7f8fc;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:100;}
+.topbar-logo{display:flex;align-items:center;gap:10px;margin-right:36px;}
+.header-nav{display:flex;align-items:center;gap:2px;flex:1;}
+.nav-item{font-size:13.5px;color:var(--gray-600);padding:6px 12px;border-radius:var(--r-sm);font-weight:500;display:flex;align-items:center;gap:6px;transition:all .15s;}
+.nav-item:hover{background:var(--gray-100);color:var(--navy-700);}
+.nav-item.active{background:var(--navy-50);color:var(--navy-700);font-weight:600;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-500);}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green-600);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.header-time{font-size:12px;color:var(--gray-400);font-family:var(--font-en);}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;font-family:var(--font-en);}
+
+.page{max-width:920px;margin:0 auto;padding:88px 24px 64px;}
+.page-header{margin-bottom:24px;}
+.page-title{font-size:26px;font-weight:600;color:var(--navy-900);font-family:var(--font-zh);}
+.page-title-sub{font-size:14px;color:var(--gray-400);font-family:var(--font-en);font-weight:400;margin-left:8px;}
+.page-update{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
+
+/* PRO GATE */
+.pro-gate{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--r-xl);padding:48px 40px;text-align:center;color:var(--white);margin-bottom:20px;}
+.pro-gate-icon{font-size:36px;color:var(--pro-gold);margin-bottom:12px;}
+.pro-gate-title{font-size:24px;font-weight:600;margin-bottom:10px;}
+.pro-gate-title em{color:var(--pro-gold);font-style:normal;}
+.pro-gate-desc{font-size:14px;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 24px;line-height:1.7;}
+.btn-pro-upgrade{display:inline-block;padding:12px 28px;background:var(--pro-gold);color:var(--navy-900);border-radius:var(--r-md);font-size:14px;font-weight:700;}
+
+/* STORY CARDS */
+.stories-view{display:none;}
+.stories-view.active{display:block;}
+.story-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:20px 22px;margin-bottom:16px;box-shadow:var(--shadow-card);}
+.sc-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.sc-title{font-size:17px;font-weight:600;color:var(--navy-900);flex:1;min-width:180px;}
+.sc-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.sc-cat{font-size:11px;font-weight:600;padding:3px 9px;border-radius:5px;background:var(--gray-100);color:var(--gray-600);}
+.sc-summary{font-size:13.5px;color:var(--gray-700);line-height:1.65;margin-bottom:10px;}
+.sc-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--gray-500);margin-bottom:12px;}
+.sc-meta b{color:var(--gray-700);font-weight:600;}
+.sc-assets span{display:inline-block;background:var(--navy-50);color:var(--navy-700);font-size:11px;padding:2px 8px;border-radius:5px;margin:0 4px 4px 0;font-family:var(--font-en);}
+.timeline{border-left:2px solid var(--gray-200);padding-left:16px;margin-left:4px;}
+.tl-item{position:relative;padding-bottom:12px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{content:'';position:absolute;left:-21px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--navy-400);border:2px solid var(--white);}
+.tl-date{font-size:11px;color:var(--gray-400);font-family:var(--font-en);font-weight:600;}
+.tl-text{font-size:13px;color:var(--gray-700);margin-top:2px;line-height:1.55;}
+.tl-src{font-size:11px;color:var(--navy-500);margin-left:6px;font-weight:600;}
+.sc-dir{font-weight:700;}
+.empty-box{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--r-lg);padding:48px 24px;text-align:center;color:var(--gray-400);font-size:14px;}
+@media(max-width:768px){.header-nav{display:none;}}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="https://projectxbrief.netlify.app/" class="logo-link" style="text-decoration:none;"><div class="topbar-logo">
+    <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
+      <line x1="10" y1="10" x2="30" y2="30" stroke="white" stroke-width="6" stroke-linecap="round"/>
+      <line x1="30" y1="10" x2="10" y2="30" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="3" fill="#2563eb"/>
+      <circle cx="20" cy="20" r="1.5" fill="#93c5fd"/>
+      <text x="48" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" letter-spacing="0.3" fill="#0f172a">PROJECT </text>
+      <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
+    </svg>
+  </div></a>
+  <nav class="header-nav" data-active="stories"></nav>
+  <div class="header-right">
+    <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+    <span class="header-time" id="clock">—</span>
+    <a href="/pages/login.html" class="btn-login" id="auth-btn">登入</a>
+  </div>
+</header>
+
+<script src="/shared/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<main class="page">
+
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">全球事件追蹤 <span class="page-title-sub">Global Story Tracker</span></h1>
+      <div class="page-update">把同一條國際大事串成跨日時間軸 · Pro 會員專屬 · 台北時間基準</div>
+    </div>
+  </div>
+
+  <!-- PRO GATE -->
+  <div id="pro-gate-view">
+    <div class="pro-gate">
+      <div class="pro-gate-icon">✦</div>
+      <h2 class="pro-gate-title">追蹤<em>全球大事</em>的完整脈絡</h2>
+      <p class="pro-gate-desc">地緣衝突、貿易政策、央行路徑、AI 與半導體供應鏈——每條重大事件串成連續時間軸，每天更新進展、方向與受影響標的，不再只看零碎的單日新聞。</p>
+      <div class="pro-gate-btns">
+        <a href="/pages/login.html" class="btn-pro-upgrade">✦ 登入體驗 Pro</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGGED-IN VIEW -->
+  <div id="stories-view" class="stories-view">
+    <div id="stories-list"></div>
+  </div>
+
+</main>
+
+<script>
+// Clock
+function tick(){
+  var t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
+  var el=document.getElementById('clock'); if(el) el.textContent=t+' CST';
+}
+tick(); setInterval(tick,1000);
+
+// ── Supabase Auth ──
+var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
+var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+function initAuth(){
+  _supabase.auth.onAuthStateChange(function(event,session){
+    if(event==='INITIAL_SESSION'||event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){
+      setAuthState(session?session.user:null);
+    } else if(event==='SIGNED_OUT'){
+      setAuthState(null);
+    }
+  });
+}
+
+function setAuthState(user){
+  var gateEl=document.getElementById('pro-gate-view');
+  var viewEl=document.getElementById('stories-view');
+  var btnEl=document.getElementById('auth-btn');
+  if(user){
+    if(btnEl){ btnEl.textContent='登出'; btnEl.href='#'; btnEl.onclick=function(e){e.preventDefault();signOutUser();}; }
+    checkProStatus(user, gateEl, viewEl);
+  } else {
+    if(gateEl) gateEl.style.display='block';
+    if(viewEl) viewEl.classList.remove('active');
+    if(btnEl){ btnEl.textContent='登入'; btnEl.href='/pages/login.html'; btnEl.onclick=null; }
+  }
+}
+
+async function checkProStatus(user, gateEl, viewEl){
+  var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
+  var isPro = result.data && result.data.is_pro === true;
+  if(isPro){
+    if(gateEl) gateEl.style.display='none';
+    if(viewEl) viewEl.classList.add('active');
+    loadStories();
+  } else {
+    if(gateEl) gateEl.style.display='block';
+    if(viewEl) viewEl.classList.remove('active');
+  }
+}
+
+async function signOutUser(){
+  await _supabase.auth.signOut();
+  window.location.reload();
+}
+
+// ── Render tracked stories ──
+var STATUS_STYLE={
+  '進行中':{bg:'var(--navy-50)',c:'var(--navy-600)'},
+  '升溫':{bg:'var(--red-100)',c:'var(--red-600)'},
+  '緩和':{bg:'var(--green-100)',c:'var(--green-700)'},
+  '落幕':{bg:'var(--gray-100)',c:'var(--gray-500)'}
+};
+var DIR_STYLE={'看多':'var(--green-600)','看空':'var(--red-600)','中性':'var(--amber-600)'};
+var SENT_COLOR={'利多':'var(--green-600)','利空':'var(--red-600)','中性':'var(--gray-500)'};
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+async function loadStories(){
+  var listEl=document.getElementById('stories-list');
+  if(!listEl) return;
+  var stories=[];
+  try{
+    var res=await fetch('/data/accumulated.json');
+    var acc=await res.json();
+    stories=Array.isArray(acc.tracked_stories)?acc.tracked_stories:[];
+  }catch(e){ stories=[]; }
+
+  // 進行中優先，落幕殿後；各自依最新更新排序
+  stories.sort(function(a,b){
+    var ended=function(s){return s.status==='落幕'?1:0;};
+    if(ended(a)!==ended(b)) return ended(a)-ended(b);
+    return (b.last_update||'').localeCompare(a.last_update||'');
+  });
+
+  if(!stories.length){
+    listEl.innerHTML='<div class="empty-box">尚無追蹤中的全球事件。下次早報生成後，重大國際大事會在這裡串成時間軸。</div>';
+    return;
+  }
+
+  listEl.innerHTML=stories.map(function(s){
+    var st=STATUS_STYLE[s.status]||STATUS_STYLE['進行中'];
+    var dirColor=DIR_STYLE[s.direction]||'var(--gray-500)';
+    var assets=(s.affect_assets||'').split(/[,，、\s]+/).filter(Boolean);
+    var tl=(Array.isArray(s.timeline)?s.timeline:[]).slice().reverse();
+    var tlHTML=tl.map(function(t){
+      var sc=SENT_COLOR[t.sentiment]||'var(--gray-500)';
+      var src=t.source_url?' <a class="tl-src" href="'+esc(t.source_url)+'" target="_blank" rel="noopener">📎 原文</a>':'';
+      return '<div class="tl-item">'+
+        '<div class="tl-date">'+esc(t.date)+' · <span style="color:'+sc+';">'+esc(t.sentiment||'')+'</span></div>'+
+        '<div class="tl-text">'+esc(t.update)+src+'</div>'+
+      '</div>';
+    }).join('');
+    return '<div class="story-card">'+
+      '<div class="sc-head">'+
+        '<span class="sc-title">'+esc(s.title)+'</span>'+
+        '<span class="sc-cat">'+esc(s.category||'')+'</span>'+
+        '<span class="sc-badge" style="background:'+st.bg+';color:'+st.c+';">'+esc(s.status||'')+'</span>'+
+      '</div>'+
+      (s.summary?'<div class="sc-summary">'+esc(s.summary)+'</div>':'')+
+      '<div class="sc-meta">'+
+        '<span>方向：<span class="sc-dir" style="color:'+dirColor+';">'+esc(s.direction||'—')+'</span></span>'+
+        '<span>起始：<b>'+esc(s.started||'—')+'</b></span>'+
+        '<span>最近更新：<b>'+esc(s.last_update||'—')+'</b></span>'+
+      '</div>'+
+      (assets.length?'<div class="sc-assets" style="margin-bottom:12px;"><span style="background:none;color:var(--gray-400);padding-left:0;">受影響標的：</span>'+assets.map(function(a){return '<span>'+esc(a)+'</span>';}).join('')+'</div>':'')+
+      (tlHTML?'<div class="timeline">'+tlHTML+'</div>':'')+
+    '</div>';
+  }).join('');
+}
+
+initAuth();
+</script>
+</body>
+</html>
