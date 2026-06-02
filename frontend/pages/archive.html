@@ -124,7 +124,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </div>
     <div><span class="logo-main">PROJECT X</span><span class="logo-sub">INTELLIGENCE</span></div>
   </div></a>
-  <nav class="header-nav" data-active="brief"></nav>
+  <nav class="header-nav" data-active="archive"></nav>
   <div class="header-right">
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
     <span class="header-time" id="clock">—</span>
@@ -290,6 +290,9 @@ function renderReport(d){
 function escHtml(s){
   return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
+
+// 日期清單獨立載入，不依賴 Supabase（即使 CDN/驗證失敗，清單仍會出現）
+loadDateList();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -327,7 +330,6 @@ function escHtml(s){
     var s=await sb.auth.getSession();
     var session=s.data?s.data.session:null;
     updateLoginBtn(session);
-    loadDateList();                          // 立即渲染日期清單，不被會員查詢卡住
     await resolveMembership(session);         // 解析付費身分
     if(currentDate) loadReport(currentDate);  // 依最終身分重渲染當前日期
   }
