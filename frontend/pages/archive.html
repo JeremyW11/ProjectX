@@ -327,8 +327,9 @@ function escHtml(s){
     var s=await sb.auth.getSession();
     var session=s.data?s.data.session:null;
     updateLoginBtn(session);
-    await resolveMembership(session);
-    loadDateList();
+    loadDateList();                          // 立即渲染日期清單，不被會員查詢卡住
+    await resolveMembership(session);         // 解析付費身分
+    if(currentDate) loadReport(currentDate);  // 依最終身分重渲染當前日期
   }
 
   var booted=false;
