@@ -539,6 +539,7 @@ function renderResearch(list){
         '<span class="rc-date">'+r.date+'</span>'+
         '<span class="rc-sector">'+(r.rating_change==='上調'?'▲ 上調':r.rating_change==='下調'?'▼ 下調':'— 維持')+'</span>'+
       '</div>'+
+      (r.firm_background?'<div style="font-size:11px;color:var(--gray-400);font-family:var(--font-zh);margin-bottom:6px;">'+r.firm_background+'</div>':'')+
       '<div class="rc-title">'+r.name+'（'+r.ticker+'）'+': '+r.note+'</div>'+
       '<div class="rc-body">'+
         '<div style="margin-bottom:10px;font-size:13px;color:var(--gray-700);font-weight:500;border-left:3px solid var(--navy-400);padding-left:10px;">'+( r.core_logic||r.note)+'</div>'+

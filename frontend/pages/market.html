@@ -446,9 +446,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <div class="section-block" style="margin-top:16px;">
           <div class="section-block-header">
             <div class="sbh-title">美股新聞 <span class="sbh-title-en">US MARKET NEWS</span></div>
-            <div class="sbh-right"><span class="sbh-badge s-neut">今日 5 則</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut" id="us-news-count">今日 — 則</span></div>
           </div>
-          <div class="news-list">
+          <div class="news-list" id="us-news-list">
             <div class="news-item"><span class="news-num">01</span><div class="news-content"><div class="news-meta"><span class="news-badge b-us-n">US EQUITY</span><span class="news-source">Bloomberg</span><span class="news-time">07:44</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">NVIDIA Q1財報大幅超預期，資料中心營收年增427%創歷史新高</div><div class="news-body">Q1 EPS 達 6.12 美元（預期 5.58），資料中心營收 226 億美元。CEO 黃仁勳表示 Blackwell 出貨量持續爬坡，下季指引 280 億美元超市場共識，盤後股價大漲 9%。</div><div class="news-tickers"><span class="news-chip">NVDA</span><span class="news-chip">AMD</span><span class="news-chip">SMCI</span></div></div></div>
             <div class="news-item"><span class="news-num">02</span><div class="news-content"><div class="news-meta"><span class="news-badge b-mac-n">MACRO</span><span class="news-source">Reuters</span><span class="news-time">07:22</span><span class="sent-chip s-bear">利空</span></div><div class="news-headline">聯準會官員鷹派表態，市場首次降息預期延至Q4</div><div class="news-body">多位 Fed 官員重申通膨預期仍具黏性，年內降息次數壓縮至1次。美元指數 DXY 突破 105，十年期公債殖利率回升至 4.52%，成長股普遍承壓。</div><div class="news-tickers"><span class="news-chip">DXY</span><span class="news-chip">TLT</span><span class="news-chip">SPY</span></div></div></div>
             <div class="news-item"><span class="news-num">03</span><div class="news-content"><div class="news-meta"><span class="news-badge b-us-n">US EQUITY</span><span class="news-source">CNBC</span><span class="news-time">06:58</span><span class="sent-chip s-bear">利空</span></div><div class="news-headline">Walmart Q1 EPS小幅不及預期，消費者支出趨於謹慎</div><div class="news-body">WMT Q1 EPS 0.61 美元（預期 0.64），管理層表示高收入消費者消費偏保守，下季指引持平市場預期，盤後股價下跌約 2%。</div><div class="news-tickers"><span class="news-chip">WMT</span><span class="news-chip">TGT</span><span class="news-chip">COST</span></div></div></div>
@@ -552,7 +552,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <div class="section-block" style="margin-top:16px;">
           <div class="section-block-header">
             <div class="sbh-title">台股新聞 <span class="sbh-title-en">TW MARKET NEWS</span></div>
-            <div class="sbh-right"><span class="sbh-badge s-neut">今日 5 則</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut" id="tw-news-count">今日 — 則</span></div>
           </div>
           <div class="news-list" id="tw-news-list">
             <div class="news-item"><span class="news-num">01</span><div class="news-content"><div class="news-meta"><span class="news-badge b-tw-n">台股</span><span class="news-source">經濟日報</span><span class="news-time">08:05</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">外資連三日買超逾百億，台積電與聯發科為主力標的</div><div class="news-body">外資本週累積買超台積電（2330）達 142 億元、聯發科（2454）62 億元，加權指數在 21,330 點獲得支撐。ADR 夜盤台積電 +1.2%，法人預估 Q2 財測將優於預期。</div><div class="news-tickers"><span class="news-chip">2330</span><span class="news-chip">2454</span><span class="news-chip">TSM</span></div></div></div>
@@ -731,9 +731,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <div class="section-block" style="margin-top:16px;">
           <div class="section-block-header">
             <div class="sbh-title">加密新聞 <span class="sbh-title-en">CRYPTO NEWS</span></div>
-            <div class="sbh-right"><span class="sbh-badge s-neut">今日 5 則</span></div>
+            <div class="sbh-right"><span class="sbh-badge s-neut" id="crypto-news-count">今日 — 則</span></div>
           </div>
-          <div class="news-list">
+          <div class="news-list" id="crypto-news-list">
             <div class="news-item"><span class="news-num">01</span><div class="news-content"><div class="news-meta"><span class="news-badge b-cr-n">CRYPTO</span><span class="news-source">CoinDesk</span><span class="news-time">08:14</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">比特幣現貨ETF單日淨流入13億美元，創近期單日新高</div><div class="news-body">BlackRock IBIT 單日淨流入 8.2 億美元，Fidelity FBTC 3.1 億美元，合計流入創近三個月單日新高。BTC 成功站穩 100K 心理關卡，市場情緒指數升至 72（貪婪）。</div><div class="news-tickers"><span class="news-chip">BTC</span><span class="news-chip">IBIT</span><span class="news-chip">FBTC</span></div></div></div>
             <div class="news-item"><span class="news-num">02</span><div class="news-content"><div class="news-meta"><span class="news-badge b-cr-n">CRYPTO</span><span class="news-source">The Block</span><span class="news-time">07:55</span><span class="sent-chip s-bull">利多</span></div><div class="news-headline">以太坊坎昆升級後Gas費創歷史新低，L2生態活躍度大幅提升</div><div class="news-body">Dencun 升級後 Blob Gas 均價降至 0.003 Gwei，Arbitrum 與 Base 日活交易量分別達 180 萬與 240 萬筆。ETH 質押率突破 28%。</div><div class="news-tickers"><span class="news-chip">ETH</span><span class="news-chip">ARB</span><span class="news-chip">ETHA</span></div></div></div>
             <div class="news-item"><span class="news-num">03</span><div class="news-content"><div class="news-meta"><span class="news-badge b-cr-n">CRYPTO</span><span class="news-source">Decrypt</span><span class="news-time">07:30</span><span class="sent-chip s-neut">中性</span></div><div class="news-headline">SEC 延後以太坊現貨ETF選擇權審核，最終決定推至六月下旬</div><div class="news-body">SEC 發布通知將 ETH 現貨 ETF 選擇權審核期限延後至 6 月 22 日，市場反應平淡。分析師認為最終批准機率仍高，短期影響有限。</div><div class="news-tickers"><span class="news-chip">ETH</span><span class="news-chip">ETHA</span></div></div></div>
@@ -847,12 +847,40 @@ async function loadData(){
       if(twTh) twTh.innerHTML='<th>標的</th><th class="r">股價</th><th class="r">漲跌</th><th class="r">今日重點</th><th class="r">板塊</th><th class="r">觀察重點</th>';
     }
 
-    // TW news
-    var twNews=document.getElementById('tw-news-list');
-    if(twNews&&data.market&&data.market.tw_news){
-      twNews.innerHTML=data.market.tw_news.map(function(n,i){
-        return '<div class="news-item"><span class="news-num">0'+(i+1)+'</span><div class="news-content"><div class="news-meta"><span class="news-badge b-tw-n">台股</span><span class="news-time">'+(n.time||n.date||'')+'</span></div><div class="news-headline">'+(n.text||'')+'</div></div></div>';
-      }).join('');
+    // News renderers (tw / us / crypto) — rich cards with source / sentiment / body / tickers
+    function escapeHtml(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+    function sentChip(sent){
+      var s=String(sent||'').trim();
+      if(s==='利多'||s==='positive') return '<span class="sent-chip s-bull">利多</span>';
+      if(s==='利空'||s==='negative') return '<span class="sent-chip s-bear">利空</span>';
+      if(s) return '<span class="sent-chip s-neut">中性</span>';
+      return '';
+    }
+    function renderNewsCard(n,i,badgeClass,badgeLabel){
+      var num=(i+1<10?'0':'')+(i+1);
+      var meta=['<span class="news-badge '+badgeClass+'">'+badgeLabel+'</span>'];
+      if(n.source) meta.push('<span class="news-source">'+escapeHtml(n.source)+'</span>');
+      if(n.time||n.date) meta.push('<span class="news-time">'+escapeHtml(n.time||n.date)+'</span>');
+      var sc=sentChip(n.sentiment); if(sc) meta.push(sc);
+      var headline=n.text?'<div class="news-headline">'+escapeHtml(n.text)+'</div>':'';
+      var body=n.body?'<div class="news-body">'+escapeHtml(n.body)+'</div>':'';
+      var tk='';
+      if(Array.isArray(n.tickers)&&n.tickers.length){
+        tk='<div class="news-tickers">'+n.tickers.map(function(t){return '<span class="news-chip">'+escapeHtml(t)+'</span>';}).join('')+'</div>';
+      }
+      return '<div class="news-item"><span class="news-num">'+num+'</span><div class="news-content"><div class="news-meta">'+meta.join('')+'</div>'+headline+body+tk+'</div></div>';
+    }
+    function renderNewsList(listId,countId,arr,badgeClass,badgeLabel){
+      var el=document.getElementById(listId);
+      if(!el||!Array.isArray(arr)) return;
+      el.innerHTML=arr.map(function(n,i){return renderNewsCard(n,i,badgeClass,badgeLabel);}).join('');
+      var cnt=document.getElementById(countId);
+      if(cnt) cnt.textContent='今日 '+arr.length+' 則';
+    }
+    if(data.market){
+      renderNewsList('tw-news-list','tw-news-count',data.market.tw_news,'b-tw-n','台股');
+      renderNewsList('us-news-list','us-news-count',data.market.us_news,'b-us-n','US EQUITY');
+      renderNewsList('crypto-news-list','crypto-news-count',data.market.crypto_news,'b-cr-n','CRYPTO');
     }
 
   }catch(e){console.error('loadData error:',e);}
