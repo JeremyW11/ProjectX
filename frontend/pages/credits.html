@@ -87,6 +87,39 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 .notice{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:16px 20px;font-size:12px;color:var(--gray-500);line-height:1.7;}
 .notice strong{color:var(--gray-700);}
+
+/* Pro 訂閱卡 */
+.pro-card{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border:1px solid var(--pro-gold);border-radius:var(--r-xl);padding:28px 32px;margin-bottom:32px;color:var(--white);position:relative;overflow:hidden;}
+.pro-card::after{content:"";position:absolute;top:-40px;right:-40px;width:140px;height:140px;background:radial-gradient(circle,rgba(201,168,76,.18),transparent 70%);}
+.pro-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.pro-badge{font-family:var(--font-en);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--pro-gold-dark);background:var(--pro-gold);padding:3px 10px;border-radius:20px;}
+.pro-title{font-family:var(--font-display);font-size:22px;color:var(--white);}
+.pro-price{display:flex;align-items:baseline;gap:6px;margin:12px 0 18px;}
+.pro-price-num{font-family:var(--font-en);font-size:40px;font-weight:600;color:var(--pro-gold);line-height:1;}
+.pro-price-unit{font-size:14px;color:rgba(255,255,255,.5);font-family:var(--font-en);}
+.pro-benefits{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px;}
+.pro-benefits li{font-size:13px;color:rgba(255,255,255,.85);display:flex;align-items:flex-start;gap:8px;}
+.pro-benefits li::before{content:"✦";color:var(--pro-gold);flex-shrink:0;}
+.btn-pro{display:inline-block;padding:12px 28px;background:var(--pro-gold);color:var(--navy-900);border-radius:var(--r-md);font-size:14px;font-weight:700;font-family:var(--font-en);transition:all .2s;position:relative;z-index:1;}
+.btn-pro:hover{background:#dbb95a;}
+.pro-hint{margin-top:10px;font-size:11px;color:rgba(255,255,255,.4);font-family:var(--font-en);}
+.pro-active{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(201,168,76,.15);border:1px solid var(--pro-gold);color:var(--pro-gold-light);border-radius:var(--r-md);font-size:13px;font-weight:600;font-family:var(--font-en);position:relative;z-index:1;}
+
+/* 權益對照表 */
+.compare-table{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);overflow:hidden;margin-bottom:32px;}
+.compare-head{display:grid;grid-template-columns:1.6fr 1fr 1fr;background:var(--gray-50);border-bottom:1px solid var(--gray-200);}
+.compare-head>div{padding:12px 16px;font-size:12px;font-weight:700;font-family:var(--font-en);text-align:center;}
+.compare-head>div:first-child{text-align:left;color:var(--gray-500);}
+.compare-head .col-free{color:var(--gray-600);}
+.compare-head .col-pro{color:var(--pro-gold-dark);background:var(--pro-gold-light);}
+.compare-row{display:grid;grid-template-columns:1.6fr 1fr 1fr;border-bottom:1px solid var(--gray-100);}
+.compare-row:last-child{border-bottom:none;}
+.compare-row>div{padding:13px 16px;font-size:13px;display:flex;align-items:center;justify-content:center;}
+.compare-row .feat{justify-content:flex-start;color:var(--gray-700);}
+.compare-row .col-pro{background:rgba(245,233,200,.35);}
+.ck-yes{color:var(--green-600);font-weight:700;}
+.ck-no{color:var(--gray-300);}
+.ck-txt{font-size:12px;color:var(--gray-600);font-family:var(--font-en);}
 </style>
 </head>
 <body>
@@ -111,6 +144,67 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div class="balance-card" id="balance-card">
     <div class="balance-label">我的點數餘額</div>
     <div class="balance-guest" id="balance-loading">載入中...</div>
+  </div>
+
+  <!-- Pro 訂閱 -->
+  <div class="pro-card" id="pro-card">
+    <div class="pro-head">
+      <span class="pro-badge">PRO</span>
+      <span class="pro-title">Pro 訂閱會員</span>
+    </div>
+    <div class="pro-price">
+      <span class="pro-price-num">$9.99</span>
+      <span class="pro-price-unit">USD / 月</span>
+    </div>
+    <ul class="pro-benefits">
+      <li>每月自動發放 30 點訂閱點數，週期開始時重置</li>
+      <li>解鎖全部歷史報告完整內容（免費會員僅能看標題與日期）</li>
+      <li>免費功能全保留：每日早報、機構研報、市場數據、自選看板</li>
+    </ul>
+    <div id="pro-action">
+      <a class="btn-pro" id="btn-pro" href="#">升級 Pro</a>
+      <div class="pro-hint">訂閱付款功能即將開放</div>
+    </div>
+  </div>
+
+  <!-- 免費 vs Pro 權益對照 -->
+  <div class="section-title">免費 vs Pro</div>
+  <div class="compare-table">
+    <div class="compare-head">
+      <div>功能</div>
+      <div class="col-free">免費</div>
+      <div class="col-pro">Pro</div>
+    </div>
+    <div class="compare-row">
+      <div class="feat">每日早報、市場數據</div>
+      <div><span class="ck-yes">✓</span></div>
+      <div class="col-pro"><span class="ck-yes">✓</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="feat">機構研報、共識溫度計</div>
+      <div><span class="ck-yes">✓</span></div>
+      <div class="col-pro"><span class="ck-yes">✓</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="feat">自選看板、事件追蹤</div>
+      <div><span class="ck-yes">✓</span></div>
+      <div class="col-pro"><span class="ck-yes">✓</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="feat">歷史報告完整內容</div>
+      <div><span class="ck-no">✕</span></div>
+      <div class="col-pro"><span class="ck-yes">✓</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="feat">每月訂閱點數</div>
+      <div><span class="ck-txt">—</span></div>
+      <div class="col-pro"><span class="ck-txt">30 點 / 月</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="feat">AI 個股分析、推演沙盤</div>
+      <div><span class="ck-txt">需購買點數</span></div>
+      <div class="col-pro"><span class="ck-txt">用訂閱點數</span></div>
+    </div>
   </div>
 
   <!-- 點數用途 -->
@@ -210,6 +304,7 @@ async function initCreditsPage(){
   if(!user){
     loadingEl.innerHTML='請先 <a href="/pages/login.html">登入</a> 查看點數餘額';
     setupBuyButtons(null);
+    renderProCard(false,null);
     return;
   }
 
@@ -237,6 +332,24 @@ async function initCreditsPage(){
     '<div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.3);font-family:var(--font-en);">'+user.email+'</div>';
 
   setupBuyButtons(user.email);
+  renderProCard(data.is_pro===true,resetDate);
+}
+
+function renderProCard(isPro,resetDate){
+  var action=document.getElementById('pro-action');
+  if(!action) return;
+  if(isPro){
+    action.innerHTML='<div class="pro-active">✦ 您已是 Pro 會員</div>'+
+      (resetDate?'<div class="pro-hint">下次訂閱點數重置：'+resetDate+'</div>':'');
+    return;
+  }
+  var btn=document.getElementById('btn-pro');
+  if(btn){
+    btn.addEventListener('click',function(e){
+      e.preventDefault();
+      alert('Pro 訂閱付款功能即將開放，敬請期待。');
+    });
+  }
 }
 
 function setupBuyButtons(email){
