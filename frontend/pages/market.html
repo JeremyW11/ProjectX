@@ -755,13 +755,15 @@ tick();setInterval(tick,1000);
 
 function toggleMenu(){
   var m=document.getElementById('mobile-menu'),h=document.getElementById('hamburger');
+  if(!m||!h)return;
   m.classList.toggle('open');h.classList.toggle('open');
   document.body.style.overflow=m.classList.contains('open')?'hidden':'';
 }
-document.getElementById('mobile-menu').querySelectorAll('a').forEach(function(a){
+var mm=document.getElementById('mobile-menu');
+if(mm) mm.querySelectorAll('a').forEach(function(a){
   a.addEventListener('click',function(){
-    document.getElementById('mobile-menu').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
+    mm.classList.remove('open');
+    var hb=document.getElementById('hamburger');if(hb)hb.classList.remove('open');
     document.body.style.overflow='';
   });
 });
