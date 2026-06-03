@@ -86,12 +86,19 @@
 /* ============================================================ RESET */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+/* ── AMBIENT BACKGROUND (mesh gradient, no grid, bulletproof) ── */
 body {
-  background: var(--bg-page);
+  background:
+    radial-gradient(1120px 640px at 94% -14%, rgba(37,99,235,.46), transparent 64%),
+    radial-gradient(940px 720px at -10% 4%, rgba(51,65,85,.40), transparent 64%),
+    radial-gradient(820px 620px at 50% 118%, rgba(29,78,216,.28), transparent 66%),
+    linear-gradient(160deg, #dbe2ef 0%, var(--bg-page) 56%);
+  background-attachment:fixed;
   color: var(--text-primary);
   font-family: var(--font-zh);
   min-height: 100vh;
   line-height: 1.6;
+  position: relative;
 }
 a { text-decoration: none; color: inherit; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
@@ -102,7 +109,9 @@ img { display: block; max-width: 100%; }
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--header-h);
-  background: var(--white);
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-light);
   z-index: 100;
   display: flex;
