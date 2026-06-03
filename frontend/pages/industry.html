@@ -388,7 +388,7 @@ var allData=null;
 function checkDataStaleness(dateStr){var today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei'}).format(new Date());if(dateStr&&dateStr!==today){var b=document.getElementById('stale-banner');if(b){b.style.display='flex';b.querySelector('.stale-date').textContent=dateStr;}}}
 
 async function loadData(){
-  var res=await fetch('../data/daily.json');
+  var res=await fetch('../data/daily.json?t='+Date.now());
   allData=await res.json();
   checkDataStaleness(allData.date);
 

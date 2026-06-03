@@ -205,11 +205,26 @@ input::placeholder{color:var(--gray-400);}
           <input type="password" id="login-password" placeholder="••••••••">
         </div>
         <button class="btn-primary" onclick="signIn()">登入</button>
+        <div style="text-align:center;margin-top:12px;">
+          <a href="#" onclick="showForgot();return false;" style="font-size:12.5px;color:var(--navy-600);text-decoration:none;">忘記密碼？</a>
+        </div>
         <div class="msg" id="login-msg"></div>
       </div>
 
       <!-- 註冊 -->
       <div id="tab-signup" class="tab-content">
+        <div class="form-group">
+          <label>姓名 / 暱稱</label>
+          <input type="text" id="signup-name" placeholder="您的稱呼" maxlength="40">
+        </div>
+        <div class="form-group">
+          <label>手機號碼</label>
+          <input type="tel" id="signup-phone" placeholder="0912345678" maxlength="20">
+        </div>
+        <div class="form-group">
+          <label>生日</label>
+          <input type="date" id="signup-birthday">
+        </div>
         <div class="form-group">
           <label>電子郵件</label>
           <input type="email" id="signup-email" placeholder="your@email.com">
@@ -239,6 +254,34 @@ input::placeholder{color:var(--gray-400);}
         <button class="btn-primary" onclick="signUp()">建立帳號</button>
         <div class="msg" id="signup-msg"></div>
       </div>
+    </div>
+
+    <!-- 忘記密碼 -->
+    <div id="forgot-view" style="display:none;">
+      <div class="form-group">
+        <label>電子郵件</label>
+        <input type="email" id="forgot-email" placeholder="your@email.com">
+        <div class="field-hint">我們會寄送密碼重設連結到此信箱，點擊後即可設定新密碼。</div>
+      </div>
+      <button class="btn-primary" onclick="sendReset()">寄送重設連結</button>
+      <div style="text-align:center;margin-top:12px;">
+        <a href="#" onclick="backToLogin();return false;" style="font-size:12.5px;color:var(--navy-600);text-decoration:none;">← 返回登入</a>
+      </div>
+      <div class="msg" id="forgot-msg"></div>
+    </div>
+
+    <!-- 設定新密碼（從信箱連結進入） -->
+    <div id="reset-view" style="display:none;">
+      <div class="form-group">
+        <label>新密碼</label>
+        <input type="password" id="reset-password" placeholder="至少 6 個字元">
+      </div>
+      <div class="form-group">
+        <label>確認新密碼</label>
+        <input type="password" id="reset-confirm" placeholder="再次輸入新密碼">
+      </div>
+      <button class="btn-primary" onclick="submitNewPassword()">更新密碼</button>
+      <div class="msg" id="reset-msg"></div>
     </div>
 
   </div>
@@ -310,16 +353,20 @@ function signupErrMsg(err){
 }
 
 async function signUp(){
+  var name=document.getElementById('signup-name').value.trim();
+  var phone=document.getElementById('signup-phone').value.trim();
+  var birthday=document.getElementById('signup-birthday').value;
   var email=document.getElementById('signup-email').value.trim();
   var password=document.getElementById('signup-password').value;
   var confirm=document.getElementById('signup-confirm').value;
-  if(!email||!password||!confirm){showMsg('signup-msg','請填寫所有欄位','error');return;}
+  if(!name||!phone||!birthday||!email||!password||!confirm){showMsg('signup-msg','請填寫所有欄位','error');return;}
+  if(!/^[0-9+\-() ]{6,20}$/.test(phone)){showMsg('signup-msg','手機號碼格式不正確','error');return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showMsg('signup-msg','電子郵件格式不正確，請輸入有效信箱（例：name@gmail.com）','error');return;}
   if(password.length<6){showMsg('signup-msg','密碼長度不足，至少需要 6 個字元','error');return;}
   if(password!==confirm){showMsg('signup-msg','兩次輸入的密碼不一致','error');return;}
   var btn=document.querySelector('#tab-signup .btn-primary');
   btn.disabled=true;btn.textContent='建立中...';
-  var result=await supabase.auth.signUp({email:email,password:password});
+  var result=await supabase.auth.signUp({email:email,password:password,options:{data:{display_name:name,phone:phone,birthday:birthday}}});
   if(result.error){
     showMsg('signup-msg','註冊失敗：'+signupErrMsg(result.error),'error');
     btn.disabled=false;btn.textContent='建立帳號';
@@ -334,7 +381,63 @@ async function signOut(){
   window.location.reload();
 }
 
-checkUser();
+// ── 忘記 / 重設密碼 ──────────────────────────────
+function showForgot(){
+  document.getElementById('logged-out-view').style.display='none';
+  document.getElementById('forgot-view').style.display='block';
+}
+function backToLogin(){
+  document.getElementById('forgot-view').style.display='none';
+  document.getElementById('logged-out-view').style.display='block';
+}
+async function sendReset(){
+  var email=document.getElementById('forgot-email').value.trim();
+  if(!email){showMsg('forgot-msg','請輸入電子郵件','error');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showMsg('forgot-msg','電子郵件格式不正確','error');return;}
+  var btn=document.querySelector('#forgot-view .btn-primary');
+  btn.disabled=true;btn.textContent='寄送中...';
+  var result=await supabase.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin+'/pages/login.html'});
+  btn.disabled=false;btn.textContent='寄送重設連結';
+  if(result.error){
+    showMsg('forgot-msg','寄送失敗：'+result.error.message,'error');
+  }else{
+    showMsg('forgot-msg','✅ 已寄送重設連結，請至信箱查收（含垃圾信匣）','success');
+  }
+}
+async function submitNewPassword(){
+  var p1=document.getElementById('reset-password').value;
+  var p2=document.getElementById('reset-confirm').value;
+  if(p1.length<6){showMsg('reset-msg','密碼至少需要 6 個字元','error');return;}
+  if(p1!==p2){showMsg('reset-msg','兩次輸入的密碼不一致','error');return;}
+  var btn=document.querySelector('#reset-view .btn-primary');
+  btn.disabled=true;btn.textContent='更新中...';
+  var result=await supabase.auth.updateUser({password:p1});
+  if(result.error){
+    showMsg('reset-msg','更新失敗：'+result.error.message,'error');
+    btn.disabled=false;btn.textContent='更新密碼';
+  }else{
+    showMsg('reset-msg','✅ 密碼已更新，跳轉中...','success');
+    setTimeout(function(){window.location.href='/pages/targets.html';},1200);
+  }
+}
+
+var recoveryMode=window.location.hash.indexOf('type=recovery')!==-1;
+supabase.auth.onAuthStateChange(function(event){
+  if(event==='PASSWORD_RECOVERY'){
+    recoveryMode=true;
+    document.getElementById('loading-view').style.display='none';
+    document.getElementById('logged-in-view').style.display='none';
+    document.getElementById('logged-out-view').style.display='none';
+    document.getElementById('reset-view').style.display='block';
+  }
+});
+
+if(recoveryMode){
+  document.getElementById('loading-view').style.display='none';
+  document.getElementById('reset-view').style.display='block';
+}else{
+  checkUser();
+}
 </script>
 </body>
 </html>

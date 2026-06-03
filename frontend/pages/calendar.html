@@ -675,7 +675,7 @@ function checkDataStaleness(dateStr){var today=new Intl.DateTimeFormat('en-CA',{
 
 async function loadCalendarData(){
   try{
-    var res = await fetch('../data/daily.json');
+    var res = await fetch('../data/daily.json?t='+Date.now());
     var data = await res.json();
     checkDataStaleness(data.date);
 

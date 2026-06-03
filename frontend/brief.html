@@ -1117,7 +1117,7 @@ function checkDataStaleness(dateStr){var today=new Intl.DateTimeFormat('en-CA',{
 
 async function loadData() {
   try {
-    const res = await fetch('/data/daily.json');
+    const res = await fetch('/data/daily.json?t='+Date.now());
     const data = await res.json();
     checkDataStaleness(data.date);
 

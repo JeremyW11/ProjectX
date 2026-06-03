@@ -365,6 +365,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <span style="font-size:12px;color:var(--gray-400);font-weight:400;" id="wl-user-email"></span>
       </div>
       <div class="wl-actions">
+        <button class="btn-outline-sm" onclick="openPwdModal()">修改密碼</button>
         <button class="btn-outline-sm" onclick="signOutUser()" style="color:var(--red-600);border-color:var(--red-100);">登出</button>
       </div>
     </div>
@@ -543,12 +544,34 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   </div>
 </div>
 
+<!-- 修改密碼 Modal -->
+<div class="modal-overlay" id="pwdModal" onclick="closePwdModalBg(event)">
+  <div class="modal">
+    <button class="m-close" onclick="closePwdModal()">✕</button>
+    <div class="modal-header">
+      <div class="modal-title">修改密碼</div>
+    </div>
+    <div class="modal-body">
+      <div class="m-group">
+        <label class="m-label">新密碼</label>
+        <input class="m-input" type="password" placeholder="至少 6 個字元" id="pwd-new">
+      </div>
+      <div class="m-group">
+        <label class="m-label">確認新密碼</label>
+        <input class="m-input" type="password" placeholder="再次輸入新密碼" id="pwd-confirm">
+      </div>
+      <div id="pwd-msg" style="font-size:12.5px;margin-bottom:12px;display:none;"></div>
+      <button class="m-submit" onclick="changePassword()" id="pwd-submit">更新密碼</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // 共用 daily.json 載入（單次抓取，全頁快取）
 var _dailyPromise = null;
 function getDaily(){
   if(!_dailyPromise){
-    _dailyPromise = fetch('/data/daily.json').then(function(r){ return r.json(); });
+    _dailyPromise = fetch('/data/daily.json?t='+Date.now()).then(function(r){ return r.json(); });
   }
   return _dailyPromise;
 }
@@ -646,6 +669,35 @@ async function checkProStatus(user, gateEl, viewEl){
 async function signOutUser(){
   await _supabase.auth.signOut();
   window.location.reload();
+}
+
+// ── 修改密碼 ──────────────────────────────────────
+function openPwdModal(){
+  document.getElementById('pwd-new').value='';
+  document.getElementById('pwd-confirm').value='';
+  var msg=document.getElementById('pwd-msg'); msg.style.display='none';
+  document.getElementById('pwdModal').classList.add('open');
+}
+function closePwdModal(){ document.getElementById('pwdModal').classList.remove('open'); }
+function closePwdModalBg(e){ if(e.target===e.currentTarget) closePwdModal(); }
+function showPwdMsg(text,ok){
+  var msg=document.getElementById('pwd-msg');
+  msg.textContent=text;
+  msg.style.color=ok?'var(--navy-600)':'var(--red-600)';
+  msg.style.display='block';
+}
+async function changePassword(){
+  var p1=document.getElementById('pwd-new').value;
+  var p2=document.getElementById('pwd-confirm').value;
+  if(p1.length<6){ showPwdMsg('密碼至少需要 6 個字元',false); return; }
+  if(p1!==p2){ showPwdMsg('兩次輸入的密碼不一致',false); return; }
+  var btn=document.getElementById('pwd-submit');
+  btn.disabled=true; btn.textContent='更新中…';
+  var res=await _supabase.auth.updateUser({password:p1});
+  btn.disabled=false; btn.textContent='更新密碼';
+  if(res.error){ showPwdMsg('更新失敗：'+res.error.message,false); return; }
+  showPwdMsg('✓ 密碼已更新',true);
+  setTimeout(closePwdModal,1200);
 }
 
 
@@ -797,7 +849,7 @@ async function loadConsensusMeter(watchlistItems){
     (m.crypto||[]).forEach(function(s){ dailyData[s.symbol] = s; });
     signals = d1.signals || [];
 
-    var r2 = await fetch('/data/accumulated.json');
+    var r2 = await fetch('/data/accumulated.json?t='+Date.now());
     var d2 = await r2.json();
     accResearch = d2.research || [];
     accEarnings = d2.earnings || [];
@@ -1090,7 +1142,7 @@ async function loadEventTracker(watchlistItems){
     var aiPredictions = d.event_predictions || [];
     var todayStr = d.date || '';
 
-    var res2 = await fetch('/data/accumulated.json');
+    var res2 = await fetch('/data/accumulated.json?t='+Date.now());
     var acc = await res2.json();
     var predHistory = acc.prediction_history || [];
 
@@ -1300,7 +1352,7 @@ async function analyzeTarget(e, ticker, category, id){
     return;
   }
 
-  // ── 當日 cache 檢查（不打 API 也要扣 1 點，符合產品邏輯）──
+  // ── 當日 cache 檢查（命中當日快取：不打 API、不扣點）──
   var today = new Date().toISOString().slice(0,10);
   var cacheCheck;
   try {
@@ -1328,9 +1380,14 @@ async function analyzeTarget(e, ticker, category, id){
     return;
   }
 
-  // ── 未命中當日 cache：扣點 + 打 API ──
-  var ok = await deductCredits(1);
-  if(!ok){ btn.disabled=false; return; }
+  // ── 未命中當日 cache：先確認點數足夠（不先扣，待分析成功才扣，避免失敗仍扣點）──
+  var balance = (currentUser.subCredits||0) + (currentUser.purCredits||0);
+  if(balance < 1){
+    if(confirm('點數不足（剩餘 '+balance+' 點，需要 1 點）\n\n前往購點頁面？')){
+      window.location.href='/pages/credits.html';
+    }
+    return;
+  }
   btn.textContent = '分析中...';
   btn.disabled = true;
   resultEl.style.display = 'block';
@@ -1369,6 +1426,8 @@ async function analyzeTarget(e, ticker, category, id){
         .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--gray-800);">$1</strong>')
         .replace(/^- (.*?)$/gm, '<div style="padding-left:10px;margin:3px 0;">• $1</div>')
         .replace(/\n/g, '<br>');
+      // 分析成功才扣點（API 失敗或連線錯誤皆不扣）
+      await deductCredits(1);
       resultEl.innerHTML = md;
       resultEl.style.display = 'block';
       btn.textContent = '🔼 收起';

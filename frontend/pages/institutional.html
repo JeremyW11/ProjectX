@@ -742,7 +742,7 @@ function checkDataStaleness(dateStr){var today=new Intl.DateTimeFormat('en-CA',{
 
 async function loadData(){
   try{
-    var res=await fetch('../data/daily.json');
+    var res=await fetch('../data/daily.json?t='+Date.now());
     var data=await res.json();
     checkDataStaleness(data.date);
 
@@ -751,7 +751,7 @@ async function loadData(){
     // try accumulated.json for more data (covers full current month)
     var accCoverage='';
     try{
-      var accRes=await fetch('../data/accumulated.json');
+      var accRes=await fetch('../data/accumulated.json?t='+Date.now());
       if(accRes.ok){
         var acc=await accRes.json();
         if(acc.research&&acc.research.length>0) inst.research=acc.research;

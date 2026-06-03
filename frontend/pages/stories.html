@@ -211,7 +211,7 @@ async function loadStories(){
   if(!listEl) return;
   var stories=[];
   try{
-    var res=await fetch('/data/accumulated.json');
+    var res=await fetch('/data/accumulated.json?t='+Date.now());
     var acc=await res.json();
     stories=Array.isArray(acc.tracked_stories)?acc.tracked_stories:[];
   }catch(e){ stories=[]; }
