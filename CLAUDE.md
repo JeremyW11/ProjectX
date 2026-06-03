@@ -90,6 +90,7 @@ server.js          (Express server, runs /brief endpoint that generates daily.js
 - **Prefetch TW/US rebalance**: `/morning` skill's 16 queries are ~1/16 TW-specific (rest US/global). Suggest cutting 1 of the 3 overlapping US-equity queries (#10/11/12) and adding 2 TW-specific (大盤外資法人 + 台股財報法說/題材). Not yet done.
 - **"Since last trigger" data window logic**: Shelved (user is concerned about content sparsity).
 - **TWSE primary/fallback inversion**: If TWSE stays broken, swap order so Yahoo is primary.
+- **Market data-source gaps** (frontend `market.html` falls back to `--` correctly; needs backend fetch in `generate_brief.js`): (1) **VIX** — no field in daily.json at all (line ~827 hardcoded `--`). (2) **投信買賣超** — `tw_market_summary` only has `trade_value`+`foreign_net`, no 投信 (line ~843 hardcoded `--`). (3) **台股成交量** — `tw_market_summary.trade_value` is `"--"` from backend though tw_news text contains it (e.g. 「成交值1.607兆」). (4) **crypto high/low** — coingecko fetch doesn't include当日 high/low. Verified 2026-06-03 against live daily.json. Requires backend change + paid trigger to validate.
 
 ## Code style notes
 

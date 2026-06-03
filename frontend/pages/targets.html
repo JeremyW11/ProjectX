@@ -365,6 +365,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <span style="font-size:12px;color:var(--gray-400);font-weight:400;" id="wl-user-email"></span>
       </div>
       <div class="wl-actions">
+        <button class="btn-outline-sm" onclick="openProfileModal()">修改資料</button>
         <button class="btn-outline-sm" onclick="openPwdModal()">修改密碼</button>
         <button class="btn-outline-sm" onclick="signOutUser()" style="color:var(--red-600);border-color:var(--red-100);">登出</button>
       </div>
@@ -566,6 +567,31 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   </div>
 </div>
 
+<div class="modal-overlay" id="profileModal" onclick="closeProfileModalBg(event)">
+  <div class="modal">
+    <button class="m-close" onclick="closeProfileModal()">✕</button>
+    <div class="modal-header">
+      <div class="modal-title">修改基本資料</div>
+    </div>
+    <div class="modal-body">
+      <div class="m-group">
+        <label class="m-label">姓名／暱稱</label>
+        <input class="m-input" type="text" placeholder="你的稱呼" id="pf-name">
+      </div>
+      <div class="m-group">
+        <label class="m-label">手機號碼</label>
+        <input class="m-input" type="tel" placeholder="例如 0912345678" id="pf-phone">
+      </div>
+      <div class="m-group">
+        <label class="m-label">生日</label>
+        <input class="m-input" type="date" id="pf-birthday">
+      </div>
+      <div id="pf-msg" style="font-size:12.5px;margin-bottom:12px;display:none;"></div>
+      <button class="m-submit" onclick="saveProfile()" id="pf-submit">儲存</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // 共用 daily.json 載入（單次抓取，全頁快取）
 var _dailyPromise = null;
@@ -624,12 +650,15 @@ function setAuthState(user){
 }
 
 async function checkProStatus(user, gateEl, viewEl){
-  var result = await _supabase.from('profiles').select('is_pro,subscription_credits,purchased_credits,credits_reset_date').eq('id', user.id).single();
+  var result = await _supabase.from('profiles').select('is_pro,subscription_credits,purchased_credits,credits_reset_date,display_name,phone,birthday').eq('id', user.id).single();
   var isPro = result.data && result.data.is_pro === true;
   currentUser.isPro = isPro;
   currentUser.subCredits = (result.data && result.data.subscription_credits) || 0;
   currentUser.purCredits = (result.data && result.data.purchased_credits) || 0;
   currentUser.resetDate = (result.data && result.data.credits_reset_date) || null;
+  currentUser.displayName = (result.data && result.data.display_name) || '';
+  currentUser.phone = (result.data && result.data.phone) || '';
+  currentUser.birthday = (result.data && result.data.birthday) || '';
 
   // 訂閱點數到期自動重置
   if(isPro && currentUser.resetDate){
@@ -698,6 +727,39 @@ async function changePassword(){
   if(res.error){ showPwdMsg('更新失敗：'+res.error.message,false); return; }
   showPwdMsg('✓ 密碼已更新',true);
   setTimeout(closePwdModal,1200);
+}
+
+// ── 修改基本資料 ───────────────────────────────────
+function openProfileModal(){
+  document.getElementById('pf-name').value = (currentUser && currentUser.displayName) || '';
+  document.getElementById('pf-phone').value = (currentUser && currentUser.phone) || '';
+  document.getElementById('pf-birthday').value = (currentUser && currentUser.birthday) || '';
+  var msg=document.getElementById('pf-msg'); msg.style.display='none';
+  document.getElementById('profileModal').classList.add('open');
+}
+function closeProfileModal(){ document.getElementById('profileModal').classList.remove('open'); }
+function closeProfileModalBg(e){ if(e.target===e.currentTarget) closeProfileModal(); }
+function showProfileMsg(text,ok){
+  var msg=document.getElementById('pf-msg');
+  msg.textContent=text;
+  msg.style.color=ok?'var(--navy-600)':'var(--red-600)';
+  msg.style.display='block';
+}
+async function saveProfile(){
+  if(!currentUser){ showProfileMsg('請先登入',false); return; }
+  var name=document.getElementById('pf-name').value.trim();
+  var phone=document.getElementById('pf-phone').value.trim();
+  var birthday=document.getElementById('pf-birthday').value;
+  if(!name){ showProfileMsg('請輸入姓名／暱稱',false); return; }
+  if(phone && !/^[0-9+\-() ]{6,20}$/.test(phone)){ showProfileMsg('手機號碼格式不正確',false); return; }
+  var btn=document.getElementById('pf-submit');
+  btn.disabled=true; btn.textContent='儲存中…';
+  var res=await _supabase.from('profiles').update({display_name:name,phone:phone,birthday:birthday||null}).eq('id',currentUser.id);
+  btn.disabled=false; btn.textContent='儲存';
+  if(res.error){ showProfileMsg('儲存失敗：'+res.error.message,false); return; }
+  currentUser.displayName=name; currentUser.phone=phone; currentUser.birthday=birthday;
+  showProfileMsg('✓ 資料已更新',true);
+  setTimeout(closeProfileModal,1200);
 }
 
 
