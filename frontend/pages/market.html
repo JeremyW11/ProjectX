@@ -610,79 +610,17 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
           <!-- BTC -->
           <div class="coin-panel active" id="coin-btc">
-            <div class="crypto-metric-grid">
-              <div class="cm-card">
-                <div class="cm-label">MARKET CAP</div>
-                <div class="cm-val">$2.03T</div>
-                <div class="cm-sub">USD</div>
-              </div>
-              <div class="cm-card">
-                <div class="cm-label">24H VOLUME</div>
-                <div class="cm-val">$48.2B</div>
-                <div class="cm-sub">USD</div>
-              </div>
-              <div class="cm-card">
-                <div class="cm-label">FUNDING RATE</div>
-                <div class="cm-val">+0.010%</div>
-                <div class="cm-sub">8H · Binance</div>
-                <div class="fr-bar-wrap">
-                  <div class="fr-bar-track">
-                    <div class="fr-bar-center"></div>
-                    <div class="fr-bar-fill" style="left:50%;width:18%;background:var(--green-600);"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="cm-card">
-                <div class="cm-label">LONG/SHORT RATIO</div>
-                <div class="cm-val">1.24</div>
-                <div class="cm-sub">多/空比 · Binance</div>
-                <div class="cm-badge s-bull">多方主導</div>
-              </div>
-              <div class="cm-card">
-                <div class="cm-label">ETF 今日淨流入</div>
-                <div class="cm-val">+$1.3B</div>
-                <div class="cm-sub">IBIT $820M · FBTC $310M</div>
-                <div class="cm-badge s-bull" style="margin-top:4px">歷史新高</div>
-              </div>
-              <div class="cm-card">
-                <div class="cm-label">鏈上清算量</div>
-                <div class="cm-val">$32M</div>
-                <div class="cm-sub">24H · 多空各半</div>
-                <div class="cm-badge s-neut" style="margin-top:4px;background:var(--amber-100);color:var(--amber-600);">低位</div>
-              </div>
-            </div>
-
-            <!-- Mini bar chart -->
-            <div style="padding:0 16px 16px;">
-              <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">7D PRICE TREND</div>
-              <div class="mini-chart" id="btc-chart"></div>
-            </div>
+            <div class="crypto-metric-grid" id="cm-grid-btc"></div>
           </div>
 
           <!-- ETH -->
           <div class="coin-panel" id="coin-eth">
-            <div class="crypto-metric-grid">
-              <div class="cm-card"><div class="cm-label">MARKET CAP</div><div class="cm-val">$386B</div><div class="cm-sub">USD</div></div>
-              <div class="cm-card"><div class="cm-label">24H VOLUME</div><div class="cm-val">$18.4B</div><div class="cm-sub">USD</div></div>
-              <div class="cm-card"><div class="cm-label">FUNDING RATE</div><div class="cm-val">+0.008%</div><div class="cm-sub">8H · Binance</div><div class="fr-bar-wrap"><div class="fr-bar-track"><div class="fr-bar-center"></div><div class="fr-bar-fill" style="left:50%;width:14%;background:var(--green-600);"></div></div></div></div>
-              <div class="cm-card"><div class="cm-label">STAKING RATE</div><div class="cm-val">28.3%</div><div class="cm-sub">ETH質押率</div><div class="cm-badge s-bull" style="margin-top:4px">創新高</div></div>
-              <div class="cm-card"><div class="cm-label">GAS FEE (Blob)</div><div class="cm-val">0.003</div><div class="cm-sub">Gwei · 坎昆升級後新低</div></div>
-              <div class="cm-card"><div class="cm-label">L2 日活交易</div><div class="cm-val">4.2M</div><div class="cm-sub">Arbitrum + Base 合計</div><div class="cm-badge s-bull" style="margin-top:4px">創新高</div></div>
-            </div>
-            <div style="padding:0 16px 16px;"><div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">7D PRICE TREND</div><div class="mini-chart" id="eth-chart"></div></div>
+            <div class="crypto-metric-grid" id="cm-grid-eth"></div>
           </div>
 
           <!-- SOL -->
           <div class="coin-panel" id="coin-sol">
-            <div class="crypto-metric-grid">
-              <div class="cm-card"><div class="cm-label">MARKET CAP</div><div class="cm-val">$78.2B</div><div class="cm-sub">USD</div></div>
-              <div class="cm-card"><div class="cm-label">24H VOLUME</div><div class="cm-val">$5.1B</div><div class="cm-sub">USD</div></div>
-              <div class="cm-card"><div class="cm-label">FUNDING RATE</div><div class="cm-val">−0.004%</div><div class="cm-sub">8H · Binance</div><div class="fr-bar-wrap"><div class="fr-bar-track"><div class="fr-bar-center"></div><div class="fr-bar-fill" style="right:50%;width:8%;background:var(--red-600);"></div></div></div></div>
-              <div class="cm-card"><div class="cm-label">TPS (Peak)</div><div class="cm-val">6,540</div><div class="cm-sub">網路吞吐量</div></div>
-              <div class="cm-card"><div class="cm-label">DEX 交易量</div><div class="cm-val">$2.8B</div><div class="cm-sub">24H · Raydium主導</div></div>
-              <div class="cm-card"><div class="cm-label">LONG/SHORT</div><div class="cm-val">0.94</div><div class="cm-sub">空方略佔優</div><div class="cm-badge s-bear" style="margin-top:4px;background:var(--red-100);color:var(--red-700);">偏空</div></div>
-            </div>
-            <div style="padding:0 16px 16px;"><div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">7D PRICE TREND</div><div class="mini-chart" id="sol-chart"></div></div>
+            <div class="crypto-metric-grid" id="cm-grid-sol"></div>
           </div>
         </div>
       </div>
@@ -886,6 +824,43 @@ async function loadData(){
       renderNewsList('us-news-list','us-news-count',data.market.us_news,'b-us-n','US EQUITY');
       renderNewsList('crypto-news-list','crypto-news-count',data.market.crypto_news,'b-cr-n','CRYPTO');
     }
+
+    // Crypto summary cards + per-coin metric grids (real data only)
+    var cryptoMap={};
+    (data.market&&Array.isArray(data.market.crypto)?data.market.crypto:[]).forEach(function(c){cryptoMap[c.symbol]=c;});
+    function setSumCard(sym,priceId,chgId){
+      var c=cryptoMap[sym];
+      var pEl=document.getElementById(priceId), chEl=document.getElementById(chgId);
+      if(pEl) pEl.textContent=c?c.price:'--';
+      if(chEl){
+        var up=c&&c.dir==='up', dn=c&&c.dir==='down';
+        chEl.className='sum-chg '+(up?'up':dn?'dn':'flat');
+        chEl.textContent=c?((up?'▲ ':dn?'▼ ':'')+(c.change||'--')):'--';
+      }
+    }
+    setSumCard('BTC','btc-price','btc-chg');
+    setSumCard('ETH','eth-price','eth-chg');
+    setSumCard('SOL','sol-price','sol-chg');
+    function cmCard(label,val,sub){
+      return '<div class="cm-card"><div class="cm-label">'+label+'</div><div class="cm-val">'+(val||'--')+'</div>'+(sub?'<div class="cm-sub">'+escapeHtml(sub)+'</div>':'')+'</div>';
+    }
+    function buildCoinGrid(gridId,sym,withFunding){
+      var el=document.getElementById(gridId); if(!el) return;
+      var c=cryptoMap[sym];
+      if(!c){ el.innerHTML='<div class="cm-card"><div class="cm-val">--</div><div class="cm-sub">暫無資料</div></div>'; return; }
+      var cards=[];
+      cards.push(cmCard('MARKET CAP',c.market_cap,'USD'));
+      cards.push(cmCard('24H VOLUME',c.volume,'USD'));
+      cards.push(cmCard('24H HIGH',c.high,'USD'));
+      cards.push(cmCard('24H LOW',c.low,'USD'));
+      if(withFunding&&cg&&cg.funding_rate&&cg.funding_rate!=='搜尋補充') cards.push(cmCard('FUNDING RATE',cg.funding_rate,'8H · Binance'));
+      if(withFunding&&cg&&cg.long_short_ratio&&cg.long_short_ratio!=='搜尋補充') cards.push(cmCard('LONG/SHORT RATIO',cg.long_short_ratio,'多/空比 · Binance'));
+      if(c.support||c.resistance) cards.push(cmCard('支撐 / 壓力',(c.support||'--')+' / '+(c.resistance||'--'),c.tech_note||''));
+      el.innerHTML=cards.join('');
+    }
+    buildCoinGrid('cm-grid-btc','BTC',true);
+    buildCoinGrid('cm-grid-eth','ETH',false);
+    buildCoinGrid('cm-grid-sol','SOL',false);
 
   }catch(e){console.error('loadData error:',e);}
 }
