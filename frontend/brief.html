@@ -844,6 +844,45 @@ img { display: block; max-width: 100%; }
   .header-nav { display: none; }
 }
 #stale-banner{display:none;align-items:center;justify-content:center;gap:6px;background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 24px;font-size:12px;color:#92400e;font-family:var(--font-zh);position:fixed;top:56px;left:0;right:0;z-index:99;}
+
+/* ============================================================ EXPANDABLE CARD */
+.brief-item.has-expand { cursor: pointer; }
+.brief-subtag { font-size: 10.5px; color: var(--text-muted); font-family: var(--font-zh); }
+.brief-source { font-size: 10.5px; color: var(--text-muted); font-family: var(--font-zh); }
+.brief-caret {
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-left: 6px;
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.18s;
+}
+.brief-item.open .brief-caret { transform: rotate(180deg); }
+.brief-expand {
+  display: none;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 10px;
+  padding-top: 11px;
+  border-top: 1px dashed var(--border-mid);
+}
+.brief-item.open .brief-expand { display: flex; }
+.expand-row {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-family: var(--font-zh);
+}
+.expand-label {
+  font-weight: 600;
+  color: var(--navy-700);
+  font-size: 11px;
+  font-family: var(--font-en);
+  letter-spacing: 0.04em;
+  margin-right: 7px;
+}
+.expand-label.expand-pos { color: var(--green-600); }
+.expand-label.expand-neg { color: var(--red-600); }
 </style>
   <script src="/shared/nav.js"></script>
 </head>
@@ -975,6 +1014,24 @@ function renderImpactDots(score) {
   return h;
 }
 
+function normSentiment(item) {
+  const raw = item.sentiment || item.tag_type || '';
+  if (raw === 'bull' || raw === '利多' || raw === '看多' || raw === '偏多') return 'bull';
+  if (raw === 'bear' || raw === '利空' || raw === '看空' || raw === '偏空') return 'bear';
+  return 'neutral';
+}
+
+function buildExpand(item) {
+  const rows = [];
+  if (item.expand_analysis) rows.push('<div class="expand-row"><span class="expand-label">分析</span>' + item.expand_analysis + '</div>');
+  if (item.expand_impact_pos) rows.push('<div class="expand-row"><span class="expand-label expand-pos">利多</span>' + item.expand_impact_pos + '</div>');
+  if (item.expand_impact_neg) rows.push('<div class="expand-row"><span class="expand-label expand-neg">利空</span>' + item.expand_impact_neg + '</div>');
+  if (item.expand_tickers) rows.push('<div class="expand-row"><span class="expand-label">相關標的</span>' + item.expand_tickers + '</div>');
+  if (item.expand_action) rows.push('<div class="expand-row"><span class="expand-label">操作</span>' + item.expand_action + '</div>');
+  if (item.expand_watch) rows.push('<div class="expand-row"><span class="expand-label">觀察</span>' + item.expand_watch + '</div>');
+  return rows.join('');
+}
+
 function renderBriefList(items) {
   if (!items || !items.length) return '<div style="padding:20px;text-align:center;color:var(--gray-400);">暫無數據</div>';
   let html = '', lastType = '';
@@ -982,20 +1039,28 @@ function renderBriefList(items) {
     const type = item.type || 'macro';
     if (type !== lastType) { html += '<div class="track-divider">' + (dividerMap[type] || type) + '</div>'; lastType = type; }
     const tickers = (item.tickers || []).map(t => '<span class="ticker-chip">' + t + '</span>').join('');
-    const sentiment = item.sentiment || (item.tag_type === 'bull' ? 'bull' : item.tag_type === 'bear' ? 'bear' : 'neutral');
+    const sentiment = normSentiment(item);
     const sentLabel = sentiment === 'bull' ? '利多' : sentiment === 'bear' ? '利空' : '中性';
-    const sentClass = sentiment === 'bull' ? 'sent-bull' : sentiment === 'bear' ? 'sent-bear' : 'sent-neutral';
+    const sentClass = sentiment === 'bull' ? 'sent-bull' : sentiment === 'bear' ? 'sent-bear' : 'sent-neut';
     const score = item.impact_score || 3;
-    html += '<div class="brief-item" data-type="' + type + '">' +
+    const badgeLabel = badgeLabelMap[type] || type;
+    const subTag = (item.tag && item.tag !== badgeLabel) ? '<span class="brief-subtag">· ' + item.tag + '</span>' : '';
+    const source = item.source ? '<span class="brief-source">· ' + item.source + '</span>' : '';
+    const expandHtml = buildExpand(item);
+    const hasExpand = !!expandHtml;
+    html += '<div class="brief-item' + (hasExpand ? ' has-expand' : '') + '" data-type="' + type + '">' +
       '<div class="brief-item-left">' +
         '<div class="brief-item-meta">' +
-          '<span class="brief-track-badge ' + (badgeMap[type] || 'badge-macro') + '">' + (badgeLabelMap[type] || type) + '</span>' +
+          '<span class="brief-track-badge ' + (badgeMap[type] || 'badge-macro') + '">' + badgeLabel + '</span>' +
+          subTag +
           '<span class="brief-time">' + (item.time || '') + '</span>' +
           '<span class="brief-sentiment ' + sentClass + '">' + sentLabel + '</span>' +
+          source +
         '</div>' +
-        '<div class="brief-headline">' + (item.text || item.headline || '') + '</div>' +
+        '<div class="brief-headline">' + (item.text || item.headline || '') + (hasExpand ? '<span class="brief-caret">▼</span>' : '') + '</div>' +
         '<div class="brief-body">' + (item.body || item.detail || item.impact || '') + '</div>' +
         (tickers ? '<div class="brief-tickers">' + tickers + '</div>' : '') +
+        (hasExpand ? '<div class="brief-expand">' + expandHtml + '</div>' : '') +
       '</div>' +
       '<div class="brief-item-right"><div>' +
         '<div class="impact-label">IMPACT</div>' +
@@ -1056,9 +1121,13 @@ async function loadData() {
     if (timeEl) timeEl.textContent = '更新於 '+(data.generated_at||data.date);
     const mktEl = document.getElementById('market-bar');
     if (mktEl) mktEl.innerHTML = renderMarketBar(data.tickers);
+    const mk = data.market || {};
     const allItems = [
-      ...(data.macro||[]).map(i=>({...i,type:i.type||'macro'})),
-      ...(data.industry||[]).map(i=>({...i,type:i.type||'industry'})),
+      ...(data.macro||[]).map(i=>({...i,type:'macro'})),
+      ...(mk.crypto_news||[]).map(i=>({...i,type:'crypto'})),
+      ...(mk.us_news||[]).map(i=>({...i,type:'us'})),
+      ...(mk.tw_news||[]).map(i=>({...i,type:'tw'})),
+      ...(data.industry||[]).map(i=>({...i,type:'industry'})),
     ];
     const briefEl = document.getElementById('brief-list');
     if (briefEl) briefEl.innerHTML = renderBriefList(allItems);
@@ -1068,6 +1137,12 @@ async function loadData() {
     if (calEl && data.calendar) calEl.innerHTML = renderCalendar(data.calendar);
   } catch(e) { console.error('loadData error:', e); }
 }
+
+document.getElementById('brief-list').addEventListener('click', function(e){
+  const item = e.target.closest('.brief-item.has-expand');
+  if (item) item.classList.toggle('open');
+});
+
 loadData();
 </script>
 
