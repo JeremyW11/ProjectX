@@ -754,9 +754,10 @@ async function saveProfile(){
   if(phone && !/^[0-9+\-() ]{6,20}$/.test(phone)){ showProfileMsg('手機號碼格式不正確',false); return; }
   var btn=document.getElementById('pf-submit');
   btn.disabled=true; btn.textContent='儲存中…';
-  var res=await _supabase.from('profiles').update({display_name:name,phone:phone,birthday:birthday||null}).eq('id',currentUser.id);
+  var res=await _supabase.from('profiles').update({display_name:name,phone:phone,birthday:birthday||null}).eq('id',currentUser.id).select();
   btn.disabled=false; btn.textContent='儲存';
   if(res.error){ showProfileMsg('儲存失敗：'+res.error.message,false); return; }
+  if(!res.data || res.data.length===0){ showProfileMsg('儲存失敗：無更新權限，請確認資料庫 RLS 設定',false); return; }
   currentUser.displayName=name; currentUser.phone=phone; currentUser.birthday=birthday;
   showProfileMsg('✓ 資料已更新',true);
   setTimeout(closeProfileModal,1200);
