@@ -811,6 +811,7 @@ async function loadData(){
     var ndx=getTicker(tickers,'NASDAQ');
     var twx=getTicker(tickers,'台股加權');
     var fg=data.sentiment&&data.sentiment.fear_greed?data.sentiment.fear_greed:null;
+    var vix=data.sentiment&&data.sentiment.vix?data.sentiment.vix:null;
     var cg=data.sentiment&&data.sentiment.coinglass?data.sentiment.coinglass:null;
     var ts=data.tw_market_summary||{};
     var d=new Date(data.date);
@@ -824,7 +825,7 @@ async function loadData(){
       sumCard('SPX','Index','S&P 500',spx?spx.value:'--',spx?spx.change:'--',spx?spx.dir:'flat','前收')+
       sumCard('NDX','Index','NASDAQ 100',ndx?ndx.value:'--',ndx?ndx.change:'--',ndx?ndx.dir:'flat','前收')+
       '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">F&G</span><span class="sum-category">Sentiment</span></div><div class="sum-name">恐懼貪婪指數</div><div class="sum-price" style="color:'+(fg?parseInt(fg.value)>=50?'var(--green-600)':'var(--red-600)':'var(--gray-400)')+';">'+(fg?fg.value:'--')+'</div><div class="sum-row"><span class="sum-chg '+(fg?parseInt(fg.value)>=50?'up':'dn':'flat')+'">'+(fg?fg.label:'--')+'</span></div></div>'+
-      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">VIX</span><span class="sum-category">Volatility</span></div><div class="sum-name">恐慌指數</div><div class="sum-price">--</div><div class="sum-row"><span class="sum-chg flat">CBOE</span></div></div>';
+      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">VIX</span><span class="sum-category">Volatility</span></div><div class="sum-name">恐慌指數</div><div class="sum-price">'+(vix?vix.value:'--')+'</div><div class="sum-row"><span class="sum-chg '+(vix?vix.dir==='up'?'up':vix.dir==='down'?'dn':'flat':'flat')+'">'+(vix?vix.change:'CBOE')+'</span></div></div>';
 
     // US stocks
     var usTbody=document.getElementById('us-stocks-tbody');
@@ -840,7 +841,7 @@ async function loadData(){
       sumCard('TAIEX','加權指數','台灣加權指數',twx?twx.value:'--',twx?twx.change:'--',twx?twx.dir:'flat','前收')+
       '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">成交量</span><span class="sum-category">全市場</span></div><div class="sum-name">今日成交量</div><div class="sum-price" style="font-size:16px;">'+(ts.trade_value||'--')+'</div><div class="sum-row"><span class="sum-chg flat">TWD TWSE</span></div></div>'+
       '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">外資</span><span class="sum-category">買賣超</span></div><div class="sum-name">外資買賣超</div><div class="sum-price" style="font-size:16px;">'+(ts.foreign_net||'--')+'</div><div class="sum-row"><span class="sum-chg flat">三大法人</span></div></div>'+
-      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">投信</span><span class="sum-category">買賣超</span></div><div class="sum-name">投信動向</div><div class="sum-price">--</div><div class="sum-row"><span class="sum-chg flat">億元 TWD</span></div></div>';
+      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">投信</span><span class="sum-category">買賣超</span></div><div class="sum-name">投信動向</div><div class="sum-price" style="font-size:16px;">'+(ts.trust_net||'--')+'</div><div class="sum-row"><span class="sum-chg flat">三大法人</span></div></div>';
 
     // TW stocks
     var twTbody=document.getElementById('tw-stocks-tbody');
