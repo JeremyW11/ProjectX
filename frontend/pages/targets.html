@@ -660,17 +660,15 @@ async function checkProStatus(user, gateEl, viewEl){
   currentUser.phone = (result.data && result.data.phone) || '';
   currentUser.birthday = (result.data && result.data.birthday) || '';
 
-  // 訂閱點數到期自動重置
+  // 訂閱點數到期自動重置（伺服器端 RPC 把關，client 不可自行改點數）
   if(isPro && currentUser.resetDate){
     var resetDate=new Date(currentUser.resetDate+'T00:00:00');
     var today=new Date(); today.setHours(0,0,0,0);
     if(today>=resetDate){
-      var nextReset=new Date(today); nextReset.setDate(nextReset.getDate()+30);
-      var nextResetStr=nextReset.toISOString().split('T')[0];
-      var resetRes=await _supabase.from('profiles').update({subscription_credits:30,credits_reset_date:nextResetStr}).eq('id',user.id);
-      if(!resetRes.error){
-        currentUser.subCredits=30;
-        currentUser.resetDate=nextResetStr;
+      var rpc=await _supabase.rpc('reset_monthly_credits');
+      if(!rpc.error && rpc.data){
+        currentUser.subCredits=rpc.data.subscription_credits;
+        currentUser.resetDate=rpc.data.credits_reset_date;
       }
     }
   }
