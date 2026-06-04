@@ -282,6 +282,18 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .hub-cat{display:none;}
 .hub-cat.active{display:block;}
 .sub-label{font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-en);margin:4px 0 14px;}
+/* ── PulseAI 一致橫幅卡 ── */
+.ai-card{display:flex;align-items:center;justify-content:space-between;gap:14px;background:linear-gradient(135deg,var(--navy-800),var(--navy-600));border-radius:var(--r-lg);padding:18px 20px;color:#fff;margin-bottom:14px;text-decoration:none;transition:opacity .15s;}
+.ai-card:hover{opacity:.9;}
+.ai-card .ai-t{font-size:15px;font-weight:600;color:#fff;font-family:var(--font-zh);}
+.ai-card .ai-d{font-size:12px;color:rgba(255,255,255,.6);margin-top:3px;font-family:var(--font-zh);}
+.ai-go{font-size:12px;color:rgba(255,255,255,.85);font-family:var(--font-en);white-space:nowrap;border:1px solid rgba(255,255,255,.25);border-radius:6px;padding:6px 12px;}
+/* ── 自選投資全螢幕視圖 ── */
+.watchlist-fullview{display:none;}
+#targets-view.show-watchlist .hub-layout{display:none;}
+#targets-view.show-watchlist .watchlist-fullview{display:block;}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--gray-500);font-family:var(--font-zh);text-decoration:none;padding:6px 0;}
+.back-link:hover{color:var(--navy-600);}
 @media(max-width:860px){
   .hub-layout{display:block;}
   .hub-side{position:static;width:auto;display:flex;gap:6px;overflow-x:auto;padding:10px;margin-bottom:16px;-webkit-overflow-scrolling:touch;}
@@ -512,84 +524,28 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <section class="hub-cat" id="cat-pulse">
       <div class="sub-label">PulseAI 智能工具</div>
 
-      <!-- 自選投資 -->
-      <div class="section-block" style="margin-bottom:16px;">
-        <div class="section-block-header">
-          <div class="sbh-title">⭐ 我的自選標的 <span class="sbh-title-en">WATCHLIST</span></div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <a href="/pages/credits.html" id="credits-display" title="查看點數詳情" style="font-size:11px;color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:20px;font-family:var(--font-en);text-decoration:none;cursor:pointer;">⚡ — 點</a>
-            <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
-          </div>
+      <a href="#watchlist" class="ai-card" style="background:linear-gradient(135deg,var(--navy-700),var(--navy-500));">
+        <div>
+          <div class="ai-t">⭐ PulseAI 自選投資</div>
+          <div class="ai-d">自選標的即時報價、共識溫度計與組合風險雷達一站掌握</div>
         </div>
-        <div style="padding:14px 20px;">
-          <!-- Category tabs -->
-          <div class="cat-tabs">
-            <button class="cat-tab active" onclick="filterCat('all',this)">全部 (8)</button>
-            <button class="cat-tab" onclick="filterCat('us',this)">美股 (3)</button>
-            <button class="cat-tab" onclick="filterCat('tw',this)">台股 (2)</button>
-            <button class="cat-tab" onclick="filterCat('crypto',this)">加密 (3)</button>
-          </div>
-          <div class="cat-tabs" id="cat-tabs-dynamic" style="display:none;">
-            <button class="cat-tab active" onclick="filterCat('all',this)">全部 <span id="cnt-all">0</span></button>
-            <button class="cat-tab" onclick="filterCat('us',this)">美股 <span id="cnt-us">0</span></button>
-            <button class="cat-tab" onclick="filterCat('tw',this)">台股 <span id="cnt-tw">0</span></button>
-            <button class="cat-tab" onclick="filterCat('crypto',this)">加密 <span id="cnt-crypto">0</span></button>
-          </div>
-          <div class="target-grid" id="target-grid" style="margin-bottom:0;"></div>
-        </div>
-      </div>
-
-      <!-- 共識溫度計 -->
-      <div class="section-block" style="margin-bottom:16px;">
-        <div class="section-block-header">
-          <div class="sbh-title">共識溫度計 <span class="sbh-title-en">CONSENSUS METER</span></div>
-          <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">自選標的</span>
-        </div>
-        <div id="consensus-list" style="padding:16px 20px;">
-          <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
-        </div>
-      </div>
-
-      <!-- 組合風險雷達 -->
-      <div class="section-block" style="margin-bottom:16px;">
-        <div class="section-block-header">
-          <div class="sbh-title">組合風險雷達 <span class="sbh-title-en">RISK RADAR</span></div>
-          <span class="sbh-badge" id="risk-overall" style="background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);">評估中</span>
-        </div>
-        <div id="risk-content" style="padding:16px 20px;">
-          <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
-        </div>
-      </div>
-
-      <!-- 推演沙盤 -->
-      <a href="/pages/scenario.html" style="display:block;text-decoration:none;margin-bottom:12px;">
-        <div style="background:linear-gradient(135deg,var(--navy-800) 0%,var(--navy-600) 100%);border-radius:var(--r-lg);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;transition:opacity .15s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
-          <div style="display:flex;align-items:center;gap:14px;">
-            <div style="font-size:26px;">🤖</div>
-            <div>
-              <div style="font-size:14px;font-weight:600;color:var(--white);font-family:var(--font-zh);">PulseAI 推演沙盤</div>
-              <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:2px;font-family:var(--font-zh);">輸入問題，Claude 生成三情境機率推演（含我的推演紀錄）</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <a href="/pages/my-scenarios.html" onclick="event.stopPropagation()" style="font-size:12px;color:rgba(255,255,255,.6);font-family:var(--font-en);padding:5px 10px;border:1px solid rgba(255,255,255,.2);border-radius:6px;text-decoration:none;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,.6)'">我的推演</a>
-            <span style="font-size:13px;color:rgba(255,255,255,.5);">→</span>
-          </div>
-        </div>
+        <span class="ai-go">管理自選 →</span>
       </a>
 
-      <!-- 互動圖表 -->
-      <a href="/pages/chart.html" style="display:block;text-decoration:none;margin-bottom:12px;">
-        <div style="background:linear-gradient(135deg,var(--navy-700) 0%,var(--navy-500) 100%);border-radius:var(--r-lg);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;transition:opacity .15s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
-          <div style="display:flex;align-items:center;gap:14px;">
-            <div style="font-size:26px;">📈</div>
-            <div>
-              <div style="font-size:14px;font-weight:600;color:var(--white);font-family:var(--font-zh);">PulseAI 互動圖表</div>
-              <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:2px;font-family:var(--font-zh);">AI 捕捉市場脈動，自動標出支撐與壓力區間</div>
-            </div>
-          </div>
-          <span style="font-size:13px;color:rgba(255,255,255,.5);">→</span>
+      <a href="/pages/scenario.html" class="ai-card">
+        <div>
+          <div class="ai-t">🤖 PulseAI 推演沙盤</div>
+          <div class="ai-d">輸入市場問題，AI 生成三情境機率推演與行動建議</div>
         </div>
+        <span class="ai-go">開始推演 →</span>
+      </a>
+
+      <a href="/pages/chart.html" class="ai-card" style="background:linear-gradient(135deg,#1e293b,#334155);">
+        <div>
+          <div class="ai-t">📈 PulseAI 互動圖表</div>
+          <div class="ai-d">AI 捕捉市場脈動，自動標出支撐（綠）與壓力（紅）區間</div>
+        </div>
+        <span class="ai-go">開啟圖表 →</span>
       </a>
     </section>
 
@@ -639,6 +595,61 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
     </div><!-- end hub-main -->
    </div><!-- end hub-layout -->
+
+   <!-- ════════ 自選投資全螢幕視圖（由 PulseAI「管理自選」開啟） ════════ -->
+   <section class="watchlist-fullview" id="watchlist-view">
+     <a href="#" class="back-link" onclick="event.preventDefault();location.hash='';">← 返回 PulseAI</a>
+     <div class="sub-label" style="margin-top:6px;">PulseAI 自選投資</div>
+
+     <!-- 自選標的 -->
+     <div class="section-block" style="margin-bottom:16px;">
+       <div class="section-block-header">
+         <div class="sbh-title">⭐ 我的自選標的 <span class="sbh-title-en">WATCHLIST</span></div>
+         <div style="display:flex;align-items:center;gap:8px;">
+           <a href="/pages/credits.html" id="credits-display" title="查看點數詳情" style="font-size:11px;color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:20px;font-family:var(--font-en);text-decoration:none;cursor:pointer;">⚡ — 點</a>
+           <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
+         </div>
+       </div>
+       <div style="padding:14px 20px;">
+         <!-- Category tabs -->
+         <div class="cat-tabs">
+           <button class="cat-tab active" onclick="filterCat('all',this)">全部 (8)</button>
+           <button class="cat-tab" onclick="filterCat('us',this)">美股 (3)</button>
+           <button class="cat-tab" onclick="filterCat('tw',this)">台股 (2)</button>
+           <button class="cat-tab" onclick="filterCat('crypto',this)">加密 (3)</button>
+         </div>
+         <div class="cat-tabs" id="cat-tabs-dynamic" style="display:none;">
+           <button class="cat-tab active" onclick="filterCat('all',this)">全部 <span id="cnt-all">0</span></button>
+           <button class="cat-tab" onclick="filterCat('us',this)">美股 <span id="cnt-us">0</span></button>
+           <button class="cat-tab" onclick="filterCat('tw',this)">台股 <span id="cnt-tw">0</span></button>
+           <button class="cat-tab" onclick="filterCat('crypto',this)">加密 <span id="cnt-crypto">0</span></button>
+         </div>
+         <div class="target-grid" id="target-grid" style="margin-bottom:0;"></div>
+       </div>
+     </div>
+
+     <!-- 共識溫度計 -->
+     <div class="section-block" style="margin-bottom:16px;">
+       <div class="section-block-header">
+         <div class="sbh-title">共識溫度計 <span class="sbh-title-en">CONSENSUS METER</span></div>
+         <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">自選標的</span>
+       </div>
+       <div id="consensus-list" style="padding:16px 20px;">
+         <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
+       </div>
+     </div>
+
+     <!-- 組合風險雷達 -->
+     <div class="section-block" style="margin-bottom:16px;">
+       <div class="section-block-header">
+         <div class="sbh-title">組合風險雷達 <span class="sbh-title-en">RISK RADAR</span></div>
+         <span class="sbh-badge" id="risk-overall" style="background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);">評估中</span>
+       </div>
+       <div id="risk-content" style="padding:16px 20px;">
+         <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
+       </div>
+     </div>
+   </section>
   </div><!-- end targets-view -->
 
   <!-- ═══ 意見回饋（所有已登入會員可用，含免費） ═══ -->
@@ -850,6 +861,7 @@ async function checkProStatus(user, gateEl, viewEl){
     var acctCat=document.getElementById('cat-account');
     if(fbBlock&&acctCat){ fbBlock.style.display='block'; acctCat.appendChild(fbBlock); }
     loadWatchlist();
+    syncWatchlistView();
   } else {
     // 已登入但非付費會員，顯示升級提示
     if(gateEl){
@@ -1795,6 +1807,15 @@ function goCat(cat, el){
   if(cat==='stories' && !goCat._stories){ goCat._stories=true; loadHubStories(); }
   if(cat==='history' && !goCat._history){ goCat._history=true; loadHubDateList(); }
 }
+
+// 自選投資全螢幕視圖：以網址 #watchlist 切換（瀏覽器上一頁可用）
+function syncWatchlistView(){
+  var tv=document.getElementById('targets-view');
+  if(!tv) return;
+  if(location.hash==='#watchlist'){ tv.classList.add('show-watchlist'); window.scrollTo(0,0); }
+  else { tv.classList.remove('show-watchlist'); }
+}
+window.addEventListener('hashchange', syncWatchlistView);
 
 // ── 全球追蹤（移植自 stories.html）─────────────────
 var STORY_STATUS_STYLE={
