@@ -51,7 +51,14 @@ main{max-width:760px;margin:0 auto;padding:88px 20px 60px;}
 .act-adopt:hover{opacity:.88;}
 .act-reject{background:var(--white);color:var(--gray-600);border-color:var(--gray-200);}
 .act-reject:hover{background:var(--gray-50);}
+.act-reply{background:var(--navy-700);color:var(--white);}
+.act-reply:hover{opacity:.88;}
 .act:disabled{opacity:.5;cursor:default;}
+.reply-box{margin-top:14px;padding-top:14px;border-top:1px dashed var(--gray-200);}
+.reply-label{font-size:11.5px;color:var(--gray-400);font-family:var(--font-zh);margin-bottom:6px;}
+.reply-ta{width:100%;min-height:60px;padding:9px 11px;border:1px solid var(--gray-200);border-radius:var(--r-sm);font-size:13px;font-family:var(--font-zh);line-height:1.6;resize:vertical;box-sizing:border-box;color:var(--gray-700);}
+.reply-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;}
+.reply-msg{font-size:12px;font-family:var(--font-zh);}
 .muted{text-align:center;color:var(--gray-400);font-size:13px;padding:40px 20px;}
 .gate{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--r-lg);padding:48px 32px;text-align:center;color:var(--white);}
 .gate h2{font-size:20px;margin-bottom:10px;}
@@ -118,7 +125,7 @@ function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').repla
 function fmtDate(s){ var d=new Date(s); var p=function(n){return n<10?'0'+n:n;}; return (d.getMonth()+1)+'/'+d.getDate()+' '+p(d.getHours())+':'+p(d.getMinutes()); }
 
 async function loadAll(){
-  var res=await _sb.from('feedback').select('id,user_id,content,status,created_at').order('created_at',{ascending:false});
+  var res=await _sb.from('feedback').select('id,user_id,content,status,created_at,reply').order('created_at',{ascending:false});
   if(res.error){ document.getElementById('list').innerHTML='<div class="muted">讀取失敗：'+esc(res.error.message)+'</div>'; return; }
   _all=res.data||[];
   var ids=[].concat.apply([],_all.map(function(f){return f.user_id;})).filter(function(v,i,a){return a.indexOf(v)===i;});
@@ -157,12 +164,17 @@ function render(){
         +'<button class="act act-adopt" onclick="decide(\''+f.id+'\',\'adopted\',this)">採納並 +10 點</button>'
         +'<button class="act act-reject" onclick="decide(\''+f.id+'\',\'rejected\',this)">不採納</button></div>';
     }
+    var reply='<div class="reply-box">'
+      +'<div class="reply-label">給回饋者的文字回覆（使用者會在「我的回饋紀錄」看到）</div>'
+      +'<textarea class="reply-ta" id="reply-'+f.id+'" maxlength="500" placeholder="輸入回覆內容…">'+esc(f.reply||'')+'</textarea>'
+      +'<div class="reply-row"><span class="reply-msg" id="reply-msg-'+f.id+'"></span>'
+      +'<button class="act act-reply" onclick="saveReply(\''+f.id+'\',this)">送出回覆</button></div></div>';
     return '<div class="card">'
       +'<div class="card-top"><div class="who">'+esc(name)+'<small>'+uid+'</small></div>'
       +'<div style="display:flex;align-items:center;gap:8px;">'
       +'<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">'+fmtDate(f.created_at)+'</span>'
       +'<span class="tag '+st+'">'+label[st]+'</span></div></div>'
-      +'<div class="content">'+esc(f.content)+'</div>'+acts+'</div>';
+      +'<div class="content">'+esc(f.content)+'</div>'+acts+reply+'</div>';
   }).join('');
 }
 
@@ -170,11 +182,29 @@ async function decide(id,status,btn){
   if(status==='adopted' && !confirm('確定採納這則意見？將自動為該使用者 +10 永久點數。')) return;
   var card=btn.closest('.card');
   var btns=card.querySelectorAll('.act'); for(var i=0;i<btns.length;i++) btns[i].disabled=true;
-  var res=await _sb.from('feedback').update({status:status}).eq('id',id);
+  // 連同文字回覆一併送出（若有填寫）
+  var ta=document.getElementById('reply-'+id);
+  var patch={status:status};
+  if(ta && ta.value.trim()) patch.reply=ta.value.trim();
+  var res=await _sb.from('feedback').update(patch).eq('id',id);
   if(res.error){ alert('操作失敗：'+res.error.message); for(var j=0;j<btns.length;j++) btns[j].disabled=false; return; }
   var item=_all.filter(function(f){return f.id===id;})[0];
-  if(item) item.status=status;
+  if(item){ item.status=status; if(patch.reply!==undefined) item.reply=patch.reply; }
   render();
+}
+
+async function saveReply(id,btn){
+  var ta=document.getElementById('reply-'+id);
+  var msg=document.getElementById('reply-msg-'+id);
+  if(!ta) return;
+  var text=ta.value.trim();
+  btn.disabled=true; btn.textContent='送出中…';
+  var res=await _sb.from('feedback').update({reply:text||null}).eq('id',id);
+  btn.disabled=false; btn.textContent='送出回覆';
+  if(res.error){ if(msg){ msg.textContent='送出失敗：'+res.error.message; msg.style.color='var(--red-600)'; } return; }
+  var item=_all.filter(function(f){return f.id===id;})[0];
+  if(item) item.reply=text;
+  if(msg){ msg.textContent='✓ 回覆已送出'; msg.style.color='var(--green-600)'; }
 }
 </script>
 </body>

@@ -12,13 +12,17 @@
     {key:'credits',  href:'/pages/credits.html',          label:'方案 / 點數'},
   ];
 
+  // 縮排版頂部導覽：全球追蹤／互動圖表／歷史報告／方案點數已整併進會員中心側欄，
+  // 故所有頁面的 toolbar 預設只顯示這 6 項。個別頁面仍可用 data-nav-keys 覆寫。
+  var TOOLBAR_KEYS = ['brief','market','industry','research','calendar','member'];
+
   window.buildNav = function(activeKey){
     // Support both .header-nav (standard) and .nav-links (industry.html ul-based)
     var nav = document.querySelector('.header-nav[data-active], .nav-links[data-active]');
     if(!nav) return;
-    // 可選：data-nav-keys 限制只顯示部分項目（逗號分隔），用於頁面內已有側欄分類時縮排頂部導覽
-    var only = nav.dataset.navKeys ? nav.dataset.navKeys.split(',').map(function(k){return k.trim();}) : null;
-    var list = only ? NAV.filter(function(i){ return only.indexOf(i.key) >= 0; }) : NAV;
+    // 可選：data-nav-keys 覆寫顯示項目（逗號分隔）；未指定則用縮排版預設
+    var keys = nav.dataset.navKeys ? nav.dataset.navKeys.split(',').map(function(k){return k.trim();}) : TOOLBAR_KEYS;
+    var list = NAV.filter(function(i){ return keys.indexOf(i.key) >= 0; });
     var isUl = nav.tagName === 'UL';
     nav.innerHTML = list.map(function(item){
       var active = item.key === activeKey;
