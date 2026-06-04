@@ -41,8 +41,13 @@
 // ── PulseAI 文字 LOGO：全站自動把「PulseAI」字眼轉為品牌字標 ──
 // Badge 樣式（漸層實心）：深藍→藍漸層膠囊，白字 Pulse + 青色 AI；行內隨文字自動縮放、垂直置中。含 MutationObserver 以涵蓋動態渲染內容。
 (function(){
-  var LOGO_CSS = ".pulseai-logo{display:inline-flex;align-items:baseline;font-family:'DM Sans','Noto Sans TC',sans-serif;font-weight:600;letter-spacing:-.01em;white-space:nowrap;font-style:normal;background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;border-radius:.45em;padding:.08em .42em;line-height:1.15;vertical-align:baseline;}"
-    + ".pulseai-logo .pa-ai{font-weight:700;color:#67e8f9;margin-left:.02em;}";
+  var LOGO_CSS = ".pulseai-logo{display:inline-flex;align-items:baseline;font-family:'DM Sans','Noto Sans TC',sans-serif;font-weight:600;letter-spacing:-.01em;white-space:nowrap;font-style:normal;background:linear-gradient(135deg,#13245a,#1e3a8a 45%,#2563eb);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 1px rgba(0,0,0,.25),0 1px 2px rgba(13,22,48,.35);color:#fff;border-radius:.45em;padding:.08em .42em;line-height:1.15;vertical-align:baseline;}"
+    + ".pulseai-logo .pa-pulse,.pulseai-logo .pa-ai{-webkit-text-fill-color:initial;}"
+    + ".pulseai-logo .pa-pulse{color:#f4f8ff;text-shadow:0 1px 1px rgba(0,0,0,.35);}"
+    + ".pulseai-logo .pa-ai{font-weight:700;color:#9af0fb;margin-left:.02em;text-shadow:0 1px 1px rgba(0,0,0,.35);}"
+    + "@supports ((-webkit-background-clip:text) or (background-clip:text)){"
+    + ".pulseai-logo .pa-pulse{background:linear-gradient(180deg,#ffffff 0%,#ffffff 42%,#d4e1f8 60%,#f3f7ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}"
+    + ".pulseai-logo .pa-ai{background:linear-gradient(180deg,#ecfdff 0%,#a5f3fc 44%,#3fdcf5 62%,#cdf7fd 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}}";
   function injectCss(){
     if(document.getElementById('pulseai-logo-css')) return;
     var s=document.createElement('style'); s.id='pulseai-logo-css'; s.textContent=LOGO_CSS;
@@ -51,7 +56,8 @@
   var SKIP={SCRIPT:1,STYLE:1,TEXTAREA:1,INPUT:1,SELECT:1,OPTION:1,NOSCRIPT:1,TITLE:1};
   function makeLogo(){
     var s=document.createElement('span'); s.className='pulseai-logo';
-    s.appendChild(document.createTextNode('Pulse'));
+    var p=document.createElement('span'); p.className='pa-pulse'; p.textContent='Pulse';
+    s.appendChild(p);
     var ai=document.createElement('span'); ai.className='pa-ai'; ai.textContent='AI';
     s.appendChild(ai);
     return s;
