@@ -293,6 +293,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div class="header-right">
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
     <span class="header-time" id="clock">—</span>
+    <span class="header-user" id="header-user" style="display:none;font-size:13px;color:var(--navy-700);font-weight:600;font-family:var(--font-zh);"></span>
     <a href="/pages/login.html" class="btn-login" id="auth-btn">登入</a>
   </div>
 </header>
@@ -663,6 +664,8 @@ function setAuthState(user){
     if(gateEl) gateEl.style.display='block';
     if(viewEl) viewEl.classList.remove('active');
     if(fbEl) fbEl.style.display='none';
+    var huEl=document.getElementById('header-user');
+    if(huEl){ huEl.style.display='none'; huEl.textContent=''; }
     if(btnEl){
       btnEl.textContent='登入';
       btnEl.href='/pages/login.html';
@@ -681,6 +684,14 @@ async function checkProStatus(user, gateEl, viewEl){
   currentUser.displayName = (result.data && result.data.display_name) || '';
   currentUser.phone = (result.data && result.data.phone) || '';
   currentUser.birthday = (result.data && result.data.birthday) || '';
+
+  // 右上角顯示會員名稱（無暱稱則用 email 前綴）
+  var huEl=document.getElementById('header-user');
+  if(huEl){
+    var dn=currentUser.displayName || (user.email ? user.email.split('@')[0] : '');
+    huEl.textContent=dn;
+    huEl.style.display=dn?'inline':'none';
+  }
 
   // 訂閱點數到期自動重置（伺服器端 RPC 把關，client 不可自行改點數）
   if(isPro && currentUser.resetDate){
