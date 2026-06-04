@@ -92,6 +92,19 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .zone-item .dt{color:var(--gray-400);font-size:11px;}
 .zone-empty{font-size:12.5px;color:var(--gray-400);padding:6px 0;}
 .legend-note{font-size:12px;color:var(--gray-500);line-height:1.6;margin-top:12px;}
+.usage{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);box-shadow:var(--shadow-card);margin-bottom:14px;overflow:hidden;}
+.usage>summary{list-style:none;cursor:pointer;padding:12px 16px;font-size:13.5px;font-weight:600;color:var(--navy-800);display:flex;align-items:center;gap:8px;}
+.usage>summary::-webkit-details-marker{display:none;}
+.usage>summary .chev{margin-left:auto;color:var(--gray-400);transition:transform .2s;font-size:12px;}
+.usage[open]>summary .chev{transform:rotate(90deg);}
+.usage-body{padding:0 16px 14px;font-size:13px;color:var(--gray-700);line-height:1.7;}
+.usage-body ol{margin:0 0 10px 18px;}
+.usage-body li{margin-bottom:3px;}
+.usage-grid{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:6px 0 10px;}
+.usage-grid .k{color:var(--gray-500);}
+.usage-grid .v{font-family:var(--font-en);color:var(--gray-900);}
+.usage-tag{display:inline-block;background:var(--gray-100);border-radius:5px;padding:1px 7px;font-family:var(--font-en);font-size:12px;margin:0 4px 2px 0;color:var(--navy-700);}
+.usage-body .swatch{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:middle;margin-right:5px;}
 @media(max-width:768px){.header-nav{display:none;}.zones{grid-template-columns:1fr;}.controls input{width:110px;}}
 </style>
 </head>
@@ -161,6 +174,24 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <button class="btn-go" id="btn-go">查詢</button>
       <div class="quick" id="quick"></div>
     </div>
+
+    <details class="usage" open>
+      <summary>使用說明<span class="chev">▶</span></summary>
+      <div class="usage-body">
+        <ol>
+          <li>在「標的」欄輸入代碼，選好「市場」與「週期」，按<b>查詢</b>（或直接點右側快捷鈕）。</li>
+          <li>圖上<span class="swatch" style="background:var(--green-600);"></span><b>綠色區塊＝支撐區</b>、<span class="swatch" style="background:var(--red-600);"></span><b>紅色區塊＝壓力區</b>，下方並列出各區的價格範圍與形成時間。</li>
+          <li>圖表可用滑鼠拖曳平移、滾輪縮放；十字游標可看任一根 K 棒的數值。</li>
+        </ol>
+        <div class="usage-grid">
+          <span class="k">美股</span><span class="v">直接打代號，如 <span class="usage-tag">NVDA</span><span class="usage-tag">AAPL</span></span>
+          <span class="k">台股</span><span class="v"><span class="usage-tag">2330</span> 或 <span class="usage-tag">2330.TW</span>（純數字會自動補 .TW）</span>
+          <span class="k">指數</span><span class="v"><span class="usage-tag">^GSPC</span> 標普 · <span class="usage-tag">^IXIC</span> 那斯達克 · <span class="usage-tag">^TWII</span> 台股加權</span>
+          <span class="k">加密</span><span class="v">市場切「加密幣」後打幣對，如 <span class="usage-tag">ETHBTC</span><span class="usage-tag">BTCUSDT</span></span>
+        </div>
+        <div style="font-size:12px;color:var(--gray-500);">小提醒：訂單塊區間被價格突破後即視為失效並自動移除，圖上保留各方向最近 3 個有效區；首次查詢若後端剛喚醒，可能需等 10–30 秒。本工具僅供研究參考，非投資建議。</div>
+      </div>
+    </details>
 
     <div class="chart-card">
       <div class="chart-head">
