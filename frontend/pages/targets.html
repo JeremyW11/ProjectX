@@ -510,7 +510,24 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <!-- 自選觀察 Tab -->
     </div>
 
-
+    <!-- ═══ 意見回饋 ═══ -->
+    <div class="section-block" style="margin-bottom:16px;">
+      <div class="section-block-header">
+        <div class="sbh-title">意見回饋 <span class="sbh-title-en">FEEDBACK</span></div>
+        <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">採納獎勵 +10 點</span>
+      </div>
+      <div style="padding:16px 20px;">
+        <div style="font-size:13px;color:var(--gray-500);line-height:1.7;margin-bottom:12px;font-family:var(--font-zh);">
+          有任何建議、想要的功能或發現的問題都歡迎告訴我們。<strong style="color:var(--navy-600);">一旦意見被採納，將獲得 10 點永久點數獎勵</strong>，回饋會直接加到你的帳戶。
+        </div>
+        <textarea id="fb-text" maxlength="1000" placeholder="想看到什麼新功能？哪裡可以更好？" style="width:100%;min-height:90px;padding:12px 14px;border:1px solid var(--gray-200);border-radius:var(--r-md);font-size:13.5px;font-family:var(--font-zh);line-height:1.6;resize:vertical;box-sizing:border-box;color:var(--gray-700);"></textarea>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:12px;">
+          <div id="fb-msg" style="font-size:12.5px;font-family:var(--font-zh);"></div>
+          <button class="m-submit" id="fb-btn" onclick="submitFeedback()" style="width:auto;padding:10px 22px;white-space:nowrap;">送出意見</button>
+        </div>
+        <div id="fb-history" style="margin-top:16px;"></div>
+      </div>
+    </div>
 
   </div><!-- end targets-view -->
 
@@ -678,6 +695,7 @@ async function checkProStatus(user, gateEl, viewEl){
     if(gateEl) gateEl.style.display='none';
     if(viewEl) viewEl.classList.add('active');
     loadWatchlist();
+    loadFeedbackHistory();
   } else {
     // 已登入但非付費會員，顯示升級提示
     if(gateEl){
@@ -696,6 +714,49 @@ async function checkProStatus(user, gateEl, viewEl){
 async function signOutUser(){
   await _supabase.auth.signOut();
   window.location.reload();
+}
+
+// ── 意見回饋 ──────────────────────────────────────
+function showFbMsg(text,ok){
+  var msg=document.getElementById('fb-msg');
+  if(!msg) return;
+  msg.textContent=text;
+  msg.style.color=ok?'var(--navy-600)':'var(--red-600)';
+}
+async function submitFeedback(){
+  if(!currentUser){ showFbMsg('請先登入',false); return; }
+  var ta=document.getElementById('fb-text');
+  var btn=document.getElementById('fb-btn');
+  var content=ta.value.trim();
+  if(content.length<5){ showFbMsg('請多寫一點，至少 5 個字',false); return; }
+  btn.disabled=true; btn.textContent='送出中…';
+  var res=await _supabase.from('feedback').insert({ user_id:currentUser.id, content:content });
+  btn.disabled=false; btn.textContent='送出意見';
+  if(res.error){ showFbMsg('送出失敗，請稍後再試',false); return; }
+  ta.value='';
+  showFbMsg('已收到你的意見，感謝！採納後將自動加 10 點。',true);
+  loadFeedbackHistory();
+}
+async function loadFeedbackHistory(){
+  if(!currentUser) return;
+  var box=document.getElementById('fb-history');
+  if(!box) return;
+  var res=await _supabase.from('feedback').select('content,status,created_at').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(5);
+  if(res.error||!res.data||!res.data.length){ box.innerHTML=''; return; }
+  var label={ pending:'審核中', adopted:'已採納 +10 點', rejected:'未採納' };
+  var color={ pending:'var(--gray-400)', adopted:'var(--navy-600)', rejected:'var(--gray-400)' };
+  var bg={ pending:'var(--gray-100)', adopted:'var(--navy-50)', rejected:'var(--gray-100)' };
+  box.innerHTML='<div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);margin-bottom:8px;">我的回饋紀錄</div>'+res.data.map(function(f){
+    var st=f.status||'pending';
+    var d=new Date(f.created_at);
+    var ds=(d.getMonth()+1)+'/'+d.getDate();
+    var safe=f.content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return '<div style="padding:10px 12px;border:1px solid var(--gray-100);border-radius:var(--r-md);margin-bottom:8px;">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;">'
+      +'<span style="font-size:10px;color:'+color[st]+';background:'+bg[st]+';padding:2px 8px;border-radius:10px;font-family:var(--font-zh);font-weight:600;">'+(label[st]||st)+'</span>'
+      +'<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">'+ds+'</span></div>'
+      +'<div style="font-size:12.5px;color:var(--gray-600);line-height:1.6;font-family:var(--font-zh);">'+safe+'</div></div>';
+  }).join('');
 }
 
 // ── 修改密碼 ──────────────────────────────────────
