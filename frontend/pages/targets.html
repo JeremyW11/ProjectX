@@ -510,26 +510,26 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <!-- 自選觀察 Tab -->
     </div>
 
-    <!-- ═══ 意見回饋 ═══ -->
-    <div class="section-block" style="margin-bottom:16px;">
-      <div class="section-block-header">
-        <div class="sbh-title">意見回饋 <span class="sbh-title-en">FEEDBACK</span></div>
-        <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">採納獎勵 +10 點</span>
-      </div>
-      <div style="padding:16px 20px;">
-        <div style="font-size:13px;color:var(--gray-500);line-height:1.7;margin-bottom:12px;font-family:var(--font-zh);">
-          有任何建議、想要的功能或發現的問題都歡迎告訴我們。<strong style="color:var(--navy-600);">一旦意見被採納，將獲得 10 點永久點數獎勵</strong>，回饋會直接加到你的帳戶。
-        </div>
-        <textarea id="fb-text" maxlength="1000" placeholder="想看到什麼新功能？哪裡可以更好？" style="width:100%;min-height:90px;padding:12px 14px;border:1px solid var(--gray-200);border-radius:var(--r-md);font-size:13.5px;font-family:var(--font-zh);line-height:1.6;resize:vertical;box-sizing:border-box;color:var(--gray-700);"></textarea>
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:12px;">
-          <div id="fb-msg" style="font-size:12.5px;font-family:var(--font-zh);"></div>
-          <button class="m-submit" id="fb-btn" onclick="submitFeedback()" style="width:auto;padding:10px 22px;white-space:nowrap;">送出意見</button>
-        </div>
-        <div id="fb-history" style="margin-top:16px;"></div>
-      </div>
-    </div>
-
   </div><!-- end targets-view -->
+
+  <!-- ═══ 意見回饋（所有已登入會員可用，含免費） ═══ -->
+  <div class="section-block" id="feedback-block" style="margin-bottom:16px;display:none;">
+    <div class="section-block-header">
+      <div class="sbh-title">意見回饋 <span class="sbh-title-en">FEEDBACK</span></div>
+      <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">採納獎勵 +10 點</span>
+    </div>
+    <div style="padding:16px 20px;">
+      <div style="font-size:13px;color:var(--gray-500);line-height:1.7;margin-bottom:12px;font-family:var(--font-zh);">
+        有任何建議、想要的功能或發現的問題都歡迎告訴我們。<strong style="color:var(--navy-600);">一旦意見被採納，將獲得 10 點永久點數獎勵</strong>，回饋會直接加到你的帳戶。
+      </div>
+      <textarea id="fb-text" maxlength="1000" placeholder="想看到什麼新功能？哪裡可以更好？" style="width:100%;min-height:90px;padding:12px 14px;border:1px solid var(--gray-200);border-radius:var(--r-md);font-size:13.5px;font-family:var(--font-zh);line-height:1.6;resize:vertical;box-sizing:border-box;color:var(--gray-700);"></textarea>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:12px;">
+        <div id="fb-msg" style="font-size:12.5px;font-family:var(--font-zh);"></div>
+        <button class="m-submit" id="fb-btn" onclick="submitFeedback()" style="width:auto;padding:10px 22px;white-space:nowrap;">送出意見</button>
+      </div>
+      <div id="fb-history" style="margin-top:16px;"></div>
+    </div>
+  </div>
 
 </main>
 
@@ -648,16 +648,21 @@ function setAuthState(user){
   var gateEl=document.getElementById('pro-gate-view');
   var viewEl=document.getElementById('targets-view');
   var btnEl=document.getElementById('auth-btn');
+  var fbEl=document.getElementById('feedback-block');
   if(user){
     if(btnEl){
       btnEl.textContent='登出';
       btnEl.href='#';
       btnEl.onclick=function(e){e.preventDefault();signOutUser();};
     }
+    // 意見回饋開放給所有已登入會員（含免費），不受 Pro gate 影響
+    if(fbEl) fbEl.style.display='block';
+    loadFeedbackHistory();
     checkProStatus(user, gateEl, viewEl);
   } else {
     if(gateEl) gateEl.style.display='block';
     if(viewEl) viewEl.classList.remove('active');
+    if(fbEl) fbEl.style.display='none';
     if(btnEl){
       btnEl.textContent='登入';
       btnEl.href='/pages/login.html';
@@ -695,7 +700,6 @@ async function checkProStatus(user, gateEl, viewEl){
     if(gateEl) gateEl.style.display='none';
     if(viewEl) viewEl.classList.add('active');
     loadWatchlist();
-    loadFeedbackHistory();
   } else {
     // 已登入但非付費會員，顯示升級提示
     if(gateEl){
