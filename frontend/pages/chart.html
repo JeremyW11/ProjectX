@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X · 互動圖表</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-950:#070d1c; --navy-900:#0d1630; --navy-800:#152244;
+  --navy-700:#1d2d5a; --navy-600:#1e3a8a; --navy-500:#2563eb;
+  --navy-400:#3b82f6; --navy-300:#93c5fd; --navy-100:#dbeafe; --navy-50:#eff6ff;
+  --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569;
+  --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1;
+  --gray-200:#e2e8f0; --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
+  --green-700:#15803d; --green-600:#16a34a; --green-100:#dcfce7; --green-50:#f0fdf4;
+  --red-700:#b91c1c; --red-600:#dc2626; --red-100:#fee2e2;
+  --amber-600:#d97706; --amber-100:#fef3c7;
+  --pro-gold:#c9a84c; --pro-gold-light:#f5e9c8; --pro-gold-dark:#8a6a1f;
+  --font-en:'DM Sans',sans-serif;
+  --font-zh:'Noto Sans TC',sans-serif;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:24px;
+  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;-webkit-font-smoothing:antialiased;}
+body{background:radial-gradient(1120px 640px at 94% -14%, rgba(37,99,235,.46), transparent 64%),radial-gradient(940px 720px at -10% 4%, rgba(51,65,85,.40), transparent 64%),radial-gradient(820px 620px at 50% 118%, rgba(29,78,216,.28), transparent 66%),linear-gradient(160deg, #dbe2ef 0%, #f4f6fb 56%);background-attachment:fixed;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:100;}
+.topbar-logo{display:flex;align-items:center;gap:10px;margin-right:36px;}
+.header-nav{display:flex;align-items:center;gap:2px;flex:1;}
+.nav-item{font-size:13.5px;color:var(--gray-600);padding:6px 12px;border-radius:var(--r-sm);font-weight:500;display:flex;align-items:center;gap:6px;transition:all .15s;}
+.nav-item:hover{background:var(--gray-100);color:var(--navy-700);}
+.nav-item.active{background:var(--navy-50);color:var(--navy-700);font-weight:600;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-500);}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green-600);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.header-time{font-size:12px;color:var(--gray-400);font-family:var(--font-en);}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;font-family:var(--font-en);}
+
+.page{max-width:1040px;margin:0 auto;padding:88px 24px 64px;}
+.page-header{margin-bottom:20px;}
+.page-title{font-size:26px;font-weight:600;color:var(--navy-900);font-family:var(--font-zh);}
+.page-title-sub{font-size:14px;color:var(--gray-400);font-family:var(--font-en);font-weight:400;margin-left:8px;}
+.page-update{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
+
+/* PRO GATE */
+.pro-gate{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--r-xl);padding:48px 40px;text-align:center;color:var(--white);margin-bottom:20px;}
+.pro-gate-icon{font-size:36px;color:var(--pro-gold);margin-bottom:12px;}
+.pro-gate-title{font-size:24px;font-weight:600;margin-bottom:10px;}
+.pro-gate-title em{color:var(--pro-gold);font-style:normal;}
+.pro-gate-desc{font-size:14px;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 24px;line-height:1.7;}
+.btn-pro-upgrade{display:inline-block;padding:12px 28px;background:var(--pro-gold);color:var(--navy-900);border-radius:var(--r-md);font-size:14px;font-weight:700;}
+
+/* CHART VIEW */
+.chart-view{display:none;}
+.chart-view.active{display:block;}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:12px 14px;margin-bottom:14px;box-shadow:var(--shadow-card);}
+.controls input,.controls select{font-family:var(--font-en);font-size:13.5px;padding:8px 10px;border:1px solid var(--gray-300);border-radius:var(--r-sm);color:var(--gray-900);background:var(--white);}
+.controls input{width:130px;text-transform:uppercase;}
+.controls .btn-go{padding:8px 18px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13.5px;font-weight:600;}
+.controls .btn-go:disabled{opacity:.5;cursor:default;}
+.ctrl-label{font-size:12px;color:var(--gray-500);margin-right:-2px;}
+.quick{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto;}
+.quick button{font-size:12px;padding:6px 10px;border:1px solid var(--gray-200);border-radius:20px;color:var(--gray-600);font-family:var(--font-en);}
+.quick button:hover{background:var(--gray-100);color:var(--navy-700);}
+
+.chart-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:14px;box-shadow:var(--shadow-card);margin-bottom:16px;}
+.chart-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+.chart-sym{font-size:18px;font-weight:700;color:var(--navy-900);font-family:var(--font-en);}
+.chart-meta{font-size:12px;color:var(--gray-500);}
+.chart-wrap{position:relative;width:100%;height:460px;}
+#ob-overlay{position:absolute;top:0;left:0;pointer-events:none;z-index:3;}
+.chart-status{font-size:13px;color:var(--gray-500);padding:18px 0;text-align:center;}
+
+.zones{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.zone-col{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow-card);}
+.zone-col h3{font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.zone-col h3 .dot{width:10px;height:10px;border-radius:3px;}
+.zone-item{font-family:var(--font-en);font-size:13px;color:var(--gray-700);padding:7px 0;border-top:1px dashed var(--gray-200);display:flex;justify-content:space-between;gap:8px;}
+.zone-item:first-of-type{border-top:none;}
+.zone-item .rng{font-weight:600;color:var(--gray-900);}
+.zone-item .dt{color:var(--gray-400);font-size:11px;}
+.zone-empty{font-size:12.5px;color:var(--gray-400);padding:6px 0;}
+.legend-note{font-size:12px;color:var(--gray-500);line-height:1.6;margin-top:12px;}
+@media(max-width:768px){.header-nav{display:none;}.zones{grid-template-columns:1fr;}.controls input{width:110px;}}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="https://projectxbrief.netlify.app/" class="logo-link" style="text-decoration:none;"><div class="topbar-logo">
+    <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
+      <line x1="10" y1="10" x2="30" y2="30" stroke="white" stroke-width="6" stroke-linecap="round"/>
+      <line x1="30" y1="10" x2="10" y2="30" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="3" fill="#2563eb"/>
+      <circle cx="20" cy="20" r="1.5" fill="#93c5fd"/>
+      <text x="48" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" letter-spacing="0.3" fill="#0f172a">PROJECT </text>
+      <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
+    </svg>
+  </div></a>
+  <nav class="header-nav" data-active="chart"></nav>
+  <div class="header-right">
+    <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+    <span class="header-time" id="clock">—</span>
+    <a href="/pages/login.html" class="btn-login" id="auth-btn">登入</a>
+  </div>
+</header>
+
+<script src="/shared/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+
+<main class="page">
+
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">互動圖表 <span class="page-title-sub">Order Block Chart</span></h1>
+      <div class="page-update">K 線 + 訂單塊（Order Block）支撐 / 壓力區 · Pro 會員專屬 · 資料 Binance / Yahoo</div>
+    </div>
+  </div>
+
+  <!-- PRO GATE -->
+  <div id="pro-gate-view">
+    <div class="pro-gate">
+      <div class="pro-gate-icon">✦</div>
+      <h2 class="pro-gate-title">在圖上直接看見<em>機構訂單塊</em></h2>
+      <p class="pro-gate-desc">以成交量樞紐定位主力進出的訂單塊，綠色為潛在支撐區、紅色為潛在壓力區，直接畫在 K 線上。支援加密幣對與台股 / 美股，自由切換週期。</p>
+      <div class="pro-gate-btns">
+        <a href="/pages/login.html" class="btn-pro-upgrade">✦ 登入體驗 Pro</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGGED-IN VIEW -->
+  <div id="chart-view" class="chart-view">
+    <div class="controls">
+      <span class="ctrl-label">標的</span>
+      <input id="in-symbol" value="ETHBTC" placeholder="ETHBTC / NVDA / 2330.TW">
+      <select id="in-market">
+        <option value="crypto">加密幣</option>
+        <option value="stock">股票 / 指數</option>
+      </select>
+      <select id="in-interval">
+        <option value="1h">1 小時</option>
+        <option value="4h">4 小時</option>
+        <option value="1d" selected>日線</option>
+        <option value="1w">週線</option>
+      </select>
+      <button class="btn-go" id="btn-go">查詢</button>
+      <div class="quick" id="quick"></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head">
+        <span class="chart-sym" id="chart-sym">—</span>
+        <span class="chart-meta" id="chart-meta"></span>
+      </div>
+      <div class="chart-wrap" id="chart-wrap">
+        <div class="chart-status" id="chart-status">輸入標的後按「查詢」。</div>
+        <canvas id="ob-overlay"></canvas>
+      </div>
+    </div>
+
+    <div class="zones">
+      <div class="zone-col">
+        <h3><span class="dot" style="background:var(--red-600);"></span>壓力區 Bearish OB</h3>
+        <div id="zone-bear"><div class="zone-empty">—</div></div>
+      </div>
+      <div class="zone-col">
+        <h3><span class="dot" style="background:var(--green-600);"></span>支撐區 Bullish OB</h3>
+        <div id="zone-bull"><div class="zone-empty">—</div></div>
+      </div>
+    </div>
+    <div class="legend-note">訂單塊以成交量樞紐（5 根 K 棒前後）偵測，紅區為主力供給（壓力）、綠區為主力需求（支撐）；區間被價格實體 / 影線突破後即視為失效並移除，圖上保留各方向最近 3 個有效區。本工具僅供研究參考，非投資建議。</div>
+  </div>
+
+</main>
+
+<script>
+var BACKEND='https://projectx-backend-o2pl.onrender.com';
+
+// Clock
+function tick(){
+  var t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
+  var el=document.getElementById('clock'); if(el) el.textContent=t+' CST';
+}
+tick(); setInterval(tick,1000);
+
+// ── Supabase Auth ──
+var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
+var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+var _session=null;
+
+function initAuth(){
+  _supabase.auth.onAuthStateChange(function(event,session){
+    if(event==='INITIAL_SESSION'||event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){
+      _session=session||null;
+      setAuthState(session?session.user:null);
+    } else if(event==='SIGNED_OUT'){
+      _session=null;
+      setAuthState(null);
+    }
+  });
+}
+
+function setAuthState(user){
+  var gateEl=document.getElementById('pro-gate-view');
+  var viewEl=document.getElementById('chart-view');
+  var btnEl=document.getElementById('auth-btn');
+  if(user){
+    if(btnEl){ btnEl.textContent='登出'; btnEl.href='#'; btnEl.onclick=function(e){e.preventDefault();signOutUser();}; }
+    checkProStatus(user, gateEl, viewEl);
+  } else {
+    if(gateEl) gateEl.style.display='block';
+    if(viewEl) viewEl.classList.remove('active');
+    if(btnEl){ btnEl.textContent='登入'; btnEl.href='/pages/login.html'; btnEl.onclick=null; }
+  }
+}
+
+async function checkProStatus(user, gateEl, viewEl){
+  var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
+  var isPro = result.data && result.data.is_pro === true;
+  if(isPro){
+    if(gateEl) gateEl.style.display='none';
+    if(viewEl) viewEl.classList.add('active');
+    initChart();
+  } else {
+    if(gateEl) gateEl.style.display='block';
+    if(viewEl) viewEl.classList.remove('active');
+  }
+}
+
+async function signOutUser(){
+  await _supabase.auth.signOut();
+  window.location.reload();
+}
+
+// ── Chart ──
+var _chart=null, _candleSeries=null, _volSeries=null, _obs={bull:[],bear:[]}, _loaded=false;
+var GREEN='rgba(22,163,74,0.16)', GREEN_LINE='rgba(22,163,74,0.55)';
+var RED='rgba(220,38,38,0.15)', RED_LINE='rgba(220,38,38,0.5)';
+
+var QUICKS=[
+  {label:'ETH/BTC', symbol:'ETHBTC', market:'crypto', interval:'1h'},
+  {label:'BTC/USDT', symbol:'BTCUSDT', market:'crypto', interval:'1h'},
+  {label:'NVDA', symbol:'NVDA', market:'stock', interval:'1d'},
+  {label:'台積電 2330', symbol:'2330.TW', market:'stock', interval:'1d'},
+  {label:'S&P500', symbol:'^GSPC', market:'stock', interval:'1d'}
+];
+
+function initChart(){
+  if(_loaded) return; _loaded=true;
+  var quick=document.getElementById('quick');
+  quick.innerHTML='';
+  QUICKS.forEach(function(q){
+    var b=document.createElement('button');
+    b.textContent=q.label;
+    b.onclick=function(){
+      document.getElementById('in-symbol').value=q.symbol;
+      document.getElementById('in-market').value=q.market;
+      document.getElementById('in-interval').value=q.interval;
+      loadSignal();
+    };
+    quick.appendChild(b);
+  });
+  document.getElementById('btn-go').onclick=loadSignal;
+  document.getElementById('in-symbol').addEventListener('keydown',function(e){ if(e.key==='Enter') loadSignal(); });
+  loadSignal();
+}
+
+function buildChart(){
+  var wrap=document.getElementById('chart-wrap');
+  if(_chart) return;
+  _chart=LightweightCharts.createChart(wrap,{
+    width:wrap.clientWidth, height:wrap.clientHeight,
+    layout:{ background:{color:'transparent'}, textColor:'#475569', fontFamily:'DM Sans, sans-serif' },
+    grid:{ vertLines:{color:'rgba(148,163,184,0.12)'}, horzLines:{color:'rgba(148,163,184,0.12)'} },
+    rightPriceScale:{ borderColor:'rgba(148,163,184,0.3)' },
+    timeScale:{ borderColor:'rgba(148,163,184,0.3)', timeVisible:true, secondsVisible:false },
+    crosshair:{ mode:LightweightCharts.CrosshairMode.Normal }
+  });
+  _candleSeries=_chart.addCandlestickSeries({
+    upColor:'#16a34a', downColor:'#dc2626', borderVisible:false,
+    wickUpColor:'#16a34a', wickDownColor:'#dc2626'
+  });
+  _volSeries=_chart.addHistogramSeries({ priceFormat:{type:'volume'}, priceScaleId:'' });
+  _volSeries.priceScale().applyOptions({ scaleMargins:{top:0.82, bottom:0} });
+  _chart.timeScale().subscribeVisibleLogicalRangeChange(drawOverlay);
+  window.addEventListener('resize', onResize);
+}
+
+function onResize(){
+  var wrap=document.getElementById('chart-wrap');
+  if(_chart) _chart.applyOptions({ width:wrap.clientWidth, height:wrap.clientHeight });
+  drawOverlay();
+}
+
+function status(msg){
+  var s=document.getElementById('chart-status');
+  if(!s) return;
+  if(msg){ s.style.display='block'; s.textContent=msg; }
+  else s.style.display='none';
+}
+
+async function loadSignal(){
+  var symbol=(document.getElementById('in-symbol').value||'').trim();
+  if(!symbol){ status('請輸入標的代碼。'); return; }
+  var market=document.getElementById('in-market').value;
+  var interval=document.getElementById('in-interval').value;
+  var btn=document.getElementById('btn-go'); btn.disabled=true; btn.textContent='讀取中…';
+  status('讀取 '+symbol.toUpperCase()+' 資料中…（首次喚醒後端可能需 10-30 秒）');
+  try{
+    if(!_session){ status('請先登入。'); return; }
+    var url=BACKEND+'/signal?symbol='+encodeURIComponent(symbol)+'&market='+market+'&interval='+interval;
+    var res=await fetch(url,{ headers:{ 'Authorization':'Bearer '+_session.access_token } });
+    if(res.status===403){ status('此功能限 Pro 會員。'); return; }
+    var j=await res.json();
+    if(!j.success){ status('讀取失敗：'+(j.error||'unknown')); return; }
+    renderSignal(j);
+  }catch(e){
+    status('讀取失敗：'+e.message);
+  }finally{
+    btn.disabled=false; btn.textContent='查詢';
+  }
+}
+
+function renderSignal(j){
+  status('');
+  buildChart();
+  var candles=j.candles.map(function(c){ return {time:c.time, open:c.open, high:c.high, low:c.low, close:c.close}; });
+  var vols=j.candles.map(function(c){ return {time:c.time, value:c.volume, color: c.close>=c.open?'rgba(22,163,74,0.4)':'rgba(220,38,38,0.4)'}; });
+  _candleSeries.setData(candles);
+  _volSeries.setData(vols);
+  _obs=j.obs||{bull:[],bear:[]};
+  _chart.timeScale().fitContent();
+
+  document.getElementById('chart-sym').textContent=j.symbol;
+  var intLabel={'1h':'1 小時','4h':'4 小時','1d':'日線','1w':'週線','60m':'1 小時'}[j.interval]||j.interval;
+  document.getElementById('chart-meta').textContent=intLabel+' · '+j.candles.length+' 根 K 棒 · 來源 '+(j.source==='binance'?'Binance':'Yahoo');
+
+  renderZoneList(j);
+  // overlay needs a tick after layout settles
+  requestAnimationFrame(function(){ requestAnimationFrame(drawOverlay); });
+}
+
+function fmtNum(v){
+  if(v==null) return '--';
+  var a=Math.abs(v);
+  if(a>=1000) return v.toLocaleString('en-US',{maximumFractionDigits:2});
+  if(a>=1) return v.toFixed(2);
+  if(a>=0.01) return v.toFixed(4);
+  return v.toFixed(6);
+}
+function fmtDate(ts){
+  var d=new Date(ts*1000);
+  return new Intl.DateTimeFormat('zh-TW',{timeZone:'Asia/Taipei',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).format(d);
+}
+
+function renderZoneList(j){
+  var bear=(j.obs&&j.obs.bear?j.obs.bear:[]).slice().sort(function(a,b){return b.btm-a.btm;});
+  var bull=(j.obs&&j.obs.bull?j.obs.bull:[]).slice().sort(function(a,b){return b.top-a.top;});
+  function row(z){ return '<div class="zone-item"><span class="rng">'+fmtNum(z.btm)+' ~ '+fmtNum(z.top)+'</span><span class="dt">'+fmtDate(z.time)+'</span></div>'; }
+  document.getElementById('zone-bear').innerHTML = bear.length?bear.map(row).join(''):'<div class="zone-empty">目前無有效壓力區</div>';
+  document.getElementById('zone-bull').innerHTML = bull.length?bull.map(row).join(''):'<div class="zone-empty">目前無有效支撐區</div>';
+}
+
+function drawOverlay(){
+  var wrap=document.getElementById('chart-wrap');
+  var cv=document.getElementById('ob-overlay');
+  if(!_chart||!_candleSeries||!cv||!wrap) return;
+  var W=wrap.clientWidth, H=wrap.clientHeight;
+  var dpr=window.devicePixelRatio||1;
+  cv.width=W*dpr; cv.height=H*dpr; cv.style.width=W+'px'; cv.style.height=H+'px';
+  var ctx=cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+  var ts=_chart.timeScale();
+  function zoneRect(z,fill,line){
+    var yTop=_candleSeries.priceToCoordinate(z.top);
+    var yBtm=_candleSeries.priceToCoordinate(z.btm);
+    if(yTop==null||yBtm==null) return;
+    var x1=ts.timeToCoordinate(z.time);
+    if(x1==null) x1=0; // scrolled off left → extend from edge
+    if(x1<0) x1=0;
+    var y=Math.min(yTop,yBtm), h=Math.abs(yBtm-yTop);
+    if(h<1.5) h=1.5;
+    ctx.fillStyle=fill; ctx.fillRect(x1,y,W-x1,h);
+    ctx.strokeStyle=line; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(x1,y); ctx.lineTo(W,y); ctx.moveTo(x1,y+h); ctx.lineTo(W,y+h); ctx.stroke();
+  }
+  (_obs.bear||[]).forEach(function(z){ zoneRect(z,RED,RED_LINE); });
+  (_obs.bull||[]).forEach(function(z){ zoneRect(z,GREEN,GREEN_LINE); });
+}
+
+initAuth();
+</script>
+</body>
+</html>
