@@ -37,3 +37,74 @@
     if(nav) window.buildNav(nav.dataset.active);
   });
 })();
+
+// ── PulseAI 文字 LOGO：全站自動把「PulseAI」字眼轉為品牌字標 ──
+// 「Pulse」沿用周圍文字顏色（深淺底皆適用），「AI」為藍→青漸層；含 MutationObserver 以涵蓋動態渲染內容。
+(function(){
+  var LOGO_CSS = ".pulseai-logo{font-family:'DM Sans','Noto Sans TC',sans-serif;font-weight:600;letter-spacing:-.015em;white-space:nowrap;font-style:normal;}"
+    + ".pulseai-logo .pa-ai{font-weight:700;color:#2563eb;}"
+    + "@supports ((-webkit-background-clip:text) or (background-clip:text)){.pulseai-logo .pa-ai{background:linear-gradient(95deg,#3b82f6,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}}";
+  function injectCss(){
+    if(document.getElementById('pulseai-logo-css')) return;
+    var s=document.createElement('style'); s.id='pulseai-logo-css'; s.textContent=LOGO_CSS;
+    (document.head||document.documentElement).appendChild(s);
+  }
+  var SKIP={SCRIPT:1,STYLE:1,TEXTAREA:1,INPUT:1,SELECT:1,OPTION:1,NOSCRIPT:1,TITLE:1};
+  function makeLogo(){
+    var s=document.createElement('span'); s.className='pulseai-logo';
+    s.appendChild(document.createTextNode('Pulse'));
+    var ai=document.createElement('span'); ai.className='pa-ai'; ai.textContent='AI';
+    s.appendChild(ai);
+    return s;
+  }
+  function skipParent(p){
+    while(p && p.nodeType===1){
+      if(SKIP[p.tagName]) return true;
+      if(p.classList && p.classList.contains('pulseai-logo')) return true;
+      if(p.isContentEditable) return true;
+      p=p.parentNode;
+    }
+    return false;
+  }
+  function wrapTextNode(node){
+    var val=node.nodeValue;
+    if(!val || val.indexOf('PulseAI')<0) return;
+    if(skipParent(node.parentNode)) return;
+    var parts=val.split('PulseAI');
+    var frag=document.createDocumentFragment();
+    for(var i=0;i<parts.length;i++){
+      if(i>0) frag.appendChild(makeLogo());
+      if(parts[i]) frag.appendChild(document.createTextNode(parts[i]));
+    }
+    node.parentNode.replaceChild(frag,node);
+  }
+  function scan(root){
+    if(!root) return;
+    if(root.nodeType===3){ wrapTextNode(root); return; }
+    if(root.nodeType!==1 && root.nodeType!==9 && root.nodeType!==11) return;
+    if(root.nodeType===1 && SKIP[root.tagName]) return;
+    var walker=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var nodes=[],n;
+    while((n=walker.nextNode())){ if(n.nodeValue && n.nodeValue.indexOf('PulseAI')>=0) nodes.push(n); }
+    nodes.forEach(wrapTextNode);
+  }
+  var _busy=false;
+  function init(){
+    injectCss();
+    _busy=true; scan(document.body); _busy=false;
+    if(window.MutationObserver){
+      var obs=new MutationObserver(function(muts){
+        if(_busy) return;
+        _busy=true;
+        for(var i=0;i<muts.length;i++){
+          var added=muts[i].addedNodes;
+          for(var j=0;j<added.length;j++) scan(added[j]);
+        }
+        _busy=false;
+      });
+      obs.observe(document.body,{childList:true,subtree:true});
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
