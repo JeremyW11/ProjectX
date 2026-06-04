@@ -61,6 +61,30 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .pro-gate-desc{font-size:14px;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 24px;line-height:1.7;}
 .btn-pro-upgrade{display:inline-block;padding:12px 28px;background:var(--pro-gold);color:var(--navy-900);border-radius:var(--r-md);font-size:14px;font-weight:700;}
 
+/* DEV-TESTING LOCK */
+.lock-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);box-shadow:var(--shadow-card);overflow:hidden;margin-bottom:18px;}
+.lock-banner{background:linear-gradient(135deg,var(--navy-900),var(--navy-700));color:#fff;padding:30px 32px;}
+.lock-flag{display:inline-flex;align-items:center;gap:7px;background:var(--amber-100);color:var(--amber-600);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;font-family:var(--font-zh);margin-bottom:14px;}
+.lock-title{font-size:22px;font-weight:600;margin-bottom:8px;}
+.lock-desc{font-size:13.5px;color:rgba(255,255,255,.72);line-height:1.75;max-width:640px;}
+.lock-shot{padding:18px 22px;}
+.lock-shot-cap{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-400);font-family:var(--font-en);margin-bottom:10px;}
+.lock-shot svg{width:100%;height:auto;display:block;border:1px solid var(--gray-200);border-radius:var(--r-md);}
+.lock-cta{padding:4px 22px 26px;}
+.lock-note{font-size:13px;color:var(--gray-600);line-height:1.7;margin-bottom:14px;}
+.lock-note b{color:var(--navy-700);}
+.lock-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.btn-apply{padding:11px 24px;background:var(--navy-700);color:#fff;border-radius:var(--r-md);font-size:14px;font-weight:600;font-family:var(--font-zh);}
+.btn-apply:disabled{opacity:.5;cursor:default;}
+.apply-status{font-size:12.5px;font-family:var(--font-zh);}
+/* request panel */
+.apply-panel{display:none;margin-top:16px;border-top:1px dashed var(--gray-200);padding-top:16px;}
+.apply-panel.show{display:block;}
+.apply-field{font-size:12px;color:var(--gray-500);font-family:var(--font-zh);margin-bottom:5px;}
+.apply-email{font-size:13.5px;font-family:var(--font-en);color:var(--navy-700);background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-sm);padding:9px 11px;margin-bottom:13px;}
+.apply-ta{width:100%;min-height:84px;padding:10px 12px;border:1px solid var(--gray-300);border-radius:var(--r-sm);font-size:13.5px;font-family:var(--font-zh);line-height:1.6;resize:vertical;color:var(--gray-900);}
+.apply-submit-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;}
+
 /* CHART VIEW */
 .chart-view{display:none;}
 .chart-view.active{display:block;}
@@ -140,18 +164,85 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div class="page-header">
     <div>
       <h1 class="page-title">互動圖表 <span class="page-title-sub">PulseAI</span></h1>
-      <div class="page-update">AI 智能判讀的支撐 / 壓力區 · Pro 會員專屬</div>
+      <div class="page-update">AI 智能判讀的支撐 / 壓力區 · 開發測試中（審核開放）</div>
     </div>
   </div>
 
-  <!-- PRO GATE -->
-  <div id="pro-gate-view">
-    <div class="pro-gate">
-      <div class="pro-gate-icon">✦</div>
-      <h2 class="pro-gate-title"><em>Pulse</em>AI</h2>
-      <p class="pro-gate-desc">AI 捕捉市場脈動與支撐壓力——分析價量結構，自動標出主力進出的潛在支撐（綠）與壓力（紅）區間，直接畫在 K 線上。支援加密幣對與台股 / 美股，自由切換週期。</p>
-      <div class="pro-gate-btns">
-        <a href="/pages/login.html" class="btn-pro-upgrade">✦ 登入體驗 Pro</a>
+  <!-- DEV-TESTING LOCK -->
+  <div id="lock-view">
+    <div class="lock-card">
+      <div class="lock-banner">
+        <div class="lock-flag">🔧 功能開發測試中</div>
+        <div class="lock-title">PulseAI 互動圖表</div>
+        <div class="lock-desc">本工具由 AI 分析價量結構，自動在 K 線上標出主力進出的潛在支撐（綠）與壓力（紅）區間，支援加密幣對與台股 / 美股、自由切換週期。目前仍在內部測試階段，尚未對外開放——以下為功能介面預覽，讓你先了解大致樣貌，無需花費任何點數。</div>
+      </div>
+      <div class="lock-shot">
+        <div class="lock-shot-cap">介面預覽 · Interface Preview</div>
+        <svg viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans',sans-serif">
+          <rect width="800" height="380" fill="#fbfcfe"/>
+          <!-- controls bar -->
+          <rect x="16" y="14" width="768" height="40" rx="8" fill="#fff" stroke="#e2e8f0"/>
+          <rect x="28" y="26" width="92" height="16" rx="4" fill="#eef2f9"/><text x="34" y="38" font-size="11" fill="#64748b">ETHBTC</text>
+          <rect x="130" y="26" width="70" height="16" rx="4" fill="#eef2f9"/><text x="138" y="38" font-size="11" fill="#64748b">日線 ▾</text>
+          <rect x="210" y="25" width="48" height="18" rx="4" fill="#1d2d5a"/><text x="219" y="38" font-size="11" fill="#fff">查詢</text>
+          <rect x="612" y="26" width="74" height="16" rx="9" fill="#fff" stroke="#e2e8f0"/><text x="624" y="38" font-size="10" fill="#64748b">NVDA</text>
+          <rect x="694" y="26" width="78" height="16" rx="9" fill="#fff" stroke="#e2e8f0"/><text x="704" y="38" font-size="10" fill="#64748b">2330.TW</text>
+          <!-- chart panel -->
+          <rect x="16" y="66" width="768" height="210" rx="10" fill="#fff" stroke="#e2e8f0"/>
+          <!-- resistance zone -->
+          <rect x="28" y="84" width="744" height="34" fill="rgba(220,38,38,0.13)"/>
+          <line x1="28" y1="84" x2="772" y2="84" stroke="rgba(220,38,38,0.5)" stroke-width="1"/>
+          <text x="36" y="100" font-size="10" fill="#b91c1c" font-weight="600">壓力區 0.0612 – 0.0628</text>
+          <!-- support zone -->
+          <rect x="28" y="214" width="744" height="38" fill="rgba(22,163,74,0.14)"/>
+          <line x1="28" y1="252" x2="772" y2="252" stroke="rgba(22,163,74,0.55)" stroke-width="1"/>
+          <text x="36" y="248" font-size="10" fill="#15803d" font-weight="600">支撐區 0.0548 – 0.0564</text>
+          <!-- candles -->
+          <g stroke-width="6" stroke-linecap="butt">
+            <line x1="90" y1="150" x2="90" y2="210" stroke="#16a34a"/><line x1="90" y1="140" x2="90" y2="224" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="130" y1="130" x2="130" y2="170" stroke="#dc2626"/><line x1="130" y1="120" x2="130" y2="186" stroke="#dc2626" stroke-width="1.5"/>
+            <line x1="170" y1="140" x2="170" y2="195" stroke="#16a34a"/><line x1="170" y1="132" x2="170" y2="208" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="210" y1="118" x2="210" y2="150" stroke="#16a34a"/><line x1="210" y1="108" x2="210" y2="162" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="250" y1="110" x2="250" y2="138" stroke="#dc2626"/><line x1="250" y1="100" x2="250" y2="150" stroke="#dc2626" stroke-width="1.5"/>
+            <line x1="290" y1="128" x2="290" y2="172" stroke="#16a34a"/><line x1="290" y1="120" x2="290" y2="184" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="330" y1="150" x2="330" y2="200" stroke="#dc2626"/><line x1="330" y1="140" x2="330" y2="214" stroke="#dc2626" stroke-width="1.5"/>
+            <line x1="370" y1="180" x2="370" y2="226" stroke="#dc2626"/><line x1="370" y1="170" x2="370" y2="238" stroke="#dc2626" stroke-width="1.5"/>
+            <line x1="410" y1="200" x2="410" y2="232" stroke="#16a34a"/><line x1="410" y1="190" x2="410" y2="244" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="450" y1="168" x2="450" y2="222" stroke="#16a34a"/><line x1="450" y1="160" x2="450" y2="232" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="490" y1="150" x2="490" y2="190" stroke="#16a34a"/><line x1="490" y1="142" x2="490" y2="200" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="530" y1="132" x2="530" y2="166" stroke="#dc2626"/><line x1="530" y1="124" x2="530" y2="178" stroke="#dc2626" stroke-width="1.5"/>
+            <line x1="570" y1="120" x2="570" y2="156" stroke="#16a34a"/><line x1="570" y1="112" x2="570" y2="166" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="610" y1="100" x2="610" y2="134" stroke="#16a34a"/><line x1="610" y1="92" x2="610" y2="144" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="650" y1="108" x2="650" y2="140" stroke="#dc2626"/><line x1="650" y1="100" x2="650" y2="150" stroke="#dc2626" stroke-width="1.5"/>
+            <line x1="690" y1="126" x2="690" y2="168" stroke="#16a34a"/><line x1="690" y1="118" x2="690" y2="178" stroke="#16a34a" stroke-width="1.5"/>
+          </g>
+          <!-- zone columns -->
+          <rect x="16" y="290" width="376" height="74" rx="10" fill="#fff" stroke="#e2e8f0"/>
+          <circle cx="34" cy="310" r="5" fill="#dc2626"/><text x="46" y="314" font-size="12" fill="#0f172a" font-weight="600">AI 壓力區</text>
+          <text x="30" y="338" font-size="11" fill="#334155" font-family="'DM Sans'">0.0612 – 0.0628</text><text x="300" y="338" font-size="10" fill="#94a3b8">05/28</text>
+          <text x="30" y="356" font-size="11" fill="#334155" font-family="'DM Sans'">0.0655 – 0.0670</text><text x="300" y="356" font-size="10" fill="#94a3b8">05/19</text>
+          <rect x="408" y="290" width="376" height="74" rx="10" fill="#fff" stroke="#e2e8f0"/>
+          <circle cx="426" cy="310" r="5" fill="#16a34a"/><text x="438" y="314" font-size="12" fill="#0f172a" font-weight="600">AI 支撐區</text>
+          <text x="422" y="338" font-size="11" fill="#334155" font-family="'DM Sans'">0.0548 – 0.0564</text><text x="692" y="338" font-size="10" fill="#94a3b8">06/02</text>
+          <text x="422" y="356" font-size="11" fill="#334155" font-family="'DM Sans'">0.0502 – 0.0518</text><text x="692" y="356" font-size="10" fill="#94a3b8">05/24</text>
+        </svg>
+      </div>
+      <div class="lock-cta">
+        <div class="lock-note">想<b>搶先試用</b>？歡迎向官方提出申請，我們將進行審核並為通過的帳號開放使用權限。<span id="lock-login-hint" style="display:none;">（請先<a href="/pages/login.html" style="color:var(--navy-600);font-weight:600;">登入</a>再申請）</span></div>
+        <div class="lock-actions">
+          <button class="btn-apply" id="btn-apply" onclick="toggleApply()">申請搶先試用</button>
+          <span class="apply-status" id="apply-status"></span>
+        </div>
+        <div class="apply-panel" id="apply-panel">
+          <div class="apply-field">你的聯絡信箱（審核結果將回覆於此帳號）</div>
+          <div class="apply-email" id="apply-email">—</div>
+          <div class="apply-field">申請原因 / 使用情境</div>
+          <textarea class="apply-ta" id="apply-reason" maxlength="500" placeholder="簡述你想用這個功能做什麼、預期的標的或市場…（至少 5 字）"></textarea>
+          <div class="apply-submit-row">
+            <span class="apply-status" id="apply-msg"></span>
+            <button class="btn-apply" id="btn-apply-submit" onclick="submitApply()">送出申請</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -232,7 +323,8 @@ tick(); setInterval(tick,1000);
 var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
 var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
 var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-var _session=null;
+var _session=null, _user=null;
+var ADMIN_EMAIL='jermy831102@gmail.com';
 
 function initAuth(){
   _supabase.auth.onAuthStateChange(function(event,session){
@@ -247,30 +339,85 @@ function initAuth(){
 }
 
 function setAuthState(user){
-  var gateEl=document.getElementById('pro-gate-view');
+  _user=user||null;
+  var lockEl=document.getElementById('lock-view');
   var viewEl=document.getElementById('chart-view');
   var btnEl=document.getElementById('auth-btn');
   if(user){
     if(btnEl){ btnEl.textContent='登出'; btnEl.href='#'; btnEl.onclick=function(e){e.preventDefault();signOutUser();}; }
-    checkProStatus(user, gateEl, viewEl);
+    checkAccess(user, lockEl, viewEl);
   } else {
-    if(gateEl) gateEl.style.display='block';
+    if(lockEl) lockEl.style.display='block';
     if(viewEl) viewEl.classList.remove('active');
     if(btnEl){ btnEl.textContent='登入'; btnEl.href='/pages/login.html'; btnEl.onclick=null; }
+    showLoggedOut();
   }
 }
 
-async function checkProStatus(user, gateEl, viewEl){
-  var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
-  var isPro = result.data && result.data.is_pro === true;
-  if(isPro){
-    if(gateEl) gateEl.style.display='none';
+async function checkAccess(user, lockEl, viewEl){
+  var granted = (user.email===ADMIN_EMAIL);
+  if(!granted){
+    var result = await _supabase.from('profiles').select('chart_access').eq('id', user.id).single();
+    granted = result.data && result.data.chart_access === true;
+  }
+  if(granted){
+    if(lockEl) lockEl.style.display='none';
     if(viewEl) viewEl.classList.add('active');
     initChart();
   } else {
-    if(gateEl) gateEl.style.display='block';
+    if(lockEl) lockEl.style.display='block';
     if(viewEl) viewEl.classList.remove('active');
+    prepApply(user);
   }
+}
+
+// ── 搶先試用申請 ──
+function showLoggedOut(){
+  var hint=document.getElementById('lock-login-hint');
+  var btn=document.getElementById('btn-apply');
+  var emailEl=document.getElementById('apply-email');
+  if(hint) hint.style.display='inline';
+  if(emailEl) emailEl.textContent='—';
+  if(btn){ btn.disabled=false; btn.textContent='登入後申請'; btn.onclick=function(){ window.location.href='/pages/login.html'; }; }
+}
+
+async function prepApply(user){
+  var hint=document.getElementById('lock-login-hint');
+  if(hint) hint.style.display='none';
+  var emailEl=document.getElementById('apply-email');
+  if(emailEl) emailEl.textContent=user.email||'(無信箱)';
+  var btn=document.getElementById('btn-apply');
+  if(btn){ btn.disabled=false; btn.textContent='申請搶先試用'; btn.onclick=toggleApply; }
+  // 查既有申請狀態
+  var res=await _supabase.from('feedback').select('status,reply,created_at').eq('user_id',user.id).eq('category','chart_access').order('created_at',{ascending:false}).limit(1);
+  var st=document.getElementById('apply-status');
+  if(res.data && res.data.length){
+    var r=res.data[0], s=r.status||'pending';
+    if(s==='granted'){ if(st){ st.textContent='✓ 已開放，請重新整理頁面'; st.style.color='var(--green-600)'; } }
+    else if(s==='denied'){ if(st){ st.textContent='上次申請未通過'+(r.reply?'：'+r.reply:'')+'，可重新提出'; st.style.color='var(--gray-500)'; } }
+    else { if(st){ st.textContent='⏳ 申請審核中，請耐心等候'; st.style.color='var(--amber-600)'; } if(btn){ btn.disabled=true; btn.textContent='申請審核中'; } }
+  }
+}
+
+function toggleApply(){
+  var p=document.getElementById('apply-panel');
+  if(p) p.classList.toggle('show');
+}
+
+async function submitApply(){
+  if(!_user){ window.location.href='/pages/login.html'; return; }
+  var ta=document.getElementById('apply-reason');
+  var btn=document.getElementById('btn-apply-submit');
+  var msg=document.getElementById('apply-msg');
+  var reason=(ta.value||'').trim();
+  if(reason.length<5){ if(msg){ msg.textContent='請至少填寫 5 個字'; msg.style.color='var(--red-600)'; } return; }
+  btn.disabled=true; btn.textContent='送出中…';
+  var res=await _supabase.from('feedback').insert({ user_id:_user.id, content:reason, category:'chart_access' });
+  btn.disabled=false; btn.textContent='送出申請';
+  if(res.error){ if(msg){ msg.textContent='送出失敗，請稍後再試'; msg.style.color='var(--red-600)'; } return; }
+  ta.value='';
+  if(msg){ msg.textContent='✓ 已送出，官方審核後將回覆於你的帳號'; msg.style.color='var(--green-600)'; }
+  prepApply(_user);
 }
 
 async function signOutUser(){

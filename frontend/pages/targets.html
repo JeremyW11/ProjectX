@@ -911,9 +911,9 @@ async function loadFeedbackHistory(){
   if(!box) return;
   var res=await _supabase.from('feedback').select('content,status,created_at,reply').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(5);
   if(res.error||!res.data||!res.data.length){ box.innerHTML=''; return; }
-  var label={ pending:'審核中', adopted:'已採納 +10 點', rejected:'未採納' };
-  var color={ pending:'var(--gray-400)', adopted:'var(--navy-600)', rejected:'var(--gray-400)' };
-  var bg={ pending:'var(--gray-100)', adopted:'var(--navy-50)', rejected:'var(--gray-100)' };
+  var label={ pending:'審核中', adopted:'已採納 +10 點', rejected:'未採納', granted:'圖表已開放', denied:'未通過' };
+  var color={ pending:'var(--gray-400)', adopted:'var(--navy-600)', rejected:'var(--gray-400)', granted:'var(--navy-600)', denied:'var(--gray-400)' };
+  var bg={ pending:'var(--gray-100)', adopted:'var(--navy-50)', rejected:'var(--gray-100)', granted:'var(--navy-50)', denied:'var(--gray-100)' };
   function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   box.innerHTML='<div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);margin-bottom:8px;">我的回饋紀錄</div>'+res.data.map(function(f){
     var st=f.status||'pending';
