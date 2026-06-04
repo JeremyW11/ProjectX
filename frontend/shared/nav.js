@@ -43,11 +43,11 @@
 (function(){
   var LOGO_CSS = ".pulseai-logo{display:inline-flex;align-items:baseline;font-family:'DM Sans','Noto Sans TC',sans-serif;font-weight:600;letter-spacing:-.01em;white-space:nowrap;font-style:normal;background:linear-gradient(135deg,#1e40af,#2563eb 50%,#0ea5e9);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.30),inset 0 -1px 1px rgba(0,0,0,.22),0 1px 3px rgba(8,15,40,.45);color:#fff;border-radius:.45em;padding:.1em .46em;line-height:1.15;vertical-align:baseline;}"
     + ".pulseai-logo .pa-pulse,.pulseai-logo .pa-ai{-webkit-text-fill-color:initial;}"
-    + ".pulseai-logo .pa-pulse{color:#f4f8ff;text-shadow:0 1px 1px rgba(0,0,0,.35);}"
-    + ".pulseai-logo .pa-ai{font-weight:700;color:#9af0fb;margin-left:.02em;text-shadow:0 1px 1px rgba(0,0,0,.35);}"
+    + ".pulseai-logo .pa-pulse{font-weight:700;color:#ffffff;text-shadow:0 1px 2px rgba(0,0,0,.45);}"
+    + ".pulseai-logo .pa-ai{font-weight:800;color:#a5f9ff;margin-left:.04em;text-shadow:0 1px 2px rgba(0,0,0,.45);}"
     + "@supports ((-webkit-background-clip:text) or (background-clip:text)){"
-    + ".pulseai-logo .pa-pulse{background:linear-gradient(180deg,#ffffff 0%,#ffffff 42%,#d4e1f8 60%,#f3f7ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}"
-    + ".pulseai-logo .pa-ai{background:linear-gradient(180deg,#ecfdff 0%,#a5f3fc 44%,#3fdcf5 62%,#cdf7fd 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}}";
+    + ".pulseai-logo .pa-pulse{background:linear-gradient(180deg,#ffffff 0%,#ffffff 55%,#eaf1ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}"
+    + ".pulseai-logo .pa-ai{background:linear-gradient(180deg,#dffcff 0%,#9bf6ff 55%,#5ee7f5 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}}";
   function injectCss(){
     if(document.getElementById('pulseai-logo-css')) return;
     var s=document.createElement('style'); s.id='pulseai-logo-css'; s.textContent=LOGO_CSS;
