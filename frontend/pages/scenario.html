@@ -313,22 +313,26 @@ async function runScenario() {
   currentResult = null;
 
   try {
-    // 先扣點
+    // 取得登入 token（後端會以此驗證 Pro 身分）
+    var sessionRes = await _supabase.auth.getSession();
+    var accessToken = sessionRes.data.session ? sessionRes.data.session.access_token : '';
+
+    // 先呼叫後端推演，成功才扣點（避免推演失敗或無權限仍扣點）
+    var resp = await fetch(BACKEND + '/scenario', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + accessToken },
+      body: JSON.stringify({ question: q })
+    });
+    if (resp.status === 403) throw new Error('AI 推演沙盤僅開放 Pro 會員使用');
+    var data = await resp.json();
+    if (!data.success) throw new Error(data.error || 'AI 推演失敗，請重試');
+
+    // 推演成功才扣點
     var deductRes = await _supabase.rpc('deduct_credits', { user_uuid: currentUser.id, amount: 4 });
     if (deductRes.error) throw new Error('扣點失敗：' + deductRes.error.message);
-
     currentCredits -= 4;
     document.getElementById('credits-num').textContent = currentCredits;
     document.getElementById('credits-inline').textContent = currentCredits;
-
-    // 呼叫後端
-    var resp = await fetch(BACKEND + '/scenario', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question: q })
-    });
-    var data = await resp.json();
-    if (!data.success) throw new Error(data.error || 'AI 推演失敗，請重試');
 
     currentResult = data.result;
     renderResult(data.result);
