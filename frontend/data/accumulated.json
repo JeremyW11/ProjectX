@@ -4181,34 +4181,145 @@
       "title": "美伊霍爾木茲航運危機",
       "category": "地緣",
       "started": "2026-06-03",
-      "status": "升溫",
-      "direction": "看多",
+      "status": "緩和",
+      "direction": "中性",
       "affect_assets": "Brent原油、黃金、航運股、避險資產",
-      "summary": "美伊封鎖外交升級霍爾木茲航運風險,Brent漲至96.82美元,黃金衝4481,避險需求升溫",
-      "last_update": "2026-06-03",
+      "summary": "川普稱伊朗同意不發展核武,WTI連三漲至95美元,封鎖風險暫緩但油價仍偏強",
+      "last_update": "2026-06-04",
       "timeline": [
         {
           "date": "2026-06-03",
           "update": "美伊封鎖外交升級,Brent漲96.82黃金衝4481",
           "sentiment": "利空",
           "source_url": ""
+        },
+        {
+          "date": "2026-06-04",
+          "update": "川普稱伊朗同意不發展核武WTI連三漲至95",
+          "sentiment": "中性",
+          "source_url": ""
         }
       ]
     },
     {
-      "id": "oecd-outlook-2026",
-      "title": "OECD全球經濟展望",
-      "category": "總經",
-      "started": "2026-06-03",
-      "status": "進行中",
+      "id": "fomc-warsh-debut",
+      "title": "Warsh首場FOMC會議",
+      "category": "貨幣",
+      "started": "2026-06-02",
+      "status": "升溫",
       "direction": "中性",
-      "affect_assets": "全球股市、匯市、債市",
-      "summary": "OECD今日發布全球經濟展望,提供景氣指引與央行政策走向參考",
-      "last_update": "2026-06-03",
+      "affect_assets": "美債、美股、美元、黃金",
+      "summary": "6月FOMC市場共識按兵不動利率維持3.50-3.75%,Warsh首場主持鴿鷹立場成焦點",
+      "last_update": "2026-06-04",
       "timeline": [
         {
+          "date": "2026-06-02",
+          "update": "FOMC 6/16-17召開Warsh首場主持鷹派轉向風險",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-04",
+          "update": "市場共識6月按兵不動利率維持3.50-3.75%",
+          "sentiment": "中性",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "sp500-record-rally",
+      "title": "S&P500破7600連九漲",
+      "category": "總經",
+      "started": "2026-06-02",
+      "status": "升溫",
+      "direction": "看多",
+      "affect_assets": "美股大盤、科技股、ETF",
+      "summary": "S&P 500首次收上7600創歷史新高,連續九日上漲創2025-05來最長,風險偏好強勁",
+      "last_update": "2026-06-04",
+      "timeline": [
+        {
+          "date": "2026-06-02",
+          "update": "S&P 500首破7600創高連九日上漲",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-04",
+          "update": "連九日上漲創2025-05來最長紀錄",
+          "sentiment": "利多",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "ai-chip-supply-chain",
+      "title": "AI晶片供應鏈題材",
+      "category": "科技",
+      "started": "2026-06-01",
+      "status": "升溫",
+      "direction": "看多",
+      "affect_assets": "NVDA、MRVL、AVGO、TSMC、半導體ETF",
+      "summary": "Marvell飆33%黃仁勳點名兆元,Broadcom Q2 AI營收84億年增106%,WSTS估2026市場1.51兆",
+      "last_update": "2026-06-04",
+      "timeline": [
+        {
+          "date": "2026-06-02",
+          "update": "Marvell暴漲25%黃仁勳稱兆元潛力TSMC破443新高",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-02",
+          "update": "STMicro上修資料中心展望至1B HPE暴漲25%",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-02",
+          "update": "Marvell飆33%黃仁勳點名兆元TSMC破443",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
           "date": "2026-06-03",
-          "update": "OECD全球經濟展望今日發布提供景氣指引",
+          "update": "Broadcom Q2 AI營收84億美元年增106%",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-04",
+          "update": "WSTS估2026半導體市場1.51兆美元年增90%",
+          "sentiment": "利多",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "ai-pc-platform-war",
+      "title": "AI PC平台競賽",
+      "category": "科技",
+      "started": "2026-06-01",
+      "status": "進行中",
+      "direction": "中性",
+      "affect_assets": "NVDA、AMD、INTC、QCOM、MSFT",
+      "summary": "NVDA Computex發表RTX Spark進軍PC,MSFT Build揭MAI-Code-1-Flash降低OpenAI依賴",
+      "last_update": "2026-06-04",
+      "timeline": [
+        {
+          "date": "2026-06-01",
+          "update": "NVIDIA RTX Spark超晶片進軍PC AMD INTC QCOM下跌",
+          "sentiment": "中性",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-02",
+          "update": "Microsoft Build 2026揭MAI-Code-1-Flash",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-04",
+          "update": "MSFT MAI-Code-1-Flash降低OpenAI依賴",
           "sentiment": "中性",
           "source_url": ""
         }
@@ -4234,113 +4345,57 @@
       ]
     },
     {
-      "id": "crypto-fear-extreme",
-      "title": "加密極度恐懼",
-      "category": "總經",
+      "id": "us-forced-labor-tariff",
+      "title": "美擬60國強迫勞動關稅",
+      "category": "貿易",
       "started": "2026-06-03",
       "status": "升溫",
       "direction": "看空",
-      "affect_assets": "BTC、ETH、加密相關股票",
-      "summary": "加密市值跌至2.32T,Fear & Greed指數11進入極度恐懼區,與美股創高背離",
+      "affect_assets": "亞洲出口鏈、台股、日韓股、供應鏈ETF",
+      "summary": "美擬對60國課10%強迫勞動關稅,涵蓋中日韓台,亞洲出口鏈面臨重大關稅風險",
       "last_update": "2026-06-03",
       "timeline": [
         {
           "date": "2026-06-03",
-          "update": "加密市值跌至2.32T F&G指數11極度恐懼",
+          "update": "美擬對60國課10%強迫勞動關稅含中日韓台",
           "sentiment": "利空",
           "source_url": ""
         }
       ]
     },
     {
-      "id": "fomc-warsh-debut",
-      "title": "Warsh首場FOMC會議",
-      "category": "貨幣",
-      "started": "2026-06-02",
-      "status": "升溫",
-      "direction": "看空",
-      "affect_assets": "美債、美股、美元、黃金",
-      "summary": "FOMC 6/16-17召開為Warsh首場主持,市場關注鷹派轉向風險,可能衝擊風險資產",
-      "last_update": "2026-06-02",
-      "timeline": [
-        {
-          "date": "2026-06-02",
-          "update": "FOMC 6/16-17召開Warsh首場主持鷹派轉向風險",
-          "sentiment": "利空",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "sp500-record-rally",
-      "title": "S&P500破7600連九漲",
-      "category": "總經",
-      "started": "2026-06-02",
+      "id": "clarity-act-crypto",
+      "title": "CLARITY Act加密立法",
+      "category": "貿易",
+      "started": "2026-06-03",
       "status": "升溫",
       "direction": "看多",
-      "affect_assets": "美股大盤、科技股、ETF",
-      "summary": "S&P 500首次收上7600創歷史新高,連續九日上漲,風險偏好強勁",
-      "last_update": "2026-06-02",
+      "affect_assets": "BTC、ETH、加密股、Coinbase",
+      "summary": "CLARITY Act進入參院最後階段,預計8月前簽署,加密產業監管框架確立",
+      "last_update": "2026-06-03",
       "timeline": [
         {
-          "date": "2026-06-02",
-          "update": "S&P 500首破7600創高連九日上漲",
+          "date": "2026-06-03",
+          "update": "CLARITY Act進參院最後階段8月前簽署",
           "sentiment": "利多",
           "source_url": ""
         }
       ]
     },
     {
-      "id": "ai-chip-supply-chain",
-      "title": "AI晶片供應鏈題材",
-      "category": "科技",
-      "started": "2026-06-01",
-      "status": "升溫",
-      "direction": "看多",
-      "affect_assets": "NVDA、MRVL、TSMC、STM、HPE、半導體ETF",
-      "summary": "Marvell暴漲25%黃仁勳稱兆元潛力,TSMC破443新高3nm下半年漲價15%,SIA稱半導體佔AI伺服器95%價值",
-      "last_update": "2026-06-02",
-      "timeline": [
-        {
-          "date": "2026-06-01",
-          "update": "SIA報告半導體佔AI伺服器95%價值",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-02",
-          "update": "Marvell暴漲25%黃仁勳稱兆元潛力TSMC破443新高",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-02",
-          "update": "STMicro上修資料中心展望至1B HPE暴漲25%",
-          "sentiment": "利多",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "ai-pc-platform-war",
-      "title": "AI PC平台競賽",
-      "category": "科技",
-      "started": "2026-06-01",
+      "id": "opec-june-output",
+      "title": "OPEC+ 6月象徵增產",
+      "category": "能源",
+      "started": "2026-06-03",
       "status": "進行中",
-      "direction": "中性",
-      "affect_assets": "NVDA、AMD、INTC、QCOM、MSFT",
-      "summary": "NVIDIA RTX Spark超晶片進軍PC市場,AMD/INTC/QCOM因缺AI PC整合方案下跌,Microsoft Build揭MAI-Code-1-",
-      "last_update": "2026-06-02",
+      "direction": "看多",
+      "affect_assets": "Brent、WTI、能源股、產油國資產",
+      "summary": "OPEC+ 6月象徵性增產18.8萬桶UAE退出,供給仍偏緊原油價格偏強",
+      "last_update": "2026-06-03",
       "timeline": [
         {
-          "date": "2026-06-01",
-          "update": "NVIDIA RTX Spark超晶片進軍PC AMD INTC QCOM下跌",
-          "sentiment": "中性",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-02",
-          "update": "Microsoft Build 2026揭MAI-Code-1-Flash",
+          "date": "2026-06-03",
+          "update": "OPEC+ 6月象徵增產18.8萬桶UAE退出",
           "sentiment": "利多",
           "source_url": ""
         }
@@ -4354,32 +4409,13 @@
       "status": "進行中",
       "direction": "看空",
       "affect_assets": "GOOGL、大型科技股、AI基建相關",
-      "summary": "Alphabet發行800億美元股票籌資導致股價重挫4%,市場憂慮AI資本開支壓力",
+      "summary": "Alphabet售股募資800億支應AI基建股價重挫4%,市場憂慮AI資本開支壓力",
       "last_update": "2026-06-02",
       "timeline": [
         {
           "date": "2026-06-02",
           "update": "Alphabet重挫4%發行800億美元股票籌資",
           "sentiment": "利空",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "spacex-ipo-roadshow",
-      "title": "SpaceX掛牌路演",
-      "category": "科技",
-      "started": "2026-06-02",
-      "status": "升溫",
-      "direction": "看多",
-      "affect_assets": "SpaceX、太空產業鏈、IPO市場情緒",
-      "summary": "SpaceX路演啟動預計6/12 Nasdaq掛牌,帶動太空科技與IPO市場熱度",
-      "last_update": "2026-06-02",
-      "timeline": [
-        {
-          "date": "2026-06-02",
-          "update": "SpaceX路演啟動6/12 Nasdaq掛牌",
-          "sentiment": "利多",
           "source_url": ""
         }
       ]
