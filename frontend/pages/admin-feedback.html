@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Project X · 意見回饋後台</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-900:#0d1630; --navy-800:#152244; --navy-700:#1d2d5a; --navy-600:#1e3a8a;
+  --navy-500:#2563eb; --navy-100:#dbeafe; --navy-50:#eff6ff;
+  --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569; --gray-500:#64748b;
+  --gray-400:#94a3b8; --gray-300:#cbd5e1; --gray-200:#e2e8f0; --gray-100:#f1f5f9;
+  --gray-50:#f8fafc; --white:#ffffff;
+  --green-600:#16a34a; --green-100:#dcfce7; --green-50:#f0fdf4;
+  --red-600:#dc2626; --red-100:#fee2e2; --red-50:#fef2f2;
+  --amber-600:#d97706; --amber-100:#fef3c7;
+  --font-en:'DM Sans',sans-serif; --font-zh:'Noto Sans TC',sans-serif;
+  --r-sm:6px; --r-md:10px; --r-lg:16px;
+  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:linear-gradient(160deg,#dbe2ef 0%,#f4f6fb 56%);background-attachment:fixed;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;}
+.tb-brand{font-size:15px;font-weight:600;color:var(--navy-900);}
+.tb-brand span{color:var(--gray-400);font-family:var(--font-en);font-weight:400;font-size:12px;margin-left:6px;}
+.tb-right{font-size:12px;color:var(--gray-500);font-family:var(--font-en);}
+main{max-width:760px;margin:0 auto;padding:88px 20px 60px;}
+.page-title{font-size:24px;font-weight:600;color:var(--navy-900);}
+.page-sub{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
+.filters{display:flex;gap:8px;margin:18px 0;}
+.fbtn{font-size:13px;font-family:var(--font-zh);padding:7px 14px;border:1px solid var(--gray-200);background:var(--white);border-radius:var(--r-sm);color:var(--gray-600);cursor:pointer;transition:all .15s;}
+.fbtn.active{background:var(--navy-700);color:var(--white);border-color:var(--navy-700);}
+.card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:16px 18px;margin-bottom:12px;}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;}
+.who{font-size:13px;font-weight:600;color:var(--navy-700);}
+.who small{font-weight:400;color:var(--gray-400);font-family:var(--font-en);margin-left:6px;}
+.tag{font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:10px;font-family:var(--font-zh);}
+.tag.pending{background:var(--amber-100);color:var(--amber-600);}
+.tag.adopted{background:var(--green-100);color:var(--green-600);}
+.tag.rejected{background:var(--gray-100);color:var(--gray-500);}
+.content{font-size:13.5px;color:var(--gray-700);line-height:1.7;white-space:pre-wrap;word-break:break-word;}
+.actions{display:flex;gap:8px;margin-top:14px;}
+.act{font-size:12.5px;font-family:var(--font-zh);font-weight:500;padding:7px 16px;border-radius:var(--r-sm);cursor:pointer;border:1px solid transparent;transition:all .15s;}
+.act-adopt{background:var(--green-600);color:var(--white);}
+.act-adopt:hover{opacity:.88;}
+.act-reject{background:var(--white);color:var(--gray-600);border-color:var(--gray-200);}
+.act-reject:hover{background:var(--gray-50);}
+.act:disabled{opacity:.5;cursor:default;}
+.muted{text-align:center;color:var(--gray-400);font-size:13px;padding:40px 20px;}
+.gate{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--r-lg);padding:48px 32px;text-align:center;color:var(--white);}
+.gate h2{font-size:20px;margin-bottom:10px;}
+.gate p{font-size:13.5px;color:rgba(255,255,255,.66);line-height:1.7;}
+.gate a{display:inline-block;margin-top:18px;padding:9px 20px;background:var(--white);color:var(--navy-800);border-radius:var(--r-sm);font-size:13px;font-weight:600;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="tb-brand">Project X<span>意見回饋後台</span></div>
+  <div class="tb-right" id="tb-user"></div>
+</div>
+<main>
+  <div id="gate" class="gate" style="display:none;">
+    <h2>需要管理員權限</h2>
+    <p id="gate-msg">此頁僅限管理員存取，請以管理員帳號登入。</p>
+    <a href="/pages/login.html">前往登入</a>
+  </div>
+
+  <div id="admin-view" style="display:none;">
+    <div class="page-title">意見回饋審閱</div>
+    <div class="page-sub">採納後系統自動為該使用者 +10 永久點數，不可重複發放。</div>
+    <div class="filters">
+      <button class="fbtn active" data-f="pending" onclick="setFilter('pending',this)">審核中 <span id="c-pending"></span></button>
+      <button class="fbtn" data-f="adopted" onclick="setFilter('adopted',this)">已採納 <span id="c-adopted"></span></button>
+      <button class="fbtn" data-f="rejected" onclick="setFilter('rejected',this)">未採納 <span id="c-rejected"></span></button>
+      <button class="fbtn" data-f="all" onclick="setFilter('all',this)">全部</button>
+    </div>
+    <div id="list"><div class="muted">載入中…</div></div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+var ADMIN_EMAIL='jermy831102@gmail.com';
+var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
+var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+var _sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+var _all=[], _names={}, _filter='pending';
+
+_sb.auth.onAuthStateChange(function(ev,session){
+  if(ev==='INITIAL_SESSION'||ev==='SIGNED_IN'||ev==='TOKEN_REFRESHED'){
+    onAuth(session?session.user:null);
+  } else if(ev==='SIGNED_OUT'){ onAuth(null); }
+});
+
+function onAuth(user){
+  var gate=document.getElementById('gate');
+  var view=document.getElementById('admin-view');
+  var tb=document.getElementById('tb-user');
+  if(user && user.email===ADMIN_EMAIL){
+    gate.style.display='none'; view.style.display='block';
+    tb.textContent=user.email;
+    loadAll();
+  } else {
+    view.style.display='none'; gate.style.display='block';
+    tb.textContent=user?user.email:'';
+    if(user){ document.getElementById('gate-msg').textContent='帳號 '+user.email+' 沒有管理員權限。'; }
+  }
+}
+
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmtDate(s){ var d=new Date(s); var p=function(n){return n<10?'0'+n:n;}; return (d.getMonth()+1)+'/'+d.getDate()+' '+p(d.getHours())+':'+p(d.getMinutes()); }
+
+async function loadAll(){
+  var res=await _sb.from('feedback').select('id,user_id,content,status,created_at').order('created_at',{ascending:false});
+  if(res.error){ document.getElementById('list').innerHTML='<div class="muted">讀取失敗：'+esc(res.error.message)+'</div>'; return; }
+  _all=res.data||[];
+  var ids=[].concat.apply([],_all.map(function(f){return f.user_id;})).filter(function(v,i,a){return a.indexOf(v)===i;});
+  if(ids.length){
+    var pr=await _sb.from('profiles').select('id,display_name').in('id',ids);
+    if(pr.data){ pr.data.forEach(function(p){ _names[p.id]=p.display_name||''; }); }
+  }
+  render();
+}
+
+function setFilter(f,btn){
+  _filter=f;
+  var bs=document.querySelectorAll('.fbtn'); for(var i=0;i<bs.length;i++) bs[i].classList.remove('active');
+  btn.classList.add('active');
+  render();
+}
+
+function render(){
+  var counts={pending:0,adopted:0,rejected:0};
+  _all.forEach(function(f){ var s=f.status||'pending'; if(counts[s]!==undefined) counts[s]++; });
+  document.getElementById('c-pending').textContent='('+counts.pending+')';
+  document.getElementById('c-adopted').textContent='('+counts.adopted+')';
+  document.getElementById('c-rejected').textContent='('+counts.rejected+')';
+
+  var rows=_all.filter(function(f){ return _filter==='all' || (f.status||'pending')===_filter; });
+  var box=document.getElementById('list');
+  if(!rows.length){ box.innerHTML='<div class="muted">沒有符合的回饋</div>'; return; }
+  var label={pending:'審核中',adopted:'已採納 +10',rejected:'未採納'};
+  box.innerHTML=rows.map(function(f){
+    var st=f.status||'pending';
+    var name=_names[f.user_id]||'(未命名)';
+    var uid=(f.user_id||'').slice(0,8);
+    var acts='';
+    if(st==='pending'){
+      acts='<div class="actions">'
+        +'<button class="act act-adopt" onclick="decide(\''+f.id+'\',\'adopted\',this)">採納並 +10 點</button>'
+        +'<button class="act act-reject" onclick="decide(\''+f.id+'\',\'rejected\',this)">不採納</button></div>';
+    }
+    return '<div class="card">'
+      +'<div class="card-top"><div class="who">'+esc(name)+'<small>'+uid+'</small></div>'
+      +'<div style="display:flex;align-items:center;gap:8px;">'
+      +'<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">'+fmtDate(f.created_at)+'</span>'
+      +'<span class="tag '+st+'">'+label[st]+'</span></div></div>'
+      +'<div class="content">'+esc(f.content)+'</div>'+acts+'</div>';
+  }).join('');
+}
+
+async function decide(id,status,btn){
+  if(status==='adopted' && !confirm('確定採納這則意見？將自動為該使用者 +10 永久點數。')) return;
+  var card=btn.closest('.card');
+  var btns=card.querySelectorAll('.act'); for(var i=0;i<btns.length;i++) btns[i].disabled=true;
+  var res=await _sb.from('feedback').update({status:status}).eq('id',id);
+  if(res.error){ alert('操作失敗：'+res.error.message); for(var j=0;j<btns.length;j++) btns[j].disabled=false; return; }
+  var item=_all.filter(function(f){return f.id===id;})[0];
+  if(item) item.status=status;
+  render();
+}
+</script>
+</body>
+</html>
