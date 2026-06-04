@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Project X · 會員中心（側欄版範例）</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-950:#070d1c;--navy-900:#0d1630;--navy-800:#152244;--navy-700:#1d2d5a;
+  --navy-600:#1e3a8a;--navy-500:#2563eb;--navy-400:#3b82f6;--navy-300:#93c5fd;
+  --navy-100:#dbeafe;--navy-50:#eff6ff;
+  --gray-900:#0f172a;--gray-700:#334155;--gray-600:#475569;--gray-500:#64748b;
+  --gray-400:#94a3b8;--gray-300:#cbd5e1;--gray-200:#e2e8f0;--gray-100:#f1f5f9;
+  --gray-50:#f8fafc;--white:#ffffff;
+  --green-600:#16a34a;--green-100:#dcfce7;--green-50:#f0fdf4;
+  --red-600:#dc2626;--red-100:#fee2e2;
+  --amber-600:#d97706;--amber-100:#fef3c7;
+  --pro-gold:#c9a84c;
+  --font-en:'DM Sans',sans-serif;--font-zh:'Noto Sans TC',sans-serif;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:24px;
+  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:radial-gradient(1120px 640px at 94% -14%, rgba(37,99,235,.40), transparent 64%),linear-gradient(160deg,#dbe2ef 0%,#f4f6fb 56%);background-attachment:fixed;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:100;}
+.topbar-logo{display:flex;align-items:center;gap:10px;margin-right:28px;}
+.logo-badge{width:30px;height:30px;background:var(--navy-700);border-radius:8px;display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--font-en);}
+.logo-text{font-size:15px;font-weight:600;color:var(--navy-900);font-family:var(--font-en);letter-spacing:.04em;}
+.header-nav{display:flex;align-items:center;gap:2px;flex:1;}
+.nav-item{font-size:13.5px;color:var(--gray-600);padding:6px 12px;border-radius:var(--r-sm);font-weight:500;display:flex;align-items:center;gap:6px;}
+.nav-item:hover{background:var(--gray-100);color:var(--navy-700);}
+.nav-item.active{background:var(--navy-50);color:var(--navy-700);font-weight:600;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-500);}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green-600);}
+.header-user{font-size:13px;color:var(--navy-700);font-weight:600;}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;}
+
+/* layout */
+.hub{max-width:1180px;margin:0 auto;padding:80px 24px 60px;display:grid;grid-template-columns:212px 1fr;gap:24px;align-items:start;}
+
+/* sidebar */
+.side{position:sticky;top:80px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:14px;}
+.side-user{display:flex;align-items:center;gap:10px;padding:8px 8px 14px;border-bottom:1px solid var(--gray-100);margin-bottom:10px;}
+.side-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--navy-600),var(--navy-800));display:grid;place-items:center;color:#fff;font-weight:600;font-family:var(--font-en);flex-shrink:0;}
+.side-uname{font-size:13.5px;font-weight:600;color:var(--navy-900);}
+.side-tag{font-size:10px;color:var(--pro-gold);font-weight:700;font-family:var(--font-en);letter-spacing:.05em;}
+.side-item{width:100%;text-align:left;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r-md);font-size:13.5px;color:var(--gray-600);font-weight:500;margin-bottom:3px;transition:all .15s;}
+.side-item:hover{background:var(--gray-50);color:var(--navy-700);}
+.side-item.active{background:var(--navy-50);color:var(--navy-700);font-weight:600;}
+.side-ico{font-size:16px;width:20px;text-align:center;}
+.side-item .star{margin-left:auto;font-size:10px;color:var(--pro-gold);}
+.side-credits{margin-top:10px;padding:12px;background:var(--navy-900);border-radius:var(--r-md);color:#fff;}
+.side-credits .lbl{font-size:10px;color:rgba(255,255,255,.45);font-family:var(--font-en);letter-spacing:.08em;text-transform:uppercase;}
+.side-credits .val{font-size:22px;font-weight:600;color:var(--pro-gold);font-family:var(--font-en);}
+
+/* content */
+.cat{display:none;}
+.cat.active{display:block;}
+.cat-head{margin-bottom:18px;}
+.cat-title{font-size:22px;font-weight:600;color:var(--navy-900);}
+.cat-title .en{font-size:13px;color:var(--gray-400);font-family:var(--font-en);font-weight:400;margin-left:8px;}
+.cat-desc{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
+
+.block{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);box-shadow:var(--shadow-card);margin-bottom:16px;overflow:hidden;}
+.block-h{padding:14px 18px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;}
+.block-t{font-size:14px;font-weight:600;color:var(--navy-900);}
+.block-t .en{font-size:10px;color:var(--gray-400);font-family:var(--font-en);margin-left:6px;letter-spacing:.05em;}
+.badge{font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px;background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);font-family:var(--font-en);}
+.block-b{padding:16px 18px;font-size:13px;color:var(--gray-600);line-height:1.7;}
+
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
+.tcard{border:1px solid var(--gray-200);border-radius:var(--r-md);padding:12px;}
+.tcard .sym{font-size:14px;font-weight:600;color:var(--navy-900);font-family:var(--font-en);}
+.tcard .nm{font-size:11px;color:var(--gray-400);margin:2px 0 6px;}
+.tcard .px{font-size:13px;font-weight:600;font-family:var(--font-en);}
+.up{color:var(--green-600);}.down{color:var(--red-600);}
+
+.ai-card{display:flex;align-items:center;justify-content:space-between;gap:14px;background:linear-gradient(135deg,var(--navy-800),var(--navy-600));border-radius:var(--r-lg);padding:18px 20px;color:#fff;margin-bottom:14px;}
+.ai-card .t{font-size:15px;font-weight:600;}
+.ai-card .d{font-size:12px;color:rgba(255,255,255,.6);margin-top:3px;}
+.ai-go{font-size:12px;color:#fff;border:1px solid rgba(255,255,255,.3);padding:7px 14px;border-radius:var(--r-sm);white-space:nowrap;}
+
+.acct-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--gray-100);}
+.acct-row:last-child{border-bottom:none;}
+.acct-k{font-size:13px;color:var(--gray-600);}
+.acct-v{font-size:13px;color:var(--navy-900);font-weight:500;}
+.mini-btn{font-size:12px;padding:6px 12px;border:1px solid var(--gray-200);border-radius:var(--r-sm);color:var(--gray-600);}
+
+.proto-note{max-width:1180px;margin:0 auto 0;padding:0 24px;}
+.proto-note .tip{background:var(--amber-100);color:var(--amber-600);border:1px solid #f6e3b0;border-radius:var(--r-md);padding:10px 14px;font-size:12.5px;margin-top:70px;}
+
+/* mobile: sidebar becomes top scroll row */
+@media(max-width:860px){
+  .hub{grid-template-columns:1fr;}
+  .side{position:static;display:flex;gap:8px;overflow-x:auto;padding:10px;}
+  .side-user,.side-credits{display:none;}
+  .side-item{flex-direction:column;gap:4px;white-space:nowrap;font-size:12px;padding:8px 12px;margin:0;}
+  .side-item .star{display:none;}
+  .header-nav{display:none;}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-logo"><div class="logo-badge">X</div><div class="logo-text">PROJECT X</div></div>
+  <nav class="header-nav" data-active="member"></nav>
+  <div class="header-right">
+    <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+    <span class="header-user">XTEST1</span>
+    <a href="/pages/login.html" class="btn-login">登出</a>
+  </div>
+</header>
+
+<div class="proto-note"><div class="tip">⚙️ 這是「側欄四分類」版面範例（獨立預覽頁，未接真實資料；卡片內容為示意）。確認方向後再整併進正式會員中心。</div></div>
+
+<div class="hub">
+  <!-- SIDEBAR -->
+  <aside class="side">
+    <div class="side-user">
+      <div class="side-avatar">X</div>
+      <div><div class="side-uname">XTEST1</div><div class="side-tag">✦ PRO 會員</div></div>
+    </div>
+    <button class="side-item active" data-cat="invest" onclick="go('invest',this)"><span class="side-ico">🎯</span>自選投資</button>
+    <button class="side-item" data-cat="daily" onclick="go('daily',this)"><span class="side-ico">📡</span>每日情報</button>
+    <button class="side-item" data-cat="ai" onclick="go('ai',this)"><span class="side-ico">🤖</span>AI 智能<span class="star">★</span></button>
+    <button class="side-item" data-cat="account" onclick="go('account',this)"><span class="side-ico">⚙️</span>帳戶 / 方案</button>
+    <div class="side-credits"><div class="lbl">可用點數</div><div class="val">42 <span style="font-size:12px;color:rgba(255,255,255,.5);">點</span></div></div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main>
+    <!-- 自選投資 -->
+    <section class="cat active" id="cat-invest">
+      <div class="cat-head"><div class="cat-title">自選投資 <span class="en">My Portfolio</span></div><div class="cat-desc">你的自選標的、共識與風險評估一站掌握。</div></div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">我的自選標的 <span class="en">WATCHLIST</span></div><span class="mini-btn">+ 新增標的</span></div>
+        <div class="block-b">
+          <div class="tgrid">
+            <div class="tcard"><div class="sym">NVDA</div><div class="nm">輝達</div><div class="px up">▲ 1.82%</div></div>
+            <div class="tcard"><div class="sym">2330</div><div class="nm">台積電</div><div class="px up">▲ 0.6%</div></div>
+            <div class="tcard"><div class="sym">ETH</div><div class="nm">以太坊</div><div class="px down">▼ 2.1%</div></div>
+            <div class="tcard"><div class="sym">AAPL</div><div class="nm">蘋果</div><div class="px up">▲ 0.4%</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">共識溫度計 <span class="en">CONSENSUS</span></div><span class="badge" style="background:var(--gray-100);color:var(--gray-500);border-color:var(--gray-200);">自選 · 免費</span></div>
+        <div class="block-b">多空共識視覺化：機構評級、技術面、籌碼面綜合溫度（示意）。</div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">組合風險雷達 <span class="en">RISK RADAR</span></div><span class="badge" style="background:var(--green-100);color:var(--green-600);border-color:#bbf7d0;">穩健</span></div>
+        <div class="block-b">依你的自選組合計算集中度、相關性與波動風險（示意）。</div>
+      </div>
+    </section>
+
+    <!-- 每日情報 -->
+    <section class="cat" id="cat-daily">
+      <div class="cat-head"><div class="cat-title">每日情報 <span class="en">Daily Intelligence</span></div><div class="cat-desc">每天早上一站掌握市場簡報、機會與事件。</div></div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">今日簡報 <span class="en">MORNING BRIEF</span></div><span class="badge">06/04</span></div>
+        <div class="block-b">AI 彙整今日總經、產業、美股、市場風向四維重點（示意）。</div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">不對稱機會 <span class="en">OPPORTUNITIES</span></div><span class="badge">06/04</span></div>
+        <div class="block-b">風險報酬不對稱的潛在機會清單（示意）。</div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">事件驅動追蹤 <span class="en">EVENT TRACKER</span></div><span class="badge">5 進行中</span></div>
+        <div class="block-b">財報、央行、地緣等事件對標的的影響追蹤（示意）。</div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">訊號強度雷達 <span class="en">SIGNAL RADAR</span></div><span class="badge">偏多</span></div>
+        <div class="block-b">整合宏觀／產業／技術訊號的綜合強度（示意）。</div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">全球追蹤 <span class="en">GLOBAL STORIES</span></div><span class="badge">時間軸</span></div>
+        <div class="block-b">跨日國際大事時間軸（地緣／貿易／央行／科技）（示意）。</div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">歷史報告 <span class="en">ARCHIVE</span></div><span class="mini-btn">📂 開啟</span></div>
+        <div class="block-b">瀏覽過往每日報告完整內容。</div>
+      </div>
+    </section>
+
+    <!-- AI 智能 -->
+    <section class="cat" id="cat-ai">
+      <div class="cat-head"><div class="cat-title">AI 智能 <span class="en">AI Suite</span></div><div class="cat-desc">ProjectX 的 AI 互動工具，未來可獨立組成 AI 訂閱方案。</div></div>
+      <div class="ai-card">
+        <div><div class="t">🤖 AI 推演沙盤</div><div class="d">輸入市場問題，AI 生成三情境機率推演與行動建議</div></div>
+        <span class="ai-go">開始推演 →</span>
+      </div>
+      <div class="ai-card" style="background:linear-gradient(135deg,#1e293b,#334155);">
+        <div><div class="t">📁 我的推演</div><div class="d">已加入追蹤的推演結果，等待市場驗證準確率</div></div>
+        <span class="ai-go">查看紀錄 →</span>
+      </div>
+      <div class="ai-card" style="background:linear-gradient(135deg,var(--navy-700),var(--navy-500));">
+        <div><div class="t">📈 PulseAI 互動圖表</div><div class="d">AI 捕捉市場脈動，自動標出支撐（綠）與壓力（紅）區間</div></div>
+        <span class="ai-go">開啟圖表 →</span>
+      </div>
+    </section>
+
+    <!-- 帳戶 / 方案 -->
+    <section class="cat" id="cat-account">
+      <div class="cat-head"><div class="cat-title">帳戶 / 方案 <span class="en">Account</span></div><div class="cat-desc">管理個人資料、方案點數與意見回饋。</div></div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">帳戶資料 <span class="en">PROFILE</span></div><span class="mini-btn">修改資料</span></div>
+        <div class="block-b" style="padding:6px 18px;">
+          <div class="acct-row"><span class="acct-k">稱呼</span><span class="acct-v">XTEST1</span></div>
+          <div class="acct-row"><span class="acct-k">Email</span><span class="acct-v">xtest1@test.com</span></div>
+          <div class="acct-row"><span class="acct-k">方案</span><span class="acct-v">✦ PRO</span></div>
+          <div class="acct-row"><span class="acct-k">密碼</span><span class="mini-btn">修改密碼</span></div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">方案 / 點數 <span class="en">CREDITS</span></div><span class="badge" style="background:var(--amber-100);color:var(--amber-600);border-color:#f6e3b0;">⚡ 42 點</span></div>
+        <div class="block-b">訂閱點數每月 1 號重置為 30，加購點數永久有效。 <span class="mini-btn" style="margin-left:6px;">購買點數</span></div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">意見回饋 <span class="en">FEEDBACK</span></div><span class="badge" style="background:var(--green-100);color:var(--green-600);border-color:#bbf7d0;">採納 +10 點</span></div>
+        <div class="block-b">提供建議，一旦被採納可獲 10 點永久點數。 <span class="mini-btn" style="margin-left:6px;">我要回饋</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="/shared/nav.js"></script>
+<script>
+function go(cat,el){
+  var items=document.querySelectorAll('.side-item');
+  for(var i=0;i<items.length;i++) items[i].classList.remove('active');
+  el.classList.add('active');
+  var cats=document.querySelectorAll('.cat');
+  for(var j=0;j<cats.length;j++) cats[j].classList.remove('active');
+  var target=document.getElementById('cat-'+cat);
+  if(target) target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
