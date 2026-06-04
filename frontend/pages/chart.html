@@ -120,7 +120,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 <script src="/shared/nav.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
 
 <main class="page">
 
@@ -284,6 +284,7 @@ function initChart(){
 function buildChart(){
   var wrap=document.getElementById('chart-wrap');
   if(_chart) return;
+  if(typeof LightweightCharts==='undefined'){ throw new Error('圖表元件未載入（網路可能擋了 CDN），請重新整理頁面'); }
   _chart=LightweightCharts.createChart(wrap,{
     width:wrap.clientWidth, height:wrap.clientHeight,
     layout:{ background:{color:'transparent'}, textColor:'#475569', fontFamily:'DM Sans, sans-serif' },
