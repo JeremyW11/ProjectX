@@ -860,8 +860,8 @@ function updateThisWeekDynamic(events, todayStr){
   var weekStart = new Date(today); weekStart.setDate(today.getDate() - (dow===0?6:dow-1));
   var weekEnd   = new Date(weekStart); weekEnd.setDate(weekStart.getDate()+6);
   var pad = function(d){ return d<10?'0'+d:String(d); };
-  var wsStr = weekStart.toISOString().split('T')[0];
-  var weStr = weekEnd.toISOString().split('T')[0];
+  var wsStr = weekStart.getFullYear()+'-'+pad(weekStart.getMonth()+1)+'-'+pad(weekStart.getDate());
+  var weStr = weekEnd.getFullYear()+'-'+pad(weekEnd.getMonth()+1)+'-'+pad(weekEnd.getDate());
   var weekEvs = events.filter(function(e){
     return e.date >= wsStr && e.date <= weStr && (e.impact||'').toLowerCase() !== 'low';
   });
@@ -872,7 +872,7 @@ function updateThisWeekDynamic(events, todayStr){
   } else {
     weekEvs.slice(0,6).forEach(function(ev){
       var d = new Date(ev.date+'T00:00:00');
-      var label = days[d.getDay()]+' '+d.getMonth()+1+'/'+d.getDate();
+      var label = days[d.getDay()]+' '+(d.getMonth()+1)+'/'+d.getDate();
       html += '<div class="week-item"><span class="wi-date">'+label+'</span><span class="wi-text">'+ev.title+'</span></div>';
     });
   }
