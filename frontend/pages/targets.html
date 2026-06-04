@@ -513,28 +513,31 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <div class="sub-label">PulseAI 智能工具</div>
 
       <!-- 自選投資 -->
-      <div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px;">
-        <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-en);">⭐ PulseAI 自選投資</div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <a href="/pages/credits.html" id="credits-display" title="查看點數詳情" style="font-size:11px;color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:20px;font-family:var(--font-en);text-decoration:none;cursor:pointer;">⚡ — 點</a>
-          <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
+      <div class="section-block" style="margin-bottom:16px;">
+        <div class="section-block-header">
+          <div class="sbh-title">⭐ 我的自選標的 <span class="sbh-title-en">WATCHLIST</span></div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <a href="/pages/credits.html" id="credits-display" title="查看點數詳情" style="font-size:11px;color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:20px;font-family:var(--font-en);text-decoration:none;cursor:pointer;">⚡ — 點</a>
+            <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
+          </div>
+        </div>
+        <div style="padding:14px 20px;">
+          <!-- Category tabs -->
+          <div class="cat-tabs">
+            <button class="cat-tab active" onclick="filterCat('all',this)">全部 (8)</button>
+            <button class="cat-tab" onclick="filterCat('us',this)">美股 (3)</button>
+            <button class="cat-tab" onclick="filterCat('tw',this)">台股 (2)</button>
+            <button class="cat-tab" onclick="filterCat('crypto',this)">加密 (3)</button>
+          </div>
+          <div class="cat-tabs" id="cat-tabs-dynamic" style="display:none;">
+            <button class="cat-tab active" onclick="filterCat('all',this)">全部 <span id="cnt-all">0</span></button>
+            <button class="cat-tab" onclick="filterCat('us',this)">美股 <span id="cnt-us">0</span></button>
+            <button class="cat-tab" onclick="filterCat('tw',this)">台股 <span id="cnt-tw">0</span></button>
+            <button class="cat-tab" onclick="filterCat('crypto',this)">加密 <span id="cnt-crypto">0</span></button>
+          </div>
+          <div class="target-grid" id="target-grid" style="margin-bottom:0;"></div>
         </div>
       </div>
-
-      <!-- Category tabs -->
-      <div class="cat-tabs">
-        <button class="cat-tab active" onclick="filterCat('all',this)">全部 (8)</button>
-        <button class="cat-tab" onclick="filterCat('us',this)">美股 (3)</button>
-        <button class="cat-tab" onclick="filterCat('tw',this)">台股 (2)</button>
-        <button class="cat-tab" onclick="filterCat('crypto',this)">加密 (3)</button>
-      </div>
-      <div class="cat-tabs" id="cat-tabs-dynamic" style="display:none;">
-        <button class="cat-tab active" onclick="filterCat('all',this)">全部 <span id="cnt-all">0</span></button>
-        <button class="cat-tab" onclick="filterCat('us',this)">美股 <span id="cnt-us">0</span></button>
-        <button class="cat-tab" onclick="filterCat('tw',this)">台股 <span id="cnt-tw">0</span></button>
-        <button class="cat-tab" onclick="filterCat('crypto',this)">加密 <span id="cnt-crypto">0</span></button>
-      </div>
-      <div class="target-grid" id="target-grid"></div>
 
       <!-- 共識溫度計 -->
       <div class="section-block" style="margin-bottom:16px;">
