@@ -12,9 +12,9 @@
     {key:'credits',  href:'/pages/credits.html',          label:'方案 / 點數'},
   ];
 
-  // 縮排版頂部導覽：全球追蹤／互動圖表／歷史報告／方案點數已整併進會員中心側欄，
-  // 故所有頁面的 toolbar 預設只顯示這 6 項。個別頁面仍可用 data-nav-keys 覆寫。
-  var TOOLBAR_KEYS = ['brief','market','industry','research','calendar','member'];
+  // 縮排版頂部導覽：全球追蹤／互動圖表／歷史報告已整併進會員中心側欄；
+  // 方案點數(credits)保留於 toolbar 作為訪客購點入口。個別頁面仍可用 data-nav-keys 覆寫。
+  var TOOLBAR_KEYS = ['brief','market','industry','research','calendar','member','credits'];
 
   window.buildNav = function(activeKey){
     // Support both .header-nav (standard) and .nav-links (industry.html ul-based)
