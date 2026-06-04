@@ -282,6 +282,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .hub-cat{display:none;}
 .hub-cat.active{display:block;}
 .sub-label{font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-en);margin:4px 0 14px;}
+.powered-by{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.01em;margin:4px 0 16px;}
+.powered-by .pa-big{font-size:21px;display:inline-flex;}
 /* ── PulseAI 一致橫幅卡 ── */
 .ai-card{display:flex;align-items:center;justify-content:space-between;gap:14px;background:linear-gradient(135deg,var(--navy-800),var(--navy-600));border-radius:var(--r-lg);padding:18px 20px;color:#fff;margin-bottom:14px;text-decoration:none;transition:opacity .15s;}
 .ai-card:hover{opacity:.9;}
@@ -522,7 +524,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
     <!-- ════════ PulseAI ════════ -->
     <section class="hub-cat" id="cat-pulse">
-      <div class="sub-label">PulseAI 智能工具</div>
+      <div class="powered-by">powered by <span class="pa-big">PulseAI</span></div>
 
       <a href="#watchlist" class="ai-card" style="background:linear-gradient(135deg,var(--navy-700),var(--navy-500));">
         <div>
