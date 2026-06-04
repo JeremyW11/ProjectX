@@ -41,7 +41,7 @@
 // ── PulseAI 文字 LOGO：全站自動把「PulseAI」字眼轉為品牌字標 ──
 // Badge 樣式（漸層實心）：深藍→藍漸層膠囊，白字 Pulse + 青色 AI；行內隨文字自動縮放、垂直置中。含 MutationObserver 以涵蓋動態渲染內容。
 (function(){
-  var LOGO_CSS = ".pulseai-logo{display:inline-flex;align-items:baseline;font-family:'DM Sans','Noto Sans TC',sans-serif;font-weight:600;letter-spacing:-.01em;white-space:nowrap;font-style:normal;background:linear-gradient(135deg,#13245a,#1e3a8a 45%,#2563eb);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 1px rgba(0,0,0,.25),0 1px 2px rgba(13,22,48,.35);color:#fff;border-radius:.45em;padding:.08em .42em;line-height:1.15;vertical-align:baseline;}"
+  var LOGO_CSS = ".pulseai-logo{display:inline-flex;align-items:baseline;font-family:'DM Sans','Noto Sans TC',sans-serif;font-weight:600;letter-spacing:-.01em;white-space:nowrap;font-style:normal;background:linear-gradient(135deg,#1e40af,#2563eb 50%,#0ea5e9);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.30),inset 0 -1px 1px rgba(0,0,0,.22),0 1px 3px rgba(8,15,40,.45);color:#fff;border-radius:.45em;padding:.1em .46em;line-height:1.15;vertical-align:baseline;}"
     + ".pulseai-logo .pa-pulse,.pulseai-logo .pa-ai{-webkit-text-fill-color:initial;}"
     + ".pulseai-logo .pa-pulse{color:#f4f8ff;text-shadow:0 1px 1px rgba(0,0,0,.35);}"
     + ".pulseai-logo .pa-ai{font-weight:700;color:#9af0fb;margin-left:.02em;text-shadow:0 1px 1px rgba(0,0,0,.35);}"

@@ -757,6 +757,16 @@ img { display: block; max-width: 100%; }
   line-height: 1.4;
 }
 
+/* Key people */
+.person-item { display:flex; gap:10px; padding:10px 0; border-bottom:1px solid var(--border, #e2e8f0); }
+.person-item:last-child { border-bottom:none; }
+.person-avatar { flex-shrink:0; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#fff; font-family:var(--font-en); background:linear-gradient(135deg,#1e3a8a,#2563eb); }
+.person-info { flex:1; min-width:0; }
+.person-name { font-size:12.5px; font-weight:700; color:var(--text-primary); font-family:var(--font-zh); }
+.person-title { font-size:10.5px; color:var(--text-muted, #94a3b8); font-family:var(--font-zh); margin-bottom:3px; }
+.person-note { font-size:11.5px; color:var(--text-secondary, #475569); font-family:var(--font-zh); line-height:1.45; }
+.person-watch { font-size:10.5px; color:#2563eb; font-family:var(--font-zh); margin-top:3px; }
+
 /* Nav CTA at bottom */
 .nav-cta {
   display: grid;
@@ -967,6 +977,10 @@ img { display: block; max-width: 100%; }
         <div class="side-card-title">市場日曆<a href="/pages/calendar.html" class="section-link" style="font-size:11px">全部 →</a></div>
         <div id="cal-list"></div>
       </div>
+      <div class="side-card" id="persons-card" style="display:none">
+        <div class="side-card-title">重要人物動態<span class="section-title-en" style="font-size:10px">KEY PEOPLE</span></div>
+        <div id="persons-list"></div>
+      </div>
       <div class="side-card">
         <div class="side-card-title">快速導航</div>
         <div class="nav-cta">
@@ -1113,6 +1127,19 @@ function renderCalendar(calendar) {
   }).join('');
 }
 
+function renderPersons(persons) {
+  if (!Array.isArray(persons) || !persons.length) return '';
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  return persons.map(function(p){
+    return '<div class="person-item"><div class="person-avatar">'+esc(p.initials||(p.name||'?').slice(0,2))+'</div>'
+      + '<div class="person-info"><div class="person-name">'+esc(p.name)+'</div>'
+      + '<div class="person-title">'+esc(p.title)+'</div>'
+      + '<div class="person-note">'+esc(p.note)+'</div>'
+      + (p.expand_watch?'<div class="person-watch">關注：'+esc(p.expand_watch)+'</div>':'')
+      + '</div></div>';
+  }).join('');
+}
+
 function checkDataStaleness(dateStr){var today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei'}).format(new Date());if(dateStr&&dateStr!==today){var b=document.getElementById('stale-banner');if(b){b.style.display='flex';b.querySelector('.stale-date').textContent=dateStr;}}}
 
 async function loadData() {
@@ -1144,6 +1171,13 @@ async function loadData() {
     if (riskEl) riskEl.innerHTML = renderRiskMatrix(data.signals);
     const calEl = document.getElementById('cal-list');
     if (calEl && data.calendar) calEl.innerHTML = renderCalendar(data.calendar);
+    const personsHtml = renderPersons(data.persons);
+    const personsCard = document.getElementById('persons-card');
+    const personsEl = document.getElementById('persons-list');
+    if (personsEl && personsCard) {
+      if (personsHtml) { personsEl.innerHTML = personsHtml; personsCard.style.display = 'block'; }
+      else personsCard.style.display = 'none';
+    }
   } catch(e) { console.error('loadData error:', e); }
 }
 
