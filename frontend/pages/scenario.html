@@ -181,6 +181,16 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </div>
   </div>
 
+  <!-- Pro gate -->
+  <div id="pro-gate-view" style="display:none;">
+    <div class="gate">
+      <div class="gate-icon">✦</div>
+      <h2 class="gate-title">AI 推演沙盤為 Pro 專屬</h2>
+      <p class="gate-desc">AI 推演沙盤僅開放 Pro 會員使用，每次推演消耗 4 點。升級 Pro 後，每月自動獲得 30 訂閱點數即可開始推演。</p>
+      <a href="/pages/credits.html" class="btn-primary">查看方案 / 升級 Pro</a>
+    </div>
+  </div>
+
   <!-- Main content (shown when logged in) -->
   <div id="main-view" style="display:none;">
 
@@ -228,6 +238,7 @@ var SUPABASE_URL = 'https://eezhmeccakaeiprviqra.supabase.co';
 var SUPABASE_KEY = 'sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
 var BACKEND = 'https://projectx-backend-o2pl.onrender.com';
 var _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+var ADMIN_EMAIL = 'jermy831102@gmail.com';
 
 var currentUser = null;
 var currentCredits = 0;
@@ -249,7 +260,6 @@ _supabase.auth.onAuthStateChange(function(event, session) {
     document.getElementById('auth-btn').textContent = '登出';
     document.getElementById('auth-btn').onclick = function() { _supabase.auth.signOut(); };
     document.getElementById('gate-view').style.display = 'none';
-    document.getElementById('main-view').style.display = 'block';
     loadCredits();
   } else {
     currentUser = null;
@@ -257,21 +267,29 @@ _supabase.auth.onAuthStateChange(function(event, session) {
     document.getElementById('auth-btn').href = '/pages/login.html';
     document.getElementById('auth-btn').onclick = null;
     document.getElementById('gate-view').style.display = 'block';
+    document.getElementById('pro-gate-view').style.display = 'none';
     document.getElementById('main-view').style.display = 'none';
   }
 });
 
 async function loadCredits() {
   try {
-    var res = await _supabase.from('profiles').select('subscription_credits,purchased_credits').eq('id', currentUser.id).single();
-    if (res.data) {
-      var sub = res.data.subscription_credits || 0;
-      var pur = res.data.purchased_credits || 0;
-      currentCredits = sub + pur;
-      document.getElementById('credits-num').textContent = currentCredits;
-      document.getElementById('credits-inline').textContent = currentCredits;
-      document.getElementById('credits-display').style.display = 'flex';
+    var res = await _supabase.from('profiles').select('is_pro,subscription_credits,purchased_credits').eq('id', currentUser.id).single();
+    var data = res.data || {};
+    var isPro = data.is_pro === true || currentUser.email === ADMIN_EMAIL;
+    if (!isPro) {
+      document.getElementById('main-view').style.display = 'none';
+      document.getElementById('pro-gate-view').style.display = 'block';
+      return;
     }
+    document.getElementById('pro-gate-view').style.display = 'none';
+    document.getElementById('main-view').style.display = 'block';
+    var sub = data.subscription_credits || 0;
+    var pur = data.purchased_credits || 0;
+    currentCredits = sub + pur;
+    document.getElementById('credits-num').textContent = currentCredits;
+    document.getElementById('credits-inline').textContent = currentCredits;
+    document.getElementById('credits-display').style.display = 'flex';
   } catch(e) {}
 }
 
