@@ -168,7 +168,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <h1 class="page-title">AI 推演沙盤 <span class="page-title-sub">Scenario Sandbox</span></h1>
       <a href="/pages/my-scenarios.html" class="btn-my-sc" style="white-space:nowrap;flex-shrink:0;">📁 我的推演 →</a>
     </div>
-    <p class="page-desc">輸入市場問題，AI 結合今日最新數據，推演三種情境並給出行動建議。每次推演 2 點，結果可加入追蹤，等待驗證。</p>
+    <p class="page-desc">輸入市場問題，AI 結合今日最新數據，推演三種情境並給出行動建議。每次推演 4 點，結果可加入追蹤，等待驗證。</p>
   </div>
 
   <!-- Login gate -->
@@ -176,7 +176,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="gate">
       <div class="gate-icon">🧪</div>
       <h2 class="gate-title">AI 推演沙盤</h2>
-      <p class="gate-desc">登入後可使用 AI 推演沙盤，每次推演消耗 2 點，結果自動追蹤並驗證命中率。</p>
+      <p class="gate-desc">登入後可使用 AI 推演沙盤，每次推演消耗 4 點，結果自動追蹤並驗證命中率。</p>
       <a href="/pages/login.html" class="btn-primary">登入 / 註冊</a>
     </div>
   </div>
@@ -201,7 +201,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         </div>
       </div>
       <div class="input-footer" style="margin-top:14px;">
-        <div class="cost-note">消耗 2 點 / 次推演 · 剩餘 <span id="credits-inline">—</span> 點</div>
+        <div class="cost-note">消耗 4 點 / 次推演 · 剩餘 <span id="credits-inline">—</span> 點</div>
         <button class="run-btn" id="run-btn" onclick="runScenario()">
           <span>▶</span> 開始推演
         </button>
@@ -285,7 +285,7 @@ async function runScenario() {
   var q = document.getElementById('question-input').value.trim();
   if (!q) { showError('請輸入推演問題'); return; }
   if (!currentUser) { window.location.href = '/pages/login.html'; return; }
-  if (currentCredits < 2) { showError('點數不足（需要 2 點），請聯絡客服補充'); return; }
+  if (currentCredits < 4) { showError('點數不足（需要 4 點），請聯絡客服補充'); return; }
 
   hideError();
   document.getElementById('run-btn').disabled = true;
@@ -296,10 +296,10 @@ async function runScenario() {
 
   try {
     // 先扣點
-    var deductRes = await _supabase.rpc('deduct_credits', { user_uuid: currentUser.id, amount: 2 });
+    var deductRes = await _supabase.rpc('deduct_credits', { user_uuid: currentUser.id, amount: 4 });
     if (deductRes.error) throw new Error('扣點失敗：' + deductRes.error.message);
 
-    currentCredits -= 2;
+    currentCredits -= 4;
     document.getElementById('credits-num').textContent = currentCredits;
     document.getElementById('credits-inline').textContent = currentCredits;
 
