@@ -217,14 +217,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .logo-link{transition:opacity .2s,transform .2s;display:inline-flex;}
 .logo-link:hover{opacity:.75;transform:scale(1.04);}
 
-/* ── 主題 Tab ── */
-.main-tabs{display:flex;gap:0;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:4px;margin-bottom:20px;box-shadow:var(--shadow-card);width:fit-content;}
-.main-tab-btn{padding:8px 24px;border-radius:var(--r-md);font-size:13.5px;font-weight:500;color:var(--gray-500);transition:all .15s;cursor:pointer;font-family:var(--font-zh);border:none;background:none;}
-.main-tab-btn:hover{color:var(--navy-700);background:var(--navy-50);}
-.main-tab-btn.active{background:var(--navy-700);color:var(--white);box-shadow:0 2px 8px rgba(29,45,90,.2);}
-.tab-panel{display:none;}
-.tab-panel.active{display:block;}
-
 /* ── 事件驅動追蹤 ── */
 .event-track-card{padding:12px 0;border-bottom:1px solid var(--gray-100);}
 .event-track-card:last-child{border-bottom:none;}
@@ -271,6 +263,91 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .cs-dims{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap;}
 .cs-dim{font-size:10px;padding:2px 6px;border-radius:3px;font-family:var(--font-en);}
 #stale-banner{display:none;align-items:center;justify-content:center;gap:6px;background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 24px;font-size:12px;color:#92400e;font-family:var(--font-zh);position:fixed;top:56px;left:0;right:0;z-index:99;}
+
+/* ── 會員中心側欄 Hub ── */
+.hub-layout{display:flex;gap:22px;align-items:flex-start;}
+.hub-side{width:212px;flex-shrink:0;position:sticky;top:72px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:14px 12px;}
+.hub-avatar{display:flex;align-items:center;gap:10px;padding:4px 6px 14px;border-bottom:1px solid var(--gray-100);margin-bottom:10px;}
+.hub-av-circle{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--navy-700),var(--navy-500));color:#fff;display:grid;place-items:center;font-weight:700;font-family:var(--font-en);font-size:16px;flex-shrink:0;}
+.hub-av-name{font-size:13px;font-weight:600;color:var(--gray-900);font-family:var(--font-zh);line-height:1.2;}
+.hub-av-plan{font-size:10.5px;color:var(--pro-gold-dark);font-weight:700;font-family:var(--font-en);margin-top:2px;}
+.side-item{display:flex;align-items:center;gap:9px;width:100%;padding:9px 10px;border-radius:var(--r-sm);font-size:13.5px;color:var(--gray-600);font-family:var(--font-zh);text-align:left;transition:all .15s;margin-bottom:2px;}
+.side-item:hover{background:var(--navy-50);color:var(--navy-700);}
+.side-item.active{background:var(--navy-700);color:#fff;font-weight:600;}
+.side-ico{font-size:15px;width:18px;text-align:center;flex-shrink:0;}
+.side-star{color:var(--pro-gold);font-size:11px;margin-left:auto;}
+.side-item.active .side-star{color:#fde68a;}
+.hub-credits{margin-top:10px;padding:11px 12px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:var(--r-md);}
+.hub-main{flex:1;min-width:0;}
+.hub-cat{display:none;}
+.hub-cat.active{display:block;}
+.sub-label{font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-en);margin:4px 0 14px;}
+@media(max-width:860px){
+  .hub-layout{display:block;}
+  .hub-side{position:static;width:auto;display:flex;gap:6px;overflow-x:auto;padding:10px;margin-bottom:16px;-webkit-overflow-scrolling:touch;}
+  .hub-avatar,.hub-credits{display:none;}
+  .side-item{width:auto;white-space:nowrap;flex-shrink:0;margin-bottom:0;}
+}
+
+/* ── 全球追蹤（移植自 stories.html）── */
+.story-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:20px 22px;margin-bottom:16px;box-shadow:var(--shadow-card);}
+.sc-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.sc-title{font-size:17px;font-weight:600;color:var(--navy-900);flex:1;min-width:180px;}
+.sc-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.sc-cat{font-size:11px;font-weight:600;padding:3px 9px;border-radius:5px;background:var(--gray-100);color:var(--gray-600);}
+.sc-summary{font-size:13.5px;color:var(--gray-700);line-height:1.65;margin-bottom:10px;}
+.sc-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--gray-500);margin-bottom:12px;}
+.sc-meta b{color:var(--gray-700);font-weight:600;}
+.sc-assets span{display:inline-block;background:var(--navy-50);color:var(--navy-700);font-size:11px;padding:2px 8px;border-radius:5px;margin:0 4px 4px 0;font-family:var(--font-en);}
+.timeline{border-left:2px solid var(--gray-200);padding-left:16px;margin-left:4px;}
+.tl-item{position:relative;padding-bottom:12px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{content:'';position:absolute;left:-21px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--navy-400);border:2px solid var(--white);}
+.tl-date{font-size:11px;color:var(--gray-400);font-family:var(--font-en);font-weight:600;}
+.tl-text{font-size:13px;color:var(--gray-700);margin-top:2px;line-height:1.55;}
+.tl-src{font-size:11px;color:var(--navy-500);margin-left:6px;font-weight:600;}
+.sc-dir{font-weight:700;}
+.empty-box{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--r-lg);padding:48px 24px;text-align:center;color:var(--gray-400);font-size:14px;}
+
+/* ── 歷史報告（移植自 archive.html，樣式加 arc- 前綴避免衝突）── */
+.archive-layout{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:start;}
+@media(max-width:768px){.archive-layout{grid-template-columns:1fr;}}
+.date-list-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-card);position:sticky;top:72px;}
+.date-list-header{padding:12px 16px;border-bottom:1px solid var(--gray-100);font-size:11px;font-weight:600;color:var(--gray-500);letter-spacing:.06em;font-family:var(--font-en);}
+.date-list{max-height:calc(100vh - 200px);overflow-y:auto;}
+.date-item{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;cursor:pointer;border-bottom:1px solid var(--gray-100);transition:all .15s;}
+.date-item:last-child{border-bottom:none;}
+.date-item:hover{background:var(--navy-50);}
+.date-item.active{background:var(--navy-50);border-left:3px solid var(--navy-500);}
+.di-date{font-family:var(--font-en);font-size:13px;font-weight:500;color:var(--gray-700);}
+.di-wd{font-size:10.5px;color:var(--gray-400);font-family:var(--font-en);}
+.report-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:24px 28px;box-shadow:var(--shadow-card);}
+.report-date-badge{display:inline-flex;align-items:center;gap:8px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:20px;padding:4px 14px;font-family:var(--font-en);font-size:12px;font-weight:600;color:var(--navy-700);margin-bottom:20px;}
+.arc-ticker-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--gray-100);}
+.arc-ticker-chip{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:8px 14px;min-width:90px;}
+.arc-tc-label{font-size:10px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
+.arc-tc-val{font-size:14px;font-weight:600;color:var(--gray-900);font-family:var(--font-en);margin-top:2px;}
+.arc-tc-chg{font-size:11px;font-family:var(--font-en);}
+.arc-tc-chg.up{color:var(--green-600);}
+.arc-tc-chg.down{color:var(--red-600);}
+.section-label{font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);margin-bottom:10px;}
+.morning-brief-text{font-size:13.5px;line-height:1.9;color:var(--gray-700);font-family:var(--font-zh);white-space:pre-wrap;}
+.signals-row{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 24px;padding-bottom:20px;border-bottom:1px solid var(--gray-100);}
+.signal-chip{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;font-family:var(--font-zh);}
+.signal-chip.bull{background:var(--green-100);color:var(--green-700);}
+.signal-chip.bear{background:var(--red-100);color:var(--red-600);}
+.signal-chip.neutral{background:var(--gray-100);color:var(--gray-600);}
+.arc-opp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px;}
+.arc-opp-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;}
+.oc-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.oc-ticker{font-family:var(--font-en);font-size:13px;font-weight:700;color:var(--navy-700);}
+.oc-conf{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);}
+.conf-HIGH{background:#dcfce7;color:#15803d;}
+.conf-MED{background:#fef3c7;color:#92400e;}
+.conf-LOW{background:var(--gray-100);color:var(--gray-500);}
+.oc-thesis{font-size:12px;color:var(--gray-600);font-family:var(--font-zh);line-height:1.55;}
+.oc-target{font-size:11px;color:var(--navy-600);font-family:var(--font-en);margin-top:4px;font-weight:500;}
+.empty-state{text-align:center;padding:40px 0;color:var(--gray-400);font-size:13px;font-family:var(--font-zh);}
 </style>
   <script src="/shared/nav.js"></script>
 </head>
@@ -289,7 +366,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
     </svg>
   </div></a>
-  <nav class="header-nav" data-active="member"></nav>
+  <nav class="header-nav" data-active="member" data-nav-keys="brief,market,industry,research,calendar,member"></nav>
   <div class="header-right">
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
     <span class="header-time" id="clock">—</span>
@@ -355,162 +432,210 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </div>
   </div>
 
-  <!-- ── LOGGED IN TARGETS VIEW ── -->
+  <!-- ── LOGGED IN TARGETS VIEW（側欄分類 Hub）── -->
   <div id="targets-view" class="targets-view">
+   <div class="hub-layout">
 
-    <!-- Header -->
-    <div class="wl-header">
-      <div class="wl-title">
-        我的看板
-        <span class="wl-user-badge">✦ PRO</span>
-        <span style="font-size:12px;color:var(--gray-400);font-weight:400;" id="wl-user-email"></span>
+    <!-- ═══ 側欄（僅此頁）═══ -->
+    <aside class="hub-side">
+      <div class="hub-avatar">
+        <div class="hub-av-circle" id="hub-av-circle">U</div>
+        <div>
+          <div class="hub-av-name" id="hub-av-name">會員</div>
+          <div class="hub-av-plan">✦ PRO</div>
+        </div>
       </div>
-      <div class="wl-actions">
-        <button class="btn-outline-sm" onclick="openProfileModal()">修改資料</button>
-        <button class="btn-outline-sm" onclick="openPwdModal()">修改密碼</button>
-        <button class="btn-outline-sm" onclick="signOutUser()" style="color:var(--red-600);border-color:var(--red-100);">登出</button>
+      <button class="side-item active" data-cat="daily" onclick="goCat('daily',this)"><span class="side-ico">📡</span>每日情報</button>
+      <button class="side-item" data-cat="pulse" onclick="goCat('pulse',this)"><span class="side-ico">🤖</span>PulseAI<span class="side-star">★</span></button>
+      <button class="side-item" data-cat="stories" onclick="goCat('stories',this)"><span class="side-ico">🌍</span>全球追蹤</button>
+      <button class="side-item" data-cat="history" onclick="goCat('history',this)"><span class="side-ico">📂</span>歷史報告</button>
+      <button class="side-item" data-cat="account" onclick="goCat('account',this)"><span class="side-ico">⚙️</span>帳戶方案</button>
+      <div class="hub-credits">
+        <div style="font-size:10px;color:var(--gray-400);letter-spacing:.06em;font-family:var(--font-en);margin-bottom:4px;">MY CREDITS</div>
+        <a href="/pages/credits.html" id="hub-credits-val" title="前往購點" style="font-size:18px;font-weight:700;color:var(--navy-700);font-family:var(--font-en);text-decoration:none;">⚡ — 點</a>
       </div>
-    </div>
+    </aside>
 
-    <!-- Category tabs -->
-    <div class="cat-tabs">
-      <button class="cat-tab active" onclick="filterCat('all',this)">全部 (8)</button>
-      <button class="cat-tab" onclick="filterCat('us',this)">美股 (3)</button>
-      <button class="cat-tab" onclick="filterCat('tw',this)">台股 (2)</button>
-      <button class="cat-tab" onclick="filterCat('crypto',this)">加密 (3)</button>
-    </div>
+    <!-- ═══ 內容區 ═══ -->
+    <div class="hub-main">
 
-    <!-- Category tabs dynamic -->
-    <div class="cat-tabs" id="cat-tabs-dynamic" style="display:none;">
-      <button class="cat-tab active" onclick="filterCat('all',this)">全部 <span id="cnt-all">0</span></button>
-      <button class="cat-tab" onclick="filterCat('us',this)">美股 <span id="cnt-us">0</span></button>
-      <button class="cat-tab" onclick="filterCat('tw',this)">台股 <span id="cnt-tw">0</span></button>
-      <button class="cat-tab" onclick="filterCat('crypto',this)">加密 <span id="cnt-crypto">0</span></button>
-    </div>
-
-    <!-- AI 推演入口 -->
-    <a href="/pages/scenario.html" style="display:block;text-decoration:none;margin-bottom:16px;">
-      <div style="background:linear-gradient(135deg,var(--navy-800) 0%,var(--navy-600) 100%);border-radius:var(--r-lg);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;transition:opacity .15s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
-        <div style="display:flex;align-items:center;gap:14px;">
-          <div style="font-size:26px;">🤖</div>
-          <div>
-            <div style="font-size:14px;font-weight:600;color:var(--white);font-family:var(--font-zh);">AI 推演沙盤</div>
-            <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:2px;font-family:var(--font-zh);">輸入問題，Claude 生成三情境機率推演</div>
+    <!-- ════════ 每日情報 ════════ -->
+    <section class="hub-cat active" id="cat-daily">
+      <div class="section-block" id="morning-brief-block" style="margin-bottom:16px;display:none;">
+        <div class="section-block-header">
+          <div class="sbh-title">今日簡報 <span class="sbh-title-en">MORNING BRIEF</span></div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="sbh-badge" id="brief-date" style="background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);font-size:10px;font-family:var(--font-en);"></span>
+            <button class="btn-outline-sm" onclick="generateMorningBrief()" id="brief-btn">⚡ 重新生成</button>
           </div>
         </div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <a href="/pages/my-scenarios.html" onclick="event.stopPropagation()" style="font-size:12px;color:rgba(255,255,255,.6);font-family:var(--font-en);padding:5px 10px;border:1px solid rgba(255,255,255,.2);border-radius:6px;text-decoration:none;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,.6)'">我的推演</a>
+        <div id="morning-brief-content" style="padding:20px;font-size:13.5px;color:var(--gray-700);line-height:1.8;font-family:var(--font-zh);">
+          <div style="text-align:center;color:var(--gray-400);padding:20px;">載入中...</div>
+        </div>
+      </div>
+
+      <!-- 不對稱機會 -->
+      <div class="section-block" style="margin-bottom:16px;">
+        <div class="section-block-header">
+          <div class="sbh-title">不對稱機會 <span class="sbh-title-en">OPPORTUNITIES</span></div>
+          <span class="sbh-badge" id="opp-date" style="background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);font-size:10px;font-family:var(--font-en);"></span>
+        </div>
+        <div id="opp-list" style="padding:0 20px 8px;">
+          <div style="text-align:center;padding:30px 20px;color:var(--gray-400);font-size:13px;">今日機會尚未產出，請明日 Trigger 後查看</div>
+        </div>
+      </div>
+
+      <!-- 事件驅動追蹤 -->
+      <div class="section-block" style="margin-bottom:16px;">
+        <div class="section-block-header">
+          <div class="sbh-title">事件驅動追蹤 <span class="sbh-title-en">EVENT TRACKER</span></div>
+          <span class="sbh-badge" id="event-count" style="background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);">載入中</span>
+        </div>
+        <div id="event-tracker-list" style="padding:0 20px 8px;">
+          <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
+        </div>
+      </div>
+
+      <!-- Signal Radar -->
+      <div class="section-block" style="margin-bottom:16px;">
+        <div class="section-block-header">
+          <div class="sbh-title">訊號強度雷達 <span class="sbh-title-en">SIGNAL RADAR</span></div>
+          <span class="sbh-badge" id="signal-overall-badge">—</span>
+        </div>
+        <div class="signal-grid" id="signal-grid">
+          <div style="padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ PulseAI ════════ -->
+    <section class="hub-cat" id="cat-pulse">
+      <div class="sub-label">PulseAI 智能工具</div>
+
+      <!-- 自選投資 -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px;">
+        <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-en);">⭐ PulseAI 自選投資</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <a href="/pages/credits.html" id="credits-display" title="查看點數詳情" style="font-size:11px;color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:20px;font-family:var(--font-en);text-decoration:none;cursor:pointer;">⚡ — 點</a>
+          <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
+        </div>
+      </div>
+
+      <!-- Category tabs -->
+      <div class="cat-tabs">
+        <button class="cat-tab active" onclick="filterCat('all',this)">全部 (8)</button>
+        <button class="cat-tab" onclick="filterCat('us',this)">美股 (3)</button>
+        <button class="cat-tab" onclick="filterCat('tw',this)">台股 (2)</button>
+        <button class="cat-tab" onclick="filterCat('crypto',this)">加密 (3)</button>
+      </div>
+      <div class="cat-tabs" id="cat-tabs-dynamic" style="display:none;">
+        <button class="cat-tab active" onclick="filterCat('all',this)">全部 <span id="cnt-all">0</span></button>
+        <button class="cat-tab" onclick="filterCat('us',this)">美股 <span id="cnt-us">0</span></button>
+        <button class="cat-tab" onclick="filterCat('tw',this)">台股 <span id="cnt-tw">0</span></button>
+        <button class="cat-tab" onclick="filterCat('crypto',this)">加密 <span id="cnt-crypto">0</span></button>
+      </div>
+      <div class="target-grid" id="target-grid"></div>
+
+      <!-- 共識溫度計 -->
+      <div class="section-block" style="margin-bottom:16px;">
+        <div class="section-block-header">
+          <div class="sbh-title">共識溫度計 <span class="sbh-title-en">CONSENSUS METER</span></div>
+          <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">自選標的</span>
+        </div>
+        <div id="consensus-list" style="padding:16px 20px;">
+          <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
+        </div>
+      </div>
+
+      <!-- 組合風險雷達 -->
+      <div class="section-block" style="margin-bottom:16px;">
+        <div class="section-block-header">
+          <div class="sbh-title">組合風險雷達 <span class="sbh-title-en">RISK RADAR</span></div>
+          <span class="sbh-badge" id="risk-overall" style="background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);">評估中</span>
+        </div>
+        <div id="risk-content" style="padding:16px 20px;">
+          <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
+        </div>
+      </div>
+
+      <!-- 推演沙盤 -->
+      <a href="/pages/scenario.html" style="display:block;text-decoration:none;margin-bottom:12px;">
+        <div style="background:linear-gradient(135deg,var(--navy-800) 0%,var(--navy-600) 100%);border-radius:var(--r-lg);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;transition:opacity .15s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="font-size:26px;">🤖</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:var(--white);font-family:var(--font-zh);">PulseAI 推演沙盤</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:2px;font-family:var(--font-zh);">輸入問題，Claude 生成三情境機率推演（含我的推演紀錄）</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <a href="/pages/my-scenarios.html" onclick="event.stopPropagation()" style="font-size:12px;color:rgba(255,255,255,.6);font-family:var(--font-en);padding:5px 10px;border:1px solid rgba(255,255,255,.2);border-radius:6px;text-decoration:none;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='rgba(255,255,255,.6)'">我的推演</a>
+            <span style="font-size:13px;color:rgba(255,255,255,.5);">→</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 互動圖表 -->
+      <a href="/pages/chart.html" style="display:block;text-decoration:none;margin-bottom:12px;">
+        <div style="background:linear-gradient(135deg,var(--navy-700) 0%,var(--navy-500) 100%);border-radius:var(--r-lg);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;transition:opacity .15s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="font-size:26px;">📈</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:var(--white);font-family:var(--font-zh);">PulseAI 互動圖表</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:2px;font-family:var(--font-zh);">AI 捕捉市場脈動，自動標出支撐與壓力區間</div>
+            </div>
+          </div>
           <span style="font-size:13px;color:rgba(255,255,255,.5);">→</span>
         </div>
+      </a>
+    </section>
+
+    <!-- ════════ 全球追蹤 ════════ -->
+    <section class="hub-cat" id="cat-stories">
+      <div id="stories-list-hub"><div class="empty-box">載入中...</div></div>
+    </section>
+
+    <!-- ════════ 歷史報告 ════════ -->
+    <section class="hub-cat" id="cat-history">
+      <div class="archive-layout">
+        <div class="date-list-card">
+          <div class="date-list-header">AVAILABLE DATES</div>
+          <div class="date-list" id="date-list-hub"><div class="empty-state">載入中...</div></div>
+        </div>
+        <div id="report-panel-hub"><div class="empty-state" style="padding:60px 0;">← 選擇左側日期查看當日報告</div></div>
       </div>
-    </a>
+    </section>
 
-    <!-- Target cards grid -->
-    <!-- 主題 Tab -->
-    <div class="main-tabs">
-      <button class="main-tab-btn active" onclick="switchMainTab('tab-daily',this)">📡 今日情報</button>
-      <button class="main-tab-btn" onclick="switchMainTab('tab-watchlist',this)">🎯 自選觀察</button>
-    </div>
-
-    <!-- 今日情報 Tab -->
-    <div class="tab-panel active" id="tab-daily">
-    <!-- ═══ 每日市場情報 ═══ -->
-    <div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px;">
-      <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-en);">📡 每日市場情報</div>
-      <a href="/pages/archive.html" style="font-size:11px;font-weight:600;color:var(--navy-600);text-decoration:none;font-family:var(--font-zh);padding:4px 10px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:6px;white-space:nowrap;">📂 歷史報告</a>
-    </div>
-    <div class="section-block" id="morning-brief-block" style="margin-bottom:16px;display:none;">
-      <div class="section-block-header">
-        <div class="sbh-title">今日簡報 <span class="sbh-title-en">MORNING BRIEF</span></div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span class="sbh-badge" id="brief-date" style="background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);font-size:10px;font-family:var(--font-en);"></span>
-          <button class="btn-outline-sm" onclick="generateMorningBrief()" id="brief-btn">⚡ 重新生成</button>
+    <!-- ════════ 帳戶方案 ════════ -->
+    <section class="hub-cat" id="cat-account">
+      <div class="wl-header">
+        <div class="wl-title">
+          我的帳戶
+          <span class="wl-user-badge">✦ PRO</span>
+          <span style="font-size:12px;color:var(--gray-400);font-weight:400;" id="wl-user-email"></span>
+        </div>
+        <div class="wl-actions">
+          <button class="btn-outline-sm" onclick="openProfileModal()">修改資料</button>
+          <button class="btn-outline-sm" onclick="openPwdModal()">修改密碼</button>
+          <button class="btn-outline-sm" onclick="signOutUser()" style="color:var(--red-600);border-color:var(--red-100);">登出</button>
         </div>
       </div>
-      <div id="morning-brief-content" style="padding:20px;font-size:13.5px;color:var(--gray-700);line-height:1.8;font-family:var(--font-zh);">
-        <div style="text-align:center;color:var(--gray-400);padding:20px;">載入中...</div>
+
+      <!-- 方案 / 點數 -->
+      <div class="section-block" style="margin-bottom:16px;">
+        <div class="section-block-header">
+          <div class="sbh-title">方案 / 點數 <span class="sbh-title-en">PLAN &amp; CREDITS</span></div>
+          <a href="/pages/credits.html" class="btn-outline-sm">前往購點</a>
+        </div>
+        <div id="account-credits" style="padding:16px 20px;font-size:13px;color:var(--gray-600);font-family:var(--font-zh);line-height:1.9;">
+          <div style="text-align:center;padding:12px;color:var(--gray-400);">載入中...</div>
+        </div>
       </div>
-    </div>
+      <!-- 意見回饋（#feedback-block 由 JS 移入此處）-->
+    </section>
 
-    <!-- 不對稱機會 -->
-    <div class="section-block" style="margin-bottom:16px;">
-      <div class="section-block-header">
-        <div class="sbh-title">不對稱機會 <span class="sbh-title-en">OPPORTUNITIES</span></div>
-        <span class="sbh-badge" id="opp-date" style="background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);font-size:10px;font-family:var(--font-en);"></span>
-      </div>
-      <div id="opp-list" style="padding:0 20px 8px;">
-        <div style="text-align:center;padding:30px 20px;color:var(--gray-400);font-size:13px;">今日機會尚未產出，請明日 Trigger 後查看</div>
-      </div>
-    </div>
-
-    <!-- 事件驅動追蹤 -->
-    <div class="section-block" style="margin-bottom:16px;">
-      <div class="section-block-header">
-        <div class="sbh-title">事件驅動追蹤 <span class="sbh-title-en">EVENT TRACKER</span></div>
-        <span class="sbh-badge" id="event-count" style="background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);">載入中</span>
-      </div>
-      <div id="event-tracker-list" style="padding:0 20px 8px;">
-        <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
-      </div>
-    </div>
-
-    <!-- Signal Radar - 動態 -->
-    <div class="section-block" style="margin-bottom:16px;">
-      <div class="section-block-header">
-        <div class="sbh-title">訊號強度雷達 <span class="sbh-title-en">SIGNAL RADAR</span></div>
-        <span class="sbh-badge" id="signal-overall-badge">—</span>
-      </div>
-      <div class="signal-grid" id="signal-grid">
-        <div style="padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
-      </div>
-    </div>
-
-
-    </div>
-
-    <div class="tab-panel" id="tab-watchlist">
-    <!-- ═══ 我的自選標的 ═══ -->
-    <div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px;">
-      <div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-en);">🎯 我的自選標的</div>
-      <div style="display:flex;align-items:center;gap:8px;">
-        <a href="/pages/credits.html" id="credits-display" title="查看點數詳情" style="font-size:11px;color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:20px;font-family:var(--font-en);text-decoration:none;cursor:pointer;">⚡ — 點</a>
-        <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
-      </div>
-    </div>
-    <div class="target-grid" id="target-grid">
-    </div><!-- end target-grid -->
-
-    <!-- Morning Brief -->
-    <!-- 共識溫度計 -->
-    <div class="section-block" style="margin-bottom:16px;">
-      <div class="section-block-header">
-        <div class="sbh-title">共識溫度計 <span class="sbh-title-en">CONSENSUS METER</span></div>
-        <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">自選標的 · 免費</span>
-      </div>
-      <div id="consensus-list" style="padding:16px 20px;">
-        <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
-      </div>
-    </div>
-
-    <!-- 組合風險雷達 -->
-    <div class="section-block" style="margin-bottom:16px;">
-      <div class="section-block-header">
-        <div class="sbh-title">組合風險雷達 <span class="sbh-title-en">RISK RADAR</span></div>
-        <span class="sbh-badge" id="risk-overall" style="background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);">評估中</span>
-      </div>
-      <div id="risk-content" style="padding:16px 20px;">
-        <div style="text-align:center;padding:20px;color:var(--gray-400);font-size:13px;">載入中...</div>
-      </div>
-    </div>
-
-
-    </div>
-
-    </div>
-
-    <!-- 自選觀察 Tab -->
-    </div>
-
+    </div><!-- end hub-main -->
+   </div><!-- end hub-layout -->
   </div><!-- end targets-view -->
 
   <!-- ═══ 意見回饋（所有已登入會員可用，含免費） ═══ -->
@@ -632,10 +757,12 @@ var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
 var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
 var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 var currentUser=null;
+var _accessToken=null;   // 供歷史報告 /history/:date 後端權威判定付費
 
 async function initAuth(){
   // onAuthStateChange 會在 INITIAL_SESSION 事件時帶入已存的 session
   _supabase.auth.onAuthStateChange(function(event,session){
+    _accessToken = session ? session.access_token : null;
     if(event==='INITIAL_SESSION'||event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){
       setAuthState(session?session.user:null);
     } else if(event==='SIGNED_OUT'){
@@ -687,11 +814,16 @@ async function checkProStatus(user, gateEl, viewEl){
 
   // 右上角顯示會員名稱（無暱稱則用 email 前綴）
   var huEl=document.getElementById('header-user');
+  var dnDisplay=currentUser.displayName || (user.email ? user.email.split('@')[0] : '');
   if(huEl){
-    var dn=currentUser.displayName || (user.email ? user.email.split('@')[0] : '');
-    huEl.textContent=dn;
-    huEl.style.display=dn?'inline':'none';
+    huEl.textContent=dnDisplay;
+    huEl.style.display=dnDisplay?'inline':'none';
   }
+  // 側欄頭像
+  var avName=document.getElementById('hub-av-name');
+  var avCircle=document.getElementById('hub-av-circle');
+  if(avName) avName.textContent=dnDisplay||'會員';
+  if(avCircle) avCircle.textContent=(dnDisplay||'U').charAt(0).toUpperCase();
 
   // 訂閱點數到期自動重置（伺服器端 RPC 把關，client 不可自行改點數）
   if(isPro && currentUser.resetDate){
@@ -710,6 +842,10 @@ async function checkProStatus(user, gateEl, viewEl){
   if(isPro){
     if(gateEl) gateEl.style.display='none';
     if(viewEl) viewEl.classList.add('active');
+    // 把意見回饋區塊移入「帳戶方案」分類（Pro 版面）
+    var fbBlock=document.getElementById('feedback-block');
+    var acctCat=document.getElementById('cat-account');
+    if(fbBlock&&acctCat){ fbBlock.style.display='block'; acctCat.appendChild(fbBlock); }
     loadWatchlist();
   } else {
     // 已登入但非付費會員，顯示升級提示
@@ -959,12 +1095,25 @@ async function deductCredits(amount){
 }
 
 function updateCreditsDisplay(){
+  if(!currentUser) return;
+  var total = currentUser.totalCredits||0;
   var el = document.getElementById('credits-display');
-  if(!el || !currentUser) return;
-  el.textContent = '⚡ '+(currentUser.totalCredits||0)+' 點';
-  el.title = currentUser.resetDate
-    ? '訂閱點數將於 '+currentUser.resetDate+' 重置 · 點擊購點'
-    : '點擊前往購點頁面';
+  if(el){
+    el.textContent = '⚡ '+total+' 點';
+    el.title = currentUser.resetDate
+      ? '訂閱點數將於 '+currentUser.resetDate+' 重置 · 點擊購點'
+      : '點擊前往購點頁面';
+  }
+  var hubEl = document.getElementById('hub-credits-val');
+  if(hubEl) hubEl.textContent = '⚡ '+total+' 點';
+  var acct = document.getElementById('account-credits');
+  if(acct){
+    acct.innerHTML =
+      '<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px;"><span style="font-size:26px;font-weight:700;color:var(--navy-700);font-family:var(--font-en);">'+total+'</span><span style="font-size:12px;color:var(--gray-400);">總可用點數</span></div>'+
+      '<div>訂閱點數（每月 1 號重置為 30）：<strong style="color:var(--gray-800);">'+(currentUser.subCredits||0)+'</strong> 點</div>'+
+      '<div>加購點數（永久有效）：<strong style="color:var(--gray-800);">'+(currentUser.purCredits||0)+'</strong> 點</div>'+
+      (currentUser.resetDate?'<div style="font-size:12px;color:var(--gray-400);margin-top:4px;">下次訂閱點數重置：'+currentUser.resetDate+'</div>':'');
+  }
 }
 // ── End 點數系統 ───────────────────────────────────
 
@@ -1633,11 +1782,177 @@ async function addWatchlistItem(){
   loadWatchlist();
 }
 
-function switchMainTab(tabId, btn){
-  document.querySelectorAll('.main-tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
-  btn.classList.add('active');
-  document.getElementById(tabId).classList.add('active');
+// ── 側欄分類切換 ───────────────────────────────────
+function goCat(cat, el){
+  document.querySelectorAll('.hub-cat').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.side-item').forEach(function(b){ b.classList.remove('active'); });
+  var sec=document.getElementById('cat-'+cat);
+  if(sec) sec.classList.add('active');
+  if(el) el.classList.add('active');
+  if(cat==='stories' && !goCat._stories){ goCat._stories=true; loadHubStories(); }
+  if(cat==='history' && !goCat._history){ goCat._history=true; loadHubDateList(); }
+}
+
+// ── 全球追蹤（移植自 stories.html）─────────────────
+var STORY_STATUS_STYLE={
+  '進行中':{bg:'var(--navy-50)',c:'var(--navy-600)'},
+  '升溫':{bg:'var(--red-100)',c:'var(--red-600)'},
+  '緩和':{bg:'var(--green-100)',c:'var(--green-700)'},
+  '落幕':{bg:'var(--gray-100)',c:'var(--gray-500)'}
+};
+var STORY_DIR_STYLE={'看多':'var(--green-600)','看空':'var(--red-600)','中性':'var(--amber-600)'};
+var STORY_SENT_COLOR={'利多':'var(--green-600)','利空':'var(--red-600)','中性':'var(--gray-500)'};
+function storyEsc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+async function loadHubStories(){
+  var listEl=document.getElementById('stories-list-hub');
+  if(!listEl) return;
+  var stories=[];
+  try{
+    var res=await fetch('/data/accumulated.json?t='+Date.now());
+    var acc=await res.json();
+    stories=Array.isArray(acc.tracked_stories)?acc.tracked_stories:[];
+  }catch(e){ stories=[]; }
+
+  stories.sort(function(a,b){
+    var ended=function(s){return s.status==='落幕'?1:0;};
+    if(ended(a)!==ended(b)) return ended(a)-ended(b);
+    return (b.last_update||'').localeCompare(a.last_update||'');
+  });
+
+  if(!stories.length){
+    listEl.innerHTML='<div class="empty-box">尚無追蹤中的全球事件。下次早報生成後，重大國際大事會在這裡串成時間軸。</div>';
+    return;
+  }
+
+  listEl.innerHTML=stories.map(function(s){
+    var st=STORY_STATUS_STYLE[s.status]||STORY_STATUS_STYLE['進行中'];
+    var dirColor=STORY_DIR_STYLE[s.direction]||'var(--gray-500)';
+    var assets=(s.affect_assets||'').split(/[,，、\s]+/).filter(Boolean);
+    var tl=(Array.isArray(s.timeline)?s.timeline:[]).slice().reverse();
+    var tlHTML=tl.map(function(t){
+      var sc=STORY_SENT_COLOR[t.sentiment]||'var(--gray-500)';
+      var src=t.source_url?' <a class="tl-src" href="'+storyEsc(t.source_url)+'" target="_blank" rel="noopener">📎 原文</a>':'';
+      return '<div class="tl-item">'+
+        '<div class="tl-date">'+storyEsc(t.date)+' · <span style="color:'+sc+';">'+storyEsc(t.sentiment||'')+'</span></div>'+
+        '<div class="tl-text">'+storyEsc(t.update)+src+'</div>'+
+      '</div>';
+    }).join('');
+    return '<div class="story-card">'+
+      '<div class="sc-head">'+
+        '<span class="sc-title">'+storyEsc(s.title)+'</span>'+
+        '<span class="sc-cat">'+storyEsc(s.category||'')+'</span>'+
+        '<span class="sc-badge" style="background:'+st.bg+';color:'+st.c+';">'+storyEsc(s.status||'')+'</span>'+
+      '</div>'+
+      (s.summary?'<div class="sc-summary">'+storyEsc(s.summary)+'</div>':'')+
+      '<div class="sc-meta">'+
+        '<span>方向：<span class="sc-dir" style="color:'+dirColor+';">'+storyEsc(s.direction||'—')+'</span></span>'+
+        '<span>起始：<b>'+storyEsc(s.started||'—')+'</b></span>'+
+        '<span>最近更新：<b>'+storyEsc(s.last_update||'—')+'</b></span>'+
+      '</div>'+
+      (assets.length?'<div class="sc-assets" style="margin-bottom:12px;"><span style="background:none;color:var(--gray-400);padding-left:0;">受影響標的：</span>'+assets.map(function(a){return '<span>'+storyEsc(a)+'</span>';}).join('')+'</div>':'')+
+      (tlHTML?'<div class="timeline">'+tlHTML+'</div>':'')+
+    '</div>';
+  }).join('');
+}
+
+// ── 歷史報告（移植自 archive.html）─────────────────
+var HIST_API='https://projectx-backend-o2pl.onrender.com';
+var ARC_DAYS=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+var ARC_MONTHS=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+var _hubCurrentDate=null;
+function arcFmtDate(s){ var d=new Date(s+'T00:00:00'); return ARC_MONTHS[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear(); }
+function arcWeekday(s){ return ARC_DAYS[new Date(s+'T00:00:00').getDay()]; }
+function arcEsc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+async function loadHubDateList(){
+  var list=document.getElementById('date-list-hub');
+  if(!list) return;
+  try{
+    var res=await fetch('/data/history-index.json?t='+Date.now());
+    if(!res.ok) throw new Error('index not found');
+    var dates=await res.json();
+    list.innerHTML=dates.map(function(d){
+      return '<div class="date-item" data-date="'+d+'" onclick="loadHubReport(\''+d+'\')">'+
+        '<div><div class="di-date">'+arcFmtDate(d)+'</div><div class="di-wd">'+arcWeekday(d)+'</div></div>'+
+        '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/></svg>'+
+      '</div>';
+    }).join('');
+    if(dates.length) loadHubReport(dates[0]);
+  }catch(e){
+    list.innerHTML='<div class="empty-state">無法載入日期列表</div>';
+  }
+}
+
+function arcRenderLock(){
+  return '<div class="report-card" style="text-align:center;padding:64px 32px;">'+
+    '<div style="font-size:40px;margin-bottom:16px;">🔒</div>'+
+    '<div style="font-size:18px;font-weight:600;color:var(--navy-900);font-family:var(--font-zh);margin-bottom:8px;">歷史報告為付費會員專屬</div>'+
+    '<div style="font-size:13.5px;color:var(--gray-500);font-family:var(--font-zh);line-height:1.7;max-width:420px;margin:0 auto 24px;">升級為付費會員即可解鎖過去 30 天每日 Brief 的完整內容。</div>'+
+    '<a href="/pages/credits.html" style="display:inline-block;padding:11px 28px;background:var(--navy-700);color:#fff;border-radius:var(--r-sm);font-size:14px;font-weight:600;font-family:var(--font-zh);">升級看完整報告</a>'+
+  '</div>';
+}
+
+async function loadHubReport(date){
+  _hubCurrentDate=date;
+  document.querySelectorAll('#date-list-hub .date-item').forEach(function(el){
+    el.classList.toggle('active', el.dataset.date===date);
+  });
+  var panel=document.getElementById('report-panel-hub');
+  if(!panel) return;
+  if(!_accessToken){ panel.innerHTML=arcRenderLock(); return; }
+  panel.innerHTML='<div class="empty-state">載入中...</div>';
+  try{
+    var res=await fetch(HIST_API+'/history/'+date,{ headers:{ 'Authorization':'Bearer '+(_accessToken||'') } });
+    if(res.status===403){ panel.innerHTML=arcRenderLock(); return; }
+    if(!res.ok) throw new Error('not found');
+    var d=await res.json();
+    panel.innerHTML=arcRenderReport(d);
+  }catch(e){
+    panel.innerHTML='<div class="empty-state">無法載入 '+date+' 的報告</div>';
+  }
+}
+
+function arcRenderReport(d){
+  var html='<div class="report-card">';
+  html+='<div class="report-date-badge">📅 '+arcFmtDate(d.date)+' &nbsp;·&nbsp; '+arcWeekday(d.date)+'</div>';
+  if(d.tickers && d.tickers.length){
+    html+='<div class="arc-ticker-row">';
+    d.tickers.forEach(function(t){
+      var dir=t.dir==='up'?'up':t.dir==='down'?'down':'';
+      html+='<div class="arc-ticker-chip">'+
+        '<div class="arc-tc-label">'+t.label+'</div>'+
+        '<div class="arc-tc-val">'+t.value+'</div>'+
+        '<div class="arc-tc-chg '+dir+'">'+(dir==='up'?'▲ ':dir==='down'?'▼ ':'')+t.change+'</div>'+
+      '</div>';
+    });
+    html+='</div>';
+  }
+  if(d.signals && d.signals.length){
+    html+='<div class="section-label">訊號雷達</div><div class="signals-row">';
+    d.signals.forEach(function(s){ html+='<span class="signal-chip '+(s.signal||'neutral')+'">'+s.name+' · '+s.label+'</span>'; });
+    html+='</div>';
+  }
+  if(d.morning_brief){
+    html+='<div class="section-label">每日摘要</div><div class="morning-brief-text">'+arcEsc(d.morning_brief)+'</div>';
+  }
+  if(d.opportunities && d.opportunities.length){
+    html+='<div class="section-label" style="margin-top:24px;">機會標的</div><div class="arc-opp-grid">';
+    d.opportunities.forEach(function(o){
+      html+='<div class="arc-opp-card">'+
+        '<div class="oc-header">'+
+          '<span class="oc-ticker">'+o.ticker+'</span>'+
+          '<span class="oc-conf conf-'+(o.confidence||'MED')+'">'+o.confidence+'</span>'+
+          '<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-zh);">'+o.name+'</span>'+
+        '</div>'+
+        '<div class="oc-thesis">'+arcEsc(o.thesis||'')+'</div>'+
+        (o.target?'<div class="oc-target">目標：'+o.target+'</div>':'')+
+      '</div>';
+    });
+    html+='</div>';
+  }
+  html+='</div>';
+  return html;
 }
 
 initAuth();

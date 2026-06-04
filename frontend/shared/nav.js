@@ -16,8 +16,11 @@
     // Support both .header-nav (standard) and .nav-links (industry.html ul-based)
     var nav = document.querySelector('.header-nav[data-active], .nav-links[data-active]');
     if(!nav) return;
+    // 可選：data-nav-keys 限制只顯示部分項目（逗號分隔），用於頁面內已有側欄分類時縮排頂部導覽
+    var only = nav.dataset.navKeys ? nav.dataset.navKeys.split(',').map(function(k){return k.trim();}) : null;
+    var list = only ? NAV.filter(function(i){ return only.indexOf(i.key) >= 0; }) : NAV;
     var isUl = nav.tagName === 'UL';
-    nav.innerHTML = NAV.map(function(item){
+    nav.innerHTML = list.map(function(item){
       var active = item.key === activeKey;
       var link = '<a href="'+item.href+'" class="nav-item'+(active?' active':'')+'">'
         +(active?'<span class="nav-dot"></span>':'')+item.label+'</a>';
