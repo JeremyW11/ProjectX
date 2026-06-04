@@ -228,7 +228,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         </svg>
       </div>
       <div class="lock-cta">
-        <div class="lock-note">想<b>搶先試用</b>？歡迎向官方提出申請，我們將進行審核並為通過的帳號開放使用權限。<span id="lock-login-hint" style="display:none;">（請先<a href="/pages/login.html" style="color:var(--navy-600);font-weight:600;">登入</a>再申請）</span></div>
+        <div class="lock-note">想<b>搶先試用</b>？<b>Pro 會員</b>可向官方提出申請，我們將進行審核並為通過的帳號開放使用權限。<span id="lock-login-hint" style="display:none;">（請先<a href="/pages/login.html" style="color:var(--navy-600);font-weight:600;">登入</a>再申請）</span></div>
         <div class="lock-actions">
           <button class="btn-apply" id="btn-apply" onclick="toggleApply()">申請搶先試用</button>
           <span class="apply-status" id="apply-status"></span>
@@ -354,12 +354,15 @@ function setAuthState(user){
   }
 }
 
+var _isPro=false;
 async function checkAccess(user, lockEl, viewEl){
-  var granted = (user.email===ADMIN_EMAIL);
-  if(!granted){
-    var result = await _supabase.from('profiles').select('chart_access').eq('id', user.id).single();
+  var isAdmin=(user.email===ADMIN_EMAIL);
+  var granted=isAdmin;
+  if(!isAdmin){
+    var result = await _supabase.from('profiles').select('is_pro,chart_access').eq('id', user.id).single();
+    _isPro = !!(result.data && result.data.is_pro===true);
     granted = result.data && result.data.chart_access === true;
-  }
+  } else { _isPro=true; }
   if(granted){
     if(lockEl) lockEl.style.display='none';
     if(viewEl) viewEl.classList.add('active');
@@ -387,6 +390,13 @@ async function prepApply(user){
   var emailEl=document.getElementById('apply-email');
   if(emailEl) emailEl.textContent=user.email||'(無信箱)';
   var btn=document.getElementById('btn-apply');
+  var st=document.getElementById('apply-status');
+  // 搶先試用僅開放 Pro 會員申請
+  if(!_isPro){
+    if(btn){ btn.disabled=false; btn.textContent='升級 Pro 以申請'; btn.onclick=function(){ window.location.href='/pages/credits.html'; }; }
+    if(st){ st.textContent='搶先試用僅開放 Pro 會員申請'; st.style.color='var(--gray-500)'; }
+    return;
+  }
   if(btn){ btn.disabled=false; btn.textContent='申請搶先試用'; btn.onclick=toggleApply; }
   // 查既有申請狀態
   var res=await _supabase.from('feedback').select('status,reply,created_at').eq('user_id',user.id).eq('category','chart_access').order('created_at',{ascending:false}).limit(1);
@@ -406,6 +416,7 @@ function toggleApply(){
 
 async function submitApply(){
   if(!_user){ window.location.href='/pages/login.html'; return; }
+  if(!_isPro){ window.location.href='/pages/credits.html'; return; }
   var ta=document.getElementById('apply-reason');
   var btn=document.getElementById('btn-apply-submit');
   var msg=document.getElementById('apply-msg');
