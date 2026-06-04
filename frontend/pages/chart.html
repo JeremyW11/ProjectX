@@ -329,7 +329,7 @@ async function loadSignal(){
     var res=await fetch(url,{ headers:{ 'Authorization':'Bearer '+_session.access_token } });
     if(res.status===403){ status('此功能限 Pro 會員。'); return; }
     var j=await res.json();
-    if(!j.success){ status('讀取失敗：'+(j.error||'unknown')); return; }
+    if(!j.success){ status(j.hint ? j.hint : ('讀取失敗：'+(j.error||'unknown'))); return; }
     renderSignal(j);
   }catch(e){
     status('讀取失敗：'+e.message);
