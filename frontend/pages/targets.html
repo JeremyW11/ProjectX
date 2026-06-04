@@ -909,9 +909,13 @@ async function loadFeedbackHistory(){
   if(!currentUser) return;
   var box=document.getElementById('fb-history');
   if(!box) return;
-  var res=await _supabase.from('feedback').select('content,status,created_at,reply').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(5);
+  var res=await _supabase.from('feedback').select('content,status,created_at,reply,category').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(5);
   if(res.error||!res.data||!res.data.length){ box.innerHTML=''; return; }
-  var label={ pending:'審核中', adopted:'已採納 +10 點', rejected:'未採納', granted:'圖表已開放', denied:'未通過' };
+  function statusLabel(st,cat){
+    if(st==='granted') return cat==='pro_access'?'Pro 已開放':(cat==='chart_access'?'圖表已開放':'已開放');
+    return { pending:'審核中', adopted:'已採納 +10 點', rejected:'未採納', denied:'未通過' }[st]||st;
+  }
+  var label={ pending:'審核中', adopted:'已採納 +10 點', rejected:'未採納', granted:'已開放', denied:'未通過' };
   var color={ pending:'var(--gray-400)', adopted:'var(--navy-600)', rejected:'var(--gray-400)', granted:'var(--navy-600)', denied:'var(--gray-400)' };
   var bg={ pending:'var(--gray-100)', adopted:'var(--navy-50)', rejected:'var(--gray-100)', granted:'var(--navy-50)', denied:'var(--gray-100)' };
   function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -925,7 +929,7 @@ async function loadFeedbackHistory(){
       +'<div style="font-size:12.5px;color:var(--gray-700);line-height:1.6;font-family:var(--font-zh);white-space:pre-wrap;">'+esc(f.reply)+'</div></div>' : '';
     return '<div style="padding:10px 12px;border:1px solid var(--gray-100);border-radius:var(--r-md);margin-bottom:8px;">'
       +'<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;">'
-      +'<span style="font-size:10px;color:'+color[st]+';background:'+bg[st]+';padding:2px 8px;border-radius:10px;font-family:var(--font-zh);font-weight:600;">'+(label[st]||st)+'</span>'
+      +'<span style="font-size:10px;color:'+color[st]+';background:'+bg[st]+';padding:2px 8px;border-radius:10px;font-family:var(--font-zh);font-weight:600;">'+statusLabel(st,f.category)+'</span>'
       +'<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">'+ds+'</span></div>'
       +'<div style="font-size:12.5px;color:var(--gray-600);line-height:1.6;font-family:var(--font-zh);">'+safe+'</div>'+replyHtml+'</div>';
   }).join('');
