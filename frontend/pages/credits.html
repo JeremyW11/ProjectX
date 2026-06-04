@@ -122,6 +122,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .usage-cost{font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--amber-600);background:var(--amber-100);padding:3px 10px;border-radius:20px;}
 .usage-cost.free{color:var(--green-700);background:var(--green-100);}
 .usage-cost.pro{color:var(--pro-gold-dark);background:var(--pro-gold-light);}
+.usage-cost.review{color:var(--navy-600);background:var(--navy-50);border:1px solid var(--navy-100);}
 
 .notice{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:16px 20px;font-size:12px;color:var(--gray-500);line-height:1.7;}
 .notice strong{color:var(--gray-700);}
@@ -291,26 +292,32 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   </div>
 
   <!-- 點數用途 -->
-  <div class="section-title">點數用途</div>
+  <div class="section-title">功能與費用一覽</div>
+  <div class="section-sub">只有「AI 個股深度分析」會扣點數，其餘工具依會員身分開放。</div>
   <div class="usage-table" style="margin-bottom:32px;">
     <div class="usage-row">
       <span class="usage-icon">🤖</span>
-      <span class="usage-name">AI 個股深度分析（每支標的每日首次）</span>
-      <span class="usage-cost">⚡ 1 點</span>
+      <span class="usage-name">AI 個股深度分析（每支標的・每日首次查詢）</span>
+      <span class="usage-cost">⚡ 1 點 / 次</span>
     </div>
     <div class="usage-row">
       <span class="usage-icon">🔄</span>
-      <span class="usage-name">AI 個股分析（當日 cache 命中）</span>
-      <span class="usage-cost pro">Pro 會員</span>
+      <span class="usage-name">AI 個股分析・當日重複查詢（cache 命中）</span>
+      <span class="usage-cost pro">Pro 免扣點</span>
+    </div>
+    <div class="usage-row">
+      <span class="usage-icon">📈</span>
+      <span class="usage-name">互動圖表・AI 支撐／壓力判讀</span>
+      <span class="usage-cost review">審核開放</span>
     </div>
     <div class="usage-row">
       <span class="usage-icon">📊</span>
-      <span class="usage-name">共識溫度計、事件追蹤、自選看板</span>
+      <span class="usage-name">共識溫度計、事件追蹤、自選看板、全球追蹤</span>
       <span class="usage-cost pro">Pro 會員</span>
     </div>
     <div class="usage-row">
       <span class="usage-icon">📰</span>
-      <span class="usage-name">每日早報、機構研報、市場數據</span>
+      <span class="usage-name">每日早報、機構研報、市場數據、市場日曆</span>
       <span class="usage-cost free">免費</span>
     </div>
   </div>

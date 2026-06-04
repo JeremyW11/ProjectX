@@ -33,9 +33,20 @@ a{text-decoration:none;color:inherit;}
 main{max-width:760px;margin:0 auto;padding:88px 20px 60px;}
 .page-title{font-size:24px;font-weight:600;color:var(--navy-900);}
 .page-sub{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
-.filters{display:flex;gap:8px;margin:18px 0;}
+.toolbar{margin:18px 0;}
+.searchbar{position:relative;margin-bottom:12px;}
+.searchbar input{width:100%;padding:10px 36px 10px 38px;border:1px solid var(--gray-200);border-radius:var(--r-md);font-size:13.5px;font-family:var(--font-zh);color:var(--gray-700);background:var(--white);}
+.searchbar input:focus{outline:none;border-color:var(--navy-500);box-shadow:0 0 0 3px var(--navy-50);}
+.searchbar .s-ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:14px;pointer-events:none;}
+.searchbar .s-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:16px;cursor:pointer;border:none;background:none;display:none;line-height:1;}
+.searchbar .s-clear:hover{color:var(--gray-600);}
+.filter-rows{display:flex;flex-direction:column;gap:8px;}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.filter-cap{font-size:11px;color:var(--gray-400);font-family:var(--font-zh);margin-right:2px;align-self:center;}
 .fbtn{font-size:13px;font-family:var(--font-zh);padding:7px 14px;border:1px solid var(--gray-200);background:var(--white);border-radius:var(--r-sm);color:var(--gray-600);cursor:pointer;transition:all .15s;}
 .fbtn.active{background:var(--navy-700);color:var(--white);border-color:var(--navy-700);}
+.result-count{font-size:12px;color:var(--gray-400);font-family:var(--font-zh);margin:4px 0 10px;}
+.hl{background:#fde68a;border-radius:2px;}
 .card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:16px 18px;margin-bottom:12px;}
 .card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;}
 .who{font-size:13px;font-weight:600;color:var(--navy-700);}
@@ -84,12 +95,31 @@ main{max-width:760px;margin:0 auto;padding:88px 20px 60px;}
   <div id="admin-view" style="display:none;">
     <div class="page-title">意見回饋審閱</div>
     <div class="page-sub">採納後系統自動為該使用者 +10 永久點數，不可重複發放。</div>
-    <div class="filters">
-      <button class="fbtn active" data-f="pending" onclick="setFilter('pending',this)">審核中 <span id="c-pending"></span></button>
-      <button class="fbtn" data-f="adopted" onclick="setFilter('adopted',this)">已採納 <span id="c-adopted"></span></button>
-      <button class="fbtn" data-f="rejected" onclick="setFilter('rejected',this)">未採納 <span id="c-rejected"></span></button>
-      <button class="fbtn" data-f="all" onclick="setFilter('all',this)">全部</button>
+    <div class="toolbar">
+      <div class="searchbar">
+        <span class="s-ico">🔍</span>
+        <input id="search" type="text" placeholder="搜尋使用者名稱、Email 代碼、回饋內容或回覆…" oninput="onSearch(this.value)">
+        <button class="s-clear" id="s-clear" onclick="clearSearch()" title="清除">×</button>
+      </div>
+      <div class="filter-rows">
+        <div class="filters">
+          <span class="filter-cap">狀態</span>
+          <button class="fbtn active" data-f="pending" onclick="setFilter('pending',this)">審核中 <span id="c-pending"></span></button>
+          <button class="fbtn" data-f="adopted" onclick="setFilter('adopted',this)">已採納 <span id="c-adopted"></span></button>
+          <button class="fbtn" data-f="rejected" onclick="setFilter('rejected',this)">未採納 <span id="c-rejected"></span></button>
+          <button class="fbtn" data-f="granted" onclick="setFilter('granted',this)">已開放 <span id="c-granted"></span></button>
+          <button class="fbtn" data-f="denied" onclick="setFilter('denied',this)">未通過 <span id="c-denied"></span></button>
+          <button class="fbtn" data-f="all" onclick="setFilter('all',this)">全部</button>
+        </div>
+        <div class="filters">
+          <span class="filter-cap">類型</span>
+          <button class="fbtn active" data-c="all" onclick="setCat('all',this)">全部類型</button>
+          <button class="fbtn" data-c="feedback" onclick="setCat('feedback',this)">一般回饋</button>
+          <button class="fbtn" data-c="chart_access" onclick="setCat('chart_access',this)">圖表權限申請</button>
+        </div>
+      </div>
     </div>
+    <div class="result-count" id="result-count"></div>
     <div id="list"><div class="muted">載入中…</div></div>
   </div>
 </main>
@@ -101,7 +131,7 @@ var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
 var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
 var _sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-var _all=[], _names={}, _filter='pending';
+var _all=[], _names={}, _filter='pending', _cat='all', _q='';
 
 _sb.auth.onAuthStateChange(function(ev,session){
   if(ev==='INITIAL_SESSION'||ev==='SIGNED_IN'||ev==='TOKEN_REFRESHED'){
@@ -141,21 +171,64 @@ async function loadAll(){
 
 function setFilter(f,btn){
   _filter=f;
-  var bs=document.querySelectorAll('.fbtn'); for(var i=0;i<bs.length;i++) bs[i].classList.remove('active');
+  var bs=btn.parentNode.querySelectorAll('.fbtn'); for(var i=0;i<bs.length;i++) bs[i].classList.remove('active');
   btn.classList.add('active');
   render();
 }
 
-function render(){
-  var counts={pending:0,adopted:0,rejected:0};
-  _all.forEach(function(f){ var s=f.status||'pending'; if(counts[s]!==undefined) counts[s]++; });
-  document.getElementById('c-pending').textContent='('+counts.pending+')';
-  document.getElementById('c-adopted').textContent='('+counts.adopted+')';
-  document.getElementById('c-rejected').textContent='('+counts.rejected+')';
+function setCat(c,btn){
+  _cat=c;
+  var bs=btn.parentNode.querySelectorAll('.fbtn'); for(var i=0;i<bs.length;i++) bs[i].classList.remove('active');
+  btn.classList.add('active');
+  render();
+}
 
-  var rows=_all.filter(function(f){ return _filter==='all' || (f.status||'pending')===_filter; });
+function onSearch(v){
+  _q=(v||'').trim().toLowerCase();
+  document.getElementById('s-clear').style.display=_q?'block':'none';
+  render();
+}
+
+function clearSearch(){
+  var inp=document.getElementById('search'); if(inp) inp.value='';
+  _q=''; document.getElementById('s-clear').style.display='none';
+  render();
+}
+
+function hlt(text){
+  var s=esc(text);
+  if(!_q) return s;
+  var q=_q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  try{ return s.replace(new RegExp('('+q+')','gi'),'<span class="hl">$1</span>'); }catch(e){ return s; }
+}
+
+function matchQuery(f){
+  if(!_q) return true;
+  var name=(_names[f.user_id]||'').toLowerCase();
+  var uid=(f.user_id||'').toLowerCase();
+  var content=(f.content||'').toLowerCase();
+  var reply=(f.reply||'').toLowerCase();
+  return name.indexOf(_q)>=0 || uid.indexOf(_q)>=0 || content.indexOf(_q)>=0 || reply.indexOf(_q)>=0;
+}
+
+function render(){
+  var counts={pending:0,adopted:0,rejected:0,granted:0,denied:0};
+  _all.forEach(function(f){ var s=f.status||'pending'; if(counts[s]!==undefined) counts[s]++; });
+  ['pending','adopted','rejected','granted','denied'].forEach(function(k){
+    var el=document.getElementById('c-'+k); if(el) el.textContent='('+counts[k]+')';
+  });
+
+  var rows=_all.filter(function(f){
+    if(_filter!=='all' && (f.status||'pending')!==_filter) return false;
+    var isChart=(f.category==='chart_access');
+    if(_cat==='chart_access' && !isChart) return false;
+    if(_cat==='feedback' && isChart) return false;
+    return matchQuery(f);
+  });
   var box=document.getElementById('list');
-  if(!rows.length){ box.innerHTML='<div class="muted">沒有符合的回饋</div>'; return; }
+  var rc=document.getElementById('result-count');
+  if(rc) rc.textContent='顯示 '+rows.length+' 筆'+(_q?'（搜尋：'+esc(_q)+'）':'')+' · 共 '+_all.length+' 筆紀錄';
+  if(!rows.length){ box.innerHTML='<div class="muted">沒有符合的紀錄</div>'; return; }
   var label={pending:'審核中',adopted:'已採納 +10',rejected:'未採納',granted:'已開放',denied:'未通過'};
   box.innerHTML=rows.map(function(f){
     var st=f.status||'pending';
@@ -181,11 +254,11 @@ function render(){
       +'<button class="act act-reply" onclick="saveReply(\''+f.id+'\',this)">送出回覆</button></div></div>';
     var catChip=isChart?'<span class="tag chart">🔓 圖表權限申請</span>':'';
     return '<div class="card">'
-      +'<div class="card-top"><div class="who">'+esc(name)+'<small>'+uid+'</small></div>'
+      +'<div class="card-top"><div class="who">'+hlt(name)+'<small>'+hlt(uid)+'</small></div>'
       +'<div style="display:flex;align-items:center;gap:8px;">'+catChip
       +'<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">'+fmtDate(f.created_at)+'</span>'
       +'<span class="tag '+st+'">'+(label[st]||st)+'</span></div></div>'
-      +'<div class="content">'+esc(f.content)+'</div>'+acts+reply+'</div>';
+      +'<div class="content">'+hlt(f.content)+'</div>'+acts+reply+'</div>';
   }).join('');
 }
 
