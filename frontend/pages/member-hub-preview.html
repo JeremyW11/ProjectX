@@ -71,6 +71,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .cat-title{font-size:22px;font-weight:600;color:var(--navy-900);}
 .cat-title .en{font-size:13px;color:var(--gray-400);font-family:var(--font-en);font-weight:400;margin-left:8px;}
 .cat-desc{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
+.sub-label{font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-en);margin:18px 0 10px;}
 
 .block{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);box-shadow:var(--shadow-card);margin-bottom:16px;overflow:hidden;}
 .block-h{padding:14px 18px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;}
@@ -90,6 +91,16 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .ai-card .t{font-size:15px;font-weight:600;}
 .ai-card .d{font-size:12px;color:rgba(255,255,255,.6);margin-top:3px;}
 .ai-go{font-size:12px;color:#fff;border:1px solid rgba(255,255,255,.3);padding:7px 14px;border-radius:var(--r-sm);white-space:nowrap;}
+
+.tl{position:relative;padding-left:18px;}
+.tl::before{content:"";position:absolute;left:4px;top:4px;bottom:4px;width:2px;background:var(--gray-200);}
+.tl-item{position:relative;margin-bottom:12px;}
+.tl-item::before{content:"";position:absolute;left:-18px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--navy-500);}
+.tl-d{font-size:11px;color:var(--gray-400);font-family:var(--font-en);}
+.tl-t{font-size:13px;color:var(--gray-700);}
+
+.arch-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--gray-100);}
+.arch-row:last-child{border-bottom:none;}
 
 .acct-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--gray-100);}
 .acct-row:last-child{border-bottom:none;}
@@ -114,7 +125,15 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 <body>
 <header class="topbar">
   <div class="topbar-logo"><div class="logo-badge">X</div><div class="logo-text">PROJECT X</div></div>
-  <nav class="header-nav" data-active="member"></nav>
+  <!-- 縮減後的引導列：原本散在頂部的 全球追蹤／互動圖表／歷史報告／方案點數 已整併進會員中心側欄 -->
+  <nav class="header-nav">
+    <a class="nav-item" href="/brief.html">總覽</a>
+    <a class="nav-item" href="/pages/market.html">市場</a>
+    <a class="nav-item" href="/pages/industry.html">產業</a>
+    <a class="nav-item" href="/pages/institutional.html">機構研報</a>
+    <a class="nav-item" href="/pages/calendar.html">市場日曆</a>
+    <a class="nav-item active"><span class="nav-dot"></span>會員中心</a>
+  </nav>
   <div class="header-right">
     <div class="live-badge"><span class="live-dot"></span>LIVE</div>
     <span class="header-user">XTEST1</span>
@@ -122,7 +141,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   </div>
 </header>
 
-<div class="proto-note"><div class="tip">⚙️ 這是「側欄四分類」版面範例（獨立預覽頁，未接真實資料；卡片內容為示意）。確認方向後再整併進正式會員中心。</div></div>
+<div class="proto-note"><div class="tip">⚙️ 「側欄五分類」版面範例（獨立預覽頁，未接真實資料；卡片為示意）。頂部引導列已縮減：全球追蹤／互動圖表／歷史報告／方案點數整併進側欄。</div></div>
 
 <div class="hub">
   <!-- SIDEBAR -->
@@ -131,42 +150,19 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <div class="side-avatar">X</div>
       <div><div class="side-uname">XTEST1</div><div class="side-tag">✦ PRO 會員</div></div>
     </div>
-    <button class="side-item active" data-cat="invest" onclick="go('invest',this)"><span class="side-ico">🎯</span>自選投資</button>
-    <button class="side-item" data-cat="daily" onclick="go('daily',this)"><span class="side-ico">📡</span>每日情報</button>
-    <button class="side-item" data-cat="ai" onclick="go('ai',this)"><span class="side-ico">🤖</span>AI 智能<span class="star">★</span></button>
+    <button class="side-item active" data-cat="daily" onclick="go('daily',this)"><span class="side-ico">📡</span>每日情報</button>
+    <button class="side-item" data-cat="pulse" onclick="go('pulse',this)"><span class="side-ico">🤖</span>PulseAI<span class="star">★</span></button>
+    <button class="side-item" data-cat="stories" onclick="go('stories',this)"><span class="side-ico">🌍</span>全球追蹤</button>
+    <button class="side-item" data-cat="archive" onclick="go('archive',this)"><span class="side-ico">📂</span>歷史報告</button>
     <button class="side-item" data-cat="account" onclick="go('account',this)"><span class="side-ico">⚙️</span>帳戶 / 方案</button>
     <div class="side-credits"><div class="lbl">可用點數</div><div class="val">42 <span style="font-size:12px;color:rgba(255,255,255,.5);">點</span></div></div>
   </aside>
 
   <!-- CONTENT -->
   <main>
-    <!-- 自選投資 -->
-    <section class="cat active" id="cat-invest">
-      <div class="cat-head"><div class="cat-title">自選投資 <span class="en">My Portfolio</span></div><div class="cat-desc">你的自選標的、共識與風險評估一站掌握。</div></div>
-      <div class="block">
-        <div class="block-h"><div class="block-t">我的自選標的 <span class="en">WATCHLIST</span></div><span class="mini-btn">+ 新增標的</span></div>
-        <div class="block-b">
-          <div class="tgrid">
-            <div class="tcard"><div class="sym">NVDA</div><div class="nm">輝達</div><div class="px up">▲ 1.82%</div></div>
-            <div class="tcard"><div class="sym">2330</div><div class="nm">台積電</div><div class="px up">▲ 0.6%</div></div>
-            <div class="tcard"><div class="sym">ETH</div><div class="nm">以太坊</div><div class="px down">▼ 2.1%</div></div>
-            <div class="tcard"><div class="sym">AAPL</div><div class="nm">蘋果</div><div class="px up">▲ 0.4%</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="block">
-        <div class="block-h"><div class="block-t">共識溫度計 <span class="en">CONSENSUS</span></div><span class="badge" style="background:var(--gray-100);color:var(--gray-500);border-color:var(--gray-200);">自選 · 免費</span></div>
-        <div class="block-b">多空共識視覺化：機構評級、技術面、籌碼面綜合溫度（示意）。</div>
-      </div>
-      <div class="block">
-        <div class="block-h"><div class="block-t">組合風險雷達 <span class="en">RISK RADAR</span></div><span class="badge" style="background:var(--green-100);color:var(--green-600);border-color:#bbf7d0;">穩健</span></div>
-        <div class="block-b">依你的自選組合計算集中度、相關性與波動風險（示意）。</div>
-      </div>
-    </section>
-
     <!-- 每日情報 -->
-    <section class="cat" id="cat-daily">
-      <div class="cat-head"><div class="cat-title">每日情報 <span class="en">Daily Intelligence</span></div><div class="cat-desc">每天早上一站掌握市場簡報、機會與事件。</div></div>
+    <section class="cat active" id="cat-daily">
+      <div class="cat-head"><div class="cat-title">每日情報 <span class="en">Daily Intelligence</span></div><div class="cat-desc">每天早上一站掌握市場簡報、機會、事件與訊號。</div></div>
       <div class="block">
         <div class="block-h"><div class="block-t">今日簡報 <span class="en">MORNING BRIEF</span></div><span class="badge">06/04</span></div>
         <div class="block-b">AI 彙整今日總經、產業、美股、市場風向四維重點（示意）。</div>
@@ -183,21 +179,36 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <div class="block-h"><div class="block-t">訊號強度雷達 <span class="en">SIGNAL RADAR</span></div><span class="badge">偏多</span></div>
         <div class="block-b">整合宏觀／產業／技術訊號的綜合強度（示意）。</div>
       </div>
-      <div class="block">
-        <div class="block-h"><div class="block-t">全球追蹤 <span class="en">GLOBAL STORIES</span></div><span class="badge">時間軸</span></div>
-        <div class="block-b">跨日國際大事時間軸（地緣／貿易／央行／科技）（示意）。</div>
-      </div>
-      <div class="block">
-        <div class="block-h"><div class="block-t">歷史報告 <span class="en">ARCHIVE</span></div><span class="mini-btn">📂 開啟</span></div>
-        <div class="block-b">瀏覽過往每日報告完整內容。</div>
-      </div>
     </section>
 
-    <!-- AI 智能 -->
-    <section class="cat" id="cat-ai">
-      <div class="cat-head"><div class="cat-title">AI 智能 <span class="en">AI Suite</span></div><div class="cat-desc">ProjectX 的 AI 互動工具，未來可獨立組成 AI 訂閱方案。</div></div>
+    <!-- PulseAI -->
+    <section class="cat" id="cat-pulse">
+      <div class="cat-head"><div class="cat-title">PulseAI <span class="en">AI Suite</span></div><div class="cat-desc">ProjectX 的 AI 智能工具，未來可獨立組成「PulseAI 訂閱包」行銷。</div></div>
+
+      <div class="sub-label">PulseAI 自選投資</div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">我的自選標的 <span class="en">WATCHLIST</span></div><span class="mini-btn">+ 新增標的</span></div>
+        <div class="block-b">
+          <div class="tgrid">
+            <div class="tcard"><div class="sym">NVDA</div><div class="nm">輝達</div><div class="px up">▲ 1.82%</div></div>
+            <div class="tcard"><div class="sym">2330</div><div class="nm">台積電</div><div class="px up">▲ 0.6%</div></div>
+            <div class="tcard"><div class="sym">ETH</div><div class="nm">以太坊</div><div class="px down">▼ 2.1%</div></div>
+            <div class="tcard"><div class="sym">AAPL</div><div class="nm">蘋果</div><div class="px up">▲ 0.4%</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">共識溫度計 <span class="en">CONSENSUS</span></div><span class="badge" style="background:var(--gray-100);color:var(--gray-500);border-color:var(--gray-200);">自選</span></div>
+        <div class="block-b">多空共識視覺化：機構評級、技術面、籌碼面綜合溫度（示意）。</div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">組合風險雷達 <span class="en">RISK RADAR</span></div><span class="badge" style="background:var(--green-100);color:var(--green-600);border-color:#bbf7d0;">穩健</span></div>
+        <div class="block-b">依你的自選組合計算集中度、相關性與波動風險（示意）。</div>
+      </div>
+
+      <div class="sub-label">PulseAI 智能工具</div>
       <div class="ai-card">
-        <div><div class="t">🤖 AI 推演沙盤</div><div class="d">輸入市場問題，AI 生成三情境機率推演與行動建議</div></div>
+        <div><div class="t">🤖 PulseAI 推演沙盤</div><div class="d">輸入市場問題，AI 生成三情境機率推演與行動建議</div></div>
         <span class="ai-go">開始推演 →</span>
       </div>
       <div class="ai-card" style="background:linear-gradient(135deg,#1e293b,#334155);">
@@ -207,6 +218,41 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <div class="ai-card" style="background:linear-gradient(135deg,var(--navy-700),var(--navy-500));">
         <div><div class="t">📈 PulseAI 互動圖表</div><div class="d">AI 捕捉市場脈動，自動標出支撐（綠）與壓力（紅）區間</div></div>
         <span class="ai-go">開啟圖表 →</span>
+      </div>
+    </section>
+
+    <!-- 全球追蹤 -->
+    <section class="cat" id="cat-stories">
+      <div class="cat-head"><div class="cat-title">全球追蹤 <span class="en">Global Stories</span></div><div class="cat-desc">跨日國際大事時間軸（地緣／貿易／央行／科技）。</div></div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">紅海航運中斷 <span class="en">GEOPOLITICS</span></div><span class="badge">進行中</span></div>
+        <div class="block-b">
+          <div class="tl">
+            <div class="tl-item"><div class="tl-d">06/04</div><div class="tl-t">運費指數續創高，航商加徵附加費（示意）。</div></div>
+            <div class="tl-item"><div class="tl-d">06/01</div><div class="tl-t">主要航線改道好望角，交期延長（示意）。</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-h"><div class="block-t">AI 晶片出口管制 <span class="en">TECH</span></div><span class="badge">進行中</span></div>
+        <div class="block-b">
+          <div class="tl">
+            <div class="tl-item"><div class="tl-d">06/03</div><div class="tl-t">新一輪管制草案外流，半導體類股震盪（示意）。</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 歷史報告 -->
+    <section class="cat" id="cat-archive">
+      <div class="cat-head"><div class="cat-title">歷史報告 <span class="en">Archive</span></div><div class="cat-desc">瀏覽過往每日報告完整內容。</div></div>
+      <div class="block">
+        <div class="block-b" style="padding:6px 18px;">
+          <div class="arch-row"><div><strong style="color:var(--navy-900);">2026/06/03</strong> · 每日市場簡報</div><span class="mini-btn">開啟</span></div>
+          <div class="arch-row"><div><strong style="color:var(--navy-900);">2026/06/02</strong> · 每日市場簡報</div><span class="mini-btn">開啟</span></div>
+          <div class="arch-row"><div><strong style="color:var(--navy-900);">2026/05/30</strong> · 每日市場簡報</div><span class="mini-btn">開啟</span></div>
+          <div class="arch-row"><div><strong style="color:var(--navy-900);">2026/05/29</strong> · 每日市場簡報</div><span class="mini-btn">開啟</span></div>
+        </div>
       </div>
     </section>
 
@@ -234,7 +280,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   </main>
 </div>
 
-<script src="/shared/nav.js"></script>
 <script>
 function go(cat,el){
   var items=document.querySelectorAll('.side-item');
