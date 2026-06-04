@@ -91,7 +91,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .zone-item .rng{font-weight:600;color:var(--gray-900);}
 .zone-item .dt{color:var(--gray-400);font-size:11px;}
 .zone-empty{font-size:12.5px;color:var(--gray-400);padding:6px 0;}
-.legend-note{font-size:12px;color:var(--gray-500);line-height:1.6;margin-top:12px;}
 .usage{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);box-shadow:var(--shadow-card);margin-bottom:14px;overflow:hidden;}
 .usage>summary{list-style:none;cursor:pointer;padding:12px 16px;font-size:13.5px;font-weight:600;color:var(--navy-800);display:flex;align-items:center;gap:8px;}
 .usage>summary::-webkit-details-marker{display:none;}
@@ -139,8 +138,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
   <div class="page-header">
     <div>
-      <h1 class="page-title">互動圖表 <span class="page-title-sub">Order Block Chart</span></h1>
-      <div class="page-update">K 線 + 訂單塊（Order Block）支撐 / 壓力區 · Pro 會員專屬 · 資料 Binance / Yahoo</div>
+      <h1 class="page-title">互動圖表 <span class="page-title-sub">AI Smart Chart</span></h1>
+      <div class="page-update">AI 智能判讀的支撐 / 壓力區 · Pro 會員專屬</div>
     </div>
   </div>
 
@@ -148,8 +147,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div id="pro-gate-view">
     <div class="pro-gate">
       <div class="pro-gate-icon">✦</div>
-      <h2 class="pro-gate-title">在圖上直接看見<em>機構訂單塊</em></h2>
-      <p class="pro-gate-desc">以成交量樞紐定位主力進出的訂單塊，綠色為潛在支撐區、紅色為潛在壓力區，直接畫在 K 線上。支援加密幣對與台股 / 美股，自由切換週期。</p>
+      <h2 class="pro-gate-title">AI 即時判讀<em>支撐與壓力</em></h2>
+      <p class="pro-gate-desc">AI 分析價量結構，自動標出主力進出的潛在支撐（綠）與壓力（紅）區間，直接畫在 K 線上。支援加密幣對與台股 / 美股，自由切換週期。</p>
       <div class="pro-gate-btns">
         <a href="/pages/login.html" class="btn-pro-upgrade">✦ 登入體驗 Pro</a>
       </div>
@@ -189,7 +188,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <span class="k">指數</span><span class="v"><span class="usage-tag">^GSPC</span> 標普 · <span class="usage-tag">^IXIC</span> 那斯達克 · <span class="usage-tag">^TWII</span> 台股加權</span>
           <span class="k">加密</span><span class="v">市場切「加密幣」後打幣對，如 <span class="usage-tag">ETHBTC</span><span class="usage-tag">BTCUSDT</span></span>
         </div>
-        <div style="font-size:12px;color:var(--gray-500);">小提醒：訂單塊區間被價格突破後即視為失效並自動移除，圖上保留各方向最近 3 個有效區；首次查詢若後端剛喚醒，可能需等 10–30 秒。本工具僅供研究參考，非投資建議。</div>
+        <div style="font-size:12px;color:var(--gray-500);">小提醒：AI 判讀的支撐 / 壓力區被價格突破後即視為失效並自動移除，圖上保留各方向最近 3 個有效區；首次查詢若系統剛喚醒，可能需等 10–30 秒。本工具由 AI 運算分析，僅供研究參考，非投資建議。</div>
       </div>
     </details>
 
@@ -206,15 +205,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
     <div class="zones">
       <div class="zone-col">
-        <h3><span class="dot" style="background:var(--red-600);"></span>壓力區 Bearish OB</h3>
+        <h3><span class="dot" style="background:var(--red-600);"></span>AI 壓力區</h3>
         <div id="zone-bear"><div class="zone-empty">—</div></div>
       </div>
       <div class="zone-col">
-        <h3><span class="dot" style="background:var(--green-600);"></span>支撐區 Bullish OB</h3>
+        <h3><span class="dot" style="background:var(--green-600);"></span>AI 支撐區</h3>
         <div id="zone-bull"><div class="zone-empty">—</div></div>
       </div>
     </div>
-    <div class="legend-note">訂單塊以成交量樞紐（5 根 K 棒前後）偵測，紅區為主力供給（壓力）、綠區為主力需求（支撐）；區間被價格實體 / 影線突破後即視為失效並移除，圖上保留各方向最近 3 個有效區。本工具僅供研究參考，非投資建議。</div>
   </div>
 
 </main>
@@ -381,7 +379,7 @@ function renderSignal(j){
 
   document.getElementById('chart-sym').textContent=j.symbol;
   var intLabel={'1h':'1 小時','4h':'4 小時','1d':'日線','1w':'週線','60m':'1 小時'}[j.interval]||j.interval;
-  document.getElementById('chart-meta').textContent=intLabel+' · '+j.candles.length+' 根 K 棒 · 來源 '+(j.source==='binance'?'Binance':'Yahoo');
+  document.getElementById('chart-meta').textContent=intLabel+' · '+j.candles.length+' 根 K 棒 · AI 運算';
 
   renderZoneList(j);
   // overlay needs a tick after layout settles
