@@ -735,6 +735,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <p class="m-fn">免費版可瀏覽每日宏觀情報與市場數據，無需帳號。</p>
       </div>
       <div id="form-s" style="display:none">
+        <div class="m-group"><label class="m-label">稱呼</label><input class="m-input" id="s-name" type="text" placeholder="您的稱呼" maxlength="40"></div>
+        <div class="m-group"><label class="m-label">手機</label><input class="m-input" id="s-phone" type="tel" placeholder="0912345678" maxlength="20"></div>
+        <div class="m-group"><label class="m-label">生日</label><input class="m-input" id="s-birthday" type="date"></div>
         <div class="m-group"><label class="m-label">Email</label><input class="m-input" id="s-email" type="email" placeholder="your@email.com"></div>
         <div class="m-group"><label class="m-label">設定密碼</label><input class="m-input" id="s-pw" type="password" placeholder="至少8個字元"></div>
         <button class="m-submit" id="btn-signup" onclick="doSignup()">建立帳號 · 免費開始</button>
@@ -821,12 +824,16 @@ async function doLogin(){
 }
 
 async function doSignup(){
+  const name=document.getElementById('s-name'),phone=document.getElementById('s-phone'),bday=document.getElementById('s-birthday');
   const e=document.getElementById('s-email'),p=document.getElementById('s-pw');
+  if(!name.value.trim()){shk(name);showMsg('s-msg','請輸入稱呼');return;}
+  if(!/^[0-9+\-() ]{6,20}$/.test(phone.value.trim())){shk(phone);showMsg('s-msg','手機號碼格式不正確');return;}
+  if(!bday.value){shk(bday);showMsg('s-msg','請選擇生日');return;}
   if(!ve(e.value)){shk(e);return;}
   if(p.value.length<8){shk(p);return;}
   const btn=document.getElementById('btn-signup');
   btn.disabled=true;btn.textContent='建立中...';
-  const r=await _sb.auth.signUp({email:e.value.trim(),password:p.value});
+  const r=await _sb.auth.signUp({email:e.value.trim(),password:p.value,options:{data:{display_name:name.value.trim(),phone:phone.value.trim(),birthday:bday.value}}});
   if(r.error){
     btn.disabled=false;btn.textContent='建立帳號 · 免費開始';
     showMsg('s-msg','註冊失敗：'+r.error.message);
