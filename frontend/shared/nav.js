@@ -15,7 +15,7 @@
 
   // 縮排版頂部導覽：全球追蹤／互動圖表／歷史報告已整併進會員中心側欄；
   // 方案點數(credits)保留於 toolbar 作為訪客購點入口。個別頁面仍可用 data-nav-keys 覆寫。
-  var TOOLBAR_KEYS = ['brief','market','industry','research','calendar','columns','member','credits'];
+  var TOOLBAR_KEYS = ['brief','market','industry','research','calendar','member','credits'];
 
   window.buildNav = function(activeKey){
     // Support both .header-nav (standard) and .nav-links (industry.html ul-based)

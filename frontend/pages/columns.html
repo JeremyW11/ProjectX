@@ -73,6 +73,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .pt-name{font-size:14px;font-weight:600;color:var(--navy-900);}
 .pt-focus{font-size:11px;color:var(--gray-500);font-family:var(--font-zh);}
 
+/* sub-category tabs (3日分析 / 專刊) */
+.cat-tabs{display:flex;gap:6px;margin-bottom:16px;border-bottom:1px solid var(--gray-200);}
+.cat-tab{padding:9px 16px;font-size:13.5px;font-weight:600;color:var(--gray-500);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;}
+.cat-tab:hover{color:var(--navy-700);}
+.cat-tab.active{color:var(--navy-700);border-bottom-color:var(--navy-500);}
+.cat-tab .ct-count{font-size:11px;color:var(--gray-400);font-family:var(--font-en);margin-left:5px;}
+
 /* issue list */
 .issue-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);margin-bottom:14px;box-shadow:var(--shadow-card);overflow:hidden;}
 .issue-head{display:flex;align-items:flex-start;gap:10px;padding:18px 22px;cursor:pointer;flex-wrap:wrap;}
@@ -153,6 +160,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <!-- LOGGED-IN VIEW -->
   <div id="columns-view" class="columns-view">
     <div class="persona-tabs" id="persona-tabs"></div>
+    <div class="cat-tabs" id="cat-tabs"></div>
     <div id="issue-list"></div>
   </div>
 
@@ -216,7 +224,14 @@ async function signOutUser(){
 // ── Render persona columns ──
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 
-var COL_STATE={ personas:[], feed:[], active:null, issueCache:{} };
+var COL_STATE={ personas:[], feed:[], active:null, activeCat:'serial', issueCache:{} };
+var CAT_LABEL={ serial:'3日分析', special:'專刊' };
+
+function currentIssues(){
+  return COL_STATE.feed
+    .filter(function(f){ return f.persona===COL_STATE.active && (f.type==='special'?'special':'serial')===COL_STATE.activeCat; })
+    .slice().sort(function(a,b){ return b.date.localeCompare(a.date); });
+}
 
 async function loadColumns(){
   var tabsEl=document.getElementById('persona-tabs');
@@ -244,13 +259,14 @@ async function loadColumns(){
   }
 
   COL_STATE.active=personas[0].persona;
+  COL_STATE.activeCat='serial';
   renderTabs();
+  renderCatTabs();
   renderIssueList();
 }
 
 function renderTabs(){
   var tabsEl=document.getElementById('persona-tabs');
-  if(COL_STATE.personas.length<=1){ tabsEl.innerHTML=''; return; }
   tabsEl.innerHTML=COL_STATE.personas.map(function(p){
     var active=p.persona===COL_STATE.active?' active':'';
     return '<button class="persona-tab'+active+'" data-persona="'+esc(p.persona)+'">'+
@@ -259,16 +275,30 @@ function renderTabs(){
     '</button>';
   }).join('');
   Array.prototype.forEach.call(tabsEl.querySelectorAll('.persona-tab'),function(b){
-    b.onclick=function(){ COL_STATE.active=b.dataset.persona; renderTabs(); renderIssueList(); };
+    b.onclick=function(){ COL_STATE.active=b.dataset.persona; COL_STATE.activeCat='serial'; renderTabs(); renderCatTabs(); renderIssueList(); };
+  });
+}
+
+function renderCatTabs(){
+  var el=document.getElementById('cat-tabs');
+  var counts={ serial:0, special:0 };
+  COL_STATE.feed.forEach(function(f){ if(f.persona===COL_STATE.active){ counts[f.type==='special'?'special':'serial']++; } });
+  el.innerHTML=['serial','special'].map(function(cat){
+    var active=cat===COL_STATE.activeCat?' active':'';
+    return '<button class="cat-tab'+active+'" data-cat="'+cat+'">'+CAT_LABEL[cat]+
+      '<span class="ct-count">'+counts[cat]+'</span></button>';
+  }).join('');
+  Array.prototype.forEach.call(el.querySelectorAll('.cat-tab'),function(b){
+    b.onclick=function(){ COL_STATE.activeCat=b.dataset.cat; renderCatTabs(); renderIssueList(); };
   });
 }
 
 function renderIssueList(){
   var listEl=document.getElementById('issue-list');
-  var issues=COL_STATE.feed.filter(function(f){ return f.persona===COL_STATE.active; })
-    .slice().sort(function(a,b){ return b.date.localeCompare(a.date); });
+  var issues=currentIssues();
   if(!issues.length){
-    listEl.innerHTML='<div class="empty-box">這位名家尚未出刊。</div>';
+    var msg=COL_STATE.activeCat==='special'?'這位名家目前沒有臨時專刊。市場溫度跨界時才會追加。':'這位名家尚未開始 3 日分析連載。';
+    listEl.innerHTML='<div class="empty-box">'+msg+'</div>';
     return;
   }
   listEl.innerHTML=issues.map(function(f,i){
@@ -302,8 +332,7 @@ async function toggleIssue(i, forceOpen){
     if(tgEl) tgEl.textContent='展開 ▼';
     return;
   }
-  var issues=COL_STATE.feed.filter(function(f){ return f.persona===COL_STATE.active; })
-    .slice().sort(function(a,b){ return b.date.localeCompare(a.date); });
+  var issues=currentIssues();
   var f=issues[i];
   if(!f) return;
   bodyEl.classList.add('open');
