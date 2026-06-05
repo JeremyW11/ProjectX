@@ -10,8 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --navy-950:#070d1c; --navy-700:#1d2d5a; --navy-600:#1e3a8a;
-  --navy-400:#3b82f6; --navy-300:#93c5fd; --navy-100:#dbeafe; --navy-50:#eff6ff;
+  --navy-950:#070d1c; --navy-900:#0d1630; --navy-800:#152244;
+  --navy-700:#1d2d5a; --navy-600:#1e3a8a; --navy-500:#2563eb;
+  --navy-400:#3b82f6; --navy-300:#93c5fd; --navy-200:#c7d7fd; --navy-100:#dbeafe; --navy-50:#eff6ff;
   --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569;
   --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1;
   --gray-200:#e2e8f0; --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
@@ -26,35 +27,25 @@
 html{font-size:16px;-webkit-font-smoothing:antialiased;}
 body{
   font-family:var(--font-zh);
-  background:#dbe2ef;
   color:var(--gray-900);
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   background-attachment:fixed;
-  background-image:
-    radial-gradient(900px 600px at 88% -10%, rgba(37,99,235,.34), transparent 62%),
-    radial-gradient(820px 640px at -8% 10%, rgba(51,65,85,.28), transparent 62%),
-    radial-gradient(700px 560px at 50% 116%, rgba(29,78,216,.22), transparent 64%);
+  background:
+    radial-gradient(1120px 640px at 94% -14%, rgba(37,99,235,.46), transparent 64%),
+    radial-gradient(940px 720px at -10% 4%, rgba(51,65,85,.40), transparent 64%),
+    radial-gradient(820px 620px at 50% 118%, rgba(29,78,216,.28), transparent 66%),
+    linear-gradient(160deg, #dbe2ef 0%, #f4f6fb 56%);
 }
 
 .container{width:100%;max-width:420px;padding:24px;}
 
 /* Logo */
-.logo-wrap{text-align:center;margin-bottom:10px;}
-.logo-mark-center{
-  width:44px;height:44px;background:var(--navy-700);border-radius:12px;
-  display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px;
-}
-.logo-main-text{
-  font-family:var(--font-en);font-size:15px;font-weight:600;
-  color:var(--navy-800,#152244);letter-spacing:.05em;display:block;
-}
-.logo-sub-text{
-  font-size:10px;color:var(--gray-400);letter-spacing:.08em;
-  font-family:var(--font-en);display:block;
-}
+.logo-wrap{text-align:center;margin-bottom:12px;}
+.logo-wrap svg{transition:transform .3s;}
+.logo-wrap a:hover svg{transform:translateY(-1px);}
 .subtitle{
   text-align:center;font-size:13px;color:var(--gray-400);
   margin-bottom:28px;font-family:var(--font-zh);
@@ -159,15 +150,17 @@ input::placeholder{color:var(--gray-400);}
 
   <!-- Logo -->
   <div class="logo-wrap">
-    <div class="logo-mark-center">
-      <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
-        <path d="M2 9L9 2L16 9L9 16L2 9Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
-        <path d="M9 5.5L12.5 9L9 12.5L5.5 9L9 5.5Z" fill="white" opacity="0.6"/>
-        <circle cx="9" cy="9" r="1.5" fill="white"/>
+    <a href="/index.html" aria-label="PROJECT X" style="display:inline-block;text-decoration:none;">
+      <svg width="200" height="44" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
+        <line x1="10" y1="10" x2="30" y2="30" stroke="white" stroke-width="6" stroke-linecap="round"/>
+        <line x1="30" y1="10" x2="10" y2="30" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="20" cy="20" r="3" fill="#2563eb"/>
+        <circle cx="20" cy="20" r="1.5" fill="#93c5fd"/>
+        <text x="48" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" letter-spacing="0.3" fill="#0f172a">PROJECT </text>
+        <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
       </svg>
-    </div>
-    <span class="logo-main-text">PROJECT X</span>
-    <span class="logo-sub-text">INTELLIGENCE</span>
+    </a>
   </div>
   <div class="subtitle">每日全球投資情報</div>
 
