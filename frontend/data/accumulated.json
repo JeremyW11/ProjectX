@@ -4624,8 +4624,8 @@
       "status": "緩和",
       "direction": "中性",
       "affect_assets": "Brent原油、黃金、航運股、避險資產",
-      "summary": "川普稱伊朗同意不發展核武,WTI連三漲至95美元,封鎖風險暫緩但油價仍偏強",
-      "last_update": "2026-06-04",
+      "summary": "美伊談判MOU機率上升能源溢價收斂,WTI跌1%至95美元三日連漲告終,封鎖風險續降",
+      "last_update": "2026-06-05",
       "timeline": [
         {
           "date": "2026-06-03",
@@ -4634,8 +4634,20 @@
           "source_url": ""
         },
         {
+          "date": "2026-06-03",
+          "update": "美伊封鎖外交升級Brent漲96.82黃金衝4481",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
           "date": "2026-06-04",
           "update": "川普稱伊朗同意不發展核武WTI連三漲至95",
+          "sentiment": "中性",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-05",
+          "update": "美伊MOU機率上升WTI跌1%三日連漲告終",
           "sentiment": "中性",
           "source_url": ""
         }
@@ -4649,8 +4661,8 @@
       "status": "升溫",
       "direction": "中性",
       "affect_assets": "美債、美股、美元、黃金",
-      "summary": "6月FOMC市場共識按兵不動利率維持3.50-3.75%,Warsh首場主持鴿鷹立場成焦點",
-      "last_update": "2026-06-04",
+      "summary": "6/16-17 FOMC市場共識按兵不動利率3.50-3.75%,今晚非農預期85K將牽動Fed路徑與美元",
+      "last_update": "2026-06-05",
       "timeline": [
         {
           "date": "2026-06-02",
@@ -4663,19 +4675,25 @@
           "update": "市場共識6月按兵不動利率維持3.50-3.75%",
           "sentiment": "中性",
           "source_url": ""
+        },
+        {
+          "date": "2026-06-05",
+          "update": "今晚非農預期85K牽動Fed路徑與美元",
+          "sentiment": "中性",
+          "source_url": ""
         }
       ]
     },
     {
       "id": "sp500-record-rally",
-      "title": "S&P500破7600連九漲",
+      "title": "美股創高資金輪動",
       "category": "總經",
       "started": "2026-06-02",
-      "status": "升溫",
-      "direction": "看多",
-      "affect_assets": "美股大盤、科技股、ETF",
-      "summary": "S&P 500首次收上7600創歷史新高,連續九日上漲創2025-05來最長,風險偏好強勁",
-      "last_update": "2026-06-04",
+      "status": "進行中",
+      "direction": "中性",
+      "affect_assets": "美股大盤、道瓊、科技股、ETF",
+      "summary": "道瓊飆874點創高資金輪出科技股,亞股偏弱跟進AI回檔,風險偏好續強但類股輪動",
+      "last_update": "2026-06-05",
       "timeline": [
         {
           "date": "2026-06-02",
@@ -4688,6 +4706,18 @@
           "update": "連九日上漲創2025-05來最長紀錄",
           "sentiment": "利多",
           "source_url": ""
+        },
+        {
+          "date": "2026-06-04",
+          "update": "道瓊飆874點創高資金輪出科技股",
+          "sentiment": "中性",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-05",
+          "update": "亞股偏弱跟進美股AI股回檔",
+          "sentiment": "利空",
+          "source_url": ""
         }
       ]
     },
@@ -4696,18 +4726,12 @@
       "title": "AI晶片供應鏈題材",
       "category": "科技",
       "started": "2026-06-01",
-      "status": "升溫",
-      "direction": "看多",
-      "affect_assets": "NVDA、MRVL、AVGO、TSMC、半導體ETF",
-      "summary": "Marvell飆33%黃仁勳點名兆元,Broadcom Q2 AI營收84億年增106%,WSTS估2026市場1.51兆",
-      "last_update": "2026-06-04",
+      "status": "緩和",
+      "direction": "中性",
+      "affect_assets": "NVDA、AVGO、MRVL、TSMC、半導體ETF",
+      "summary": "Broadcom AI營收108億未上修目標盤後-15%引爆賣壓,AI供應鏈進入財報檢驗期",
+      "last_update": "2026-06-05",
       "timeline": [
-        {
-          "date": "2026-06-02",
-          "update": "Marvell暴漲25%黃仁勳稱兆元潛力TSMC破443新高",
-          "sentiment": "利多",
-          "source_url": ""
-        },
         {
           "date": "2026-06-02",
           "update": "STMicro上修資料中心展望至1B HPE暴漲25%",
@@ -4731,6 +4755,12 @@
           "update": "WSTS估2026半導體市場1.51兆美元年增90%",
           "sentiment": "利多",
           "source_url": ""
+        },
+        {
+          "date": "2026-06-05",
+          "update": "AVGO AI營收108億未上修盤後-15%引爆賣壓",
+          "sentiment": "利空",
+          "source_url": ""
         }
       ]
     },
@@ -4742,8 +4772,8 @@
       "status": "進行中",
       "direction": "中性",
       "affect_assets": "NVDA、AMD、INTC、QCOM、MSFT",
-      "summary": "NVDA Computex發表RTX Spark進軍PC,MSFT Build揭MAI-Code-1-Flash降低OpenAI依賴",
-      "last_update": "2026-06-04",
+      "summary": "MSFT發布MAI-Code-1編碼模型降低OpenAI依賴,NVDA與TSMC將AI導入晶圓廠",
+      "last_update": "2026-06-05",
       "timeline": [
         {
           "date": "2026-06-01",
@@ -4761,6 +4791,56 @@
           "date": "2026-06-04",
           "update": "MSFT MAI-Code-1-Flash降低OpenAI依賴",
           "sentiment": "中性",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-05",
+          "update": "NVDA與TSMC將AI導入晶圓廠製程",
+          "sentiment": "利多",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "opec-june-output",
+      "title": "OPEC+ 6月象徵增產",
+      "category": "能源",
+      "started": "2026-06-03",
+      "status": "進行中",
+      "direction": "中性",
+      "affect_assets": "Brent、WTI、能源股、產油國資產",
+      "summary": "OPEC+ 6月象徵增產18.8萬桶UAE退出,WTI跌1%至95三日連漲告終供需轉趨平衡",
+      "last_update": "2026-06-05",
+      "timeline": [
+        {
+          "date": "2026-06-03",
+          "update": "OPEC+ 6月象徵增產18.8萬桶UAE退出",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-05",
+          "update": "WTI跌近1%至95美元三日連漲告終",
+          "sentiment": "中性",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "biopharma-ma-boom",
+      "title": "生技併購熱潮",
+      "category": "科技",
+      "started": "2026-06-04",
+      "status": "升溫",
+      "direction": "看多",
+      "affect_assets": "生技股、XBI、大型藥廠、併購標的",
+      "summary": "2026 biopharma併購已達1060億美元,全年看2500億,大型藥廠加速布局創新管線",
+      "last_update": "2026-06-04",
+      "timeline": [
+        {
+          "date": "2026-06-04",
+          "update": "2026 biopharma併購達1060億全年看2500億",
+          "sentiment": "利多",
           "source_url": ""
         }
       ]
@@ -4804,57 +4884,19 @@
       ]
     },
     {
-      "id": "clarity-act-crypto",
-      "title": "CLARITY Act加密立法",
-      "category": "貿易",
+      "id": "global-growth-downgrade",
+      "title": "UNCTAD下修全球成長",
+      "category": "總經",
       "started": "2026-06-03",
       "status": "升溫",
-      "direction": "看多",
-      "affect_assets": "BTC、ETH、加密股、Coinbase",
-      "summary": "CLARITY Act進入參院最後階段,預計8月前簽署,加密產業監管框架確立",
-      "last_update": "2026-06-03",
-      "timeline": [
-        {
-          "date": "2026-06-03",
-          "update": "CLARITY Act進參院最後階段8月前簽署",
-          "sentiment": "利多",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "opec-june-output",
-      "title": "OPEC+ 6月象徵增產",
-      "category": "能源",
-      "started": "2026-06-03",
-      "status": "進行中",
-      "direction": "看多",
-      "affect_assets": "Brent、WTI、能源股、產油國資產",
-      "summary": "OPEC+ 6月象徵性增產18.8萬桶UAE退出,供給仍偏緊原油價格偏強",
-      "last_update": "2026-06-03",
-      "timeline": [
-        {
-          "date": "2026-06-03",
-          "update": "OPEC+ 6月象徵增產18.8萬桶UAE退出",
-          "sentiment": "利多",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "alphabet-mega-raise",
-      "title": "Alphabet 800億籌資",
-      "category": "科技",
-      "started": "2026-06-02",
-      "status": "進行中",
       "direction": "看空",
-      "affect_assets": "GOOGL、大型科技股、AI基建相關",
-      "summary": "Alphabet售股募資800億支應AI基建股價重挫4%,市場憂慮AI資本開支壓力",
-      "last_update": "2026-06-02",
+      "affect_assets": "全球股市、新興市場、原物料、避險資產",
+      "summary": "UNCTAD下修2026全球成長至2.6%,地緣風險取代貿易戰成主要拖累,新興市場承壓",
+      "last_update": "2026-06-03",
       "timeline": [
         {
-          "date": "2026-06-02",
-          "update": "Alphabet重挫4%發行800億美元股票籌資",
+          "date": "2026-06-03",
+          "update": "UNCTAD下修2026全球成長至2.6%地緣風險取代貿易戰",
           "sentiment": "利空",
           "source_url": ""
         }
