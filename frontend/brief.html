@@ -553,6 +553,32 @@ img { display: block; max-width: 100%; }
   font-family: var(--font-zh);
 }
 
+/* 今日總結分析 */
+.synthesis-card {
+  position: relative;
+  background: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-700) 100%);
+  border-radius: 16px;
+  padding: 26px 28px 22px;
+  margin-bottom: 22px;
+  box-shadow: 0 10px 30px -12px rgba(15,23,42,.45);
+  overflow: hidden;
+}
+.synthesis-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+  background: linear-gradient(180deg, #facc15, #f59e0b);
+}
+.synthesis-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.synthesis-title { font-size: 16px; font-weight: 800; color: #fff; font-family: var(--font-zh); letter-spacing: .01em; }
+.synthesis-title .en { display: block; font-size: 10px; font-weight: 700; letter-spacing: .14em; color: #facc15; font-family: var(--font-en); margin-top: 3px; }
+.synthesis-badge { font-size: 10px; font-weight: 700; color: var(--navy-900); background: #facc15; padding: 4px 10px; border-radius: 999px; white-space: nowrap; font-family: var(--font-en); letter-spacing: .04em; }
+.synthesis-body { font-size: 13.5px; line-height: 1.95; color: #dbe4f5; font-family: var(--font-zh); position: relative; }
+.synthesis-body p { margin: 0 0 11px; }
+.synthesis-body p:last-child { margin-bottom: 0; }
+.synthesis-body.clamped { max-height: 168px; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent); mask-image: linear-gradient(180deg, #000 60%, transparent); }
+.synthesis-toggle { margin-top: 12px; display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; color: #facc15; background: rgba(250,204,21,.10); border: 1px solid rgba(250,204,21,.30); border-radius: 8px; padding: 6px 14px; cursor: pointer; font-family: var(--font-zh); }
+.synthesis-toggle:hover { background: rgba(250,204,21,.18); }
+@media (max-width: 640px) { .synthesis-card { padding: 20px 18px 18px; } .synthesis-body { font-size: 13px; } }
+
 .brief-tickers {
   display: flex;
   align-items: center;
@@ -949,6 +975,15 @@ img { display: block; max-width: 100%; }
 
   <div class="market-bar" id="market-bar"></div>
 
+  <div class="synthesis-card" id="synthesis-card" style="display:none;">
+    <div class="synthesis-head">
+      <div class="synthesis-title">今日總結分析<span class="en">DAILY SYNTHESIS · 首席分析師</span></div>
+      <span class="synthesis-badge" id="synthesis-date">—</span>
+    </div>
+    <div class="synthesis-body clamped" id="synthesis-body"></div>
+    <button class="synthesis-toggle" id="synthesis-toggle" onclick="toggleSynthesis()">展開全文 ▾</button>
+  </div>
+
   <div class="main-grid">
     <div class="brief-col">
       <div class="section-header">
@@ -1141,6 +1176,34 @@ function renderPersons(persons) {
   }).join('');
 }
 
+function renderSynthesis(text, dateStr){
+  var card=document.getElementById('synthesis-card');
+  var body=document.getElementById('synthesis-body');
+  var toggle=document.getElementById('synthesis-toggle');
+  if(!card||!body) return;
+  var t=(text||'').trim();
+  if(!t){ card.style.display='none'; return; }
+  var paras=t.split(/\n{1,}/).map(function(s){return s.trim();}).filter(Boolean);
+  body.innerHTML=paras.map(function(p){
+    var d=document.createElement('p'); d.textContent=p; return d.outerHTML;
+  }).join('');
+  var dEl=document.getElementById('synthesis-date');
+  if(dEl&&dateStr) dEl.textContent=dateStr;
+  card.style.display='block';
+  // 只有內容夠長才顯示展開鈕
+  requestAnimationFrame(function(){
+    if(body.scrollHeight>180){ body.classList.add('clamped'); toggle.style.display='inline-flex'; }
+    else { body.classList.remove('clamped'); toggle.style.display='none'; }
+  });
+}
+function toggleSynthesis(){
+  var body=document.getElementById('synthesis-body');
+  var toggle=document.getElementById('synthesis-toggle');
+  if(!body) return;
+  var clamped=body.classList.toggle('clamped');
+  toggle.textContent=clamped?'展開全文 ▾':'收合 ▴';
+}
+
 function checkDataStaleness(dateStr){var today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei'}).format(new Date());if(dateStr&&dateStr!==today){var b=document.getElementById('stale-banner');if(b){b.style.display='flex';b.querySelector('.stale-date').textContent=dateStr;}}}
 
 async function loadData() {
@@ -1158,6 +1221,7 @@ async function loadData() {
     if (timeEl) timeEl.textContent = '更新於 '+(data.generated_at||data.date);
     const mktEl = document.getElementById('market-bar');
     if (mktEl) mktEl.innerHTML = renderMarketBar(data.tickers);
+    renderSynthesis(data.morning_brief, data.date);
     const mk = data.market || {};
     const allItems = [
       ...(data.macro||[]).map(i=>({...i,type:'macro'})),
