@@ -571,6 +571,11 @@ img { display: block; max-width: 100%; }
 .synthesis-title { font-size: 16px; font-weight: 800; color: #fff; font-family: var(--font-zh); letter-spacing: .01em; }
 .synthesis-title .en { display: block; font-size: 10px; font-weight: 700; letter-spacing: .14em; color: #facc15; font-family: var(--font-en); margin-top: 3px; }
 .synthesis-badge { font-size: 10px; font-weight: 700; color: var(--navy-900); background: #facc15; padding: 4px 10px; border-radius: 999px; white-space: nowrap; font-family: var(--font-en); letter-spacing: .04em; }
+.synthesis-chips { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.synthesis-tier { font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 999px; white-space: nowrap; letter-spacing: .04em; color: #cbd5e1; background: rgba(148,163,184,.18); border: 1px solid rgba(148,163,184,.32); }
+.synthesis-tier.pro { color: var(--navy-900); background: linear-gradient(135deg,#fde68a,#facc15); border-color: transparent; }
+.synthesis-upsell { margin-top: 12px; display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; color: #facc15; background: rgba(250,204,21,.10); border: 1px solid rgba(250,204,21,.30); border-radius: 8px; padding: 7px 14px; cursor: pointer; font-family: var(--font-zh); text-decoration: none; }
+.synthesis-upsell:hover { background: rgba(250,204,21,.18); }
 .synthesis-body { font-size: 13.5px; line-height: 1.95; color: #dbe4f5; font-family: var(--font-zh); position: relative; }
 .synthesis-body p { margin: 0 0 11px; }
 .synthesis-body p:last-child { margin-bottom: 0; }
@@ -978,10 +983,11 @@ img { display: block; max-width: 100%; }
   <div class="synthesis-card" id="synthesis-card" style="display:none;">
     <div class="synthesis-head">
       <div class="synthesis-title">今日總結分析<span class="en">DAILY SYNTHESIS · 首席分析師</span></div>
-      <span class="synthesis-badge" id="synthesis-date">—</span>
+      <div class="synthesis-chips"><span class="synthesis-tier" id="synthesis-tier">精簡版</span><span class="synthesis-badge" id="synthesis-date">—</span></div>
     </div>
-    <div class="synthesis-body clamped" id="synthesis-body"></div>
-    <button class="synthesis-toggle" id="synthesis-toggle" onclick="toggleSynthesis()">展開全文 ▾</button>
+    <div class="synthesis-body" id="synthesis-body"></div>
+    <button class="synthesis-toggle" id="synthesis-toggle" onclick="toggleSynthesis()" style="display:none;">展開全文 ▾</button>
+    <a class="synthesis-upsell" id="synthesis-upsell" href="/pages/credits.html" style="display:none;">🔒 升級 Pro 解鎖完整版總結分析 →</a>
   </div>
 
   <div class="main-grid">
@@ -1176,30 +1182,50 @@ function renderPersons(persons) {
   }).join('');
 }
 
-function renderSynthesis(text, dateStr){
+var _synthText='', _synthDate='', _synthPro=false;
+var SYNTH_FREE_CHARS=130;
+function renderSynthesis(text, dateStr, isPro){
   var card=document.getElementById('synthesis-card');
   var body=document.getElementById('synthesis-body');
   var toggle=document.getElementById('synthesis-toggle');
+  var upsell=document.getElementById('synthesis-upsell');
+  var tier=document.getElementById('synthesis-tier');
   if(!card||!body) return;
-  var t=(text||'').trim();
+  if(typeof text==='string'){ _synthText=text.trim(); _synthDate=dateStr||''; }
+  if(typeof isPro==='boolean') _synthPro=isPro;
+  var t=_synthText;
   if(!t){ card.style.display='none'; return; }
   var paras=t.split(/\n{1,}/).map(function(s){return s.trim();}).filter(Boolean);
-  body.innerHTML=paras.map(function(p){
-    var d=document.createElement('p'); d.textContent=p; return d.outerHTML;
-  }).join('');
   var dEl=document.getElementById('synthesis-date');
-  if(dEl&&dateStr) dEl.textContent=dateStr;
+  if(dEl&&_synthDate) dEl.textContent=_synthDate;
   card.style.display='block';
-  // 只有內容夠長才顯示展開鈕
-  requestAnimationFrame(function(){
-    if(body.scrollHeight>180){ body.classList.add('clamped'); toggle.style.display='inline-flex'; }
-    else { body.classList.remove('clamped'); toggle.style.display='none'; }
-  });
+  if(_synthPro){
+    // Pro：完整版，可展開／收合
+    body.innerHTML=paras.map(function(p){
+      var d=document.createElement('p'); d.textContent=p; return d.outerHTML;
+    }).join('');
+    if(tier){ tier.textContent='PRO · 完整版'; tier.classList.add('pro'); }
+    if(upsell) upsell.style.display='none';
+    requestAnimationFrame(function(){
+      if(body.scrollHeight>180){ body.classList.add('clamped'); toggle.style.display='inline-flex'; toggle.textContent='展開全文 ▾'; }
+      else { body.classList.remove('clamped'); toggle.style.display='none'; }
+    });
+  } else {
+    // 免費／未登入：精簡版，僅首段截斷，導引升級 Pro
+    var first=paras[0]||'';
+    var short=first.length>SYNTH_FREE_CHARS ? first.slice(0,SYNTH_FREE_CHARS).trim()+'…' : first;
+    var d=document.createElement('p'); d.textContent=short;
+    body.innerHTML=d.outerHTML;
+    body.classList.remove('clamped');
+    if(tier){ tier.textContent='精簡版'; tier.classList.remove('pro'); }
+    if(toggle) toggle.style.display='none';
+    if(upsell) upsell.style.display='inline-flex';
+  }
 }
 function toggleSynthesis(){
   var body=document.getElementById('synthesis-body');
   var toggle=document.getElementById('synthesis-toggle');
-  if(!body) return;
+  if(!body||!_synthPro) return;
   var clamped=body.classList.toggle('clamped');
   toggle.textContent=clamped?'展開全文 ▾':'收合 ▴';
 }
@@ -1261,18 +1287,31 @@ loadData();
   var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
   var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
   var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  var ADMIN_EMAIL='jermy831102@gmail.com';
+  function applyPro(isPro){ if(typeof renderSynthesis==='function') renderSynthesis(undefined,undefined,!!isPro); }
+  async function resolvePro(user){
+    if(!user){ applyPro(false); return; }
+    if((user.email||'').toLowerCase()===ADMIN_EMAIL){ applyPro(true); return; }
+    try{
+      var r=await sb.from('profiles').select('is_pro').eq('id',user.id).single();
+      applyPro(!!(r.data&&r.data.is_pro===true));
+    }catch(e){ applyPro(false); }
+  }
   sb.auth.onAuthStateChange(function(event,session){
     var btn=document.querySelector('.btn-login');
-    if(!btn) return;
-    if(session&&session.user){
-      btn.textContent='登出';
-      btn.href='#';
-      btn.onclick=function(e){e.preventDefault();sb.auth.signOut().then(function(){window.location.reload();});};
-    } else {
-      btn.textContent='登入';
-      btn.href='/pages/login.html';
-      btn.onclick=null;
+    var user=session?session.user:null;
+    if(btn){
+      if(user){
+        btn.textContent='登出';
+        btn.href='#';
+        btn.onclick=function(e){e.preventDefault();sb.auth.signOut().then(function(){window.location.reload();});};
+      } else {
+        btn.textContent='登入';
+        btn.href='/pages/login.html';
+        btn.onclick=null;
+      }
     }
+    resolvePro(user);
   });
 })();
 </script>
