@@ -409,7 +409,7 @@ async function loadData(){
 
   if(allData.industry_detail){
     if(allData.industry_detail.news){
-      document.getElementById('industry-news').innerHTML=allData.industry_detail.news.map(function(item){
+      document.getElementById('industry-news').innerHTML=allData.industry_detail.news.slice().sort(function(a,b){return String(b.time||'').localeCompare(String(a.time||''));}).map(function(item){
         var expandContent=
           '<div class="expand-divider"></div>'+
           '<div class="expand-row" style="align-items:flex-start;gap:10px;"><span class="expand-label" style="flex-shrink:0;margin-top:2px;">深度分析</span><span class="expand-value">'+(item.expand_analysis||'—')+'</span></div>';
