@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X · 名人專刊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-950:#070d1c; --navy-900:#0d1630; --navy-800:#152244;
+  --navy-700:#1d2d5a; --navy-600:#1e3a8a; --navy-500:#2563eb;
+  --navy-400:#3b82f6; --navy-300:#93c5fd; --navy-100:#dbeafe; --navy-50:#eff6ff;
+  --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569;
+  --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1;
+  --gray-200:#e2e8f0; --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
+  --green-700:#15803d; --green-600:#16a34a; --green-100:#dcfce7; --green-50:#f0fdf4;
+  --red-700:#b91c1c; --red-600:#dc2626; --red-100:#fee2e2;
+  --amber-600:#d97706; --amber-100:#fef3c7;
+  --pro-gold:#c9a84c; --pro-gold-light:#f5e9c8; --pro-gold-dark:#8a6a1f;
+  --font-en:'DM Sans',sans-serif;
+  --font-zh:'Noto Sans TC',sans-serif;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:24px;
+  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;-webkit-font-smoothing:antialiased;}
+body{background:radial-gradient(1120px 640px at 94% -14%, rgba(37,99,235,.46), transparent 64%),radial-gradient(940px 720px at -10% 4%, rgba(51,65,85,.40), transparent 64%),radial-gradient(820px 620px at 50% 118%, rgba(29,78,216,.28), transparent 66%),linear-gradient(160deg, #dbe2ef 0%, #f4f6fb 56%);background-attachment:fixed;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:100;}
+.topbar-logo{display:flex;align-items:center;gap:10px;margin-right:36px;}
+.header-nav{display:flex;align-items:center;gap:2px;flex:1;}
+.nav-item{font-size:13.5px;color:var(--gray-600);padding:6px 12px;border-radius:var(--r-sm);font-weight:500;display:flex;align-items:center;gap:6px;transition:all .15s;}
+.nav-item:hover{background:var(--gray-100);color:var(--navy-700);}
+.nav-item.active{background:var(--navy-50);color:var(--navy-700);font-weight:600;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-500);}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green-600);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.header-time{font-size:12px;color:var(--gray-400);font-family:var(--font-en);}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;font-family:var(--font-en);}
+
+.page{max-width:860px;margin:0 auto;padding:88px 24px 64px;}
+.page-header{margin-bottom:20px;}
+.page-title{font-size:26px;font-weight:600;color:var(--navy-900);font-family:var(--font-zh);}
+.page-title-sub{font-size:14px;color:var(--gray-400);font-family:var(--font-en);font-weight:400;margin-left:8px;}
+.page-update{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
+
+/* PRO GATE */
+.pro-gate{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--r-xl);padding:48px 40px;text-align:center;color:var(--white);margin-bottom:20px;}
+.pro-gate-icon{font-size:36px;color:var(--pro-gold);margin-bottom:12px;}
+.pro-gate-title{font-size:24px;font-weight:600;margin-bottom:10px;}
+.pro-gate-title em{color:var(--pro-gold);font-style:normal;}
+.pro-gate-desc{font-size:14px;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 24px;line-height:1.7;}
+.btn-pro-upgrade{display:inline-block;padding:12px 28px;background:var(--pro-gold);color:var(--navy-900);border-radius:var(--r-md);font-size:14px;font-weight:700;}
+
+/* COLUMNS */
+.columns-view{display:none;}
+.columns-view.active{display:block;}
+
+/* persona tabs */
+.persona-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.persona-tab{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 16px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);box-shadow:var(--shadow-card);transition:all .15s;text-align:left;}
+.persona-tab:hover{border-color:var(--navy-300);}
+.persona-tab.active{border-color:var(--navy-500);background:var(--navy-50);}
+.pt-name{font-size:14px;font-weight:600;color:var(--navy-900);}
+.pt-focus{font-size:11px;color:var(--gray-500);font-family:var(--font-zh);}
+
+/* issue list */
+.issue-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);margin-bottom:14px;box-shadow:var(--shadow-card);overflow:hidden;}
+.issue-head{display:flex;align-items:flex-start;gap:10px;padding:18px 22px;cursor:pointer;flex-wrap:wrap;}
+.issue-head:hover{background:var(--gray-50);}
+.ih-main{flex:1;min-width:200px;}
+.ih-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
+.ih-date{font-size:12px;color:var(--gray-400);font-family:var(--font-en);font-weight:600;}
+.ih-badge{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;font-family:var(--font-zh);}
+.ih-badge.serial{background:var(--navy-50);color:var(--navy-600);}
+.ih-badge.special{background:var(--amber-100);color:var(--amber-600);}
+.ih-badge.sample{background:var(--gray-100);color:var(--gray-500);}
+.ih-title{font-size:17px;font-weight:600;color:var(--navy-900);line-height:1.5;}
+.ih-toggle{font-size:13px;color:var(--gray-400);font-family:var(--font-en);align-self:center;}
+.issue-body{display:none;padding:0 22px 22px;border-top:1px solid var(--gray-100);}
+.issue-body.open{display:block;}
+.ib-trigger{font-size:12px;color:var(--amber-600);background:var(--amber-100);border-radius:var(--r-sm);padding:6px 10px;margin:14px 0 4px;}
+.ib-prose{font-size:14.5px;color:var(--gray-700);line-height:1.85;padding-top:14px;}
+.ib-prose p{margin-bottom:12px;}
+.thesis-box{margin-top:18px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;}
+.thesis-title{font-size:12px;font-weight:700;color:var(--navy-700);margin-bottom:8px;letter-spacing:.03em;}
+.thesis-row{font-size:13px;color:var(--gray-700);line-height:1.6;margin-bottom:4px;}
+.thesis-row b{color:var(--navy-900);font-weight:600;}
+.ib-disclaimer{font-size:11.5px;color:var(--gray-400);line-height:1.6;margin-top:16px;border-top:1px dashed var(--gray-200);padding-top:12px;}
+.loading{font-size:13px;color:var(--gray-400);padding:14px 0;}
+.empty-box{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--r-lg);padding:48px 24px;text-align:center;color:var(--gray-400);font-size:14px;}
+@media(max-width:768px){.header-nav{display:none;}}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="https://projectxbrief.netlify.app/" class="logo-link" style="text-decoration:none;"><div class="topbar-logo">
+    <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
+      <line x1="10" y1="10" x2="30" y2="30" stroke="white" stroke-width="6" stroke-linecap="round"/>
+      <line x1="30" y1="10" x2="10" y2="30" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="3" fill="#2563eb"/>
+      <circle cx="20" cy="20" r="1.5" fill="#93c5fd"/>
+      <text x="48" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" letter-spacing="0.3" fill="#0f172a">PROJECT </text>
+      <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
+    </svg>
+  </div></a>
+  <nav class="header-nav" data-active="columns"></nav>
+  <div class="header-right">
+    <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+    <span class="header-time" id="clock">—</span>
+    <a href="/pages/login.html" class="btn-login" id="auth-btn">登入</a>
+  </div>
+</header>
+
+<script src="/shared/nav.js"></script>
+<script src="/shared/footer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/shared/header-user.js"></script>
+
+<main class="page">
+
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">名人專刊 <span class="page-title-sub">Persona Columns</span></h1>
+      <div class="page-update">以名家投資框架啟發的市場評述 · 連載與臨時特刊 · Pro 會員專屬 · 台北時間基準</div>
+    </div>
+  </div>
+
+  <!-- PRO GATE -->
+  <div id="pro-gate-view">
+    <div class="pro-gate">
+      <div class="pro-gate-icon">✦</div>
+      <h2 class="pro-gate-title">用<em>名家的思維框架</em>讀今天的市場</h2>
+      <p class="pro-gate-desc">每位名家以自身專長定期連載，市場溫度跨界時再追加臨時特刊。每期延續上一期的論點，串成一條可反覆閱讀的思考脈絡——不是零碎的單日評論，而是有記憶、有姿態的判斷層。</p>
+      <div class="pro-gate-btns">
+        <a href="/pages/login.html" class="btn-pro-upgrade">✦ 登入體驗 Pro</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGGED-IN VIEW -->
+  <div id="columns-view" class="columns-view">
+    <div class="persona-tabs" id="persona-tabs"></div>
+    <div id="issue-list"></div>
+  </div>
+
+</main>
+
+<script>
+// Clock
+function tick(){
+  var t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
+  var el=document.getElementById('clock'); if(el) el.textContent=t+' CST';
+}
+tick(); setInterval(tick,1000);
+
+// ── Supabase Auth ──
+var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
+var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+function initAuth(){
+  _supabase.auth.onAuthStateChange(function(event,session){
+    if(event==='INITIAL_SESSION'||event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){
+      setAuthState(session?session.user:null);
+    } else if(event==='SIGNED_OUT'){
+      setAuthState(null);
+    }
+  });
+}
+
+function setAuthState(user){
+  var gateEl=document.getElementById('pro-gate-view');
+  var viewEl=document.getElementById('columns-view');
+  var btnEl=document.getElementById('auth-btn');
+  if(user){
+    if(btnEl){ btnEl.textContent='登出'; btnEl.href='#'; btnEl.onclick=function(e){e.preventDefault();signOutUser();}; }
+    checkProStatus(user, gateEl, viewEl);
+  } else {
+    if(gateEl) gateEl.style.display='block';
+    if(viewEl) viewEl.classList.remove('active');
+    if(btnEl){ btnEl.textContent='登入'; btnEl.href='/pages/login.html'; btnEl.onclick=null; }
+  }
+}
+
+async function checkProStatus(user, gateEl, viewEl){
+  var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
+  var isPro = result.data && result.data.is_pro === true;
+  if(isPro){
+    if(gateEl) gateEl.style.display='none';
+    if(viewEl) viewEl.classList.add('active');
+    loadColumns();
+  } else {
+    if(gateEl) gateEl.style.display='block';
+    if(viewEl) viewEl.classList.remove('active');
+  }
+}
+
+async function signOutUser(){
+  await _supabase.auth.signOut();
+  window.location.reload();
+}
+
+// ── Render persona columns ──
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+var COL_STATE={ personas:[], feed:[], active:null, issueCache:{} };
+
+async function loadColumns(){
+  var tabsEl=document.getElementById('persona-tabs');
+  var listEl=document.getElementById('issue-list');
+  if(!listEl) return;
+  var idx={};
+  try{
+    var res=await fetch('/data/columns/index.json?t='+Date.now());
+    idx=await res.json();
+  }catch(e){ idx={}; }
+
+  COL_STATE.feed=Array.isArray(idx.feed)?idx.feed:[];
+  // 從 feed 推導人格清單（personas 欄若有則優先）
+  var personas=Array.isArray(idx.personas)&&idx.personas.length?idx.personas:[];
+  if(!personas.length){
+    var seen={};
+    COL_STATE.feed.forEach(function(f){ if(!seen[f.persona]){ seen[f.persona]=1; personas.push({persona:f.persona,display_name:f.display_name,series_focus:''}); } });
+  }
+  COL_STATE.personas=personas;
+
+  if(!personas.length){
+    tabsEl.innerHTML='';
+    listEl.innerHTML='<div class="empty-box">名人專刊即將開刊。各人格的連載與特刊產出後，會在這裡串成可反覆閱讀的脈絡。</div>';
+    return;
+  }
+
+  COL_STATE.active=personas[0].persona;
+  renderTabs();
+  renderIssueList();
+}
+
+function renderTabs(){
+  var tabsEl=document.getElementById('persona-tabs');
+  if(COL_STATE.personas.length<=1){ tabsEl.innerHTML=''; return; }
+  tabsEl.innerHTML=COL_STATE.personas.map(function(p){
+    var active=p.persona===COL_STATE.active?' active':'';
+    return '<button class="persona-tab'+active+'" data-persona="'+esc(p.persona)+'">'+
+      '<span class="pt-name">'+esc(p.display_name||p.persona)+'</span>'+
+      (p.series_focus?'<span class="pt-focus">'+esc(p.series_focus)+'</span>':'')+
+    '</button>';
+  }).join('');
+  Array.prototype.forEach.call(tabsEl.querySelectorAll('.persona-tab'),function(b){
+    b.onclick=function(){ COL_STATE.active=b.dataset.persona; renderTabs(); renderIssueList(); };
+  });
+}
+
+function renderIssueList(){
+  var listEl=document.getElementById('issue-list');
+  var issues=COL_STATE.feed.filter(function(f){ return f.persona===COL_STATE.active; })
+    .slice().sort(function(a,b){ return b.date.localeCompare(a.date); });
+  if(!issues.length){
+    listEl.innerHTML='<div class="empty-box">這位名家尚未出刊。</div>';
+    return;
+  }
+  listEl.innerHTML=issues.map(function(f,i){
+    var isSpecial=f.type==='special';
+    var badge=isSpecial?'<span class="ih-badge special">臨時特刊</span>':'<span class="ih-badge serial">連載</span>';
+    return '<div class="issue-card" data-persona="'+esc(f.persona)+'" data-date="'+esc(f.date)+'">'+
+      '<div class="issue-head" data-i="'+i+'">'+
+        '<div class="ih-main">'+
+          '<div class="ih-meta"><span class="ih-date">'+esc(f.date)+'</span>'+badge+'</div>'+
+          '<div class="ih-title">'+esc(f.title||'（未命名）')+'</div>'+
+        '</div>'+
+        '<span class="ih-toggle" id="tg-'+i+'">'+(i===0?'收合 ▲':'展開 ▼')+'</span>'+
+      '</div>'+
+      '<div class="issue-body" id="body-'+i+'"></div>'+
+    '</div>';
+  }).join('');
+  Array.prototype.forEach.call(listEl.querySelectorAll('.issue-head'),function(h){
+    h.onclick=function(){ toggleIssue(parseInt(h.dataset.i,10)); };
+  });
+  // 最新一期預設展開
+  toggleIssue(0, true);
+}
+
+async function toggleIssue(i, forceOpen){
+  var bodyEl=document.getElementById('body-'+i);
+  var tgEl=document.getElementById('tg-'+i);
+  if(!bodyEl) return;
+  var isOpen=bodyEl.classList.contains('open');
+  if(isOpen && !forceOpen){
+    bodyEl.classList.remove('open');
+    if(tgEl) tgEl.textContent='展開 ▼';
+    return;
+  }
+  var issues=COL_STATE.feed.filter(function(f){ return f.persona===COL_STATE.active; })
+    .slice().sort(function(a,b){ return b.date.localeCompare(a.date); });
+  var f=issues[i];
+  if(!f) return;
+  bodyEl.classList.add('open');
+  if(tgEl) tgEl.textContent='收合 ▲';
+  if(bodyEl.dataset.loaded){ return; }
+  bodyEl.innerHTML='<div class="loading">載入中…</div>';
+  var key=f.persona+'/'+f.date;
+  var data=COL_STATE.issueCache[key];
+  if(!data){
+    try{
+      var res=await fetch('/data/columns/'+encodeURIComponent(f.persona)+'/'+encodeURIComponent(f.date)+'.json?t='+Date.now());
+      data=await res.json();
+      COL_STATE.issueCache[key]=data;
+    }catch(e){ bodyEl.innerHTML='<div class="loading">這期內容載入失敗。</div>'; return; }
+  }
+  bodyEl.innerHTML=renderIssueBody(data);
+  bodyEl.dataset.loaded='1';
+}
+
+function renderIssueBody(d){
+  var html='';
+  if(d.is_sample){ html+='<div class="ib-trigger" style="background:var(--gray-100);color:var(--gray-500);">範例稿：用於預覽版面，首次正式產出後即由真實內容取代。</div>'; }
+  if(d.type==='special' && d.trigger){ html+='<div class="ib-trigger">臨時特刊 · 觸發：'+esc(d.trigger)+'</div>'; }
+  var paras=String(d.body||'').split(/\n+/).filter(function(p){return p.trim();});
+  html+='<div class="ib-prose">'+paras.map(function(p){return '<p>'+esc(p)+'</p>';}).join('')+'</div>';
+  if(d.thesis && (d.thesis.core||d.thesis.vars||d.thesis.change)){
+    html+='<div class="thesis-box">'+
+      '<div class="thesis-title">本期持續論點</div>'+
+      (d.thesis.core?'<div class="thesis-row"><b>核心判斷：</b>'+esc(d.thesis.core)+'</div>':'')+
+      (d.thesis.vars?'<div class="thesis-row"><b>關鍵變數：</b>'+esc(d.thesis.vars)+'</div>':'')+
+      (d.thesis.change?'<div class="thesis-row"><b>相對上期：</b>'+esc(d.thesis.change)+'</div>':'')+
+    '</div>';
+  }
+  if(d.disclaimer){ html+='<div class="ib-disclaimer">'+esc(d.disclaimer)+'</div>'; }
+  return html;
+}
+
+initAuth();
+</script>
+</body>
+</html>
