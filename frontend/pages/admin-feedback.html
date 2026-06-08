@@ -4,127 +4,334 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>Project X · 意見回饋後台</title>
+<title>Project X · 後台管理</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy-900:#0d1630; --navy-800:#152244; --navy-700:#1d2d5a; --navy-600:#1e3a8a;
-  --navy-500:#2563eb; --navy-100:#dbeafe; --navy-50:#eff6ff;
-  --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569; --gray-500:#64748b;
-  --gray-400:#94a3b8; --gray-300:#cbd5e1; --gray-200:#e2e8f0; --gray-100:#f1f5f9;
-  --gray-50:#f8fafc; --white:#ffffff;
-  --green-600:#16a34a; --green-100:#dcfce7; --green-50:#f0fdf4;
-  --red-600:#dc2626; --red-100:#fee2e2; --red-50:#fef2f2;
-  --amber-600:#d97706; --amber-100:#fef3c7;
+  --navy-950:#07101f; --navy-900:#0d1630; --navy-800:#152244; --navy-700:#1d2d5a;
+  --navy-600:#1e3a8a; --navy-500:#2563eb; --navy-400:#3b82f6; --navy-100:#dbeafe; --navy-50:#eff6ff;
+  --gray-900:#0f172a; --gray-800:#1e293b; --gray-700:#334155; --gray-600:#475569;
+  --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1; --gray-200:#e2e8f0;
+  --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
+  --green-700:#15803d; --green-600:#16a34a; --green-100:#dcfce7; --green-50:#f0fdf4;
+  --red-600:#dc2626; --red-100:#fee2e2;
+  --amber-700:#b45309; --amber-600:#d97706; --amber-100:#fef3c7; --amber-50:#fffbeb;
+  --pro-gold:#f6c84b; --pro-dark:#8a6a1f;
   --font-en:'DM Sans',sans-serif; --font-zh:'Noto Sans TC',sans-serif;
-  --r-sm:6px; --r-md:10px; --r-lg:16px;
-  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:20px;
+  --shadow-card:0 1px 3px rgba(15,23,42,.07),0 4px 16px rgba(15,23,42,.05);
+  --shadow-md:0 4px 20px rgba(15,23,42,.10);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:linear-gradient(160deg,#dbe2ef 0%,#f4f6fb 56%);background-attachment:fixed;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
+body{background:#f0f4f8;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
 a{text-decoration:none;color:inherit;}
-.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;}
-.tb-brand{font-size:15px;font-weight:600;color:var(--navy-900);}
-.tb-brand span{color:var(--gray-400);font-family:var(--font-en);font-weight:400;font-size:12px;margin-left:6px;}
-.tb-right{font-size:12px;color:var(--gray-500);font-family:var(--font-en);}
-main{max-width:760px;margin:0 auto;padding:88px 20px 60px;}
-.page-title{font-size:24px;font-weight:600;color:var(--navy-900);}
+
+/* ── sidebar ── */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:220px;background:var(--navy-900);display:flex;flex-direction:column;z-index:200;}
+.sb-brand{padding:22px 20px 18px;border-bottom:1px solid rgba(255,255,255,.07);}
+.sb-brand-name{font-size:15px;font-weight:700;color:var(--white);letter-spacing:.3px;}
+.sb-brand-sub{font-size:10.5px;color:rgba(255,255,255,.35);font-family:var(--font-en);margin-top:2px;}
+.sb-nav{flex:1;padding:12px 0;overflow-y:auto;}
+.sb-section{font-size:10px;font-weight:600;color:rgba(255,255,255,.25);letter-spacing:.08em;text-transform:uppercase;padding:12px 20px 4px;font-family:var(--font-en);}
+.sb-item{display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;color:rgba(255,255,255,.55);cursor:pointer;border-left:3px solid transparent;transition:all .15s;}
+.sb-item:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.04);}
+.sb-item.active{color:var(--white);background:rgba(59,130,246,.15);border-left-color:var(--navy-400);}
+.sb-item .sb-icon{font-size:15px;width:20px;text-align:center;flex-shrink:0;}
+.sb-badge{margin-left:auto;background:var(--red-600);color:var(--white);font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;font-family:var(--font-en);}
+.sb-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,.07);font-size:11px;color:rgba(255,255,255,.3);word-break:break-all;}
+
+/* ── main ── */
+.main{margin-left:220px;min-height:100vh;padding:32px 32px 64px;}
+.page-header{margin-bottom:28px;}
+.page-title{font-size:22px;font-weight:700;color:var(--navy-900);}
 .page-sub{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
-.toolbar{margin:18px 0;}
-.searchbar{position:relative;margin-bottom:12px;}
-.searchbar input{width:100%;padding:10px 36px 10px 38px;border:1px solid var(--gray-200);border-radius:var(--r-md);font-size:13.5px;font-family:var(--font-zh);color:var(--gray-700);background:var(--white);}
-.searchbar input:focus{outline:none;border-color:var(--navy-500);box-shadow:0 0 0 3px var(--navy-50);}
-.searchbar .s-ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:14px;pointer-events:none;}
-.searchbar .s-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:16px;cursor:pointer;border:none;background:none;display:none;line-height:1;}
-.searchbar .s-clear:hover{color:var(--gray-600);}
-.filter-rows{display:flex;flex-direction:column;gap:8px;}
-.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
-.filter-cap{font-size:11px;color:var(--gray-400);font-family:var(--font-zh);margin-right:2px;align-self:center;}
-.fbtn{font-size:13px;font-family:var(--font-zh);padding:7px 14px;border:1px solid var(--gray-200);background:var(--white);border-radius:var(--r-sm);color:var(--gray-600);cursor:pointer;transition:all .15s;}
+
+/* ── stat cards ── */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+.stat-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--shadow-card);}
+.stat-label{font-size:11px;color:var(--gray-500);font-family:var(--font-en);font-weight:500;letter-spacing:.04em;text-transform:uppercase;}
+.stat-value{font-size:28px;font-weight:700;color:var(--navy-800);font-family:var(--font-en);margin-top:4px;line-height:1;}
+.stat-sub{font-size:11px;color:var(--gray-400);margin-top:5px;}
+.stat-card.alert .stat-value{color:var(--red-600);}
+.stat-card.pro .stat-value{color:var(--pro-dark);}
+
+/* ── section card ── */
+.section{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-xl);box-shadow:var(--shadow-card);margin-bottom:22px;overflow:hidden;}
+.section-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--gray-100);}
+.section-title{font-size:14px;font-weight:600;color:var(--navy-800);}
+.section-body{padding:0;}
+
+/* ── toolbar ── */
+.toolbar{padding:14px 22px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--gray-100);}
+.searchbar{position:relative;flex:1;min-width:200px;}
+.searchbar input{width:100%;padding:8px 32px 8px 34px;border:1px solid var(--gray-200);border-radius:var(--r-md);font-size:13px;font-family:var(--font-zh);color:var(--gray-700);background:var(--gray-50);}
+.searchbar input:focus{outline:none;border-color:var(--navy-400);background:var(--white);box-shadow:0 0 0 3px var(--navy-50);}
+.searchbar .s-ico{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:13px;pointer-events:none;}
+.searchbar .s-clear{position:absolute;right:9px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:15px;cursor:pointer;border:none;background:none;display:none;}
+.filters{display:flex;gap:6px;flex-wrap:wrap;}
+.fbtn{font-size:12px;font-family:var(--font-zh);padding:6px 12px;border:1px solid var(--gray-200);background:var(--white);border-radius:var(--r-sm);color:var(--gray-600);cursor:pointer;transition:all .15s;white-space:nowrap;}
+.fbtn:hover{border-color:var(--gray-300);background:var(--gray-50);}
 .fbtn.active{background:var(--navy-700);color:var(--white);border-color:var(--navy-700);}
-.result-count{font-size:12px;color:var(--gray-400);font-family:var(--font-zh);margin:4px 0 10px;}
-.hl{background:#fde68a;border-radius:2px;}
-.card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:16px 18px;margin-bottom:12px;}
-.card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;}
-.who{font-size:13px;font-weight:600;color:var(--navy-700);}
-.who small{font-weight:400;color:var(--gray-400);font-family:var(--font-en);margin-left:6px;}
-.tag{font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:10px;font-family:var(--font-zh);}
-.tag.pending{background:var(--amber-100);color:var(--amber-600);}
-.tag.adopted{background:var(--green-100);color:var(--green-600);}
+.result-count{font-size:11.5px;color:var(--gray-400);padding:6px 22px 10px;}
+
+/* ── table ── */
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;font-family:var(--font-en);padding:10px 22px;background:var(--gray-50);border-bottom:1px solid var(--gray-100);text-align:left;}
+.tbl td{padding:13px 22px;font-size:13px;border-bottom:1px solid var(--gray-100);vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--gray-50);}
+.user-cell{display:flex;flex-direction:column;gap:2px;}
+.user-name{font-weight:500;color:var(--navy-800);}
+.user-email{font-size:11.5px;color:var(--gray-400);font-family:var(--font-en);}
+.tag{display:inline-flex;align-items:center;font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:10px;white-space:nowrap;}
+.tag.pro{background:#f5e9c8;color:var(--pro-dark);}
+.tag.free{background:var(--gray-100);color:var(--gray-500);}
+.tag.pending{background:var(--amber-100);color:var(--amber-700);}
+.tag.adopted{background:var(--green-100);color:var(--green-700);}
 .tag.rejected{background:var(--gray-100);color:var(--gray-500);}
 .tag.granted{background:var(--navy-100);color:var(--navy-600);}
 .tag.denied{background:var(--gray-100);color:var(--gray-500);}
-.tag.chart{background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);}
-.tag.proapp{background:#f5e9c8;color:#8a6a1f;border:1px solid #e8d49a;}
-.content{font-size:13.5px;color:var(--gray-700);line-height:1.7;white-space:pre-wrap;word-break:break-word;}
-.actions{display:flex;gap:8px;margin-top:14px;}
-.act{font-size:12.5px;font-family:var(--font-zh);font-weight:500;padding:7px 16px;border-radius:var(--r-sm);cursor:pointer;border:1px solid transparent;transition:all .15s;}
-.act-adopt{background:var(--green-600);color:var(--white);}
-.act-adopt:hover{opacity:.88;}
-.act-reject{background:var(--white);color:var(--gray-600);border-color:var(--gray-200);}
-.act-reject:hover{background:var(--gray-50);}
-.act-reply{background:var(--navy-700);color:var(--white);}
-.act-reply:hover{opacity:.88;}
-.act:disabled{opacity:.5;cursor:default;}
+.tag.proapp{background:#f5e9c8;color:var(--pro-dark);}
+.tag.chart{background:var(--navy-50);color:var(--navy-600);}
+
+/* ── action btns ── */
+.btn-row{display:flex;gap:6px;align-items:center;}
+.btn{font-size:12px;font-family:var(--font-zh);font-weight:500;padding:6px 14px;border-radius:var(--r-sm);cursor:pointer;border:1px solid transparent;transition:all .15s;white-space:nowrap;}
+.btn-primary{background:var(--navy-700);color:var(--white);}
+.btn-primary:hover{background:var(--navy-600);}
+.btn-success{background:var(--green-600);color:var(--white);}
+.btn-success:hover{opacity:.88;}
+.btn-ghost{background:var(--white);color:var(--gray-600);border-color:var(--gray-200);}
+.btn-ghost:hover{background:var(--gray-50);}
+.btn-danger{background:var(--white);color:var(--red-600);border-color:var(--red-600);}
+.btn-danger:hover{background:var(--red-100);}
+.btn:disabled{opacity:.45;cursor:default;}
+
+/* ── feedback cards ── */
+.fb-list{padding:0 22px 16px;}
+.fb-card{border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:16px;margin-top:14px;transition:box-shadow .15s;}
+.fb-card:hover{box-shadow:var(--shadow-md);}
+.fb-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;}
+.fb-who{font-size:13px;font-weight:600;color:var(--navy-700);}
+.fb-who small{font-weight:400;color:var(--gray-400);font-family:var(--font-en);margin-left:6px;}
+.fb-meta{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.fb-date{font-size:11px;color:var(--gray-400);font-family:var(--font-en);}
+.fb-content{font-size:13.5px;color:var(--gray-700);line-height:1.75;white-space:pre-wrap;word-break:break-word;}
+.fb-actions{display:flex;gap:8px;margin-top:12px;}
 .reply-box{margin-top:14px;padding-top:14px;border-top:1px dashed var(--gray-200);}
-.reply-label{font-size:11.5px;color:var(--gray-400);font-family:var(--font-zh);margin-bottom:6px;}
-.reply-ta{width:100%;min-height:60px;padding:9px 11px;border:1px solid var(--gray-200);border-radius:var(--r-sm);font-size:13px;font-family:var(--font-zh);line-height:1.6;resize:vertical;box-sizing:border-box;color:var(--gray-700);}
-.reply-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;}
-.reply-msg{font-size:12px;font-family:var(--font-zh);}
-.muted{text-align:center;color:var(--gray-400);font-size:13px;padding:40px 20px;}
-.gate{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--r-lg);padding:48px 32px;text-align:center;color:var(--white);}
+.reply-label{font-size:11px;color:var(--gray-400);margin-bottom:6px;}
+.reply-ta{width:100%;min-height:56px;padding:8px 11px;border:1px solid var(--gray-200);border-radius:var(--r-sm);font-size:13px;font-family:var(--font-zh);line-height:1.6;resize:vertical;color:var(--gray-700);}
+.reply-ta:focus{outline:none;border-color:var(--navy-400);}
+.reply-row{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+.reply-msg{font-size:11.5px;}
+
+/* ── panels ── */
+.panel{display:none;}
+.panel.active{display:block;}
+
+/* ── gate ── */
+.gate{background:var(--navy-900);border-radius:var(--r-xl);padding:56px 32px;text-align:center;color:var(--white);max-width:480px;margin:80px auto;}
 .gate h2{font-size:20px;margin-bottom:10px;}
-.gate p{font-size:13.5px;color:rgba(255,255,255,.66);line-height:1.7;}
-.gate a{display:inline-block;margin-top:18px;padding:9px 20px;background:var(--white);color:var(--navy-800);border-radius:var(--r-sm);font-size:13px;font-weight:600;}
+.gate p{font-size:13.5px;color:rgba(255,255,255,.6);line-height:1.7;}
+.gate a{display:inline-block;margin-top:18px;padding:10px 22px;background:var(--white);color:var(--navy-800);border-radius:var(--r-sm);font-size:13px;font-weight:600;}
+
+/* ── utils ── */
+.hl{background:#fde68a;border-radius:2px;}
+.muted{text-align:center;color:var(--gray-400);font-size:13px;padding:36px 20px;}
+.credits-badge{font-size:11.5px;font-family:var(--font-en);color:var(--gray-500);}
+.refresh-btn{font-size:12px;color:var(--navy-500);cursor:pointer;background:none;border:none;font-family:var(--font-zh);padding:4px 8px;border-radius:var(--r-sm);}
+.refresh-btn:hover{background:var(--navy-50);}
+
+@media(max-width:900px){
+  .sidebar{width:60px;}
+  .sb-brand,.sb-section,.sb-item span,.sb-badge,.sb-footer{display:none;}
+  .sb-item{padding:14px;justify-content:center;}
+  .main{margin-left:60px;padding:20px 16px 48px;}
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+}
 </style>
 </head>
 <body>
-<div class="topbar">
-  <div class="tb-brand">Project X<span>意見回饋後台</span></div>
-  <div class="tb-right" id="tb-user"></div>
+
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="sb-brand">
+    <div class="sb-brand-name">Project X</div>
+    <div class="sb-brand-sub">Admin Console</div>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-section">Main</div>
+    <div class="sb-item active" onclick="showPanel('dashboard',this)">
+      <span class="sb-icon">📊</span><span>總覽</span>
+    </div>
+    <div class="sb-section">Users</div>
+    <div class="sb-item" onclick="showPanel('members',this)">
+      <span class="sb-icon">👥</span><span>會員管理</span>
+    </div>
+    <div class="sb-item" onclick="showPanel('applications',this)">
+      <span class="sb-icon">📋</span><span>申請審核</span>
+      <span class="sb-badge" id="sb-pending-count" style="display:none"></span>
+    </div>
+    <div class="sb-section">Content</div>
+    <div class="sb-item" onclick="showPanel('feedback',this)">
+      <span class="sb-icon">💬</span><span>意見回饋</span>
+    </div>
+  </div>
+  <div class="sb-footer" id="sb-user"></div>
+</nav>
+
+<!-- Main -->
+<div class="main" id="main-area" style="display:none;">
+
+  <!-- ── Dashboard Panel ── -->
+  <div class="panel active" id="panel-dashboard">
+    <div class="page-header">
+      <div class="page-title">總覽</div>
+      <div class="page-sub">Project X 後台管理中心</div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Members</div>
+        <div class="stat-value" id="stat-total">—</div>
+        <div class="stat-sub">所有已註冊帳號</div>
+      </div>
+      <div class="stat-card pro">
+        <div class="stat-label">Pro Members</div>
+        <div class="stat-value" id="stat-pro">—</div>
+        <div class="stat-sub">已啟用 Pro 權限</div>
+      </div>
+      <div class="stat-card alert">
+        <div class="stat-label">Pending Reviews</div>
+        <div class="stat-value" id="stat-pending">—</div>
+        <div class="stat-sub">待審核申請</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Feedback</div>
+        <div class="stat-value" id="stat-feedback">—</div>
+        <div class="stat-sub">未處理意見</div>
+      </div>
+    </div>
+
+    <!-- Recent Applications -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">待審核申請</div>
+        <button class="btn btn-ghost" onclick="showPanel('applications',document.querySelector('[onclick*=applications]'))">查看全部 →</button>
+      </div>
+      <div id="dash-pending-list"><div class="muted">載入中…</div></div>
+    </div>
+
+    <!-- Recent Members -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">最新加入會員</div>
+        <button class="btn btn-ghost" onclick="showPanel('members',document.querySelector('[onclick*=members]'))">查看全部 →</button>
+      </div>
+      <table class="tbl" id="dash-members-tbl">
+        <thead><tr><th>會員</th><th>方案</th><th>點數</th><th>加入時間</th></tr></thead>
+        <tbody id="dash-members-body"><tr><td colspan="4" class="muted">載入中…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Members Panel ── -->
+  <div class="panel" id="panel-members">
+    <div class="page-header">
+      <div class="page-title">會員管理</div>
+      <div class="page-sub">查看所有已註冊會員與 Pro 狀態</div>
+    </div>
+    <div class="section">
+      <div class="toolbar">
+        <div class="searchbar">
+          <span class="s-ico">🔍</span>
+          <input id="m-search" type="text" placeholder="搜尋名稱或 ID…" oninput="onMemberSearch(this.value)">
+          <button class="s-clear" id="m-clear" onclick="clearMemberSearch()">×</button>
+        </div>
+        <div class="filters">
+          <button class="fbtn active" data-mf="all" onclick="setMemberFilter('all',this)">全部</button>
+          <button class="fbtn" data-mf="pro" onclick="setMemberFilter('pro',this)">Pro</button>
+          <button class="fbtn" data-mf="free" onclick="setMemberFilter('free',this)">免費</button>
+        </div>
+        <button class="refresh-btn" onclick="loadMembers()">↻ 重新整理</button>
+      </div>
+      <div class="result-count" id="m-count"></div>
+      <table class="tbl">
+        <thead><tr><th>會員</th><th>方案</th><th>訂閱點數</th><th>永久點數</th><th>加入時間</th></tr></thead>
+        <tbody id="members-body"><tr><td colspan="5" class="muted">載入中…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Applications Panel ── -->
+  <div class="panel" id="panel-applications">
+    <div class="page-header">
+      <div class="page-title">申請審核</div>
+      <div class="page-sub">Pro 會員申請與圖表權限申請</div>
+    </div>
+    <div class="section">
+      <div class="toolbar">
+        <div class="searchbar">
+          <span class="s-ico">🔍</span>
+          <input id="a-search" type="text" placeholder="搜尋申請者或內容…" oninput="onAppSearch(this.value)">
+          <button class="s-clear" id="a-clear" onclick="clearAppSearch()">×</button>
+        </div>
+        <div class="filters">
+          <button class="fbtn active" data-af="pending" onclick="setAppFilter('pending',this)">待審核 <span id="ac-pending"></span></button>
+          <button class="fbtn" data-af="granted" onclick="setAppFilter('granted',this)">已開放 <span id="ac-granted"></span></button>
+          <button class="fbtn" data-af="denied" onclick="setAppFilter('denied',this)">已婉拒 <span id="ac-denied"></span></button>
+          <button class="fbtn" data-af="all" onclick="setAppFilter('all',this)">全部</button>
+        </div>
+        <div class="filters">
+          <button class="fbtn active" data-ac="all" onclick="setAppCat('all',this)">全部類型</button>
+          <button class="fbtn" data-ac="pro_access" onclick="setAppCat('pro_access',this)">Pro 申請</button>
+          <button class="fbtn" data-ac="chart_access" onclick="setAppCat('chart_access',this)">圖表申請</button>
+        </div>
+        <button class="refresh-btn" onclick="loadFeedback()">↻ 重新整理</button>
+      </div>
+      <div class="result-count" id="a-count"></div>
+      <div id="app-list" class="fb-list"><div class="muted">載入中…</div></div>
+    </div>
+  </div>
+
+  <!-- ── Feedback Panel ── -->
+  <div class="panel" id="panel-feedback">
+    <div class="page-header">
+      <div class="page-title">意見回饋</div>
+      <div class="page-sub">採納後自動為該使用者 +10 永久點數</div>
+    </div>
+    <div class="section">
+      <div class="toolbar">
+        <div class="searchbar">
+          <span class="s-ico">🔍</span>
+          <input id="f-search" type="text" placeholder="搜尋使用者或回饋內容…" oninput="onFbSearch(this.value)">
+          <button class="s-clear" id="f-clear" onclick="clearFbSearch()">×</button>
+        </div>
+        <div class="filters">
+          <button class="fbtn active" data-ff="pending" onclick="setFbFilter('pending',this)">待處理 <span id="fc-pending"></span></button>
+          <button class="fbtn" data-ff="adopted" onclick="setFbFilter('adopted',this)">已採納 <span id="fc-adopted"></span></button>
+          <button class="fbtn" data-ff="rejected" onclick="setFbFilter('rejected',this)">未採納 <span id="fc-rejected"></span></button>
+          <button class="fbtn" data-ff="all" onclick="setFbFilter('all',this)">全部</button>
+        </div>
+        <button class="refresh-btn" onclick="loadFeedback()">↻ 重新整理</button>
+      </div>
+      <div class="result-count" id="f-count"></div>
+      <div id="fb-list" class="fb-list"><div class="muted">載入中…</div></div>
+    </div>
+  </div>
+
 </div>
-<main>
-  <div id="gate" class="gate" style="display:none;">
+
+<!-- Gate (not admin) -->
+<div id="gate-view" style="display:none;">
+  <div class="gate">
     <h2>需要管理員權限</h2>
     <p id="gate-msg">此頁僅限管理員存取，請以管理員帳號登入。</p>
     <a href="/pages/login.html">前往登入</a>
   </div>
-
-  <div id="admin-view" style="display:none;">
-    <div class="page-title">意見回饋審閱</div>
-    <div class="page-sub">採納後系統自動為該使用者 +10 永久點數，不可重複發放。</div>
-    <div class="toolbar">
-      <div class="searchbar">
-        <span class="s-ico">🔍</span>
-        <input id="search" type="text" placeholder="搜尋使用者名稱、Email 代碼、回饋內容或回覆…" oninput="onSearch(this.value)">
-        <button class="s-clear" id="s-clear" onclick="clearSearch()" title="清除">×</button>
-      </div>
-      <div class="filter-rows">
-        <div class="filters">
-          <span class="filter-cap">狀態</span>
-          <button class="fbtn active" data-f="pending" onclick="setFilter('pending',this)">審核中 <span id="c-pending"></span></button>
-          <button class="fbtn" data-f="adopted" onclick="setFilter('adopted',this)">已採納 <span id="c-adopted"></span></button>
-          <button class="fbtn" data-f="rejected" onclick="setFilter('rejected',this)">未採納 <span id="c-rejected"></span></button>
-          <button class="fbtn" data-f="granted" onclick="setFilter('granted',this)">已開放 <span id="c-granted"></span></button>
-          <button class="fbtn" data-f="denied" onclick="setFilter('denied',this)">未通過 <span id="c-denied"></span></button>
-          <button class="fbtn" data-f="all" onclick="setFilter('all',this)">全部</button>
-        </div>
-        <div class="filters">
-          <span class="filter-cap">類型</span>
-          <button class="fbtn active" data-c="all" onclick="setCat('all',this)">全部類型</button>
-          <button class="fbtn" data-c="feedback" onclick="setCat('feedback',this)">一般回饋</button>
-          <button class="fbtn" data-c="pro_access" onclick="setCat('pro_access',this)">Pro 申請</button>
-          <button class="fbtn" data-c="chart_access" onclick="setCat('chart_access',this)">圖表權限申請</button>
-        </div>
-      </div>
-    </div>
-    <div class="result-count" id="result-count"></div>
-    <div id="list"><div class="muted">載入中…</div></div>
-  </div>
-</main>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -133,8 +340,11 @@ var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
 var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
 var _sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-var _all=[], _names={}, _filter='pending', _cat='all', _q='';
+// state
+var _members=[],_mFilter='all',_mQ='';
+var _allFb=[],_names={},_appFilter='pending',_appCat='all',_appQ='',_fbFilter='pending',_fbQ='';
 
+// ── auth ──
 _sb.auth.onAuthStateChange(function(ev,session){
   if(ev==='INITIAL_SESSION'||ev==='SIGNED_IN'||ev==='TOKEN_REFRESHED'){
     onAuth(session?session.user:null);
@@ -142,192 +352,299 @@ _sb.auth.onAuthStateChange(function(ev,session){
 });
 
 function onAuth(user){
-  var gate=document.getElementById('gate');
-  var view=document.getElementById('admin-view');
-  var tb=document.getElementById('tb-user');
   if(user && user.email===ADMIN_EMAIL){
-    gate.style.display='none'; view.style.display='block';
-    tb.textContent=user.email;
+    document.getElementById('gate-view').style.display='none';
+    document.getElementById('main-area').style.display='block';
+    document.getElementById('sb-user').textContent=user.email;
     loadAll();
   } else {
-    view.style.display='none'; gate.style.display='block';
-    tb.textContent=user?user.email:'';
-    if(user){ document.getElementById('gate-msg').textContent='帳號 '+user.email+' 沒有管理員權限。'; }
+    document.getElementById('main-area').style.display='none';
+    document.getElementById('gate-view').style.display='block';
+    if(user) document.getElementById('gate-msg').textContent='帳號 '+user.email+' 沒有管理員權限。';
   }
 }
 
-function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function fmtDate(s){ var d=new Date(s); var p=function(n){return n<10?'0'+n:n;}; return (d.getMonth()+1)+'/'+d.getDate()+' '+p(d.getHours())+':'+p(d.getMinutes()); }
+// ── panel switching ──
+function showPanel(name,triggerEl){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('active');});
+  var panel=document.getElementById('panel-'+name);
+  if(panel) panel.classList.add('active');
+  if(triggerEl) triggerEl.classList.add('active');
+}
 
+// ── load all data ──
 async function loadAll(){
-  var res=await _sb.from('feedback').select('id,user_id,content,status,created_at,reply,category').order('created_at',{ascending:false});
-  if(res.error){ document.getElementById('list').innerHTML='<div class="muted">讀取失敗：'+esc(res.error.message)+'</div>'; return; }
-  _all=res.data||[];
-  var ids=[].concat.apply([],_all.map(function(f){return f.user_id;})).filter(function(v,i,a){return a.indexOf(v)===i;});
-  if(ids.length){
-    var pr=await _sb.from('profiles').select('id,display_name').in('id',ids);
-    if(pr.data){ pr.data.forEach(function(p){ _names[p.id]=p.display_name||''; }); }
-  }
-  render();
+  await Promise.all([loadMembers(),loadFeedback()]);
 }
 
-function setFilter(f,btn){
-  _filter=f;
-  var bs=btn.parentNode.querySelectorAll('.fbtn'); for(var i=0;i<bs.length;i++) bs[i].classList.remove('active');
-  btn.classList.add('active');
-  render();
+// ── members ──
+async function loadMembers(){
+  var tbody=document.getElementById('members-body');
+  if(tbody) tbody.innerHTML='<tr><td colspan="5" class="muted">載入中…</td></tr>';
+  var res=await _sb.from('profiles').select('id,display_name,is_pro,subscription_credits,purchased_credits,created_at').order('created_at',{ascending:false});
+  if(res.error){ if(tbody) tbody.innerHTML='<tr><td colspan="5" class="muted">讀取失敗：'+esc(res.error.message)+'</td></tr>'; return; }
+  _members=res.data||[];
+  renderMembers();
+  renderDashMembers();
+  updateStats();
 }
 
-function setCat(c,btn){
-  _cat=c;
-  var bs=btn.parentNode.querySelectorAll('.fbtn'); for(var i=0;i<bs.length;i++) bs[i].classList.remove('active');
-  btn.classList.add('active');
-  render();
-}
-
-function onSearch(v){
-  _q=(v||'').trim().toLowerCase();
-  document.getElementById('s-clear').style.display=_q?'block':'none';
-  render();
-}
-
-function clearSearch(){
-  var inp=document.getElementById('search'); if(inp) inp.value='';
-  _q=''; document.getElementById('s-clear').style.display='none';
-  render();
-}
-
-function hlt(text){
-  var s=esc(text);
-  if(!_q) return s;
-  var q=_q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  try{ return s.replace(new RegExp('('+q+')','gi'),'<span class="hl">$1</span>'); }catch(e){ return s; }
-}
-
-function matchQuery(f){
-  if(!_q) return true;
-  var name=(_names[f.user_id]||'').toLowerCase();
-  var uid=(f.user_id||'').toLowerCase();
-  var content=(f.content||'').toLowerCase();
-  var reply=(f.reply||'').toLowerCase();
-  return name.indexOf(_q)>=0 || uid.indexOf(_q)>=0 || content.indexOf(_q)>=0 || reply.indexOf(_q)>=0;
-}
-
-function render(){
-  var counts={pending:0,adopted:0,rejected:0,granted:0,denied:0};
-  _all.forEach(function(f){ var s=f.status||'pending'; if(counts[s]!==undefined) counts[s]++; });
-  ['pending','adopted','rejected','granted','denied'].forEach(function(k){
-    var el=document.getElementById('c-'+k); if(el) el.textContent='('+counts[k]+')';
-  });
-
-  var rows=_all.filter(function(f){
-    if(_filter!=='all' && (f.status||'pending')!==_filter) return false;
-    var cat=f.category||'feedback';
-    if(_cat!=='all' && cat!==_cat) return false;
-    return matchQuery(f);
-  });
-  var box=document.getElementById('list');
-  var rc=document.getElementById('result-count');
-  if(rc) rc.textContent='顯示 '+rows.length+' 筆'+(_q?'（搜尋：'+esc(_q)+'）':'')+' · 共 '+_all.length+' 筆紀錄';
-  if(!rows.length){ box.innerHTML='<div class="muted">沒有符合的紀錄</div>'; return; }
-  var label={pending:'審核中',adopted:'已採納 +10',rejected:'未採納',granted:'已開放',denied:'未通過'};
-  box.innerHTML=rows.map(function(f){
-    var st=f.status||'pending';
-    var isChart=(f.category==='chart_access');
-    var isProApp=(f.category==='pro_access');
-    var isApply=isChart||isProApp;
-    var name=_names[f.user_id]||'(未命名)';
-    var uid=(f.user_id||'').slice(0,8);
-    var acts='';
-    if(st==='pending'){
-      if(isChart){
-        acts='<div class="actions">'
-          +'<button class="act act-adopt" onclick="grantChart(\''+f.id+'\',\''+f.user_id+'\',true,this)">開放圖表權限</button>'
-          +'<button class="act act-reject" onclick="grantChart(\''+f.id+'\',\''+f.user_id+'\',false,this)">婉拒</button></div>';
-      } else if(isProApp){
-        acts='<div class="actions">'
-          +'<button class="act act-adopt" onclick="grantPro(\''+f.id+'\',\''+f.user_id+'\',true,this)">開放 Pro 會員</button>'
-          +'<button class="act act-reject" onclick="grantPro(\''+f.id+'\',\''+f.user_id+'\',false,this)">婉拒</button></div>';
-      } else {
-        acts='<div class="actions">'
-          +'<button class="act act-adopt" onclick="decide(\''+f.id+'\',\'adopted\',this)">採納並 +10 點</button>'
-          +'<button class="act act-reject" onclick="decide(\''+f.id+'\',\'rejected\',this)">不採納</button></div>';
-      }
+function renderMembers(){
+  var rows=_members.filter(function(m){
+    if(_mFilter==='pro' && !m.is_pro) return false;
+    if(_mFilter==='free' && m.is_pro) return false;
+    if(_mQ){
+      var name=(m.display_name||'').toLowerCase();
+      var id=(m.id||'').toLowerCase();
+      return name.indexOf(_mQ)>=0||id.indexOf(_mQ)>=0;
     }
-    var reply='<div class="reply-box">'
-      +'<div class="reply-label">給'+(isApply?'申請者':'回饋者')+'的文字回覆（使用者會在頁面上看到）</div>'
-      +'<textarea class="reply-ta" id="reply-'+f.id+'" maxlength="500" placeholder="輸入回覆內容…">'+esc(f.reply||'')+'</textarea>'
-      +'<div class="reply-row"><span class="reply-msg" id="reply-msg-'+f.id+'"></span>'
-      +'<button class="act act-reply" onclick="saveReply(\''+f.id+'\',this)">送出回覆</button></div></div>';
-    var catChip=isChart?'<span class="tag chart">🔓 圖表權限申請</span>':(isProApp?'<span class="tag proapp">✦ Pro 會員申請</span>':'');
-    return '<div class="card">'
-      +'<div class="card-top"><div class="who">'+hlt(name)+'<small>'+hlt(uid)+'</small></div>'
-      +'<div style="display:flex;align-items:center;gap:8px;">'+catChip
-      +'<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">'+fmtDate(f.created_at)+'</span>'
-      +'<span class="tag '+st+'">'+(label[st]||st)+'</span></div></div>'
-      +'<div class="content">'+hlt(f.content)+'</div>'+acts+reply+'</div>';
+    return true;
+  });
+  var el=document.getElementById('m-count');
+  if(el) el.textContent='顯示 '+rows.length+' 筆 · 共 '+_members.length+' 位會員';
+  var tbody=document.getElementById('members-body');
+  if(!tbody) return;
+  if(!rows.length){ tbody.innerHTML='<tr><td colspan="5" class="muted">沒有符合的會員</td></tr>'; return; }
+  tbody.innerHTML=rows.map(function(m){
+    var sub=m.subscription_credits||0;
+    var pur=m.purchased_credits||0;
+    return '<tr>'
+      +'<td><div class="user-cell"><div class="user-name">'+esc(m.display_name||'(未命名)')+'</div><div class="user-email">'+esc((m.id||'').slice(0,12))+'…</div></div></td>'
+      +'<td>'+(m.is_pro?'<span class="tag pro">✦ Pro</span>':'<span class="tag free">Free</span>')+'</td>'
+      +'<td><span class="credits-badge">'+sub+'</span></td>'
+      +'<td><span class="credits-badge">'+pur+'</span></td>'
+      +'<td style="font-size:12px;color:var(--gray-400);font-family:var(--font-en);">'+fmtDate(m.created_at)+'</td>'
+      +'</tr>';
   }).join('');
 }
 
+function renderDashMembers(){
+  var recent=_members.slice(0,8);
+  var tbody=document.getElementById('dash-members-body');
+  if(!tbody) return;
+  if(!recent.length){ tbody.innerHTML='<tr><td colspan="4" class="muted">尚無會員</td></tr>'; return; }
+  tbody.innerHTML=recent.map(function(m){
+    return '<tr>'
+      +'<td><div class="user-cell"><div class="user-name">'+esc(m.display_name||'(未命名)')+'</div><div class="user-email">'+esc((m.id||'').slice(0,10))+'…</div></div></td>'
+      +'<td>'+(m.is_pro?'<span class="tag pro">✦ Pro</span>':'<span class="tag free">Free</span>')+'</td>'
+      +'<td><span class="credits-badge">'+((m.subscription_credits||0)+(m.purchased_credits||0))+'</span></td>'
+      +'<td style="font-size:12px;color:var(--gray-400);font-family:var(--font-en);">'+fmtDate(m.created_at)+'</td>'
+      +'</tr>';
+  }).join('');
+}
+
+function setMemberFilter(f,btn){
+  _mFilter=f;
+  btn.parentNode.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderMembers();
+}
+function onMemberSearch(v){ _mQ=(v||'').trim().toLowerCase(); document.getElementById('m-clear').style.display=_mQ?'block':'none'; renderMembers(); }
+function clearMemberSearch(){ var i=document.getElementById('m-search'); if(i) i.value=''; _mQ=''; document.getElementById('m-clear').style.display='none'; renderMembers(); }
+
+// ── feedback ──
+async function loadFeedback(){
+  var res=await _sb.from('feedback').select('id,user_id,content,status,created_at,reply,category').order('created_at',{ascending:false});
+  if(res.error) return;
+  _allFb=res.data||[];
+  var ids=_allFb.map(function(f){return f.user_id;}).filter(function(v,i,a){return a.indexOf(v)===i;});
+  if(ids.length){
+    var pr=await _sb.from('profiles').select('id,display_name').in('id',ids);
+    if(pr.data) pr.data.forEach(function(p){ _names[p.id]=p.display_name||''; });
+  }
+  renderApps();
+  renderFeedback();
+  renderDashPending();
+  updateStats();
+}
+
+// applications
+function renderApps(){
+  var rows=_allFb.filter(function(f){
+    var cat=f.category||'feedback';
+    if(cat!=='pro_access'&&cat!=='chart_access') return false;
+    if(_appFilter!=='all'&&(f.status||'pending')!==_appFilter) return false;
+    if(_appCat!=='all'&&cat!==_appCat) return false;
+    if(_appQ){
+      var name=(_names[f.user_id]||'').toLowerCase();
+      var uid=(f.user_id||'').toLowerCase();
+      var content=(f.content||'').toLowerCase();
+      return name.indexOf(_appQ)>=0||uid.indexOf(_appQ)>=0||content.indexOf(_appQ)>=0;
+    }
+    return true;
+  });
+  var counts={pending:0,granted:0,denied:0};
+  _allFb.filter(function(f){var c=f.category||''; return c==='pro_access'||c==='chart_access';})
+    .forEach(function(f){var s=f.status||'pending'; if(counts[s]!==undefined) counts[s]++;});
+  ['pending','granted','denied'].forEach(function(k){ var el=document.getElementById('ac-'+k); if(el) el.textContent='('+counts[k]+')'; });
+  var sbBadge=document.getElementById('sb-pending-count');
+  if(sbBadge){ sbBadge.textContent=counts.pending; sbBadge.style.display=counts.pending>0?'':'none'; }
+  var el=document.getElementById('a-count');
+  if(el) el.textContent='顯示 '+rows.length+' 筆';
+  var box=document.getElementById('app-list');
+  if(!box) return;
+  if(!rows.length){ box.innerHTML='<div class="muted">沒有符合的申請記錄</div>'; return; }
+  box.innerHTML=rows.map(function(f){ return renderFbCard(f,true); }).join('');
+}
+
+function renderDashPending(){
+  var rows=_allFb.filter(function(f){
+    var cat=f.category||'feedback';
+    return (cat==='pro_access'||cat==='chart_access')&&(f.status||'pending')==='pending';
+  });
+  var box=document.getElementById('dash-pending-list');
+  if(!box) return;
+  if(!rows.length){ box.innerHTML='<div class="muted" style="padding:24px 22px;">目前沒有待審核申請 ✓</div>'; return; }
+  box.innerHTML='<div class="fb-list">'+rows.map(function(f){ return renderFbCard(f,true); }).join('')+'</div>';
+}
+
+// feedback
+function renderFeedback(){
+  var rows=_allFb.filter(function(f){
+    var cat=f.category||'feedback';
+    if(cat==='pro_access'||cat==='chart_access') return false;
+    if(_fbFilter!=='all'&&(f.status||'pending')!==_fbFilter) return false;
+    if(_fbQ){
+      var name=(_names[f.user_id]||'').toLowerCase();
+      var content=(f.content||'').toLowerCase();
+      return name.indexOf(_fbQ)>=0||content.indexOf(_fbQ)>=0;
+    }
+    return true;
+  });
+  var counts={pending:0,adopted:0,rejected:0};
+  _allFb.filter(function(f){var c=f.category||'feedback'; return c!=='pro_access'&&c!=='chart_access';})
+    .forEach(function(f){var s=f.status||'pending'; if(counts[s]!==undefined) counts[s]++;});
+  ['pending','adopted','rejected'].forEach(function(k){ var el=document.getElementById('fc-'+k); if(el) el.textContent='('+counts[k]+')'; });
+  var el=document.getElementById('f-count');
+  if(el) el.textContent='顯示 '+rows.length+' 筆';
+  var box=document.getElementById('fb-list');
+  if(!box) return;
+  if(!rows.length){ box.innerHTML='<div class="muted">沒有符合的回饋記錄</div>'; return; }
+  box.innerHTML=rows.map(function(f){ return renderFbCard(f,false); }).join('');
+}
+
+function renderFbCard(f,isApply){
+  var st=f.status||'pending';
+  var isChart=f.category==='chart_access';
+  var isProApp=f.category==='pro_access';
+  var name=_names[f.user_id]||'(未命名)';
+  var uid=(f.user_id||'').slice(0,8);
+  var label={pending:'審核中',adopted:'已採納 +10',rejected:'未採納',granted:'已開放',denied:'已婉拒'};
+  var catChip=isChart?'<span class="tag chart">🔓 圖表申請</span>':(isProApp?'<span class="tag proapp">✦ Pro 申請</span>':'');
+  var acts='';
+  if(st==='pending'){
+    if(isChart){
+      acts='<div class="fb-actions">'
+        +'<button class="btn btn-success" onclick="grantChart(\''+f.id+'\',\''+f.user_id+'\',true,this)">開放圖表權限</button>'
+        +'<button class="btn btn-ghost" onclick="grantChart(\''+f.id+'\',\''+f.user_id+'\',false,this)">婉拒</button></div>';
+    } else if(isProApp){
+      acts='<div class="fb-actions">'
+        +'<button class="btn btn-success" onclick="grantPro(\''+f.id+'\',\''+f.user_id+'\',true,this)">開放 Pro 會員</button>'
+        +'<button class="btn btn-ghost" onclick="grantPro(\''+f.id+'\',\''+f.user_id+'\',false,this)">婉拒</button></div>';
+    } else {
+      acts='<div class="fb-actions">'
+        +'<button class="btn btn-success" onclick="decide(\''+f.id+'\',\'adopted\',this)">採納並 +10 點</button>'
+        +'<button class="btn btn-ghost" onclick="decide(\''+f.id+'\',\'rejected\',this)">不採納</button></div>';
+    }
+  }
+  var reply='<div class="reply-box">'
+    +'<div class="reply-label">給'+(isApply?'申請者':'回饋者')+'的回覆（會顯示在頁面上）</div>'
+    +'<textarea class="reply-ta" id="reply-'+f.id+'" maxlength="500" placeholder="輸入回覆…">'+esc(f.reply||'')+'</textarea>'
+    +'<div class="reply-row"><span class="reply-msg" id="reply-msg-'+f.id+'"></span>'
+    +'<button class="btn btn-primary" onclick="saveReply(\''+f.id+'\',this)">送出回覆</button></div></div>';
+  return '<div class="fb-card" id="fc-'+f.id+'">'
+    +'<div class="fb-top"><div><div class="fb-who">'+esc(name)+'<small>'+esc(uid)+'</small></div></div>'
+    +'<div class="fb-meta">'+catChip
+    +'<span class="fb-date">'+fmtDate(f.created_at)+'</span>'
+    +'<span class="tag '+st+'">'+(label[st]||st)+'</span></div></div>'
+    +'<div class="fb-content">'+esc(f.content||'')+'</div>'+acts+reply+'</div>';
+}
+
+// ── stats ──
+function updateStats(){
+  var total=_members.length;
+  var proCount=_members.filter(function(m){return m.is_pro;}).length;
+  var pending=_allFb.filter(function(f){var c=f.category||''; return (c==='pro_access'||c==='chart_access')&&(f.status||'pending')==='pending';}).length;
+  var fbPending=_allFb.filter(function(f){var c=f.category||'feedback'; return c!=='pro_access'&&c!=='chart_access'&&(f.status||'pending')==='pending';}).length;
+  var s=function(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; };
+  s('stat-total',total); s('stat-pro',proCount); s('stat-pending',pending); s('stat-feedback',fbPending);
+}
+
+// ── filters ──
+function setAppFilter(f,btn){ _appFilter=f; btn.parentNode.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); renderApps(); }
+function setAppCat(c,btn){ _appCat=c; btn.parentNode.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); renderApps(); }
+function onAppSearch(v){ _appQ=(v||'').trim().toLowerCase(); document.getElementById('a-clear').style.display=_appQ?'block':'none'; renderApps(); }
+function clearAppSearch(){ var i=document.getElementById('a-search'); if(i) i.value=''; _appQ=''; document.getElementById('a-clear').style.display='none'; renderApps(); }
+function setFbFilter(f,btn){ _fbFilter=f; btn.parentNode.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); renderFeedback(); }
+function onFbSearch(v){ _fbQ=(v||'').trim().toLowerCase(); document.getElementById('f-clear').style.display=_fbQ?'block':'none'; renderFeedback(); }
+function clearFbSearch(){ var i=document.getElementById('f-search'); if(i) i.value=''; _fbQ=''; document.getElementById('f-clear').style.display='none'; renderFeedback(); }
+
+// ── actions ──
 async function decide(id,status,btn){
-  if(status==='adopted' && !confirm('確定採納這則意見？將自動為該使用者 +10 永久點數。')) return;
-  var card=btn.closest('.card');
-  var btns=card.querySelectorAll('.act'); for(var i=0;i<btns.length;i++) btns[i].disabled=true;
-  // 連同文字回覆一併送出（若有填寫）
+  if(status==='adopted'&&!confirm('確定採納？將自動 +10 永久點數。')) return;
+  setCardBtns(id,true);
   var ta=document.getElementById('reply-'+id);
   var patch={status:status};
-  if(ta && ta.value.trim()) patch.reply=ta.value.trim();
+  if(ta&&ta.value.trim()) patch.reply=ta.value.trim();
   var res=await _sb.from('feedback').update(patch).eq('id',id);
-  if(res.error){ alert('操作失敗：'+res.error.message); for(var j=0;j<btns.length;j++) btns[j].disabled=false; return; }
-  var item=_all.filter(function(f){return f.id===id;})[0];
-  if(item){ item.status=status; if(patch.reply!==undefined) item.reply=patch.reply; }
-  render();
+  if(res.error){ alert('操作失敗：'+res.error.message); setCardBtns(id,false); return; }
+  updateFbItem(id,patch); renderFeedback(); renderDashPending(); updateStats();
 }
 
 async function grantChart(id,userId,allow,btn){
-  if(!confirm(allow?'確定開放此帳號的互動圖表使用權限？':'確定婉拒這筆申請？')) return;
-  var card=btn.closest('.card');
-  var btns=card.querySelectorAll('.act'); for(var i=0;i<btns.length;i++) btns[i].disabled=true;
+  if(!confirm(allow?'確定開放圖表權限？':'確定婉拒？')) return;
+  setCardBtns(id,true);
   var rpc=await _sb.rpc('grant_chart_access',{target:userId,allow:allow});
-  if(rpc.error){ alert('權限更新失敗：'+rpc.error.message); for(var j=0;j<btns.length;j++) btns[j].disabled=false; return; }
+  if(rpc.error){ alert('權限更新失敗：'+rpc.error.message); setCardBtns(id,false); return; }
   var ta=document.getElementById('reply-'+id);
   var patch={status:allow?'granted':'denied'};
-  if(ta && ta.value.trim()) patch.reply=ta.value.trim();
-  var res=await _sb.from('feedback').update(patch).eq('id',id);
-  if(res.error){ alert('狀態更新失敗：'+res.error.message); for(var k=0;k<btns.length;k++) btns[k].disabled=false; return; }
-  var item=_all.filter(function(f){return f.id===id;})[0];
-  if(item){ item.status=patch.status; if(patch.reply!==undefined) item.reply=patch.reply; }
-  render();
+  if(ta&&ta.value.trim()) patch.reply=ta.value.trim();
+  await _sb.from('feedback').update(patch).eq('id',id);
+  updateFbItem(id,patch); renderApps(); renderDashPending(); updateStats();
 }
 
 async function grantPro(id,userId,allow,btn){
-  if(!confirm(allow?'確定開放此帳號的 Pro 會員權限？（將設為 Pro 並給予 30 訂閱點數）':'確定婉拒這筆 Pro 申請？')) return;
-  var card=btn.closest('.card');
-  var btns=card.querySelectorAll('.act'); for(var i=0;i<btns.length;i++) btns[i].disabled=true;
+  if(!confirm(allow?'確定開放 Pro 會員？（設為 Pro 並給予 30 訂閱點數）':'確定婉拒？')) return;
+  setCardBtns(id,true);
   var rpc=await _sb.rpc('grant_pro_access',{target:userId,allow:allow});
-  if(rpc.error){ alert('權限更新失敗：'+rpc.error.message); for(var j=0;j<btns.length;j++) btns[j].disabled=false; return; }
+  if(rpc.error){ alert('權限更新失敗：'+rpc.error.message); setCardBtns(id,false); return; }
   var ta=document.getElementById('reply-'+id);
   var patch={status:allow?'granted':'denied'};
-  if(ta && ta.value.trim()) patch.reply=ta.value.trim();
-  var res=await _sb.from('feedback').update(patch).eq('id',id);
-  if(res.error){ alert('狀態更新失敗：'+res.error.message); for(var k=0;k<btns.length;k++) btns[k].disabled=false; return; }
-  var item=_all.filter(function(f){return f.id===id;})[0];
-  if(item){ item.status=patch.status; if(patch.reply!==undefined) item.reply=patch.reply; }
-  render();
+  if(ta&&ta.value.trim()) patch.reply=ta.value.trim();
+  await _sb.from('feedback').update(patch).eq('id',id);
+  updateFbItem(id,patch); renderApps(); renderDashPending(); updateStats();
+  loadMembers();
 }
 
 async function saveReply(id,btn){
   var ta=document.getElementById('reply-'+id);
   var msg=document.getElementById('reply-msg-'+id);
   if(!ta) return;
-  var text=ta.value.trim();
   btn.disabled=true; btn.textContent='送出中…';
-  var res=await _sb.from('feedback').update({reply:text||null}).eq('id',id);
+  var res=await _sb.from('feedback').update({reply:ta.value.trim()||null}).eq('id',id);
   btn.disabled=false; btn.textContent='送出回覆';
-  if(res.error){ if(msg){ msg.textContent='送出失敗：'+res.error.message; msg.style.color='var(--red-600)'; } return; }
-  var item=_all.filter(function(f){return f.id===id;})[0];
-  if(item) item.reply=text;
-  if(msg){ msg.textContent='✓ 回覆已送出'; msg.style.color='var(--green-600)'; }
+  if(res.error){ if(msg){msg.textContent='送出失敗';msg.style.color='var(--red-600)';} return; }
+  updateFbItem(id,{reply:ta.value.trim()});
+  if(msg){msg.textContent='✓ 已送出';msg.style.color='var(--green-600)';}
+}
+
+function setCardBtns(id,disabled){
+  var card=document.getElementById('fc-'+id);
+  if(card) card.querySelectorAll('.btn').forEach(function(b){b.disabled=disabled;});
+}
+function updateFbItem(id,patch){
+  var item=_allFb.filter(function(f){return f.id===id;})[0];
+  if(item){ if(patch.status!==undefined) item.status=patch.status; if(patch.reply!==undefined) item.reply=patch.reply; }
+}
+
+// ── utils ──
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmtDate(s){
+  if(!s) return '—';
+  var d=new Date(s);
+  var p=function(n){return n<10?'0'+n:n;};
+  return (d.getMonth()+1)+'/'+d.getDate()+' '+p(d.getHours())+':'+p(d.getMinutes());
 }
 </script>
 <script src="/shared/footer.js"></script>
