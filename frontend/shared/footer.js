@@ -1,3 +1,20 @@
+// ── Google Analytics 4（全站共用，單一檔案維護）──
+// 用法：把下面 GA_MEASUREMENT_ID 換成你 GA4 資源的評估 ID（格式 G-XXXXXXXXXX）。
+// 留空（''）時整段不執行，不影響網站。每個頁面都引入 footer.js，故只需在此設定一次。
+(function(){
+  var GA_MEASUREMENT_ID = 'G-5DY07S3K06'; // ← 在此填入 G-XXXXXXXXXX
+  if(!GA_MEASUREMENT_ID || !/^G-[A-Z0-9]+$/.test(GA_MEASUREMENT_ID)) return;
+  if(window.__gaLoaded) return; window.__gaLoaded = true;
+  var s=document.createElement('script'); s.async=true;
+  s.src='https://www.googletagmanager.com/gtag/js?id='+GA_MEASUREMENT_ID;
+  (document.head||document.documentElement).appendChild(s);
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag=gtag;
+  gtag('js', new Date());
+  gtag('config', GA_MEASUREMENT_ID);
+})();
+
 // ── 全站免責聲明頁尾：自動注入至每個頁面底部 ──
 // 內容僅供參考、非投資建議；部分由 AI 生成，可能有誤。單一檔案維護，於各頁 <script> 引入即可。
 (function(){
