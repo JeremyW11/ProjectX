@@ -150,7 +150,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="pro-gate">
       <div class="pro-gate-icon">✦</div>
       <h2 class="pro-gate-title">用<em>名家的思維框架</em>讀今天的市場</h2>
-      <p class="pro-gate-desc">每位名家以自身專長定期連載，市場溫度跨界時再追加臨時特刊。每期延續上一期的論點，串成一條可反覆閱讀的思考脈絡——不是零碎的單日評論，而是有記憶、有姿態的判斷層。</p>
+      <p class="pro-gate-desc">每位名家以自身專長定期連載、回顧數日區間，並在每日資料蒐集後自行判斷——遇到值得一講的轉折才追加臨時特刊。每期延續上一期的論點，串成一條可反覆閱讀的思考脈絡——不是零碎的單日評論，而是有記憶、有姿態的判斷層。</p>
       <div class="pro-gate-btns">
         <a href="/pages/login.html" class="btn-pro-upgrade">✦ 登入體驗 Pro</a>
       </div>
@@ -297,7 +297,7 @@ function renderIssueList(){
   var listEl=document.getElementById('issue-list');
   var issues=currentIssues();
   if(!issues.length){
-    var msg=COL_STATE.activeCat==='special'?'這位名家目前沒有臨時專刊。市場溫度跨界時才會追加。':'這位名家尚未開始 3 日分析連載。';
+    var msg=COL_STATE.activeCat==='special'?'這位名家目前沒有臨時專刊。名家在每日資料蒐集後自行判斷，遇到值得一講的轉折才會加發。':'這位名家尚未開始 3 日分析連載。';
     listEl.innerHTML='<div class="empty-box">'+msg+'</div>';
     return;
   }
@@ -355,7 +355,7 @@ async function toggleIssue(i, forceOpen){
 function renderIssueBody(d){
   var html='';
   if(d.is_sample){ html+='<div class="ib-trigger" style="background:var(--gray-100);color:var(--gray-500);">範例稿：用於預覽版面，首次正式產出後即由真實內容取代。</div>'; }
-  if(d.type==='special' && d.trigger){ html+='<div class="ib-trigger">臨時特刊 · 觸發：'+esc(d.trigger)+'</div>'; }
+  if(d.type==='special' && d.trigger){ html+='<div class="ib-trigger">臨時特刊 · 加發原因：'+esc(d.trigger)+'</div>'; }
   var paras=String(d.body||'').split(/\n+/).filter(function(p){return p.trim();});
   html+='<div class="ib-prose">'+paras.map(function(p){return '<p>'+esc(p)+'</p>';}).join('')+'</div>';
   if(d.thesis && (d.thesis.core||d.thesis.vars||d.thesis.change)){
