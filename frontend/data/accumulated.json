@@ -5152,14 +5152,14 @@
   "tracked_stories": [
     {
       "id": "hormuz-iran-blockade",
-      "title": "美伊霍爾木茲航運危機",
+      "title": "伊以互擊霍爾木茲危機",
       "category": "地緣",
       "started": "2026-06-03",
-      "status": "緩和",
-      "direction": "中性",
-      "affect_assets": "Brent原油、黃金、航運股、避險資產",
-      "summary": "美伊談判MOU機率上升能源溢價收斂,WTI跌1%至95美元三日連漲告終,封鎖風險續降",
-      "last_update": "2026-06-05",
+      "status": "升溫",
+      "direction": "看空",
+      "affect_assets": "Brent原油、黃金、航運股、航空股、避險資產",
+      "summary": "伊以互擊霍爾木茲接近封閉油價飆3%至96美元，航空下修獲利通膨黏著加劇封鎖風險急升",
+      "last_update": "2026-06-08",
       "timeline": [
         {
           "date": "2026-06-03",
@@ -5184,6 +5184,12 @@
           "update": "美伊MOU機率上升WTI跌1%三日連漲告終",
           "sentiment": "中性",
           "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "伊以互擊霍爾木茲接近封閉油價飆逾3%航空下修獲利",
+          "sentiment": "利空",
+          "source_url": ""
         }
       ]
     },
@@ -5193,10 +5199,10 @@
       "category": "貨幣",
       "started": "2026-06-02",
       "status": "升溫",
-      "direction": "中性",
+      "direction": "看空",
       "affect_assets": "美債、美股、美元、黃金",
-      "summary": "6/16-17 FOMC市場共識按兵不動利率3.50-3.75%,今晚非農預期85K將牽動Fed路徑與美元",
-      "last_update": "2026-06-05",
+      "summary": "5月非農+17.2萬創共識兩倍10Y殖利率急升4.55%，6/16 FOMC升息路徑重估壓力驟升",
+      "last_update": "2026-06-08",
       "timeline": [
         {
           "date": "2026-06-02",
@@ -5215,19 +5221,25 @@
           "update": "今晚非農預期85K牽動Fed路徑與美元",
           "sentiment": "中性",
           "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "5月非農+17.2萬創共識兩倍10Y殖利率急升4.55%升息預期回燃",
+          "sentiment": "利空",
+          "source_url": ""
         }
       ]
     },
     {
       "id": "sp500-record-rally",
-      "title": "美股創高資金輪動",
+      "title": "美股創高後急速修正",
       "category": "總經",
       "started": "2026-06-02",
-      "status": "進行中",
-      "direction": "中性",
-      "affect_assets": "美股大盤、道瓊、科技股、ETF",
-      "summary": "道瓊飆874點創高資金輪出科技股,亞股偏弱跟進AI回檔,風險偏好續強但類股輪動",
-      "last_update": "2026-06-05",
+      "status": "緩和",
+      "direction": "看空",
+      "affect_assets": "Nasdaq、S&P500、AI雲端股、VIX、台股",
+      "summary": "Nasdaq暴跌4%VIX升21.51，AI雲端成空頭論核心，台股法人賣超1094億，創高長漲後急速修正",
+      "last_update": "2026-06-08",
       "timeline": [
         {
           "date": "2026-06-02",
@@ -5252,6 +5264,12 @@
           "update": "亞股偏弱跟進美股AI股回檔",
           "sentiment": "利空",
           "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "Nasdaq暴跌4%VIX升21.51AI雲端成空頭核心台股法人賣超1094億",
+          "sentiment": "利空",
+          "source_url": ""
         }
       ]
     },
@@ -5260,24 +5278,12 @@
       "title": "AI晶片供應鏈題材",
       "category": "科技",
       "started": "2026-06-01",
-      "status": "緩和",
+      "status": "進行中",
       "direction": "中性",
-      "affect_assets": "NVDA、AVGO、MRVL、TSMC、半導體ETF",
-      "summary": "Broadcom AI營收108億未上修目標盤後-15%引爆賣壓,AI供應鏈進入財報檢驗期",
-      "last_update": "2026-06-05",
+      "affect_assets": "NVDA、AVGO、MRVL、TSMC、HBM記憶體、半導體ETF",
+      "summary": "晶片股蒸發1兆市值賣壓延續，HBM供應吃緊看至2027，供應鏈基本面強勁與估值修正拉鋸",
+      "last_update": "2026-06-08",
       "timeline": [
-        {
-          "date": "2026-06-02",
-          "update": "STMicro上修資料中心展望至1B HPE暴漲25%",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-02",
-          "update": "Marvell飆33%黃仁勳點名兆元TSMC破443",
-          "sentiment": "利多",
-          "source_url": ""
-        },
         {
           "date": "2026-06-03",
           "update": "Broadcom Q2 AI營收84億美元年增106%",
@@ -5295,6 +5301,93 @@
           "update": "AVGO AI營收108億未上修盤後-15%引爆賣壓",
           "sentiment": "利空",
           "source_url": ""
+        },
+        {
+          "date": "2026-06-05",
+          "update": "晶片股單日蒸發1兆市值Nasdaq暴跌4%",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "法人預估HBM記憶體供不應求延伸至2027年持續吃緊",
+          "sentiment": "利多",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "opec-june-output",
+      "title": "OPEC+增產與油價走勢",
+      "category": "能源",
+      "started": "2026-06-03",
+      "status": "進行中",
+      "direction": "看多",
+      "affect_assets": "Brent、WTI、能源股、產油國資產",
+      "summary": "伊以互擊疊加OPEC+控產推升Brent至96美元+3.21%，能源板塊YTD+21%年度領漲",
+      "last_update": "2026-06-08",
+      "timeline": [
+        {
+          "date": "2026-06-03",
+          "update": "OPEC+ 6月象徵增產18.8萬桶UAE退出",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-05",
+          "update": "WTI跌近1%至95美元三日連漲告終",
+          "sentiment": "中性",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "伊以互擊助推Brent漲3.21%至96美元能源板塊YTD+21%",
+          "sentiment": "利多",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "us-forced-labor-tariff",
+      "title": "美擬60國強迫勞動關稅",
+      "category": "貿易",
+      "started": "2026-06-03",
+      "status": "升溫",
+      "direction": "看空",
+      "affect_assets": "亞洲出口鏈、台股、日韓股、電子消費品、供應鏈ETF",
+      "summary": "美對60國強迫勞動關稅提案持續推進，電子品通膨黏著，供應鏈重組壓力延續通膨預期上修",
+      "last_update": "2026-06-08",
+      "timeline": [
+        {
+          "date": "2026-06-03",
+          "update": "美擬對60國課10%強迫勞動關稅含中日韓台",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "供應鏈重組壓力持續電子消費品通膨預期上修",
+          "sentiment": "利空",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "us-farm-tariff-cut",
+      "title": "美農機關稅降至15%",
+      "category": "貿易",
+      "started": "2026-06-08",
+      "status": "進行中",
+      "direction": "看多",
+      "affect_assets": "DE、農機股、工程機械股、農業ETF",
+      "summary": "美農機工程機械進口關稅由25%降至15%，6/8即日生效，直接降低製造商成本，DE等農機股大漲",
+      "last_update": "2026-06-08",
+      "timeline": [
+        {
+          "date": "2026-06-08",
+          "update": "農機工程機械進口關稅由25%降至15%即日生效DE大漲直接受益",
+          "sentiment": "利多",
+          "source_url": ""
         }
       ]
     },
@@ -5306,7 +5399,7 @@
       "status": "進行中",
       "direction": "中性",
       "affect_assets": "NVDA、AMD、INTC、QCOM、MSFT",
-      "summary": "MSFT發布MAI-Code-1編碼模型降低OpenAI依賴,NVDA與TSMC將AI導入晶圓廠",
+      "summary": "MSFT發布MAI-Code-1編碼模型降低OpenAI依賴，NVDA與TSMC將AI導入晶圓廠製程",
       "last_update": "2026-06-05",
       "timeline": [
         {
@@ -5336,31 +5429,6 @@
       ]
     },
     {
-      "id": "opec-june-output",
-      "title": "OPEC+ 6月象徵增產",
-      "category": "能源",
-      "started": "2026-06-03",
-      "status": "進行中",
-      "direction": "中性",
-      "affect_assets": "Brent、WTI、能源股、產油國資產",
-      "summary": "OPEC+ 6月象徵增產18.8萬桶UAE退出,WTI跌1%至95三日連漲告終供需轉趨平衡",
-      "last_update": "2026-06-05",
-      "timeline": [
-        {
-          "date": "2026-06-03",
-          "update": "OPEC+ 6月象徵增產18.8萬桶UAE退出",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-05",
-          "update": "WTI跌近1%至95美元三日連漲告終",
-          "sentiment": "中性",
-          "source_url": ""
-        }
-      ]
-    },
-    {
       "id": "biopharma-ma-boom",
       "title": "生技併購熱潮",
       "category": "科技",
@@ -5368,7 +5436,7 @@
       "status": "升溫",
       "direction": "看多",
       "affect_assets": "生技股、XBI、大型藥廠、併購標的",
-      "summary": "2026 biopharma併購已達1060億美元,全年看2500億,大型藥廠加速布局創新管線",
+      "summary": "2026 biopharma併購已達1060億美元，全年看2500億，大型藥廠加速布局創新管線",
       "last_update": "2026-06-04",
       "timeline": [
         {
@@ -5387,51 +5455,13 @@
       "status": "進行中",
       "direction": "中性",
       "affect_assets": "原油、天然氣、東歐相關資產、避險商品",
-      "summary": "Trump要求習近平施壓普丁推動俄烏談判,中美斡旋格局成型,地緣不確定性升高",
+      "summary": "Trump要求習近平施壓普丁推動俄烏談判，中美斡旋格局成型，地緣不確定性升高",
       "last_update": "2026-06-03",
       "timeline": [
         {
           "date": "2026-06-03",
           "update": "Trump要求習近平施壓普丁中美斡旋俄烏",
           "sentiment": "中性",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "us-forced-labor-tariff",
-      "title": "美擬60國強迫勞動關稅",
-      "category": "貿易",
-      "started": "2026-06-03",
-      "status": "升溫",
-      "direction": "看空",
-      "affect_assets": "亞洲出口鏈、台股、日韓股、供應鏈ETF",
-      "summary": "美擬對60國課10%強迫勞動關稅,涵蓋中日韓台,亞洲出口鏈面臨重大關稅風險",
-      "last_update": "2026-06-03",
-      "timeline": [
-        {
-          "date": "2026-06-03",
-          "update": "美擬對60國課10%強迫勞動關稅含中日韓台",
-          "sentiment": "利空",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "global-growth-downgrade",
-      "title": "UNCTAD下修全球成長",
-      "category": "總經",
-      "started": "2026-06-03",
-      "status": "升溫",
-      "direction": "看空",
-      "affect_assets": "全球股市、新興市場、原物料、避險資產",
-      "summary": "UNCTAD下修2026全球成長至2.6%,地緣風險取代貿易戰成主要拖累,新興市場承壓",
-      "last_update": "2026-06-03",
-      "timeline": [
-        {
-          "date": "2026-06-03",
-          "update": "UNCTAD下修2026全球成長至2.6%地緣風險取代貿易戰",
-          "sentiment": "利空",
           "source_url": ""
         }
       ]
