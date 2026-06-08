@@ -562,7 +562,7 @@ function fmtDate(ts){
 function renderZoneList(j){
   var bear=(j.obs&&j.obs.bear?j.obs.bear:[]).slice().sort(function(a,b){return b.btm-a.btm;});
   var bull=(j.obs&&j.obs.bull?j.obs.bull:[]).slice().sort(function(a,b){return b.top-a.top;});
-  function row(z){ return '<div class="zone-item"><span class="rng">'+fmtNum(z.btm)+' ~ '+fmtNum(z.top)+'</span><span class="dt">'+fmtDate(z.time)+'</span></div>'; }
+  function row(z){ var tag=z.tested?' <span style="font-size:10px;color:var(--gray-400);">（已測試）</span>':''; return '<div class="zone-item"'+(z.tested?' style="opacity:.6;"':'')+'><span class="rng">'+fmtNum(z.btm)+' ~ '+fmtNum(z.top)+tag+'</span><span class="dt">'+fmtDate(z.time)+'</span></div>'; }
   document.getElementById('zone-bear').innerHTML = bear.length?bear.map(row).join(''):'<div class="zone-empty">目前無有效壓力區</div>';
   document.getElementById('zone-bull').innerHTML = bull.length?bull.map(row).join(''):'<div class="zone-empty">目前無有效支撐區</div>';
 }
@@ -585,9 +585,13 @@ function drawOverlay(){
     if(x1<0) x1=0;
     var y=Math.min(yTop,yBtm), h=Math.abs(yBtm-yTop);
     if(h<1.5) h=1.5;
+    ctx.save();
+    if(z.tested) ctx.globalAlpha=0.45;
     ctx.fillStyle=fill; ctx.fillRect(x1,y,W-x1,h);
     ctx.strokeStyle=line; ctx.lineWidth=1;
+    if(z.tested) ctx.setLineDash([5,4]);
     ctx.beginPath(); ctx.moveTo(x1,y); ctx.lineTo(W,y); ctx.moveTo(x1,y+h); ctx.lineTo(W,y+h); ctx.stroke();
+    ctx.restore();
   }
   (_obs.bear||[]).forEach(function(z){ zoneRect(z,RED,RED_LINE); });
   (_obs.bull||[]).forEach(function(z){ zoneRect(z,GREEN,GREEN_LINE); });
