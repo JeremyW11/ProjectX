@@ -67,9 +67,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 /* persona tabs */
 .persona-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
-.persona-tab{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 16px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);box-shadow:var(--shadow-card);transition:all .15s;text-align:left;}
+.persona-tab{display:flex;flex-direction:row;align-items:center;gap:10px;padding:10px 16px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);box-shadow:var(--shadow-card);transition:all .15s;text-align:left;}
 .persona-tab:hover{border-color:var(--navy-300);}
 .persona-tab.active{border-color:var(--navy-500);background:var(--navy-50);}
+.pt-ava{flex-shrink:0;width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--gray-100);border:1px solid var(--gray-200);}
+.pt-meta{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;}
 .pt-name{font-size:14px;font-weight:600;color:var(--navy-900);}
 .pt-focus{font-size:11px;color:var(--gray-500);font-family:var(--font-zh);}
 
@@ -270,8 +272,11 @@ function renderTabs(){
   tabsEl.innerHTML=COL_STATE.personas.map(function(p){
     var active=p.persona===COL_STATE.active?' active':'';
     return '<button class="persona-tab'+active+'" data-persona="'+esc(p.persona)+'">'+
-      '<span class="pt-name">'+esc(p.display_name||p.persona)+'</span>'+
-      (p.series_focus?'<span class="pt-focus">'+esc(p.series_focus)+'</span>':'')+
+      '<img class="pt-ava" src="/assets/personas/'+esc(p.persona)+'.png" alt="'+esc(p.display_name||p.persona)+'" loading="lazy" onerror="this.style.display=\'none\'">'+
+      '<span class="pt-meta">'+
+        '<span class="pt-name">'+esc(p.display_name||p.persona)+'</span>'+
+        (p.series_focus?'<span class="pt-focus">'+esc(p.series_focus)+'</span>':'')+
+      '</span>'+
     '</button>';
   }).join('');
   Array.prototype.forEach.call(tabsEl.querySelectorAll('.persona-tab'),function(b){

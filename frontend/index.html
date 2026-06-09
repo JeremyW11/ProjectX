@@ -485,6 +485,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .pp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
 .pp-chip{display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:11px 13px;}
 .pp-mono{flex-shrink:0;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-size:13px;font-weight:700;color:#fff;background:linear-gradient(135deg,#1e40af,#0ea5e9);letter-spacing:.02em;}
+.pp-ava{flex-shrink:0;width:38px;height:38px;border-radius:50%;object-fit:cover;background:#0f172a;border:1px solid rgba(255,255,255,.12);}
 .pp-meta{min-width:0;}
 .pp-name{font-family:var(--font-zh);font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .pp-focus{font-family:var(--font-zh);font-size:10.5px;color:rgba(255,255,255,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -523,13 +524,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="pulse-personas reveal">
       <div class="pp-label">名人專刊 · 七位名家人格，每日連載</div>
       <div class="pp-grid">
-        <div class="pp-chip"><span class="pp-mono">WB</span><span class="pp-meta"><span class="pp-name">華倫・巴菲特</span><span class="pp-focus">內在價值與優質生意</span></span></div>
-        <div class="pp-chip"><span class="pp-mono">CM</span><span class="pp-meta"><span class="pp-name">查理・蒙格</span><span class="pp-focus">多元思維模型與生意品質</span></span></div>
-        <div class="pp-chip"><span class="pp-mono">RD</span><span class="pp-meta"><span class="pp-name">瑞・達利歐</span><span class="pp-focus">總經機器與週期定位</span></span></div>
-        <div class="pp-chip"><span class="pp-mono">HM</span><span class="pp-meta"><span class="pp-name">霍華・馬克斯</span><span class="pp-focus">市場溫度與風險姿態</span></span></div>
-        <div class="pp-chip"><span class="pp-mono">SD</span><span class="pp-meta"><span class="pp-name">史丹利・德魯肯米勒</span><span class="pp-focus">總體趨勢與流動性前瞻</span></span></div>
-        <div class="pp-chip"><span class="pp-mono">MB</span><span class="pp-meta"><span class="pp-name">麥可・貝瑞</span><span class="pp-focus">逆向深度價值與泡沫偵察</span></span></div>
-        <div class="pp-chip"><span class="pp-mono">CW</span><span class="pp-meta"><span class="pp-name">凱西・伍德</span><span class="pp-focus">破壞式創新與指數成長</span></span></div>
+        <div class="pp-chip"><img class="pp-ava" src="/assets/personas/warren_buffett.png" alt="華倫・巴菲特" loading="lazy"><span class="pp-meta"><span class="pp-name">華倫・巴菲特</span><span class="pp-focus">內在價值與優質生意</span></span></div>
+        <div class="pp-chip"><img class="pp-ava" src="/assets/personas/charlie_munger.png" alt="查理・蒙格" loading="lazy"><span class="pp-meta"><span class="pp-name">查理・蒙格</span><span class="pp-focus">多元思維模型與生意品質</span></span></div>
+        <div class="pp-chip"><img class="pp-ava" src="/assets/personas/ray_dalio.png" alt="瑞・達利歐" loading="lazy"><span class="pp-meta"><span class="pp-name">瑞・達利歐</span><span class="pp-focus">總經機器與週期定位</span></span></div>
+        <div class="pp-chip"><img class="pp-ava" src="/assets/personas/howard_marks.png" alt="霍華・馬克斯" loading="lazy"><span class="pp-meta"><span class="pp-name">霍華・馬克斯</span><span class="pp-focus">市場溫度與風險姿態</span></span></div>
+        <div class="pp-chip"><img class="pp-ava" src="/assets/personas/stanley_druckenmiller.png" alt="史丹利・德魯肯米勒" loading="lazy"><span class="pp-meta"><span class="pp-name">史丹利・德魯肯米勒</span><span class="pp-focus">總體趨勢與流動性前瞻</span></span></div>
+        <div class="pp-chip"><img class="pp-ava" src="/assets/personas/michael_burry.png" alt="麥可・貝瑞" loading="lazy"><span class="pp-meta"><span class="pp-name">麥可・貝瑞</span><span class="pp-focus">逆向深度價值與泡沫偵察</span></span></div>
+        <div class="pp-chip"><img class="pp-ava" src="/assets/personas/cathie_wood.png" alt="凱西・伍德" loading="lazy"><span class="pp-meta"><span class="pp-name">凱西・伍德</span><span class="pp-focus">破壞式創新與指數成長</span></span></div>
         <div class="pp-chip" style="justify-content:center;"><a href="/pages/columns.html" style="font-family:var(--font-zh);font-size:12.5px;font-weight:600;color:#7dd3fc;text-decoration:none;">看名人專刊 →</a></div>
       </div>
     </div>
@@ -656,7 +657,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
             <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">名人專刊 · 名家人格連載</div>
             <div class="pro-target-card" style="padding:12px;">
               <div style="display:flex;align-items:center;gap:9px;margin-bottom:9px;">
-                <span id="p-col-mono" style="flex-shrink:0;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-size:11px;font-weight:700;color:#fff;background:linear-gradient(135deg,#1e40af,#0ea5e9);">—</span>
+                <span id="p-col-mono" style="flex-shrink:0;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-size:11px;font-weight:700;color:#fff;background:linear-gradient(135deg,#1e40af,#0ea5e9);overflow:hidden;">—</span>
                 <span id="p-col-name" style="font-size:12.5px;font-weight:600;color:#fff;font-family:var(--font-zh);">名人專刊</span>
                 <span id="p-col-type" style="margin-left:auto;font-size:9.5px;font-weight:600;color:#7dd3fc;background:rgba(125,211,252,.12);border:1px solid rgba(125,211,252,.25);border-radius:999px;padding:2px 9px;font-family:var(--font-zh);">連載</span>
               </div>
@@ -933,7 +934,9 @@ async function loadColumnDemo(){
     const m=dn.match(/（([^）]+)）/);
     const mono=(m?m[1]:zh).split(/\s+/).map(w=>w[0]||'').join('').slice(0,2).toUpperCase();
     const set=(id,v)=>{const e=document.getElementById(id);if(e&&v)e.textContent=v;};
-    set('p-col-mono',mono);
+    const mEl=document.getElementById('p-col-mono');
+    if(mEl&&f.persona){mEl.innerHTML='<img src="/assets/personas/'+f.persona+'.png" alt="'+zh+'" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentNode.textContent=\''+mono+'\'">';}
+    else set('p-col-mono',mono);
     set('p-col-name',zh||'名人專刊');
     set('p-col-type',f.type==='special'?'臨時特刊':'連載');
     set('p-col-title','「'+(f.title||'')+'」');
