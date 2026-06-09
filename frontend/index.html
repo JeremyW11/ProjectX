@@ -248,27 +248,32 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .ptc-chg{font-family:var(--font-en);font-size:10.5px;font-weight:500;width:46px;text-align:right;}
 .ptc-chg.up{color:#4ade80;} .ptc-chg.dn{color:#f87171;}
 
-/* ── FEATURE LIST TABLE ── */
-.feat-table-wrap{background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-xl);overflow:hidden;box-shadow:0 26px 70px -38px rgba(30,58,138,.3);}
-.feat-table{width:100%;border-collapse:collapse;table-layout:fixed;}
-.ft-head th{padding:16px 26px;font-size:11px;font-weight:700;font-family:var(--font-en);letter-spacing:.12em;text-align:left;color:var(--gray-500);border-bottom:1px solid var(--gray-200);text-transform:uppercase;}
-.ft-head th:nth-child(2),.ft-head th:nth-child(3){text-align:center;width:124px;}
-.ft-head th:nth-child(3){background:#fcf8ee;}
-.ft-col-free{color:var(--gray-500);}
-.ft-col-pro{color:var(--pro-gold-dark);display:inline-flex;align-items:center;justify-content:center;gap:5px;background:linear-gradient(135deg,var(--pro-gold-light),#eddaa4);border:1px solid rgba(201,168,76,.45);border-radius:999px;padding:5px 15px;font-weight:700;box-shadow:0 2px 7px -3px rgba(138,106,31,.55);}
-.ft-group-row td{padding:17px 26px 8px;font-size:11.5px;font-weight:700;color:var(--navy-500);letter-spacing:.03em;font-family:var(--font-zh);border-top:1px solid var(--gray-100);background:linear-gradient(to right,var(--gray-50) 0,var(--gray-50) calc(100% - 124px),#fcf8ee calc(100% - 124px));}
-.ft-group-row td::before{content:"";display:inline-block;width:3px;height:12px;background:var(--navy-400);border-radius:2px;margin-right:9px;vertical-align:-1px;}
-.ft-row td{padding:13px 26px;font-size:13.5px;color:var(--gray-700);font-family:var(--font-zh);border-bottom:1px solid var(--gray-100);vertical-align:middle;}
-.ft-row td:nth-child(3){background:#fcf8ee;}
+/* ── FEATURE COMPARISON TABLE ── */
+.feat-table-wrap{position:relative;background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-xl);overflow:hidden;box-shadow:0 30px 80px -42px rgba(30,58,138,.35);}
+/* PRO spotlight band — floating tinted column behind the cells */
+.ft-pro-band{position:absolute;top:0;bottom:0;right:0;width:128px;background:linear-gradient(180deg,#fbf3dd,#fdf9ef);border-left:1.5px solid rgba(201,168,76,.4);box-shadow:inset 0 0 0 1px rgba(201,168,76,.1),0 10px 34px -14px rgba(201,168,76,.45);pointer-events:none;z-index:0;}
+.feat-table{position:relative;z-index:1;width:100%;border-collapse:collapse;table-layout:fixed;}
+.ft-head th{padding:20px 26px 17px;font-size:11px;font-weight:700;font-family:var(--font-en);letter-spacing:.14em;text-align:left;color:var(--gray-500);border-bottom:1px solid var(--gray-200);text-transform:uppercase;vertical-align:bottom;}
+.ft-head th:nth-child(2),.ft-head th:nth-child(3){text-align:center;width:128px;}
+.ft-col-free{color:var(--gray-400);font-size:12px;letter-spacing:.16em;}
+.ft-col-pro{color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,#d8bd6a,#b8923a);border-radius:999px;padding:7px 18px;font-weight:800;font-size:12px;letter-spacing:.07em;box-shadow:0 7px 18px -7px rgba(138,106,31,.75);}
+.ft-group-row td{padding:18px 26px 9px;font-size:11px;font-weight:800;color:var(--navy-600);letter-spacing:.09em;font-family:var(--font-zh);border-top:1px solid var(--gray-100);background:linear-gradient(to right,var(--gray-50),var(--gray-50) calc(100% - 128px),transparent calc(100% - 128px));}
+.ft-group-row td::before{content:"";display:inline-block;width:3px;height:12px;background:linear-gradient(var(--pro-gold),var(--navy-400));border-radius:2px;margin-right:10px;vertical-align:-1px;}
+.ft-row td{padding:14px 26px;font-family:var(--font-zh);border-bottom:1px solid var(--gray-100);vertical-align:middle;}
 .ft-row td:nth-child(2),.ft-row td:nth-child(3){text-align:center;}
 .ft-row:last-child td{border-bottom:none;}
-.ft-row:hover td{background:var(--navy-50);}
-.ft-row:hover td:nth-child(3){background:#f7eed6;}
-.ft-check-free{font-size:16px;color:var(--green-600);}
-.ft-check-pro{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;background:rgba(201,168,76,.18);color:var(--pro-gold-dark);font-size:13px;font-weight:700;}
+.ft-row:hover td{background:rgba(37,99,235,.04);}
+.ft-row:hover td:nth-child(3){background:rgba(201,168,76,.12);}
+.ft-feat{display:flex;align-items:center;gap:13px;}
+.ft-ico{flex-shrink:0;width:34px;height:34px;border-radius:10px;background:var(--navy-50);display:inline-flex;align-items:center;justify-content:center;font-size:16px;}
+.ft-txt{display:flex;flex-direction:column;gap:1px;min-width:0;}
+.ft-name{font-size:14px;font-weight:600;color:var(--navy-950);line-height:1.35;}
+.ft-desc{font-size:11.5px;color:var(--gray-400);line-height:1.35;}
+.ft-check-free{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--green-50);color:var(--green-600);font-size:13px;font-weight:700;}
+.ft-check-pro{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#d8bd6a,#b8923a);color:#fff;font-size:13px;font-weight:700;box-shadow:0 4px 9px -3px rgba(138,106,31,.6);}
 .ft-lock{font-size:15px;color:var(--gray-300);font-weight:400;}
-.ft-partial{font-size:10.5px;color:var(--pro-gold-dark);background:rgba(201,168,76,.18);border:1px solid rgba(201,168,76,.3);border-radius:999px;padding:4px 10px;font-weight:700;font-family:var(--font-zh);}
-@media(max-width:600px){.ft-head th,.ft-row td,.ft-group-row td{padding-left:14px;padding-right:14px;}.ft-head th:nth-child(2),.ft-head th:nth-child(3){width:78px;}.ft-group-row td{background:linear-gradient(to right,var(--gray-50) 0,var(--gray-50) calc(100% - 78px),#fcf8ee calc(100% - 78px));}}
+.ft-partial{display:inline-block;font-size:10.5px;color:#fff;background:linear-gradient(135deg,#d8bd6a,#b8923a);border-radius:999px;padding:5px 11px;font-weight:700;font-family:var(--font-zh);line-height:1.25;box-shadow:0 4px 9px -3px rgba(138,106,31,.55);}
+@media(max-width:600px){.ft-head th,.ft-row td,.ft-group-row td{padding-left:14px;padding-right:14px;}.ft-head th:nth-child(2),.ft-head th:nth-child(3){width:78px;}.ft-pro-band{width:78px;}.ft-group-row td{background:linear-gradient(to right,var(--gray-50),var(--gray-50) calc(100% - 78px),transparent calc(100% - 78px));}.ft-ico{width:30px;height:30px;font-size:14px;}.ft-name{font-size:13px;}.ft-desc{font-size:11px;}.ft-col-pro{padding:6px 12px;font-size:11px;}}
 .pro-col-header{background:linear-gradient(135deg,var(--navy-800),var(--navy-700));border-radius:var(--r-sm) var(--r-sm) 0 0;padding:6px 14px 4px;display:inline-block;}
 
 /* ── PRICING ── */
@@ -671,42 +676,43 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
     <!-- Feature comparison table -->
     <div class="feat-table-wrap reveal">
+      <div class="ft-pro-band" aria-hidden="true"></div>
       <table class="feat-table">
         <thead class="ft-head">
           <tr>
             <th style="color:var(--gray-600)">功能</th>
-            <th class="ft-col-free">FREE</th>
+            <th><span class="ft-col-free">FREE</span></th>
             <th>
               <div class="ft-col-pro">
-                <span style="color:var(--pro-gold)">✦</span> PRO
+                <span>✦</span> PRO
               </div>
             </th>
           </tr>
         </thead>
         <tbody>
           <tr><td colspan="3" class="ft-group-row" style="border-top:none;">每日情報 + 市場（免費）</td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🌐</span>每日情報簡報<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">宏觀 + 產業 + 個股</span></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">₿</span>加密 + 美股 + 台股即時數據</td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🧭</span>產業地圖<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">產業新聞 + 各產業前五大公司</span></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">😱</span>風險矩陣 + VIX 情緒追蹤</td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🌐</span><div class="ft-txt"><span class="ft-name">每日情報簡報</span><span class="ft-desc">宏觀 + 產業 + 個股</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">₿</span><div class="ft-txt"><span class="ft-name">加密 + 美股 + 台股即時數據</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🧭</span><div class="ft-txt"><span class="ft-name">產業地圖</span><span class="ft-desc">產業新聞 + 各產業前五大公司</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">😱</span><div class="ft-txt"><span class="ft-name">風險矩陣 + VIX 情緒追蹤</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">機構情報（免費）</td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🏛</span>機構研報摘要<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">GS / MS / UBS 等</span></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📊</span>財報 EPS 對比 + 法說會摘要</td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📅</span>市場日曆</td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🏛</span><div class="ft-txt"><span class="ft-name">機構研報摘要</span><span class="ft-desc">GS / MS / UBS 等</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">📊</span><div class="ft-txt"><span class="ft-name">財報 EPS 對比 + 法說會摘要</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">📅</span><div class="ft-txt"><span class="ft-name">市場日曆</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">會員中心（Pro 專屬）</td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🎯</span>會員中心<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">自選看板 + 共識溫度計 + 事件追蹤 + 訊號雷達</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🤖</span>AI 個股分析 + 推演沙盤<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">會員中心內，依點數</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">用訂閱點數</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🌍</span>全球事件追蹤<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">跨日國際大事時間軸</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🎯</span><div class="ft-txt"><span class="ft-name">會員中心</span><span class="ft-desc">自選看板 + 共識溫度計 + 事件追蹤 + 訊號雷達</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🤖</span><div class="ft-txt"><span class="ft-name">AI 個股分析 + 推演沙盤</span><span class="ft-desc">會員中心內，依點數</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">用訂閱點數</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🌍</span><div class="ft-txt"><span class="ft-name">全球事件追蹤</span><span class="ft-desc">跨日國際大事時間軸</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">名家視角 + 進階工具（Pro 專屬）</td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📰</span>名家觀點<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">七位名家人格每日出刊</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📈</span>互動圖表<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">K 線 + 訂單簿熱力 + 技術訊號</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">📰</span><div class="ft-txt"><span class="ft-name">名家觀點</span><span class="ft-desc">七位名家人格每日出刊</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">📈</span><div class="ft-txt"><span class="ft-name">互動圖表</span><span class="ft-desc">K 線 + 訂單簿熱力 + 技術訊號</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">Pro 專屬</td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📂</span>歷史報告完整內容<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">免費僅看標題與日期</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">⚡</span>每月訂閱點數</td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">30 點 / 月</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">📂</span><div class="ft-txt"><span class="ft-name">歷史報告完整內容</span><span class="ft-desc">免費僅看標題與日期</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">⚡</span><div class="ft-txt"><span class="ft-name">每月訂閱點數</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">30 點 / 月</span></td></tr>
         </tbody>
       </table>
     </div>
