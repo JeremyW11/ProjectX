@@ -602,7 +602,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
               <button class="fls-lock" onclick="window.location.href='/pages/credits.html'">✦ 升級 Pro</button>
             </div>
             <div class="free-locked-section">
-              <span class="fls-label">🔒 AI 個股分析 / 推演沙盤</span>
+              <span class="fls-label">🔒 名人專刊 · AI 個股分析 / 推演沙盤</span>
               <button class="fls-lock" onclick="window.location.href='/pages/credits.html'">✦ 升級 Pro</button>
             </div>
           </div>
@@ -649,29 +649,16 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
             <div class="pro-earnings-row"><div class="per-left"><span class="per-ticker" id="p-e2-tk">—</span><span class="per-name" id="p-e2-nm">—</span></div><div class="per-right"><span class="per-eps" id="p-e2-eps">—</span><span class="per-beat beat-yes" id="p-e2-b">—</span></div></div>
           </div>
 
-          <!-- AI 推演沙盤 -->
+          <!-- 名人專刊 · PulseAI -->
           <div>
-            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">AI 推演沙盤 <span style="color:rgba(255,255,255,.25);font-weight:500;">· 示意</span></div>
-            <div class="pro-target-card" style="padding:10px 12px;">
-              <div style="font-size:10.5px;color:rgba(255,255,255,.45);font-family:var(--font-zh);margin-bottom:8px;">「Fed 若6月升息，NVDA 怎麼走？」</div>
-              <div style="display:flex;flex-direction:column;gap:5px;">
-                <div style="display:flex;align-items:center;justify-content:space-between;">
-                  <span style="font-size:10px;color:rgba(255,255,255,.6);font-family:var(--font-zh);">情境A · 市場消化升息</span>
-                  <span style="font-size:10px;font-weight:600;color:#4ade80;font-family:var(--font-en);">45%</span>
-                </div>
-                <div style="background:rgba(255,255,255,.08);border-radius:3px;height:4px;overflow:hidden;"><div style="width:45%;height:100%;background:#4ade80;border-radius:3px;"></div></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;">
-                  <span style="font-size:10px;color:rgba(255,255,255,.6);font-family:var(--font-zh);">情境B · 估值壓縮</span>
-                  <span style="font-size:10px;font-weight:600;color:#f87171;font-family:var(--font-en);">35%</span>
-                </div>
-                <div style="background:rgba(255,255,255,.08);border-radius:3px;height:4px;overflow:hidden;"><div style="width:35%;height:100%;background:#f87171;border-radius:3px;"></div></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:3px;">
-                  <span style="font-size:10px;color:rgba(255,255,255,.6);font-family:var(--font-zh);">情境C · 快速反彈</span>
-                  <span style="font-size:10px;font-weight:600;color:#fbbf24;font-family:var(--font-en);">20%</span>
-                </div>
-                <div style="background:rgba(255,255,255,.08);border-radius:3px;height:4px;overflow:hidden;"><div style="width:20%;height:100%;background:#fbbf24;border-radius:3px;"></div></div>
+            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">名人專刊 · 名家人格連載</div>
+            <div class="pro-target-card" style="padding:12px;">
+              <div style="display:flex;align-items:center;gap:9px;margin-bottom:9px;">
+                <span id="p-col-mono" style="flex-shrink:0;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-size:11px;font-weight:700;color:#fff;background:linear-gradient(135deg,#1e40af,#0ea5e9);">—</span>
+                <span id="p-col-name" style="font-size:12.5px;font-weight:600;color:#fff;font-family:var(--font-zh);">名人專刊</span>
+                <span id="p-col-type" style="margin-left:auto;font-size:9.5px;font-weight:600;color:#7dd3fc;background:rgba(125,211,252,.12);border:1px solid rgba(125,211,252,.25);border-radius:999px;padding:2px 9px;font-family:var(--font-zh);">連載</span>
               </div>
-              <div style="margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,255,255,.08);font-size:9.5px;color:rgba(255,255,255,.3);font-family:var(--font-zh);">示意畫面 · 實際分析依當日 AI 推演結果產生</div>
+              <div id="p-col-title" style="font-size:12px;line-height:1.65;color:rgba(255,255,255,.78);font-family:var(--font-zh);">PulseAI 以名家思維框架，對當日市場連載評述。</div>
             </div>
           </div>
 
@@ -707,11 +694,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
           <tr><td colspan="3" class="ft-group-row">會員中心（Pro 專屬）</td></tr>
           <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🎯</span>會員中心<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">自選看板 + 共識溫度計 + 事件追蹤 + 訊號雷達</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🤖</span>AI 個股分析 + 推演沙盤<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">Powered by PulseAI · 依點數</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">用訂閱點數</span></td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🤖</span>AI 個股分析 + 推演沙盤<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">會員中心內，依點數</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">用訂閱點數</span></td></tr>
           <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🌍</span>全球事件追蹤<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">跨日國際大事時間軸</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">名家視角 + 進階工具（Pro 專屬）</td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📰</span>名人專刊<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">Powered by PulseAI · 七位名家人格每日連載</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📰</span>名人專刊<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">七位名家人格每日連載</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📈</span>互動圖表<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">K 線 + 訂單簿熱力 + 技術訊號</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">Pro 專屬</td></tr>
@@ -760,7 +747,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">包含所有免費功能</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">每月 30 訂閱點數（AI 分析 / 推演沙盤）</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">全球事件追蹤（跨日國際大事時間軸）</span></li>
-          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">名人專刊（PulseAI · 七位名家人格每日連載）</span></li>
+          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">名人專刊（七位名家人格每日連載）</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">互動圖表（K 線 + 訂單簿熱力 + 技術訊號）</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">解鎖全部歷史報告完整內容</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">訂閱點數每月自動重置</span></li>
@@ -931,6 +918,26 @@ function populateDemo(d){
   fillEarn(1,'p-e2-tk','p-e2-nm','p-e2-eps','p-e2-b');
 }
 loadRealTickers();
+
+/* 名人專刊 demo：讀今日真實出刊 */
+async function loadColumnDemo(){
+  try{
+    const res=await fetch('/data/columns/index.json?t='+Date.now());
+    const c=await res.json();
+    const f=(c.feed||[])[0];
+    if(!f)return;
+    const dn=f.display_name||'';
+    const zh=dn.replace(/（[^）]+）/,'').trim();
+    const m=dn.match(/（([^）]+)）/);
+    const mono=(m?m[1]:zh).split(/\s+/).map(w=>w[0]||'').join('').slice(0,2).toUpperCase();
+    const set=(id,v)=>{const e=document.getElementById(id);if(e&&v)e.textContent=v;};
+    set('p-col-mono',mono);
+    set('p-col-name',zh||'名人專刊');
+    set('p-col-type',f.type==='special'?'臨時特刊':'連載');
+    set('p-col-title','「'+(f.title||'')+'」');
+  }catch(e){console.log('column demo load failed',e);}
+}
+loadColumnDemo();
 
 /* modal */
 function openModal(tab){document.getElementById('modalOverlay').classList.add('open');switchTab(tab||'login');}
