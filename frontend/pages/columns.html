@@ -4,7 +4,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project X · 名人專刊</title>
+<title>Project X · 名家觀點</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -83,7 +83,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .pt-name{font-size:15.5px;font-weight:700;color:var(--navy-900);line-height:1.25;}
 .pt-focus{font-size:11.5px;color:var(--gray-500);font-family:var(--font-zh);line-height:1.3;}
 
-/* sub-category tabs (3日分析 / 專刊) */
+/* sub-category tabs (三日分析 / 名人專刊) */
 .cat-tabs{display:flex;gap:6px;margin-bottom:16px;border-bottom:1px solid var(--gray-200);}
 .cat-tab{padding:9px 16px;font-size:13.5px;font-weight:600;color:var(--gray-500);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;}
 .cat-tab:hover{color:var(--navy-700);}
@@ -150,8 +150,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
   <div class="page-header">
     <div>
-      <h1 class="page-title">名人專刊 <span class="page-title-sub">Persona Columns</span></h1>
-      <div class="page-update">以名家投資框架啟發的市場評述 · 連載與臨時特刊 · Pro 會員專屬 · 台北時間基準</div>
+      <h1 class="page-title">名家觀點 <span class="page-title-sub">Persona Insights</span></h1>
+      <div class="page-update">以名家投資框架啟發的市場評述 · 三日分析（短期）與名人專刊（長期）兩種獨立觀察 · Pro 會員專屬 · 台北時間基準</div>
     </div>
   </div>
 
@@ -160,7 +160,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="pro-gate">
       <div class="pro-gate-icon">✦</div>
       <h2 class="pro-gate-title">用<em>名家的思維框架</em>讀今天的市場</h2>
-      <p class="pro-gate-desc">每位名家以自身專長定期連載、回顧數日區間，並在每日資料蒐集後自行判斷——遇到值得一講的轉折才追加臨時特刊。每期延續上一期的論點，串成一條可反覆閱讀的思考脈絡——不是零碎的單日評論，而是有記憶、有姿態的判斷層。</p>
+      <p class="pro-gate-desc">每位名家有兩種獨立的觀察：短期的「三日分析」固定回顧近數個交易日；長期的「名人專刊」則在每日資料蒐集後自行判斷——遇到值得一講的轉折才不定期加發。每期延續上一期的論點，串成一條可反覆閱讀的思考脈絡——不是零碎的單日評論，而是有記憶、有姿態的判斷層。</p>
       <div class="pro-gate-btns">
         <a href="/pages/login.html" class="btn-pro-upgrade">✦ 登入體驗 Pro</a>
       </div>
@@ -239,7 +239,7 @@ async function signOutUser(){
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 
 var COL_STATE={ personas:[], feed:[], active:null, activeCat:'serial', issueCache:{} };
-var CAT_LABEL={ serial:'3日分析', special:'專刊' };
+var CAT_LABEL={ serial:'三日分析（短期）', special:'名人專刊（長期）' };
 
 function currentIssues(){
   return COL_STATE.feed
@@ -268,7 +268,7 @@ async function loadColumns(){
 
   if(!personas.length){
     tabsEl.innerHTML='';
-    listEl.innerHTML='<div class="empty-box">名人專刊即將開刊。各人格的連載與特刊產出後，會在這裡串成可反覆閱讀的脈絡。</div>';
+    listEl.innerHTML='<div class="empty-box">名家觀點即將開刊。各人格的三日分析與名人專刊產出後，會在這裡串成可反覆閱讀的脈絡。</div>';
     return;
   }
 
@@ -314,13 +314,13 @@ function renderIssueList(){
   var listEl=document.getElementById('issue-list');
   var issues=currentIssues();
   if(!issues.length){
-    var msg=COL_STATE.activeCat==='special'?'這位名家目前沒有臨時專刊。名家在每日資料蒐集後自行判斷，遇到值得一講的轉折才會加發。':'這位名家尚未開始 3 日分析連載。';
+    var msg=COL_STATE.activeCat==='special'?'這位名家目前沒有名人專刊。名家在每日資料蒐集後自行判斷，遇到值得一講的長期轉折才會加發。':'這位名家尚未開始三日分析。';
     listEl.innerHTML='<div class="empty-box">'+msg+'</div>';
     return;
   }
   listEl.innerHTML=issues.map(function(f,i){
     var isSpecial=f.type==='special';
-    var badge=isSpecial?'<span class="ih-badge special">臨時特刊</span>':'<span class="ih-badge serial">連載</span>';
+    var badge=isSpecial?'<span class="ih-badge special">名人專刊</span>':'<span class="ih-badge serial">三日分析</span>';
     return '<div class="issue-card" data-persona="'+esc(f.persona)+'" data-date="'+esc(f.date)+'">'+
       '<div class="issue-head" data-i="'+i+'">'+
         '<div class="ih-main">'+
@@ -372,7 +372,7 @@ async function toggleIssue(i, forceOpen){
 function renderIssueBody(d){
   var html='';
   if(d.is_sample){ html+='<div class="ib-trigger" style="background:var(--gray-100);color:var(--gray-500);">範例稿：用於預覽版面，首次正式產出後即由真實內容取代。</div>'; }
-  if(d.type==='special' && d.trigger){ html+='<div class="ib-trigger">臨時特刊 · 加發原因：'+esc(d.trigger)+'</div>'; }
+  if(d.type==='special' && d.trigger){ html+='<div class="ib-trigger">名人專刊 · 加發原因：'+esc(d.trigger)+'</div>'; }
   var paras=String(d.body||'').split(/\n+/).filter(function(p){return p.trim();});
   html+='<div class="ib-prose">'+paras.map(function(p){return '<p>'+esc(p)+'</p>';}).join('')+'</div>';
   if(d.thesis && (d.thesis.core||d.thesis.vars||d.thesis.change)){
