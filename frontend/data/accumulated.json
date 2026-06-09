@@ -6061,18 +6061,12 @@
       "title": "伊以互擊霍爾木茲危機",
       "category": "地緣",
       "started": "2026-06-03",
-      "status": "升溫",
-      "direction": "看空",
+      "status": "緩和",
+      "direction": "中性",
       "affect_assets": "Brent原油、黃金、航運股、航空股、避險資產",
-      "summary": "以色列空襲伊朗石化設施Brent飆近5%，霍爾木茲封鎖風險急升，能源通膨加劇全球風險偏好驟降",
-      "last_update": "2026-06-08",
+      "summary": "伊朗宣布停止對以軍事行動川普表示樂觀，能源溢酬與公債殖利率同步回落，中東緊張暫緩",
+      "last_update": "2026-06-09",
       "timeline": [
-        {
-          "date": "2026-06-03",
-          "update": "美伊封鎖外交升級Brent漲96.82黃金衝4481",
-          "sentiment": "利空",
-          "source_url": ""
-        },
         {
           "date": "2026-06-04",
           "update": "川普稱伊朗同意不發展核武WTI連三漲至95",
@@ -6096,6 +6090,229 @@
           "update": "以色列空襲伊朗石化設施Brent單日飆近5%中東升級能源通膨壓力驟升",
           "sentiment": "利空",
           "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "伊朗宣布停止對以軍事行動川普樂觀能源溢酬回落",
+          "sentiment": "利多",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "sp500-record-rally",
+      "title": "美股創高後急速修正",
+      "category": "總經",
+      "started": "2026-06-02",
+      "status": "緩和",
+      "direction": "中性",
+      "affect_assets": "Nasdaq、S&P500、AI雲端股、VIX、台股、亞洲科技股",
+      "summary": "中東停火推動美股反彈AI晶片股領漲，修正暫緩但估值壓力仍在",
+      "last_update": "2026-06-09",
+      "timeline": [
+        {
+          "date": "2026-06-04",
+          "update": "道瓊飆874點創高資金輪出科技股",
+          "sentiment": "中性",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-05",
+          "update": "亞股偏弱跟進美股AI股回檔",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "Nasdaq暴跌4%VIX升21.51AI雲端成空頭核心台股法人賣超1094億",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "亞洲科技股全面下挫SoftBank跌6%AI估值泡沫疑慮蔓延全球",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "中東停火推動美股反彈AI晶片股領漲市場情緒回穩",
+          "sentiment": "利多",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "ai-chip-supply-chain",
+      "title": "AI晶片供應鏈題材",
+      "category": "科技",
+      "started": "2026-06-01",
+      "status": "升溫",
+      "direction": "看多",
+      "affect_assets": "NVDA、AMD、ORCL、GOOGL、MRVL、TSMC、HBM記憶體、半導體ETF",
+      "summary": "Oracle導入5萬張AMD GPU、Alphabet850億融資加速AI基建，NVDA續購SK海力士HBM供應吃緊",
+      "last_update": "2026-06-09",
+      "timeline": [
+        {
+          "date": "2026-06-05",
+          "update": "晶片股單日蒸發1兆市值Nasdaq暴跌4%",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "法人預估HBM記憶體供不應求延伸至2027年持續吃緊",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "超大型雲廠capex 7500億75%投AI但估值泡沫論升溫晶片股估值承壓",
+          "sentiment": "中性",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "Oracle導入5萬張AMD MI450 GPU capex達收入76%",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "NVDA稱記憶體短缺無盡頭將續購SK海力士HBM產品",
+          "sentiment": "利多",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "opec-june-output",
+      "title": "OPEC+增產與油價走勢",
+      "category": "能源",
+      "started": "2026-06-03",
+      "status": "緩和",
+      "direction": "中性",
+      "affect_assets": "Brent、WTI、能源股、產油國資產",
+      "summary": "伊朗宣布停火中東風險溢酬回落，油價漲勢暫歇但OPEC控產支撐底部",
+      "last_update": "2026-06-09",
+      "timeline": [
+        {
+          "date": "2026-06-03",
+          "update": "OPEC+ 6月象徵增產18.8萬桶UAE退出",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-05",
+          "update": "WTI跌近1%至95美元三日連漲告終",
+          "sentiment": "中性",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "伊以互擊助推Brent漲3.21%至96美元能源板塊YTD+21%",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "以色列空襲伊朗石化設施Brent飆近5%能源供應衝擊進一步加劇",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "伊朗停火宣言緩解供應擔憂能源溢酬與殖利率同步回落",
+          "sentiment": "利空",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "spacex-ipo",
+      "title": "SpaceX IPO掛牌倒數",
+      "category": "科技",
+      "started": "2026-06-08",
+      "status": "升溫",
+      "direction": "看多",
+      "affect_assets": "NASDAQ、私人科技股、科技ETF、GOOGL",
+      "summary": "SpaceX定價$135/股6/12掛牌，IPO前夕獲Google 300億大單，為年度最大科技上市案",
+      "last_update": "2026-06-09",
+      "timeline": [
+        {
+          "date": "2026-06-08",
+          "update": "SpaceX IPO定價$135/股6/12掛牌NASDAQ為年度最受矚目上市案",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "SpaceX獲Google 300億美元大單IPO前夕釋重大利多",
+          "sentiment": "利多",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "apple-ai-strategy",
+      "title": "蘋果WWDC AI戰略升級",
+      "category": "科技",
+      "started": "2026-06-09",
+      "status": "進行中",
+      "direction": "中性",
+      "affect_assets": "AAPL、NVDA、GOOGL、語音助理概念股",
+      "summary": "WWDC發布新Siri升級並與Google Nvidia合作打造AI模型，華爾街反應冷淡觀望後續",
+      "last_update": "2026-06-09",
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "update": "蘋果WWDC發布新Siri升級AI戰略但華爾街不買帳",
+          "sentiment": "中性",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "蘋果與Google Nvidia合作打造最先進AI模型",
+          "sentiment": "利多",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "us-china-military-list",
+      "title": "五角大廈擴大中企軍事名單",
+      "category": "地緣",
+      "started": "2026-06-09",
+      "status": "進行中",
+      "direction": "看空",
+      "affect_assets": "BABA、百度、比亞迪、中概股ETF、港股科技股",
+      "summary": "五角大廈擴大中國軍事關聯企業名單納入阿里百度比亞迪，中概股承壓風險上升",
+      "last_update": "2026-06-09",
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "update": "五角大廈擴大軍事關聯名單納入阿里百度比亞迪",
+          "sentiment": "利空",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "china-pboc-easing",
+      "title": "人行寬鬆與房市疲軟",
+      "category": "總經",
+      "started": "2026-06-09",
+      "status": "進行中",
+      "direction": "中性",
+      "affect_assets": "A股、港股、人民幣、中國房產股、台股半導體",
+      "summary": "人行預期進一步寬鬆但房市新房跌1.5-2.5%二手跌4-5%，政策基調支撐非刺激",
+      "last_update": "2026-06-09",
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "update": "人行預期寬鬆房市新房跌1.5-2.5%二手跌4-5%政策支撐",
+          "sentiment": "中性",
+          "source_url": ""
         }
       ]
     },
@@ -6107,7 +6324,7 @@
       "status": "升溫",
       "direction": "看空",
       "affect_assets": "美債、美股、美元、黃金",
-      "summary": "非農+17.2萬10Y殖利率4.55%，JPMorgan預估2026全年不降息下次或2027Q3升息，高利率持久估值承壓",
+      "summary": "非農+17.2萬10Y破4.55%30Y破5%，更長期高利率預期強化壓制降息空間",
       "last_update": "2026-06-08",
       "timeline": [
         {
@@ -6143,134 +6360,11 @@
       ]
     },
     {
-      "id": "sp500-record-rally",
-      "title": "美股創高後急速修正",
-      "category": "總經",
-      "started": "2026-06-02",
-      "status": "升溫",
-      "direction": "看空",
-      "affect_assets": "Nasdaq、S&P500、AI雲端股、VIX、台股、亞洲科技股",
-      "summary": "Nasdaq暴跌4%VIX升21.51，SoftBank跌6%AI估值泡沫疑慮蔓延亞洲，台股法人賣超千億科技股賣壓延續",
-      "last_update": "2026-06-08",
-      "timeline": [
-        {
-          "date": "2026-06-04",
-          "update": "連九日上漲創2025-05來最長紀錄",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-04",
-          "update": "道瓊飆874點創高資金輪出科技股",
-          "sentiment": "中性",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-05",
-          "update": "亞股偏弱跟進美股AI股回檔",
-          "sentiment": "利空",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "Nasdaq暴跌4%VIX升21.51AI雲端成空頭核心台股法人賣超1094億",
-          "sentiment": "利空",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "亞洲科技股全面下挫SoftBank跌6%AI估值泡沫疑慮蔓延全球",
-          "sentiment": "利空",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "ai-chip-supply-chain",
-      "title": "AI晶片供應鏈題材",
-      "category": "科技",
-      "started": "2026-06-01",
-      "status": "進行中",
-      "direction": "中性",
-      "affect_assets": "NVDA、AVGO、MRVL、TSMC、HBM記憶體、半導體ETF",
-      "summary": "超大型雲廠capex 7500億75%投AI，估值泡沫論升溫晶片股承壓，HBM供應吃緊至2027，強基本面與修正拉鋸",
-      "last_update": "2026-06-08",
-      "timeline": [
-        {
-          "date": "2026-06-04",
-          "update": "WSTS估2026半導體市場1.51兆美元年增90%",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-05",
-          "update": "AVGO AI營收108億未上修盤後-15%引爆賣壓",
-          "sentiment": "利空",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-05",
-          "update": "晶片股單日蒸發1兆市值Nasdaq暴跌4%",
-          "sentiment": "利空",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "法人預估HBM記憶體供不應求延伸至2027年持續吃緊",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "超大型雲廠capex 7500億75%投AI但估值泡沫論升溫晶片股估值承壓",
-          "sentiment": "中性",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "opec-june-output",
-      "title": "OPEC+增產與油價走勢",
-      "category": "能源",
-      "started": "2026-06-03",
-      "status": "升溫",
-      "direction": "看多",
-      "affect_assets": "Brent、WTI、能源股、產油國資產",
-      "summary": "以色列空襲伊朗石化設施疊加OPEC控產，Brent飆近5%至97美元，能源YTD+21%領漲通膨風險驟升",
-      "last_update": "2026-06-08",
-      "timeline": [
-        {
-          "date": "2026-06-03",
-          "update": "OPEC+ 6月象徵增產18.8萬桶UAE退出",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-05",
-          "update": "WTI跌近1%至95美元三日連漲告終",
-          "sentiment": "中性",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "伊以互擊助推Brent漲3.21%至96美元能源板塊YTD+21%",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "以色列空襲伊朗石化設施Brent飆近5%能源供應衝擊進一步加劇",
-          "sentiment": "利多",
-          "source_url": ""
-        }
-      ]
-    },
-    {
       "id": "us-forced-labor-tariff",
       "title": "美擬60國強迫勞動關稅",
       "category": "貿易",
       "started": "2026-06-03",
-      "status": "升溫",
+      "status": "進行中",
       "direction": "看空",
       "affect_assets": "亞洲出口鏈、台股、日韓股、電子消費品、供應鏈ETF",
       "summary": "美對60國強迫勞動關稅提案持續推進，電子品通膨黏著，供應鏈重組壓力延續通膨預期上修",
@@ -6286,119 +6380,6 @@
           "date": "2026-06-08",
           "update": "供應鏈重組壓力持續電子消費品通膨預期上修",
           "sentiment": "利空",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "us-farm-tariff-cut",
-      "title": "美農機關稅降至15%",
-      "category": "貿易",
-      "started": "2026-06-08",
-      "status": "進行中",
-      "direction": "看多",
-      "affect_assets": "DE、農機股、工程機械股、農業ETF",
-      "summary": "美農機工程機械進口關稅由25%降至15%，6/8即日生效，直接降低製造商成本，DE等農機股大漲",
-      "last_update": "2026-06-08",
-      "timeline": [
-        {
-          "date": "2026-06-08",
-          "update": "農機工程機械進口關稅由25%降至15%即日生效DE大漲直接受益",
-          "sentiment": "利多",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "spacex-ipo",
-      "title": "SpaceX IPO掛牌倒數",
-      "category": "科技",
-      "started": "2026-06-08",
-      "status": "進行中",
-      "direction": "中性",
-      "affect_assets": "NASDAQ、私人科技股、科技ETF、競爭對手航太股",
-      "summary": "SpaceX定價$135/股6/12掛牌NASDAQ，為2026年最受矚目IPO，估值逾千億引燃私人科技股上市熱潮",
-      "last_update": "2026-06-08",
-      "timeline": [
-        {
-          "date": "2026-06-08",
-          "update": "SpaceX IPO定價$135/股6/12掛牌NASDAQ為年度最受矚目上市案",
-          "sentiment": "利多",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "ai-pc-platform-war",
-      "title": "AI PC平台競賽",
-      "category": "科技",
-      "started": "2026-06-01",
-      "status": "進行中",
-      "direction": "中性",
-      "affect_assets": "NVDA、AMD、INTC、QCOM、MSFT",
-      "summary": "MSFT發布MAI-Code-1編碼模型降低OpenAI依賴，NVDA與TSMC將AI導入晶圓廠製程",
-      "last_update": "2026-06-05",
-      "timeline": [
-        {
-          "date": "2026-06-01",
-          "update": "NVIDIA RTX Spark超晶片進軍PC AMD INTC QCOM下跌",
-          "sentiment": "中性",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-02",
-          "update": "Microsoft Build 2026揭MAI-Code-1-Flash",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-04",
-          "update": "MSFT MAI-Code-1-Flash降低OpenAI依賴",
-          "sentiment": "中性",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-05",
-          "update": "NVDA與TSMC將AI導入晶圓廠製程",
-          "sentiment": "利多",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "biopharma-ma-boom",
-      "title": "生技併購熱潮",
-      "category": "科技",
-      "started": "2026-06-04",
-      "status": "升溫",
-      "direction": "看多",
-      "affect_assets": "生技股、XBI、大型藥廠、併購標的",
-      "summary": "2026 biopharma併購已達1060億美元，全年看2500億，大型藥廠加速布局創新管線",
-      "last_update": "2026-06-04",
-      "timeline": [
-        {
-          "date": "2026-06-04",
-          "update": "2026 biopharma併購達1060億全年看2500億",
-          "sentiment": "利多",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "trump-xi-russia-ukraine",
-      "title": "Trump促習施壓普丁",
-      "category": "地緣",
-      "started": "2026-06-03",
-      "status": "落幕",
-      "direction": "中性",
-      "affect_assets": "原油、天然氣、東歐相關資產、避險商品",
-      "summary": "Trump要求習近平施壓普丁推動俄烏談判，中美斡旋格局成型，地緣不確定性升高",
-      "last_update": "2026-06-03",
-      "timeline": [
-        {
-          "date": "2026-06-03",
-          "update": "Trump要求習近平施壓普丁中美斡旋俄烏",
-          "sentiment": "中性",
           "source_url": ""
         }
       ]
