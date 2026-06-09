@@ -442,19 +442,19 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </div>
     <div class="preview-body" style="position:relative;">
       <div class="pc-date-row">
-        <span class="pc-date">SUN · MAY 10 · 2026 · TAIPEI</span>
+        <span class="pc-date" id="h-date">— · TAIPEI</span>
         <span class="pc-live"><span class="pc-live-dot"></span>LIVE</span>
       </div>
       <div class="pc-tickers">
-        <div class="pc-ticker"><div class="pc-ticker-sym">BTC</div><div class="pc-ticker-val" id="h-btc">102,840</div><div class="pc-ticker-chg tc-up" id="h-btc-c">▲ +2.31%</div></div>
-        <div class="pc-ticker"><div class="pc-ticker-sym">SPX</div><div class="pc-ticker-val" id="h-spx">5,214</div><div class="pc-ticker-chg tc-dn" id="h-spx-c">▼ −0.48%</div></div>
-        <div class="pc-ticker"><div class="pc-ticker-sym">TWX</div><div class="pc-ticker-val" id="h-twx">21,330</div><div class="pc-ticker-chg tc-up" id="h-twx-c">▲ +0.72%</div></div>
+        <div class="pc-ticker"><div class="pc-ticker-sym">BTC</div><div class="pc-ticker-val" id="h-btc">—</div><div class="pc-ticker-chg tc-up" id="h-btc-c">—</div></div>
+        <div class="pc-ticker"><div class="pc-ticker-sym">SPX</div><div class="pc-ticker-val" id="h-spx">—</div><div class="pc-ticker-chg tc-dn" id="h-spx-c">—</div></div>
+        <div class="pc-ticker"><div class="pc-ticker-sym">TWX</div><div class="pc-ticker-val" id="h-twx">—</div><div class="pc-ticker-chg tc-up" id="h-twx-c">—</div></div>
       </div>
       <div class="pc-section-label">TODAY'S BRIEF</div>
-      <div class="pc-brief-item"><span class="pc-badge b-cry">CRYPTO</span><span class="pc-brief-text">比特幣ETF單日淨流入13億美元，突破102K</span></div>
-      <div class="pc-brief-item"><span class="pc-badge b-mac">MACRO</span><span class="pc-brief-text">Fed鷹派信號，降息時間點延後至Q4</span></div>
-      <div class="pc-brief-item"><span class="pc-badge b-tw">台股</span><span class="pc-brief-text">外資連三日買超逾百億，台積電ADR+1.2%，法人上調目標價至1,050元</span></div>
-      <div class="pc-brief-item"><span class="pc-badge b-us">US EQ</span><span class="pc-brief-text">NVIDIA Q1 EPS 6.12美元超預期，法說會暗示Blackwell出貨加速</span></div>
+      <div class="pc-brief-item"><span class="pc-badge b-cry">CRYPTO</span><span class="pc-brief-text" id="h-br-cry">—</span></div>
+      <div class="pc-brief-item"><span class="pc-badge b-mac">MACRO</span><span class="pc-brief-text" id="h-br-mac">—</span></div>
+      <div class="pc-brief-item"><span class="pc-badge b-tw">台股</span><span class="pc-brief-text" id="h-br-tw">—</span></div>
+      <div class="pc-brief-item"><span class="pc-badge b-us">US EQ</span><span class="pc-brief-text" id="h-br-us">—</span></div>
     </div>
     <div class="pc-fade">
       <button class="pc-cta" onclick="window.location.href='/brief.html'">查看今日完整簡報 →</button>
@@ -471,6 +471,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <p class="comparison-sub">每日情報、機構研報、市場數據免費看；Pro 解鎖會員中心、名家視角與 AI 功能、全部歷史報告，每月再送 30 點。</p>
     </div>
 
+    <p class="comparison-sub reveal" style="margin-top:-8px;margin-bottom:18px;font-size:12.5px;color:var(--gray-400);">示範介面 · 以今日真實情報資料即時呈現</p>
+
     <!-- Side-by-side Demo -->
     <div class="demo-panels reveal">
 
@@ -486,9 +488,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <div style="margin-bottom:14px">
             <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">MARKET SNAPSHOT</div>
             <div class="free-mkt-row">
-              <div class="free-mkt-card"><div class="fmc-sym">BTC</div><div class="fmc-val">102,840</div><div class="fmc-chg tc-up">▲ +2.31%</div></div>
-              <div class="free-mkt-card"><div class="fmc-sym">SPX</div><div class="fmc-val">5,214</div><div class="fmc-chg tc-dn">▼ −0.48%</div></div>
-              <div class="free-mkt-card"><div class="fmc-sym">TWX</div><div class="fmc-val">21,330</div><div class="fmc-chg tc-up">▲ +0.72%</div></div>
+              <div class="free-mkt-card"><div class="fmc-sym">BTC</div><div class="fmc-val" id="f-btc">—</div><div class="fmc-chg tc-up" id="f-btc-c">—</div></div>
+              <div class="free-mkt-card"><div class="fmc-sym">SPX</div><div class="fmc-val" id="f-spx">—</div><div class="fmc-chg tc-dn" id="f-spx-c">—</div></div>
+              <div class="free-mkt-card"><div class="fmc-sym">TWX</div><div class="fmc-val" id="f-twx">—</div><div class="fmc-chg tc-up" id="f-twx-c">—</div></div>
             </div>
           </div>
 
@@ -497,13 +499,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
             <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">TODAY'S BRIEF</div>
             <div class="free-item">
               <span class="fi-badge b-cry">CRYPTO</span>
-              <span class="fi-text">比特幣ETF單日淨流入13億美元，突破102K關卡</span>
-              <span class="fi-sent s-bull">利多</span>
+              <span class="fi-text" id="f-br1">—</span>
+              <span class="fi-sent s-neu" id="f-br1-s">—</span>
             </div>
             <div class="free-item">
               <span class="fi-badge b-mac">MACRO</span>
-              <span class="fi-text">Fed鷹派信號，降息時間點延後至Q4</span>
-              <span class="fi-sent s-bear">利空</span>
+              <span class="fi-text" id="f-br2">—</span>
+              <span class="fi-sent s-neu" id="f-br2-s">—</span>
             </div>
           </div>
 
@@ -512,8 +514,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
             <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">機構研報 · 免費</div>
             <div class="free-item">
               <span class="fi-badge" style="background:var(--navy-50);color:var(--navy-600);">研報</span>
-              <span class="fi-text">Goldman Sachs：NVIDIA 維持買入，目標價上調至 $1,250</span>
-              <span class="fi-sent s-bull">BUY</span>
+              <span class="fi-text" id="f-res">—</span>
+              <span class="fi-sent s-bull">研報</span>
             </div>
           </div>
 
@@ -547,37 +549,37 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <!-- Full brief: 4 items -->
           <div style="margin-bottom:16px">
             <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">TODAY'S BRIEF · 完整版</div>
-            <div class="pro-item"><span class="pi-badge b-cry">CRYPTO</span><span class="pi-text">比特幣ETF單日淨流入13億美元，突破102K，鏈上清算降至3,200萬</span><span class="pi-sent s-bull" style="flex-shrink:0;margin-top:1px;">利多</span></div>
-            <div class="pro-item"><span class="pi-badge b-mac">MACRO</span><span class="pi-text">Fed鷹派信號，降息延後至Q4，DXY突破105，TLT殖利率4.52%</span><span class="pi-sent s-bear" style="flex-shrink:0;margin-top:1px;">利空</span></div>
-            <div class="pro-item"><span class="pi-badge b-tw">台股</span><span class="pi-text">外資連三日買超逾百億，台積電ADR+1.2%，法人上調目標價至1,050</span><span class="pi-sent s-bull" style="flex-shrink:0;margin-top:1px;">利多</span></div>
-            <div class="pro-item"><span class="pi-badge b-us">US EQ</span><span class="pi-text">NVDA Q1 EPS 6.12美元，Blackwell出貨加速，下季指引280億美元</span><span class="pi-sent s-bull" style="flex-shrink:0;margin-top:1px;">利多</span></div>
+            <div class="pro-item"><span class="pi-badge b-cry">CRYPTO</span><span class="pi-text" id="p-br1">—</span><span class="pi-sent s-neu" id="p-br1-s" style="flex-shrink:0;margin-top:1px;">—</span></div>
+            <div class="pro-item"><span class="pi-badge b-mac">MACRO</span><span class="pi-text" id="p-br2">—</span><span class="pi-sent s-neu" id="p-br2-s" style="flex-shrink:0;margin-top:1px;">—</span></div>
+            <div class="pro-item"><span class="pi-badge b-tw">台股</span><span class="pi-text" id="p-br3">—</span><span class="pi-sent s-neu" id="p-br3-s" style="flex-shrink:0;margin-top:1px;">—</span></div>
+            <div class="pro-item"><span class="pi-badge b-us">US EQ</span><span class="pi-text" id="p-br4">—</span><span class="pi-sent s-neu" id="p-br4-s" style="flex-shrink:0;margin-top:1px;">—</span></div>
           </div>
 
           <!-- Research cards -->
           <div style="margin-bottom:14px">
             <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">機構研報</div>
             <div class="pro-research-card">
-              <div class="prc-firm">GOLDMAN SACHS</div>
-              <div class="prc-title">NVIDIA：AI基礎設施超級週期仍在早期，維持買入</div>
-              <div class="prc-meta"><span class="prc-tag prc-rating-up">BUY</span><span class="prc-target">目標價 $1,100 → $1,250</span></div>
+              <div class="prc-firm" id="p-r1-firm">—</div>
+              <div class="prc-title" id="p-r1-title">—</div>
+              <div class="prc-meta"><span class="prc-tag prc-rating-up" id="p-r1-rate">—</span><span class="prc-target" id="p-r1-tgt">—</span></div>
             </div>
             <div class="pro-research-card">
-              <div class="prc-firm">MORGAN STANLEY</div>
-              <div class="prc-title">台積電：CoWoS產能滿載至2026Q2，上調評級至超配</div>
-              <div class="prc-meta"><span class="prc-tag prc-rating-up">OW</span><span class="prc-target">目標價 NT$1,050</span></div>
+              <div class="prc-firm" id="p-r2-firm">—</div>
+              <div class="prc-title" id="p-r2-title">—</div>
+              <div class="prc-meta"><span class="prc-tag prc-rating-up" id="p-r2-rate">—</span><span class="prc-target" id="p-r2-tgt">—</span></div>
             </div>
           </div>
 
           <!-- Earnings EPS -->
           <div style="margin-bottom:14px">
             <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">財報 EPS 對比</div>
-            <div class="pro-earnings-row"><div class="per-left"><span class="per-ticker">NVDA</span><span class="per-name">NVIDIA</span></div><div class="per-right"><span class="per-eps">EPS 6.12 vs 預期 5.58</span><span class="per-beat beat-yes">Beat ↑10%</span></div></div>
-            <div class="pro-earnings-row"><div class="per-left"><span class="per-ticker">WMT</span><span class="per-name">Walmart</span></div><div class="per-right"><span class="per-eps">EPS 0.61 vs 預期 0.64</span><span class="per-beat beat-no">Miss ↓5%</span></div></div>
+            <div class="pro-earnings-row"><div class="per-left"><span class="per-ticker" id="p-e1-tk">—</span><span class="per-name" id="p-e1-nm">—</span></div><div class="per-right"><span class="per-eps" id="p-e1-eps">—</span><span class="per-beat beat-yes" id="p-e1-b">—</span></div></div>
+            <div class="pro-earnings-row"><div class="per-left"><span class="per-ticker" id="p-e2-tk">—</span><span class="per-name" id="p-e2-nm">—</span></div><div class="per-right"><span class="per-eps" id="p-e2-eps">—</span><span class="per-beat beat-yes" id="p-e2-b">—</span></div></div>
           </div>
 
           <!-- AI 推演沙盤 -->
           <div>
-            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">AI 推演沙盤</div>
+            <div style="font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.08em;font-family:var(--font-en);margin-bottom:8px;">AI 推演沙盤 <span style="color:rgba(255,255,255,.25);font-weight:500;">· 示意</span></div>
             <div class="pro-target-card" style="padding:10px 12px;">
               <div style="font-size:10.5px;color:rgba(255,255,255,.45);font-family:var(--font-zh);margin-bottom:8px;">「Fed 若6月升息，NVDA 怎麼走？」</div>
               <div style="display:flex;flex-direction:column;gap:5px;">
@@ -597,7 +599,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
                 </div>
                 <div style="background:rgba(255,255,255,.08);border-radius:3px;height:4px;overflow:hidden;"><div style="width:20%;height:100%;background:#fbbf24;border-radius:3px;"></div></div>
               </div>
-              <div style="margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,255,255,.08);font-size:9.5px;color:rgba(255,255,255,.3);font-family:var(--font-en);">驗證日 2026-06-15 · 加權預期 −3.2%</div>
+              <div style="margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,255,255,.08);font-size:9.5px;color:rgba(255,255,255,.3);font-family:var(--font-zh);">示意畫面 · 實際分析依當日 AI 推演結果產生</div>
             </div>
           </div>
 
@@ -681,7 +683,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <span class="plan-price-num">9.99</span>
           <span class="plan-price-period">/ 月</span>
         </div>
-        <p class="plan-tagline">每月 30 點 + 完整歷史報告<br>首月免費試用</p>
+        <p class="plan-tagline">每月 30 點 + 完整歷史報告<br>付款功能即將開放</p>
         <ul class="plan-feats">
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">包含所有免費功能</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">每月 30 訂閱點數（AI 分析 / 推演沙盤）</span></li>
@@ -755,7 +757,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           先以訪客身份瀏覽
         </button>
-        <p class="m-fn">建立帳號即表示同意服務條款。Pro 方案 USD $9.99 / 月、首月免費試用，付款功能即將開放。</p>
+        <p class="m-fn">建立帳號即表示同意服務條款。Pro 方案 USD $9.99 / 月，付款功能即將開放。</p>
       </div>
     </div>
   </div>
@@ -795,7 +797,66 @@ async function loadRealTickers(){
     if(spx)setTicker('h-spx','h-spx-c',spx.value,spx.change,spx.dir);
     const twx=(d.tickers||[]).find(t=>t.label==='台股加權');
     if(twx)setTicker('h-twx','h-twx-c',twx.value,twx.change,twx.dir);
+
+    /* hero 日期 */
+    if(d.date){
+      const dt=new Date(d.date+'T00:00:00');
+      const dys=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+      const mos=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      const he=document.getElementById('h-date');
+      if(he)he.textContent=dys[dt.getDay()]+' · '+mos[dt.getMonth()]+' '+String(dt.getDate()).padStart(2,'0')+' · '+dt.getFullYear()+' · TAIPEI';
+    }
+    const setTxt=(id,v)=>{const e=document.getElementById(id);if(e&&v)e.textContent=v;};
+    /* hero brief 四則 — 真實資料 */
+    setTxt('h-br-cry',((d.market?.crypto_news||[])[0]||{}).text);
+    setTxt('h-br-mac',((d.macro||[])[0]||{}).text);
+    setTxt('h-br-tw',((d.market?.tw_news||[])[0]||{}).text);
+    setTxt('h-br-us',((d.market?.us_news||[])[0]||{}).text);
+
+    populateDemo(d);
   }catch(e){console.log('ticker load failed',e);}
+}
+
+/* 示範面板：以今日真實 daily.json 資料填入 */
+function populateDemo(d){
+  const setTxt=(id,v)=>{const e=document.getElementById(id);if(e&&v!=null)e.textContent=v;};
+  const sentClass=s=>/利空|偏空|看空/.test(s||'')?'s-bear':(/利多|利好|偏多|看多/.test(s||'')?'s-bull':'s-neu');
+  const sentLabel=s=>/利空|偏空|看空/.test(s||'')?'利空':(/利多|利好|偏多|看多/.test(s||'')?'利多':'中性');
+  const setSent=(id,s)=>{const e=document.getElementById(id);if(!e)return;e.textContent=sentLabel(s);e.className=e.className.replace(/s-(bull|bear|neu)/g,'').trim()+' '+sentClass(s);};
+  const tickers=d.tickers||[], crypto=d.market?.crypto||[];
+  const cn=d.market?.crypto_news||[], mc=d.macro||[], tn=d.market?.tw_news||[], un=d.market?.us_news||[];
+  const res=d.institutional?.research||[], earn=d.institutional?.earnings||[];
+
+  /* FREE 市場快照 */
+  const btc=crypto.find(c=>c.symbol==='BTC');
+  if(btc)setTxt('f-btc',btc.price.replace('$',''));
+  const spx=tickers.find(t=>t.label==='S&P 500'); if(spx)setTxt('f-spx',spx.value);
+  const twx=tickers.find(t=>t.label==='台股加權'); if(twx)setTxt('f-twx',twx.value);
+  const setChg=(id,chg,dir)=>{const e=document.getElementById(id);if(!e)return;const up=dir==='up';e.className='fmc-chg '+(up?'tc-up':'tc-dn');e.textContent=(up?'▲ +':'▼ -')+(chg||'').replace(/^[+-]/,'').replace('%','')+'%';};
+  if(btc)setChg('f-btc-c',btc.change,btc.dir);
+  if(spx)setChg('f-spx-c',spx.change,spx.dir);
+  if(twx)setChg('f-twx-c',twx.change,twx.dir);
+
+  /* FREE brief 2 則 + 研報 1 則 */
+  setTxt('f-br1',(cn[0]||{}).text); setSent('f-br1-s',(cn[0]||{}).sentiment);
+  setTxt('f-br2',(mc[0]||{}).text); setSent('f-br2-s',(mc[0]||{}).sentiment);
+  if(res[0])setTxt('f-res',res[0].firm+'：'+res[0].name+' '+res[0].rating+'，目標價 '+res[0].target);
+
+  /* PRO brief 4 則 */
+  setTxt('p-br1',(cn[0]||{}).text); setSent('p-br1-s',(cn[0]||{}).sentiment);
+  setTxt('p-br2',(mc[0]||{}).text); setSent('p-br2-s',(mc[0]||{}).sentiment);
+  setTxt('p-br3',(tn[0]||{}).text); setSent('p-br3-s',(tn[0]||{}).sentiment);
+  setTxt('p-br4',(un[0]||{}).text); setSent('p-br4-s',(un[0]||{}).sentiment);
+
+  /* PRO 研報 2 張 */
+  const fillRes=(i,fId,tId,rId,gId)=>{const r=res[i];if(!r)return;setTxt(fId,r.firm.toUpperCase());setTxt(tId,r.name+'：'+(r.note||r.core_logic||''));const rt=document.getElementById(rId);if(rt){rt.textContent=r.rating;rt.className='prc-tag '+(r.rating_type==='buy'||r.rating_type==='outperform'?'prc-rating-up':'prc-rating-dn');}setTxt(gId,'目標價 '+(r.prev_target?r.prev_target+' → ':'')+r.target);};
+  fillRes(0,'p-r1-firm','p-r1-title','p-r1-rate','p-r1-tgt');
+  fillRes(1,'p-r2-firm','p-r2-title','p-r2-rate','p-r2-tgt');
+
+  /* PRO 財報 2 列 */
+  const fillEarn=(i,tkId,nmId,epsId,bId)=>{const e=earn[i];if(!e)return;setTxt(tkId,e.ticker);setTxt(nmId,e.name);setTxt(epsId,'EPS '+e.eps+' vs 預期 '+e.eps_est);const b=document.getElementById(bId);if(b){const beat=e.eps_result==='beat';b.textContent=(beat?'Beat ↑':'Miss ↓')+(e.eps_surprise||'');b.className='per-beat '+(beat?'beat-yes':'beat-no');}};
+  fillEarn(0,'p-e1-tk','p-e1-nm','p-e1-eps','p-e1-b');
+  fillEarn(1,'p-e2-tk','p-e2-nm','p-e2-eps','p-e2-b');
 }
 loadRealTickers();
 
