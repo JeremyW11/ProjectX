@@ -407,7 +407,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       </svg>
     </a>
   </div>
-  <div class="topbar-actions">
+  <div class="topbar-actions" id="topbar-actions">
     <button class="btn-ghost" onclick="openModal('login')">登入</button>
     <button class="btn-primary" onclick="openModal('signup')">免費開始 →</button>
   </div>
@@ -1003,6 +1003,34 @@ async function doSignup(){
 }
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+/* 頁首登入狀態：已登入時把「登入／免費開始」換成 名稱＋進入總覽＋登出 */
+(function(){
+  var box=document.getElementById('topbar-actions');
+  if(!box) return;
+  var guestHTML=box.innerHTML;
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function renderUser(name){
+    box.innerHTML=
+      '<span style="font-size:13px;font-weight:600;color:var(--navy-800);font-family:var(--font-zh);white-space:nowrap;">嗨，'+esc(name)+'</span>'
+      +'<button class="btn-primary" onclick="window.location.href=\'/brief.html\'">進入總覽 →</button>'
+      +'<button class="btn-ghost" id="px-signout">登出</button>';
+    var so=document.getElementById('px-signout');
+    if(so) so.onclick=function(){ _sb.auth.signOut().then(function(){ window.location.reload(); }); };
+  }
+  function apply(session){
+    if(session&&session.user){
+      var u=session.user;
+      var nm=(u.user_metadata&&u.user_metadata.display_name)||(u.email?u.email.split('@')[0]:'會員');
+      renderUser(nm);
+      _sb.from('profiles').select('display_name').eq('id',u.id).single().then(function(r){
+        if(r&&r.data&&r.data.display_name) renderUser(r.data.display_name);
+      });
+    } else { box.innerHTML=guestHTML; }
+  }
+  _sb.auth.getSession().then(function(res){ apply(res&&res.data?res.data.session:null); });
+  _sb.auth.onAuthStateChange(function(ev,session){ apply(session); });
+})();
 </script>
 <script src="/js/support.js"></script>
 <script src="/shared/nav.js"></script>
