@@ -329,7 +329,7 @@ async function signIn(){
     btn.disabled=false;btn.textContent='登入';
   }else{
     showMsg('login-msg','登入成功！跳轉中...','success');
-    setTimeout(function(){window.location.href='/pages/targets.html';},1000);
+    setTimeout(function(){window.location.href=(window.PX_postAuthDest?window.PX_postAuthDest():'/brief.html');},1000);
   }
 }
 
@@ -410,7 +410,7 @@ async function submitNewPassword(){
     btn.disabled=false;btn.textContent='更新密碼';
   }else{
     showMsg('reset-msg','✅ 密碼已更新，跳轉中...','success');
-    setTimeout(function(){window.location.href='/pages/targets.html';},1200);
+    setTimeout(function(){window.location.href=(window.PX_postAuthDest?window.PX_postAuthDest():'/brief.html');},1200);
   }
 }
 

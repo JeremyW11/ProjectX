@@ -816,6 +816,7 @@ async function loadCalendarData(){
 
   } catch(e){
     console.error('calendar loadData error',e);
+    if(window.PX_showDataError)window.PX_showDataError();
     var tl = document.getElementById('timeline');
     if(tl) tl.innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--gray-400);font-size:13px;font-family:var(--font-zh);">資料載入失敗，請重新整理</div>';
   }

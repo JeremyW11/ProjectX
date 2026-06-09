@@ -979,7 +979,7 @@ async function doLogin(){
     showMsg('l-msg','登入失敗：'+r.error.message);
     return;
   }
-  window.location.href='/pages/targets.html';
+  window.location.href=(window.PX_postAuthDest?window.PX_postAuthDest():'/brief.html');
 }
 
 async function doSignup(){

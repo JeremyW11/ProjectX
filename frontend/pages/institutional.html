@@ -867,7 +867,7 @@ async function loadData(){
       }).join('');
     }
 
-  }catch(e){console.error('loadData error:',e);}
+  }catch(e){console.error('loadData error:',e);if(window.PX_showDataError)window.PX_showDataError();}
 }
 loadData();
 </script>

@@ -183,7 +183,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div class="topbar-sep"></div>
   <nav class="header-nav" data-active="credits"></nav>
   <div class="topbar-right">
-    <a href="/pages/targets.html" class="btn-back">← 返回看板</a>
+    <a href="/pages/targets.html" id="credits-back" class="btn-back">← 返回看板</a>
   </div>
 </div>
 
@@ -543,6 +543,18 @@ function setupBuyButtons(email){
 }
 
 initCreditsPage();
+
+// 升級頁的返回鈕：若帶 ?next= 則回到使用者剛才的頁面，否則回看板。
+(function(){
+  var raw=null;
+  try{ raw=new URLSearchParams(location.search).get('next'); }catch(e){}
+  if(raw){ try{ raw=decodeURIComponent(raw); }catch(e){} }
+  var ok=raw&&raw.charAt(0)==='/'&&raw.charAt(1)!=='/'&&!/login\.html/.test(raw);
+  if(ok){
+    var b=document.getElementById('credits-back');
+    if(b){ b.setAttribute('href',raw); b.textContent='← 返回上一頁'; }
+  }
+})();
 </script>
 <script src="/shared/nav.js"></script>
 <script src="/shared/footer.js"></script>

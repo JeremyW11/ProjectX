@@ -57,3 +57,67 @@
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',build);
   else build();
 })();
+
+// ── 全站共用：登入/升級回跳（?next=）與資料載入錯誤橫幅 ──
+// footer.js 幾乎在每頁載入（含 login/index），故集中於此維護，避免各頁重複又漂移。
+(function(){
+  // 僅接受站內相對路徑（/ 開頭、非 //），且不可指回登入頁，避免 open redirect 與回圈。
+  function safeNext(raw){
+    if(!raw) return '';
+    try{ raw=decodeURIComponent(raw); }catch(e){}
+    if(raw.charAt(0)!=='/'||raw.charAt(1)==='/') return '';
+    if(/login\.html/.test(raw)) return '';
+    return raw;
+  }
+  function currentAsNext(){
+    return encodeURIComponent(location.pathname+location.search);
+  }
+  // 登入/註冊成功後的去處：優先 ?next=，否則回總覽。
+  window.PX_postAuthDest=function(){
+    var p=null;
+    try{ p=new URLSearchParams(location.search).get('next'); }catch(e){}
+    return safeNext(p)||'/brief.html';
+  };
+
+  // 把當前頁夾帶進站內所有 login / credits 連結（含 onclick 版），讓回跳成立。
+  function injectNext(){
+    var onCredits=/credits\.html/.test(location.pathname);
+    var onLogin=/login\.html/.test(location.pathname);
+    var nx=currentAsNext();
+    function appendHref(a){
+      var h=a.getAttribute('href'); if(!h) return;
+      if(/[?&]next=/.test(h)) return;
+      a.setAttribute('href',h+(h.indexOf('?')>=0?'&':'?')+'next='+nx);
+    }
+    if(!onLogin){
+      document.querySelectorAll('a[href*="login.html"]').forEach(appendHref);
+    }
+    if(!onCredits){
+      document.querySelectorAll('a[href*="credits.html"]').forEach(appendHref);
+      // onclick="...credits.html..." 改用事件監聽帶上 next（靜態鎖點按鈕）。
+      document.querySelectorAll('[onclick*="credits.html"]').forEach(function(el){
+        el.removeAttribute('onclick');
+        el.style.cursor='pointer';
+        el.addEventListener('click',function(e){
+          e.preventDefault();
+          window.location.href='/pages/credits.html?next='+nx;
+        });
+      });
+    }
+  }
+
+  // 資料抓取失敗時：明確標示下方為示意內容，不讓靜態 fallback 假冒真資料。
+  window.PX_showDataError=function(msg){
+    if(document.getElementById('px-data-error')) return;
+    var bar=document.createElement('div');
+    bar.id='px-data-error';
+    bar.textContent=msg||'⚠ 今日資料載入失敗，下方為示意內容，請稍後重新整理。';
+    bar.style.cssText='position:sticky;top:56px;z-index:90;background:#fef3c7;color:#92400e;'
+      +'border-bottom:1px solid #fcd34d;font:600 13px/1.5 "Noto Sans TC",sans-serif;'
+      +'padding:10px 16px;text-align:center;';
+    document.body.insertBefore(bar,document.body.firstChild);
+  };
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',injectNext);
+  else injectNext();
+})();

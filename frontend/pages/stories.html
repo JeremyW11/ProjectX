@@ -216,7 +216,7 @@ async function loadStories(){
     var res=await fetch('/data/accumulated.json?t='+Date.now());
     var acc=await res.json();
     stories=Array.isArray(acc.tracked_stories)?acc.tracked_stories:[];
-  }catch(e){ stories=[]; }
+  }catch(e){ stories=[]; if(window.PX_showDataError)window.PX_showDataError('⚠ 追蹤資料載入失敗，請稍後重新整理。'); }
 
   // 進行中優先，落幕殿後；各自依最新更新排序
   stories.sort(function(a,b){

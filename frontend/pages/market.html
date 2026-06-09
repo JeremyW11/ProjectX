@@ -796,7 +796,7 @@ async function loadData(){
       cBias.textContent=cb;cBias.className='sent-chip '+ccls;
     }
 
-  }catch(e){console.error('loadData error:',e);}
+  }catch(e){console.error('loadData error:',e);if(window.PX_showDataError)window.PX_showDataError();}
 }
 loadData();
 </script>

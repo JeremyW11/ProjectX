@@ -1269,7 +1269,7 @@ async function loadData() {
       if (personsHtml) { personsEl.innerHTML = personsHtml; personsCard.style.display = 'block'; }
       else personsCard.style.display = 'none';
     }
-  } catch(e) { console.error('loadData error:', e); }
+  } catch(e) { console.error('loadData error:', e); if(window.PX_showDataError)window.PX_showDataError(); }
 }
 
 document.getElementById('brief-list').addEventListener('click', function(e){
