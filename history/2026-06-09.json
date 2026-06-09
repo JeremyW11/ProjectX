@@ -1,0 +1,2015 @@
+{
+  "date": "2026-06-09",
+  "tickers": [
+    {
+      "label": "BTC / USD",
+      "value": "$62,763",
+      "change": "-0.11%",
+      "dir": "down",
+      "_source": "coingecko"
+    },
+    {
+      "label": "ETH / USD",
+      "value": "$1,670.05",
+      "change": "-0.35%",
+      "dir": "down",
+      "_source": "coingecko"
+    },
+    {
+      "label": "S&P 500",
+      "value": "7,405.73",
+      "change": "-2.35%",
+      "dir": "down",
+      "_source": "yahoo_gspc"
+    },
+    {
+      "label": "NASDAQ",
+      "value": "25,929.66",
+      "change": "-3.36%",
+      "dir": "down",
+      "_source": "yahoo_ixic"
+    },
+    {
+      "label": "台股加權",
+      "value": "44,017.56",
+      "change": "+1.18%",
+      "dir": "up",
+      "_source": "yahoo_twii"
+    },
+    {
+      "label": "Brent 原油",
+      "value": "$93.95",
+      "change": "-0.32%",
+      "dir": "down",
+      "_source": "yahoo_oil"
+    }
+  ],
+  "macro": [
+    {
+      "tag": "中東停火",
+      "type": "macro",
+      "text": "伊朗宣布停止對以色列軍事行動川普表示樂觀",
+      "time": "2026-06-08",
+      "impact": "能源溢酬與公債殖利率同步回落",
+      "expand_analysis": "原油自119美元高點回落至94美元降幅21%減輕通膨黏著壓力VIX由高點回落至18中性區間市場風險偏好短期回暖但以色列總理稱戰爭未結束需持續觀察",
+      "expand_impact_pos": "消費股航空股進口商",
+      "expand_impact_neg": "能源股軍工股",
+      "expand_tickers": "XLE XOM CVX UAL DAL",
+      "expand_action": "能源股獲利了結航空股逢低布局",
+      "expand_watch": "後續談判進展胡塞武裝紅海威脅"
+    },
+    {
+      "tag": "Fed利率",
+      "type": "macro",
+      "text": "5月非農+17.2萬人殖利率10Y破4.55%30Y破5%",
+      "time": "2026-06-05",
+      "impact": "強化更長期高利率預期壓制降息空間",
+      "expand_analysis": "就業數據遠優預期Fed主席Warsh鷹派立場確認市場預期2026全年按兵不動首次升息最早2027Q3高收益利差253bp為歷史低點信用風險溢酬被壓縮",
+      "expand_impact_pos": "銀行股美元資產",
+      "expand_impact_neg": "高估值成長股REITs",
+      "expand_tickers": "JPM BAC XLF TLT QQQ",
+      "expand_action": "成長股高位減碼金融股逢低承接",
+      "expand_watch": "6/10美國CPI數據6/16FOMC會議"
+    },
+    {
+      "tag": "中國寬鬆",
+      "type": "macro",
+      "text": "人行預期進一步寬鬆房市新房跌1.5-2.5%二手跌4-5%",
+      "time": "2026-06-08",
+      "impact": "政策基調支撐非刺激對台股半導體出口中性壓力",
+      "expand_analysis": "中國房市持續下修消費信心疲弱對台灣出口依賴中國的傳產族群形成壓力但AI伺服器需求獨立於中國內需半導體先進製程影響有限",
+      "expand_impact_pos": "內需防禦股黃金",
+      "expand_impact_neg": "中國概念股傳產出口",
+      "expand_tickers": "2883 1301 FXI GLD",
+      "expand_action": "減持中國曝險高個股",
+      "expand_watch": "人行降準時點中國PMI數據"
+    }
+  ],
+  "industry": [
+    {
+      "tag": "半導體",
+      "type": "AI晶片",
+      "text": "Broadcom法說未上調AI長期展望觸發晶片股崩跌",
+      "time": "2026-06-04",
+      "impact": "Nasdaq單日跌4.18%創年內最大跌幅",
+      "expand_analysis": "AVGO財報超預期但FY26/27展望不變市場解讀AI需求成長速度放緩Micron跌13%MRVL跌16%NVDA承壓但6/8反彈2%後6/9再跌4.58%去槓桿過程未完",
+      "expand_impact_pos": "現金防禦ETF",
+      "expand_impact_neg": "半導體ETF高估值AI股",
+      "expand_tickers": "AVGO MU MRVL NVDA SMH",
+      "expand_action": "分批承接優質標的勿追高",
+      "expand_watch": "TSMC下半年3nm漲價幅度"
+    },
+    {
+      "tag": "AI基建",
+      "type": "雲端",
+      "text": "超大型雲廠商2026年capex合計逾7500億美元75%用於AI",
+      "time": "2026-06-05",
+      "impact": "AI基礎設施估值上修50%以上",
+      "expand_analysis": "Oracle宣布導入5萬張AMD MI450 GPU capex達收入76%Alphabet尋求850億外部融資TSMC capex 520-560億支撐先進製程供應鏈瓶頸在封裝非晶片製造",
+      "expand_impact_pos": "ASIC設計IP授權封裝測試",
+      "expand_impact_neg": "傳統資料中心舊製程",
+      "expand_tickers": "ORCL GOOGL TSM 3711",
+      "expand_action": "聚焦CoWoS先進封裝供應鏈",
+      "expand_watch": "HBM產能擴張時程"
+    },
+    {
+      "tag": "記憶體",
+      "type": "HBM",
+      "text": "SK Hynix與Micron 2026年HBM產能全數售罄延伸至2027",
+      "time": "2026-06-04",
+      "impact": "供需缺口支撐記憶體價格",
+      "expand_analysis": "AI伺服器HBM需求量較一般伺服器高3-5倍TSMC CoWoS先進封裝需求產能缺口達20-30%DRAM/NAND同步受益記憶體族群技術超賣後具反彈空間",
+      "expand_impact_pos": "記憶體股封裝設備",
+      "expand_impact_neg": "NAND消費端需求疲弱",
+      "expand_tickers": "MU 000660.KS 2408",
+      "expand_action": "記憶體族群分批布局",
+      "expand_watch": "DRAM合約價走勢"
+    },
+    {
+      "tag": "航運",
+      "type": "貨櫃",
+      "text": "貨櫃三雄Q2獲利看俏美國線6/15前調漲運價",
+      "time": "2026-06-08",
+      "impact": "資金輪動承接航運族群",
+      "expand_analysis": "長榮陽明萬海同步走強美西美東航線報價上調胡塞武裝威脅紅海航運持續繞道好望角運價支撐長榮航孫嘉明任IATA理事產業地位提升",
+      "expand_impact_pos": "貨櫃航運散裝航運",
+      "expand_impact_neg": "進口商航空貨運",
+      "expand_tickers": "2603 2609 2615 ZIM",
+      "expand_action": "航運股逢回買進",
+      "expand_watch": "紅海局勢運價指數"
+    },
+    {
+      "tag": "生技",
+      "type": "醫療",
+      "text": "ASCO年會Revolution胰腺癌新藥數據轟動Lilly GLP-1展示近手術效果",
+      "time": "2026-06-07",
+      "impact": "肥胖糖尿病治療市場擴大",
+      "expand_analysis": "Eli Lilly一週內宣布4項新交易含3項疫苗領域次世代GLP-1平台商業化加速CicadaBio雙通路數據顯示強健減重與保留瘦體重個人化治療為下一波主題",
+      "expand_impact_pos": "GLP-1龍頭生技新創",
+      "expand_impact_neg": "傳統減重手術器械",
+      "expand_tickers": "LLY NVO RVMD",
+      "expand_action": "生技ETF長期配置",
+      "expand_watch": "FDA審批進度"
+    }
+  ],
+  "persons": [
+    {
+      "initials": "DT",
+      "name": "Donald Trump",
+      "title": "美國總統",
+      "note": "公開表示對伊朗協議樂觀推動中東緩解",
+      "expand_watch": "後續談判態度對以色列壓力"
+    },
+    {
+      "initials": "KW",
+      "name": "Kevin Warsh",
+      "title": "Fed主席",
+      "note": "強調通膨仍高於目標市場解讀鷹派底色",
+      "expand_watch": "6/18FOMC記者會措辭"
+    },
+    {
+      "initials": "JH",
+      "name": "Jensen Huang",
+      "title": "NVIDIA CEO",
+      "note": "與韓國LG合作開發人形機器人喊撿便宜時機",
+      "expand_watch": "Blackwell出貨進度"
+    },
+    {
+      "initials": "HT",
+      "name": "Hock Tan",
+      "title": "Broadcom CEO",
+      "note": "法說會維持AI展望不變觸發晶片股崩跌",
+      "expand_watch": "ASIC設計贏單兌現時程"
+    }
+  ],
+  "signals": [
+    {
+      "name": "半導體",
+      "signal": "watch",
+      "label": "觀察",
+      "reason": "技術超賣但籌碼未穩"
+    },
+    {
+      "name": "航運",
+      "signal": "bull",
+      "label": "看多",
+      "reason": "運價上調資金輪動"
+    },
+    {
+      "name": "金融",
+      "signal": "bull",
+      "label": "看多",
+      "reason": "高利率環境股息題材"
+    },
+    {
+      "name": "能源",
+      "signal": "bear",
+      "label": "看空",
+      "reason": "中東緩解油價回落"
+    },
+    {
+      "name": "加密貨幣",
+      "signal": "bear",
+      "label": "看空",
+      "reason": "極度恐懼ETF持續流出"
+    }
+  ],
+  "market": {
+    "crypto": [
+      {
+        "symbol": "BTC",
+        "name": "Bitcoin",
+        "price": "$62,763",
+        "change": "-0.11%",
+        "dir": "down",
+        "high": "$64,156",
+        "low": "$62,461",
+        "market_cap": "$1.26T",
+        "volume": "$34.93B",
+        "signal": "bear",
+        "signal_label": "看空",
+        "support": "$60,000 / $53,000",
+        "resistance": "$66,000 / $74,000",
+        "tech_note": "RSI一度低至21.8技術超賣反彈",
+        "watch_note": "ETF連12日流出累計35.8億美元",
+        "_source": "coingecko"
+      },
+      {
+        "symbol": "ETH",
+        "name": "Ethereum",
+        "price": "$1,670.05",
+        "change": "-0.35%",
+        "dir": "down",
+        "high": "$1,712.73",
+        "low": "$1,647.32",
+        "market_cap": "$201.60B",
+        "volume": "$17.19B",
+        "signal": "bear",
+        "signal_label": "看空",
+        "support": "$1,550",
+        "resistance": "$1,800",
+        "tech_note": "跟隨BTC弱勢整理",
+        "watch_note": "Layer2生態發展",
+        "_source": "coingecko"
+      },
+      {
+        "symbol": "SOL",
+        "name": "Solana",
+        "price": "$65.79",
+        "change": "+0.37%",
+        "dir": "up",
+        "high": "$67.92",
+        "low": "$65.09",
+        "market_cap": "$38.12B",
+        "volume": "$3.30B",
+        "signal": "watch",
+        "signal_label": "觀察",
+        "support": "$60",
+        "resistance": "$75",
+        "tech_note": "相對抗跌小幅反彈",
+        "watch_note": "生態TVL變化",
+        "_source": "coingecko"
+      }
+    ],
+    "crypto_news": [
+      {
+        "text": "BTC跌破6萬美元後反彈空頭清算達3.2億美元",
+        "source": "Investing.com",
+        "sentiment": "中性",
+        "body": "週末BTC一度跌破60000美元觸發空頭大規模清算達3.2億美元RSI低至21.8技術超賣後反彈至63000美元以上但資金費率持續偏負顯示去槓桿過程未完全結束",
+        "tickers": [
+          "BTC"
+        ],
+        "time": "2026-06-08"
+      },
+      {
+        "text": "加密Fear & Greed指數維持10極度恐懼較昨日+2",
+        "source": "alternative.me",
+        "sentiment": "利空",
+        "body": "加密市場恐懼指數維持在10的極度恐懼區間較前日小幅回升2點但整體空頭情緒持續主導市場投資人風險偏好極低觀望氣氛濃厚",
+        "tickers": [
+          "BTC",
+          "ETH"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "BTC多空比1.86多方65%但資金費率-0.003%顯示空頭積極",
+        "source": "Binance",
+        "sentiment": "利空",
+        "body": "Binance數據顯示BTC多空比1.86表面多方佔優但永續合約資金費率持續為負-0.0030%顯示空頭實際持倉更為積極市場結構偏空",
+        "tickers": [
+          "BTC"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "加密ETF連續12日淨流出累計35.8億美元單日5.2億",
+        "source": "CoinGlass",
+        "sentiment": "利空",
+        "body": "比特幣現貨ETF連續12個交易日淨流出累計達35.8億美元6月5日單日流出5.2億美元機構資金持續撤離中東緩解後風險偏好略回暖但整體空頭格局維持6週以上",
+        "tickers": [
+          "BTC",
+          "IBIT",
+          "FBTC"
+        ],
+        "time": "2026-06-05"
+      },
+      {
+        "text": "BTC能跌多低分析師稱53000為關鍵支撐",
+        "source": "Motley Fool",
+        "sentiment": "利空",
+        "body": "分析師指出若BTC失守60000美元支撐下一個關鍵支撐位在53000美元附近為前波整理平台目前技術面超賣但籌碼面未見明顯止穩跡象",
+        "tickers": [
+          "BTC"
+        ],
+        "time": "2026-06-08"
+      },
+      {
+        "text": "韓股熔斷後強彈KOSPI漲4.9%三星漲5%海力士漲7.8%",
+        "source": "鉅亨網",
+        "sentiment": "利多",
+        "body": "韓國股市觸發熔斷機制後強勁反彈KOSPI指數大漲4.9%三星電子漲5%SK海力士漲7.8%帶動亞洲科技股情緒回暖加密市場連動效應有限",
+        "tickers": [
+          "BTC",
+          "ETH"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "OpenAI秘密提交IPO申請準備華爾街AI首秀",
+        "source": "CNBC",
+        "sentiment": "中性",
+        "body": "OpenAI已秘密向SEC提交IPO申請為AI產業最受矚目的上市案之一若成功上市將為AI賽道估值提供重要參考對加密AI代幣板塊具間接影響",
+        "tickers": [
+          "BTC",
+          "ETH"
+        ],
+        "time": "2026-06-08"
+      },
+      {
+        "text": "川普提議讓美國人持有AI股權加密社群關注政策走向",
+        "source": "BeInCrypto",
+        "sentiment": "中性",
+        "body": "川普浮議讓美國民眾持有AI相關股權引發市場討論加密社群關注此政策是否延伸至數位資產領域目前尚無具體細節但顯示政府對新興科技資產的態度",
+        "tickers": [
+          "BTC"
+        ],
+        "time": "2026-06-08"
+      },
+      {
+        "text": "Perplexity CEO稱2028年IPO計畫不受OpenAI影響",
+        "source": "CNBC",
+        "sentiment": "中性",
+        "body": "AI搜尋新創Perplexity執行長表示公司計畫2028年IPO不受Anthropic或OpenAI上市進程影響AI產業IPO潮將持續為科技與加密市場帶來資金競爭",
+        "tickers": [
+          "BTC"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "美國家庭財務擔憂升至2022年7月以來最高",
+        "source": "CNBC",
+        "sentiment": "利空",
+        "body": "紐約聯儲調查顯示美國家庭對財務狀況的擔憂升至2022年7月以來最高水平反映通膨與高利率對消費者信心的壓制風險資產包括加密貨幣承壓",
+        "tickers": [
+          "BTC",
+          "ETH"
+        ],
+        "time": "2026-06-08"
+      }
+    ],
+    "us_stocks": [
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "price": "$208.64",
+        "change": "-4.58%",
+        "dir": "down",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "與LG合作開發人形機器人但股價續跌",
+        "watch_note": "Blackwell出貨進度",
+        "tech_note": "技術超賣反彈後再回落",
+        "action": "分批承接勿追高",
+        "_source": "yahoo"
+      },
+      {
+        "ticker": "TSM",
+        "name": "台積電ADR",
+        "price": "$426.80",
+        "change": "-4.07%",
+        "dir": "down",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "CEO重申全年營收成長逾30%",
+        "watch_note": "3nm漲價幅度",
+        "tech_note": "外資賣壓沉重",
+        "action": "逢低分批布局",
+        "_source": "yahoo"
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft",
+        "price": "$411.74",
+        "change": "-3.81%",
+        "dir": "down",
+        "tag": "server",
+        "tag_label": "雲端",
+        "note": "Azure動能支撐但大盤拖累",
+        "watch_note": "AI Copilot營收貢獻",
+        "tech_note": "高位整理",
+        "action": "持有觀察",
+        "_source": "yahoo"
+      },
+      {
+        "ticker": "AAPL",
+        "name": "Apple",
+        "price": "$301.54",
+        "change": "-3.11%",
+        "dir": "down",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "WWDC發布新Siri但股價不漲反跌",
+        "watch_note": "摺疊iPhone進度",
+        "tech_note": "AI題材未能提振股價",
+        "action": "觀望等待回穩",
+        "_source": "yahoo"
+      },
+      {
+        "ticker": "META",
+        "name": "Meta",
+        "price": "$585.39",
+        "change": "-6.72%",
+        "dir": "down",
+        "tag": "ai",
+        "tag_label": "AI",
+        "note": "今日Mag7最大跌幅承壓明顯",
+        "watch_note": "廣告營收展望",
+        "tech_note": "高基期修正",
+        "action": "觀察止穩訊號",
+        "_source": "yahoo"
+      }
+    ],
+    "us_news": [
+      {
+        "text": "Nasdaq崩跌4.18%創2025年4月以來最大單日跌幅",
+        "source": "CNBC",
+        "sentiment": "利空",
+        "body": "Broadcom財報未上調AI長期展望觸發晶片股全面潰逃Micron跌13%AVGO跌7%MRVL跌16%S&P 500收7383.74跌2.64%Nasdaq收25709為年內最慘單日",
+        "tickers": [
+          "AVGO",
+          "MU",
+          "MRVL",
+          "NVDA"
+        ],
+        "time": "2026-06-05"
+      },
+      {
+        "text": "中東停火推動美股反彈AI晶片股領漲",
+        "source": "Bloomberg",
+        "sentiment": "利多",
+        "body": "伊朗宣布停止對以色列軍事行動推動風險偏好回暖S&P 500漲0.8%至7442 Nasdaq 100漲1.5%MRVL漲4%MU漲4%原油自119美元高點回落",
+        "tickers": [
+          "NVDA",
+          "MRVL",
+          "MU"
+        ],
+        "time": "2026-06-08"
+      },
+      {
+        "text": "Oracle宣布導入5萬張AMD MI450 GPU capex達收入76%",
+        "source": "CNBC",
+        "sentiment": "利多",
+        "body": "Oracle宣布Q3起在OCI導入5萬張AMD Instinct MI450 GPU年度capex約500億美元較去年增逾一倍capex占收入比達76%為超大型雲廠商外最大AI投資者",
+        "tickers": [
+          "ORCL",
+          "AMD"
+        ],
+        "time": "2026-06-08"
+      },
+      {
+        "text": "Alphabet尋求850億美元外部融資加速AI基建",
+        "source": "Bloomberg",
+        "sentiment": "中性",
+        "body": "Alphabet即便現金充沛仍尋求850億美元外部融資用於加速AI基礎設施擴建引發市場對AI capex可持續性的疑慮顯示AI軍備競賽資金需求龐大",
+        "tickers": [
+          "GOOGL",
+          "GOOG"
+        ],
+        "time": "2026-06-07"
+      },
+      {
+        "text": "5月非農+17.2萬人推升10年期殖利率破4.55%",
+        "source": "Reuters",
+        "sentiment": "利空",
+        "body": "美國5月非農就業新增17.2萬人遠優於預期推升10年期公債殖利率突破4.55%30年期越過5%強化更長期高利率敘事加劇股市拋壓",
+        "tickers": [
+          "TLT",
+          "SPY"
+        ],
+        "time": "2026-06-05"
+      },
+      {
+        "text": "SpaceX確定IPO定價每股135美元本週五掛牌",
+        "source": "CNBC",
+        "sentiment": "利多",
+        "body": "SpaceX確定IPO固定發行價每股135美元將於6月12日在Nasdaq掛牌為2026年最受矚目大型IPO案AI與太空科技雙重題材吸引市場關注",
+        "tickers": [
+          "SPCX"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "蘋果WWDC發布新Siri升級AI戰略但華爾街不買帳",
+        "source": "鉅亨網",
+        "sentiment": "利空",
+        "body": "蘋果在WWDC發布全新Siri與Apple Intelligence升級AI戰略但股價當日下跌3.11%華爾街認為AI功能落後競爭對手估值已充分反映預期",
+        "tickers": [
+          "AAPL"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "蘋果與Google Nvidia合作打造最先進AI模型",
+        "source": "CNBC",
+        "sentiment": "利多",
+        "body": "蘋果宣布與Google及Nvidia合作開發最先進AI模型整合至Apple Intelligence平台顯示蘋果加速追趕AI競賽但市場反應冷淡",
+        "tickers": [
+          "AAPL",
+          "GOOGL",
+          "NVDA"
+        ],
+        "time": "2026-06-08"
+      },
+      {
+        "text": "五角大廈擴大中國軍事關聯企業名單納入阿里百度比亞迪",
+        "source": "CNBC",
+        "sentiment": "利空",
+        "body": "美國國防部擴大中國軍事關聯企業名單納入阿里巴巴百度比亞迪等禁止美軍採購相關產品記憶體與機器人新星也遭切斷中美科技脫鉤加劇",
+        "tickers": [
+          "BABA",
+          "BIDU",
+          "BYD"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "Intel獲多家機構升評YTD漲250%成年度最大輪動故事",
+        "source": "Benzinga",
+        "sentiment": "利多",
+        "body": "Intel獲Barclays Wells Fargo Mizuho等機構升評三機構平均目標價112.67美元隱含上漲空間8.95%YTD漲幅達250%成為年度最大空翻多輪動故事",
+        "tickers": [
+          "INTC"
+        ],
+        "time": "2026-06-06"
+      },
+      {
+        "text": "NVIDIA看不到記憶體短缺盡頭要採購更多SK海力士產品",
+        "source": "經濟日報",
+        "sentiment": "利多",
+        "body": "NVIDIA表示看不到記憶體短缺的盡頭將採購更多SK海力士HBM產品顯示AI晶片對高頻寬記憶體需求持續強勁供需缺口短期難以緩解",
+        "tickers": [
+          "NVDA",
+          "MU"
+        ],
+        "time": "2026-06-08"
+      },
+      {
+        "text": "Marvell加入S&P 500升評持續ETF被動買盤挹注",
+        "source": "Reuters",
+        "sentiment": "利多",
+        "body": "Marvell正式加入S&P 500指數ETF被動調倉買盤將提供結構性支撐多家機構維持樂觀評等AI ASIC設計贏單為基本面驅動力上週大跌16%後反彈",
+        "tickers": [
+          "MRVL"
+        ],
+        "time": "2026-06-06"
+      },
+      {
+        "text": "SpaceX獲Google 300億美元大單IPO前夕釋利多",
+        "source": "TheStreet",
+        "sentiment": "利多",
+        "body": "SpaceX在IPO前一週獲得Google 300億美元衛星網路合約為AI資料中心提供低延遲連線服務馬斯克首度曝光AI資料中心衛星細節",
+        "tickers": [
+          "SPCX",
+          "GOOGL"
+        ],
+        "time": "2026-06-09"
+      }
+    ],
+    "tw_stocks": [
+      {
+        "ticker": "2330",
+        "name": "台積電",
+        "price": "2295",
+        "change": "-2.96%",
+        "dir": "down",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "Q1 EPS 22.08元歷史新高外資續賣",
+        "watch_note": "N3/N2量產進度",
+        "tech_note": "外資賣超主力",
+        "action": "逢低分批承接",
+        "_source": "twse"
+      },
+      {
+        "ticker": "2317",
+        "name": "鴻海",
+        "price": "269.5",
+        "change": "-5.27%",
+        "dir": "down",
+        "tag": "server",
+        "tag_label": "伺服器",
+        "note": "AI伺服器出貨熱但股價承壓",
+        "watch_note": "GB200訂單能見度",
+        "tech_note": "外資賣超",
+        "action": "觀察止穩訊號",
+        "_source": "twse"
+      },
+      {
+        "ticker": "2454",
+        "name": "聯發科",
+        "price": "4070",
+        "change": "-5.35%",
+        "dir": "down",
+        "tag": "semi",
+        "tag_label": "半導體",
+        "note": "外資調節高基期修正",
+        "watch_note": "手機SoC市佔",
+        "tech_note": "外資賣超",
+        "action": "等待回穩",
+        "_source": "twse"
+      },
+      {
+        "ticker": "2308",
+        "name": "台達電",
+        "price": "2255",
+        "change": "-1.96%",
+        "dir": "down",
+        "tag": "server",
+        "tag_label": "電源",
+        "note": "AI電源模組需求強勁相對抗跌",
+        "watch_note": "AI伺服器電源訂單",
+        "tech_note": "投信買超",
+        "action": "逢低布局",
+        "_source": "twse"
+      },
+      {
+        "ticker": "3711",
+        "name": "日月光",
+        "price": "540",
+        "change": "-6.41%",
+        "dir": "down",
+        "tag": "semi",
+        "tag_label": "封裝",
+        "note": "CoWoS先進封裝供不應求但股價重挫",
+        "watch_note": "先進封裝產能擴張",
+        "tech_note": "外資賣超",
+        "action": "分批承接",
+        "_source": "twse"
+      }
+    ],
+    "tw_news": [
+      {
+        "text": "台股加權指數收44017點漲1.18%但權值股全面重挫",
+        "source": "Yahoo奇摩股市",
+        "sentiment": "中性",
+        "body": "台股加權指數收44017.56點漲1.18%但半導體權值股全線重挫台積電跌2.96%鴻海跌5.27%聯發科跌5.35%日月光跌6.41%資金輪動至航運金融等族群",
+        "tickers": [
+          "2330",
+          "2317",
+          "2454",
+          "3711"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "外資單日賣超938億元三日累計逾2520億創紀錄",
+        "source": "TWSE",
+        "sentiment": "利空",
+        "body": "外資單日賣超938.52億元三日累計賣超逾2520億元創歷史紀錄三大法人合計賣超1342億元外資期貨空單逼近7萬口籌碼面明顯轉空",
+        "tickers": [
+          "2330",
+          "2317",
+          "2454"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "投信逆勢買超87.76億元護盤廣達南電金融股獲青睞",
+        "source": "MoneyDJ",
+        "sentiment": "利多",
+        "body": "投信單日買超87.76億元為三大法人唯一買方重點買超廣達南電旺宏啟碁等AI伺服器與載板PCB族群以及國泰金凱基金等金融股",
+        "tickers": [
+          "2382",
+          "8046",
+          "2882"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "台指期夜盤曾重挫3006點至42220創史上最大單日跌幅",
+        "source": "鉅亨網",
+        "sentiment": "利空",
+        "body": "台指期夜盤一度重挫3006點至42220點創史上最大單日跌幅反映國際股市崩跌衝擊6/8美股反彈提供跟漲動能但籌碼偏空格局未扭轉",
+        "tickers": [
+          "TX"
+        ],
+        "time": "2026-06-05"
+      },
+      {
+        "text": "四大代工廠5月營收寫最旺伺服器出貨熱法人看好下半年",
+        "source": "經濟日報",
+        "sentiment": "利多",
+        "body": "鴻海廣達緯創英業達四大代工廠5月營收創歷史同期新高AI伺服器出貨動能強勁法人看好下半年在GB200量產帶動下營收續創高",
+        "tickers": [
+          "2317",
+          "2382",
+          "3231",
+          "2356"
+        ],
+        "time": "2026-06-08"
+      },
+      {
+        "text": "貨櫃三雄Q2獲利看俏美國線6/15前調漲運價",
+        "source": "經濟日報",
+        "sentiment": "利多",
+        "body": "長榮陽明萬海貨櫃三雄Q2獲利展望樂觀美西美東航線運價6月15日前將再調漲紅海繞道效應持續支撐運價航運股成資金輪動標的",
+        "tickers": [
+          "2603",
+          "2609",
+          "2615"
+        ],
+        "time": "2026-06-08"
+      },
+      {
+        "text": "皇翔6/4-8取得聯發科77張約3.29億元",
+        "source": "MoneyDJ",
+        "sentiment": "中性",
+        "body": "皇翔於6月4日至8日期間取得聯發科股票77張金額約3.29億元顯示法人對聯發科長期價值的認可但短期股價仍受外資賣壓影響",
+        "tickers": [
+          "2545",
+          "2454"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "進泰電子5月營收2.32億元創53個月新高送件現增",
+        "source": "鉅亨網",
+        "sentiment": "利多",
+        "body": "進泰電子5月營收2.32億元改寫53個月新高年增率亮眼公司同步送件現增籌資案擴充產能顯示營運動能持續向上",
+        "tickers": [
+          "3551"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "NVIDIA結盟韓國三大咖推動AI資料中心建設鴻海沾光",
+        "source": "經濟日報",
+        "sentiment": "利多",
+        "body": "NVIDIA與韓國LG集團等三大企業結盟合作開發人形機器人及AI資料中心架構台灣供應鏈鴻海等可望受惠於相關訂單",
+        "tickers": [
+          "2317"
+        ],
+        "time": "2026-06-08"
+      },
+      {
+        "text": "台股站上4萬5大關外資曾單日加碼368億",
+        "source": "鉅亨網",
+        "sentiment": "利多",
+        "body": "台股前波強勢攻上45000點整數關卡外資單日大幅買超368億元三大法人合計淨買超367億元但隨後急速反轉賣超形成籌碼劇烈震盪",
+        "tickers": [
+          "TWII"
+        ],
+        "time": "2026-06-07"
+      },
+      {
+        "text": "台灣股市市值達4.95兆美元超越印度成全球第五大",
+        "source": "Perplexity Finance",
+        "sentiment": "利多",
+        "body": "台灣股市總市值達4.95兆美元超越印度4.92兆美元成為全球第五大市場台積電YTD大漲為主要貢獻台股科技龍頭全球地位持續上升",
+        "tickers": [
+          "2330"
+        ],
+        "time": "2026-06-07"
+      },
+      {
+        "text": "高股息四大天王PK投入100萬這檔一年讓你最超感",
+        "source": "鉅亨網",
+        "sentiment": "中性",
+        "body": "市場比較高股息ETF四大天王0056 00878 00919 00929過去一年績效與配息投資人關注股息殖利率與填息能力作為選擇依據",
+        "tickers": [
+          "0056",
+          "00878"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "亞洲生技大會7月中起跑27家頂尖新創競逐國際資金",
+        "source": "經濟日報",
+        "sentiment": "利多",
+        "body": "亞洲生技大會將於7月中旬起跑27家頂尖新創將競逐國際一線多元資金青睞台灣生技產業國際能見度持續提升",
+        "tickers": [
+          "4147",
+          "6446"
+        ],
+        "time": "2026-06-09"
+      },
+      {
+        "text": "鈊象5月每股稅前賺4.55元遊戲股龍頭獲利亮眼",
+        "source": "經濟日報",
+        "sentiment": "利多",
+        "body": "鈊象5月單月每股稅前盈餘達4.55元獲利表現亮眼遊戲機台與線上遊戲雙引擎驅動營運持續創高",
+        "tickers": [
+          "3293"
+        ],
+        "time": "2026-06-08"
+      }
+    ]
+  },
+  "tw_market_summary": {
+    "trade_value": "--",
+    "foreign_net": "賣超 -939 億元",
+    "trust_net": "買超 +88 億元"
+  },
+  "sentiment": {
+    "fear_greed": {
+      "value": "10",
+      "label": "極度恐懼",
+      "change": "+2",
+      "note": "空頭情緒主導加密市場，較昨日略回暖但仍處極端區間",
+      "_source": "alternative.me"
+    },
+    "polymarket": [],
+    "coinglass": {
+      "btc_long_liq": "N/A",
+      "btc_short_liq": "320M",
+      "eth_long_liq": "N/A",
+      "eth_short_liq": "N/A",
+      "funding_rate": "BTC -0.0030%",
+      "long_short_ratio": "BTC 多空比 1.86（多:65.0% 空:35.0%）",
+      "note": "資金費率持續偏負，空頭實際持倉積極，去槓桿未完全結束",
+      "_source": "binance"
+    },
+    "vix": {
+      "value": "18.92",
+      "change": "-12.04%",
+      "dir": "down",
+      "_source": "yahoo"
+    }
+  },
+  "industry_detail": {
+    "news": [
+      {
+        "tag": "晶片崩跌",
+        "type": "semi",
+        "text": "NVDA -4.58%、TSM -4.07%，6/8反彈後6/9再度轉弱",
+        "time": "2026-06-09",
+        "impact": "半導體修復失敗，AI估值修正持續",
+        "expand_analysis": "NVDA今日$208.64、TSM$426.80，6/8技術反彈未持續。外資持續減持，台積電台股同步跌2.96%。Nasdaq -3.31%，顯示AI題材估值仍在修正階段，需等CPI數據觸發轉折。",
+        "expand_impact_pos": "現金/短債受益，避險情緒推升黃金",
+        "expand_impact_neg": "NVDA、TSM、AVGO等晶片股短期承壓",
+        "expand_tickers": "NVDA 觀望、TSM 觀望、SOXS 短線對沖",
+        "expand_action": "晶片股暫不追空，等6/10 CPI確認後再評估進場時機",
+        "expand_watch": "6/10 CPI是否帶動殖利率下行觸發反彈"
+      },
+      {
+        "tag": "HBM售罄",
+        "type": "semi",
+        "text": "SK Hynix/Micron 2026年HBM產能全數售罄，CoWoS缺口20-30%",
+        "time": "2026-06-04",
+        "impact": "記憶體供需偏緊，HBM價格支撐明確",
+        "expand_analysis": "HBM超額訂購延伸至2027年，CoWoS先進封裝瓶頸比晶圓更嚴峻。AI伺服器HBM需求較一般伺服器高3-5倍，Micron雖6/5跌13%但基本面未變，超賣後具備反彈動能。",
+        "expand_impact_pos": "MU長線受益，HBM ASP維持高位",
+        "expand_impact_neg": "短缺加劇NVDA/AMD出貨時程風險",
+        "expand_tickers": "MU 逢低買進、2330台積電封裝業務受益",
+        "expand_action": "MU超賣後逢低分批布局，機構目標$286",
+        "expand_watch": "CoWoS擴產進度及TSMC先進封裝交期"
+      },
+      {
+        "tag": "台積漲價",
+        "type": "semi",
+        "text": "TSMC計畫H2對3nm漲價最高15%，雲廠商全面採用加速",
+        "time": "2026-06-07",
+        "impact": "台積電毛利率進一步提升空間打開",
+        "expand_analysis": "超大型雲廠商ASIC設計需求為主因，N3/N2下半年量產在即。台積電Q1毛利率66.2%，3nm漲價15%若落實將再推升毛利率至67-68%區間，定價權確立。",
+        "expand_impact_pos": "TSM/2330毛利率提升，目標價上調空間",
+        "expand_impact_neg": "下游IC設計廠成本壓力增，Fabless毛利率受壓",
+        "expand_tickers": "TSM 中長線買進、2330 逢回布局",
+        "expand_action": "台積電回檔至2200-2250觀察支撐後分批進場",
+        "expand_watch": "N2量產良率及3nm漲價正式公告時程"
+      },
+      {
+        "tag": "Broadcom爆雷",
+        "type": "semi",
+        "text": "Broadcom法說會未上調AI晶片長期展望，帶崩半導體族群",
+        "time": "2026-06-04",
+        "impact": "AI需求天花板疑慮重燃，估值修正擴大",
+        "expand_analysis": "AVGO Q2財報超預期但CEO維持FY26/27 AI展望不變，引發Broadcom效應。Micron -13%、MRVL -16%連鎖崩跌，Nasdaq單日 -4.18%創2025年4月以來最大跌幅，機構仍看多長線ASIC贏單。",
+        "expand_impact_pos": "長線ASIC設計訂單CY26-27兌現，機構目標價未降",
+        "expand_impact_neg": "短線AI估值修正未完，反彈力道受壓制",
+        "expand_tickers": "AVGO 觀望等底、MU 超賣逢低、MRVL S&P500加入受益",
+        "expand_action": "等AVGO跌至$190-200支撐區觀察量能後再進場",
+        "expand_watch": "超大型雲廠商ASIC設計訂單公告及AI capex指引"
+      },
+      {
+        "tag": "Oracle豪賭AI",
+        "type": "ai",
+        "text": "Oracle導入5萬張AMD MI450 GPU，AI capex達收入比76%",
+        "time": "2026-06-08",
+        "impact": "非Mag7最大AI基礎設施投資，AMD多元化受益",
+        "expand_analysis": "Oracle約$500億capex年增逾一倍，capex/收入比76%為業界最高。採用AMD MI450顯示雲廠商晶片多元化策略明確，降低對NVDA單一依賴，ORCL雲AI競爭力重估。",
+        "expand_impact_pos": "AMD MI450需求確認，ORCL雲AI競爭力提升",
+        "expand_impact_neg": "NVDA壟斷地位受威脅，HPC市場份額競爭加劇",
+        "expand_tickers": "AMD 買進、ORCL 觀察財報後布局",
+        "expand_action": "AMD逢回$150以下關注，ORCL等財報確認後布局",
+        "expand_watch": "MI450實際部署進度及OCI AI業務收入貢獻"
+      },
+      {
+        "tag": "蘋果WWDC",
+        "type": "ai",
+        "text": "Apple WWDC發布新Siri及Apple Intelligence，股價跌3.11%",
+        "time": "2026-06-08",
+        "impact": "AI功能已充分定價，短期賣壓出現",
+        "expand_analysis": "AAPL今日$301.54(-3.11%)，市場對Siri升級反應冷淡。與Google/NVIDIA合作最先進AI模型，但摺疊iPhone首批估1100萬台低於預期。Waymo $220M收購Apple廢棄機器人測試場地。",
+        "expand_impact_pos": "長期AI生態系整合利好AAPL服務收入",
+        "expand_impact_neg": "短期股價修正，摺疊版出貨不如預期",
+        "expand_tickers": "AAPL 觀望等$290支撐",
+        "expand_action": "AAPL等待$290支撐確認後再考慮布局",
+        "expand_watch": "摺疊iPhone訂單修正及AI服務付費轉化率"
+      },
+      {
+        "tag": "OpenAI IPO",
+        "type": "ai",
+        "text": "OpenAI秘密提交IPO文件，2026年最大AI上市案啟動",
+        "time": "2026-06-08",
+        "impact": "AI估值重新定錨，科技IPO市場活化",
+        "expand_analysis": "OpenAI秘密申請IPO，Perplexity計畫2028年上市。SpaceX已定價$135/股，市場將用OpenAI估值重評未上市AI公司及Anthropic隱含估值，帶動AI概念股整體重評。",
+        "expand_impact_pos": "AI概念股整體估值提升，MSFT/NVDA間接受益",
+        "expand_impact_neg": "大型IPO吸走流動性，中小型AI股承壓",
+        "expand_tickers": "MSFT 持有、NVDA 持有、關注SPCX IPO",
+        "expand_action": "SpaceX IPO 6/12定價可小額參與追蹤AI空間題材",
+        "expand_watch": "OpenAI估值區間及機構配售結果"
+      },
+      {
+        "tag": "中國軍企名單",
+        "type": "ai",
+        "text": "五角大廈更新名單，阿里、百度、比亞迪入列軍事企業",
+        "time": "2026-06-09",
+        "impact": "中美科技脫鉤加速，美軍採購禁令擴大",
+        "expand_analysis": "阿里巴巴、百度、比亞迪入列，記憶體與機器人新星遭切斷美軍採購。中美外交緩和受阻，半導體出口管制壓力延伸至更廣泛中國科技鏈，台積電中國業務潛在風險上升。",
+        "expand_impact_pos": "台灣/南韓記憶體廠替代需求增加",
+        "expand_impact_neg": "中概股BABA/BIDU美股承壓，供應鏈重組成本上升",
+        "expand_tickers": "BABA 賣出、BIDU 賣出、MU替代受益",
+        "expand_action": "規避中概股，轉向非中國記憶體及半導體供應鏈",
+        "expand_watch": "後續制裁範圍擴大及中方反制動作"
+      },
+      {
+        "tag": "中東緩解油回落",
+        "type": "energy",
+        "text": "伊朗停止對以色列軍事行動，Brent原油自$119跌至$93.95",
+        "time": "2026-06-08",
+        "impact": "能源溢價消散，通膨壓力邊際降溫",
+        "expand_analysis": "Brent今日$93.95(-0.32%)，較高點$119回落21%。中東風險溢價部分消散，公債殖利率同步回落，但霍爾木茲流量恢復正常估至年底，能源板塊YTD仍+22%。",
+        "expand_impact_pos": "航空/運輸/消費板塊油價成本下降",
+        "expand_impact_neg": "能源股Exxon/Chevron短線高位承壓",
+        "expand_tickers": "XLE 減持、AAL/DAL 受益、BNO 觀望",
+        "expand_action": "能源股短線獲利了結，等CPI確認通膨降溫後再布局",
+        "expand_watch": "霍爾木茲海峽流量恢復進度及OPEC+產量政策"
+      },
+      {
+        "tag": "OPEC增產過剩",
+        "type": "energy",
+        "text": "OPEC+快速增產轉向，全球石油市場預期H2大幅過剩",
+        "time": "2026-06-06",
+        "impact": "油價中長期下行壓力，能源股獲利承壓",
+        "expand_analysis": "OPEC+增產轉向配合地緣緊張緩解，供過於求格局H2顯現。銅需求受電氣化驅動仍強，印尼煤炭出口管制推升亞洲煤價至兩年高點，能源轉型金屬與化石燃料走勢分化。",
+        "expand_impact_pos": "電力/電動車/銅相關ETF長線受益",
+        "expand_impact_neg": "純油氣股中長期估值壓縮",
+        "expand_tickers": "COPX 銅ETF買進、XLE 中性",
+        "expand_action": "減持純油氣股，轉向電氣化/銅相關布局",
+        "expand_watch": "H2 OPEC實際增產執行率及全球需求數據"
+      },
+      {
+        "tag": "外資大賣台股",
+        "type": "tw",
+        "text": "外資今日賣超938億，三大法人合計賣超1342億創新高",
+        "time": "2026-06-09",
+        "impact": "台股籌碼嚴重偏空，外資期貨空單近7萬口",
+        "expand_analysis": "外資三日累計賣超逾2520億，期貨空單逼近7萬口歷史高位。加權指數靠航運/金融撐盤小漲1.18%，但台積電-2.96%、聯發科-5.35%顯示主力籌碼持續鬆動，CPI是外資回補關鍵觸發點。",
+        "expand_impact_pos": "投信逆勢買超廣達、南電提供局部支撐",
+        "expand_impact_neg": "台積電、鴻海、日月光等權值股持續承壓",
+        "expand_tickers": "2330 觀望、2603長榮 關注、2882國泰金 防守",
+        "expand_action": "台股暫守現金，等外資期貨空單縮減後再進場",
+        "expand_watch": "外資期貨空單口數變化及CPI後回補訊號"
+      },
+      {
+        "tag": "台灣市值超印",
+        "type": "tw",
+        "text": "台灣股市市值達4.95兆美元，超越印度成全球第五大市場",
+        "time": "2026-06-07",
+        "impact": "台股全球地位提升，有助吸引被動型外資",
+        "expand_analysis": "台積電YTD大漲為主要貢獻，台灣成全球第五大資本市場。但短期外資籌碼大量流出顯示結構性地位與短線行為分離，市值里程碑有助MSCI調升台灣權重預期。",
+        "expand_impact_pos": "MSCI潛在調升台灣權重，被動基金長期流入",
+        "expand_impact_neg": "短線外資仍在減碼，高估值面臨修正壓力",
+        "expand_tickers": "EWT台灣ETF 長線持有、2330 核心持股",
+        "expand_action": "EWT逢修正布局，長線受益於被動配置增加",
+        "expand_watch": "MSCI季度審核台灣權重調整公告"
+      },
+      {
+        "tag": "貨櫃運費漲",
+        "type": "shipping",
+        "text": "美西美東航線6/15前調高報價，貨櫃三雄Q2獲利看俏",
+        "time": "2026-06-08",
+        "impact": "運費上漲帶動長榮、陽明、萬海獲利超預期",
+        "expand_analysis": "美西美東航線6/15前調漲，貨櫃三雄今日台股逆勢走強為少數亮點。中東霍爾木茲恢復正常估至年底，繞行成本支撐運費高檔，Q2財報7月初是觀察重點。",
+        "expand_impact_pos": "2603長榮、2609陽明、2615萬海Q2獲利上調",
+        "expand_impact_neg": "OPEC增產若壓低油價，燃油成本優勢縮小",
+        "expand_tickers": "2603長榮 買進、2609陽明 買進",
+        "expand_action": "貨櫃三雄逢拉回買進，Q2財報前持有",
+        "expand_watch": "6/15運費報價調幅及中東航線繞行情況"
+      },
+      {
+        "tag": "紅海威脅持續",
+        "type": "shipping",
+        "text": "葉門胡塞武裝持續威脅紅海以色列船隻，繞行成本未解除",
+        "time": "2026-06-08",
+        "impact": "繞行溢價維持，運費下行空間有限",
+        "expand_analysis": "伊以停火但胡塞武裝繼續威脅紅海航線，霍爾木茲流量恢復至年底。航運股同時受益繞行增加運費溢價及貨量需求，但若中東全面和解，繞行費用將快速消失。",
+        "expand_impact_pos": "繞行路線持續，長程航線運費維持高位",
+        "expand_impact_neg": "中東全面和平若實現，繞行溢價快速消失",
+        "expand_tickers": "2603長榮 持有、2609陽明 持有",
+        "expand_action": "持續追蹤紅海局勢，作為航運股加減碼依據",
+        "expand_watch": "胡塞武裝停火談判進展及紅海實際通行狀況"
+      },
+      {
+        "tag": "高收益利差低",
+        "type": "finance",
+        "text": "美高收益利差接近253bp歷史低點，信用風險溢酬被壓縮",
+        "time": "2026-06-08",
+        "impact": "尾部風險若爆發，利差快速走闊殺傷力大",
+        "expand_analysis": "高收益利差253bp接近2024年11月低點，歷史偏窄顯示市場對違約風險定價過樂觀。10Y-2Y正斜率+38bp，但30Y突破5%對高槓桿企業融資成本形成壓力，台灣金融股受益高利率維持。",
+        "expand_impact_pos": "金融股受益高利率維持，台灣金融股短線有支撐",
+        "expand_impact_neg": "高收益債ETF若利差走闊，JNK/HYG面臨大幅回落",
+        "expand_tickers": "2882國泰金 防守持有、JNK 減持",
+        "expand_action": "減持高收益債配置，轉向投資等級債或短期美債",
+        "expand_watch": "CPI後殖利率走向及高收益利差是否突破260bp"
+      },
+      {
+        "tag": "家庭財務憂慮",
+        "type": "finance",
+        "text": "紐約聯儲調查家庭財務憂慮升至2022年7月來最高",
+        "time": "2026-06-08",
+        "impact": "消費降溫信號出現，零售板塊承壓",
+        "expand_analysis": "紐約聯儲調查顯示家庭財務憂慮創近四年高，與Jim Cramer警告牛市支柱崩潰相互印證。高利率3.50-3.75%維持已久，消費信貸壓力累積，零售銷售數據為CPI後關鍵觀察。",
+        "expand_impact_pos": "防禦性消費股、必需品ETF相對抗跌",
+        "expand_impact_neg": "可選消費、信用卡公司壞帳率上升風險",
+        "expand_tickers": "XLP 買進、XLY 減持",
+        "expand_action": "增配必需消費ETF，減少可選消費曝險",
+        "expand_watch": "零售銷售及消費信貸違約率月度數據"
+      },
+      {
+        "tag": "ASCO癌症新藥",
+        "type": "biotech",
+        "text": "ASCO 2026年會Revolution Medicines胰腺癌新藥數據轟動全場",
+        "time": "2026-06-07",
+        "impact": "罕見癌症突破，生技板塊情緒提振",
+        "expand_analysis": "Revolution Medicines胰腺癌完整數據符合預期，Summit/Akeso PD-L1/VEGF機制獲驗證。Eli Lilly一週宣布4項新交易含3項疫苗，次世代GLP-1展示近似手術效果，整體生技估值修復。",
+        "expand_impact_pos": "RVMD股價受益，biotech ETF IBB情緒提振",
+        "expand_impact_neg": "已充分反映預期者若失利將大幅修正",
+        "expand_tickers": "LLY 持有、IBB ETF逢低布局",
+        "expand_action": "IBB在大盤修正中逢低布局，LLY GLP-1平台長線持有",
+        "expand_watch": "RVMD FDA審核時程及LLY次世代GLP-1臨床進展"
+      }
+    ],
+    "top_companies": [
+      {
+        "name": "Nvidia",
+        "ticker": "NVDA·US",
+        "industry": "半導體/AI晶片",
+        "event_type": "watch",
+        "event_label": "技術反彈失敗",
+        "note": "今日-4.58%至$208.64，6/8反彈一日即終，AI估值修正持續",
+        "core_business": "全球AI GPU龍頭，Blackwell架構主導資料中心AI加速晶片市場，佔全球AI訓練晶片80%+市場份額，黃仁勳主導機器人/邊緣AI新戰場",
+        "recent_event": "2026-06-08 CEO黃仁勳宣布與韓國LG合作人形機器人及AI資料中心架構，NVDA當日反彈+2%。2026-06-04 AVGO法說會帶崩Nasdaq -4.18%。Q1 EPS $1.87超預期10%，機構共識目標價$288",
+        "industry_impact": "NVDA走勢主導AI投資情緒，下跌拖累AMD/AVGO/MU等整個半導體板塊，為市場最重要情緒指標",
+        "risk_note": "AI需求天花板疑慮加估值偏高，CPI前不宜追多"
+      },
+      {
+        "name": "台積電",
+        "ticker": "TSM·US",
+        "industry": "晶圓代工",
+        "event_type": "watch",
+        "event_label": "3nm漲價+外資賣壓",
+        "note": "美股-4.07%，台股2330跌2.96%至2295，外資持續大幅調節",
+        "core_business": "全球最先進晶圓代工廠，N3/N2製程獨占鰲頭，CoWoS先進封裝需求爆發，AI晶片唯一代工選擇，台灣市值貢獻最大單一標的",
+        "recent_event": "2026-06-07 CEO重申2026全年營收成長>30%，AI供給落後需求多年。計畫H2 3nm漲價最高15%。Q1 EPS $3.49超預期5.44%，毛利率66.2%歷史新高，N2下半年量產在即",
+        "industry_impact": "3nm漲價確立台積電定價權，CoWoS擴產是AI供應鏈關鍵瓶頸，決定整個AI晶片生態系交期",
+        "risk_note": "外資期貨空單近7萬口，短線籌碼壓力沉重"
+      },
+      {
+        "name": "SpaceX",
+        "ticker": "SPCX·NASDAQ",
+        "industry": "太空/AI基礎設施",
+        "event_type": "expand",
+        "event_label": "IPO本週定價",
+        "note": "6/12 IPO定價$135，Google簽$300億合約，馬斯克揭AI衛星細節",
+        "core_business": "全球最大商業火箭公司，Starlink衛星互聯網覆蓋全球，最新揭露AI資料中心衛星星座計畫，融合太空+AI雙重題材，為2026年最矚目上市案",
+        "recent_event": "2026-06-09 SpaceX簽署$300億Google採購合約，馬斯克首次公開AI資料中心衛星細節。2026-06-03 IPO定價$135啟動路演。Tesla同日漲近5%，市場押注SpaceX-Tesla合併可能性",
+        "industry_impact": "2026最大IPO，AI+太空估值定錨，對OpenAI/Perplexity等AI IPO估值具指標意義",
+        "risk_note": "高估值尚未盈利，上市初期流動性風險高"
+      },
+      {
+        "name": "Apple",
+        "ticker": "AAPL·US",
+        "industry": "消費電子/AI",
+        "event_type": "watch",
+        "event_label": "WWDC後賣壓",
+        "note": "WWDC發布AI Siri後跌3.11%至$301.54，市場反應冷淡",
+        "core_business": "全球最大消費電子公司，iPhone/Mac/服務三大支柱，Apple Intelligence為AI戰略核心，摺疊iPhone為下一個硬體周期催化劑",
+        "recent_event": "2026-06-08 WWDC26發布全新Siri與Apple Intelligence，與Google/NVIDIA合作最先進AI模型。摺疊iPhone傳僅推白色版本首批出貨估1100萬低於預期。Waymo $220M收購Apple廢棄機器人測試場地",
+        "industry_impact": "Apple AI進展影響整個iOS生態系開發商，Siri競爭力對比GPT-4o/Gemini為關鍵估值依據",
+        "risk_note": "摺疊版出貨保守加AI商業化時程不明確"
+      },
+      {
+        "name": "長榮海運",
+        "ticker": "2603·TW",
+        "industry": "貨櫃航運",
+        "event_type": "watch",
+        "event_label": "台股今日亮點",
+        "note": "台股今日逆勢走強，美西美東運費6/15前調漲，Q2獲利看俏",
+        "core_business": "台灣最大貨櫃航運公司，全球前五大箱公司，受益中東繞行與跨太平洋運費上漲，為台股外資賣壓下少數承接資金標的",
+        "recent_event": "2026-06-08 美西美東航線6/15前調高報價，貨櫃三雄台股連漲。2026-06-08 Q2獲利看俏報告發布。2026-06-08 紅海胡塞武裝持續威脅以色列船隻，繞行成本維持高檔支撐運費",
+        "industry_impact": "運費上漲帶動陽明2609、萬海2615同步受益，為台股今日資金輪動主要目標族群",
+        "risk_note": "中東若全面和解繞行溢價消失風險大"
+      },
+      {
+        "name": "Meta Platforms",
+        "ticker": "META·US",
+        "industry": "社群媒體/AI廣告",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "2026-06-09 重挫 -6.72% 至 $585.39，為 Mag7 今日最大跌幅，WWDC 蘋果 AI 競爭加劇壓制估值",
+        "core_business": "全球最大社群廣告平台，旗下 Facebook/Instagram/WhatsApp，AI 驅動廣告精準投放與 Reality Labs 元宇宙布局為雙核心",
+        "recent_event": "2026-05-Q1 財報 EPS $7.31 vs 預期 $6.71 超預期 +8.94%；AI capex 持續擴張，Llama 開源生態鞏固；蘋果 WWDC26 發表新 Siri 後市場擔憂社群 AI 競爭加劇",
+        "industry_impact": "AI 廣告生態估值重估壓力，Llama 開源競爭加劇 AI 平台護城河疑慮，但廣告收益韌性仍強",
+        "risk_note": "AI capex 燒錢速度、監管反壟斷壓力、蘋果 Siri AI 廣告替代風險"
+      },
+      {
+        "name": "台積電",
+        "ticker": "TSM·US / 2330·TW",
+        "industry": "半導體製造",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "2026-06-09 美股 ADR -4.07% 至 $426.80，台股現股 -2.96% 至 2295 元，外資連三日合計賣超逾 2520 億",
+        "core_business": "全球最先進晶圓代工龍頭，N3/N2 製程壟斷 AI 晶片供應鏈，CoWoS 先進封裝需求全面爆發，NVIDIA/Apple/AMD 主要供應商",
+        "recent_event": "2026-06-07 CEO CC Wei 重申 2026 全年營收成長 >30%；H2 對 3nm 製程漲價最高 15%；Q1 EPS $3.49 超預期 +5.44%，毛利率 66.2% 歷史新高；CoWoS 產能缺口達 20-30%",
+        "industry_impact": "定價權確立推升整體半導體供應鏈毛利，N2 量產帶動設備材料鏈進入交貨期，HBM 封裝瓶頸比晶片製造更嚴峻",
+        "risk_note": "外資持續調節、地緣政治風險、高基期修正壓力"
+      },
+      {
+        "name": "Tesla",
+        "ticker": "TSLA·US",
+        "industry": "電動車/AI/機器人",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "2026-06-09 大漲近 5%，市場聚焦 SpaceX 本週五 IPO 及預測市場押注 SpaceX 與 Tesla 合併題材",
+        "core_business": "全球電動車龍頭，Autopilot/FSD 自動駕駛、Dojo 超級電腦、Optimus 人形機器人三平台並進，儲能 Megapack 為第四成長引擎",
+        "recent_event": "2026-06-09 SpaceX IPO 定價 $135/股（NASDAQ: SPCX，本週五 6/12 掛牌）；馬斯克首曝 AI 資料中心衛星細節；市場預測合併題材推升 TSLA 今日逆市大漲",
+        "industry_impact": "SpaceX IPO 帶動 AI 太空科技雙重估值重塑，Optimus 人形機器人與 NVIDIA 合作加速具身智慧商業化",
+        "risk_note": "馬斯克精力分散 SpaceX/xAI，電動車中國競爭激烈，FSD 監管落地風險"
+      },
+      {
+        "name": "Broadcom",
+        "ticker": "AVGO·US",
+        "industry": "半導體/網路晶片",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "2026-06-04 法說會不升調 AI 長期展望引爆 -7% 連鎖崩跌，6/8 技術性修復 +部分反彈，機構維持長線正面評等",
+        "core_business": "全球 ASIC 客製晶片與網路晶片龍頭，超大型雲廠商（Google/Meta/ByteDance）自研 AI ASIC 設計主要夥伴，VMware 企業軟體整合",
+        "recent_event": "2026-06-04 FY Q2 2026 法說會：財務數字超預期但 CEO Hock Tan 維持 FY2026/2027 AI 晶片長期展望不變，市場解讀需求天花板疑慮，帶崩 MRVL -16%/MU -13%/NVDA -7%；機構目標價仍維持上調，ASIC 贏單 CY2026-2027 兌現確定性高",
+        "industry_impact": "超大型雲廠商 ASIC 自研趨勢確立，GPU 採購多元化（Oracle 導入 AMD MI450）重塑 AI 晶片生態競爭格局",
+        "risk_note": "法說會引發 AI 需求上限疑慮、VMware 整合執行風險、短期估值修正"
+      },
+      {
+        "name": "Eli Lilly",
+        "ticker": "LLY·US",
+        "industry": "製藥/GLP-1",
+        "event_type": "watch",
+        "event_label": "觀察",
+        "note": "2026-06-06 一週內宣布 4 項新交易含 3 項疫苗領域，次世代 GLP-1 展示近似手術效果震撼 ADA 年會",
+        "core_business": "全球 GLP-1 減重藥龍頭（Mounjaro/Zepbound），次世代 GLP-1/anti-ActRII 雙通路平台商業化加速，糖尿病與肥胖個人化治療為未來十年核心",
+        "recent_event": "2026-06-06 一週宣布 4 項交易（含 3 項疫苗收購）；2026-06-07 ADA 年會 CicadaBio CC-18 臨床前強健減重+保留瘦體重；2026-06-07 ASCO 胰腺癌數據符合預期；次世代 GLP-1 效果媲美手術獲 FDA 快速通道",
+        "industry_impact": "GLP-1 平台估值上修帶動整體生技醫療板塊，競爭者 Novo Nordisk 份額受壓，肥胖症治療重塑全球醫療保險支出結構",
+        "risk_note": "GLP-1 定價談判壓力、產能擴張成本、次世代藥物臨床失敗風險"
+      }
+    ],
+    "corp_events": [
+      {
+        "date": "2026-06-10",
+        "title": "美國5月CPI公布(BLS)",
+        "desc": "本輪最關鍵宏觀數據，確認中東緩解後通膨路徑，決定外資回補台股及FOMC降息預期時程，能源分項為核心觀察"
+      },
+      {
+        "date": "2026-06-10",
+        "title": "Parabilis Medicines IPO(PBLS·NASDAQ)",
+        "desc": "生技新股定價$17-19，ASCO後生技情緒回溫，關注機構配售情況"
+      },
+      {
+        "date": "2026-06-10",
+        "title": "ERock Inc IPO(EROC·NYSE)",
+        "desc": "能源相關新股定價$20-23，中東緩解後能源新股市場溫度測試"
+      },
+      {
+        "date": "2026-06-11",
+        "title": "Forbright Inc IPO(FRBT·NASDAQ)",
+        "desc": "金融板塊新股定價$18-20，NASDAQ Global Select掛牌，高利率環境下金融股IPO觀察"
+      },
+      {
+        "date": "2026-06-12",
+        "title": "SpaceX正式IPO上市(SPCX·NASDAQ)",
+        "desc": "2026最大IPO定價$135，Google $300億合約加持，AI+太空雙題材，估值定錨意義重大，市場關注開盤首日溢價幅度"
+      },
+      {
+        "date": "2026-06-16",
+        "title": "FOMC利率決策會議第一天",
+        "desc": "Fed主席Warsh主持，市場預期維持3.50-3.75%，點陣圖更新與前瞻指引措辭為關鍵觀察"
+      },
+      {
+        "date": "2026-06-18",
+        "title": "FOMC決策聲明及Warsh記者會",
+        "desc": "鷹派底色Warsh前瞻指引將決定2026全年降息路徑預期，對美股及台股外資動向影響重大，最早升息預期為2027 Q3"
+      }
+    ],
+    "rotation": [
+      {
+        "from": "半導體/科技成長股",
+        "to": "航運/金融防禦股",
+        "strength": "強烈",
+        "reason": "台積電-2.96%、聯發科-5.35%、日月光-6.41%，資金流入長榮、陽明、國泰金等防禦板塊"
+      },
+      {
+        "from": "美國科技Mag7",
+        "to": "韓日亞洲晶片股",
+        "strength": "中等",
+        "reason": "KOSPI強彈4.9%、三星+5%、SK海力士+7.8%，技術性超賣後亞洲市場出現補漲"
+      },
+      {
+        "from": "能源股高位",
+        "to": "必需消費/投資等級債",
+        "strength": "明顯",
+        "reason": "中東緩解後Brent油價自$119回落至$94，能源板塊YTD +22%後獲利了結，防禦配置需求上升"
+      },
+      {
+        "from": "高收益債",
+        "to": "短期美債/現金",
+        "strength": "中等",
+        "reason": "高收益利差253bp歷史低點，家庭財務壓力創四年高，信用風險重估促使資金轉向短端"
+      }
+    ]
+  },
+  "morning_brief": "ProjectX 市場早報｜2026年6月9日（星期二）\n\n——————————————————————\n\n整體市場氛圍：技術反彈未竟，空頭格局仍主導\n\n昨日（6/8）美股因伊朗宣布停止對以色列軍事行動，觸發一波技術性反彈——S&P 500 收 7,442（+0.8%），Nasdaq 100 漲 1.5%，晶片股止跌回升，NVDA +2%、Marvell +4%、Micron +4%。然而，今日（6/9）美股開盤後立即再度走弱：NVDA 跌 4.58%、TSM 跌 4.07%、META 跌 6.72%、SPY 跌 2.36%。這個「一日反彈、次日再殺」的走法，清晰說明市場目前仍無趨勢反轉信號，昨日回升更多屬於短空軋壓與技術超賣修復，並非結構性多頭重啟。\n\n——————————————————————\n\n宏觀核心：CPI 與 FOMC 是本週真正主角\n\n中東局勢緩解帶來的最直接利多，是原油自 6 月初的 119 美元高點大幅回落至今日 Brent 93.95 美元（-0.32%），能源通膨溢酬部分消散。然而市場現在真正在等的是下週初公布的美國 5 月 CPI——若通膨數據因能源降溫而出現明顯回落，將成為外資回補台股、科技股止跌的關鍵觸發點。接下來 6/16 至 17 日，Fed 主席 Kevin Warsh 主持的 FOMC 會議及記者會，將是上半年最後一個重要政策錨點。Warsh 自 5 月 15 日接任以來始終維持鷹派基調，市場目前預期 2026 全年按兵不動，最早升息要等到 2027 年第三季。在這個利率框架下，科技高估值股的折現壓力尚未解除。\n\n此外需留意今日（6/9）美股盤面的一條新聞——阿里巴巴、百度、比亞迪遭美國國防部列入「支持中國軍事企業」名單，市場解讀為美中科技脫鉤壓力仍在持續升溫，短期對兩岸半導體供應鏈情緒有邊際性負面影響，值得追蹤。\n\n——————————————————————\n\n產業動態：AI 需求敘事分歧加劇\n\n半導體族群承受雙重壓力——基本面上，上週 Broadcom 法說會未上調 AI 晶片長期展望（6/4），引爆市場對 AI 需求成長速度低於預期的疑慮；技術面上，NVDA、TSM、聯發科等權值股今日再殺，顯示反彈動能薄弱。\n\n不過長線結構信號仍然正向：HBM 2026 年產能全數售罄、CoWoS 封裝缺口達 20 至 30%、超大型雲廠商 2026 年 AI capex 合計逾 7,500 億美元、台積電 3nm 預計下半年對大客戶漲價最高 15%，AI 基礎設施的實體需求並未消失，只是估值先行的市場在消化「現實追不上預期」的時差。\n\n另一個值得關注的訊號是 SpaceX IPO，Finnhub 官方資料顯示 6 月 12 日以每股 135 美元在 NASDAQ 掛牌，加上 Google 宣布的 300 億美元合作案，IPO 前夕相關題材將持續活躍，亦可能吸走市場部分流動性。\n\n蘋果方面，WWDC 2026 發布新一代 Siri 及 Apple Intelligence，但市場反應冷淡，股價今日仍跌 3.11%，顯示投資人對蘋果 AI 落地速度信心不足。\n\n——————————————————————\n\n加密市場：極度恐懼，空頭結構未解\n\n今日加密 Fear & Greed 指數為 10，分類為「極度恐懼」，較昨日僅回升 2 點。BTC 現報 62,763 美元（-0.11%），ETH 1,670 美元（-0.35%），SOL 66 美元（+0.37%）。BTC 多空比 1.86，表面偏多，但永續資金費率 -0.0030% 顯示空頭實際佈局仍積極，去槓桿過程尚未完成。上週末 BTC 跌破 60,000 美元後急彈至 63,000 美元以上，清算空單達 3.2 億美元，技術上完成短線軋空，但加密 ETF 連 12 日淨流出（累計 35.8 億美元）的結構性賣壓並未逆轉。整體而言，加密市場今日仍以觀望為宜，$60,000 為關鍵支撐，若失守將引發新一輪槓桿清算。\n\n——————————————————————\n\n台股：指數小漲掩護，籌碼面嚴峻\n\n今日台股加權指數收 44,017.56（+1.18%），看似收紅，但權值股全面重挫——聯發科 -5.35%、日月光 -6.41%、鴻海 -5.27%、台積電 -2.96%——指數收紅主要靠航運、金融與電子通路等族群撐盤，並非主軸回升。\n\n法人籌碼面持續惡化：外資今日賣超 938 億元，連三日分別為 826、756、938 億，三大法人合計賣超 1,342 億元，外資期貨空單逼近 7 萬口，為近年罕見的集中空頭佈局。僅投信逆勢買超 87.76 億元，主要承接廣達（AI 伺服器）、南電（載板）、國泰金。\n\n今日亮點集中在航運（長榮 2603、陽明 2609）與金融（國泰金 2882），前者受惠美西、美東航線 6 月 15 日前調漲報價題材，後者靠股東會旺季殖利率配息支撐。\n\n——————————————————————\n\n今日需特別關注\n\n一、明日（6/10）美國 5 月 CPI 公布，是本週最高權重數據，直接決定外資是否啟動回補台股及科技板塊。若 CPI 低於預期，修復行情可期；若持平或偏高，賣壓恐延續。\n\n二、SpaceX（SPCX）預計 6/12 正式掛牌，IPO 定價 135 美元，本週路演期間對市場資金有排擠效應，同時帶動馬斯克題材（特斯拉今日漲近 5%），留意相關族群聯動。\n\n三、台積電今日 2,295 元（-2.96%），需持續觀察外資是否藉機加碼或持續調節，此一訊號為外資對台灣科技股信心的重要判斷依據。\n\n——————————————————————\n\n今日操作基調：謹慎\n\n整體建議維持謹慎偏守。技術性反彈已出現但力道薄弱，美股今日再度走弱，台股法人籌碼面嚴峻，加密市場情緒極端低迷，當前市場缺乏短線做多的足夠理由。建議等待明日 CPI 數據確認通膨拐點，在數據落地前不宜追高，持有核心部位者可酌量減少暴露，靜待外資回補訊號明確後再行佈局。若 CPI 顯著降溫，AI 供應鏈（台積電、廣達、南電）及 BTC 60,000 美元以上的多單均可視為優先回補標的。\n",
+  "opportunities": [
+    {
+      "ticker": "MU",
+      "name": "Micron Technology",
+      "category": "us",
+      "price": "~$195",
+      "thesis": "2026年HBM產能全數售罄、DRAM capex年增14%，6/5跌13%為市場對AVGO財報的連帶誤殺，實際基本面未受損，定價錯誤明確，機構目標$286.54隱含+47%空間",
+      "catalyst": "2026-06-04半導體月報確認HBM至2027訂單飽和；6/8技術反彈+4%確認短期底部",
+      "risk": "AI需求天花板論述若擴散，恐引發進一步估值壓縮",
+      "target": "$286.54（+47%）",
+      "confidence": "HIGH",
+      "timeframe": "中期1-3月"
+    },
+    {
+      "ticker": "MRVL",
+      "name": "Marvell Technology",
+      "category": "us",
+      "price": "--",
+      "thesis": "S&P500正式納入帶動被動ETF強制買盤入場，AI ASIC設計贏單2026-2027兌現，6/5跌16%完全消化利空，市場低估指數納入的結構性買盤規模與持續性",
+      "catalyst": "2026-06月正式納入S&P500 ETF調倉買盤即將入場；2026-06-08反彈+4%確認底部",
+      "risk": "納入效應一次性；後續需AI ASIC收入實質兌現方能延續漲勢",
+      "target": "+25%至+35%",
+      "confidence": "HIGH",
+      "timeframe": "短期1-2週"
+    },
+    {
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices",
+      "category": "us",
+      "price": "~$520",
+      "thesis": "Oracle採用5萬張MI450 GPU確立AI晶片多元化趨勢，非NVDA算力需求崛起被市場低估；機構目標$626.67隱含+20%，Alphabet合作進一步擴大生態",
+      "catalyst": "2026-06-08 Oracle宣布OCI導入5萬張AMD MI450；Barclays/TD Cowen/Mizuho維持目標$626",
+      "risk": "NVDA Blackwell性能優勢若進一步擴大將壓縮AMD市占空間",
+      "target": "$626.67（+20.6%）",
+      "confidence": "MED",
+      "timeframe": "中期1-3月"
+    },
+    {
+      "ticker": "BTC",
+      "name": "Bitcoin",
+      "category": "crypto",
+      "price": "$62,763",
+      "thesis": "Fear&Greed指數10（極度恐懼）歷史上此水位後6個月中位數報酬+45%；$60K支撐守住，短空清算$3.2億完成，下跌動能衰竭，情緒面定價過度悲觀",
+      "catalyst": "2026-06-08短空清算$3.2億，BTC由$60K反彈至$63K；資金費率-0.003%顯示空頭過度佈局",
+      "risk": "ETF連12日淨流出$35.8億，機構持續撤場可能壓制反彈高度",
+      "target": "$74,000（+18%）",
+      "confidence": "MED",
+      "timeframe": "中期1-3月"
+    },
+    {
+      "ticker": "2609",
+      "name": "陽明海運",
+      "category": "tw",
+      "price": "--",
+      "thesis": "美西/美東航線6/15前調漲報價，Q2貨量強勁；2609估值低於長榮且籌碼相對輕，法人尚未大量買入，散戶忽視度高，為航運輪動中最具不對稱報酬的切入點",
+      "catalyst": "2026-06-08報導美國線6/15前調高美西/美東報價；Q2貨櫃三雄獲利看俏",
+      "risk": "中東霍姆茲海峽年底前難正常化，繞行成本持續侵蝕利潤",
+      "target": "+20%至+30%",
+      "confidence": "MED",
+      "timeframe": "短期1-2週"
+    },
+    {
+      "ticker": "XLE",
+      "name": "能源板塊ETF",
+      "category": "sector",
+      "price": "--",
+      "thesis": "油價由$119跌至$93市場過度定價中東緩解永久性；霍姆茲年底前無法正常化，能源YTD+22%疊加歷史最大單週機構淨流入，結構性配置週期未結束",
+      "catalyst": "2026-06-08 CNBC確認霍姆茲年底前無法正常化；能源板塊出現歷史最大單週機構淨流入",
+      "risk": "若伊朗協議全面落實且OPEC+快速增產，油價跌至$85以下",
+      "target": "+15%",
+      "confidence": "MED",
+      "timeframe": "中期1-3月"
+    },
+    {
+      "ticker": "INTC",
+      "name": "Intel Corporation",
+      "category": "us",
+      "price": "~$103",
+      "thesis": "Alphabet-Intel晶片合作（6/8）重塑AI供應鏈，市場聚焦NVDA之際三家券商同步升評；YTD+250%後籌碼換手完成，合作訊息尚未被充分定價",
+      "catalyst": "2026-06-08 Alphabet-Intel晶片合作宣布；Barclays/Wells Fargo/Mizuho本月同步升評轉向",
+      "risk": "YTD+250%高基期下獲利了結賣壓大；訂單兌現時程不確定",
+      "target": "$112.67（+9%）",
+      "confidence": "LOW",
+      "timeframe": "短期1-2週"
+    },
+    {
+      "ticker": "ETH",
+      "name": "Ethereum",
+      "category": "crypto",
+      "price": "$1,670",
+      "thesis": "ETH/BTC比值處歷史低位，超賣程度與BTC相當但無地緣政治連結；Fear&Greed10極度恐懼下歷史回彈彈性通常大於BTC，市場情緒面定價過度悲觀",
+      "catalyst": "2026-06-08 BTC完成$3.2億短空清算並站回$63K，山寨幣技術性修復空間打開",
+      "risk": "ETF連續流出格局未改；BTC若跌破$60K，ETH跌幅通常放大1.5倍",
+      "target": "$2,100（+26%）",
+      "confidence": "LOW",
+      "timeframe": "中期1-3月"
+    },
+    {
+      "ticker": "ORCL",
+      "name": "Oracle Corporation",
+      "category": "us",
+      "price": "--",
+      "thesis": "capex/收入比76%顯示AI押注規模僅次Mag7但估值明顯折價；5萬張AMD GPU確立非NVDA AI基礎設施路線，市場低估雲端+AI雙重增長潛力",
+      "catalyst": "2026-06-08宣布Q3 2026起OCI導入5萬張AMD MI450；AI capex達~$500億年增逾一倍",
+      "risk": "capex/收入比76%若AI商業化不及預期，現金流壓力將急速升溫",
+      "target": "+20%至+25%",
+      "confidence": "MED",
+      "timeframe": "中期1-3月"
+    },
+    {
+      "ticker": "2882",
+      "name": "國泰金控",
+      "category": "tw",
+      "price": "--",
+      "thesis": "Fed 2026全年按兵維持高利率對金融淨利差有利；外資大賣期間投信逆勢買超籌碼紮實；股東會旺季殖利率題材市場尚未充分定價，防禦性強",
+      "catalyst": "2026-06-08法人確認投信買超國泰金；Kevin Warsh鷹派立場強化高利率維持至2027預期",
+      "risk": "外資期貨空單近7萬口若加速去槓桿，金融股難逃系統性賣壓",
+      "target": "+10%至+15%",
+      "confidence": "MED",
+      "timeframe": "中期1-3月"
+    }
+  ],
+  "event_predictions": [
+    {
+      "event_date": "2026-06-10",
+      "event_title": "美國CPI（5月）",
+      "direction": "positive",
+      "magnitude": "medium",
+      "confidence": "MED",
+      "prediction": "能源回落料使CPI降至3.2%或以下，低於預期將引發股債雙漲、美元走弱",
+      "affect_assets": "SPY,QQQ,TLT,DXY,BTC",
+      "reasoning": "Brent由$119跌至$94，能源分項降溫；但服務業通膨黏性仍高"
+    },
+    {
+      "event_date": "2026-06-12",
+      "event_title": "SpaceX IPO上市",
+      "direction": "positive",
+      "magnitude": "medium",
+      "confidence": "MED",
+      "prediction": "首日預計大幅溢價開盤，TSLA受馬斯克財富效應帶動跟漲，太空概念股同步拉升",
+      "affect_assets": "SPCX,TSLA,太空概念股",
+      "reasoning": "Google $300億採購合約+AI資料中心衛星題材強化估值，市場熱度高"
+    },
+    {
+      "event_date": "2026-06-16",
+      "event_title": "FOMC利率決策會議首日",
+      "direction": "neutral",
+      "magnitude": "small",
+      "confidence": "HIGH",
+      "prediction": "按兵不動機率極高，市場焦點轉向點陣圖2027年路徑與Warsh措辭鷹鴿程度",
+      "affect_assets": "SPY,TLT,DXY,黃金",
+      "reasoning": "Warsh明確表態通膨仍高於目標，連三次維持利率，維持格局確定性高"
+    },
+    {
+      "event_date": "2026-06-17",
+      "event_title": "FOMC會議第二日",
+      "direction": "negative",
+      "magnitude": "medium",
+      "confidence": "MED",
+      "prediction": "SEP點陣圖若維持2027年才升息路徑，市場偏空反應；若暗示更早則大跌",
+      "affect_assets": "SPY,QQQ,TLT",
+      "reasoning": "當前定價已含2026全年按兵，任何鷹派意外均為負面衝擊"
+    },
+    {
+      "event_date": "2026-06-18",
+      "event_title": "FOMC決策聲明與記者會",
+      "direction": "negative",
+      "magnitude": "medium",
+      "confidence": "MED",
+      "prediction": "Warsh鷹派底色下措辭偏緊，降息預期進一步後延，科技股承壓；除非CPI數據顯著走軟",
+      "affect_assets": "全市場",
+      "reasoning": "Warsh首次主持、強調通膨未達標；美股本已高估值，利率維持高位壓制本益比"
+    },
+    {
+      "event_date": "2026-06-10",
+      "event_title": "Parabilis Medicines IPO",
+      "direction": "neutral",
+      "magnitude": "small",
+      "confidence": "LOW",
+      "prediction": "生技IPO在Fear&Greed極度恐懼（10）環境下承壓，定價可能落區間下緣",
+      "affect_assets": "PBLS,XBI",
+      "reasoning": "加密與股票市場雙重恐慌情緒，小型生技IPO認購意願偏低"
+    },
+    {
+      "event_date": "2026-06-10",
+      "event_title": "ERock Inc IPO",
+      "direction": "neutral",
+      "magnitude": "small",
+      "confidence": "LOW",
+      "prediction": "能源科技估值受油價回落影響，定價挑戰；Brent跌破$94壓制能源板塊溢價空間",
+      "affect_assets": "EROC",
+      "reasoning": "油價由$119高點大跌，能源板塊雖YTD+22%但短期動能減弱"
+    },
+    {
+      "event_date": "2026-07-08",
+      "event_title": "Conagra Brands財報",
+      "direction": "negative",
+      "magnitude": "small",
+      "confidence": "MED",
+      "prediction": "EPS預期$0.46低於前期$0.51，成本轉嫁困難，食品通膨緩解壓縮毛利空間",
+      "affect_assets": "CAG,XLP",
+      "reasoning": "消費者財務憂慮創2022年7月以來新高，食品需求彈性疲弱，定價力受限"
+    }
+  ],
+  "institutional": {
+    "research": [
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "firm": "Goldman Sachs",
+        "firm_background": "全球頂級投行，半導體研究團隊為業界權威",
+        "rating": "買入",
+        "rating_type": "buy",
+        "rating_change": "維持",
+        "prev_target": "$270",
+        "target": "$288",
+        "date": "2026-06-06",
+        "note": "Blackwell下半年放量，超大型雲廠商AI capex達7500億美元，維持首選推薦",
+        "core_logic": "Q2 EPS 1.87超預期10%，Blackwell架構獲AWS/Azure大單，CoWoS封裝產能擴張30%支撐2027年出貨",
+        "risk_note": "CoWoS產能瓶頸、中國出口限制擴大風險",
+        "action": "回調至$200-210區間可加碼",
+        "source_url": ""
+      },
+      {
+        "ticker": "INTC",
+        "name": "Intel",
+        "firm": "Barclays",
+        "firm_background": "英國跨國投行，半導體覆蓋完整",
+        "rating": "加碼",
+        "rating_type": "outperform",
+        "rating_change": "上調",
+        "prev_target": "$95",
+        "target": "$112",
+        "date": "2026-06-06",
+        "note": "YTD漲幅250%為年度最大輪動故事，空頭轉向，製程追趕進度優於預期",
+        "core_logic": "18A製程良率達標，Alphabet採用Intel代工AI晶片，2027年重奪製程領先地位預期升溫",
+        "risk_note": "台積電N2競爭、PC市場復甦不如預期",
+        "action": "突破$100後可追蹤動能",
+        "source_url": "https://www.benzinga.com/quote/INTC/analyst-ratings"
+      },
+      {
+        "ticker": "INTC",
+        "name": "Intel",
+        "firm": "Wells Fargo",
+        "firm_background": "美國大型銀行，科技研究團隊近年強化",
+        "rating": "加碼",
+        "rating_type": "outperform",
+        "rating_change": "上調",
+        "prev_target": "$90",
+        "target": "$110",
+        "date": "2026-06-06",
+        "note": "代工業務轉型見成效，與Alphabet合作為重要里程碑，重新評估估值倍數",
+        "core_logic": "Foundry營收2026年預估年增45%，毛利率回升軌道確立，P/E由12x上修至15x",
+        "risk_note": "代工客戶集中度高、資本支出壓力",
+        "action": "中長線持有，短線注意獲利了結壓力",
+        "source_url": "https://www.benzinga.com/quote/INTC/analyst-ratings"
+      },
+      {
+        "ticker": "AMD",
+        "name": "AMD",
+        "firm": "TD Cowen",
+        "firm_background": "北美中型投行，半導體研究具影響力",
+        "rating": "買入",
+        "rating_type": "buy",
+        "rating_change": "維持",
+        "prev_target": "$600",
+        "target": "$627",
+        "date": "2026-06-05",
+        "note": "MI450 GPU獲Oracle採用，資料中心GPU市佔持續擴大，維持樂觀評等",
+        "core_logic": "Oracle宣布導入5萬張MI450，AI GPU營收2026年預估達180億美元，對標NVDA市佔可達25%",
+        "risk_note": "NVIDIA Blackwell競爭壓力、毛利率承壓",
+        "action": "$500下方為長線買點",
+        "source_url": "https://www.benzinga.com/quote/AMD/analyst-ratings"
+      },
+      {
+        "ticker": "MU",
+        "name": "Micron",
+        "firm": "Morgan Stanley",
+        "firm_background": "全球頂級投行，記憶體產業研究深厚",
+        "rating": "加碼",
+        "rating_type": "outperform",
+        "rating_change": "維持",
+        "prev_target": "$275",
+        "target": "$287",
+        "date": "2026-06-03",
+        "note": "HBM產能2026-2027年全數售罄，DRAM capex年增14%支撐供需格局",
+        "core_logic": "HBM3e出貨量Q2環比增50%，ASP年增35%，2027年HBM營收佔比將達40%",
+        "risk_note": "傳統DRAM價格波動、三星產能追趕",
+        "action": "6/5暴跌13%後技術超賣，分批布局",
+        "source_url": ""
+      },
+      {
+        "ticker": "AVGO",
+        "name": "Broadcom",
+        "firm": "UBS",
+        "firm_background": "瑞士大型投行，全球半導體研究領先",
+        "rating": "買入",
+        "rating_type": "buy",
+        "rating_change": "維持",
+        "prev_target": "$280",
+        "target": "$295",
+        "date": "2026-06-04",
+        "note": "法說會未上調AI長期展望引發短期賣壓，但ASIC設計贏單將於CY26-27兌現",
+        "core_logic": "超大型雲廠商客製化AI晶片訂單backlog達150億美元，VMware整合效益2027年全面釋放",
+        "risk_note": "AI需求成長放緩疑慮、估值偏高",
+        "action": "回調至$230-240為中線買點",
+        "source_url": ""
+      },
+      {
+        "ticker": "MRVL",
+        "name": "Marvell",
+        "firm": "J.P. Morgan",
+        "firm_background": "全球最大投行之一，科技股覆蓋廣泛",
+        "rating": "加碼",
+        "rating_type": "outperform",
+        "rating_change": "維持",
+        "prev_target": "$140",
+        "target": "$165",
+        "date": "2026-06-03",
+        "note": "本月加入S&P 500，ETF被動買盤挹注，AI ASIC設計贏單為基本面驅動",
+        "core_logic": "雲端客製化晶片營收年增80%，加入S&P 500後被動資金流入估達20億美元",
+        "risk_note": "單一大客戶依賴、6/5暴跌16%後波動加大",
+        "action": "納入指數後觀察籌碼穩定再加碼",
+        "source_url": ""
+      },
+      {
+        "ticker": "TSM",
+        "name": "台積電",
+        "firm": "Mizuho",
+        "firm_background": "日本大型金融集團，亞洲半導體研究權威",
+        "rating": "買入",
+        "rating_type": "buy",
+        "rating_change": "維持",
+        "prev_target": "$420",
+        "target": "$450",
+        "date": "2026-06-07",
+        "note": "CEO重申2026年營收成長逾30%，AI晶片供給落後需求多年，3nm漲價15%",
+        "core_logic": "Q1 EPS $3.49超預期5.4%，N3/N2下半年量產，CoWoS產能缺口20-30%推升ASP",
+        "risk_note": "地緣政治風險、先進製程良率挑戰",
+        "action": "回調至$400下方可加碼",
+        "source_url": "https://finance.yahoo.com/quote/TSM/"
+      },
+      {
+        "ticker": "ORCL",
+        "name": "Oracle",
+        "firm": "Bernstein",
+        "firm_background": "獨立研究機構，雲端運算研究具公信力",
+        "rating": "買入",
+        "rating_type": "buy",
+        "rating_change": "上調",
+        "prev_target": "$210",
+        "target": "$250",
+        "date": "2026-06-08",
+        "note": "宣布導入5萬張AMD MI450，AI capex達收入76%，為Mag7外最大AI投資者",
+        "core_logic": "OCI雲端營收年增35%，AI基礎設施投資500億美元，2027年營收可達700億美元",
+        "risk_note": "capex回收期長、AWS/Azure競爭",
+        "action": "突破$220可順勢加碼",
+        "source_url": "https://www.cnbc.com/quotes/ORCL"
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft",
+        "firm": "Wedbush",
+        "firm_background": "美國中型投行，科技股研究活躍",
+        "rating": "加碼",
+        "rating_type": "outperform",
+        "rating_change": "維持",
+        "prev_target": "$520",
+        "target": "$550",
+        "date": "2026-06-05",
+        "note": "Azure動能追趕，Q1 EPS 4.27超預期4.9%，AI Copilot商業化加速",
+        "core_logic": "Azure營收年增29%，Copilot企業用戶突破50萬家，2027年AI營收佔比可達15%",
+        "risk_note": "雲端競爭加劇、監管風險",
+        "action": "回調至$400可中線布局",
+        "source_url": ""
+      }
+    ],
+    "earnings": [
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "note": "Blackwell放量推升獲利，AI GPU需求持續超預期，毛利率維持75%高位",
+        "eps": "1.87",
+        "eps_est": "1.70",
+        "eps_result": "beat",
+        "eps_surprise": "10%",
+        "revenue": "440億美元",
+        "rev_est": "415億美元",
+        "guidance": "Q3營收指引480億美元，高於共識460億",
+        "market_reaction": "盤後漲3%，但隨後回吐",
+        "key_metric": "資料中心營收年增85%",
+        "status": "已公布（Apr 2026）",
+        "status_type": "reported"
+      },
+      {
+        "ticker": "TSM",
+        "name": "台積電",
+        "note": "Q1創歷史新高，N3營收佔比達28%，AI晶片需求強勁推升毛利率",
+        "eps": "3.49",
+        "eps_est": "3.31",
+        "eps_result": "beat",
+        "eps_surprise": "5.44%",
+        "revenue": "259億美元",
+        "rev_est": "250億美元",
+        "guidance": "Q2營收指引280-290億美元",
+        "market_reaction": "盤後漲2.5%",
+        "key_metric": "毛利率66.2%創新高",
+        "status": "已公布（Mar 2026）",
+        "status_type": "reported"
+      },
+      {
+        "ticker": "META",
+        "name": "Meta",
+        "note": "AI廣告投放效率提升，Reels變現加速，營收超預期帶動獲利大增",
+        "eps": "7.31",
+        "eps_est": "6.71",
+        "eps_result": "beat",
+        "eps_surprise": "8.94%",
+        "revenue": "425億美元",
+        "rev_est": "408億美元",
+        "guidance": "Q2營收指引440-460億美元",
+        "market_reaction": "盤後漲4%後回落",
+        "key_metric": "DAU年增8%達34億",
+        "status": "已公布（Mar 2026）",
+        "status_type": "reported"
+      },
+      {
+        "ticker": "AAPL",
+        "name": "Apple",
+        "note": "iPhone營收持平，服務營收年增18%續創高，大中華區衰退收窄",
+        "eps": "2.01",
+        "eps_est": "1.92",
+        "eps_result": "beat",
+        "eps_surprise": "4.69%",
+        "revenue": "958億美元",
+        "rev_est": "945億美元",
+        "guidance": "未提供具體指引，強調AI投資加速",
+        "market_reaction": "盤後漲1%",
+        "key_metric": "服務營收年增18%",
+        "status": "已公布（Mar 2026）",
+        "status_type": "reported"
+      },
+      {
+        "ticker": "CAG",
+        "name": "Conagra Brands",
+        "note": "即將公布Q4財報，市場預期EPS 0.46，關注成本壓力與定價能力",
+        "eps": "",
+        "eps_est": "0.46",
+        "eps_result": "",
+        "eps_surprise": "",
+        "revenue": "",
+        "rev_est": "30億美元",
+        "guidance": "",
+        "market_reaction": "待公布",
+        "key_metric": "毛利率趨勢",
+        "status": "2026-07-08盤後公布",
+        "status_type": "upcoming"
+      },
+      {
+        "ticker": "AZZ",
+        "name": "AZZ Inc",
+        "note": "工業塗料與金屬加工，預期EPS 1.71，受惠基建投資週期",
+        "eps": "",
+        "eps_est": "1.71",
+        "eps_result": "",
+        "eps_surprise": "",
+        "revenue": "",
+        "rev_est": "4.2億美元",
+        "guidance": "",
+        "market_reaction": "待公布",
+        "key_metric": "訂單backlog變化",
+        "status": "2026-07-07公布",
+        "status_type": "upcoming"
+      },
+      {
+        "ticker": "PSMT",
+        "name": "PriceSmart",
+        "note": "中美洲會員制零售商，預期EPS 1.21，關注會員續約率",
+        "eps": "",
+        "eps_est": "1.21",
+        "eps_result": "",
+        "eps_surprise": "",
+        "revenue": "",
+        "rev_est": "12億美元",
+        "guidance": "",
+        "market_reaction": "待公布",
+        "key_metric": "同店銷售成長",
+        "status": "2026-07-08公布",
+        "status_type": "upcoming"
+      }
+    ],
+    "earnings_calls": [
+      {
+        "ticker": "AVGO",
+        "name": "Broadcom",
+        "date": "2026-06-04",
+        "ceo": "Hock Tan",
+        "key_quote": "AI晶片長期展望維持不變，我們對FY26-27營收目標有信心但不上調",
+        "guidance": "FY26 AI晶片營收維持350億美元指引",
+        "market_reaction": "當日股價-7%，帶崩半導體族群",
+        "watch_note": "未上調長期展望引發AI需求天花板疑慮",
+        "sentiment": "neutral"
+      },
+      {
+        "ticker": "TSM",
+        "name": "台積電",
+        "date": "2026-05-29",
+        "ceo": "C.C. Wei",
+        "key_quote": "AI晶片供應未來數年將持續落後需求，我們正全力擴產",
+        "guidance": "2026全年營收成長逾30%指引不變",
+        "market_reaction": "股價當週上漲3%",
+        "watch_note": "N2量產進度與CoWoS產能是關鍵",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "NVDA",
+        "name": "NVIDIA",
+        "date": "2026-05-28",
+        "ceo": "Jensen Huang",
+        "key_quote": "Blackwell是我們有史以來最成功的產品世代，需求遠超供給",
+        "guidance": "Q3營收指引480億美元，毛利率維持75%",
+        "market_reaction": "盤後漲3%後回吐",
+        "watch_note": "CoWoS封裝產能與客戶集中度",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft",
+        "date": "2026-05-27",
+        "ceo": "Satya Nadella",
+        "key_quote": "AI正在重塑每一個產品線，Copilot採用率超出預期",
+        "guidance": "Azure營收成長維持高雙位數",
+        "market_reaction": "股價當週漲2%",
+        "watch_note": "AI Copilot企業端變現進度",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "META",
+        "name": "Meta",
+        "date": "2026-05-26",
+        "ceo": "Mark Zuckerberg",
+        "key_quote": "AI讓我們的廣告系統效率提升了20%，這只是開始",
+        "guidance": "Q2營收指引440-460億美元",
+        "market_reaction": "盤後漲4%",
+        "watch_note": "Reels變現與Reality Labs虧損",
+        "sentiment": "positive"
+      }
+    ]
+  },
+  "calendar": {
+    "events": [
+      {
+        "date": "2026-06-10",
+        "time": "20:30",
+        "title": "美國CPI（5月）",
+        "desc": "中東緩解後通膨路徑關鍵",
+        "type": "data",
+        "tag": "CPI",
+        "impact": "high",
+        "expect": "年增3.2%",
+        "prev": "年增3.4%",
+        "affect_assets": "SPY,QQQ,TLT,DXY,BTC",
+        "watch": "能源價格回落是否反映"
+      },
+      {
+        "date": "2026-06-12",
+        "time": "全天",
+        "title": "SpaceX IPO上市",
+        "desc": "2026年最大科技IPO",
+        "type": "ipo",
+        "tag": "IPO",
+        "impact": "high",
+        "expect": "定價$135",
+        "prev": "",
+        "affect_assets": "SPCX,TSLA,太空概念股",
+        "watch": "首日漲幅與成交量"
+      },
+      {
+        "date": "2026-06-16",
+        "time": "全天",
+        "title": "FOMC利率決策會議首日",
+        "desc": "Kevin Warsh主導首次重要會議",
+        "type": "fed",
+        "tag": "FOMC",
+        "impact": "high",
+        "expect": "維持3.50-3.75%",
+        "prev": "3.50-3.75%",
+        "affect_assets": "SPY,TLT,DXY,黃金",
+        "watch": "點陣圖與2027年路徑"
+      },
+      {
+        "date": "2026-06-17",
+        "time": "全天",
+        "title": "FOMC會議第二日",
+        "desc": "SEP點陣圖公布",
+        "type": "fed",
+        "tag": "FOMC",
+        "impact": "high",
+        "expect": "",
+        "prev": "",
+        "affect_assets": "SPY,QQQ,TLT",
+        "watch": "升息預期時間點"
+      },
+      {
+        "date": "2026-06-18",
+        "time": "02:00",
+        "title": "FOMC決策聲明與記者會",
+        "desc": "Warsh首次主持記者會",
+        "type": "fed",
+        "tag": "FOMC",
+        "impact": "high",
+        "expect": "按兵不動",
+        "prev": "",
+        "affect_assets": "全市場",
+        "watch": "通膨與就業措辭變化"
+      },
+      {
+        "date": "2026-06-10",
+        "time": "全天",
+        "title": "Parabilis Medicines IPO",
+        "desc": "生技新藥公司上市",
+        "type": "ipo",
+        "tag": "IPO",
+        "impact": "mid",
+        "expect": "$17-19",
+        "prev": "",
+        "affect_assets": "PBLS,XBI",
+        "watch": "生技IPO市場情緒"
+      },
+      {
+        "date": "2026-06-10",
+        "time": "全天",
+        "title": "ERock Inc IPO",
+        "desc": "能源科技公司上市",
+        "type": "ipo",
+        "tag": "IPO",
+        "impact": "mid",
+        "expect": "$20-23",
+        "prev": "",
+        "affect_assets": "EROC",
+        "watch": "能源科技估值"
+      },
+      {
+        "date": "2026-06-11",
+        "time": "全天",
+        "title": "Forbright Inc IPO",
+        "desc": "金融服務公司上市",
+        "type": "ipo",
+        "tag": "IPO",
+        "impact": "low",
+        "expect": "$18-20",
+        "prev": "",
+        "affect_assets": "FRBT",
+        "watch": "金融股IPO需求"
+      },
+      {
+        "date": "2026-06-09",
+        "time": "全天",
+        "title": "WhiteHawk Income Corp IPO",
+        "desc": "收益型投資公司上市",
+        "type": "ipo",
+        "tag": "IPO",
+        "impact": "low",
+        "expect": "$25-27",
+        "prev": "",
+        "affect_assets": "WHK",
+        "watch": "收益型產品需求"
+      },
+      {
+        "date": "2026-07-08",
+        "time": "盤後",
+        "title": "Conagra Brands財報",
+        "desc": "食品大廠Q4財報",
+        "type": "earnings",
+        "tag": "財報",
+        "impact": "mid",
+        "expect": "EPS $0.46",
+        "prev": "EPS $0.51",
+        "affect_assets": "CAG,XLP",
+        "watch": "成本轉嫁能力"
+      },
+      {
+        "date": "2026-07-07",
+        "time": "全天",
+        "title": "AZZ Inc財報",
+        "desc": "工業塗料Q1財報",
+        "type": "earnings",
+        "tag": "財報",
+        "impact": "low",
+        "expect": "EPS $1.71",
+        "prev": "",
+        "affect_assets": "AZZ",
+        "watch": "基建訂單"
+      }
+    ],
+    "high_impact": [
+      {
+        "date": "2026-06-10",
+        "title": "美國CPI（5月）",
+        "desc": "確認中東緩解後通膨是否降溫",
+        "impact": "high",
+        "affect_assets": "SPY,QQQ,TLT,BTC"
+      },
+      {
+        "date": "2026-06-12",
+        "title": "SpaceX IPO",
+        "desc": "2026年最大科技IPO，定價$135",
+        "impact": "high",
+        "affect_assets": "SPCX,TSLA,太空概念股"
+      },
+      {
+        "date": "2026-06-16",
+        "title": "FOMC會議",
+        "desc": "Warsh主導，關注點陣圖",
+        "impact": "high",
+        "affect_assets": "全市場"
+      },
+      {
+        "date": "2026-06-18",
+        "title": "FOMC決策公布",
+        "desc": "利率決策與記者會",
+        "impact": "high",
+        "affect_assets": "SPY,TLT,DXY"
+      }
+    ],
+    "future": [
+      {
+        "date": "2026-07-初",
+        "title": "Q2財報季啟動",
+        "desc": "大型銀行率先公布，關注AI投資回報"
+      },
+      {
+        "date": "2026-07-08",
+        "title": "Conagra財報",
+        "desc": "消費必需品龍頭Q4業績"
+      },
+      {
+        "date": "2026-06-下旬",
+        "title": "Marvell納入S&P 500生效",
+        "desc": "被動資金調倉完成"
+      }
+    ]
+  }
+}
