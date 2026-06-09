@@ -418,7 +418,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <span class="hero-h1-accent">Decoded Daily.</span>
       <span class="hero-h1-zh">每天早上，一份看懂全球的情報</span>
     </h1>
-    <p class="hero-desc reveal reveal-delay-2">整合加密貨幣、美股、台股與宏觀訊號，每日產出雙語情報簡報。不是新聞聚合，是真正的決策支援。</p>
+    <p class="hero-desc reveal reveal-delay-2">整合加密貨幣、美股、台股與宏觀訊號，每日由 PulseAI 產出繁體中文情報簡報。不是新聞聚合，是真正的決策支援。</p>
     <div class="hero-cta reveal reveal-delay-3">
       <button class="btn-hero-p" onclick="window.location.href='/brief.html'">
         查看今日簡報
@@ -429,7 +429,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <p class="hero-note reveal reveal-delay-4">
       <span class="hero-note-check">✓</span> 無需信用卡 &nbsp;·&nbsp;
       <span class="hero-note-check">✓</span> 每日更新 &nbsp;·&nbsp;
-      <span class="hero-note-check">✓</span> 繁中 + English
+      <span class="hero-note-check">✓</span> 繁體中文 · 台北時間基準
     </p>
   </div>
 
@@ -458,6 +458,78 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </div>
     <div class="pc-fade">
       <button class="pc-cta" onclick="window.location.href='/brief.html'">查看今日完整簡報 →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PULSEAI ENGINE ═══ -->
+<style>
+.pulse-sec{background:linear-gradient(165deg,#0d1630 0%,#152244 55%,#1d2d5a 100%);padding:84px 32px;position:relative;overflow:hidden;}
+.pulse-sec::before{content:"";position:absolute;top:-40%;right:-10%;width:560px;height:560px;background:radial-gradient(circle,rgba(14,165,233,.18),transparent 70%);pointer-events:none;}
+.pulse-inner{max-width:1080px;margin:0 auto;position:relative;}
+.pulse-header{text-align:center;max-width:680px;margin:0 auto 44px;}
+.pulse-eyebrow{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-en);font-size:11px;font-weight:600;letter-spacing:.14em;color:#7dd3fc;text-transform:uppercase;margin-bottom:18px;}
+.pulse-h2{font-family:var(--font-zh);font-size:34px;font-weight:700;color:#fff;line-height:1.3;letter-spacing:-.01em;margin-bottom:16px;}
+.pulse-sub{font-family:var(--font-zh);font-size:15.5px;line-height:1.75;color:rgba(255,255,255,.62);}
+.pulse-caps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:40px;}
+.pulse-cap{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:24px 22px;transition:border-color .2s,transform .2s;}
+.pulse-cap:hover{border-color:rgba(125,211,252,.4);transform:translateY(-3px);}
+.pcap-icon{font-size:24px;margin-bottom:12px;}
+.pcap-name{font-family:var(--font-zh);font-size:17px;font-weight:700;color:#fff;margin-bottom:9px;}
+.pcap-desc{font-family:var(--font-zh);font-size:13px;line-height:1.7;color:rgba(255,255,255,.55);margin-bottom:14px;}
+.pcap-tag{display:inline-block;font-family:var(--font-en);font-size:10.5px;font-weight:600;letter-spacing:.04em;color:#fcd34d;background:rgba(201,168,76,.14);border:1px solid rgba(201,168,76,.3);border-radius:999px;padding:3px 11px;}
+.pulse-personas{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:26px 26px 22px;}
+.pp-label{font-family:var(--font-zh);font-size:13px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.02em;margin-bottom:18px;text-align:center;}
+.pp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.pp-chip{display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:11px 13px;}
+.pp-mono{flex-shrink:0;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-en);font-size:13px;font-weight:700;color:#fff;background:linear-gradient(135deg,#1e40af,#0ea5e9);letter-spacing:.02em;}
+.pp-meta{min-width:0;}
+.pp-name{font-family:var(--font-zh);font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pp-focus{font-family:var(--font-zh);font-size:10.5px;color:rgba(255,255,255,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+@media(max-width:860px){.pulse-caps{grid-template-columns:1fr;}.pp-grid{grid-template-columns:repeat(2,1fr);}.pulse-h2{font-size:27px;}}
+@media(max-width:520px){.pp-grid{grid-template-columns:1fr;}}
+</style>
+<section class="pulse-sec">
+  <div class="pulse-inner">
+    <div class="pulse-header reveal">
+      <div class="pulse-eyebrow">⚡ Powered by PulseAI</div>
+      <h2 class="pulse-h2">每一份判斷，背後都是同一套 AI 引擎</h2>
+      <p class="pulse-sub">PulseAI 是驅動 Project X 的分析引擎。它每天蒐集總經、個經、美股、市場風向四維資料，再轉成可閱讀的判斷——從名家視角的市場評述，到個股深度分析與情境推演。</p>
+    </div>
+
+    <div class="pulse-caps reveal">
+      <div class="pulse-cap">
+        <div class="pcap-icon">📰</div>
+        <div class="pcap-name">名人專刊</div>
+        <div class="pcap-desc">以七位投資名家的思維框架，對當日市場連載評述；遇到關鍵轉折，名家會自行判斷加發臨時特刊。每期延續上一期論點，串成有記憶的判斷脈絡。</div>
+        <div class="pcap-tag">PRO 專屬</div>
+      </div>
+      <div class="pulse-cap">
+        <div class="pcap-icon">🤖</div>
+        <div class="pcap-name">AI 個股深度分析</div>
+        <div class="pcap-desc">輸入任一標的，PulseAI 彙整基本面、技術面、籌碼與新聞，產出結構化的多面向分析報告。</div>
+        <div class="pcap-tag">PRO · 1 點 / 次</div>
+      </div>
+      <div class="pulse-cap">
+        <div class="pcap-icon">🎲</div>
+        <div class="pcap-name">推演沙盤</div>
+        <div class="pcap-desc">提出假設情境，PulseAI 推演多種結果的機率與後續驗證，把「如果」變成可追蹤的判斷。</div>
+        <div class="pcap-tag">PRO · 4 點 / 次</div>
+      </div>
+    </div>
+
+    <div class="pulse-personas reveal">
+      <div class="pp-label">名人專刊 · 七位名家人格，每日連載</div>
+      <div class="pp-grid">
+        <div class="pp-chip"><span class="pp-mono">WB</span><span class="pp-meta"><span class="pp-name">華倫・巴菲特</span><span class="pp-focus">內在價值與優質生意</span></span></div>
+        <div class="pp-chip"><span class="pp-mono">CM</span><span class="pp-meta"><span class="pp-name">查理・蒙格</span><span class="pp-focus">多元思維模型與生意品質</span></span></div>
+        <div class="pp-chip"><span class="pp-mono">RD</span><span class="pp-meta"><span class="pp-name">瑞・達利歐</span><span class="pp-focus">總經機器與週期定位</span></span></div>
+        <div class="pp-chip"><span class="pp-mono">HM</span><span class="pp-meta"><span class="pp-name">霍華・馬克斯</span><span class="pp-focus">市場溫度與風險姿態</span></span></div>
+        <div class="pp-chip"><span class="pp-mono">SD</span><span class="pp-meta"><span class="pp-name">史丹利・德魯肯米勒</span><span class="pp-focus">總體趨勢與流動性前瞻</span></span></div>
+        <div class="pp-chip"><span class="pp-mono">MB</span><span class="pp-meta"><span class="pp-name">麥可・貝瑞</span><span class="pp-focus">逆向深度價值與泡沫偵察</span></span></div>
+        <div class="pp-chip"><span class="pp-mono">CW</span><span class="pp-meta"><span class="pp-name">凱西・伍德</span><span class="pp-focus">破壞式創新與指數成長</span></span></div>
+        <div class="pp-chip" style="justify-content:center;"><a href="/pages/columns.html" style="font-family:var(--font-zh);font-size:12.5px;font-weight:600;color:#7dd3fc;text-decoration:none;">看名人專刊 →</a></div>
+      </div>
     </div>
   </div>
 </section>
@@ -635,11 +707,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
           <tr><td colspan="3" class="ft-group-row">會員中心（Pro 專屬）</td></tr>
           <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🎯</span>會員中心<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">自選看板 + 共識溫度計 + 事件追蹤 + 訊號雷達</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🤖</span>AI 個股分析 + 推演沙盤<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">會員中心內，依點數</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">用訂閱點數</span></td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🤖</span>AI 個股分析 + 推演沙盤<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">Powered by PulseAI · 依點數</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">用訂閱點數</span></td></tr>
           <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">🌍</span>全球事件追蹤<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">跨日國際大事時間軸</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">名家視角 + 進階工具（Pro 專屬）</td></tr>
-          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📰</span>名人專刊<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">巴菲特 / 蒙格 / 達利歐 / 馬克斯等名家思維框架評述</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📰</span>名人專刊<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">Powered by PulseAI · 七位名家人格每日連載</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr class="ft-row"><td><span style="font-size:13px;margin-right:7px;">📈</span>互動圖表<span style="font-size:12px;color:var(--gray-400);margin-left:6px;">K 線 + 訂單簿熱力 + 技術訊號</span></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">Pro 專屬</td></tr>
@@ -688,7 +760,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">包含所有免費功能</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">每月 30 訂閱點數（AI 分析 / 推演沙盤）</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">全球事件追蹤（跨日國際大事時間軸）</span></li>
-          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">名人專刊（巴菲特 / 蒙格 / 達利歐等名家思維評述）</span></li>
+          <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">名人專刊（PulseAI · 七位名家人格每日連載）</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">互動圖表（K 線 + 訂單簿熱力 + 技術訊號）</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">解鎖全部歷史報告完整內容</span></li>
           <li class="plan-feat"><span class="pf-check-pro">✓</span><span class="plan-feat-text" style="color:rgba(255,255,255,.8)">訂閱點數每月自動重置</span></li>
@@ -915,6 +987,7 @@ async function doSignup(){
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 </script>
 <script src="/js/support.js"></script>
+<script src="/shared/nav.js"></script>
 <script src="/shared/footer.js"></script>
 </body>
 </html>
