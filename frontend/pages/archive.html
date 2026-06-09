@@ -204,6 +204,7 @@ function renderLock(){
   '</div>';
 }
 
+var reportCache = {};   // 已載入的日期 → 報告內容，重複點擊免重新請求
 async function loadReport(date){
   currentDate = date;
   document.querySelectorAll('.date-item').forEach(function(el){
@@ -215,15 +216,24 @@ async function loadReport(date){
     panel.innerHTML = renderLock();
     return;
   }
+  // 快取命中 → 立即渲染，不打後端
+  if(reportCache[date]){ panel.innerHTML = renderReport(reportCache[date]); return; }
   panel.innerHTML = '<div class="empty-state">載入中...</div>';
+  // 後端為 Render 免費方案，閒置後首次請求需喚醒，顯示提示避免看起來像當掉
+  var slowTimer = setTimeout(function(){
+    if(currentDate === date) panel.innerHTML = '<div class="empty-state">伺服器喚醒中，首次載入約需 20–30 秒，請稍候…</div>';
+  }, 4000);
   try {
     var res = await fetch(API+'/history/'+date, { headers: { 'Authorization': 'Bearer '+(accessToken||'') } });
+    clearTimeout(slowTimer);
     if(res.status === 403){ panel.innerHTML = renderLock(); return; }
     if(!res.ok) throw new Error('not found');
     var d = await res.json();
-    panel.innerHTML = renderReport(d);
+    reportCache[date] = d;
+    if(currentDate === date) panel.innerHTML = renderReport(d);   // 使用者可能已切換日期，避免覆蓋
   } catch(e){
-    panel.innerHTML = '<div class="empty-state">無法載入 '+date+' 的報告</div>';
+    clearTimeout(slowTimer);
+    if(currentDate === date) panel.innerHTML = '<div class="empty-state">無法載入 '+date+' 的報告</div>';
   }
 }
 
@@ -291,6 +301,8 @@ function escHtml(s){
 
 // 日期清單獨立載入，不依賴 Supabase（即使 CDN/驗證失敗，清單仍會出現）
 loadDateList();
+// 預熱：頁面載入即喚醒 Render 後端，讓冷啟動與使用者瀏覽清單時間重疊
+fetch(API + '/health').catch(function(){});
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
