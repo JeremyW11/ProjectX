@@ -277,6 +277,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .side-ico{font-size:15px;width:18px;text-align:center;flex-shrink:0;}
 .side-star{color:var(--pro-gold);font-size:11px;margin-left:auto;}
 .side-item.active .side-star{color:#fde68a;}
+.side-sec{font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);text-transform:uppercase;padding:12px 10px 5px;border-top:1px solid var(--gray-100);margin-top:8px;}
 .hub-credits{margin-top:10px;padding:11px 12px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:var(--r-md);}
 .hub-main{flex:1;min-width:0;}
 .hub-cat{display:none;}
@@ -300,6 +301,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   .hub-layout{display:block;}
   .hub-side{position:static;width:auto;display:flex;gap:6px;overflow-x:auto;padding:10px;margin-bottom:16px;-webkit-overflow-scrolling:touch;}
   .hub-avatar,.hub-credits{display:none;}
+  .side-sec{border-top:none;margin-top:0;padding:9px 4px 0 10px;flex-shrink:0;white-space:nowrap;}
   .side-item{width:auto;white-space:nowrap;flex-shrink:0;margin-bottom:0;}
 }
 
@@ -465,6 +467,10 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <button class="side-item" data-cat="stories" onclick="goCat('stories',this)"><span class="side-ico">🌍</span>全球追蹤</button>
       <button class="side-item" data-cat="history" onclick="goCat('history',this)"><span class="side-ico">📂</span>歷史報告</button>
       <button class="side-item" data-cat="account" onclick="goCat('account',this)"><span class="side-ico">⚙️</span>帳戶方案</button>
+      <div class="side-sec">Pro Tools</div>
+      <a class="side-item" href="/pages/columns.html"><span class="side-ico">📰</span>名家觀點<span class="side-star">★</span></a>
+      <a class="side-item" href="/pages/chart.html"><span class="side-ico">📈</span>互動圖表<span class="side-star">★</span></a>
+      <a class="side-item" href="/pages/performance.html"><span class="side-ico">📜</span>歷史戰績<span class="side-star">★</span></a>
       <div class="hub-credits">
         <div style="font-size:10px;color:var(--gray-400);letter-spacing:.06em;font-family:var(--font-en);margin-bottom:4px;">MY CREDITS</div>
         <a href="/pages/credits.html" id="hub-credits-val" title="前往購點" style="font-size:18px;font-weight:700;color:var(--navy-700);font-family:var(--font-en);text-decoration:none;">⚡ — 點</a>
