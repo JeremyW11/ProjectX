@@ -22,14 +22,17 @@
   --pro-gold:#c9a84c; --pro-gold-light:#f5e9c8; --pro-gold-dark:#8a6a1f;
   --font-en:'DM Sans',sans-serif;
   --font-zh:'Noto Sans TC',sans-serif;
+  --font-display:'DM Serif Display',Georgia,serif;
   --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:24px;
   --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+  --shadow-lift:0 2px 6px rgba(15,23,42,.08),0 12px 32px rgba(15,23,42,.10);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:16px;-webkit-font-smoothing:antialiased;}
 body{background:radial-gradient(1120px 640px at 94% -14%, rgba(37,99,235,.46), transparent 64%),radial-gradient(940px 720px at -10% 4%, rgba(51,65,85,.40), transparent 64%),radial-gradient(820px 620px at 50% 118%, rgba(29,78,216,.28), transparent 66%),linear-gradient(160deg, #dbe2ef 0%, #f4f6fb 56%);background-attachment:fixed;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
 a{text-decoration:none;color:inherit;}
 button{cursor:pointer;border:none;background:none;font-family:inherit;}
+.num{font-family:var(--font-en);font-variant-numeric:tabular-nums;}
 
 .topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:100;}
 .topbar-logo{display:flex;align-items:center;gap:10px;margin-right:36px;}
@@ -46,11 +49,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;font-family:var(--font-en);}
 @media(max-width:768px){.header-nav{display:none;}}
 
-.page{max-width:960px;margin:0 auto;padding:88px 24px 64px;}
-.page-header{margin-bottom:24px;}
-.page-title{font-size:26px;font-weight:600;color:var(--navy-900);}
-.page-title-sub{font-size:14px;color:var(--gray-400);font-family:var(--font-en);font-weight:400;margin-left:8px;}
-.page-update{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
+.page{max-width:1020px;margin:0 auto;padding:88px 24px 64px;}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap;}
+.page-title{font-family:var(--font-display);font-size:30px;font-weight:400;color:var(--navy-950);line-height:1.2;}
+.page-title-sub{font-size:14px;color:var(--gray-400);font-family:var(--font-en);font-weight:400;margin-left:8px;font-style:italic;}
+.page-update{font-size:12.5px;color:var(--gray-500);margin-top:5px;}
+.update-chip{display:inline-flex;align-items:center;gap:7px;background:var(--white);border:1px solid var(--gray-200);border-radius:20px;padding:6px 14px;font-size:12px;color:var(--gray-600);box-shadow:var(--shadow-card);font-family:var(--font-en);white-space:nowrap;}
+.update-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--green-600);animation:pulse 2s infinite;}
 
 .pro-gate{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--r-xl);padding:48px 40px;text-align:center;color:var(--white);margin-bottom:20px;}
 .pro-gate-icon{font-size:36px;color:var(--pro-gold);margin-bottom:12px;}
@@ -61,37 +66,138 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 #perf-view{display:none;}
 #perf-view.active{display:block;}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px;}
-.stat-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--shadow-card);}
+
+/* 進場顯示 */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);}
+.rv.on{opacity:1;transform:none;}
+
+/* ── hero：環形儀表 + 指標卡 ── */
+.hero-grid{display:grid;grid-template-columns:300px 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:820px){.hero-grid{grid-template-columns:1fr;}}
+.gauge-card{background:linear-gradient(150deg,var(--navy-900) 0%,var(--navy-800) 70%,var(--navy-700));border-radius:var(--r-xl);padding:26px;color:var(--white);position:relative;overflow:hidden;box-shadow:var(--shadow-lift);}
+.gauge-card::after{content:'';position:absolute;inset:0;background:radial-gradient(420px 260px at 110% -20%, rgba(59,130,246,.35), transparent 70%);pointer-events:none;}
+.gauge-label{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.12em;font-weight:600;font-family:var(--font-en);}
+.gauge-label b{color:var(--pro-gold);font-weight:700;}
+.gauge-wrap{display:flex;justify-content:center;margin:14px 0 6px;position:relative;}
+.gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.gauge-value{font-size:42px;font-weight:700;font-family:var(--font-en);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1;}
+.gauge-value small{font-size:20px;font-weight:500;color:rgba(255,255,255,.6);}
+.gauge-sub{font-size:11.5px;color:rgba(255,255,255,.5);margin-top:6px;}
+.gauge-foot{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.65);border-top:1px solid rgba(255,255,255,.12);padding-top:12px;margin-top:10px;position:relative;}
+.gauge-foot b{color:#fff;font-family:var(--font-en);}
+
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+@media(max-width:560px){.stat-grid{grid-template-columns:1fr;}}
+.stat-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:18px 20px 14px;box-shadow:var(--shadow-card);display:flex;flex-direction:column;transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s;}
+.stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);}
 .stat-label{font-size:12px;color:var(--gray-500);margin-bottom:6px;}
-.stat-value{font-size:26px;font-weight:600;font-family:var(--font-en);color:var(--navy-900);}
+.stat-value{font-size:27px;font-weight:600;font-family:var(--font-en);font-variant-numeric:tabular-nums;color:var(--navy-900);letter-spacing:-.01em;}
 .stat-value.green{color:var(--green-600);} .stat-value.red{color:var(--red-600);}
-.stat-foot{font-size:11.5px;color:var(--gray-400);margin-top:4px;}
+.stat-value .unit{font-size:15px;color:var(--gray-400);font-weight:400;}
+.stat-foot{font-size:11.5px;color:var(--gray-400);margin-top:auto;padding-top:8px;}
+.tally{display:flex;gap:4px;margin-top:10px;height:6px;border-radius:3px;overflow:hidden;}
+.tally i{display:block;height:100%;transform:scaleX(0);transform-origin:left;transition:transform .8s cubic-bezier(.2,.7,.2,1);}
+.tally .t-hit{background:var(--green-600);} .tally .t-partial{background:var(--amber-600);} .tally .t-miss{background:var(--red-600);}
+.on .tally i{transform:scaleX(1);}
+.tally-legend{display:flex;gap:12px;font-size:11px;color:var(--gray-500);margin-top:7px;}
+.tally-legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;}
+.tally-legend .lg-hit i{background:var(--green-600);} .tally-legend .lg-partial i{background:var(--amber-600);} .tally-legend .lg-miss i{background:var(--red-600);}
 
-.card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow-card);margin-bottom:20px;}
-.card h2{font-size:16px;font-weight:600;color:var(--navy-900);margin-bottom:4px;}
+/* ── 深藍走勢卡 ── */
+.chart-card{background:linear-gradient(165deg,#0d1630 0%,#152244 60%,#1d2d5a 100%);border-radius:var(--r-xl);padding:24px 26px;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:var(--shadow-lift);}
+.chart-card::before{content:"";position:absolute;top:-50%;right:-10%;width:480px;height:480px;background:radial-gradient(circle,rgba(14,165,233,.16),transparent 70%);pointer-events:none;}
+.chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap;position:relative;}
+.chart-title{font-size:15px;font-weight:600;color:#fff;}
+.chart-kpis{display:flex;gap:18px;font-size:11px;color:rgba(255,255,255,.4);font-family:var(--font-en);}
+.chart-kpis b{color:#7dd3fc;font-weight:600;}
+.chart-desc{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:16px;position:relative;}
+.chart-box{position:relative;}
+#trend{display:block;width:100%;height:250px;cursor:crosshair;}
+.tooltip{position:absolute;pointer-events:none;background:#fff;color:var(--navy-900);border-radius:8px;padding:8px 12px;font-size:12px;line-height:1.6;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.35);z-index:5;}
+.tooltip.show{opacity:1;transform:none;}
+.tooltip .tt-date{color:var(--gray-400);font-family:var(--font-en);font-size:11px;}
+.tooltip .tt-rate{font-family:var(--font-en);font-weight:700;font-size:15px;color:var(--navy-600);}
+.tooltip .tt-n{color:var(--gray-500);}
+
+/* ── 最佳/最差雙面板 ── */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:720px){.split{grid-template-columns:1fr;}}
+.panel{border-radius:var(--r-xl);overflow:hidden;border:1px solid rgba(255,255,255,.30);box-shadow:0 24px 64px -30px rgba(30,58,138,.26);}
+.panel-header{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;}
+.panel-header.win{background:rgba(255,255,255,.62);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.4);}
+.panel-header.loss{background:rgba(30,41,59,.90);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1);}
+.panel-title{font-family:var(--font-en);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+.panel-title.win{color:var(--gray-500);} .panel-title.loss{color:rgba(255,255,255,.7);}
+.panel-badge{font-size:11px;font-weight:600;font-family:var(--font-zh);padding:3px 10px;border-radius:20px;}
+.panel-badge.win{background:var(--green-100);color:var(--green-700);}
+.panel-badge.loss{background:rgba(220,38,38,.18);color:#f87171;}
+.panel-body.win{background:rgba(255,255,255,.58);backdrop-filter:blur(16px);padding:14px 20px;}
+.panel-body.loss{background:rgba(15,23,42,.88);backdrop-filter:blur(14px);padding:14px 20px;}
+.case{padding:11px 0;border-bottom:1px solid var(--gray-100);}
+.panel-body.loss .case{border-bottom-color:rgba(255,255,255,.07);}
+.case:last-child{border-bottom:none;}
+.case .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;gap:8px;}
+.case .title{font-size:13.5px;font-weight:600;color:var(--navy-950);}
+.case .title .tk{font-family:var(--font-en);color:var(--navy-600);}
+.panel-body.loss .case .title{color:rgba(255,255,255,.85);}
+.panel-body.loss .case .title .tk{color:#7dd3fc;}
+.case .pct{font-family:var(--font-en);font-weight:700;font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.case .pct.up{color:var(--green-600);} .case .pct.dn{color:var(--red-600);}
+.panel-body.loss .case .pct.dn{color:#f87171;} .panel-body.loss .case .pct.up{color:#4ade80;}
+.case .note{font-size:12px;color:var(--gray-500);line-height:1.6;}
+.panel-body.loss .case .note{color:rgba(255,255,255,.5);}
+.case .meta{font-size:10.5px;color:var(--gray-400);font-family:var(--font-en);margin-top:5px;letter-spacing:.03em;}
+.panel-body.loss .case .meta{color:rgba(255,255,255,.3);}
+
+/* ── 帳目 ── */
+.card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-xl);padding:22px 24px;box-shadow:var(--shadow-card);margin-bottom:16px;}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap;}
+.card h2{font-size:16px;font-weight:600;color:var(--navy-900);}
 .card .desc{font-size:12.5px;color:var(--gray-500);margin-bottom:16px;}
-svg text{font-family:var(--font-en);}
+.card-kpis{display:flex;gap:18px;font-size:11.5px;color:var(--gray-500);font-family:var(--font-en);}
+.card-kpis b{color:var(--navy-700);}
+.ledger-head,.lrow{display:grid;grid-template-columns:84px minmax(110px,1fr) 64px 1fr 78px;gap:10px;align-items:center;}
+.ledger-head{font-size:11px;color:var(--gray-500);font-weight:600;padding:0 10px 8px;border-bottom:1px solid var(--gray-200);}
+.lrow{padding:7px 10px;border-radius:var(--r-sm);font-size:13px;transition:background .15s;}
+.lrow:hover{background:var(--navy-50);}
+.lrow+.lrow{border-top:1px solid var(--gray-100);}
+.l-date{font-size:11.5px;color:var(--gray-400);font-family:var(--font-en);}
+.l-name{display:flex;align-items:baseline;gap:7px;min-width:0;}
+.l-tk{font-family:var(--font-en);font-weight:600;color:var(--navy-700);white-space:nowrap;}
+.l-nm{font-size:12px;color:var(--gray-500);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.l-cat{font-size:10px;font-weight:600;padding:2px 8px;border-radius:3px;text-align:center;font-family:var(--font-en);letter-spacing:.04em;}
+.l-cat.us{background:#f0fdf4;color:#166534;}
+.l-cat.tw{background:#fdf4ff;color:#7e22ce;}
+.l-cat.crypto{background:#fef3c7;color:#92400e;}
+.l-cat.sector,.l-cat.other{background:#eff6ff;color:#1d4ed8;}
+.l-bar{position:relative;height:18px;}
+.l-bar::before{content:'';position:absolute;left:50%;top:-4px;bottom:-4px;width:1px;background:var(--gray-200);}
+.l-bar i{position:absolute;top:3px;height:12px;border-radius:3px;transform:scaleX(0);transition:transform .55s cubic-bezier(.2,.7,.2,1);}
+.l-bar i.up{left:50%;background:linear-gradient(90deg,rgba(22,163,74,.55),var(--green-600));transform-origin:left;}
+.l-bar i.dn{right:50%;background:linear-gradient(270deg,rgba(220,38,38,.5),var(--red-600));transform-origin:right;}
+.lrow.on .l-bar i{transform:scaleX(1);}
+.l-pct{font-family:var(--font-en);font-weight:600;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;}
+.l-pct.up{color:var(--green-600);} .l-pct.dn{color:var(--red-600);}
+.ledger-more{display:block;margin:14px auto 0;font-size:12.5px;color:var(--navy-600);font-weight:600;background:var(--navy-50);border-radius:20px;padding:7px 20px;transition:background .15s;}
+.ledger-more:hover{background:var(--navy-100);}
+@media(max-width:640px){.ledger-head,.lrow{grid-template-columns:1fr 64px 78px;}.l-bar,.l-date{display:none;}.ledger-head span:nth-child(1),.ledger-head span:nth-child(4){display:none;}}
 
+/* ── 預判驗證表 ── */
 table{width:100%;border-collapse:collapse;font-size:13px;}
 th{text-align:left;font-size:11.5px;color:var(--gray-500);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--gray-200);}
 td{padding:9px 10px;border-bottom:1px solid var(--gray-100);color:var(--gray-700);vertical-align:top;}
 tr:last-child td{border-bottom:none;}
-.tk{font-family:var(--font-en);font-weight:600;color:var(--navy-700);white-space:nowrap;}
-.pct{font-family:var(--font-en);font-weight:600;white-space:nowrap;}
-.pct.up{color:var(--green-600);} .pct.dn{color:var(--red-600);}
 .badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;}
 .badge.hit{background:var(--green-100);color:var(--green-700);}
 .badge.miss{background:var(--red-100);color:var(--red-700);}
 .badge.partial{background:var(--amber-100);color:var(--amber-600);}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-@media(max-width:720px){.split{grid-template-columns:1fr;}}
-.case{border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;margin-bottom:10px;}
-.case .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;gap:8px;}
-.case .title{font-size:13.5px;font-weight:600;color:var(--navy-900);}
-.case .note{font-size:12px;color:var(--gray-500);line-height:1.6;}
-.method-note{font-size:12px;color:var(--gray-400);margin-top:18px;line-height:1.7;}
+
+.method-note{font-size:12px;color:var(--gray-400);margin-top:6px;line-height:1.75;}
 .empty-box{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--r-lg);padding:36px;text-align:center;color:var(--gray-500);font-size:13.5px;}
+
+@media (prefers-reduced-motion: reduce){
+  .rv,.tally i,.l-bar i{transition:none;opacity:1;transform:none;}
+}
 </style>
 </head>
 <body>
@@ -123,8 +229,11 @@ tr:last-child td{border-bottom:none;}
 <main class="page">
 
   <div class="page-header">
-    <h1 class="page-title">歷史戰績 <span class="page-title-sub">Track Record</span></h1>
-    <div class="page-update" id="perf-updated">事件預判命中率與不對稱機會實際報酬 · Pro 會員專屬 · 每日更新</div>
+    <div>
+      <h1 class="page-title">歷史戰績<span class="page-title-sub">Track Record</span></h1>
+      <div class="page-update" id="perf-updated">事件預判命中率與不對稱機會實際報酬 · 命中與失準全部公開</div>
+    </div>
+    <div class="update-chip" id="update-chip" style="display:none;"><span class="dot"></span><span id="update-chip-text">DAILY</span></div>
   </div>
 
   <div id="pro-gate-view">
@@ -141,6 +250,7 @@ tr:last-child td{border-bottom:none;}
 </main>
 
 <script>
+'use strict';
 function tick(){
   var t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
   var el=document.getElementById('clock'); if(el) el.textContent=t+' CST';
@@ -190,95 +300,233 @@ async function checkProStatus(user, gateEl, viewEl){
 async function signOutUser(){ await _supabase.auth.signOut(); window.location.reload(); }
 
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
-function pctCell(v){
-  if(v==null) return '<span class="pct" style="color:var(--gray-400);">—</span>';
-  return '<span class="pct '+(v>=0?'up':'dn')+'">'+(v>=0?'+':'')+v.toFixed(2)+'%</span>';
+function fmtPct(v,sign){
+  if(v==null) return '—';
+  return (v>=0?(sign===false?'':'+'):'−')+Math.abs(v).toFixed(2)+'%';
+}
+var REDUCED=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var easeOut=function(t){return 1-Math.pow(1-t,3);};
+
+/* ── 動畫工具 ── */
+function countUp(scope){
+  scope.querySelectorAll('[data-count]').forEach(function(el){
+    var target=parseFloat(el.dataset.count), dec=parseInt(el.dataset.dec||'0',10);
+    if(isNaN(target)){ return; }
+    if(REDUCED){ el.textContent=target.toFixed(dec); return; }
+    var t0=null;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/1100,1);
+      el.textContent=(target*easeOut(p)).toFixed(dec);
+      if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  });
+}
+function runGauge(target){
+  var arc=document.getElementById('gauge-arc'), num=document.getElementById('gauge-num');
+  if(!arc||!num) return;
+  var C=2*Math.PI*76;
+  arc.style.strokeDasharray=C;
+  if(REDUCED){ arc.style.strokeDashoffset=C*(1-target/100); num.textContent=target.toFixed(1); return; }
+  arc.style.strokeDashoffset=C;
+  var t0=null;
+  function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/1400,1), v=target*easeOut(p);
+    arc.style.strokeDashoffset=C*(1-v/100); num.textContent=v.toFixed(1);
+    if(p<1) requestAnimationFrame(step); }
+  requestAnimationFrame(step);
 }
 
-function buildSeriesSVG(series){
-  var pts=series.filter(function(s){return s.rate!=null;});
-  if(pts.length<2) return '<div class="empty-box">驗證樣本累積中，命中率走勢將在數日後出現。</div>';
-  var W=860,H=220,L=50,R=20,T=16,B=34;
-  var min=Math.min.apply(null,pts.map(function(p){return p.rate;}));
-  var max=Math.max.apply(null,pts.map(function(p){return p.rate;}));
-  min=Math.max(0,Math.floor((min-8)/10)*10); max=Math.min(100,Math.ceil((max+8)/10)*10);
-  if(max-min<20){max=Math.min(100,min+20);}
-  var x=function(i){return L+(W-L-R)*(pts.length===1?0.5:i/(pts.length-1));};
-  var y=function(v){return T+(H-T-B)*(1-(v-min)/(max-min));};
-  var grid='',labels='';
-  for(var g=0;g<=3;g++){
-    var gv=min+(max-min)*g/3, gy=y(gv);
-    grid+='<line x1="'+L+'" y1="'+gy+'" x2="'+(W-R)+'" y2="'+gy+'" stroke="#e2e8f0" stroke-width="1"/>';
-    labels+='<text x="10" y="'+(gy+4)+'" fill="#94a3b8" font-size="11">'+Math.round(gv)+'%</text>';
+/* ── canvas 走勢圖 ── */
+function drawTrend(series){
+  var cv=document.getElementById('trend'); if(!cv) return;
+  var pts0=series.filter(function(s){return s.rate!=null;});
+  if(pts0.length<2){ cv.parentNode.innerHTML='<div style="padding:28px;text-align:center;color:rgba(255,255,255,.45);font-size:13px;">驗證樣本累積中，命中率走勢將在數日後出現。</div>'; return; }
+  var dpr=window.devicePixelRatio||1;
+  var W=cv.clientWidth, H=250;
+  cv.width=W*dpr; cv.height=H*dpr;
+  var ctx=cv.getContext('2d'); ctx.scale(dpr,dpr);
+  var padL=42,padR=16,padT=18,padB=30;
+  var iw=W-padL-padR, ih=H-padT-padB;
+  var rates=pts0.map(function(p){return p.rate;});
+  var ymin=Math.max(0,Math.floor((Math.min.apply(null,rates.concat([50]))-8)/10)*10);
+  var ymax=Math.min(100,Math.ceil((Math.max.apply(null,rates.concat([50]))+8)/10)*10);
+  if(ymax-ymin<20) ymax=Math.min(100,ymin+20);
+  var X=function(i){return padL+iw*(i/(pts0.length-1));};
+  var Y=function(r){return padT+ih*(1-(r-ymin)/(ymax-ymin));};
+  var pts=pts0.map(function(s,i){return {x:X(i),y:Y(s.rate),s:s};});
+  var gridLines=[];
+  for(var g=Math.ceil(ymin/10)*10;g<=ymax;g+=10) gridLines.push(g);
+
+  function paint(prog){
+    ctx.clearRect(0,0,W,H);
+    ctx.font='10.5px "DM Sans",sans-serif'; ctx.fillStyle='rgba(255,255,255,.35)';
+    gridLines.forEach(function(g){
+      var y=Y(g);
+      ctx.strokeStyle = g===50 ? 'rgba(255,255,255,.30)' : 'rgba(255,255,255,.07)';
+      ctx.setLineDash(g===50?[5,4]:[]);
+      ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(W-padR,y); ctx.stroke(); ctx.setLineDash([]);
+      ctx.textAlign='right'; ctx.fillText(g+'%',padL-8,y+3.5);
+    });
+    ctx.textAlign='center';
+    var lstep=Math.max(1,Math.floor(pts0.length/5));
+    pts0.forEach(function(s,i){ if(i%lstep===0||i===pts0.length-1) ctx.fillText(String(s.date).slice(5),X(i),H-10); });
+
+    var maxX=padL+iw*prog;
+    ctx.save();
+    ctx.beginPath(); ctx.rect(padL-2,0,maxX-padL+6,H); ctx.clip();
+    var grad=ctx.createLinearGradient(0,padT,0,H-padB);
+    grad.addColorStop(0,'rgba(125,211,252,.28)'); grad.addColorStop(1,'rgba(125,211,252,0)');
+    ctx.beginPath();
+    pts.forEach(function(p,i){ i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y); });
+    ctx.lineTo(pts[pts.length-1].x,H-padB); ctx.lineTo(padL,H-padB); ctx.closePath();
+    ctx.fillStyle=grad; ctx.fill();
+    ctx.beginPath();
+    pts.forEach(function(p,i){ i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y); });
+    ctx.strokeStyle='#7dd3fc'; ctx.lineWidth=2.2; ctx.lineJoin='round'; ctx.stroke();
+    pts.forEach(function(p){
+      if(p.x>maxX) return;
+      ctx.beginPath(); ctx.arc(p.x,p.y,3.4,0,7); ctx.fillStyle='#0d1630'; ctx.fill();
+      ctx.lineWidth=2; ctx.strokeStyle='#7dd3fc'; ctx.stroke();
+    });
+    ctx.restore();
+    if(prog>=1){
+      var last=pts[pts.length-1];
+      ctx.font='700 12px "DM Sans",sans-serif'; ctx.fillStyle='#fff'; ctx.textAlign='left';
+      ctx.fillText(last.s.rate+'%',last.x-44,last.y-10);
+    }
   }
-  var poly=pts.map(function(p,i){return x(i).toFixed(1)+','+y(p.rate).toFixed(1);}).join(' ');
-  var last=pts[pts.length-1];
-  var xticks='';
-  var step=Math.max(1,Math.floor(pts.length/4));
-  for(var i=0;i<pts.length;i+=step){ xticks+='<text x="'+(x(i)-16)+'" y="'+(H-12)+'" fill="#94a3b8" font-size="11">'+esc(pts[i].date.slice(5))+'</text>'; }
-  return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="220">'+grid+labels+
-    '<polyline fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round" points="'+poly+'"/>'+
-    '<circle cx="'+x(pts.length-1)+'" cy="'+y(last.rate)+'" r="4" fill="#2563eb"/>'+
-    '<text x="'+(x(pts.length-1)-44)+'" y="'+(y(last.rate)-10)+'" fill="#1d2d5a" font-size="12" font-weight="600">'+last.rate+'%</text>'+
-    xticks+'</svg>';
+
+  if(REDUCED){ paint(1); }
+  else{
+    var t0=null;
+    requestAnimationFrame(function step(ts){
+      if(!t0)t0=ts; var p=Math.min((ts-t0)/1300,1);
+      paint(easeOut(p)); if(p<1) requestAnimationFrame(step);
+    });
+  }
+
+  var tt=document.getElementById('tt');
+  cv.addEventListener('mousemove',function(ev){
+    var rect=cv.getBoundingClientRect(), mx=ev.clientX-rect.left;
+    var best=null,bd=1e9;
+    pts.forEach(function(p){ var d=Math.abs(p.x-mx); if(d<bd){bd=d;best=p;} });
+    if(!best||bd>40){ tt.classList.remove('show'); paint(1); return; }
+    paint(1);
+    ctx.save();
+    ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(best.x,padT); ctx.lineTo(best.x,H-padB); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.beginPath(); ctx.arc(best.x,best.y,5.5,0,7); ctx.fillStyle='rgba(125,211,252,.25)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(best.x,best.y,3.4,0,7); ctx.fillStyle='#7dd3fc'; ctx.fill();
+    ctx.restore();
+    tt.innerHTML='<div class="tt-date">'+esc(best.s.date)+'</div><div class="tt-rate">'+best.s.rate+'%</div><div class="tt-n">累計驗證 '+(best.s.n||'—')+' 件</div>';
+    tt.classList.add('show');
+    var bx=best.x+14; if(bx+130>W) bx=best.x-144;
+    tt.style.left=bx+'px'; tt.style.top=(best.y-20)+'px';
+  });
+  cv.addEventListener('mouseleave',function(){ tt.classList.remove('show'); paint(1); });
 }
 
-function buildDistSVG(items){
-  var vals=items.filter(function(e){return e.r7!=null;}).slice(0,42).reverse().map(function(e){return e.r7;});
-  if(!vals.length) return '<div class="empty-box">尚無已到期的機會報酬。</div>';
-  var W=860,H=180,mid=90,L=34;
-  var maxAbs=Math.max.apply(null,vals.map(Math.abs));
-  var scale=Math.min(75/Math.max(maxAbs,1),12);
-  var bw=Math.min(16,(W-L-10)/vals.length-4);
-  var bars=vals.map(function(v,i){
-    var h=Math.max(2,Math.abs(v)*scale), bx=L+i*((W-L-10)/vals.length);
-    return '<rect x="'+bx.toFixed(1)+'" width="'+bw.toFixed(1)+'" y="'+(v>=0?mid-h:mid).toFixed(1)+'" height="'+h.toFixed(1)+'" rx="2" fill="'+(v>=0?'#16a34a':'#dc2626')+'" opacity=".85"/>';
-  }).join('');
-  return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="180">'+
-    '<line x1="'+(L-6)+'" y1="'+mid+'" x2="'+(W-6)+'" y2="'+mid+'" stroke="#cbd5e1" stroke-width="1"/>'+
-    '<text x="2" y="'+(mid+4)+'" fill="#94a3b8" font-size="11">0%</text>'+bars+'</svg>';
+/* ── 帳目 ── */
+function buildLedger(items){
+  var evaluated=items.filter(function(e){return e.r7!=null;}).sort(function(a,b){return b.r7-a.r7;});
+  if(!evaluated.length) return null;
+  var CAT={us:'US EQ',tw:'台股',crypto:'CRYPTO',sector:'SECTOR'};
+  var SCALE=20;
+  function rowHtml(it){
+    var r=it.r7, up=r>=0, w=Math.min(Math.abs(r)/SCALE,1)*50;
+    var cat=CAT[it.category]?it.category:'other';
+    return '<div class="lrow"><span class="l-date">'+esc(String(it.date||'').slice(5))+'</span>'
+      +'<span class="l-name"><span class="l-tk">'+esc(it.ticker)+'</span><span class="l-nm">'+esc(it.name||'')+'</span></span>'
+      +'<span class="l-cat '+cat+'">'+(CAT[it.category]||esc((it.category||'—').toUpperCase()))+'</span>'
+      +'<span class="l-bar"><i class="'+(up?'up':'dn')+'" style="width:'+w.toFixed(1)+'%"></i></span>'
+      +'<span class="l-pct '+(up?'up':'dn')+'">'+fmtPct(r)+'</span></div>';
+  }
+  return {evaluated:evaluated, rowHtml:rowHtml};
 }
 
 function caseHTML(c){
   var v=(c.r30!=null?c.r30:c.r7);
-  return '<div class="case"><div class="head">'+
-    '<span class="title"><span class="tk">'+esc(c.ticker)+'</span> '+esc(c.name||'')+'</span>'+pctCell(v)+
-    '</div><div class="note">'+esc(c.date)+' 提出'+(c.thesis?' · '+esc(c.thesis):'')+(c.r30!=null?'（30日）':'（7日）')+'</div></div>';
+  if(v==null) return '';
+  return '<div class="case"><div class="head">'
+    +'<span class="title"><span class="tk">'+esc(c.ticker)+'</span> · '+esc(c.name||'')+'</span>'
+    +'<span class="pct '+(v>=0?'up':'dn')+'">'+fmtPct(v)+'</span></div>'
+    +'<div class="note">'+esc(c.thesis||'')+'</div>'
+    +'<div class="meta">'+esc(c.date||'')+' · '+esc((c.category||'').toUpperCase())+(c.target?' · TARGET '+esc(c.target):'')+(c.r30!=null?' · 30D':' · 7D')+'</div></div>';
 }
 
 async function loadPerformance(){
   var viewEl=document.getElementById('perf-view');
   if(!viewEl) return;
   var perf=null, acc=null;
-  try{
-    var r1=await fetch('/data/performance.json?t='+Date.now()); perf=await r1.json();
-  }catch(e){}
-  try{
-    var r2=await fetch('/data/accumulated.json?t='+Date.now()); acc=await r2.json();
-  }catch(e){}
+  try{ var r1=await fetch('/data/performance.json?t='+Date.now()); perf=await r1.json(); }catch(e){}
+  try{ var r2=await fetch('/data/accumulated.json?t='+Date.now()); acc=await r2.json(); }catch(e){}
   if(!perf){ viewEl.innerHTML='<div class="empty-box">戰績資料尚未生成，下次早報後將自動出現。</div>'; return; }
 
   var P=perf.predictions||{}, O=perf.opportunities||{};
-  document.getElementById('perf-updated').textContent='資料截至 '+(perf.updated||'—')+' · 報酬以 7／30 日後實際收盤價計算 · Pro 會員專屬';
+  document.getElementById('perf-updated').textContent='事件預判命中率與不對稱機會實際報酬 · 命中與失準全部公開 · Pro 會員專屬';
+  if(perf.updated){
+    var chip=document.getElementById('update-chip');
+    chip.style.display='inline-flex';
+    document.getElementById('update-chip-text').textContent='UPDATED '+perf.updated.replace(/-/g,'.')+' · DAILY';
+  }
 
-  var resolvedTxt=(P.hit||0)+' 命中 / '+(P.partial||0)+' 部分 / '+(P.miss||0)+' 未中';
-  var html='<div class="stat-grid">'+
-    '<div class="stat-card"><div class="stat-label">事件預判命中率（加權）</div><div class="stat-value '+((P.hit_rate_weighted||0)>=50?'green':'red')+'">'+(P.hit_rate_weighted!=null?P.hit_rate_weighted+'%':'—')+'</div><div class="stat-foot">'+resolvedTxt+'（部分命中計 0.5）</div></div>'+
-    '<div class="stat-card"><div class="stat-label">機會 7 日平均報酬</div><div class="stat-value '+((O.avg_r7||0)>=0?'green':'red')+'">'+(O.avg_r7!=null?(O.avg_r7>=0?'+':'')+O.avg_r7+'%':'—')+'</div><div class="stat-foot">已評估 '+(O.evaluated7||0)+' 筆 · 勝率 '+(O.win7!=null?O.win7+'%':'—')+'</div></div>'+
-    '<div class="stat-card"><div class="stat-label">機會 30 日平均報酬</div><div class="stat-value '+((O.avg_r30||0)>=0?'green':'red')+'">'+(O.avg_r30!=null?(O.avg_r30>=0?'+':'')+O.avg_r30+'%':'—')+'</div><div class="stat-foot">'+(O.evaluated30?('已評估 '+O.evaluated30+' 筆 · 勝率 '+(O.win30!=null?O.win30+'%':'—')):'樣本累積中（30日後陸續到期）')+'</div></div>'+
-    '<div class="stat-card"><div class="stat-label">追蹤中機會</div><div class="stat-value">'+(O.tracked||0)+'</div><div class="stat-foot">驗證樣本共 '+(P.resolved||0)+' 項預判</div></div>'+
-  '</div>';
+  var hr=P.hit_rate_weighted, resolved=P.resolved||0, hit=P.hit||0, partial=P.partial||0, miss=P.miss||0;
+  var pending=P.pending!=null?P.pending:Math.max(0,(P.total||0)-resolved);
 
-  html+='<div class="card"><h2>預判命中率走勢</h2><div class="desc">每日驗證的事件預判滾動 14 日加權命中率（命中=1、部分=0.5）</div>'+buildSeriesSVG(P.series||[])+'</div>';
-  html+='<div class="card"><h2>機會 7 日報酬分布</h2><div class="desc">每筆不對稱機會自提出日起 7 日的實際收盤報酬（最近 '+Math.min(42,(O.items||[]).filter(function(e){return e.r7!=null;}).length)+' 筆）</div>'+buildDistSVG(O.items||[])+'</div>';
+  var html='<div class="hero-grid">'
+    +'<div class="gauge-card rv">'
+      +'<div class="gauge-label">WEIGHTED HIT RATE <b>· PRO</b></div>'
+      +'<div class="gauge-wrap">'
+        +'<svg width="178" height="178" viewBox="0 0 178 178">'
+          +'<circle cx="89" cy="89" r="76" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="10"/>'
+          +'<circle id="gauge-arc" cx="89" cy="89" r="76" fill="none" stroke="url(#ggrad)" stroke-width="10" stroke-linecap="round" transform="rotate(-90 89 89)"/>'
+          +'<defs><linearGradient id="ggrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#93c5fd"/></linearGradient></defs>'
+        +'</svg>'
+        +'<div class="gauge-center"><div class="gauge-value"><span id="gauge-num">0.0</span><small>%</small></div><div class="gauge-sub">事件預判加權命中率</div></div>'
+      +'</div>'
+      +'<div class="gauge-foot"><span>已驗證 <b class="num">'+resolved+'</b> 件</span><span>追蹤中 <b class="num">'+pending+'</b> 件</span></div>'
+    +'</div>'
+    +'<div class="stat-grid">'
+      +'<div class="stat-card rv"><div class="stat-label">預判結果分布</div><div class="stat-value num"><span data-count="'+resolved+'">0</span><span class="unit"> 件已驗證</span></div>'
+        +'<div class="tally" aria-hidden="true"><i class="t-hit" style="flex:'+Math.max(hit,0.01)+';transition-delay:.1s"></i><i class="t-partial" style="flex:'+Math.max(partial,0.01)+';transition-delay:.25s"></i><i class="t-miss" style="flex:'+Math.max(miss,0.01)+';transition-delay:.4s"></i></div>'
+        +'<div class="tally-legend"><span class="lg-hit"><i></i>命中 '+hit+'</span><span class="lg-partial"><i></i>部分 '+partial+'</span><span class="lg-miss"><i></i>失準 '+miss+'</span></div>'
+        +'<div class="stat-foot">部分命中以 0.5 件計入加權</div></div>'
+      +'<div class="stat-card rv"><div class="stat-label">機會 7 日平均報酬</div><div class="stat-value num '+((O.avg_r7||0)>=0?'green':'red')+'">'+(O.avg_r7!=null?((O.avg_r7>=0?'+':'−')+'<span data-count="'+Math.abs(O.avg_r7)+'" data-dec="2">0.00</span>%'):'—')+'</div>'
+        +'<div class="stat-foot">已評估 '+(O.evaluated7||0)+' 筆 · 勝率 '+(O.win7!=null?O.win7+'%':'—')+' · 真實收盤價計算</div></div>'
+      +'<div class="stat-card rv"><div class="stat-label">機會 30 日平均報酬</div><div class="stat-value num '+((O.avg_r30||0)>=0?'green':'red')+'">'+(O.avg_r30!=null&&O.evaluated30?((O.avg_r30>=0?'+':'−')+'<span data-count="'+Math.abs(O.avg_r30)+'" data-dec="2">0.00</span>%'):'—')+'</div>'
+        +'<div class="stat-foot">'+(O.evaluated30?('已評估 '+O.evaluated30+' 筆 · 勝率 '+(O.win30!=null?O.win30+'%':'—')):'樣本累積中（30 日後陸續到期）')+'</div></div>'
+      +'<div class="stat-card rv"><div class="stat-label">追蹤機會總數</div><div class="stat-value num"><span data-count="'+(O.tracked||0)+'">0</span></div>'
+        +'<div class="stat-foot">自 2026-05-15 起累積 · 每日自動更新</div></div>'
+    +'</div>'
+  +'</div>';
+
+  html+='<div class="chart-card rv">'
+    +'<div class="chart-head"><div class="chart-title">命中率走勢</div><div class="chart-kpis"><span>BASELINE <b>50%</b></span><span>SCORED BY <b>PULSEAI</b></span></div></div>'
+    +'<div class="chart-desc">累計加權命中率（按驗證日）· 滑鼠移入查看單日明細 · 灰色虛線為 50% 擲幣基準</div>'
+    +'<div class="chart-box"><canvas id="trend"></canvas><div class="tooltip" id="tt"></div></div>'
+  +'</div>';
 
   var best=(O.best||[]).filter(function(c){return (c.r30!=null?c.r30:c.r7)!=null;});
   var worst=(O.worst||[]).filter(function(c){return (c.r30!=null?c.r30:c.r7)!=null;});
   if(best.length||worst.length){
-    html+='<div class="split">'+
-      '<div class="card"><h2>最佳案例</h2><div class="desc">依已實現報酬排序</div>'+best.map(caseHTML).join('')+'</div>'+
-      '<div class="card"><h2>最差案例</h2><div class="desc">誠實揭露：失準的判斷</div>'+worst.map(caseHTML).join('')+'</div>'+
-    '</div>';
+    html+='<div class="split rv">'
+      +'<div class="panel"><div class="panel-header win"><span class="panel-title win">BEST CALLS</span><span class="panel-badge win">報酬最高</span></div>'
+      +'<div class="panel-body win">'+(best.map(caseHTML).join('')||'<div class="case"><div class="note">尚無資料</div></div>')+'</div></div>'
+      +'<div class="panel"><div class="panel-header loss"><span class="panel-title loss">WORST CALLS</span><span class="panel-badge loss">誠實揭露</span></div>'
+      +'<div class="panel-body loss">'+(worst.map(caseHTML).join('')||'<div class="case"><div class="note">尚無資料</div></div>')+'</div></div>'
+    +'</div>';
+  }
+
+  var ledger=buildLedger(O.items||[]);
+  if(ledger){
+    html+='<div class="card rv"><div class="card-head"><h2>機會報酬帳目</h2>'
+      +'<div class="card-kpis"><span>EVALUATED <b>'+ledger.evaluated.length+'</b></span><span>WIN <b>'+(O.win7!=null?O.win7+'%':'—')+'</b></span><span>AVG <b>'+(O.avg_r7!=null?fmtPct(O.avg_r7):'—')+'</b></span></div></div>'
+      +'<div class="desc">依 7 日報酬排序 · 中軸發散條 ±20% 滿格</div>'
+      +'<div class="ledger-head"><span>日期</span><span>標的</span><span>市場</span><span style="text-align:center">−20% ⟵ 0 ⟶ +20%</span><span style="text-align:right">7 日報酬</span></div>'
+      +'<div id="ledger-rows"></div>'
+      +(ledger.evaluated.length>12?'<button class="ledger-more" id="more-btn">展開全部 '+ledger.evaluated.length+' 筆</button>':'')
+    +'</div>';
+  } else {
+    html+='<div class="empty-box rv">尚無已到期的機會報酬。</div>';
   }
 
   var ph=(acc&&Array.isArray(acc.prediction_history))?acc.prediction_history:[];
@@ -286,16 +534,49 @@ async function loadPerformance(){
     .sort(function(a,b){return (b.verified_at||b.date||'').localeCompare(a.verified_at||a.date||'');}).slice(0,10);
   if(recent.length){
     var BADGE={hit:'<span class="badge hit">命中</span>',partial:'<span class="badge partial">部分</span>',miss:'<span class="badge miss">未中</span>'};
-    html+='<div class="card"><h2>近期已驗證預判</h2><div class="desc">事件預判 vs 隔日實際結果</div><table>'+
-      '<tr><th>預判日</th><th>事件</th><th>實際結果</th><th>結果</th></tr>'+
-      recent.map(function(p){
-        return '<tr><td style="white-space:nowrap;">'+esc((p.date||'').slice(5))+'</td><td>'+esc(p.event_title||'')+'</td><td>'+esc(p.actual_result||'')+'</td><td>'+(BADGE[p.accuracy]||'')+'</td></tr>';
+    html+='<div class="card rv"><div class="card-head"><h2>近期已驗證預判</h2><div class="card-kpis"><span>LATEST <b>'+recent.length+'</b></span></div></div>'
+      +'<div class="desc">事件預判 vs 隔日實際結果</div><table>'
+      +'<tr><th>預判日</th><th>事件</th><th>實際結果</th><th>結果</th></tr>'
+      +recent.map(function(p){
+        return '<tr><td style="white-space:nowrap;" class="num">'+esc((p.date||'').slice(5))+'</td><td>'+esc(p.event_title||'')+'</td><td>'+esc(p.actual_result||'')+'</td><td>'+(BADGE[p.accuracy]||'')+'</td></tr>';
       }).join('')+'</table></div>';
   }
 
-  html+='<div class="method-note">計算方式：機會報酬＝提出日收盤 → 7／30 個日曆日後最近交易日收盤（Yahoo Finance 實際行情），不含交易成本與滑價；題材型（無單一代號）機會不納入報酬統計。預判驗證由隔日報告比對實際市場結果，部分命中計 0.5。歷史樣本自 2026-05-15 起累積。</div>';
+  html+='<div class="method-note rv">計算方式：機會報酬＝提出日收盤 → 7／30 個日曆日後最近交易日收盤（Yahoo Finance 實際行情），不含交易成本與滑價；題材型（無單一代號）機會不納入報酬統計。預判驗證由隔日報告比對實際市場結果，部分命中計 0.5。歷史樣本自 2026-05-15 起累積，每日自動更新、不可回溯修改。</div>';
 
   viewEl.innerHTML=html;
+
+  /* 進場動畫：依序觸發 */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add('on'); io.unobserve(e.target);
+      if(e.target.querySelector('[data-count]')||e.target.hasAttribute('data-count')) countUp(e.target);
+      if(e.target.querySelector('#gauge-arc')&&hr!=null) runGauge(hr);
+      if(e.target.querySelector('#trend')) drawTrend(P.series||[]);
+    });
+  },{threshold:.15});
+  viewEl.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  /* 帳目逐筆展開 */
+  if(ledger){
+    var box=document.getElementById('ledger-rows'), btn=document.getElementById('more-btn');
+    function revealRows(rows){
+      rows.forEach(function(row,i){ setTimeout(function(){ row.classList.add('on'); }, REDUCED?0:i*45); });
+    }
+    box.innerHTML=ledger.evaluated.slice(0,12).map(ledger.rowHtml).join('');
+    var rio=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ rio.disconnect(); revealRows([].slice.call(box.children)); } });
+    },{threshold:.1});
+    rio.observe(box);
+    if(btn) btn.addEventListener('click',function(){
+      var holder=document.createElement('div');
+      holder.innerHTML=ledger.evaluated.slice(12).map(ledger.rowHtml).join('');
+      var added=[].slice.call(holder.children);
+      added.forEach(function(r){ box.appendChild(r); });
+      revealRows(added); btn.remove();
+    });
+  }
 }
 
 initAuth();
