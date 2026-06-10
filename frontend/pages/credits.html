@@ -4,7 +4,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project X · 點數中心</title>
+<title>Project X · 方案 / 點數</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -44,6 +44,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .btn-back:hover{border-color:var(--gray-400);color:var(--gray-700);}
 
 .page-wrap{max-width:720px;margin:0 auto;padding:88px 24px 60px;}
+
+.page-header{margin-bottom:24px;}
+.page-title{font-family:var(--font-display);font-size:28px;color:var(--navy-950);line-height:1.2;}
+.page-title-sub{font-family:var(--font-en);font-size:13px;font-weight:300;color:var(--gray-400);margin-left:8px;}
+.page-desc{font-size:13px;color:var(--gray-500);margin-top:6px;line-height:1.7;}
 
 .balance-card{background:var(--navy-900);border-radius:var(--r-xl);padding:28px 32px;margin-bottom:32px;color:var(--white);}
 .balance-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);font-family:var(--font-en);margin-bottom:16px;}
@@ -189,6 +194,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 <div class="page-wrap">
 
+  <div class="page-header">
+    <h1 class="page-title">方案 / 點數 <span class="page-title-sub">Plans &amp; Credits</span></h1>
+    <p class="page-desc">免費掌握每日盤勢，升級 Pro 解鎖全部工具與每月 30 點，點數不夠再加購。</p>
+  </div>
+
   <!-- 點數餘額 -->
   <div class="balance-card" id="balance-card">
     <div class="balance-label">我的點數餘額</div>
@@ -249,6 +259,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <li>名家觀點：PulseAI 以七位名家人格每日出刊（三日分析＋名人專刊）</li>
       <li>互動圖表：K 線 + 訂單簿熱力 + 技術訊號</li>
       <li>全球事件追蹤：跨日國際大事時間軸（地緣／貿易／央行／科技）</li>
+      <li>歷史戰績：預測命中率與機會 7／30 日真實報酬，全紀錄公開驗證</li>
       <li>解鎖全部歷史報告完整內容（免費會員僅能看標題與日期）</li>
       <li>每月 1 號自動重置為 30 點訂閱點數（未用完不累積）</li>
     </ul>
@@ -293,6 +304,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </div>
     <div class="compare-row">
       <div class="feat">互動圖表（K 線 + 訂單簿熱力 + 技術訊號）</div>
+      <div><span class="ck-no">✕</span></div>
+      <div class="col-pro"><span class="ck-yes">✓</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="feat">歷史戰績（預測命中率 + 機會真實報酬）</div>
       <div><span class="ck-no">✕</span></div>
       <div class="col-pro"><span class="ck-yes">✓</span></div>
     </div>
@@ -345,6 +361,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="usage-row">
       <span class="usage-icon">📊</span>
       <span class="usage-name">共識溫度計、事件追蹤、自選看板、全球追蹤<span class="usage-pw">powered by PulseAI</span></span>
+      <span class="usage-cost pro">限 Pro · 不扣點</span>
+    </div>
+    <div class="usage-row">
+      <span class="usage-icon">📜</span>
+      <span class="usage-name">歷史戰績・預測命中率與機會 7／30 日報酬全紀錄<span class="usage-pw">powered by PulseAI</span></span>
       <span class="usage-cost pro">限 Pro · 不扣點</span>
     </div>
     <div class="usage-row">
