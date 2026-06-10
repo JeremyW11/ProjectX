@@ -404,6 +404,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <a class="btn-buy" id="buy-150" href="#">購買 150 點</a>
     </div>
   </div>
+  <div id="pkg-status" style="display:none;margin-top:14px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:14px 18px;font-size:13px;color:var(--gray-600);line-height:1.8;"></div>
 
   <!-- 購買流程說明 -->
   <div class="section-title">如何購買</div>
@@ -411,15 +412,15 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="how-steps">
       <div class="how-step">
         <div class="how-step-num">1</div>
-        <div class="how-step-text">點擊購買按鈕，系統自動開啟信件並填好訂單資訊</div>
+        <div class="how-step-text">登入後點選欲購買的點數方案，送出購買申請</div>
       </div>
       <div class="how-step">
         <div class="how-step-num">2</div>
-        <div class="how-step-text">確認內容後送出，客服將在 24 小時內回覆付款方式</div>
+        <div class="how-step-text">管理員收到申請後，會在本頁回覆付款方式</div>
       </div>
       <div class="how-step">
         <div class="how-step-num">3</div>
-        <div class="how-step-text">付款確認後點數立即入帳，可在餘額卡片查看</div>
+        <div class="how-step-text">付款確認後由管理員加點，可在餘額卡片查看</div>
       </div>
     </div>
   </div>
@@ -475,7 +476,7 @@ async function initCreditsPage(){
     (resetDate?'<div class="balance-reset">訂閱點數將於 <span>'+resetDate+'</span> 重置為 30 點</div>':'')+
     '<div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.3);font-family:var(--font-en);">'+user.email+'</div>';
 
-  setupBuyButtons(user.email);
+  setupBuyButtons(user);
   renderProCard(data.is_pro===true,resetDate,user);
 }
 
@@ -503,16 +504,17 @@ function renderProCard(isPro,resetDate,user){
 }
 
 async function checkProRequest(user){
-  var res=await _supabase.from('feedback').select('status,created_at').eq('user_id',user.id).eq('category','pro_access').order('created_at',{ascending:false}).limit(1);
+  var res=await _supabase.from('feedback').select('status,reply,created_at').eq('user_id',user.id).eq('category','pro_access').order('created_at',{ascending:false}).limit(1);
   if(res.error||!res.data||!res.data.length) return;
   var st=res.data[0].status||'pending';
+  var replyHtml=res.data[0].reply?'<br>官方回覆：'+esc(res.data[0].reply):'';
   var wrap=document.getElementById('pro-apply-wrap');
   var btn=document.getElementById('btn-pro-apply');
   if(st==='pending'){
-    if(wrap) wrap.innerHTML='<div class="pro-status" style="color:var(--pro-gold-light);">⏳ 您的 Pro 申請審核中，請耐心等候官方通知。</div>';
+    if(wrap) wrap.innerHTML='<div class="pro-status" style="color:var(--pro-gold-light);">⏳ 您的 Pro 申請審核中，請耐心等候官方通知。'+replyHtml+'</div>';
     if(btn){ btn.textContent='申請審核中'; btn.style.pointerEvents='none'; btn.style.opacity='.6'; }
   } else if(st==='denied'){
-    if(wrap) wrap.innerHTML='<div class="pro-status" style="color:rgba(255,255,255,.55);">上次申請未通過，可重新提出申請。</div>';
+    if(wrap) wrap.innerHTML='<div class="pro-status" style="color:rgba(255,255,255,.55);">上次申請未通過，可重新提出申請。'+replyHtml+'</div>';
   }
 }
 
@@ -548,19 +550,62 @@ async function submitProApply(user){
   if(b){ b.textContent='申請已送出'; b.style.pointerEvents='none'; b.style.opacity='.6'; }
 }
 
-function setupBuyButtons(email){
-  var packages=[
-    {id:'buy-10', pts:10, price:'USD $2.99'},
-    {id:'buy-50', pts:50, price:'USD $9.99'},
-    {id:'buy-150',pts:150,price:'USD $24.99'}
-  ];
-  packages.forEach(function(pkg){
+var BUY_PKGS=[
+  {id:'buy-10', pts:10, price:'USD $2.99'},
+  {id:'buy-50', pts:50, price:'USD $9.99'},
+  {id:'buy-150',pts:150,price:'USD $24.99'}
+];
+
+function setupBuyButtons(user){
+  BUY_PKGS.forEach(function(pkg){
     var btn=document.getElementById(pkg.id);
     if(!btn) return;
-    var subject='ProjectX 點數購買 — '+pkg.pts+'點 ('+pkg.price+')';
-    var body='您好 Jeremy，\n\n我想購買 ProjectX '+pkg.pts+' 點（'+pkg.price+'）。\n\n帳號 Email：'+(email||'（請填寫）')+'\n\n請提供付款方式，謝謝！';
-    btn.href='mailto:support@projectx.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    if(!user){ btn.textContent='登入後申請購買'; btn.href='/pages/login.html'; return; }
+    btn.addEventListener('click',function(e){ e.preventDefault(); submitCreditApply(user,pkg); });
   });
+  if(user) checkCreditRequest(user);
+}
+
+function setBuyDisabled(d){
+  BUY_PKGS.forEach(function(pkg){
+    var btn=document.getElementById(pkg.id);
+    if(!btn) return;
+    btn.style.pointerEvents=d?'none':'';
+    btn.style.opacity=d?'.55':'';
+  });
+}
+
+function showPkgStatus(html,isErr){
+  var el=document.getElementById('pkg-status');
+  if(!el) return;
+  el.style.display='block';
+  el.style.borderColor=isErr?'#fca5a5':'var(--gray-200)';
+  el.innerHTML=html;
+}
+
+async function submitCreditApply(user,pkg){
+  if(!confirm('送出購買申請：'+pkg.pts+' 點（'+pkg.price+'）？\n管理員確認後會在本頁回覆付款方式。')) return;
+  setBuyDisabled(true);
+  var content='申請購買 '+pkg.pts+' 點（'+pkg.price+'）｜帳號 '+user.email;
+  var res=await _supabase.from('feedback').insert({ user_id:user.id, content:content, category:'credit_purchase' });
+  if(res.error){ showPkgStatus('送出失敗：'+esc(res.error.message),true); setBuyDisabled(false); return; }
+  showPkgStatus('✓ 申請已送出：<b>'+pkg.pts+' 點（'+pkg.price+'）</b>。管理員將在本頁回覆付款方式，付款確認後即為您加點。',false);
+}
+
+async function checkCreditRequest(user){
+  var res=await _supabase.from('feedback').select('status,content,reply,created_at').eq('user_id',user.id).eq('category','credit_purchase').order('created_at',{ascending:false}).limit(1);
+  if(res.error||!res.data||!res.data.length) return;
+  var r=res.data[0];
+  var st=r.status||'pending';
+  var replyHtml=r.reply?'<br><span style="color:var(--navy-700);">官方回覆：'+esc(r.reply)+'</span>':'';
+  if(st==='pending'){
+    setBuyDisabled(true);
+    showPkgStatus('⏳ 您有一筆點數購買申請處理中：'+esc(r.content||'')+replyHtml,false);
+  } else if(st==='granted'){
+    showPkgStatus('✓ 上次購買申請已完成加點。'+replyHtml,false);
+  } else if(st==='denied'){
+    showPkgStatus('上次購買申請未完成，可重新送出。'+replyHtml,false);
+  }
 }
 
 initCreditsPage();

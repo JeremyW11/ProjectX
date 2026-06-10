@@ -96,6 +96,7 @@ a{text-decoration:none;color:inherit;}
 .tag.denied{background:var(--gray-100);color:var(--gray-500);}
 .tag.proapp{background:#f5e9c8;color:var(--pro-dark);}
 .tag.chart{background:var(--navy-50);color:var(--navy-600);}
+.tag.credit{background:var(--green-100);color:var(--green-700);}
 
 /* ── action btns ── */
 .btn-row{display:flex;gap:6px;align-items:center;}
@@ -269,7 +270,7 @@ a{text-decoration:none;color:inherit;}
   <div class="panel" id="panel-applications">
     <div class="page-header">
       <div class="page-title">申請審核</div>
-      <div class="page-sub">Pro 會員申請與圖表權限申請</div>
+      <div class="page-sub">Pro 會員申請、圖表權限申請與點數購買申請</div>
     </div>
     <div class="section">
       <div class="toolbar">
@@ -288,6 +289,7 @@ a{text-decoration:none;color:inherit;}
           <button class="fbtn active" data-ac="all" onclick="setAppCat('all',this)">全部類型</button>
           <button class="fbtn" data-ac="pro_access" onclick="setAppCat('pro_access',this)">Pro 申請</button>
           <button class="fbtn" data-ac="chart_access" onclick="setAppCat('chart_access',this)">圖表申請</button>
+          <button class="fbtn" data-ac="credit_purchase" onclick="setAppCat('credit_purchase',this)">點數購買</button>
         </div>
         <button class="refresh-btn" onclick="loadFeedback()">↻ 重新整理</button>
       </div>
@@ -460,10 +462,11 @@ async function loadFeedback(){
 }
 
 // applications
+function isAppCat(c){ return c==='pro_access'||c==='chart_access'||c==='credit_purchase'; }
 function renderApps(){
   var rows=_allFb.filter(function(f){
     var cat=f.category||'feedback';
-    if(cat!=='pro_access'&&cat!=='chart_access') return false;
+    if(!isAppCat(cat)) return false;
     if(_appFilter!=='all'&&(f.status||'pending')!==_appFilter) return false;
     if(_appCat!=='all'&&cat!==_appCat) return false;
     if(_appQ){
@@ -475,7 +478,7 @@ function renderApps(){
     return true;
   });
   var counts={pending:0,granted:0,denied:0};
-  _allFb.filter(function(f){var c=f.category||''; return c==='pro_access'||c==='chart_access';})
+  _allFb.filter(function(f){return isAppCat(f.category||'');})
     .forEach(function(f){var s=f.status||'pending'; if(counts[s]!==undefined) counts[s]++;});
   ['pending','granted','denied'].forEach(function(k){ var el=document.getElementById('ac-'+k); if(el) el.textContent='('+counts[k]+')'; });
   var sbBadge=document.getElementById('sb-pending-count');
@@ -491,7 +494,7 @@ function renderApps(){
 function renderDashPending(){
   var rows=_allFb.filter(function(f){
     var cat=f.category||'feedback';
-    return (cat==='pro_access'||cat==='chart_access')&&(f.status||'pending')==='pending';
+    return isAppCat(cat)&&(f.status||'pending')==='pending';
   });
   var box=document.getElementById('dash-pending-list');
   if(!box) return;
@@ -503,7 +506,7 @@ function renderDashPending(){
 function renderFeedback(){
   var rows=_allFb.filter(function(f){
     var cat=f.category||'feedback';
-    if(cat==='pro_access'||cat==='chart_access') return false;
+    if(isAppCat(cat)) return false;
     if(_fbFilter!=='all'&&(f.status||'pending')!==_fbFilter) return false;
     if(_fbQ){
       var name=(_names[f.user_id]||'').toLowerCase();
@@ -513,7 +516,7 @@ function renderFeedback(){
     return true;
   });
   var counts={pending:0,adopted:0,rejected:0};
-  _allFb.filter(function(f){var c=f.category||'feedback'; return c!=='pro_access'&&c!=='chart_access';})
+  _allFb.filter(function(f){return !isAppCat(f.category||'feedback');})
     .forEach(function(f){var s=f.status||'pending'; if(counts[s]!==undefined) counts[s]++;});
   ['pending','adopted','rejected'].forEach(function(k){ var el=document.getElementById('fc-'+k); if(el) el.textContent='('+counts[k]+')'; });
   var el=document.getElementById('f-count');
@@ -528,13 +531,19 @@ function renderFbCard(f,isApply){
   var st=f.status||'pending';
   var isChart=f.category==='chart_access';
   var isProApp=f.category==='pro_access';
+  var isCredit=f.category==='credit_purchase';
   var name=_names[f.user_id]||'(未命名)';
   var uid=(f.user_id||'').slice(0,8);
   var label={pending:'審核中',adopted:'已採納 +10',rejected:'未採納',granted:'已開放',denied:'已婉拒'};
-  var catChip=isChart?'<span class="tag chart">🔓 圖表申請</span>':(isProApp?'<span class="tag proapp">✦ Pro 申請</span>':'');
+  if(isCredit){ label.pending='待處理'; label.granted='已加點'; label.denied='未完成'; }
+  var catChip=isChart?'<span class="tag chart">🔓 圖表申請</span>':(isProApp?'<span class="tag proapp">✦ Pro 申請</span>':(isCredit?'<span class="tag credit">💎 點數購買</span>':''));
   var acts='';
   if(st==='pending'){
-    if(isChart){
+    if(isCredit){
+      acts='<div class="fb-actions">'
+        +'<button class="btn btn-success" onclick="grantCredits(\''+f.id+'\',\''+f.user_id+'\',this)">已收款，完成加點</button>'
+        +'<button class="btn btn-ghost" onclick="denyCredits(\''+f.id+'\',this)">婉拒 / 取消</button></div>';
+    } else if(isChart){
       acts='<div class="fb-actions">'
         +'<button class="btn btn-success" onclick="grantChart(\''+f.id+'\',\''+f.user_id+'\',true,this)">開放圖表權限</button>'
         +'<button class="btn btn-ghost" onclick="grantChart(\''+f.id+'\',\''+f.user_id+'\',false,this)">婉拒</button></div>';
@@ -565,8 +574,8 @@ function renderFbCard(f,isApply){
 function updateStats(){
   var total=_members.length;
   var proCount=_members.filter(function(m){return m.is_pro;}).length;
-  var pending=_allFb.filter(function(f){var c=f.category||''; return (c==='pro_access'||c==='chart_access')&&(f.status||'pending')==='pending';}).length;
-  var fbPending=_allFb.filter(function(f){var c=f.category||'feedback'; return c!=='pro_access'&&c!=='chart_access'&&(f.status||'pending')==='pending';}).length;
+  var pending=_allFb.filter(function(f){return isAppCat(f.category||'')&&(f.status||'pending')==='pending';}).length;
+  var fbPending=_allFb.filter(function(f){return !isAppCat(f.category||'feedback')&&(f.status||'pending')==='pending';}).length;
   var s=function(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; };
   s('stat-total',total); s('stat-pro',proCount); s('stat-pending',pending); s('stat-feedback',fbPending);
 }
@@ -615,6 +624,36 @@ async function grantPro(id,userId,allow,btn){
   await _sb.from('feedback').update(patch).eq('id',id);
   updateFbItem(id,patch); renderApps(); renderDashPending(); updateStats();
   loadMembers();
+}
+
+async function grantCredits(id,userId,btn){
+  var item=_allFb.filter(function(f){return f.id===id;})[0];
+  var m=((item&&item.content)||'').match(/(\d+)\s*點/);
+  var def=m?m[1]:'';
+  var input=prompt('確認已收款，要加多少永久點數？',def);
+  if(input===null) return;
+  var amount=parseInt(input,10);
+  if(!amount||amount<=0){ alert('點數必須是正整數'); return; }
+  setCardBtns(id,true);
+  var rpc=await _sb.rpc('admin_add_credits',{target:userId,amount:amount});
+  if(rpc.error){ alert('加點失敗：'+rpc.error.message); setCardBtns(id,false); return; }
+  var ta=document.getElementById('reply-'+id);
+  var patch={status:'granted'};
+  patch.reply=(ta&&ta.value.trim())||('已完成加點 '+amount+' 點，感謝購買！');
+  await _sb.from('feedback').update(patch).eq('id',id);
+  updateFbItem(id,patch); renderApps(); renderDashPending(); updateStats();
+  loadMembers();
+}
+
+async function denyCredits(id,btn){
+  if(!confirm('確定婉拒 / 取消這筆點數購買申請？')) return;
+  setCardBtns(id,true);
+  var ta=document.getElementById('reply-'+id);
+  var patch={status:'denied'};
+  if(ta&&ta.value.trim()) patch.reply=ta.value.trim();
+  var res=await _sb.from('feedback').update(patch).eq('id',id);
+  if(res.error){ alert('操作失敗：'+res.error.message); setCardBtns(id,false); return; }
+  updateFbItem(id,patch); renderApps(); renderDashPending(); updateStats();
 }
 
 async function saveReply(id,btn){
