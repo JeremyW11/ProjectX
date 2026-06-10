@@ -6,6 +6,7 @@
     {key:'research', href:'/pages/institutional.html',    label:'機構研報'},
     {key:'calendar', href:'/pages/calendar.html',         label:'市場日曆'},
     {key:'stories',  href:'/pages/stories.html',          label:'全球追蹤'},
+    {key:'performance', href:'/pages/performance.html',   label:'戰績'},
     {key:'columns',  href:'/pages/columns.html',           label:'名家觀點'},
     {key:'chart',    href:'/pages/chart.html',             label:'互動圖表'},
     {key:'member',   href:'/pages/targets.html',          label:'會員中心'},
@@ -15,7 +16,7 @@
 
   // 縮排版頂部導覽：全球追蹤／互動圖表／歷史報告整併進會員中心側欄；名家觀點(columns)
   // 因落地頁主推、保留於 toolbar。方案點數(credits)作為訪客購點入口。個別頁面可用 data-nav-keys 覆寫。
-  var TOOLBAR_KEYS = ['brief','market','industry','research','calendar','columns','member','credits'];
+  var TOOLBAR_KEYS = ['brief','market','industry','research','calendar','columns','performance','member','credits'];
 
   window.buildNav = function(activeKey){
     // Support both .header-nav (standard) and .nav-links (industry.html ul-based)
