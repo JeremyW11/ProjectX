@@ -542,6 +542,98 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   </div>
 </section>
 
+<!-- ═══ TRACK RECORD ═══ -->
+<style>
+.tr-sec{padding:88px 32px;background:transparent;}
+.tr-inner{max-width:1080px;margin:0 auto;}
+.tr-header{text-align:center;max-width:640px;margin:0 auto 40px;}
+.tr-eyebrow{font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--navy-500);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;}
+.tr-h2{font-family:var(--font-display);font-size:36px;color:var(--navy-950);line-height:1.2;margin-bottom:12px;}
+.tr-sub{font-size:14.5px;line-height:1.8;color:var(--gray-500);font-weight:300;}
+.tr-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:16px;margin-bottom:26px;}
+.tr-card{background:var(--white);border:1px solid var(--gray-200);border-radius:16px;padding:22px 22px 20px;box-shadow:0 1px 2px rgba(13,22,48,.04),0 8px 24px -14px rgba(13,22,48,.1);transition:transform .2s,box-shadow .2s;}
+.tr-card:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(13,22,48,.05),0 16px 36px -14px rgba(13,22,48,.18);}
+.tr-card-label{font-family:var(--font-zh);font-size:12.5px;font-weight:600;color:var(--gray-500);margin-bottom:8px;}
+.tr-card-num{font-family:var(--font-en);font-size:34px;font-weight:700;color:var(--navy-950);letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1;}
+.tr-card-num small{font-size:17px;font-weight:600;}
+.tr-card-num.tr-pos{color:#16a34a;}
+.tr-card-note{font-family:var(--font-zh);font-size:11.5px;color:var(--gray-400);margin-top:7px;line-height:1.6;}
+.tr-main{background:linear-gradient(165deg,#0d1630,#152244 60%,#1d2d5a);border:none;}
+.tr-main .tr-card-label{color:rgba(255,255,255,.6);}
+.tr-main .tr-card-num{color:#fff;}
+.tr-main .tr-card-note{color:rgba(255,255,255,.5);}
+.tr-bar{height:7px;border-radius:5px;overflow:hidden;display:flex;background:rgba(255,255,255,.12);margin-top:14px;}
+.tr-bar i{display:block;height:100%;}
+.tr-bar .b-hit{background:#34d399;} .tr-bar .b-part{background:#fbbf24;} .tr-bar .b-miss{background:#fb7185;}
+.tr-legend{display:flex;gap:14px;margin-top:9px;font-family:var(--font-zh);font-size:10.5px;color:rgba(255,255,255,.55);}
+.tr-legend i{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:5px;vertical-align:0;}
+.tr-cta-row{text-align:center;}
+.tr-cta-row .tr-note{font-family:var(--font-zh);font-size:12.5px;color:var(--gray-400);margin-top:12px;}
+.btn-tr{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:var(--navy-700);color:var(--white);border-radius:var(--r-md);font-size:14.5px;font-weight:500;font-family:var(--font-zh);transition:all .22s;}
+.btn-tr:hover{background:var(--navy-600);transform:translateY(-2px);box-shadow:0 10px 28px rgba(30,58,138,.22);}
+.btn-tr .gold{color:var(--pro-gold);font-weight:700;}
+@media(max-width:880px){.tr-grid{grid-template-columns:1fr 1fr;}.tr-h2{font-size:28px;}}
+@media(max-width:520px){.tr-grid{grid-template-columns:1fr;}}
+</style>
+<section class="tr-sec">
+  <div class="tr-inner">
+    <div class="tr-header reveal">
+      <div class="tr-eyebrow">Track Record · 公開驗證</div>
+      <h2 class="tr-h2">每一筆研判，攤開來對答案</h2>
+      <p class="tr-sub">PulseAI 的每日預測與進場機會不是說過就算：預測逐日驗證命中與否，機會標的追蹤 7 日與 30 日真實報酬。對與錯，全部留下紀錄。</p>
+    </div>
+    <div class="tr-grid reveal">
+      <div class="tr-card tr-main">
+        <div class="tr-card-label">預測加權命中率</div>
+        <div class="tr-card-num"><span id="tr-hr">—</span><small>%</small></div>
+        <div class="tr-card-note" id="tr-hr-note">已驗證預測逐日對答案</div>
+        <div class="tr-bar" id="tr-bar" hidden><i class="b-hit"></i><i class="b-part"></i><i class="b-miss"></i></div>
+        <div class="tr-legend" id="tr-legend" hidden><span><i class="b-hit"></i>命中</span><span><i class="b-part"></i>部分</span><span><i class="b-miss"></i>未中</span></div>
+      </div>
+      <div class="tr-card">
+        <div class="tr-card-label">已驗證預測</div>
+        <div class="tr-card-num" id="tr-resolved">—</div>
+        <div class="tr-card-note" id="tr-pending">每日事件預測，到期自動評分</div>
+      </div>
+      <div class="tr-card">
+        <div class="tr-card-label">機會 7 日平均報酬</div>
+        <div class="tr-card-num tr-pos" id="tr-avg7">—</div>
+        <div class="tr-card-note" id="tr-win7">以實際收盤價計算</div>
+      </div>
+      <div class="tr-card">
+        <div class="tr-card-label">追蹤中機會標的</div>
+        <div class="tr-card-num" id="tr-tracked">—</div>
+        <div class="tr-card-note">含最佳與最差案例完整回顧</div>
+      </div>
+    </div>
+    <div class="tr-cta-row reveal">
+      <a class="btn-tr" href="/pages/performance.html">查看完整歷史戰績 <span class="gold">✦ PRO</span></a>
+      <p class="tr-note">數據每日隨晨報自動更新，無人工挑選</p>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  fetch('/data/performance.json?t='+Date.now()).then(function(r){return r.json();}).then(function(d){
+    var P=d.predictions||{},O=d.opportunities||{};
+    function set(id,v){var el=document.getElementById(id);if(el&&v!=null)el.textContent=v;}
+    if(P.hit_rate_weighted!=null) set('tr-hr',P.hit_rate_weighted.toFixed(1));
+    if(P.resolved!=null){ set('tr-resolved',P.resolved);
+      if(P.pending!=null) set('tr-pending','另有 '+P.pending+' 筆預測等待驗證'); }
+    if(P.hit!=null&&P.resolved){
+      set('tr-hr-note','命中 '+P.hit+'／部分 '+P.partial+'／未中 '+P.miss);
+      var bar=document.getElementById('tr-bar'),seg=bar.children,tot=P.hit+P.partial+P.miss||1;
+      seg[0].style.width=(P.hit/tot*100)+'%'; seg[1].style.width=(P.partial/tot*100)+'%'; seg[2].style.width=(P.miss/tot*100)+'%';
+      bar.hidden=false; document.getElementById('tr-legend').hidden=false;
+    }
+    if(O.avg_r7!=null) set('tr-avg7',(O.avg_r7>=0?'+':'')+O.avg_r7.toFixed(2)+'%');
+    if(O.win7!=null) set('tr-win7','勝率 '+O.win7.toFixed(1)+'% · 已評估 '+(O.evaluated7||0)+' 項');
+    if(O.tracked!=null) set('tr-tracked',O.tracked);
+    if(O.avg_r7!=null&&O.avg_r7<0) document.getElementById('tr-avg7').classList.remove('tr-pos');
+  }).catch(function(){});
+})();
+</script>
+
 <!-- ═══ COMPARISON SECTION ═══ -->
 <section class="comparison">
   <div class="comparison-inner">
