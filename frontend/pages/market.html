@@ -446,7 +446,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <div class="signal-row"><span class="sr-label">加權指數</span><span class="sr-val flat" id="tw-sig-taiex">--</span></div>
           <div class="signal-row"><span class="sr-label">外資買賣超</span><span class="sr-val flat" id="tw-sig-foreign">--</span></div>
           <div class="signal-row"><span class="sr-label">投信買賣超</span><span class="sr-val flat" id="tw-sig-trust">--</span></div>
-          <div class="signal-row"><span class="sr-label">今日成交量</span><span class="sr-val flat" id="tw-sig-vol">--</span></div>
+          <div class="signal-row"><span class="sr-label" id="tw-sig-vol-label">成交量（前一交易日）</span><span class="sr-val flat" id="tw-sig-vol">--</span></div>
         </div>
       </div>
     </div>
@@ -666,9 +666,10 @@ async function loadData(){
 
     // TW summary
     var twStrip=document.getElementById('tw-summary-strip');
+    var volLabel=ts.data_date?'成交量（'+ts.data_date.slice(5).replace('-','/')+' 收盤）':'成交量（前一交易日收盤）';
     if(twStrip) twStrip.innerHTML=
       sumCard('TAIEX','加權指數','台灣加權指數',twx?twx.value:'--',twx?twx.change:'--',twx?twx.dir:'flat','前收')+
-      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">成交量</span><span class="sum-category">全市場</span></div><div class="sum-name">今日成交量</div><div class="sum-price" style="font-size:16px;">'+(ts.trade_value||'--')+'</div><div class="sum-row"><span class="sum-chg flat">TWD TWSE</span></div></div>'+
+      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">成交量</span><span class="sum-category">全市場</span></div><div class="sum-name">'+volLabel+'</div><div class="sum-price" style="font-size:16px;">'+(ts.trade_value||'--')+'</div><div class="sum-row"><span class="sum-chg flat">TWD TWSE</span></div></div>'+
       '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">外資</span><span class="sum-category">買賣超</span></div><div class="sum-name">外資買賣超</div><div class="sum-price" style="font-size:16px;">'+(ts.foreign_net||'--')+'</div><div class="sum-row"><span class="sum-chg flat">三大法人</span></div></div>'+
       '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">投信</span><span class="sum-category">買賣超</span></div><div class="sum-name">投信動向</div><div class="sum-price" style="font-size:16px;">'+(ts.trust_net||'--')+'</div><div class="sum-row"><span class="sum-chg flat">三大法人</span></div></div>';
 
@@ -682,6 +683,8 @@ async function loadData(){
     if(tT){tT.textContent=ts.trust_net||'--';tT.className='sr-val '+netDir(ts.trust_net);}
     var tV=document.getElementById('tw-sig-vol');
     if(tV){tV.textContent=ts.trade_value||'--';}
+    var tVL=document.getElementById('tw-sig-vol-label');
+    if(tVL){tVL.textContent=volLabel;}
     var tB=document.getElementById('tw-sig-bias');
     if(tB){
       var fd=netDir(ts.foreign_net),td=netDir(ts.trust_net),bias='中性',cls='s-neut';

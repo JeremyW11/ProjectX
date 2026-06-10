@@ -429,18 +429,27 @@ img { display: block; max-width: 100%; }
 
 .section-link:hover { color: var(--navy-700); }
 
-/* Track tabs */
-.track-tabs {
+/* Track side nav */
+.brief-flex {
   display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.track-side {
+  display: flex;
+  flex-direction: column;
   gap: 4px;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
+  width: 108px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 76px;
 }
 
 .track-tab {
-  font-size: 11.5px;
-  padding: 5px 12px;
-  border-radius: 20px;
+  font-size: 12px;
+  padding: 7px 12px;
+  border-radius: 8px;
   border: 1px solid var(--border-light);
   color: var(--text-secondary);
   font-family: var(--font-zh);
@@ -448,6 +457,13 @@ img { display: block; max-width: 100%; }
   transition: all 0.15s;
   cursor: pointer;
   font-weight: 400;
+  text-align: left;
+}
+
+@media (max-width: 720px) {
+  .brief-flex { flex-direction: column; }
+  .track-side { flex-direction: row; flex-wrap: wrap; position: static; width: auto; }
+  .track-tab { border-radius: 20px; padding: 5px 12px; }
 }
 
 .track-tab:hover {
@@ -995,16 +1011,18 @@ img { display: block; max-width: 100%; }
       <div class="section-header">
         <div class="section-title">今日情報<span class="section-title-en">DAILY BRIEF</span></div>
       </div>
-      <div class="track-tabs">
-        <button class="track-tab active" data-filter="all">全部</button>
-        <button class="track-tab" data-filter="macro">🌐 宏觀</button>
-        <button class="track-tab" data-filter="crypto">₿ 加密</button>
-        <button class="track-tab" data-filter="us">📈 美股</button>
-        <button class="track-tab" data-filter="tw">🇹🇼 台股</button>
-        <button class="track-tab" data-filter="commodity">🛢 大宗</button>
-        <button class="track-tab" data-filter="industry">🏭 產業</button>
+      <div class="brief-flex">
+        <nav class="track-side">
+          <button class="track-tab active" data-filter="all">全部</button>
+          <button class="track-tab" data-filter="macro">🌐 宏觀</button>
+          <button class="track-tab" data-filter="us">📈 美股</button>
+          <button class="track-tab" data-filter="tw">🇹🇼 台股</button>
+          <button class="track-tab" data-filter="industry">🏭 產業</button>
+          <button class="track-tab" data-filter="crypto">₿ 加密貨幣</button>
+          <button class="track-tab" data-filter="commodity">🛢 大宗</button>
+        </nav>
+        <div class="brief-list" id="brief-list" style="flex:1;min-width:0;"></div>
       </div>
-      <div class="brief-list" id="brief-list"></div>
     </div>
 
     <div class="sidebar">
@@ -1065,6 +1083,18 @@ document.querySelectorAll('.track-tab').forEach(tab => {
       while (el && !el.classList.contains('track-divider')) { items.push(el); el = el.nextElementSibling; }
       div.style.display = items.some(i => i.style.display !== 'none') ? '' : 'none';
     });
+    const anyVisible = [...document.querySelectorAll('.brief-item')].some(i => i.style.display !== 'none');
+    let empty = document.getElementById('brief-empty');
+    if (!anyVisible) {
+      if (!empty) {
+        empty = document.createElement('div');
+        empty.id = 'brief-empty';
+        empty.style.cssText = 'padding:24px;text-align:center;color:var(--gray-400);font-family:var(--font-zh);font-size:13px;';
+        empty.textContent = '此分類今日暫無消息';
+        document.getElementById('brief-list').appendChild(empty);
+      }
+      empty.style.display = '';
+    } else if (empty) empty.style.display = 'none';
   });
 });
 
@@ -1251,10 +1281,11 @@ async function loadData() {
     const mk = data.market || {};
     const allItems = [
       ...(data.macro||[]).map(i=>({...i,type:'macro'})),
-      ...(mk.crypto_news||[]).map(i=>({...i,type:'crypto'})),
       ...(mk.us_news||[]).map(i=>({...i,type:'us'})),
       ...(mk.tw_news||[]).map(i=>({...i,type:'tw'})),
       ...(data.industry||[]).map(i=>({...i,type:'industry'})),
+      ...(mk.crypto_news||[]).map(i=>({...i,type:'crypto'})),
+      ...(mk.commodity_news||[]).map(i=>({...i,type:'commodity'})),
     ];
     const briefEl = document.getElementById('brief-list');
     if (briefEl) briefEl.innerHTML = renderBriefList(allItems);
