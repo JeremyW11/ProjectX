@@ -6425,22 +6425,145 @@
   ],
   "tracked_stories": [
     {
+      "id": "sp500-record-rally",
+      "title": "美股創高後急速修正",
+      "category": "總經",
+      "started": "2026-06-02",
+      "status": "進行中",
+      "direction": "看空",
+      "affect_assets": "Nasdaq、S&P500、AI雲端股、VIX、台股、亞洲科技股",
+      "summary": "高盛巴克萊示警AI擁擠度創新高修正恐超預期，CPI今日公布若高於預期強化升息定價延後外資回補",
+      "last_update": "2026-06-10",
+      "timeline": [
+        {
+          "date": "2026-06-08",
+          "update": "Nasdaq暴跌4%VIX升21.51AI雲端成空頭核心台股法人賣超1094億",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "亞洲科技股全面下挫SoftBank跌6%AI估值泡沫疑慮蔓延全球",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "中東停火推動美股反彈AI晶片股領漲市場情緒回穩",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "高盛巴克萊示警AI擁擠度創新高修正幅度恐超預期",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-10",
+          "update": "美國5月CPI今日公布若高於預期強化升息定價外資回補延後",
+          "sentiment": "中性",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "ai-chip-supply-chain",
+      "title": "AI晶片供應鏈題材",
+      "category": "科技",
+      "started": "2026-06-01",
+      "status": "升溫",
+      "direction": "看多",
+      "affect_assets": "NVDA、AMD、ORCL、GOOGL、MRVL、TSMC、HBM記憶體、CPO光通訊、半導體ETF",
+      "summary": "蘋果改用Google Cloud NVIDIA GPU，聯發科AI ASIC爆發外資上調目標價，台積電N2下半年放量CPO量產元年",
+      "last_update": "2026-06-10",
+      "timeline": [
+        {
+          "date": "2026-06-09",
+          "update": "Oracle導入5萬張AMD MI450 GPU capex達收入76%",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "NVDA稱記憶體短缺無盡頭將續購SK海力士HBM產品",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "蘋果改在Google Cloud用NVIDIA GPU執行AI棄私有基礎建設",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "CPO量產元年7檔概念股全面噴出大立光9月前試產",
+          "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-10",
+          "update": "聯發科AI ASIC業務爆發外資上調目標價台積電股東會ADR漲3%",
+          "sentiment": "利多",
+          "source_url": ""
+        }
+      ]
+    },
+    {
+      "id": "fomc-warsh-debut",
+      "title": "Warsh首場FOMC會議",
+      "category": "貨幣",
+      "started": "2026-06-02",
+      "status": "升溫",
+      "direction": "看空",
+      "affect_assets": "美債、美股、美元、黃金、台股外資",
+      "summary": "美5月CPI今日公布若高於預期升息定價強化，FOMC 6/16-17 Warsh鷹派轉向風險壓制降息空間",
+      "last_update": "2026-06-10",
+      "timeline": [
+        {
+          "date": "2026-06-04",
+          "update": "市場共識6月按兵不動利率維持3.50-3.75%",
+          "sentiment": "中性",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-05",
+          "update": "今晚非農預期85K牽動Fed路徑與美元",
+          "sentiment": "中性",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "5月非農+17.2萬創共識兩倍10Y殖利率急升4.55%升息預期回燃",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-08",
+          "update": "JPMorgan預估2026全年利率不變下次行動或為2027Q3升息高利率持久",
+          "sentiment": "利空",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-10",
+          "update": "美5月CPI今日公布若高於預期升息定價強化外資台股回補延後",
+          "sentiment": "中性",
+          "source_url": ""
+        }
+      ]
+    },
+    {
       "id": "hormuz-iran-blockade",
       "title": "伊以互擊霍爾木茲危機",
       "category": "地緣",
       "started": "2026-06-03",
-      "status": "緩和",
-      "direction": "中性",
+      "status": "升溫",
+      "direction": "看空",
       "affect_assets": "Brent原油、黃金、航運股、航空股、避險資產",
-      "summary": "伊朗宣布停止對以軍事行動川普表示樂觀，能源溢酬與公債殖利率同步回落，中東緊張暫緩",
+      "summary": "美軍空襲伊朗報復直升機事件荷姆茲封閉風險再起，油價短暫回升後回落VIX收18.92，緊張局勢二度升溫",
       "last_update": "2026-06-09",
       "timeline": [
-        {
-          "date": "2026-06-04",
-          "update": "川普稱伊朗同意不發展核武WTI連三漲至95",
-          "sentiment": "中性",
-          "source_url": ""
-        },
         {
           "date": "2026-06-05",
           "update": "美伊MOU機率上升WTI跌1%三日連漲告終",
@@ -6464,91 +6587,11 @@
           "update": "伊朗宣布停止對以軍事行動川普樂觀能源溢酬回落",
           "sentiment": "利多",
           "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "sp500-record-rally",
-      "title": "美股創高後急速修正",
-      "category": "總經",
-      "started": "2026-06-02",
-      "status": "緩和",
-      "direction": "中性",
-      "affect_assets": "Nasdaq、S&P500、AI雲端股、VIX、台股、亞洲科技股",
-      "summary": "中東停火推動美股反彈AI晶片股領漲，修正暫緩但估值壓力仍在",
-      "last_update": "2026-06-09",
-      "timeline": [
-        {
-          "date": "2026-06-04",
-          "update": "道瓊飆874點創高資金輪出科技股",
-          "sentiment": "中性",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-05",
-          "update": "亞股偏弱跟進美股AI股回檔",
-          "sentiment": "利空",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "Nasdaq暴跌4%VIX升21.51AI雲端成空頭核心台股法人賣超1094億",
-          "sentiment": "利空",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "亞洲科技股全面下挫SoftBank跌6%AI估值泡沫疑慮蔓延全球",
-          "sentiment": "利空",
-          "source_url": ""
         },
         {
           "date": "2026-06-09",
-          "update": "中東停火推動美股反彈AI晶片股領漲市場情緒回穩",
-          "sentiment": "利多",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "ai-chip-supply-chain",
-      "title": "AI晶片供應鏈題材",
-      "category": "科技",
-      "started": "2026-06-01",
-      "status": "升溫",
-      "direction": "看多",
-      "affect_assets": "NVDA、AMD、ORCL、GOOGL、MRVL、TSMC、HBM記憶體、半導體ETF",
-      "summary": "Oracle導入5萬張AMD GPU、Alphabet850億融資加速AI基建，NVDA續購SK海力士HBM供應吃緊",
-      "last_update": "2026-06-09",
-      "timeline": [
-        {
-          "date": "2026-06-05",
-          "update": "晶片股單日蒸發1兆市值Nasdaq暴跌4%",
+          "update": "美軍空襲伊朗報復直升機事件荷姆茲封閉風險再起VIX收18.92",
           "sentiment": "利空",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "法人預估HBM記憶體供不應求延伸至2027年持續吃緊",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "超大型雲廠capex 7500億75%投AI但估值泡沫論升溫晶片股估值承壓",
-          "sentiment": "中性",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-09",
-          "update": "Oracle導入5萬張AMD MI450 GPU capex達收入76%",
-          "sentiment": "利多",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-09",
-          "update": "NVDA稱記憶體短缺無盡頭將續購SK海力士HBM產品",
-          "sentiment": "利多",
           "source_url": ""
         }
       ]
@@ -6558,18 +6601,12 @@
       "title": "OPEC+增產與油價走勢",
       "category": "能源",
       "started": "2026-06-03",
-      "status": "緩和",
+      "status": "進行中",
       "direction": "中性",
       "affect_assets": "Brent、WTI、能源股、產油國資產",
-      "summary": "伊朗宣布停火中東風險溢酬回落，油價漲勢暫歇但OPEC控產支撐底部",
+      "summary": "美軍空襲伊朗荷姆茲風險再起油價短暫回升後回落，OPEC控產支撐底部但地緣波動加劇能源板塊",
       "last_update": "2026-06-09",
       "timeline": [
-        {
-          "date": "2026-06-03",
-          "update": "OPEC+ 6月象徵增產18.8萬桶UAE退出",
-          "sentiment": "利多",
-          "source_url": ""
-        },
         {
           "date": "2026-06-05",
           "update": "WTI跌近1%至95美元三日連漲告終",
@@ -6593,6 +6630,12 @@
           "update": "伊朗停火宣言緩解供應擔憂能源溢酬與殖利率同步回落",
           "sentiment": "利空",
           "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "美軍空襲伊朗油價短暫回升後回落能源板塊波動加劇",
+          "sentiment": "中性",
+          "source_url": ""
         }
       ]
     },
@@ -6603,8 +6646,8 @@
       "started": "2026-06-08",
       "status": "升溫",
       "direction": "看多",
-      "affect_assets": "NASDAQ、私人科技股、科技ETF、GOOGL",
-      "summary": "SpaceX定價$135/股6/12掛牌，IPO前夕獲Google 300億大單，為年度最大科技上市案",
+      "affect_assets": "NASDAQ、私人科技股、科技ETF、GOOGL、AI股資金流",
+      "summary": "SpaceX $135/股6/12掛牌，高盛示警3000億估值吸走科技資金加劇AI股排擠，為年度最大科技上市案",
       "last_update": "2026-06-09",
       "timeline": [
         {
@@ -6618,6 +6661,12 @@
           "update": "SpaceX獲Google 300億美元大單IPO前夕釋重大利多",
           "sentiment": "利多",
           "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "高盛示警SpaceX IPO估值3000億吸走科技資金加劇AI股排擠",
+          "sentiment": "利空",
+          "source_url": ""
         }
       ]
     },
@@ -6627,9 +6676,9 @@
       "category": "科技",
       "started": "2026-06-09",
       "status": "進行中",
-      "direction": "中性",
+      "direction": "看空",
       "affect_assets": "AAPL、NVDA、GOOGL、語音助理概念股",
-      "summary": "WWDC發布新Siri升級並與Google Nvidia合作打造AI模型，華爾街反應冷淡觀望後續",
+      "summary": "Siri AI功能延遲歐盟中國無法上線AAPL跌5%，與Google Nvidia合作長期轉型但市場短期信心受挫",
       "last_update": "2026-06-09",
       "timeline": [
         {
@@ -6642,6 +6691,12 @@
           "date": "2026-06-09",
           "update": "蘋果與Google Nvidia合作打造最先進AI模型",
           "sentiment": "利多",
+          "source_url": ""
+        },
+        {
+          "date": "2026-06-09",
+          "update": "Siri AI功能延遲歐盟中國無法上線AAPL單日跌5%",
+          "sentiment": "利空",
           "source_url": ""
         }
       ]
@@ -6680,49 +6735,6 @@
           "date": "2026-06-09",
           "update": "人行預期寬鬆房市新房跌1.5-2.5%二手跌4-5%政策支撐",
           "sentiment": "中性",
-          "source_url": ""
-        }
-      ]
-    },
-    {
-      "id": "fomc-warsh-debut",
-      "title": "Warsh首場FOMC會議",
-      "category": "貨幣",
-      "started": "2026-06-02",
-      "status": "升溫",
-      "direction": "看空",
-      "affect_assets": "美債、美股、美元、黃金",
-      "summary": "非農+17.2萬10Y破4.55%30Y破5%，更長期高利率預期強化壓制降息空間",
-      "last_update": "2026-06-08",
-      "timeline": [
-        {
-          "date": "2026-06-02",
-          "update": "FOMC 6/16-17召開Warsh首場主持鷹派轉向風險",
-          "sentiment": "利空",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-04",
-          "update": "市場共識6月按兵不動利率維持3.50-3.75%",
-          "sentiment": "中性",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-05",
-          "update": "今晚非農預期85K牽動Fed路徑與美元",
-          "sentiment": "中性",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "5月非農+17.2萬創共識兩倍10Y殖利率急升4.55%升息預期回燃",
-          "sentiment": "利空",
-          "source_url": ""
-        },
-        {
-          "date": "2026-06-08",
-          "update": "JPMorgan預估2026全年利率不變下次行動或為2027Q3升息高利率持久",
-          "sentiment": "利空",
           "source_url": ""
         }
       ]
