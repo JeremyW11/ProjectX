@@ -1,14 +1,14 @@
 {
-  "updated": "2026-06-10",
+  "updated": "2026-06-11",
   "predictions": {
-    "total": 138,
-    "hit": 8,
-    "partial": 12,
+    "total": 148,
+    "hit": 9,
+    "partial": 15,
     "miss": 3,
-    "pending": 115,
-    "resolved": 23,
-    "hit_rate": 34.8,
-    "hit_rate_weighted": 60.9,
+    "pending": 121,
+    "resolved": 27,
+    "hit_rate": 33.3,
+    "hit_rate_weighted": 61.1,
     "series": [
       {
         "date": "2026-05-20",
@@ -54,18 +54,123 @@
         "date": "2026-06-03",
         "rate": 60.9,
         "n": 23
+      },
+      {
+        "date": "2026-06-10",
+        "rate": 63,
+        "n": 23
       }
     ]
   },
   "opportunities": {
-    "tracked": 99,
-    "evaluated7": 47,
-    "avg_r7": 0.29,
-    "win7": 40.4,
+    "tracked": 109,
+    "evaluated7": 57,
+    "avg_r7": -1.16,
+    "win7": 35.1,
     "evaluated30": 0,
     "avg_r30": null,
     "win30": null,
     "items": [
+      {
+        "date": "2026-06-04",
+        "ticker": "MRVL",
+        "name": "Marvell Technology",
+        "category": "us",
+        "r7": -11.53,
+        "r30": null,
+        "thesis": "黃仁勳公開點名下一家兆元市值候選，客製化ASIC與光通訊在AI資料中心放量，市場仍以傳統半導體本益比估值，明顯低估其AI",
+        "target": "+20% 中期"
+      },
+      {
+        "date": "2026-06-04",
+        "ticker": "HPE",
+        "name": "Hewlett Packard Enterprise",
+        "category": "us",
+        "r7": -12.48,
+        "r30": null,
+        "thesis": "AI伺服器訂單能見度大幅優於預期，市場仍以舊式企業硬體本益比給估值，相對Dell與SMCI明顯折價",
+        "target": "+15% 中期"
+      },
+      {
+        "date": "2026-06-04",
+        "ticker": "2344",
+        "name": "華邦電",
+        "category": "tw",
+        "r7": -11.83,
+        "r30": null,
+        "thesis": "記憶體缺貨延伸至2027，HBM與利基型DRAM雙旺，市場仍視為次階記憶體股給予折價，未反映WSTS記憶體市場年增3.5",
+        "target": "+18% 中期"
+      },
+      {
+        "date": "2026-06-04",
+        "ticker": "2382",
+        "name": "廣達",
+        "category": "tw",
+        "r7": -10.07,
+        "r30": null,
+        "thesis": "AI伺服器ODM龍頭，Blackwell與Rubin出貨放量但市場仍以PC代工本益比估值，AI營收佔比超過50%尚未反映",
+        "target": "+15% 中期"
+      },
+      {
+        "date": "2026-06-04",
+        "ticker": "2603",
+        "name": "長榮海運",
+        "category": "tw",
+        "r7": -6.33,
+        "r30": null,
+        "thesis": "荷姆茲擾動帶動運價走高，集裝箱業者燃油成本附加費啟動轉嫁，市場仍以景氣循環低點本益比估值",
+        "target": "+12% 短期"
+      },
+      {
+        "date": "2026-06-04",
+        "ticker": "SOL",
+        "name": "Solana",
+        "category": "crypto",
+        "r7": -9.29,
+        "r30": null,
+        "thesis": "Fear & Greed 12極度恐懼且SOL跌幅居前已超賣，CLARITY Act通過後高速公鏈最受惠，現價對應市值/",
+        "target": "+25% 中期"
+      },
+      {
+        "date": "2026-06-04",
+        "ticker": "XLE",
+        "name": "Energy Select Sector SPDR",
+        "category": "sector",
+        "r7": -2.25,
+        "r30": null,
+        "thesis": "Brent維持97美元但能源股相對油價落後，UAE退出OPEC+與荷姆茲擾動推升地緣溢價，市場仍預期Q4降至89而低估短",
+        "target": "+10% 短期"
+      },
+      {
+        "date": "2026-06-04",
+        "ticker": "INDA",
+        "name": "iShares MSCI India ETF",
+        "category": "sector",
+        "r7": 0.38,
+        "r30": null,
+        "thesis": "台股市值已超越印度成全球第五，印度遭課10%+強迫勞動關稅但內需與服務業占比高、出口曝險相對亞洲偏低，跌深後估值具吸引力",
+        "target": "+8% 中期"
+      },
+      {
+        "date": "2026-06-04",
+        "ticker": "3035",
+        "name": "智原",
+        "category": "tw",
+        "r7": -8.37,
+        "r30": null,
+        "thesis": "ASIC設計服務受惠Broadcom AI營收年增106%帶動的客製化晶片浪潮，市場仍以傳統IP本益比估值，未反映ASI",
+        "target": "+18% 中期"
+      },
+      {
+        "date": "2026-06-04",
+        "ticker": "STM",
+        "name": "STMicroelectronics",
+        "category": "us",
+        "r7": -8.02,
+        "r30": null,
+        "thesis": "資料中心SiC與類比晶片供應商，市場仍視為車用與工業景氣股給予折價，未反映其上修資料中心營收目標",
+        "target": "+12% 中期"
+      },
       {
         "date": "2026-06-03",
         "ticker": "MRVL",
