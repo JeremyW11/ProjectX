@@ -1656,7 +1656,7 @@ function renderWatchlist(items, dailyData){
     var changeIcon = dir==='up'?'▲':dir==='down'?'▼':'—';
     var techNote = price ? (price.tech_note||price.watch_note||'') : '';
     // 當日已分析過 → 重繪時直接還原內容並展開（切頁/跳窗回來免再點、免打 API）
-    var hasCacheToday = item.analysis && item.analysis_date === today;
+    var hasCacheToday = item.analysis && String(item.analysis_date||'').slice(0,10) === today;
     var analysisInner = hasCacheToday ? renderAnalysisMd(item.analysis) : '';
     var boxDisplay = hasCacheToday ? 'block' : 'none';
     var btnLabel = hasCacheToday ? '🔼 收起' : '🔍 分析';
@@ -1715,7 +1715,7 @@ async function analyzeTarget(e, ticker, category, id){
 
   var hasCachedToday = cacheCheck && cacheCheck.data
     && cacheCheck.data.analysis
-    && cacheCheck.data.analysis_date === today;
+    && String(cacheCheck.data.analysis_date||'').slice(0,10) === today;
 
   if(hasCachedToday){
     // 命中當日 cache：直接顯示已存內容（不扣點、不打 API）
