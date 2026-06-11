@@ -1748,7 +1748,7 @@ async function analyzeTarget(e, ticker, category, id){
           body: JSON.stringify({ symbol: ticker, market: category })
         });
         var sd = await sr.json();
-        if(sd && sd.symbol) context = JSON.stringify(sd);
+        if(sd && sd.success && sd.data && sd.data.symbol) context = JSON.stringify(sd.data);
         else context = JSON.stringify({ticker: ticker, market: category});
       } catch(eSearch){
         context = JSON.stringify({ticker: ticker, market: category});
