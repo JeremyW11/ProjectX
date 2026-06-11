@@ -72,12 +72,37 @@
   function currentAsNext(){
     return encodeURIComponent(location.pathname+location.search);
   }
-  // 登入/註冊成功後的去處：優先 ?next=，否則回總覽。
+  // 來源頁兜底：程式化 window.location.href='/pages/login.html' 不會帶 ?next=，
+  // 但同源導向下 document.referrer 會帶完整路徑，可據此回到原頁。
+  function safeNextFromReferrer(){
+    var r=document.referrer;
+    if(!r) return '';
+    try{
+      var u=new URL(r);
+      if(u.origin!==location.origin) return '';
+      return safeNext(u.pathname+u.search);
+    }catch(e){ return ''; }
+  }
+  // 登入/註冊成功後的去處：優先 ?next=，再退而求其次用來源頁，最後回總覽。
   window.PX_postAuthDest=function(){
     var p=null;
     try{ p=new URLSearchParams(location.search).get('next'); }catch(e){}
-    return safeNext(p)||'/brief.html';
+    return safeNext(p)||safeNextFromReferrer()||'/brief.html';
   };
+
+  // 點擊當下才決定 next：各頁 auth JS 常在驗證回來後重設 btn.href 成裸登入網址，
+  // 會洗掉 DOMContentLoaded 階段裝飾的 ?next=。用捕獲階段的委派監聽在點擊瞬間補上，
+  // 讀的是當下 href，不受之後覆寫影響，亦不需逐頁修改。
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;
+    if(!a) return;
+    var href=a.getAttribute('href')||'';
+    var m=href.match(/(login|credits)\.html/);
+    if(!m) return;
+    if(/[?&]next=/.test(href)) return;            // 已帶 next，不重複
+    if(new RegExp(m[1]+'\\.html').test(location.pathname)) return; // 不在同類型頁自我回跳
+    a.setAttribute('href',href+(href.indexOf('?')>=0?'&':'?')+'next='+currentAsNext());
+  },true);
 
   // 把當前頁夾帶進站內所有 login / credits 連結（含 onclick 版），讓回跳成立。
   function injectNext(){
