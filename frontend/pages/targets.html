@@ -568,10 +568,10 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
       <a href="/pages/performance.html" class="ai-card" style="background:linear-gradient(135deg,#0d1630,#1d2d5a);">
         <div>
-          <div class="ai-t">📜 PulseAI 歷史戰績</div>
+          <div class="ai-t">📜 PulseAI 歷史績效</div>
           <div class="ai-d">預測命中率與機會 7／30 日真實報酬，每一筆研判攤開對答案</div>
         </div>
-        <span class="ai-go">查看戰績 →</span>
+        <span class="ai-go">查看績效 →</span>
       </a>
     </section>
 
@@ -797,6 +797,7 @@ var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
 var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
 var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 var currentUser=null;
+var _fbMsgs={};
 var _accessToken=null;   // 供歷史報告 /history/:date 後端權威判定付費
 
 async function initAuth(){
@@ -933,8 +934,14 @@ async function loadFeedbackHistory(){
   if(!currentUser) return;
   var box=document.getElementById('fb-history');
   if(!box) return;
-  var res=await _supabase.from('feedback').select('content,status,created_at,reply,category').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(5);
+  var res=await _supabase.from('feedback').select('id,content,status,created_at,reply,category').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(5);
   if(res.error||!res.data||!res.data.length){ box.innerHTML=''; return; }
+  _fbMsgs={};
+  var fids=res.data.map(function(f){return f.id;});
+  if(fids.length){
+    var mr=await _supabase.from('feedback_messages').select('feedback_id,sender,content,created_at').in('feedback_id',fids).order('created_at',{ascending:true});
+    if(!mr.error&&mr.data) mr.data.forEach(function(m){ (_fbMsgs[m.feedback_id]=_fbMsgs[m.feedback_id]||[]).push(m); });
+  }
   function statusLabel(st,cat){
     if(st==='granted') return cat==='pro_access'?'Pro 已開放':(cat==='chart_access'?'圖表已開放':'已開放');
     return { pending:'審核中', adopted:'已採納 +10 點', rejected:'未採納', denied:'未通過' }[st]||st;
@@ -951,12 +958,50 @@ async function loadFeedbackHistory(){
     var replyHtml = f.reply ? '<div style="margin-top:8px;padding:8px 10px;background:var(--navy-50);border-radius:7px;border-left:3px solid var(--navy-400);">'
       +'<div style="font-size:10px;font-weight:700;color:var(--navy-500);margin-bottom:3px;font-family:var(--font-zh);">官方回覆</div>'
       +'<div style="font-size:12.5px;color:var(--gray-700);line-height:1.6;font-family:var(--font-zh);white-space:pre-wrap;">'+esc(f.reply)+'</div></div>' : '';
+    var threadHtml = f.reply ? '<div class="fb-thread" id="uthread-'+f.id+'">'+renderUserThreadInner(f.id)+'</div>' : '';
     return '<div style="padding:10px 12px;border:1px solid var(--gray-100);border-radius:var(--r-md);margin-bottom:8px;">'
       +'<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;">'
       +'<span style="font-size:10px;color:'+color[st]+';background:'+bg[st]+';padding:2px 8px;border-radius:10px;font-family:var(--font-zh);font-weight:600;">'+statusLabel(st,f.category)+'</span>'
       +'<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">'+ds+'</span></div>'
-      +'<div style="font-size:12.5px;color:var(--gray-600);line-height:1.6;font-family:var(--font-zh);">'+safe+'</div>'+replyHtml+'</div>';
+      +'<div style="font-size:12.5px;color:var(--gray-600);line-height:1.6;font-family:var(--font-zh);">'+safe+'</div>'+replyHtml+threadHtml+'</div>';
   }).join('');
+}
+
+// 對話串（使用者端）：官方正式回覆後可繼續多輪來回
+function fbMsgTime(s){ if(!s) return ''; var d=new Date(s); var p=function(n){return n<10?'0'+n:n;}; return (d.getMonth()+1)+'/'+d.getDate()+' '+p(d.getHours())+':'+p(d.getMinutes()); }
+function renderUserThreadInner(id){
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  var msgs=_fbMsgs[id]||[];
+  var body=msgs.map(function(m){
+    var mine=m.sender==='user';
+    var who=m.sender==='admin'?'官方':'我';
+    return '<div style="display:flex;justify-content:'+(mine?'flex-end':'flex-start')+';margin-bottom:6px;">'
+      +'<div style="max-width:80%;padding:7px 10px;border-radius:9px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;font-family:var(--font-zh);'
+      +(mine?'background:var(--navy-500,#3454b4);color:#fff;':'background:var(--gray-100);color:var(--gray-700);')+'">'
+      +'<div style="font-size:9.5px;opacity:.7;margin-bottom:2px;">'+who+' · '+fbMsgTime(m.created_at)+'</div>'
+      +esc(m.content)+'</div></div>';
+  }).join('');
+  return '<div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--gray-200);">'
+    +body
+    +'<div style="display:flex;gap:6px;margin-top:'+(msgs.length?'6px':'2px')+';">'
+    +'<input id="umsg-'+id+'" type="text" maxlength="500" placeholder="回覆官方…" '
+    +'onkeydown="if(event.key===\'Enter\'){event.preventDefault();sendUserMsg(\''+id+'\');}" '
+    +'style="flex:1;padding:7px 10px;border:1px solid var(--gray-200);border-radius:7px;font-size:12.5px;font-family:var(--font-zh);">'
+    +'<button onclick="sendUserMsg(\''+id+'\')" style="font-size:12px;color:#fff;background:var(--navy-500,#3454b4);border:none;padding:0 14px;border-radius:7px;cursor:pointer;font-family:var(--font-zh);">送出</button></div></div>';
+}
+async function sendUserMsg(id){
+  var input=document.getElementById('umsg-'+id);
+  if(!input||!currentUser) return;
+  var content=input.value.trim();
+  if(!content) return;
+  input.disabled=true;
+  var res=await _supabase.from('feedback_messages').insert({feedback_id:id,sender:'user',content:content}).select();
+  input.disabled=false;
+  if(res.error){ input.placeholder='送出失敗，請稍後再試'; input.disabled=false; return; }
+  (_fbMsgs[id]=_fbMsgs[id]||[]).push((res.data&&res.data[0])||{sender:'user',content:content,created_at:new Date().toISOString()});
+  var box=document.getElementById('uthread-'+id);
+  if(box) box.innerHTML=renderUserThreadInner(id);
+  var ni=document.getElementById('umsg-'+id); if(ni){ ni.focus(); }
 }
 
 // ── 修改密碼 ──────────────────────────────────────

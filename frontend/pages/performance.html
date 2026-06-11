@@ -4,7 +4,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project X · 歷史戰績</title>
+<title>Project X · 歷史績效</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -230,7 +230,7 @@ tr:last-child td{border-bottom:none;}
 
   <div class="page-header">
     <div>
-      <h1 class="page-title">歷史戰績<span class="page-title-sub">Track Record</span></h1>
+      <h1 class="page-title">歷史績效<span class="page-title-sub">Track Record</span></h1>
       <div class="page-update" id="perf-updated">事件預判命中率與不對稱機會實際報酬 · 命中與失準全部公開</div>
     </div>
     <div class="update-chip" id="update-chip" style="display:none;"><span class="dot"></span><span id="update-chip-text">DAILY</span></div>
@@ -459,7 +459,7 @@ async function loadPerformance(){
   var perf=null, acc=null;
   try{ var r1=await fetch('/data/performance.json?t='+Date.now()); perf=await r1.json(); }catch(e){}
   try{ var r2=await fetch('/data/accumulated.json?t='+Date.now()); acc=await r2.json(); }catch(e){}
-  if(!perf){ viewEl.innerHTML='<div class="empty-box">戰績資料尚未生成，下次早報後將自動出現。</div>'; return; }
+  if(!perf){ viewEl.innerHTML='<div class="empty-box">績效資料尚未生成，下次早報後將自動出現。</div>'; return; }
 
   var P=perf.predictions||{}, O=perf.opportunities||{};
   document.getElementById('perf-updated').textContent='事件預判命中率與不對稱機會實際報酬 · 命中與失準全部公開 · Pro 會員專屬';
