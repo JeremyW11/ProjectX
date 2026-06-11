@@ -304,6 +304,18 @@ function fmtPct(v,sign){
   if(v==null) return '—';
   return (v>=0?(sign===false?'':'+'):'−')+Math.abs(v).toFixed(2)+'%';
 }
+function fmtPx(cat,v){
+  if(v==null||isNaN(Number(v))) return null;
+  var n=Number(v);
+  var s=n>=1000?Math.round(n).toLocaleString('en-US'):(n>=1?n.toFixed(2):n.toFixed(4));
+  return (cat==='tw'?'':'$')+s;
+}
+// 進→出實際收盤價（佐證報酬），which=7 或 30
+function proofStr(it,which){
+  var e=fmtPx(it.category,it.entry), x=fmtPx(it.category,which===30?it.exit30:it.exit7);
+  if(e==null||x==null) return '';
+  return '進 '+e+' → 出 '+x;
+}
 var REDUCED=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var easeOut=function(t){return 1-Math.pow(1-t,3);};
 
@@ -434,8 +446,9 @@ function buildLedger(items){
   function rowHtml(it){
     var r=it.r7, up=r>=0, w=Math.min(Math.abs(r)/SCALE,1)*50;
     var cat=CAT[it.category]?it.category:'other';
+    var pf=proofStr(it,7);
     return '<div class="lrow"><span class="l-date">'+esc(String(it.date||'').slice(5))+'</span>'
-      +'<span class="l-name"><span class="l-tk">'+esc(it.ticker)+'</span><span class="l-nm">'+esc(it.name||'')+'</span></span>'
+      +'<span class="l-name"><span class="l-tk">'+esc(it.ticker)+'</span><span class="l-nm">'+esc(it.name||'')+(pf?'<span style="display:block;font-size:10px;color:var(--gray-400);font-family:var(--font-en);">'+esc(pf)+'</span>':'')+'</span></span>'
       +'<span class="l-cat '+cat+'">'+(CAT[it.category]||esc((it.category||'—').toUpperCase()))+'</span>'
       +'<span class="l-bar"><i class="'+(up?'up':'dn')+'" style="width:'+w.toFixed(1)+'%"></i></span>'
       +'<span class="l-pct '+(up?'up':'dn')+'">'+fmtPct(r)+'</span></div>';
@@ -450,6 +463,7 @@ function caseHTML(c){
     +'<span class="title"><span class="tk">'+esc(c.ticker)+'</span> · '+esc(c.name||'')+'</span>'
     +'<span class="pct '+(v>=0?'up':'dn')+'">'+fmtPct(v)+'</span></div>'
     +'<div class="note">'+esc(c.thesis||'')+'</div>'
+    +(function(){var p=proofStr(c,c.r30!=null?30:7);return p?'<div class="meta" style="font-family:var(--font-en);color:var(--gray-500);">'+esc(p)+'</div>':'';})()
     +'<div class="meta">'+esc(c.date||'')+' · '+esc((c.category||'').toUpperCase())+(c.target?' · TARGET '+esc(c.target):'')+(c.r30!=null?' · 30D':' · 7D')+'</div></div>';
 }
 
