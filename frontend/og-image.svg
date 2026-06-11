@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1630"/>
+      <stop offset="100%" style="stop-color:#1a2d5a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d4a30a"/>
+      <stop offset="100%" style="stop-color:#f0c840"/>
+    </linearGradient>
+    <linearGradient id="line1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d4a30a;stop-opacity:0"/>
+      <stop offset="40%" style="stop-color:#d4a30a;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#d4a30a;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid lines -->
+  <g stroke="#1e3366" stroke-width="1" opacity="0.4">
+    <line x1="0" y1="105" x2="1200" y2="105"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="525" x2="1200" y2="525"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Decorative chart bars (right side) -->
+  <g opacity="0.12" fill="#4a7fd4">
+    <rect x="780" y="280" width="28" height="180"/>
+    <rect x="820" y="230" width="28" height="230"/>
+    <rect x="860" y="310" width="28" height="150"/>
+    <rect x="900" y="200" width="28" height="260"/>
+    <rect x="940" y="260" width="28" height="200"/>
+    <rect x="980" y="170" width="28" height="290"/>
+    <rect x="1020" y="240" width="28" height="220"/>
+    <rect x="1060" y="210" width="28" height="250"/>
+    <rect x="1100" y="290" width="28" height="170"/>
+    <rect x="1140" y="180" width="28" height="280"/>
+  </g>
+
+  <!-- Trend line overlay -->
+  <polyline points="780,380 820,320 860,350 900,270 940,300 980,240 1020,280 1060,230 1100,260 1168,210"
+    fill="none" stroke="url(#gold)" stroke-width="3" opacity="0.6"/>
+
+  <!-- Gold accent bar top -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#gold)"/>
+
+  <!-- Gold accent bar bottom -->
+  <rect x="0" y="626" width="1200" height="4" fill="url(#gold)"/>
+
+  <!-- Left accent line -->
+  <rect x="96" y="60" width="3" height="80" fill="url(#gold)" rx="2"/>
+
+  <!-- Logo: X mark -->
+  <g transform="translate(110, 200)">
+    <circle cx="0" cy="0" r="64" fill="none" stroke="url(#gold)" stroke-width="2.5" opacity="0.3"/>
+    <text x="0" y="0" text-anchor="middle" dominant-baseline="central"
+      font-family="Georgia, serif" font-size="80" font-weight="900"
+      fill="url(#gold)" letter-spacing="-2">X</text>
+  </g>
+
+  <!-- Main title -->
+  <text x="210" y="185"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="88" font-weight="900"
+    fill="white" letter-spacing="-1">Project</text>
+  <text x="614" y="185"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="88" font-weight="900"
+    fill="url(#gold)" letter-spacing="-1">X</text>
+
+  <!-- Divider line -->
+  <rect x="210" y="205" width="500" height="2" fill="url(#line1)" rx="1"/>
+
+  <!-- Tagline -->
+  <text x="210" y="258"
+    font-family="'DM Sans', Arial, sans-serif"
+    font-size="28" font-weight="400"
+    fill="#94a3b8" letter-spacing="0.08em">DAILY MARKET INTELLIGENCE</text>
+
+  <!-- Feature pills -->
+  <g transform="translate(210, 310)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="148" height="38" rx="19" fill="#1e3366" stroke="#2a4a8a" stroke-width="1"/>
+    <text x="74" y="24" text-anchor="middle"
+      font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#94c5f8">📊 美股 · 台股</text>
+    <!-- Pill 2 -->
+    <rect x="160" y="0" width="148" height="38" rx="19" fill="#1e3366" stroke="#2a4a8a" stroke-width="1"/>
+    <text x="234" y="24" text-anchor="middle"
+      font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#94c5f8">🤖 AI 分析</text>
+    <!-- Pill 3 -->
+    <rect x="320" y="0" width="148" height="38" rx="19" fill="#1e3366" stroke="#2a4a8a" stroke-width="1"/>
+    <text x="394" y="24" text-anchor="middle"
+      font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#94c5f8">🎯 每日簡報</text>
+  </g>
+
+  <!-- Bottom caption -->
+  <text x="210" y="560"
+    font-family="'DM Sans', Arial, sans-serif"
+    font-size="20" font-weight="400"
+    fill="#475569" letter-spacing="0.05em">projectxbrief.netlify.app</text>
+</svg>
