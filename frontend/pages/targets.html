@@ -1732,8 +1732,20 @@ async function analyzeTarget(e, ticker, category, id){
     if(found){
       context = JSON.stringify(found);
     } else {
-      // 標的不在 daily.json，用基本資訊組 context
-      context = JSON.stringify({ticker: ticker, market: category, note: '今日資料未收錄於 daily.json，請根據最新市場資訊分析'});
+      // 標的不在 daily.json → 呼叫 /search-ticker 抓即時資料，避免 Claude 無資料亂猜
+      try {
+        resultEl.textContent = '⚡ 搜尋即時資料中...';
+        var sr = await fetch('https://projectx-backend-o2pl.onrender.com/search-ticker', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ symbol: ticker, market: category })
+        });
+        var sd = await sr.json();
+        if(sd && sd.symbol) context = JSON.stringify(sd);
+        else context = JSON.stringify({ticker: ticker, market: category});
+      } catch(eSearch){
+        context = JSON.stringify({ticker: ticker, market: category});
+      }
     }
     // 宏觀背景
     var macro = (d.macro||[]).slice(0,3).map(function(x){ return x.text||''; }).join('；');
