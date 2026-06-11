@@ -599,10 +599,9 @@ async function sendThreadMsg(id,el){
   if(!input) return;
   var content=input.value.trim();
   if(!content) return;
-  input.disabled=true;
+  input.value=''; input.disabled=true;   // 先清空：擋住 await 期間重複觸發造成重複送出
   var res=await _sb.from('feedback_messages').insert({feedback_id:id,sender:'admin',content:content}).select();
-  input.disabled=false;
-  if(res.error){ alert('送出失敗：'+res.error.message); return; }
+  if(res.error){ input.value=content; input.disabled=false; alert('送出失敗：'+res.error.message); return; }
   if(!_msgs[id]) _msgs[id]=[];
   _msgs[id].push((res.data&&res.data[0])||{sender:'admin',content:content,created_at:new Date().toISOString()});
   var box=document.getElementById('thread-'+id);

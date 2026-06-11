@@ -994,10 +994,9 @@ async function sendUserMsg(id){
   if(!input||!currentUser) return;
   var content=input.value.trim();
   if(!content) return;
-  input.disabled=true;
+  input.value=''; input.disabled=true;   // 先清空：擋住 await 期間重複觸發造成重複送出
   var res=await _supabase.from('feedback_messages').insert({feedback_id:id,sender:'user',content:content}).select();
-  input.disabled=false;
-  if(res.error){ input.placeholder='送出失敗，請稍後再試'; input.disabled=false; return; }
+  if(res.error){ input.value=content; input.disabled=false; input.placeholder='送出失敗，請稍後再試'; return; }
   (_fbMsgs[id]=_fbMsgs[id]||[]).push((res.data&&res.data[0])||{sender:'user',content:content,created_at:new Date().toISOString()});
   var box=document.getElementById('uthread-'+id);
   if(box) box.innerHTML=renderUserThreadInner(id);
