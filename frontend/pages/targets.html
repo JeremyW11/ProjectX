@@ -1607,6 +1607,8 @@ async function loadWatchlist(){
   loadRiskRadar(items);
   // 載入事件驅動追蹤
   loadEventTracker(items);
+  // 接續因切 App／凍結被中斷、尚未完成的分析
+  resumePendingAnalyses();
 }
 
 // 分析內容 markdown → HTML（多處共用）
@@ -1688,59 +1690,70 @@ function renderWatchlist(items, dailyData){
 
 
 // ── 個股分析 ──────────────────────────────────────
+// 進行中分析的本機標記：手機切 App／瀏覽器分頁被系統凍結而殺掉請求時，回到頁面自動接續
+var PENDING_ANALYSIS_KEY = 'px_pending_analysis';
+var ANALYSIS_RUNNING = {};   // 防重入
+var ANALYSIS_NUDGED = {};    // 單次自動接續旗標，避免後端持續失敗時重試風暴
+function readPending(){ try { return JSON.parse(localStorage.getItem(PENDING_ANALYSIS_KEY)||'{}'); } catch(e){ return {}; } }
+function writePending(m){ try { localStorage.setItem(PENDING_ANALYSIS_KEY, JSON.stringify(m)); } catch(e){} }
+function setPending(id, ticker, category){ var m=readPending(); m[id]={ticker:ticker, category:category, ts:Date.now()}; writePending(m); }
+function clearPending(id){ var m=readPending(); delete m[id]; writePending(m); }
+
+// 點擊：展開/收合切換；展開時觸發分析
 async function analyzeTarget(e, ticker, category, id){
   e.stopPropagation();
-  var btn = e.target;
-  // 找 analysis box（用 card 內的 class 找）
-  var card = btn.closest('.target-card');
-  var resultEl = card ? card.querySelector('.analysis-box') : document.getElementById('analysis-'+id);
+  var resultEl = document.getElementById('analysis-'+id);
   if(!resultEl) return;
-
-  // toggle
-  if(resultEl.style.display !== 'none' && resultEl.style.display !== ''){
+  // 已展開且非進行中 → 收起
+  if(resultEl.style.display !== 'none' && resultEl.style.display !== '' && !ANALYSIS_RUNNING[id]){
     resultEl.style.display = 'none';
-    btn.textContent = '🔍 分析';
+    var b = document.querySelector('.tc-analyze-btn[data-id="'+id+'"]');
+    if(b) b.textContent = '🔍 分析';
     return;
   }
+  delete ANALYSIS_NUDGED[id]; // 手動觸發 → 重置自動接續額度
+  runAnalysis(ticker, category, id, false);
+}
 
-  // ── 當日 cache 檢查（命中當日快取：不打 API、不扣點）──
+// 實際執行分析：一律以 id 查 DOM，重繪或自動接續都安全
+async function runAnalysis(ticker, category, id, isResume){
+  if(ANALYSIS_RUNNING[id]) return;
+  var box = document.getElementById('analysis-'+id);
+  var btn = document.querySelector('.tc-analyze-btn[data-id="'+id+'"]');
+  if(!box || !btn) return;
   var today = new Date().toISOString().slice(0,10);
+
+  // 當日 cache：命中直接顯示（不打 API、不扣點）；接續時若原請求其實已存檔也走這裡
   var cacheCheck;
-  try {
-    cacheCheck = await _supabase.from('watchlist')
-      .select('analysis, analysis_date')
-      .eq('id', id)
-      .single();
-  } catch(eCache){ /* cache 查詢失敗時走原流程 */ }
-
-  var hasCachedToday = cacheCheck && cacheCheck.data
-    && cacheCheck.data.analysis
-    && String(cacheCheck.data.analysis_date||'').slice(0,10) === today;
-
-  if(hasCachedToday){
-    // 命中當日 cache：直接顯示已存內容（不扣點、不打 API）
-    resultEl.innerHTML = renderAnalysisMd(cacheCheck.data.analysis);
-    resultEl.style.display = 'block';
+  try { cacheCheck = await _supabase.from('watchlist').select('analysis, analysis_date').eq('id', id).single(); } catch(eCache){}
+  if(cacheCheck && cacheCheck.data && cacheCheck.data.analysis
+     && String(cacheCheck.data.analysis_date||'').slice(0,10) === today){
+    box.innerHTML = renderAnalysisMd(cacheCheck.data.analysis);
+    box.style.display = 'block';
     btn.textContent = '🔼 收起';
+    clearPending(id);
     return;
   }
 
-  // ── 未命中當日 cache：先確認點數足夠（不先扣，待分析成功才扣，避免失敗仍扣點）──
+  // 點數確認（不先扣，成功才扣）
   var balance = (currentUser.subCredits||0) + (currentUser.purCredits||0);
   if(balance < 1){
-    if(confirm('點數不足（剩餘 '+balance+' 點，需要 1 點）\n\n前往購點頁面？')){
+    clearPending(id);
+    if(!isResume && confirm('點數不足（剩餘 '+balance+' 點，需要 1 點）\n\n前往購點頁面？')){
       window.location.href='/pages/credits.html';
     }
     return;
   }
+
+  ANALYSIS_RUNNING[id] = true;
+  setPending(id, ticker, category); // 開跑即記標記，請求中途被殺也能接續
   btn.textContent = '分析中...';
   btn.disabled = true;
-  resultEl.style.display = 'block';
-  resultEl.textContent = '⚡ AI 分析中，請稍候...';
+  box.style.display = 'block';
+  box.textContent = isResume ? '⚡ 接續分析中...' : '⚡ AI 分析中，請稍候...';
 
-  // 從 daily.json 取標的資料
-  var context = '';
-  var marketContext = '';
+  // 組 context
+  var context = ''; var marketContext = '';
   try {
     var d = await getDaily();
     var m = d.market || {};
@@ -1749,59 +1762,76 @@ async function analyzeTarget(e, ticker, category, id){
     if(found){
       context = JSON.stringify(found);
     } else {
-      // 標的不在 daily.json → 呼叫 /search-ticker 抓即時資料，避免 Claude 無資料亂猜
       try {
-        resultEl.textContent = '⚡ 搜尋即時資料中...';
+        box.textContent = '⚡ 搜尋即時資料中...';
         var sr = await fetch('https://projectx-backend-o2pl.onrender.com/search-ticker', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ symbol: ticker, market: category })
         });
         var sd = await sr.json();
         if(sd && sd.success && sd.data && sd.data.symbol){
           context = JSON.stringify(sd.data);
-          // 回填正式名稱：更新卡片顯示 + Supabase（修正舊標的只顯示代碼的問題）
           if(sd.data.name){
-            var nameEl = card ? card.querySelector('.tc-name') : null;
+            var nameEl = document.querySelector('.target-card[data-id="'+id+'"] .tc-name');
             if(nameEl && nameEl.textContent !== sd.data.name) nameEl.textContent = sd.data.name;
             try { await _supabase.from('watchlist').update({ name: sd.data.name }).eq('id', id); } catch(eUpd){}
           }
-        }
-        else context = JSON.stringify({ticker: ticker, market: category});
-      } catch(eSearch){
-        context = JSON.stringify({ticker: ticker, market: category});
-      }
+        } else context = JSON.stringify({ticker: ticker, market: category});
+      } catch(eSearch){ context = JSON.stringify({ticker: ticker, market: category}); }
     }
-    // 宏觀背景
     var macro = (d.macro||[]).slice(0,3).map(function(x){ return x.text||''; }).join('；');
     marketContext = macro;
   } catch(e2){}
 
   try {
     var res2 = await fetch('https://projectx-backend-o2pl.onrender.com/analyze', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ symbol: ticker, market: category, context: context, marketContext: marketContext })
     });
     var data = await res2.json();
     if(data.success && data.analysis){
-      // 分析成功才扣點（API 失敗或連線錯誤皆不扣）
+      // 先存檔（確保 cache 存在）再扣點，避免接續造成重複扣點
+      try { await _supabase.from('watchlist').update({ analysis: data.analysis, analysis_date: today }).eq('id', id); } catch(eSave){}
       await deductCredits(1);
-      resultEl.innerHTML = renderAnalysisMd(data.analysis);
-      resultEl.style.display = 'block';
-      btn.textContent = '🔼 收起';
-      // 寫入時帶上 analysis_date，下次當日點擊可命中 cache
-      await _supabase.from('watchlist').update({ analysis: data.analysis, analysis_date: today }).eq('id', id);
+      clearPending(id); delete ANALYSIS_NUDGED[id];
+      var box2 = document.getElementById('analysis-'+id);
+      var btn2 = document.querySelector('.tc-analyze-btn[data-id="'+id+'"]');
+      if(box2){ box2.innerHTML = renderAnalysisMd(data.analysis); box2.style.display='block'; }
+      if(btn2){ btn2.textContent='🔼 收起'; btn2.disabled=false; }
     } else {
-      resultEl.textContent = '分析失敗：'+(data.error||'未知錯誤');
-      btn.textContent = '🔍 分析';
+      clearPending(id); delete ANALYSIS_NUDGED[id];
+      box.textContent = '分析失敗：'+(data.error||'未知錯誤');
+      btn.textContent = '🔍 分析'; btn.disabled=false;
     }
   } catch(e3){
-    resultEl.textContent = '連線錯誤：'+e3.message;
-    btn.textContent = '🔍 分析';
+    // 連線中斷（含手機凍結被殺）：保留 pending，回到頁面自動接續一次
+    var bx = document.getElementById('analysis-'+id);
+    var bt = document.querySelector('.tc-analyze-btn[data-id="'+id+'"]');
+    if(bx) bx.textContent = '連線中斷，回到頁面將自動接續…';
+    if(bt){ bt.textContent='🔍 分析'; bt.disabled=false; }
+    if(document.visibilityState==='visible' && !ANALYSIS_NUDGED[id]){
+      ANALYSIS_NUDGED[id]=true;
+      setTimeout(function(){ resumePendingAnalyses(); }, 600);
+    }
+  } finally {
+    delete ANALYSIS_RUNNING[id];
   }
-  btn.disabled = false;
 }
+
+// 回到頁面時接續未完成的分析（手機切 App／凍結被殺的請求）
+function resumePendingAnalyses(){
+  if(!currentUser) return;
+  var m = readPending(); var changed=false; var now=Date.now();
+  Object.keys(m).forEach(function(id){
+    var p = m[id];
+    if(!p || (now - (p.ts||0)) > 180000){ delete m[id]; changed=true; return; } // 逾 3 分鐘不自動重跑，避免意外扣點
+    if(!ANALYSIS_RUNNING[id]) runAnalysis(p.ticker, p.category, id, true);
+  });
+  if(changed) writePending(m);
+}
+document.addEventListener('visibilitychange', function(){
+  if(document.visibilityState === 'visible'){ ANALYSIS_NUDGED = {}; resumePendingAnalyses(); }
+});
 // ── End 個股分析 ───────────────────────────────────
 async function removeWatchlistItem(id, el){
   var card = el.closest('.target-card');
