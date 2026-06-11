@@ -1856,7 +1856,7 @@ async function addWatchlistItem(){
   var note = document.getElementById('add-note').value.trim();
   if(!ticker){ alert('請輸入股票代碼'); return; }
 
-  // 嘗試從 daily.json 找名稱
+  // 嘗試從 daily.json 找名稱（本地、快）
   var name = ticker;
   try {
     var d = await getDaily();
@@ -1865,25 +1865,15 @@ async function addWatchlistItem(){
     var found = all.find(function(s){ return (s.ticker||s.symbol||'').toUpperCase()===ticker; });
     if(found) name = found.name || ticker;
   } catch(e){}
-  // 不在 daily.json → 用免費名稱解析端點抓正式名稱（不打 LLM、不扣點）
-  if(name === ticker){
-    try {
-      var nr = await fetch('https://projectx-backend-o2pl.onrender.com/resolve-name', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ symbol: ticker, market: category })
-      });
-      var nd = await nr.json();
-      if(nd && nd.success && nd.name) name = nd.name;
-    } catch(eName){}
-  }
 
+  // 立即插入（不等名稱解析，避免畫面卡住）
   var result = await _supabase.from('watchlist').insert({
     user_id: currentUser.id,
     ticker: ticker,
     name: name,
     category: category,
     note: note
-  });
+  }).select();
 
   if(result.error){
     if(result.error.code==='23505') alert('此標的已在看板中');
@@ -1894,6 +1884,27 @@ async function addWatchlistItem(){
   document.getElementById('add-sym').value='';
   document.getElementById('add-note').value='';
   loadWatchlist();
+
+  // 名稱還是代碼 → 背景解析正式名稱（不阻塞 UI，完成後回填卡片與 DB）
+  if(name === ticker && result.data && result.data[0]){
+    resolveNameInBackground(result.data[0].id, ticker, category);
+  }
+}
+
+// 背景解析正式名稱：用免費端點（不打 LLM、不扣點），完成後更新 DB 與卡片
+async function resolveNameInBackground(id, ticker, category){
+  try {
+    var nr = await fetch('https://projectx-backend-o2pl.onrender.com/resolve-name', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ symbol: ticker, market: category })
+    });
+    var nd = await nr.json();
+    if(nd && nd.success && nd.name){
+      try { await _supabase.from('watchlist').update({ name: nd.name }).eq('id', id); } catch(eUpd){}
+      var nameEl = document.querySelector('.target-card[data-id="'+id+'"] .tc-name');
+      if(nameEl && nameEl.textContent !== nd.name) nameEl.textContent = nd.name;
+    }
+  } catch(eName){}
 }
 
 // ── 側欄分類切換 ───────────────────────────────────
