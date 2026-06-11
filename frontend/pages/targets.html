@@ -1624,6 +1624,8 @@ function renderAnalysisMd(text){
 function renderWatchlist(items, dailyData){
   var grid = document.getElementById('target-grid');
   var today = new Date().toISOString().slice(0,10);
+  var pendingMap = (typeof readPending==='function') ? readPending() : {};
+  var nowTs = Date.now();
   var tabsDyn = document.getElementById('cat-tabs-dynamic');
   var staticTabs = document.querySelector('.cat-tabs:not(#cat-tabs-dynamic)');
 
@@ -1659,9 +1661,17 @@ function renderWatchlist(items, dailyData){
     var techNote = price ? (price.tech_note||price.watch_note||'') : '';
     // 當日已分析過 → 重繪時直接還原內容並展開（切頁/跳窗回來免再點、免打 API）
     var hasCacheToday = item.analysis && String(item.analysis_date||'').slice(0,10) === today;
-    var analysisInner = hasCacheToday ? renderAnalysisMd(item.analysis) : '';
-    var boxDisplay = hasCacheToday ? 'block' : 'none';
-    var btnLabel = hasCacheToday ? '🔼 收起' : '🔍 分析';
+    // 進行中（記憶體旗標，或 3 分鐘內的 pending 標記且尚無當日結果）→ 顯示分析中
+    var pend = pendingMap[item.id];
+    var isRunning = !hasCacheToday && ((typeof ANALYSIS_RUNNING==='object' && ANALYSIS_RUNNING[item.id]) || (pend && (nowTs - (pend.ts||0)) <= 180000));
+    var analysisInner, boxDisplay, btnLabel, btnDisabled='';
+    if(hasCacheToday){
+      analysisInner = renderAnalysisMd(item.analysis); boxDisplay='block'; btnLabel='🔼 收起';
+    } else if(isRunning){
+      analysisInner = '⚡ AI 分析中，請稍候...'; boxDisplay='block'; btnLabel='分析中...'; btnDisabled=' disabled';
+    } else {
+      analysisInner = ''; boxDisplay='none'; btnLabel='🔍 分析';
+    }
     return '<div class="target-card '+cardClass+'" data-cat="'+item.category+'" data-id="'+item.id+'">'+
       '<div class="tc-top">'+
         '<div>'+
@@ -1681,7 +1691,7 @@ function renderWatchlist(items, dailyData){
       (item.note?'<div style="font-size:11px;color:var(--navy-600);margin-top:4px;padding:5px 8px;background:var(--navy-50);border-radius:5px;">📌 '+item.note+'</div>':'')+
             '<div id="analysis-'+item.id+'" class="analysis-box" style="display:'+boxDisplay+';margin:8px 0 4px;padding:10px 12px;background:var(--navy-50);border-radius:8px;font-size:12px;color:var(--gray-700);line-height:1.7;font-family:var(--font-zh);border-left:3px solid var(--navy-400);">'+analysisInner+'</div>'+
       '<div class="tc-meta">'+
-        '<button class="tc-analyze-btn" data-ticker="'+item.ticker+'" data-cat="'+item.category+'" data-id="'+item.id+'" onclick="analyzeTarget(event,this.dataset.ticker,this.dataset.cat,this.dataset.id)" style="font-size:11px;color:var(--navy-600);padding:3px 8px;border:1px solid var(--navy-200,#c7d7fd);border-radius:4px;background:var(--navy-50);cursor:pointer;font-family:var(--font-zh);">'+btnLabel+'</button>'+
+        '<button class="tc-analyze-btn" data-ticker="'+item.ticker+'" data-cat="'+item.category+'" data-id="'+item.id+'"'+btnDisabled+' onclick="analyzeTarget(event,this.dataset.ticker,this.dataset.cat,this.dataset.id)" style="font-size:11px;color:var(--navy-600);padding:3px 8px;border:1px solid var(--navy-200,#c7d7fd);border-radius:4px;background:var(--navy-50);cursor:pointer;font-family:var(--font-zh);">'+btnLabel+'</button>'+
         '<span class="tc-remove" data-id="'+item.id+'" onclick="removeWatchlistItem(this.dataset.id,this)" title="移除">✕</span>'+
       '</div>'+
     '</div>';
