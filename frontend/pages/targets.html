@@ -1609,8 +1609,19 @@ async function loadWatchlist(){
   loadEventTracker(items);
 }
 
+// 分析內容 markdown → HTML（多處共用）
+function renderAnalysisMd(text){
+  return (text||'')
+    .replace(/^#{1,2} (.*?)$/gm, '<div style="font-weight:700;color:var(--navy-800);margin:12px 0 5px;font-size:14px;border-bottom:1px solid var(--navy-100);padding-bottom:3px;">$1</div>')
+    .replace(/^---$/gm, '<hr style="border:none;border-top:1px solid var(--gray-200);margin:8px 0;">')
+    .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--gray-800);">$1</strong>')
+    .replace(/^- (.*?)$/gm, '<div style="padding-left:10px;margin:3px 0;">• $1</div>')
+    .replace(/\n/g, '<br>');
+}
+
 function renderWatchlist(items, dailyData){
   var grid = document.getElementById('target-grid');
+  var today = new Date().toISOString().slice(0,10);
   var tabsDyn = document.getElementById('cat-tabs-dynamic');
   var staticTabs = document.querySelector('.cat-tabs:not(#cat-tabs-dynamic)');
 
@@ -1644,6 +1655,11 @@ function renderWatchlist(items, dailyData){
     var changeClass = dir==='up'?'up':dir==='down'?'dn':'flat';
     var changeIcon = dir==='up'?'▲':dir==='down'?'▼':'—';
     var techNote = price ? (price.tech_note||price.watch_note||'') : '';
+    // 當日已分析過 → 重繪時直接還原內容並展開（切頁/跳窗回來免再點、免打 API）
+    var hasCacheToday = item.analysis && item.analysis_date === today;
+    var analysisInner = hasCacheToday ? renderAnalysisMd(item.analysis) : '';
+    var boxDisplay = hasCacheToday ? 'block' : 'none';
+    var btnLabel = hasCacheToday ? '🔼 收起' : '🔍 分析';
     return '<div class="target-card '+cardClass+'" data-cat="'+item.category+'" data-id="'+item.id+'">'+
       '<div class="tc-top">'+
         '<div>'+
@@ -1661,9 +1677,9 @@ function renderWatchlist(items, dailyData){
       '</div>'+
       (techNote?'<div style="font-size:11px;color:var(--gray-500);margin:6px 0 4px;line-height:1.5;font-family:var(--font-zh);">'+techNote+'</div>':'')+
       (item.note?'<div style="font-size:11px;color:var(--navy-600);margin-top:4px;padding:5px 8px;background:var(--navy-50);border-radius:5px;">📌 '+item.note+'</div>':'')+
-            '<div id="analysis-'+item.id+'" class="analysis-box" style="display:none;margin:8px 0 4px;padding:10px 12px;background:var(--navy-50);border-radius:8px;font-size:12px;color:var(--gray-700);line-height:1.7;font-family:var(--font-zh);border-left:3px solid var(--navy-400);"></div>'+
+            '<div id="analysis-'+item.id+'" class="analysis-box" style="display:'+boxDisplay+';margin:8px 0 4px;padding:10px 12px;background:var(--navy-50);border-radius:8px;font-size:12px;color:var(--gray-700);line-height:1.7;font-family:var(--font-zh);border-left:3px solid var(--navy-400);">'+analysisInner+'</div>'+
       '<div class="tc-meta">'+
-        '<button class="tc-analyze-btn" data-ticker="'+item.ticker+'" data-cat="'+item.category+'" data-id="'+item.id+'" onclick="analyzeTarget(event,this.dataset.ticker,this.dataset.cat,this.dataset.id)" style="font-size:11px;color:var(--navy-600);padding:3px 8px;border:1px solid var(--navy-200,#c7d7fd);border-radius:4px;background:var(--navy-50);cursor:pointer;font-family:var(--font-zh);">🔍 分析</button>'+
+        '<button class="tc-analyze-btn" data-ticker="'+item.ticker+'" data-cat="'+item.category+'" data-id="'+item.id+'" onclick="analyzeTarget(event,this.dataset.ticker,this.dataset.cat,this.dataset.id)" style="font-size:11px;color:var(--navy-600);padding:3px 8px;border:1px solid var(--navy-200,#c7d7fd);border-radius:4px;background:var(--navy-50);cursor:pointer;font-family:var(--font-zh);">'+btnLabel+'</button>'+
         '<span class="tc-remove" data-id="'+item.id+'" onclick="removeWatchlistItem(this.dataset.id,this)" title="移除">✕</span>'+
       '</div>'+
     '</div>';
@@ -1703,13 +1719,7 @@ async function analyzeTarget(e, ticker, category, id){
 
   if(hasCachedToday){
     // 命中當日 cache：直接顯示已存內容（不扣點、不打 API）
-    var mdCache = cacheCheck.data.analysis
-      .replace(/^#{1,2} (.*?)$/gm, '<div style="font-weight:700;color:var(--navy-800);margin:12px 0 5px;font-size:14px;border-bottom:1px solid var(--navy-100);padding-bottom:3px;">$1</div>')
-      .replace(/^---$/gm, '<hr style="border:none;border-top:1px solid var(--gray-200);margin:8px 0;">')
-      .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--gray-800);">$1</strong>')
-      .replace(/^- (.*?)$/gm, '<div style="padding-left:10px;margin:3px 0;">• $1</div>')
-      .replace(/\n/g, '<br>');
-    resultEl.innerHTML = mdCache;
+    resultEl.innerHTML = renderAnalysisMd(cacheCheck.data.analysis);
     resultEl.style.display = 'block';
     btn.textContent = '🔼 收起';
     return;
@@ -1748,7 +1758,15 @@ async function analyzeTarget(e, ticker, category, id){
           body: JSON.stringify({ symbol: ticker, market: category })
         });
         var sd = await sr.json();
-        if(sd && sd.success && sd.data && sd.data.symbol) context = JSON.stringify(sd.data);
+        if(sd && sd.success && sd.data && sd.data.symbol){
+          context = JSON.stringify(sd.data);
+          // 回填正式名稱：更新卡片顯示 + Supabase（修正舊標的只顯示代碼的問題）
+          if(sd.data.name){
+            var nameEl = card ? card.querySelector('.tc-name') : null;
+            if(nameEl && nameEl.textContent !== sd.data.name) nameEl.textContent = sd.data.name;
+            try { await _supabase.from('watchlist').update({ name: sd.data.name }).eq('id', id); } catch(eUpd){}
+          }
+        }
         else context = JSON.stringify({ticker: ticker, market: category});
       } catch(eSearch){
         context = JSON.stringify({ticker: ticker, market: category});
@@ -1767,15 +1785,9 @@ async function analyzeTarget(e, ticker, category, id){
     });
     var data = await res2.json();
     if(data.success && data.analysis){
-      var md = data.analysis
-        .replace(/^#{1,2} (.*?)$/gm, '<div style="font-weight:700;color:var(--navy-800);margin:12px 0 5px;font-size:14px;border-bottom:1px solid var(--navy-100);padding-bottom:3px;">$1</div>')
-        .replace(/^---$/gm, '<hr style="border:none;border-top:1px solid var(--gray-200);margin:8px 0;">')
-        .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--gray-800);">$1</strong>')
-        .replace(/^- (.*?)$/gm, '<div style="padding-left:10px;margin:3px 0;">• $1</div>')
-        .replace(/\n/g, '<br>');
       // 分析成功才扣點（API 失敗或連線錯誤皆不扣）
       await deductCredits(1);
-      resultEl.innerHTML = md;
+      resultEl.innerHTML = renderAnalysisMd(data.analysis);
       resultEl.style.display = 'block';
       btn.textContent = '🔼 收起';
       // 寫入時帶上 analysis_date，下次當日點擊可命中 cache
@@ -1823,6 +1835,17 @@ async function addWatchlistItem(){
     var found = all.find(function(s){ return (s.ticker||s.symbol||'').toUpperCase()===ticker; });
     if(found) name = found.name || ticker;
   } catch(e){}
+  // 不在 daily.json → 用免費名稱解析端點抓正式名稱（不打 LLM、不扣點）
+  if(name === ticker){
+    try {
+      var nr = await fetch('https://projectx-backend-o2pl.onrender.com/resolve-name', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symbol: ticker, market: category })
+      });
+      var nd = await nr.json();
+      if(nd && nd.success && nd.name) name = nd.name;
+    } catch(eName){}
+  }
 
   var result = await _supabase.from('watchlist').insert({
     user_id: currentUser.id,
