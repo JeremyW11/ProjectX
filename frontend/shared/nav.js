@@ -6,7 +6,7 @@
     {key:'research', href:'/pages/institutional.html',    label:'機構研報'},
     {key:'calendar', href:'/pages/calendar.html',         label:'市場日曆'},
     {key:'stories',  href:'/pages/stories.html',          label:'全球追蹤'},
-    {key:'performance', href:'/pages/performance.html',   label:'歷史績效'},
+    {key:'performance', href:'/pages/performance.html',   label:'歷史數據'},
     {key:'columns',  href:'/pages/columns.html',           label:'名家觀點'},
     {key:'chart',    href:'/pages/chart.html',             label:'互動圖表'},
     {key:'member',   href:'/pages/targets.html',          label:'會員中心'},
