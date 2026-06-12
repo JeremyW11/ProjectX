@@ -1176,19 +1176,20 @@ function renderBriefList(items) {
 function renderMarketBar(tickers) {
   if (!tickers) return '';
   const labelMap = {
-    'S&P 500':{tag:'SPX',cat:'US Equity',name:'標普500'},
-    'NASDAQ':{tag:'NDX',cat:'US Equity',name:'納斯達克'},
-    '台股加權':{tag:'TWX',cat:'台股',name:'加權指數'},
+    'S&P 500':{tag:'SPX',cat:'US Equity',name:'標普500',yahoo:'^GSPC'},
+    'NASDAQ':{tag:'NDX',cat:'US Equity',name:'納斯達克',yahoo:'^IXIC'},
+    '台股加權':{tag:'TWX',cat:'台股',name:'加權指數',yahoo:'^TWII'},
     'BTC / USD':{tag:'BTC',cat:'Crypto',name:'比特幣',binance:'BTCUSDT'},
     'ETH / USD':{tag:'ETH',cat:'Crypto',name:'以太坊',binance:'ETHUSDT'},
-    'VIX':{tag:'VIX',cat:'Volatility',name:'恐慌指數'},
+    'VIX':{tag:'VIX',cat:'Volatility',name:'恐慌指數',yahoo:'^VIX'},
   };
   return tickers.map(t => {
     const info = labelMap[t.label] || {tag:t.label,cat:'',name:t.label};
     const dc = t.dir==='up'?'up':t.dir==='down'?'down':'flat';
     const di = t.dir==='up'?'▲':t.dir==='down'?'▼':'―';
     const bAttr = info.binance ? ' data-binance="'+info.binance+'"' : '';
-    return '<div class="mkt-card"'+bAttr+'><div class="mkt-card-tag"><span class="mkt-tag">'+info.tag+'</span><span class="mkt-category">'+info.cat+'</span></div><div class="mkt-name">'+info.name+'</div><div class="mkt-price">'+t.value+'</div><div class="mkt-chg '+dc+'">'+di+' '+t.change+'</div></div>';
+    const yAttr = info.yahoo   ? ' data-yahoo="'+info.yahoo+'"'     : '';
+    return '<div class="mkt-card"'+bAttr+yAttr+'><div class="mkt-card-tag"><span class="mkt-tag">'+info.tag+'</span><span class="mkt-category">'+info.cat+'</span></div><div class="mkt-name">'+info.name+'</div><div class="mkt-price">'+t.value+'</div><div class="mkt-chg '+dc+'">'+di+' '+t.change+'</div></div>';
   }).join('');
 }
 
@@ -1352,6 +1353,44 @@ loadData();
     }
     resolvePro(user);
   });
+})();
+
+// ── Yahoo Finance 即時報價（S&P500/NASDAQ/台股加權/VIX，30s 輪詢）──
+(function(){
+  function fmtVal(n){
+    if(n>=100) return Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+    return Number(n).toFixed(2);
+  }
+  async function tick(){
+    var cards=document.querySelectorAll('[data-yahoo]');
+    if(!cards.length) return;
+    var syms=Array.from(cards).map(function(c){return c.dataset.yahoo;}).join(',');
+    try{
+      var url='https://query1.finance.yahoo.com/v8/finance/quote?symbols='+encodeURIComponent(syms);
+      var r=await fetch(url,{cache:'no-store'});
+      if(!r.ok) throw new Error('yahoo '+r.status);
+      var data=await r.json();
+      var results=((data.quoteResponse||{}).result)||[];
+      results.forEach(function(q){
+        var card=document.querySelector('[data-yahoo="'+q.symbol+'"]');
+        if(!card) return;
+        var p=q.regularMarketPrice, chg=q.regularMarketChangePercent;
+        if(p==null||chg==null) return;
+        var dc=chg>0?'up':chg<0?'down':'flat';
+        var di=chg>0?'▲':chg<0?'▼':'―';
+        var priceEl=card.querySelector('.mkt-price');
+        var chgEl=card.querySelector('.mkt-chg');
+        if(priceEl) priceEl.textContent=fmtVal(p);
+        if(chgEl){chgEl.textContent=di+' '+Math.abs(chg).toFixed(2)+'%';chgEl.className='mkt-chg '+dc;}
+        var catEl=card.querySelector('.mkt-category');
+        if(catEl&&!catEl.querySelector('.live-dot')) catEl.innerHTML='<span class="live-dot"></span>即時';
+      });
+    }catch(e){console.warn('live yahoo skip:',e.message);}
+  }
+  var timer=null;
+  function start(){tick();clearInterval(timer);timer=setInterval(function(){if(!document.hidden)tick();},30000);}
+  var wait=setInterval(function(){if(document.querySelector('[data-yahoo]')){clearInterval(wait);start();}},300);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)tick();});
 })();
 
 // ── 即時加密報價（Binance 公開 API，30s 輪詢，分頁隱藏時暫停）──
