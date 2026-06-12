@@ -589,7 +589,7 @@ function renderThreadInner(id,viewer){
     +'<div class="thread-msgs">'+body+'</div>'
     +'<div style="display:flex;gap:6px;margin-top:6px;">'
     +'<input id="tmsg-'+id+'" type="text" maxlength="500" placeholder="輸入訊息…" '
-    +'onkeydown="if(event.key===\'Enter\'){event.preventDefault();sendThreadMsg(\''+id+'\',this);}" '
+    +'onkeydown="if(event.key===\'Enter\'&&!event.isComposing){event.preventDefault();sendThreadMsg(\''+id+'\',this);}" '
     +'style="flex:1;padding:7px 10px;border:1px solid var(--gray-200);border-radius:var(--r-sm);font-size:12.5px;font-family:var(--font-zh);">'
     +'<button class="btn btn-primary" onclick="sendThreadMsg(\''+id+'\',this)">送出</button></div>';
 }
