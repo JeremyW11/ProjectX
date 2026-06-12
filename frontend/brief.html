@@ -1182,6 +1182,7 @@ function renderMarketBar(tickers) {
     'BTC / USD':{tag:'BTC',cat:'Crypto',name:'比特幣',binance:'BTCUSDT'},
     'ETH / USD':{tag:'ETH',cat:'Crypto',name:'以太坊',binance:'ETHUSDT'},
     'VIX':{tag:'VIX',cat:'Volatility',name:'恐慌指數',yahoo:'^VIX'},
+    'Brent 原油':{tag:'BRENT',cat:'Commodity',name:'布蘭特原油',yahoo:'BZ=F'},
   };
   return tickers.map(t => {
     const info = labelMap[t.label] || {tag:t.label,cat:'',name:t.label};
@@ -1358,6 +1359,7 @@ loadData();
 // ── 即時指數報價（後端 /live-market 代理 TWSE + Yahoo，30s 輪詢）──
 (function(){
   var BASE='https://projectx-backend-o2pl.onrender.com';
+  var PFX={'BZ=F':'$'};
   function fmtVal(n){
     if(n>=100) return Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
     return Number(n).toFixed(2);
@@ -1376,7 +1378,7 @@ loadData();
         var di=q.dir==='up'?'▲':q.dir==='down'?'▼':'―';
         var priceEl=card.querySelector('.mkt-price');
         var chgEl=card.querySelector('.mkt-chg');
-        if(priceEl) priceEl.textContent=fmtVal(q.price);
+        if(priceEl) priceEl.textContent=(PFX[sym]||'')+fmtVal(q.price);
         if(chgEl){chgEl.textContent=di+' '+Math.abs(q.change).toFixed(2)+'%';chgEl.className='mkt-chg '+dc;}
         var catEl=card.querySelector('.mkt-category');
         if(catEl&&!catEl.querySelector('.live-dot')) catEl.innerHTML='<span class="live-dot"></span>即時';
