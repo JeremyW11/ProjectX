@@ -326,46 +326,69 @@ a{text-decoration:none;color:inherit;}
 
 </div>
 
-<!-- Gate (not admin) -->
+<!-- Gate (code entry) -->
 <div id="gate-view" style="display:none;">
   <div class="gate">
-    <h2>需要管理員權限</h2>
-    <p id="gate-msg">此頁僅限管理員存取，請以管理員帳號登入。</p>
-    <a href="/pages/login.html">前往登入</a>
+    <h2>後台管理</h2>
+    <p id="gate-msg">請輸入管理密碼進入後台。</p>
+    <input id="code-input" type="password" inputmode="numeric" autocomplete="off" placeholder="管理密碼"
+      onkeydown="if(event.key==='Enter'&&!event.isComposing){submitCode();}"
+      style="display:block;width:100%;max-width:240px;margin:18px auto 0;padding:11px 14px;border:none;border-radius:var(--r-sm);font-size:15px;text-align:center;letter-spacing:.2em;font-family:var(--font-en);">
+    <a href="#" onclick="submitCode();return false;" style="cursor:pointer;">進入</a>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-var ADMIN_EMAIL='jermy831102@gmail.com';
-var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
-var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
-var _sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+var BACKEND='https://projectx-backend-o2pl.onrender.com';
+var _code=sessionStorage.getItem('px_admin_code')||'';
 
 // state
 var _members=[],_mFilter='all',_mQ='';
 var _allFb=[],_names={},_appFilter='pending',_appCat='all',_appQ='',_fbFilter='pending',_fbQ='';
 var _msgs={};
 
-// ── auth ──
-_sb.auth.onAuthStateChange(function(ev,session){
-  if(ev==='INITIAL_SESSION'||ev==='SIGNED_IN'||ev==='TOKEN_REFRESHED'){
-    onAuth(session?session.user:null);
-  } else if(ev==='SIGNED_OUT'){ onAuth(null); }
-});
-
-function onAuth(user){
-  if(user && user.email===ADMIN_EMAIL){
-    document.getElementById('gate-view').style.display='none';
-    document.getElementById('main-area').style.display='block';
-    document.getElementById('sb-user').textContent=user.email;
-    loadAll();
-  } else {
-    document.getElementById('main-area').style.display='none';
-    document.getElementById('gate-view').style.display='block';
-    if(user) document.getElementById('gate-msg').textContent='帳號 '+user.email+' 沒有管理員權限。';
-  }
+// ── 後端呼叫（帶 x-admin-code）──
+async function api(path,opts){
+  opts=opts||{};
+  var headers=Object.assign({'x-admin-code':_code},opts.headers||{});
+  if(opts.body){ headers['Content-Type']='application/json'; opts.body=JSON.stringify(opts.body); }
+  var r=await fetch(BACKEND+path,{method:opts.method||'GET',headers:headers,body:opts.body});
+  if(r.status===401){ _code=''; sessionStorage.removeItem('px_admin_code'); showGate('密碼錯誤，請重新輸入。'); throw new Error('unauthorized'); }
+  var data=null; try{ data=await r.json(); }catch(e){}
+  if(!r.ok) throw new Error((data&&data.error)||('http_'+r.status));
+  return data;
 }
+
+// ── code gate ──
+function showGate(msg){
+  document.getElementById('main-area').style.display='none';
+  document.getElementById('gate-view').style.display='block';
+  if(msg) document.getElementById('gate-msg').textContent=msg;
+}
+function enterAdmin(){
+  document.getElementById('gate-view').style.display='none';
+  document.getElementById('main-area').style.display='block';
+  document.getElementById('sb-user').textContent='管理員';
+  loadAll();
+}
+async function submitCode(){
+  var inp=document.getElementById('code-input');
+  var code=(inp.value||'').trim();
+  if(!code) return;
+  _code=code;
+  try{
+    await api('/admin/login',{method:'POST'});
+    sessionStorage.setItem('px_admin_code',_code);
+    enterAdmin();
+  }catch(e){ /* api() 已處理 401 並顯示訊息 */ }
+}
+
+// 進場：有暫存 code 直接驗證，否則顯示輸入畫面
+(function(){
+  if(_code){
+    api('/admin/login',{method:'POST'}).then(enterAdmin).catch(function(){ showGate('請輸入管理密碼進入後台。'); });
+  } else { showGate(); }
+})();
 
 // ── panel switching ──
 function showPanel(name,triggerEl){
@@ -376,22 +399,28 @@ function showPanel(name,triggerEl){
   if(triggerEl) triggerEl.classList.add('active');
 }
 
-// ── load all data ──
+// ── load all data（一次打 /admin/overview）──
 async function loadAll(){
-  await Promise.all([loadMembers(),loadFeedback()]);
-}
-
-// ── members ──
-async function loadMembers(){
   var tbody=document.getElementById('members-body');
   if(tbody) tbody.innerHTML='<tr><td colspan="5" class="muted">載入中…</td></tr>';
-  var res=await _sb.from('profiles').select('id,display_name,is_pro,subscription_credits,purchased_credits,created_at').order('created_at',{ascending:false});
-  if(res.error){ if(tbody) tbody.innerHTML='<tr><td colspan="5" class="muted">讀取失敗：'+esc(res.error.message)+'</td></tr>'; return; }
-  _members=res.data||[];
-  renderMembers();
-  renderDashMembers();
-  updateStats();
+  try{
+    var d=await api('/admin/overview');
+    _members=d.members||[];
+    _allFb=d.feedback||[];
+    _names={};
+    _members.forEach(function(m){ _names[m.id]=m.display_name||''; });
+    _msgs={};
+    (d.messages||[]).forEach(function(m){ (_msgs[m.feedback_id]=_msgs[m.feedback_id]||[]).push(m); });
+    renderMembers(); renderDashMembers();
+    renderApps(); renderFeedback(); renderDashPending();
+    updateStats();
+  }catch(e){
+    if(tbody) tbody.innerHTML='<tr><td colspan="5" class="muted">讀取失敗：'+esc(e.message)+'</td></tr>';
+  }
 }
+// 重新整理（按鈕共用）
+function loadMembers(){ return loadAll(); }
+function loadFeedback(){ return loadAll(); }
 
 function renderMembers(){
   var rows=_members.filter(function(m){
@@ -445,23 +474,6 @@ function setMemberFilter(f,btn){
 }
 function onMemberSearch(v){ _mQ=(v||'').trim().toLowerCase(); document.getElementById('m-clear').style.display=_mQ?'block':'none'; renderMembers(); }
 function clearMemberSearch(){ var i=document.getElementById('m-search'); if(i) i.value=''; _mQ=''; document.getElementById('m-clear').style.display='none'; renderMembers(); }
-
-// ── feedback ──
-async function loadFeedback(){
-  var res=await _sb.from('feedback').select('id,user_id,content,status,created_at,reply,category').order('created_at',{ascending:false});
-  if(res.error) return;
-  _allFb=res.data||[];
-  var ids=_allFb.map(function(f){return f.user_id;}).filter(function(v,i,a){return a.indexOf(v)===i;});
-  if(ids.length){
-    var pr=await _sb.from('profiles').select('id,display_name').in('id',ids);
-    if(pr.data) pr.data.forEach(function(p){ _names[p.id]=p.display_name||''; });
-  }
-  await loadThreadMessages();
-  renderApps();
-  renderFeedback();
-  renderDashPending();
-  updateStats();
-}
 
 // applications
 function isAppCat(c){ return c==='pro_access'||c==='chart_access'||c==='credit_purchase'; }
@@ -600,23 +612,14 @@ async function sendThreadMsg(id,el){
   var content=input.value.trim();
   if(!content) return;
   input.value=''; input.disabled=true;   // 先清空：擋住 await 期間重複觸發造成重複送出
-  var res=await _sb.from('feedback_messages').insert({feedback_id:id,sender:'admin',content:content}).select();
-  if(res.error){ input.value=content; input.disabled=false; alert('送出失敗：'+res.error.message); return; }
-  _sb.from('feedback').update({replied_at:new Date().toISOString()}).eq('id',id);
-  if(!_msgs[id]) _msgs[id]=[];
-  _msgs[id].push((res.data&&res.data[0])||{sender:'admin',content:content,created_at:new Date().toISOString()});
-  var box=document.getElementById('thread-'+id);
-  if(box) box.innerHTML=renderThreadInner(id,'admin');
-  var ni=document.getElementById('tmsg-'+id); if(ni) ni.focus();
-}
-
-async function loadThreadMessages(){
-  _msgs={};
-  var ids=_allFb.map(function(f){return f.id;});
-  if(!ids.length) return;
-  var res=await _sb.from('feedback_messages').select('feedback_id,sender,content,created_at').in('feedback_id',ids).order('created_at',{ascending:true});
-  if(res.error||!res.data) return;
-  res.data.forEach(function(m){ (_msgs[m.feedback_id]=_msgs[m.feedback_id]||[]).push(m); });
+  try{
+    var r=await api('/admin/thread',{method:'POST',body:{feedback_id:id,content:content}});
+    if(!_msgs[id]) _msgs[id]=[];
+    _msgs[id].push((r&&r.message)||{sender:'admin',content:content,created_at:new Date().toISOString()});
+    var box=document.getElementById('thread-'+id);
+    if(box) box.innerHTML=renderThreadInner(id,'admin');
+    var ni=document.getElementById('tmsg-'+id); if(ni) ni.focus();
+  }catch(e){ input.value=content; input.disabled=false; alert('送出失敗：'+e.message); }
 }
 
 // ── stats ──
@@ -643,36 +646,35 @@ async function decide(id,status,btn){
   if(status==='adopted'&&!confirm('確定採納？將自動 +10 永久點數。')) return;
   setCardBtns(id,true);
   var ta=document.getElementById('reply-'+id);
-  var patch={status:status,replied_at:new Date().toISOString()};
-  if(ta&&ta.value.trim()) patch.reply=ta.value.trim();
-  var res=await _sb.from('feedback').update(patch).eq('id',id);
-  if(res.error){ alert('操作失敗：'+res.error.message); setCardBtns(id,false); return; }
-  updateFbItem(id,patch); renderFeedback(); renderDashPending(); updateStats();
+  var body={status:status};
+  if(ta&&ta.value.trim()) body.reply=ta.value.trim();
+  try{
+    await api('/admin/feedback/'+id,{method:'POST',body:body});
+    updateFbItem(id,body); renderFeedback(); renderDashPending(); updateStats();
+  }catch(e){ alert('操作失敗：'+e.message); setCardBtns(id,false); }
 }
 
 async function grantChart(id,userId,allow,btn){
   if(!confirm(allow?'確定開放圖表權限？':'確定婉拒？')) return;
   setCardBtns(id,true);
-  var rpc=await _sb.rpc('grant_chart_access',{target:userId,allow:allow});
-  if(rpc.error){ alert('權限更新失敗：'+rpc.error.message); setCardBtns(id,false); return; }
   var ta=document.getElementById('reply-'+id);
-  var patch={status:allow?'granted':'denied',replied_at:new Date().toISOString()};
-  if(ta&&ta.value.trim()) patch.reply=ta.value.trim();
-  await _sb.from('feedback').update(patch).eq('id',id);
-  updateFbItem(id,patch); renderApps(); renderDashPending(); updateStats();
+  var reply=(ta&&ta.value.trim())||'';
+  try{
+    await api('/admin/grant-chart',{method:'POST',body:{id:id,target:userId,allow:allow,reply:reply}});
+    updateFbItem(id,{status:allow?'granted':'denied',reply:reply}); renderApps(); renderDashPending(); updateStats();
+  }catch(e){ alert('權限更新失敗：'+e.message); setCardBtns(id,false); }
 }
 
 async function grantPro(id,userId,allow,btn){
   if(!confirm(allow?'確定開放 Pro 會員？（設為 Pro 並給予 30 訂閱點數）':'確定婉拒？')) return;
   setCardBtns(id,true);
-  var rpc=await _sb.rpc('grant_pro_access',{target:userId,allow:allow});
-  if(rpc.error){ alert('權限更新失敗：'+rpc.error.message); setCardBtns(id,false); return; }
   var ta=document.getElementById('reply-'+id);
-  var patch={status:allow?'granted':'denied',replied_at:new Date().toISOString()};
-  if(ta&&ta.value.trim()) patch.reply=ta.value.trim();
-  await _sb.from('feedback').update(patch).eq('id',id);
-  updateFbItem(id,patch); renderApps(); renderDashPending(); updateStats();
-  loadMembers();
+  var reply=(ta&&ta.value.trim())||'';
+  try{
+    await api('/admin/grant-pro',{method:'POST',body:{id:id,target:userId,allow:allow,reply:reply}});
+    updateFbItem(id,{status:allow?'granted':'denied',reply:reply}); renderApps(); renderDashPending(); updateStats();
+    loadAll();
+  }catch(e){ alert('權限更新失敗：'+e.message); setCardBtns(id,false); }
 }
 
 async function grantCredits(id,userId,btn){
@@ -684,25 +686,25 @@ async function grantCredits(id,userId,btn){
   var amount=parseInt(input,10);
   if(!amount||amount<=0){ alert('點數必須是正整數'); return; }
   setCardBtns(id,true);
-  var rpc=await _sb.rpc('admin_add_credits',{target:userId,amount:amount});
-  if(rpc.error){ alert('加點失敗：'+rpc.error.message); setCardBtns(id,false); return; }
   var ta=document.getElementById('reply-'+id);
-  var patch={status:'granted',replied_at:new Date().toISOString()};
-  patch.reply=(ta&&ta.value.trim())||('已完成加點 '+amount+' 點，感謝購買！');
-  await _sb.from('feedback').update(patch).eq('id',id);
-  updateFbItem(id,patch); renderApps(); renderDashPending(); updateStats();
-  loadMembers();
+  var reply=(ta&&ta.value.trim())||'';
+  try{
+    await api('/admin/grant-credits',{method:'POST',body:{id:id,target:userId,amount:amount,reply:reply}});
+    updateFbItem(id,{status:'granted',reply:reply||('已完成加點 '+amount+' 點，感謝購買！')}); renderApps(); renderDashPending(); updateStats();
+    loadAll();
+  }catch(e){ alert('加點失敗：'+e.message); setCardBtns(id,false); }
 }
 
 async function denyCredits(id,btn){
   if(!confirm('確定婉拒 / 取消這筆點數購買申請？')) return;
   setCardBtns(id,true);
   var ta=document.getElementById('reply-'+id);
-  var patch={status:'denied',replied_at:new Date().toISOString()};
-  if(ta&&ta.value.trim()) patch.reply=ta.value.trim();
-  var res=await _sb.from('feedback').update(patch).eq('id',id);
-  if(res.error){ alert('操作失敗：'+res.error.message); setCardBtns(id,false); return; }
-  updateFbItem(id,patch); renderApps(); renderDashPending(); updateStats();
+  var body={status:'denied'};
+  if(ta&&ta.value.trim()) body.reply=ta.value.trim();
+  try{
+    await api('/admin/feedback/'+id,{method:'POST',body:body});
+    updateFbItem(id,body); renderApps(); renderDashPending(); updateStats();
+  }catch(e){ alert('操作失敗：'+e.message); setCardBtns(id,false); }
 }
 
 async function saveReply(id,btn){
@@ -710,11 +712,12 @@ async function saveReply(id,btn){
   var msg=document.getElementById('reply-msg-'+id);
   if(!ta) return;
   btn.disabled=true; btn.textContent='送出中…';
-  var res=await _sb.from('feedback').update({reply:ta.value.trim()||null,replied_at:new Date().toISOString()}).eq('id',id);
+  try{
+    await api('/admin/feedback/'+id,{method:'POST',body:{reply:ta.value.trim()||null}});
+    updateFbItem(id,{reply:ta.value.trim()});
+    if(msg){msg.textContent='✓ 已送出';msg.style.color='var(--green-600)';}
+  }catch(e){ if(msg){msg.textContent='送出失敗';msg.style.color='var(--red-600)';} }
   btn.disabled=false; btn.textContent='送出回覆';
-  if(res.error){ if(msg){msg.textContent='送出失敗';msg.style.color='var(--red-600)';} return; }
-  updateFbItem(id,{reply:ta.value.trim()});
-  if(msg){msg.textContent='✓ 已送出';msg.style.color='var(--green-600)';}
 }
 
 function setCardBtns(id,disabled){
