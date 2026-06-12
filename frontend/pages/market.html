@@ -167,6 +167,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .sr-val.flat{color:var(--gray-500);}
 
 /* ── CRYPTO EXTRAS ── */
+.live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green-600);margin-right:5px;vertical-align:middle;animation:livePulse 1.6s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;}50%{opacity:.25;}}
 .crypto-metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:16px;}
 .cm-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:12px 14px;}
 .cm-label{font-size:10.5px;color:var(--gray-500);font-family:var(--font-en);letter-spacing:.04em;margin-bottom:4px;}
@@ -806,9 +808,73 @@ async function loadData(){
       cBias.textContent=cb;cBias.className='sent-chip '+ccls;
     }
 
+    // 暴露 crypto 重繪入口給即時更新器（Binance live）；market_cap/support 等仍沿用快照
+    function pxRenderCrypto(){
+      setSumCard('BTC','btc-price','btc-chg');
+      setSumCard('ETH','eth-price','eth-chg');
+      setSumCard('SOL','sol-price','sol-chg');
+      buildCoinGrid('cm-grid-btc','BTC',true);
+      buildCoinGrid('cm-grid-eth','ETH',false);
+      buildCoinGrid('cm-grid-sol','SOL',false);
+      var b=cryptoMap['BTC'];
+      var sb=document.getElementById('cr-sig-btc');
+      if(sb){sb.textContent=b?b.price:'--';sb.className='sr-val '+(b?(b.dir==='up'?'up':b.dir==='down'?'dn':'flat'):'flat');}
+      var sBias=document.getElementById('cr-sig-bias');
+      if(sBias){
+        var cb2='中性',cc2='s-neut';
+        if(b&&b.dir==='up'){cb2='偏多';cc2='s-bull';}
+        else if(b&&b.dir==='down'){cb2='偏空';cc2='s-bear';}
+        else if(fg){var fv2=parseInt(fg.value);if(fv2>=60){cb2='偏多';cc2='s-bull';}else if(fv2<=40){cb2='偏空';cc2='s-bear';}}
+        else if(!b&&!fg){cb2='—';}
+        sBias.textContent=cb2;sBias.className='sent-chip '+cc2;
+      }
+    }
+    window.__pxCrypto={map:cryptoMap,render:pxRenderCrypto};
+
   }catch(e){console.error('loadData error:',e);if(window.PX_showDataError)window.PX_showDataError();}
 }
 loadData();
+
+// ── 即時加密報價（Binance 公開 API，CORS 友善；每 30 秒更新，分頁隱藏時暫停）──
+// 覆寫快照的 價格/漲跌/24H 高低/24H 量；market cap 等 Binance 無提供者仍沿用快照。
+(function(){
+  var SYMS=[['BTC','BTCUSDT'],['ETH','ETHUSDT'],['SOL','SOLUSDT']];
+  function fmtPrice(n){var dp=n>=10000?0:2;return '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:dp,maximumFractionDigits:dp});}
+  function fmtUSD(n){n=Number(n);if(n>=1e12)return '$'+(n/1e12).toFixed(2)+'T';if(n>=1e9)return '$'+(n/1e9).toFixed(2)+'B';if(n>=1e6)return '$'+(n/1e6).toFixed(2)+'M';return '$'+Math.round(n).toLocaleString('en-US');}
+  function markLive(){
+    var ex=document.querySelectorAll('#tab-crypto .sum-extra');
+    for(var i=0;i<ex.length;i++) ex[i].innerHTML='<span class="live-dot"></span>即時 · USD';
+  }
+  async function tick(){
+    var px=window.__pxCrypto; if(!px) return;
+    try{
+      var syms=SYMS.map(function(s){return s[1];});
+      var url='https://api.binance.com/api/v3/ticker/24hr?symbols='+encodeURIComponent(JSON.stringify(syms));
+      var r=await fetch(url,{cache:'no-store'});
+      if(!r.ok) throw new Error('binance '+r.status);
+      var arr=await r.json();
+      var by={}; arr.forEach(function(o){by[o.symbol]=o;});
+      var any=false;
+      SYMS.forEach(function(s){
+        var o=by[s[1]]; if(!o) return;
+        var c=px.map[s[0]]; if(!c){c={symbol:s[0]};px.map[s[0]]=c;}
+        var p=parseFloat(o.lastPrice), chg=parseFloat(o.priceChangePercent);
+        c.price=fmtPrice(p);
+        c.change=(chg>=0?'+':'')+chg.toFixed(2)+'%';
+        c.dir=chg>0?'up':chg<0?'down':'flat';
+        c.high=fmtPrice(parseFloat(o.highPrice));
+        c.low=fmtPrice(parseFloat(o.lowPrice));
+        c.volume=fmtUSD(parseFloat(o.quoteVolume));
+        any=true;
+      });
+      if(any){px.render();markLive();}
+    }catch(e){/* 地區封鎖或網路失敗 → 靜默保留快照 */ console.warn('live crypto skip:',e.message);}
+  }
+  var timer=null;
+  function start(){tick();clearInterval(timer);timer=setInterval(function(){if(!document.hidden)tick();},30000);}
+  var wait=setInterval(function(){if(window.__pxCrypto){clearInterval(wait);start();}},300);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)tick();});
+})();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
