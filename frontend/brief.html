@@ -1179,15 +1179,16 @@ function renderMarketBar(tickers) {
     'S&P 500':{tag:'SPX',cat:'US Equity',name:'標普500'},
     'NASDAQ':{tag:'NDX',cat:'US Equity',name:'納斯達克'},
     '台股加權':{tag:'TWX',cat:'台股',name:'加權指數'},
-    'BTC / USD':{tag:'BTC',cat:'Crypto',name:'比特幣'},
-    'ETH / USD':{tag:'ETH',cat:'Crypto',name:'以太坊'},
+    'BTC / USD':{tag:'BTC',cat:'Crypto',name:'比特幣',binance:'BTCUSDT'},
+    'ETH / USD':{tag:'ETH',cat:'Crypto',name:'以太坊',binance:'ETHUSDT'},
     'VIX':{tag:'VIX',cat:'Volatility',name:'恐慌指數'},
   };
   return tickers.map(t => {
     const info = labelMap[t.label] || {tag:t.label,cat:'',name:t.label};
     const dc = t.dir==='up'?'up':t.dir==='down'?'down':'flat';
     const di = t.dir==='up'?'▲':t.dir==='down'?'▼':'―';
-    return '<div class="mkt-card"><div class="mkt-card-tag"><span class="mkt-tag">'+info.tag+'</span><span class="mkt-category">'+info.cat+'</span></div><div class="mkt-name">'+info.name+'</div><div class="mkt-price">'+t.value+'</div><div class="mkt-chg '+dc+'">'+di+' '+t.change+'</div></div>';
+    const bAttr = info.binance ? ' data-binance="'+info.binance+'"' : '';
+    return '<div class="mkt-card"'+bAttr+'><div class="mkt-card-tag"><span class="mkt-tag">'+info.tag+'</span><span class="mkt-category">'+info.cat+'</span></div><div class="mkt-name">'+info.name+'</div><div class="mkt-price">'+t.value+'</div><div class="mkt-chg '+dc+'">'+di+' '+t.change+'</div></div>';
   }).join('');
 }
 
@@ -1351,6 +1352,39 @@ loadData();
     }
     resolvePro(user);
   });
+})();
+
+// ── 即時加密報價（Binance 公開 API，30s 輪詢，分頁隱藏時暫停）──
+(function(){
+  function fmtPrice(n){var dp=n>=10000?0:2;return '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:dp,maximumFractionDigits:dp});}
+  async function tick(){
+    var cards=document.querySelectorAll('[data-binance]');
+    if(!cards.length) return;
+    try{
+      var syms=Array.from(cards).map(function(c){return c.dataset.binance;});
+      var url='https://api.binance.com/api/v3/ticker/24hr?symbols='+encodeURIComponent(JSON.stringify(syms));
+      var r=await fetch(url,{cache:'no-store'});
+      if(!r.ok) throw new Error('binance '+r.status);
+      var arr=await r.json();
+      arr.forEach(function(o){
+        var card=document.querySelector('[data-binance="'+o.symbol+'"]');
+        if(!card) return;
+        var p=parseFloat(o.lastPrice),chg=parseFloat(o.priceChangePercent);
+        var dc=chg>0?'up':chg<0?'down':'flat';
+        var di=chg>0?'▲':chg<0?'▼':'―';
+        var priceEl=card.querySelector('.mkt-price');
+        var chgEl=card.querySelector('.mkt-chg');
+        if(priceEl) priceEl.textContent=fmtPrice(p);
+        if(chgEl){chgEl.textContent=di+' '+Math.abs(chg).toFixed(2)+'%';chgEl.className='mkt-chg '+dc;}
+        var catEl=card.querySelector('.mkt-category');
+        if(catEl&&!catEl.querySelector('.live-dot')) catEl.innerHTML='<span class="live-dot"></span>即時';
+      });
+    }catch(e){console.warn('live crypto skip:',e.message);}
+  }
+  var timer=null;
+  function start(){tick();clearInterval(timer);timer=setInterval(function(){if(!document.hidden)tick();},30000);}
+  var wait=setInterval(function(){if(document.querySelector('[data-binance]')){clearInterval(wait);start();}},300);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)tick();});
 })();
 </script>
 <script src="/js/support.js"></script>
