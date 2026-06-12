@@ -27,18 +27,35 @@
     else { el.textContent=''; el.style.display='none'; }
   }
 
-  // 會員中心 nav 項目上的站內信箱未讀紅點
-  function memberNavItem(){ return document.querySelector('.nav-item[href*="targets"]'); }
-  function setBadge(n){
-    var a=memberNavItem(); if(!a) return;
-    var b=a.querySelector('.inbox-badge');
-    if(!n){ if(b) b.remove(); return; }
-    if(!b){
-      b=document.createElement('span'); b.className='inbox-badge';
-      b.style.cssText='display:inline-block;min-width:16px;height:16px;line-height:16px;padding:0 4px;margin-left:5px;border-radius:9px;background:#d92d20;color:#fff;font-size:10px;font-weight:700;text-align:center;font-family:\'DM Sans\',sans-serif;vertical-align:middle;';
-      a.appendChild(b);
+  // 工具列站內信箱圖示（全站共用）；未讀紅點掛在圖示右上角
+  function ensureInboxIcon(){
+    var box=container();
+    if(!box) return null;
+    var el=document.getElementById('header-inbox');
+    if(!el){
+      el=document.createElement('a');
+      el.id='header-inbox';
+      el.href='/pages/inbox.html';
+      el.title='站內信箱';
+      el.style.cssText='display:none;position:relative;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;color:#475569;transition:background .15s;';
+      el.onmouseover=function(){ el.style.background='#f1f5f9'; };
+      el.onmouseout=function(){ el.style.background='transparent'; };
+      el.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 6L2 7"></path></svg>'
+        +'<span class="inbox-badge" style="display:none;position:absolute;top:-3px;right:-3px;min-width:15px;height:15px;line-height:15px;padding:0 3px;border-radius:8px;background:#d92d20;color:#fff;font-size:9.5px;font-weight:700;text-align:center;font-family:\'DM Sans\',sans-serif;box-sizing:border-box;"></span>';
+      var anchor=box.querySelector('.btn-login,#auth-btn,a[href*="login"]');
+      if(anchor) box.insertBefore(el,anchor); else box.appendChild(el);
     }
-    b.textContent=n>99?'99+':n;
+    return el;
+  }
+  function showInboxIcon(show){
+    var el=ensureInboxIcon();
+    if(el) el.style.display=show?'inline-flex':'none';
+  }
+  function setBadge(n){
+    var el=ensureInboxIcon(); if(!el) return;
+    var b=el.querySelector('.inbox-badge'); if(!b) return;
+    if(!n){ b.style.display='none'; return; }
+    b.textContent=n>99?'99+':n; b.style.display='inline-block';
   }
 
   function init(){
@@ -58,8 +75,9 @@
     window.refreshInboxBadge=refreshBadge;
 
     function refresh(session){
-      if(!session || !session.user){ _loggedIn=false; setName(''); setBadge(0); return; }
+      if(!session || !session.user){ _loggedIn=false; setName(''); showInboxIcon(false); setBadge(0); return; }
       _loggedIn=true;
+      showInboxIcon(true);
       var u=session.user;
       var name=(u.user_metadata && u.user_metadata.display_name) || (u.email ? u.email.split('@')[0] : '');
       setName(name);

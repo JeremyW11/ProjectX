@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X · 站內信箱</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-950:#070d1c; --navy-900:#0d1630; --navy-800:#152244;
+  --navy-700:#1d2d5a; --navy-600:#1e3a8a; --navy-500:#2563eb;
+  --navy-400:#3b82f6; --navy-300:#93c5fd; --navy-100:#dbeafe; --navy-50:#eff6ff;
+  --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569;
+  --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1;
+  --gray-200:#e2e8f0; --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
+  --green-700:#15803d; --green-600:#16a34a; --green-100:#dcfce7; --green-50:#f0fdf4;
+  --red-700:#b91c1c; --red-600:#dc2626; --red-100:#fee2e2;
+  --amber-600:#d97706; --amber-100:#fef3c7;
+  --pro-gold:#c9a84c; --pro-gold-light:#f5e9c8; --pro-gold-dark:#8a6a1f;
+  --font-en:'DM Sans',sans-serif;
+  --font-zh:'Noto Sans TC',sans-serif;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:24px;
+  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;-webkit-font-smoothing:antialiased;}
+body{background:radial-gradient(1120px 640px at 94% -14%, rgba(37,99,235,.46), transparent 64%),radial-gradient(940px 720px at -10% 4%, rgba(51,65,85,.40), transparent 64%),radial-gradient(820px 620px at 50% 118%, rgba(29,78,216,.28), transparent 66%),linear-gradient(160deg, #dbe2ef 0%, #f4f6fb 56%);background-attachment:fixed;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:100;}
+.topbar-logo{display:flex;align-items:center;gap:10px;margin-right:36px;}
+.header-nav{display:flex;align-items:center;gap:2px;flex:1;}
+.nav-item{font-size:13.5px;color:var(--gray-600);padding:6px 12px;border-radius:var(--r-sm);font-weight:500;display:flex;align-items:center;gap:6px;transition:all .15s;}
+.nav-item:hover{background:var(--gray-100);color:var(--navy-700);}
+.nav-item.active{background:var(--navy-50);color:var(--navy-700);font-weight:600;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-500);}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.header-time{font-size:12px;color:var(--gray-400);font-family:var(--font-en);}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;font-family:var(--font-en);}
+
+.page{max-width:760px;margin:0 auto;padding:88px 24px 64px;}
+.page-header{margin-bottom:20px;}
+.page-title{font-size:26px;font-weight:600;color:var(--navy-900);font-family:var(--font-zh);}
+.page-title-sub{font-size:14px;color:var(--gray-400);font-family:var(--font-en);font-weight:400;margin-left:8px;}
+.page-update{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
+
+.gate-box{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--r-lg);padding:48px 24px;text-align:center;color:var(--gray-500);font-size:14px;line-height:1.8;}
+.gate-box .btn-login{display:inline-block;margin-top:14px;}
+
+.card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);box-shadow:var(--shadow-card);margin-bottom:18px;}
+.card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--gray-100);}
+.card-title{font-size:14px;font-weight:700;color:var(--navy-900);font-family:var(--font-zh);}
+.card-title-en{font-size:11px;color:var(--gray-400);font-family:var(--font-en);font-weight:500;margin-left:6px;}
+.card-body{padding:16px 20px;}
+.m-submit{background:var(--navy-700);color:var(--white);border-radius:var(--r-md);font-size:13.5px;font-weight:600;font-family:var(--font-zh);}
+.m-submit:hover{background:var(--navy-800);}
+@media(max-width:768px){.header-nav{display:none;}}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="https://projectxbrief.netlify.app/" class="logo-link" style="text-decoration:none;"><div class="topbar-logo">
+    <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
+      <line x1="10" y1="10" x2="30" y2="30" stroke="white" stroke-width="6" stroke-linecap="round"/>
+      <line x1="30" y1="10" x2="10" y2="30" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="3" fill="#2563eb"/>
+      <circle cx="20" cy="20" r="1.5" fill="#93c5fd"/>
+      <text x="48" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" letter-spacing="0.3" fill="#0f172a">PROJECT </text>
+      <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
+    </svg>
+  </div></a>
+  <nav class="header-nav" data-active="member"></nav>
+  <div class="header-right">
+    <span class="header-time" id="clock">—</span>
+    <a href="/pages/login.html" class="btn-login" id="auth-btn">登入</a>
+  </div>
+</header>
+
+<script src="/shared/nav.js"></script>
+<script src="/shared/footer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/shared/header-user.js"></script>
+
+<main class="page">
+
+  <div class="page-header">
+    <h1 class="page-title">站內信箱 <span class="page-title-sub">Inbox</span></h1>
+    <div class="page-update">權限申請、點數購買、意見回饋與官方回覆都會記錄並通知於此</div>
+  </div>
+
+  <!-- 未登入 -->
+  <div id="gate-view">
+    <div class="gate-box">
+      登入後即可查看你的申請、購點與意見回饋紀錄，以及官方的回覆通知。
+      <br><a href="/pages/login.html" class="btn-login">前往登入</a>
+    </div>
+  </div>
+
+  <!-- 已登入 -->
+  <div id="inbox-view" style="display:none;">
+    <div class="card">
+      <div class="card-head">
+        <span><span class="card-title">意見回饋</span><span class="card-title-en">FEEDBACK</span></span>
+        <span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">採納獎勵 +10 點</span>
+      </div>
+      <div class="card-body">
+        <div style="font-size:13px;color:var(--gray-500);line-height:1.7;margin-bottom:12px;">
+          有任何建議、想要的功能或發現的問題都歡迎告訴我們。<strong style="color:var(--navy-600);">一旦意見被採納，將獲得 10 點永久點數獎勵</strong>，回饋會直接加到你的帳戶。
+        </div>
+        <textarea id="fb-text" maxlength="1000" placeholder="想看到什麼新功能？哪裡可以更好？" style="width:100%;min-height:90px;padding:12px 14px;border:1px solid var(--gray-200);border-radius:var(--r-md);font-size:13.5px;font-family:var(--font-zh);line-height:1.6;resize:vertical;box-sizing:border-box;color:var(--gray-700);"></textarea>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:12px;">
+          <div id="fb-msg" style="font-size:12.5px;font-family:var(--font-zh);"></div>
+          <button class="m-submit" id="fb-btn" onclick="submitFeedback()" style="padding:10px 22px;white-space:nowrap;">送出意見</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="fb-history"></div>
+  </div>
+
+</main>
+
+<script>
+// Clock
+function tick(){
+  var t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
+  var el=document.getElementById('clock'); if(el) el.textContent=t+' CST';
+}
+tick(); setInterval(tick,1000);
+
+// ── Supabase Auth ──
+var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
+var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+var currentUser=null;
+var _fbMsgs={};
+
+function initAuth(){
+  _supabase.auth.onAuthStateChange(function(event,session){
+    if(event==='INITIAL_SESSION'||event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){
+      setAuthState(session?session.user:null);
+    } else if(event==='SIGNED_OUT'){
+      setAuthState(null);
+    }
+  });
+}
+
+function setAuthState(user){
+  var gateEl=document.getElementById('gate-view');
+  var viewEl=document.getElementById('inbox-view');
+  var btnEl=document.getElementById('auth-btn');
+  if(user){
+    currentUser=user;
+    if(gateEl) gateEl.style.display='none';
+    if(viewEl) viewEl.style.display='block';
+    if(btnEl){ btnEl.textContent='登出'; btnEl.href='#'; btnEl.onclick=function(e){e.preventDefault();signOutUser();}; }
+    loadFeedbackHistory();
+  } else {
+    currentUser=null;
+    if(gateEl) gateEl.style.display='block';
+    if(viewEl) viewEl.style.display='none';
+    if(btnEl){ btnEl.textContent='登入'; btnEl.href='/pages/login.html'; btnEl.onclick=null; }
+  }
+}
+
+async function signOutUser(){
+  await _supabase.auth.signOut();
+  window.location.reload();
+}
+
+// ── 意見回饋 ──
+function showFbMsg(text,ok){
+  var msg=document.getElementById('fb-msg');
+  if(!msg) return;
+  msg.textContent=text;
+  msg.style.color=ok?'var(--navy-600)':'var(--red-600)';
+}
+async function submitFeedback(){
+  if(!currentUser){ showFbMsg('請先登入',false); return; }
+  var ta=document.getElementById('fb-text');
+  var btn=document.getElementById('fb-btn');
+  var content=ta.value.trim();
+  if(content.length<5){ showFbMsg('請多寫一點，至少 5 個字',false); return; }
+  btn.disabled=true; btn.textContent='送出中…';
+  var res=await _supabase.from('feedback').insert({ user_id:currentUser.id, content:content });
+  btn.disabled=false; btn.textContent='送出意見';
+  if(res.error){ showFbMsg('送出失敗，請稍後再試',false); return; }
+  ta.value='';
+  showFbMsg('已收到你的意見，感謝！採納後將自動加 10 點。',true);
+  loadFeedbackHistory();
+}
+
+async function loadFeedbackHistory(){
+  if(!currentUser) return;
+  var box=document.getElementById('fb-history');
+  if(!box) return;
+  var res=await _supabase.from('feedback').select('id,content,status,created_at,reply,category,user_seen_at,replied_at').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(50);
+  if(res.error||!res.data||!res.data.length){ box.innerHTML=''; return; }
+  _fbMsgs={};
+  var fids=res.data.map(function(f){return f.id;});
+  if(fids.length){
+    var mr=await _supabase.from('feedback_messages').select('feedback_id,sender,content,created_at').in('feedback_id',fids).order('created_at',{ascending:true});
+    if(!mr.error&&mr.data) mr.data.forEach(function(m){ (_fbMsgs[m.feedback_id]=_fbMsgs[m.feedback_id]||[]).push(m); });
+  }
+  function statusLabel(st,cat){
+    if(st==='granted') return cat==='pro_access'?'Pro 已開放':(cat==='chart_access'?'圖表已開放':'已開放');
+    return { pending:'審核中', adopted:'已採納 +10 點', rejected:'未採納', denied:'未通過' }[st]||st;
+  }
+  function catLabel(cat){ return {pro_access:'Pro 申請',chart_access:'圖表申請',credit_purchase:'點數購買'}[cat]||'意見回饋'; }
+  function isApp(cat){ return cat==='pro_access'||cat==='chart_access'||cat==='credit_purchase'; }
+  function isUnread(f){
+    var seen=f.user_seen_at?new Date(f.user_seen_at).getTime():0;
+    var act=f.replied_at?new Date(f.replied_at).getTime():0;
+    (_fbMsgs[f.id]||[]).forEach(function(m){ if(m.sender==='admin'){ var t=new Date(m.created_at).getTime(); if(t>act) act=t; } });
+    return act>seen;
+  }
+  var color={ pending:'var(--gray-400)', adopted:'var(--navy-600)', rejected:'var(--gray-400)', granted:'var(--navy-600)', denied:'var(--gray-400)' };
+  var bg={ pending:'var(--gray-100)', adopted:'var(--navy-50)', rejected:'var(--gray-100)', granted:'var(--navy-50)', denied:'var(--gray-100)' };
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function renderCard(f){
+    var st=f.status||'pending';
+    var d=new Date(f.created_at);
+    var ds=(d.getMonth()+1)+'/'+d.getDate();
+    var safe=esc(f.content);
+    var unread=isUnread(f);
+    var newDot=unread?'<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red-600,#d92d20);margin-right:5px;vertical-align:middle;"></span>':'';
+    var replyHtml = f.reply ? '<div style="margin-top:8px;padding:8px 10px;background:var(--navy-50);border-radius:7px;border-left:3px solid var(--navy-400);">'
+      +'<div style="font-size:10px;font-weight:700;color:var(--navy-500);margin-bottom:3px;font-family:var(--font-zh);">官方回覆</div>'
+      +'<div style="font-size:12.5px;color:var(--gray-700);line-height:1.6;font-family:var(--font-zh);white-space:pre-wrap;">'+esc(f.reply)+'</div></div>' : '';
+    var threadHtml = f.reply ? '<div class="fb-thread" id="uthread-'+f.id+'">'+renderUserThreadInner(f.id)+'</div>' : '';
+    return '<div style="padding:10px 12px;border:1px solid '+(unread?'var(--navy-300,#7d97e0)':'var(--gray-100)')+';border-radius:var(--r-md);margin-bottom:8px;background:'+(unread?'var(--navy-50)':'var(--white)')+';">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;">'
+      +'<span style="display:flex;align-items:center;gap:6px;">'+newDot
+      +'<span style="font-size:10px;color:var(--gray-500);background:var(--gray-100);padding:2px 8px;border-radius:10px;font-family:var(--font-zh);font-weight:600;">'+catLabel(f.category)+'</span>'
+      +'<span style="font-size:10px;color:'+color[st]+';background:'+bg[st]+';padding:2px 8px;border-radius:10px;font-family:var(--font-zh);font-weight:600;">'+statusLabel(st,f.category)+'</span></span>'
+      +'<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">'+ds+'</span></div>'
+      +'<div style="font-size:12.5px;color:var(--gray-600);line-height:1.6;font-family:var(--font-zh);">'+safe+'</div>'+replyHtml+threadHtml+'</div>';
+  }
+  var apps=res.data.filter(function(f){return isApp(f.category);});
+  var fbs=res.data.filter(function(f){return !isApp(f.category);});
+  function section(title,rows){ return rows.length?('<div class="card"><div class="card-head"><span class="card-title">'+title+'</span></div><div class="card-body">'+rows.map(renderCard).join('')+'</div></div>'):''; }
+  box.innerHTML=section('申請與購點',apps)+section('意見回饋紀錄',fbs);
+  // 已進入信箱 → 標記全部已讀，清掉 nav 紅點（畫面上的未讀高亮本次仍保留）
+  _supabase.rpc('mark_inbox_seen').then(function(){ if(window.refreshInboxBadge) window.refreshInboxBadge(); });
+}
+
+// 對話串（使用者端）：官方正式回覆後可繼續多輪來回
+function fbMsgTime(s){ if(!s) return ''; var d=new Date(s); var p=function(n){return n<10?'0'+n:n;}; return (d.getMonth()+1)+'/'+d.getDate()+' '+p(d.getHours())+':'+p(d.getMinutes()); }
+function renderUserThreadInner(id){
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  var msgs=_fbMsgs[id]||[];
+  var body=msgs.map(function(m){
+    var mine=m.sender==='user';
+    var who=m.sender==='admin'?'官方':'我';
+    return '<div style="display:flex;justify-content:'+(mine?'flex-end':'flex-start')+';margin-bottom:6px;">'
+      +'<div style="max-width:80%;padding:7px 10px;border-radius:9px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;font-family:var(--font-zh);'
+      +(mine?'background:var(--navy-500,#3454b4);color:#fff;':'background:var(--gray-100);color:var(--gray-700);')+'">'
+      +'<div style="font-size:9.5px;opacity:.7;margin-bottom:2px;">'+who+' · '+fbMsgTime(m.created_at)+'</div>'
+      +esc(m.content)+'</div></div>';
+  }).join('');
+  return '<div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--gray-200);">'
+    +body
+    +'<div style="display:flex;gap:6px;margin-top:'+(msgs.length?'6px':'2px')+';">'
+    +'<input id="umsg-'+id+'" type="text" maxlength="500" placeholder="回覆官方…" '
+    +'onkeydown="if(event.key===\'Enter\'){event.preventDefault();sendUserMsg(\''+id+'\');}" '
+    +'style="flex:1;padding:7px 10px;border:1px solid var(--gray-200);border-radius:7px;font-size:12.5px;font-family:var(--font-zh);">'
+    +'<button onclick="sendUserMsg(\''+id+'\')" style="font-size:12px;color:#fff;background:var(--navy-500,#3454b4);border:none;padding:0 14px;border-radius:7px;cursor:pointer;font-family:var(--font-zh);">送出</button></div></div>';
+}
+async function sendUserMsg(id){
+  var input=document.getElementById('umsg-'+id);
+  if(!input||!currentUser) return;
+  var content=input.value.trim();
+  if(!content) return;
+  input.value=''; input.disabled=true;   // 先清空：擋住 await 期間重複觸發造成重複送出
+  var res=await _supabase.from('feedback_messages').insert({feedback_id:id,sender:'user',content:content}).select();
+  if(res.error){ input.value=content; input.disabled=false; input.placeholder='送出失敗，請稍後再試'; return; }
+  (_fbMsgs[id]=_fbMsgs[id]||[]).push((res.data&&res.data[0])||{sender:'user',content:content,created_at:new Date().toISOString()});
+  var box=document.getElementById('uthread-'+id);
+  if(box) box.innerHTML=renderUserThreadInner(id);
+  var ni=document.getElementById('umsg-'+id); if(ni){ ni.focus(); }
+}
+
+initAuth();
+</script>
+</body>
+</html>
