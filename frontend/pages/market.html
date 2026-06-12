@@ -598,10 +598,14 @@ function switchTab(id,btn){
 
 function getTicker(tickers,label){return tickers.find(function(t){return t.label===label;})||null;}
 
-function sumCard(tag,cat,name,val,chg,dir,extra){
+function sumCard(tag,cat,name,val,chg,dir,extra,attrs){
   var dc=dir==='up'?'up':dir==='down'?'dn':'flat';
   var di=dir==='up'?'▲ ':dir==='down'?'▼ ':'― ';
-  return '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">'+tag+'</span><span class="sum-category">'+cat+'</span></div><div class="sum-name">'+name+'</div><div class="sum-price">'+val+'</div><div class="sum-row"><span class="sum-chg '+dc+'">'+di+chg+'</span><span class="sum-extra">'+extra+'</span></div></div>';
+  return '<div class="sum-card"'+(attrs?' '+attrs:'')+'>'+
+    '<div class="sum-card-top"><span class="sum-tag">'+tag+'</span><span class="sum-category">'+cat+'</span></div>'+
+    '<div class="sum-name">'+name+'</div>'+
+    '<div class="sum-price">'+val+'</div>'+
+    '<div class="sum-row"><span class="sum-chg '+dc+'">'+di+chg+'</span><span class="sum-extra">'+extra+'</span></div></div>';
 }
 
 function renderStockRow(s){
@@ -639,10 +643,10 @@ async function loadData(){
     // US summary
     var usStrip=document.getElementById('us-summary-strip');
     if(usStrip) usStrip.innerHTML=
-      sumCard('SPX','Index','S&P 500',spx?spx.value:'--',spx?spx.change:'--',spx?spx.dir:'flat','前收')+
-      sumCard('NDX','Index','NASDAQ 100',ndx?ndx.value:'--',ndx?ndx.change:'--',ndx?ndx.dir:'flat','前收')+
+      sumCard('SPX','Index','S&P 500',spx?spx.value:'--',spx?spx.change:'--',spx?spx.dir:'flat','前收','id="lc-spx"')+
+      sumCard('NDX','Index','NASDAQ 100',ndx?ndx.value:'--',ndx?ndx.change:'--',ndx?ndx.dir:'flat','前收','id="lc-ndx"')+
       '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">F&G</span><span class="sum-category">Sentiment</span></div><div class="sum-name">恐懼貪婪指數</div><div class="sum-price" style="color:'+(fg?parseInt(fg.value)>=50?'var(--green-600)':'var(--red-600)':'var(--gray-400)')+';">'+(fg?fg.value:'--')+'</div><div class="sum-row"><span class="sum-chg '+(fg?parseInt(fg.value)>=50?'up':'dn':'flat')+'">'+(fg?fg.label:'--')+'</span></div></div>'+
-      '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">VIX</span><span class="sum-category">Volatility</span></div><div class="sum-name">恐慌指數</div><div class="sum-price">'+(vix?vix.value:'--')+'</div><div class="sum-row"><span class="sum-chg '+(vix?vix.dir==='up'?'up':vix.dir==='down'?'dn':'flat':'flat')+'">'+(vix?vix.change:'CBOE')+'</span></div></div>';
+      '<div class="sum-card" id="lc-vix"><div class="sum-card-top"><span class="sum-tag">VIX</span><span class="sum-category">Volatility</span></div><div class="sum-name">恐慌指數</div><div class="sum-price">'+(vix?vix.value:'--')+'</div><div class="sum-row"><span class="sum-chg '+(vix?vix.dir==='up'?'up':vix.dir==='down'?'dn':'flat':'flat')+'">'+(vix?vix.change:'CBOE')+'</span><span class="sum-extra">前收</span></div></div>';
 
     // US 訊號卡（真實資料：指數/VIX/F&G；缺資料留 --）
     var idxDir=function(t){return t?(t.dir==='up'?'up':t.dir==='down'?'dn':'flat'):'flat';};
@@ -677,7 +681,7 @@ async function loadData(){
     var twStrip=document.getElementById('tw-summary-strip');
     var volLabel=ts.data_date?'成交量（'+ts.data_date.slice(5).replace('-','/')+' 收盤）':'成交量（前一交易日收盤）';
     if(twStrip) twStrip.innerHTML=
-      sumCard('TAIEX','加權指數','台灣加權指數',twx?twx.value:'--',twx?twx.change:'--',twx?twx.dir:'flat','前收')+
+      sumCard('TAIEX','加權指數','台灣加權指數',twx?twx.value:'--',twx?twx.change:'--',twx?twx.dir:'flat','前收','id="lc-taiex"')+
       '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">成交量</span><span class="sum-category">全市場</span></div><div class="sum-name">'+volLabel+'</div><div class="sum-price" style="font-size:16px;">'+(ts.trade_value||'--')+'</div><div class="sum-row"><span class="sum-chg flat">TWD TWSE</span></div></div>'+
       '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">外資</span><span class="sum-category">買賣超</span></div><div class="sum-name">外資買賣超</div><div class="sum-price" style="font-size:16px;">'+(ts.foreign_net||'--')+'</div><div class="sum-row"><span class="sum-chg flat">三大法人</span></div></div>'+
       '<div class="sum-card"><div class="sum-card-top"><span class="sum-tag">投信</span><span class="sum-category">買賣超</span></div><div class="sum-name">投信動向</div><div class="sum-price" style="font-size:16px;">'+(ts.trust_net||'--')+'</div><div class="sum-row"><span class="sum-chg flat">三大法人</span></div></div>';
@@ -897,6 +901,60 @@ loadData();
       btn.onclick=null;
     }
   });
+})();
+
+// ── 即時指數報價（後端 /live-market 代理 TWSE 台股加權 + Yahoo 美股/VIX，30s 輪詢）──
+(function(){
+  var BASE='https://projectx-backend-o2pl.onrender.com';
+  var SYM_MAP={'lc-taiex':'^TWII','lc-spx':'^GSPC','lc-ndx':'^IXIC','lc-vix':'^VIX'};
+  var SIG_MAP={'^TWII':'tw-sig-taiex','^GSPC':'us-sig-spx','^IXIC':'us-sig-ndx','^VIX':'us-sig-vix'};
+  function fmtVal(n){
+    if(n>=100) return Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+    return Number(n).toFixed(2);
+  }
+  function liveDot(){return '<span class="live-dot" style="display:inline-block;margin-right:4px;"></span>';}
+  async function tick(){
+    if(!document.getElementById('lc-taiex')&&!document.getElementById('lc-spx')) return;
+    try{
+      var r=await fetch(BASE+'/live-market',{cache:'no-store'});
+      if(!r.ok) throw new Error('live-market '+r.status);
+      var data=await r.json();
+      Object.keys(SYM_MAP).forEach(function(cardId){
+        var sym=SYM_MAP[cardId];
+        var q=data[sym]; if(!q) return;
+        var card=document.getElementById(cardId); if(!card) return;
+        var dc=q.dir==='up'?'up':q.dir==='down'?'dn':'flat';
+        var di=q.dir==='up'?'▲ ':q.dir==='down'?'▼ ':'― ';
+        var pEl=card.querySelector('.sum-price');
+        var cEl=card.querySelector('.sum-chg');
+        var xEl=card.querySelector('.sum-extra');
+        if(pEl) pEl.textContent=fmtVal(q.price);
+        if(cEl){cEl.textContent=di+Math.abs(q.change).toFixed(2)+'%';cEl.className='sum-chg '+dc;}
+        if(xEl&&!xEl.querySelector('.live-dot')) xEl.innerHTML=liveDot()+'即時';
+        // 同步 signal row
+        var sigId=SIG_MAP[sym];
+        var sEl=sigId?document.getElementById(sigId):null;
+        if(sEl){
+          sEl.textContent=fmtVal(q.price)+' '+(q.change>=0?'+':'')+q.change.toFixed(2)+'%';
+          sEl.className='sr-val '+dc;
+        }
+      });
+      // 重算美股偏向 chip
+      var spxQ=data['^GSPC'],ndxQ=data['^IXIC'];
+      var uBias=document.getElementById('us-sig-bias');
+      if(uBias&&(spxQ||ndxQ)){
+        var ups=(spxQ&&spxQ.dir==='up'?1:0)+(ndxQ&&ndxQ.dir==='up'?1:0);
+        var dns=(spxQ&&spxQ.dir==='down'?1:0)+(ndxQ&&ndxQ.dir==='down'?1:0);
+        var ub='中性',uc='s-neut';
+        if(ups>dns){ub='偏多';uc='s-bull';}else if(dns>ups){ub='偏空';uc='s-bear';}
+        uBias.textContent=ub;uBias.className='sent-chip '+uc;
+      }
+    }catch(e){console.warn('live market skip:',e.message);}
+  }
+  var timer=null;
+  function start(){tick();clearInterval(timer);timer=setInterval(function(){if(!document.hidden)tick();},30000);}
+  var wait=setInterval(function(){if(document.getElementById('lc-taiex')){clearInterval(wait);start();}},300);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)tick();});
 })();
 </script>
 <script src="/js/support.js"></script>
