@@ -934,7 +934,7 @@ async function loadFeedbackHistory(){
   if(!currentUser) return;
   var box=document.getElementById('fb-history');
   if(!box) return;
-  var res=await _supabase.from('feedback').select('id,content,status,created_at,reply,category').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(5);
+  var res=await _supabase.from('feedback').select('id,content,status,created_at,reply,category,user_seen_at,replied_at').eq('user_id',currentUser.id).order('created_at',{ascending:false}).limit(50);
   if(res.error||!res.data||!res.data.length){ box.innerHTML=''; return; }
   _fbMsgs={};
   var fids=res.data.map(function(f){return f.id;});
@@ -946,25 +946,43 @@ async function loadFeedbackHistory(){
     if(st==='granted') return cat==='pro_access'?'Pro 已開放':(cat==='chart_access'?'圖表已開放':'已開放');
     return { pending:'審核中', adopted:'已採納 +10 點', rejected:'未採納', denied:'未通過' }[st]||st;
   }
-  var label={ pending:'審核中', adopted:'已採納 +10 點', rejected:'未採納', granted:'已開放', denied:'未通過' };
+  function catLabel(cat){ return {pro_access:'Pro 申請',chart_access:'圖表申請',credit_purchase:'點數購買'}[cat]||'意見回饋'; }
+  function isApp(cat){ return cat==='pro_access'||cat==='chart_access'||cat==='credit_purchase'; }
+  function isUnread(f){
+    var seen=f.user_seen_at?new Date(f.user_seen_at).getTime():0;
+    var act=f.replied_at?new Date(f.replied_at).getTime():0;
+    (_fbMsgs[f.id]||[]).forEach(function(m){ if(m.sender==='admin'){ var t=new Date(m.created_at).getTime(); if(t>act) act=t; } });
+    return act>seen;
+  }
   var color={ pending:'var(--gray-400)', adopted:'var(--navy-600)', rejected:'var(--gray-400)', granted:'var(--navy-600)', denied:'var(--gray-400)' };
   var bg={ pending:'var(--gray-100)', adopted:'var(--navy-50)', rejected:'var(--gray-100)', granted:'var(--navy-50)', denied:'var(--gray-100)' };
   function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  box.innerHTML='<div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);margin-bottom:8px;">我的回饋紀錄</div>'+res.data.map(function(f){
+  function renderCard(f){
     var st=f.status||'pending';
     var d=new Date(f.created_at);
     var ds=(d.getMonth()+1)+'/'+d.getDate();
     var safe=esc(f.content);
+    var unread=isUnread(f);
+    var newDot=unread?'<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red-600,#d92d20);margin-right:5px;vertical-align:middle;"></span>':'';
     var replyHtml = f.reply ? '<div style="margin-top:8px;padding:8px 10px;background:var(--navy-50);border-radius:7px;border-left:3px solid var(--navy-400);">'
       +'<div style="font-size:10px;font-weight:700;color:var(--navy-500);margin-bottom:3px;font-family:var(--font-zh);">官方回覆</div>'
       +'<div style="font-size:12.5px;color:var(--gray-700);line-height:1.6;font-family:var(--font-zh);white-space:pre-wrap;">'+esc(f.reply)+'</div></div>' : '';
     var threadHtml = f.reply ? '<div class="fb-thread" id="uthread-'+f.id+'">'+renderUserThreadInner(f.id)+'</div>' : '';
-    return '<div style="padding:10px 12px;border:1px solid var(--gray-100);border-radius:var(--r-md);margin-bottom:8px;">'
+    return '<div style="padding:10px 12px;border:1px solid '+(unread?'var(--navy-300,#7d97e0)':'var(--gray-100)')+';border-radius:var(--r-md);margin-bottom:8px;background:'+(unread?'var(--navy-50)':'transparent')+';">'
       +'<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;">'
-      +'<span style="font-size:10px;color:'+color[st]+';background:'+bg[st]+';padding:2px 8px;border-radius:10px;font-family:var(--font-zh);font-weight:600;">'+statusLabel(st,f.category)+'</span>'
+      +'<span style="display:flex;align-items:center;gap:6px;">'+newDot
+      +'<span style="font-size:10px;color:var(--gray-500);background:var(--gray-100);padding:2px 8px;border-radius:10px;font-family:var(--font-zh);font-weight:600;">'+catLabel(f.category)+'</span>'
+      +'<span style="font-size:10px;color:'+color[st]+';background:'+bg[st]+';padding:2px 8px;border-radius:10px;font-family:var(--font-zh);font-weight:600;">'+statusLabel(st,f.category)+'</span></span>'
       +'<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-en);">'+ds+'</span></div>'
       +'<div style="font-size:12.5px;color:var(--gray-600);line-height:1.6;font-family:var(--font-zh);">'+safe+'</div>'+replyHtml+threadHtml+'</div>';
-  }).join('');
+  }
+  var apps=res.data.filter(function(f){return isApp(f.category);});
+  var fbs=res.data.filter(function(f){return !isApp(f.category);});
+  function section(title,rows){ return rows.length?('<div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.04em;font-family:var(--font-zh);margin:14px 0 8px;">'+title+'</div>'+rows.map(renderCard).join('')):''; }
+  box.innerHTML='<div style="font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);margin-bottom:4px;">站內信箱</div>'
+    +section('申請與購點',apps)+section('意見回饋',fbs);
+  // 已進入信箱 → 標記全部已讀，清掉 nav 紅點（畫面上的未讀高亮本次仍保留）
+  _supabase.rpc('mark_inbox_seen').then(function(){ if(window.refreshInboxBadge) window.refreshInboxBadge(); });
 }
 
 // 對話串（使用者端）：官方正式回覆後可繼續多輪來回

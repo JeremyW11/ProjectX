@@ -27,6 +27,20 @@
     else { el.textContent=''; el.style.display='none'; }
   }
 
+  // 會員中心 nav 項目上的站內信箱未讀紅點
+  function memberNavItem(){ return document.querySelector('.nav-item[href*="targets"]'); }
+  function setBadge(n){
+    var a=memberNavItem(); if(!a) return;
+    var b=a.querySelector('.inbox-badge');
+    if(!n){ if(b) b.remove(); return; }
+    if(!b){
+      b=document.createElement('span'); b.className='inbox-badge';
+      b.style.cssText='display:inline-block;min-width:16px;height:16px;line-height:16px;padding:0 4px;margin-left:5px;border-radius:9px;background:#d92d20;color:#fff;font-size:10px;font-weight:700;text-align:center;font-family:\'DM Sans\',sans-serif;vertical-align:middle;';
+      a.appendChild(b);
+    }
+    b.textContent=n>99?'99+':n;
+  }
+
   function init(){
     if(!window.supabase || !window.supabase.createClient) return;
     var sb;
@@ -34,8 +48,18 @@
       sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{autoRefreshToken:false,persistSession:true}});
     }catch(e){ return; }
 
+    var _loggedIn=false;
+    function refreshBadge(){
+      if(!_loggedIn){ setBadge(0); return; }
+      sb.rpc('inbox_unread_count').then(function(r){
+        if(r && !r.error && typeof r.data==='number') setBadge(r.data);
+      });
+    }
+    window.refreshInboxBadge=refreshBadge;
+
     function refresh(session){
-      if(!session || !session.user){ setName(''); return; }
+      if(!session || !session.user){ _loggedIn=false; setName(''); setBadge(0); return; }
+      _loggedIn=true;
       var u=session.user;
       var name=(u.user_metadata && u.user_metadata.display_name) || (u.email ? u.email.split('@')[0] : '');
       setName(name);
@@ -43,6 +67,7 @@
       sb.from('profiles').select('display_name').eq('id',u.id).single().then(function(r){
         if(r && r.data && r.data.display_name) setName(r.data.display_name);
       });
+      refreshBadge();
     }
 
     sb.auth.getSession().then(function(res){ refresh(res && res.data ? res.data.session : null); });
