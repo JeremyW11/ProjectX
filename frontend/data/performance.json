@@ -1,14 +1,14 @@
 {
-  "updated": "2026-06-11",
+  "updated": "2026-06-12",
   "predictions": {
-    "total": 148,
+    "total": 156,
     "hit": 9,
-    "partial": 15,
+    "partial": 17,
     "miss": 3,
-    "pending": 121,
-    "resolved": 27,
-    "hit_rate": 33.3,
-    "hit_rate_weighted": 61.1,
+    "pending": 127,
+    "resolved": 29,
+    "hit_rate": 31,
+    "hit_rate_weighted": 60.3,
     "series": [
       {
         "date": "2026-05-20",
@@ -57,20 +57,155 @@
       },
       {
         "date": "2026-06-10",
-        "rate": 63,
-        "n": 23
+        "rate": 61.1,
+        "n": 27
+      },
+      {
+        "date": "2026-06-11",
+        "rate": 60.3,
+        "n": 29
       }
     ]
   },
   "opportunities": {
-    "tracked": 109,
-    "evaluated7": 57,
-    "avg_r7": -1.16,
-    "win7": 35.1,
+    "tracked": 119,
+    "evaluated7": 67,
+    "avg_r7": -2.46,
+    "win7": 31.3,
     "evaluated30": 0,
     "avg_r30": null,
     "win30": null,
     "items": [
+      {
+        "date": "2026-06-05",
+        "ticker": "MRVL",
+        "name": "Marvell Technology",
+        "category": "us",
+        "r7": -20.18,
+        "r30": null,
+        "thesis": "Huang 於 COMPUTEX 點名為下一個兆元市值候選，客製化 ASIC 受惠雲端 capex 上修至 7250 億",
+        "target": "+20% 中期",
+        "entry": 316.43,
+        "exit7": 252.59,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-05",
+        "ticker": "HPE",
+        "name": "Hewlett Packard Enterprise",
+        "category": "us",
+        "r7": -15.27,
+        "r30": null,
+        "thesis": "AI server 訂單能見度延伸，財測上修但市值仍遠低於 Dell，估值倍數錯置",
+        "target": "+15% 中期",
+        "entry": 53.69,
+        "exit7": 45.49,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-05",
+        "ticker": "GLD",
+        "name": "SPDR Gold Trust",
+        "category": "sector",
+        "r7": -8.92,
+        "r30": null,
+        "thesis": "美伊談判反覆＋通膨黏性＋Fed 按兵不動＋BTC 重挫資金回流避險，黃金尚未充分反映地緣溢價",
+        "target": "+8% 中期",
+        "entry": 411.27,
+        "exit7": 374.58,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-05",
+        "ticker": "2454",
+        "name": "聯發科",
+        "category": "tw",
+        "r7": -6.21,
+        "r30": null,
+        "thesis": "邊緣 AI 與 PC 處理器題材受惠 NVDA COMPUTEX 生態擴散，今日 -2.53% 跟跌提供進場區，相對台積",
+        "target": "4800 短期",
+        "entry": 4430,
+        "exit7": 4155,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-05",
+        "ticker": "SOL",
+        "name": "Solana",
+        "category": "crypto",
+        "r7": -8.09,
+        "r30": null,
+        "thesis": "極度恐懼指數 12 為歷史極端區，SOL 跌幅大於 BTC 反映散戶恐慌，鏈上活動仍穩健，反彈彈性高",
+        "target": "+25% 短期",
+        "entry": 68.7189,
+        "exit7": 63.161,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-05",
+        "ticker": "XLV",
+        "name": "Health Care Select SPDR",
+        "category": "sector",
+        "r7": 0.51,
+        "r30": null,
+        "thesis": "資金自 AI 半導體輪出至防禦類股，醫療類股 6/3 +3.14% 為當日最強，biotech M&A 全年挑戰 250",
+        "target": "+7% 中期",
+        "entry": 152.08,
+        "exit7": 152.85,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-05",
+        "ticker": "ORCL",
+        "name": "Oracle",
+        "category": "us",
+        "r7": -14.84,
+        "r30": null,
+        "thesis": "6 月法說將公布 OCI 雲端營收，超大規模 capex 上修至 7250 億的最大受惠者之一，市場仍以傳統軟體估值",
+        "target": "+12% 短期",
+        "entry": 236.34,
+        "exit7": 201.26,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-05",
+        "ticker": "SPRO",
+        "name": "Spero Therapeutics",
+        "category": "us",
+        "r7": -14.77,
+        "r30": null,
+        "thesis": "FDA 6 月 cUTI 抗生素審查，小型 biotech 二元事件具高勝率不對稱回報，市場關注度低",
+        "target": "+50% 短期",
+        "entry": 2.98,
+        "exit7": 2.54,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-05",
+        "ticker": "3711",
+        "name": "日月光投控",
+        "category": "tw",
+        "r7": -9.11,
+        "r30": null,
+        "thesis": "今日 -4.05% 跌幅居台股前列，CoWoS-L 需求隨 NVDA Vera Rubin 量產擴大，封測產能緊張未反映",
+        "target": "650 中期",
+        "entry": 593,
+        "exit7": 539,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-05",
+        "ticker": "USO",
+        "name": "United States Oil Fund",
+        "category": "sector",
+        "r7": -1.78,
+        "r30": null,
+        "thesis": "Brent 今日 -2.85% 反映 MOU 樂觀，但 EIA 美原油庫存連 6 週下滑逼近最低運作水位，供給面被忽視",
+        "target": "+10% 短期",
+        "entry": 136.74,
+        "exit7": 134.3,
+        "exit30": null
+      },
       {
         "date": "2026-06-04",
         "ticker": "MRVL",
@@ -79,7 +214,10 @@
         "r7": -11.53,
         "r30": null,
         "thesis": "黃仁勳公開點名下一家兆元市值候選，客製化ASIC與光通訊在AI資料中心放量，市場仍以傳統半導體本益比估值，明顯低估其AI",
-        "target": "+20% 中期"
+        "target": "+20% 中期",
+        "entry": 301.65,
+        "exit7": 266.88,
+        "exit30": null
       },
       {
         "date": "2026-06-04",
@@ -89,7 +227,10 @@
         "r7": -12.48,
         "r30": null,
         "thesis": "AI伺服器訂單能見度大幅優於預期，市場仍以舊式企業硬體本益比給估值，相對Dell與SMCI明顯折價",
-        "target": "+15% 中期"
+        "target": "+15% 中期",
+        "entry": 55.15,
+        "exit7": 48.27,
+        "exit30": null
       },
       {
         "date": "2026-06-04",
@@ -99,7 +240,10 @@
         "r7": -11.83,
         "r30": null,
         "thesis": "記憶體缺貨延伸至2027，HBM與利基型DRAM雙旺，市場仍視為次階記憶體股給予折價，未反映WSTS記憶體市場年增3.5",
-        "target": "+18% 中期"
+        "target": "+18% 中期",
+        "entry": 177.5,
+        "exit7": 156.5,
+        "exit30": null
       },
       {
         "date": "2026-06-04",
@@ -109,7 +253,10 @@
         "r7": -10.07,
         "r30": null,
         "thesis": "AI伺服器ODM龍頭，Blackwell與Rubin出貨放量但市場仍以PC代工本益比估值，AI營收佔比超過50%尚未反映",
-        "target": "+15% 中期"
+        "target": "+15% 中期",
+        "entry": 417,
+        "exit7": 375,
+        "exit30": null
       },
       {
         "date": "2026-06-04",
@@ -119,7 +266,10 @@
         "r7": -6.33,
         "r30": null,
         "thesis": "荷姆茲擾動帶動運價走高，集裝箱業者燃油成本附加費啟動轉嫁，市場仍以景氣循環低點本益比估值",
-        "target": "+12% 短期"
+        "target": "+12% 短期",
+        "entry": 237,
+        "exit7": 222,
+        "exit30": null
       },
       {
         "date": "2026-06-04",
@@ -129,7 +279,10 @@
         "r7": -9.29,
         "r30": null,
         "thesis": "Fear & Greed 12極度恐懼且SOL跌幅居前已超賣，CLARITY Act通過後高速公鏈最受惠，現價對應市值/",
-        "target": "+25% 中期"
+        "target": "+25% 中期",
+        "entry": 71.6124,
+        "exit7": 64.9621,
+        "exit30": null
       },
       {
         "date": "2026-06-04",
@@ -139,7 +292,10 @@
         "r7": -2.25,
         "r30": null,
         "thesis": "Brent維持97美元但能源股相對油價落後，UAE退出OPEC+與荷姆茲擾動推升地緣溢價，市場仍預期Q4降至89而低估短",
-        "target": "+10% 短期"
+        "target": "+10% 短期",
+        "entry": 58.71,
+        "exit7": 57.39,
+        "exit30": null
       },
       {
         "date": "2026-06-04",
@@ -149,7 +305,10 @@
         "r7": 0.38,
         "r30": null,
         "thesis": "台股市值已超越印度成全球第五，印度遭課10%+強迫勞動關稅但內需與服務業占比高、出口曝險相對亞洲偏低，跌深後估值具吸引力",
-        "target": "+8% 中期"
+        "target": "+8% 中期",
+        "entry": 47.36,
+        "exit7": 47.54,
+        "exit30": null
       },
       {
         "date": "2026-06-04",
@@ -159,7 +318,10 @@
         "r7": -8.37,
         "r30": null,
         "thesis": "ASIC設計服務受惠Broadcom AI營收年增106%帶動的客製化晶片浪潮，市場仍以傳統IP本益比估值，未反映ASI",
-        "target": "+18% 中期"
+        "target": "+18% 中期",
+        "entry": 203,
+        "exit7": 186,
+        "exit30": null
       },
       {
         "date": "2026-06-04",
@@ -169,7 +331,10 @@
         "r7": -8.02,
         "r30": null,
         "thesis": "資料中心SiC與類比晶片供應商，市場仍視為車用與工業景氣股給予折價，未反映其上修資料中心營收目標",
-        "target": "+12% 中期"
+        "target": "+12% 中期",
+        "entry": 79.71,
+        "exit7": 73.32,
+        "exit30": null
       },
       {
         "date": "2026-06-03",
@@ -179,7 +344,10 @@
         "r7": -0.67,
         "r30": null,
         "thesis": "客製ASIC受惠hyperscaler自研晶片潮，黃仁勳點名下一兆元候選後市場僅給單日反應，AI光通訊與資料中心連接器業",
-        "target": "+25%"
+        "target": "+25%",
+        "entry": 290.79,
+        "exit7": 288.85,
+        "exit30": null
       },
       {
         "date": "2026-06-03",
@@ -189,7 +357,10 @@
         "r7": -11.18,
         "r30": null,
         "thesis": "AI伺服器訂單推動全年指引上修，市場仍以傳統硬體本益比評價，未反映Juniper整合後網路+AI機架價值",
-        "target": "+20%"
+        "target": "+20%",
+        "entry": 56.15,
+        "exit7": 49.87,
+        "exit30": null
       },
       {
         "date": "2026-06-03",
@@ -199,7 +370,10 @@
         "r7": -5.66,
         "r30": null,
         "thesis": "資料中心營收指引從$500M倍增至$1B，市場仍以歐洲類比IC估值，AI基建轉型未被定價",
-        "target": "+20%"
+        "target": "+20%",
+        "entry": 79.51,
+        "exit7": 75.01,
+        "exit30": null
       },
       {
         "date": "2026-06-03",
@@ -209,7 +383,10 @@
         "r7": -6.71,
         "r30": null,
         "thesis": "驅動IC受惠AI PC換機潮與OLED滲透率提升，市場聚焦先進製程忽略顯示驅動鏈",
-        "target": "+12%"
+        "target": "+12%",
+        "entry": 507,
+        "exit7": 473,
+        "exit30": null
       },
       {
         "date": "2026-06-03",
@@ -219,7 +396,10 @@
         "r7": -9.58,
         "r30": null,
         "thesis": "NVIDIA進軍ARM PC晶片驗證ARM架構在Windows上行，QCOM Snapdragon X為現有最大ARM ",
-        "target": "+15%"
+        "target": "+15%",
+        "entry": 240.84,
+        "exit7": 217.77,
+        "exit30": null
       },
       {
         "date": "2026-06-02",
@@ -229,7 +409,10 @@
         "r7": -0.73,
         "r30": null,
         "thesis": "跨太平洋運價自伊朗戰爭起累漲約1000美元/FEU，旺季附加費將擴散，貨櫃三雄盈餘上修被低估",
-        "target": "65元（+16%）"
+        "target": "65元（+16%）",
+        "entry": 54.9,
+        "exit7": 54.5,
+        "exit30": null
       },
       {
         "date": "2026-06-02",
@@ -239,7 +422,10 @@
         "r7": -11.33,
         "r30": null,
         "thesis": "Fear&Greed跌至23極度恐懼背離美股貪婪59，RSI約35近超賣，永續持倉顯示風險偏好仍在，反向佈局機會",
-        "target": "75000（+7%）"
+        "target": "75000（+7%）",
+        "entry": 71319.7734,
+        "exit7": 63239.5195,
+        "exit30": null
       },
       {
         "date": "2026-06-02",
@@ -249,7 +435,10 @@
         "r7": -13.89,
         "r30": null,
         "thesis": "AI雲端訂單動能延續但市場仍視為傳統軟體股估值，與hyperscaler共振6/1大漲9.9%顯示資金輪動進場",
-        "target": "中期+15%"
+        "target": "中期+15%",
+        "entry": 248.15,
+        "exit7": 213.68,
+        "exit30": null
       },
       {
         "date": "2026-06-02",
@@ -259,7 +448,10 @@
         "r7": -3.99,
         "r30": null,
         "thesis": "CoWoS先進封裝產能緊俏卻被市場忽略，AVGO客製AI ASIC放量直接受惠後段封測，估值低於台積電折價過深",
-        "target": "680元（+13%）"
+        "target": "680元（+13%）",
+        "entry": 601,
+        "exit7": 577,
+        "exit30": null
       },
       {
         "date": "2026-06-02",
@@ -269,7 +461,10 @@
         "r7": 0.65,
         "r30": null,
         "thesis": "Brent94美元但EIA預估Q2庫存日均減850萬桶，市場已price-in Q4回落至89，能源股估值未反映短期供給",
-        "target": "+8-10%"
+        "target": "+8-10%",
+        "entry": 57.3,
+        "exit7": 57.67,
+        "exit30": null
       },
       {
         "date": "2026-06-02",
@@ -279,7 +474,10 @@
         "r7": -18.22,
         "r30": null,
         "thesis": "加密恐慌氛圍下SOL跌幅大於BTC/ETH呈現高Beta超賣，OCC國家信託牌照成主流為公鏈生態提供機構入場路徑",
-        "target": "95美元（+19%）"
+        "target": "95美元（+19%）",
+        "entry": 81.087,
+        "exit7": 66.3106,
+        "exit30": null
       },
       {
         "date": "2026-06-02",
@@ -289,7 +487,10 @@
         "r7": -9.29,
         "r30": null,
         "thesis": "6/1因Nvidia進軍PC晶片大跌逾4%反應過度，Lip-Bu Tan 6/2 Computex keynote與TS",
-        "target": "反彈+8-10%"
+        "target": "反彈+8-10%",
+        "entry": 109.33,
+        "exit7": 99.17,
+        "exit30": null
       },
       {
         "date": "2026-06-01",
@@ -299,7 +500,10 @@
         "r7": -7.63,
         "r30": null,
         "thesis": "伺服器BMC龍頭受惠AI資料中心爆量,外資目標價持續上修",
-        "target": "23000元"
+        "target": "23000元",
+        "entry": 18950,
+        "exit7": 17505,
+        "exit30": null
       },
       {
         "date": "2026-06-01",
@@ -309,7 +513,10 @@
         "r7": -13.36,
         "r30": null,
         "thesis": "AI資料中心電力需求外溢至再生能源,題材外擴啟動",
-        "target": "續強"
+        "target": "續強",
+        "entry": 73.93,
+        "exit7": 64.05,
+        "exit30": null
       },
       {
         "date": "2026-06-01",
@@ -319,7 +526,10 @@
         "r7": -17.28,
         "r30": null,
         "thesis": "F&G恐懼29+清算量近零+RSI超賣,低槓桿觀望盤的反彈位置",
-        "target": "81000美元"
+        "target": "81000美元",
+        "entry": 73579.6875,
+        "exit7": 60867.4141,
+        "exit30": null
       },
       {
         "date": "2026-06-01",
@@ -329,7 +539,10 @@
         "r7": -3.67,
         "r30": null,
         "thesis": "AI資料中心儲存超級循環,簽5份多年期合約前季三份達420億",
-        "target": "續強"
+        "target": "續強",
+        "entry": 531.21,
+        "exit7": 511.72,
+        "exit30": null
       },
       {
         "date": "2026-05-30",
@@ -339,7 +552,10 @@
         "r7": 54.36,
         "r30": null,
         "thesis": "AI基建客製化ASIC需求強勁 UBS上調目標價反映轉折",
-        "target": "$230"
+        "target": "$230",
+        "entry": 205,
+        "exit7": 316.43,
+        "exit30": null
       },
       {
         "date": "2026-05-30",
@@ -349,7 +565,10 @@
         "r7": -13.04,
         "r30": null,
         "thesis": "Fear&Greed 23極度恐懼 RSI超賣 CFTC核准永續結構性利多",
-        "target": "$78,000"
+        "target": "$78,000",
+        "entry": 73372.5234,
+        "exit7": 63801.5742,
+        "exit30": null
       },
       {
         "date": "2026-05-29",
@@ -359,7 +578,10 @@
         "r7": -12.95,
         "r30": null,
         "thesis": "7日RSI 27.99超賣 加密恐慌23與股市貪婪61極端背離 反向布局窗口",
-        "target": "$78,000-82,000"
+        "target": "$78,000-82,000",
+        "entry": 73536.5547,
+        "exit7": 64014.3672,
+        "exit30": null
       },
       {
         "date": "2026-05-29",
@@ -369,7 +591,10 @@
         "r7": 2.72,
         "r30": null,
         "thesis": "單日跌5.16% 為AI伺服器電源散熱核心 超跌提供進場點",
-        "target": "2600-2700"
+        "target": "2600-2700",
+        "entry": 2390,
+        "exit7": 2455,
+        "exit30": null
       },
       {
         "date": "2026-05-29",
@@ -379,7 +604,10 @@
         "r7": 6.86,
         "r30": null,
         "thesis": "AI ASIC設計純度高 Broadcom財報前題材升溫 聯發科弱勢資金輪入",
-        "target": "+15-20%"
+        "target": "+15-20%",
+        "entry": 4300,
+        "exit7": 4595,
+        "exit30": null
       },
       {
         "date": "2026-05-28",
@@ -389,7 +617,10 @@
         "r7": -8.1,
         "r30": null,
         "thesis": "LEAP先進封裝爆發年，2026資本支出70億美元歷史新高，AI CoWoS需求溢出效應受惠，投信積極掃貨市場尚未充分定",
-        "target": "780"
+        "target": "780",
+        "entry": 642,
+        "exit7": 590,
+        "exit30": null
       },
       {
         "date": "2026-05-28",
@@ -399,7 +630,10 @@
         "r7": -10.28,
         "r30": null,
         "thesis": "現價緊貼74700支撐，多空比1.69偏多，CLARITY Act進入參院markup，白宮比特幣儲備公告預期升溫，恐慌",
-        "target": "82000"
+        "target": "82000",
+        "entry": 74344.7031,
+        "exit7": 66703.6563,
+        "exit30": null
       },
       {
         "date": "2026-05-27",
@@ -409,7 +643,10 @@
         "r7": -5.94,
         "r30": null,
         "thesis": "極度恐懼25為歷史性逆向買點，多空比1.34偏多，ETF機構需求未中斷，與股市情緒嚴重背離",
-        "target": "$81,000（守穩$76,900後）"
+        "target": "$81,000（守穩$76,900後）",
+        "entry": 75825.7344,
+        "exit7": 71319.7734,
+        "exit30": null
       },
       {
         "date": "2026-05-27",
@@ -419,7 +656,10 @@
         "r7": 2.98,
         "r30": null,
         "thesis": "AI伺服器電源管理與散熱雙重受惠，逆勢強漲透露主力籌碼介入，COMPUTEX展前熱度未散",
-        "target": "TWD 2500-2600"
+        "target": "TWD 2500-2600",
+        "entry": 2350,
+        "exit7": 2420,
+        "exit30": null
       },
       {
         "date": "2026-05-27",
@@ -429,7 +669,10 @@
         "r7": 5.58,
         "r30": null,
         "thesis": "GRI生效加上Blank Sailing 10-15%支撐運價，外資籌碼開始歸宿，復甦初段被市場低估",
-        "target": "+20-25%"
+        "target": "+20-25%",
+        "entry": 52,
+        "exit7": 54.9,
+        "exit30": null
       },
       {
         "date": "2026-05-26",
@@ -439,7 +682,10 @@
         "r7": 1.05,
         "r30": null,
         "thesis": "WWDC 6/8 前市場低估 iOS 27 多 AI 模型選擇的黏著度價值，Wedbush 目標 $400 距今 +29",
-        "target": "$400"
+        "target": "$400",
+        "entry": 308.82,
+        "exit7": 312.06,
+        "exit30": null
       },
       {
         "date": "2026-05-26",
@@ -449,7 +695,10 @@
         "r7": -4.79,
         "r30": null,
         "thesis": "油價崩跌觸發風險偏好回升，新任 Fed 主席 Warsh 受降息壓力，恐貪指數 34 接近歷史買點區間",
-        "target": "$82,000"
+        "target": "$82,000",
+        "entry": 77279.9297,
+        "exit7": 73579.6875,
+        "exit30": null
       },
       {
         "date": "2026-05-26",
@@ -459,7 +708,10 @@
         "r7": 6.77,
         "r30": null,
         "thesis": "AI 伺服器高壓直流電源架構滲透率快速提升，為結構性需求，今日 +9.31% 確認新一波突破",
-        "target": "TWD 2600"
+        "target": "TWD 2600",
+        "entry": 2290,
+        "exit7": 2445,
+        "exit30": null
       },
       {
         "date": "2026-05-26",
@@ -469,7 +721,10 @@
         "r7": -5.38,
         "r30": null,
         "thesis": "荷姆茲重開預期壓縮地緣溢價，Brent 單日 -7.9%，YTD +30% 板塊面臨大規模獲利了結與資金輪出",
-        "target": "板塊回檔 -10~15%"
+        "target": "板塊回檔 -10~15%",
+        "entry": 59.49,
+        "exit7": 56.29,
+        "exit30": null
       },
       {
         "date": "2026-05-26",
@@ -479,7 +734,10 @@
         "r7": -0.97,
         "r30": null,
         "thesis": "AMD 先進封裝合作訂單擴大，CoW 封裝需求隨 AI 晶片複雜度提升呈結構性成長，市場低估封裝瓶頸價值",
-        "target": "TWD 750"
+        "target": "TWD 750",
+        "entry": 617,
+        "exit7": 611,
+        "exit30": null
       },
       {
         "date": "2026-05-25",
@@ -489,7 +747,10 @@
         "r7": -4.19,
         "r30": null,
         "thesis": "恐懼指數30歷史逢低買入區，SpaceX IPO揭露持有BTC強化機構信用，$76K支撐結構完整",
-        "target": "$82000-85000"
+        "target": "$82000-85000",
+        "entry": 76981.125,
+        "exit7": 73754.8359,
+        "exit30": null
       },
       {
         "date": "2026-05-25",
@@ -499,7 +760,10 @@
         "r7": 6.13,
         "r30": null,
         "thesis": "AI CRM滲透率初期，5/27財報料首次呈現AI Revenue顯著貢獻，市場對企業軟體AI轉型速度低估",
-        "target": "+12-18%"
+        "target": "+12-18%",
+        "entry": 180.07,
+        "exit7": 191.1,
+        "exit30": null
       },
       {
         "date": "2026-05-25",
@@ -509,7 +773,10 @@
         "r7": 16.71,
         "r30": null,
         "thesis": "AI伺服器電源散熱需求暴增，法人持續加碼但媒體關注度遠低於IC設計，風報比優於追高晶片股",
-        "target": "NT$2350-2500"
+        "target": "NT$2350-2500",
+        "entry": 2095,
+        "exit7": 2445,
+        "exit30": null
       },
       {
         "date": "2026-05-21",
@@ -519,7 +786,10 @@
         "r7": 25.12,
         "r30": null,
         "thesis": "Nvidia進軍CPU市場打開2000億TAM，ARM架構為核心受益者",
-        "target": "$260 (+31%)"
+        "target": "$260 (+31%)",
+        "entry": 256.73,
+        "exit7": 321.22,
+        "exit30": null
       },
       {
         "date": "2026-05-21",
@@ -529,7 +799,10 @@
         "r7": 10.36,
         "r30": null,
         "thesis": "記憶體供不應求延續至2027底，資本支出上調至520億擴產",
-        "target": "$95 (+21%)"
+        "target": "$95 (+21%)",
+        "entry": 275,
+        "exit7": 303.5,
+        "exit30": null
       },
       {
         "date": "2026-05-20",
@@ -539,7 +812,10 @@
         "r7": 34.55,
         "r30": null,
         "thesis": "外資大砍台積電時聯發科逆勢漲2.38% 資金輪動至IC設計股跡象明顯",
-        "target": "3500"
+        "target": "3500",
+        "entry": 3155,
+        "exit7": 4245,
+        "exit30": null
       },
       {
         "date": "2026-05-20",
@@ -549,7 +825,10 @@
         "r7": 0.69,
         "r30": null,
         "thesis": "恐懼指數27極端恐慌 ETF單週流出10億後資金面見底 技術支撐74200",
-        "target": "85000"
+        "target": "85000",
+        "entry": 76750.9063,
+        "exit7": 77279.9297,
+        "exit30": null
       },
       {
         "date": "2026-05-19",
@@ -559,7 +838,10 @@
         "r7": 10.79,
         "r30": null,
         "thesis": "蘋果代工協議曝光後股價已漲15%但市場低估長期代工轉型價值與AI PC需求",
-        "target": "+25-35%"
+        "target": "+25-35%",
+        "entry": 108.17,
+        "exit7": 119.84,
+        "exit30": null
       },
       {
         "date": "2026-05-19",
@@ -569,77 +851,10 @@
         "r7": 25.55,
         "r30": null,
         "thesis": "被動元件三大廠漲價循環確立且AI伺服器供電密度提升帶動規格升級需求",
-        "target": "580-620"
-      },
-      {
-        "date": "2026-05-19",
-        "ticker": "ETH",
-        "name": "Ethereum",
-        "category": "crypto",
-        "r7": -1.43,
-        "r30": null,
-        "thesis": "ETH相對BTC嚴重超跌且ETF淨流出已達極端水準去槓桿接近尾聲",
-        "target": "2800-3200"
-      },
-      {
-        "date": "2026-05-19",
-        "ticker": "3491",
-        "name": "昇達科",
-        "category": "tw",
-        "r7": 4.04,
-        "r30": null,
-        "thesis": "SpaceX六月IPO倒數低軌衛星供應鏈龍頭估值尚未反映上市後訂單能見度提升",
-        "target": "+20-30%"
-      },
-      {
-        "date": "2026-05-19",
-        "ticker": "MU",
-        "name": "Micron Technology",
-        "category": "us",
-        "r7": 10.19,
-        "r30": null,
-        "thesis": "Nomura大幅上調記憶體股目標價且Agentic AI將驅動通用記憶體新需求類別",
-        "target": "+30-40%"
-      },
-      {
-        "date": "2026-05-15",
-        "ticker": "BTC",
-        "name": "比特幣",
-        "category": "crypto",
-        "r7": -4.43,
-        "r30": null,
-        "thesis": "多空比0.73空方過度擁擠 負資金費率顯示軋空條件成熟 清算量極端後常見反轉",
-        "target": "+15%至$94000"
-      },
-      {
-        "date": "2026-05-15",
-        "ticker": "3008",
-        "name": "大立光",
-        "category": "tw",
-        "r7": 2.07,
-        "r30": null,
-        "thesis": "CPO矽光子商轉元年 NVIDIA定調核心技術 光學龍頭轉型AI基建受惠者 散戶仍視為手機舊經濟股",
-        "target": "$4000-4200"
-      },
-      {
-        "date": "2026-05-15",
-        "ticker": "2303",
-        "name": "聯電",
-        "category": "tw",
-        "r7": 0,
-        "r30": null,
-        "thesis": "外資回補標的 成熟製程受惠車用與工控需求 本益比遠低於台積電 市場過度聚焦先進製程",
-        "target": "+20%"
-      },
-      {
-        "date": "2026-05-15",
-        "ticker": "F",
-        "name": "福特汽車",
-        "category": "us",
-        "r7": -8.7,
-        "r30": null,
-        "thesis": "ESS電池儲能業務獨立價值百億美元 大摩點名AI資料中心備援電力需求 市場仍定價為傳統車廠",
-        "target": "$18-20"
+        "target": "580-620",
+        "entry": 501,
+        "exit7": 629,
+        "exit30": null
       }
     ],
     "best": [
@@ -651,7 +866,10 @@
         "r7": 54.36,
         "r30": null,
         "thesis": "AI基建客製化ASIC需求強勁 UBS上調目標價反映轉折",
-        "target": "$230"
+        "target": "$230",
+        "entry": 205,
+        "exit7": 316.43,
+        "exit30": null
       },
       {
         "date": "2026-05-20",
@@ -661,7 +879,10 @@
         "r7": 34.55,
         "r30": null,
         "thesis": "外資大砍台積電時聯發科逆勢漲2.38% 資金輪動至IC設計股跡象明顯",
-        "target": "3500"
+        "target": "3500",
+        "entry": 3155,
+        "exit7": 4245,
+        "exit30": null
       },
       {
         "date": "2026-05-19",
@@ -671,10 +892,26 @@
         "r7": 25.55,
         "r30": null,
         "thesis": "被動元件三大廠漲價循環確立且AI伺服器供電密度提升帶動規格升級需求",
-        "target": "580-620"
+        "target": "580-620",
+        "entry": 501,
+        "exit7": 629,
+        "exit30": null
       }
     ],
     "worst": [
+      {
+        "date": "2026-06-05",
+        "ticker": "MRVL",
+        "name": "Marvell Technology",
+        "category": "us",
+        "r7": -20.18,
+        "r30": null,
+        "thesis": "Huang 於 COMPUTEX 點名為下一個兆元市值候選，客製化 ASIC 受惠雲端 capex 上修至 7250 億",
+        "target": "+20% 中期",
+        "entry": 316.43,
+        "exit7": 252.59,
+        "exit30": null
+      },
       {
         "date": "2026-06-02",
         "ticker": "SOL",
@@ -683,7 +920,10 @@
         "r7": -18.22,
         "r30": null,
         "thesis": "加密恐慌氛圍下SOL跌幅大於BTC/ETH呈現高Beta超賣，OCC國家信託牌照成主流為公鏈生態提供機構入場路徑",
-        "target": "95美元（+19%）"
+        "target": "95美元（+19%）",
+        "entry": 81.087,
+        "exit7": 66.3106,
+        "exit30": null
       },
       {
         "date": "2026-06-01",
@@ -693,17 +933,10 @@
         "r7": -17.28,
         "r30": null,
         "thesis": "F&G恐懼29+清算量近零+RSI超賣,低槓桿觀望盤的反彈位置",
-        "target": "81000美元"
-      },
-      {
-        "date": "2026-06-02",
-        "ticker": "ORCL",
-        "name": "Oracle",
-        "category": "us",
-        "r7": -13.89,
-        "r30": null,
-        "thesis": "AI雲端訂單動能延續但市場仍視為傳統軟體股估值，與hyperscaler共振6/1大漲9.9%顯示資金輪動進場",
-        "target": "中期+15%"
+        "target": "81000美元",
+        "entry": 73579.6875,
+        "exit7": 60867.4141,
+        "exit30": null
       }
     ]
   }

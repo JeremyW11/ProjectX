@@ -1,92 +1,93 @@
 {
-  "date": "2026-06-11",
-  "started_at": "2026-06-11T02:35:31.790Z",
-  "finished_at": "2026-06-11T04:22:33.003Z",
+  "date": "2026-06-12",
+  "started_at": "2026-06-12T01:32:27.881Z",
+  "finished_at": "2026-06-12T02:48:12.944Z",
   "claude_calls": 13,
-  "claude_total_ms": 5845851,
-  "claude_retries": 12,
-  "api_fallbacks": 4,
+  "claude_total_ms": 2931408,
+  "claude_retries": 0,
+  "api_fallbacks": 5,
   "failed_calls": 0,
   "calls": [
     {
-      "chars": 3565,
+      "chars": 4931,
       "attempts": 1,
-      "ms": 73065,
+      "ms": 126484,
       "ok": true
     },
     {
-      "chars": 1080,
+      "chars": 1234,
       "attempts": 1,
-      "ms": 175913,
+      "ms": 200849,
       "ok": true
     },
     {
-      "chars": 4670,
+      "chars": 6036,
       "attempts": 1,
-      "ms": 184274,
-      "ok": true
-    },
-    {
-      "chars": 4848,
-      "attempts": 1,
-      "ms": 14235,
-      "ok": true
-    },
-    {
-      "chars": 42663,
-      "attempts": 4,
-      "ms": 1454626,
+      "ms": 426608,
       "ok": true,
       "api_fallback": true
     },
     {
-      "chars": 37127,
-      "attempts": 4,
-      "ms": 1360943,
+      "chars": 5902,
+      "attempts": 1,
+      "ms": 21221,
+      "ok": true
+    },
+    {
+      "chars": 38903,
+      "attempts": 1,
+      "ms": 525405,
       "ok": true,
       "api_fallback": true
     },
     {
-      "chars": 36363,
+      "chars": 33573,
       "attempts": 1,
-      "ms": 79272,
-      "ok": true
-    },
-    {
-      "chars": 41695,
-      "attempts": 4,
-      "ms": 1340645,
+      "ms": 410833,
       "ok": true,
       "api_fallback": true
     },
     {
-      "chars": 37617,
+      "chars": 32809,
       "attempts": 1,
-      "ms": 49995,
+      "ms": 85370,
       "ok": true
     },
     {
-      "chars": 36947,
+      "chars": 39355,
       "attempts": 1,
-      "ms": 227369,
+      "ms": 396049,
+      "ok": true,
+      "api_fallback": true
+    },
+    {
+      "chars": 35277,
+      "attempts": 1,
+      "ms": 144429,
       "ok": true
     },
     {
-      "chars": 37768,
+      "chars": 33394,
       "attempts": 1,
-      "ms": 27473,
+      "ms": 269233,
       "ok": true
     },
     {
-      "chars": 38675,
+      "chars": 35050,
       "attempts": 1,
-      "ms": 41857,
+      "ms": 42935,
       "ok": true
     },
     {
-      "chars": 10602,
-      "attempts": 4,
-      "ms": 816184,
+      "chars": 34294,
+      "attempts": 1,
+      "ms": 54772,
+      "ok": true
+    },
+    {
+      "chars": 10863,
+      "attempts": 1,
+      "ms": 227220,
       "ok": true,
       "api_fallback": true
     }
