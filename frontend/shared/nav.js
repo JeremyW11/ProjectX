@@ -34,9 +34,76 @@
     }).join('');
   };
 
+  // ── 行動裝置導覽（≤768px）：桌面 nav 在窄螢幕被各頁 CSS 隱藏卻無替代，
+  //    這裡統一注入漢堡選單＋抽屜，從同一份 NAV 生成，一處修正涵蓋全站。
+  //    頁面若已自帶漢堡（如 industry.html）則跳過，避免重複。
+  function injectMobileCss(){
+    if(document.getElementById('px-mnav-css')) return;
+    var css = ".px-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;padding:6px;background:none;border:none;margin-left:8px;flex-shrink:0;}"
+      + ".px-hamburger span{display:block;width:22px;height:2px;background:#334155;border-radius:2px;transition:transform .3s,opacity .3s;}"
+      + ".px-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}"
+      + ".px-hamburger.open span:nth-child(2){opacity:0;}"
+      + ".px-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}"
+      + ".px-mobile-menu{display:none;position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.975);backdrop-filter:blur(14px);z-index:198;padding:16px 22px 36px;flex-direction:column;overflow-y:auto;border-top:1px solid #e5e7eb;}"
+      + ".px-mobile-menu.open{display:flex;}"
+      + ".px-mobile-menu .px-mm-link{color:#475569;font-size:18px;font-weight:500;padding:15px 4px;border-bottom:1px solid #f1f5f9;text-decoration:none;font-family:'Noto Sans TC','DM Sans',sans-serif;}"
+      + ".px-mobile-menu .px-mm-link.active{color:#2563eb;font-weight:700;}"
+      + ".px-mm-btns{margin-top:20px;display:flex;flex-direction:column;gap:10px;}"
+      + ".px-mm-btns a{text-align:center;padding:12px;border-radius:9px;text-decoration:none;font-size:15px;font-family:'Noto Sans TC',sans-serif;}"
+      + ".px-mm-login{border:1px solid #cbd5e1;color:#475569;}"
+      + ".px-mm-pro{background:linear-gradient(135deg,#1e40af,#2563eb);color:#fff;font-weight:600;}"
+      + ".px-mm-foot{margin-top:24px;text-align:center;font-size:12px;color:#94a3b8;font-family:'DM Sans',sans-serif;letter-spacing:.02em;}"
+      + "@media(max-width:768px){.header-nav{display:none!important;}.header-right{display:none!important;}.px-hamburger{display:flex;}}";
+    var s=document.createElement('style'); s.id='px-mnav-css'; s.textContent=css;
+    (document.head||document.documentElement).appendChild(s);
+  }
+
+  function buildMobileNav(activeKey){
+    if(document.getElementById('px-mobile-menu')) return;
+    if(document.getElementById('hamburger') || document.querySelector('.hamburger')) return; // 頁面自帶
+    var navEl = document.querySelector('.header-nav[data-active], .nav-links[data-active]');
+    var bar = navEl && navEl.closest ? navEl.closest('.topbar, .header, header') : null;
+    if(!bar) return;
+    injectMobileCss();
+
+    var list = NAV.filter(function(i){ return TOOLBAR_KEYS.indexOf(i.key) >= 0; });
+
+    var btn=document.createElement('button');
+    btn.className='px-hamburger'; btn.id='px-hamburger'; btn.type='button';
+    btn.setAttribute('aria-label','開啟選單'); btn.setAttribute('aria-expanded','false');
+    btn.innerHTML='<span></span><span></span><span></span>';
+    bar.appendChild(btn);
+
+    var menu=document.createElement('div');
+    menu.className='px-mobile-menu'; menu.id='px-mobile-menu';
+    menu.innerHTML = list.map(function(item){
+      return '<a class="px-mm-link'+(item.key===activeKey?' active':'')+'" href="'+item.href+'">'+item.label+'</a>';
+    }).join('')
+      + '<div class="px-mm-btns">'
+      +   '<a class="px-mm-login" href="/pages/login.html">登入</a>'
+      +   '<a class="px-mm-pro" href="/pages/credits.html">訂閱 Pro</a>'
+      + '</div>'
+      + '<div class="px-mm-foot">⚡ Powered by PulseAI</div>';
+    document.body.appendChild(menu);
+
+    function position(){ menu.style.top = (bar.offsetHeight || 56) + 'px'; }
+    position();
+
+    function close(){ menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+    btn.addEventListener('click', function(){
+      position();
+      var open = menu.classList.toggle('open');
+      btn.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open?'true':'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+    window.addEventListener('resize', function(){ if(window.innerWidth>768) close(); else position(); });
+  }
+
   document.addEventListener('DOMContentLoaded', function(){
     var nav = document.querySelector('.header-nav[data-active], .nav-links[data-active]');
-    if(nav) window.buildNav(nav.dataset.active);
+    if(nav){ window.buildNav(nav.dataset.active); buildMobileNav(nav.dataset.active); }
   });
 })();
 
