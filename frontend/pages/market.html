@@ -596,6 +596,14 @@ function switchTab(id,btn){
   btn.classList.add('active');
 }
 
+function switchCoin(coin,tab){
+  document.querySelectorAll('.coin-panel').forEach(function(el){el.classList.remove('active');});
+  document.querySelectorAll('.coin-tab').forEach(function(el){el.classList.remove('active');});
+  var panel=document.getElementById('coin-'+coin);
+  if(panel) panel.classList.add('active');
+  if(tab) tab.classList.add('active');
+}
+
 function getTicker(tickers,label){return tickers.find(function(t){return t.label===label;})||null;}
 
 function sumCard(tag,cat,name,val,chg,dir,extra,attrs){
