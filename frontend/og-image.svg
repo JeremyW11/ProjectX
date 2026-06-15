@@ -10,7 +10,7 @@
     </linearGradient>
     <linearGradient id="line1" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" style="stop-color:#d4a30a;stop-opacity:0"/>
-      <stop offset="40%" style="stop-color:#d4a30a;stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:#d4a30a;stop-opacity:1"/>
       <stop offset="100%" style="stop-color:#d4a30a;stop-opacity:0"/>
     </linearGradient>
   </defs>
@@ -19,7 +19,7 @@
   <rect width="1200" height="630" fill="url(#bg)"/>
 
   <!-- Subtle grid lines -->
-  <g stroke="#1e3366" stroke-width="1" opacity="0.4">
+  <g stroke="#1e3366" stroke-width="1" opacity="0.35">
     <line x1="0" y1="105" x2="1200" y2="105"/>
     <line x1="0" y1="210" x2="1200" y2="210"/>
     <line x1="0" y1="315" x2="1200" y2="315"/>
@@ -32,36 +32,14 @@
     <line x1="1000" y1="0" x2="1000" y2="630"/>
   </g>
 
-  <!-- Decorative chart bars (right side) -->
-  <g opacity="0.12" fill="#4a7fd4">
-    <rect x="780" y="280" width="28" height="180"/>
-    <rect x="820" y="230" width="28" height="230"/>
-    <rect x="860" y="310" width="28" height="150"/>
-    <rect x="900" y="200" width="28" height="260"/>
-    <rect x="940" y="260" width="28" height="200"/>
-    <rect x="980" y="170" width="28" height="290"/>
-    <rect x="1020" y="240" width="28" height="220"/>
-    <rect x="1060" y="210" width="28" height="250"/>
-    <rect x="1100" y="290" width="28" height="170"/>
-    <rect x="1140" y="180" width="28" height="280"/>
-  </g>
-
-  <!-- Trend line overlay -->
-  <polyline points="780,380 820,320 860,350 900,270 940,300 980,240 1020,280 1060,230 1100,260 1168,210"
-    fill="none" stroke="url(#gold)" stroke-width="3" opacity="0.6"/>
-
-  <!-- Gold accent bar top -->
+  <!-- Gold accent bar top / bottom -->
   <rect x="0" y="0" width="1200" height="4" fill="url(#gold)"/>
-
-  <!-- Gold accent bar bottom -->
   <rect x="0" y="626" width="1200" height="4" fill="url(#gold)"/>
 
-  <!-- Left accent line -->
-  <rect x="96" y="60" width="3" height="80" fill="url(#gold)" rx="2"/>
-
-  <!-- Logo: ProjectX mark (matches site favicon / topbar logo) -->
-  <g transform="translate(46, 136) scale(3.2)">
-    <rect x="-6" y="-6" width="52" height="52" rx="12" fill="none" stroke="url(#gold)" stroke-width="1.2" opacity="0.35"/>
+  <!-- ===== Centered logo mark (matches site favicon / topbar) ===== -->
+  <!-- 40-unit mark scaled x4 = 160px, centered at x=600, top y=120 -->
+  <g transform="translate(520, 120) scale(4)">
+    <rect x="-6" y="-6" width="52" height="52" rx="12" fill="none" stroke="url(#gold)" stroke-width="1.1" opacity="0.4"/>
     <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
     <line x1="10" y1="10" x2="30" y2="30" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
     <line x1="30" y1="10" x2="10" y2="30" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
@@ -69,44 +47,25 @@
     <circle cx="20" cy="20" r="1.5" fill="#93c5fd"/>
   </g>
 
-  <!-- Main title -->
-  <text x="210" y="185"
+  <!-- ===== Centered wordmark ===== -->
+  <text x="600" y="400" text-anchor="middle"
     font-family="Georgia, 'Times New Roman', serif"
-    font-size="88" font-weight="900"
-    fill="white" letter-spacing="-1">Project</text>
-  <text x="614" y="185"
-    font-family="Georgia, 'Times New Roman', serif"
-    font-size="88" font-weight="900"
-    fill="url(#gold)" letter-spacing="-1">X</text>
+    font-size="84" font-weight="900" letter-spacing="-1">
+    <tspan fill="white">PROJECT </tspan><tspan fill="url(#gold)">X</tspan>
+  </text>
 
-  <!-- Divider line -->
-  <rect x="210" y="205" width="500" height="2" fill="url(#line1)" rx="1"/>
+  <!-- Divider line (centered) -->
+  <rect x="380" y="425" width="440" height="2" fill="url(#line1)" rx="1"/>
 
   <!-- Tagline -->
-  <text x="210" y="258"
+  <text x="600" y="478" text-anchor="middle"
     font-family="'DM Sans', Arial, sans-serif"
-    font-size="28" font-weight="400"
-    fill="#94a3b8" letter-spacing="0.08em">DAILY MARKET INTELLIGENCE</text>
-
-  <!-- Feature pills -->
-  <g transform="translate(210, 310)">
-    <!-- Pill 1 -->
-    <rect x="0" y="0" width="148" height="38" rx="19" fill="#1e3366" stroke="#2a4a8a" stroke-width="1"/>
-    <text x="74" y="24" text-anchor="middle"
-      font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#94c5f8">📊 美股 · 台股</text>
-    <!-- Pill 2 -->
-    <rect x="160" y="0" width="148" height="38" rx="19" fill="#1e3366" stroke="#2a4a8a" stroke-width="1"/>
-    <text x="234" y="24" text-anchor="middle"
-      font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#94c5f8">🤖 AI 分析</text>
-    <!-- Pill 3 -->
-    <rect x="320" y="0" width="148" height="38" rx="19" fill="#1e3366" stroke="#2a4a8a" stroke-width="1"/>
-    <text x="394" y="24" text-anchor="middle"
-      font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="#94c5f8">🎯 每日簡報</text>
-  </g>
+    font-size="27" font-weight="400"
+    fill="#94a3b8" letter-spacing="0.14em">DAILY MARKET INTELLIGENCE</text>
 
   <!-- Bottom caption -->
-  <text x="210" y="560"
+  <text x="600" y="560" text-anchor="middle"
     font-family="'DM Sans', Arial, sans-serif"
-    font-size="20" font-weight="400"
-    fill="#475569" letter-spacing="0.05em">projectxbrief.netlify.app</text>
+    font-size="22" font-weight="400"
+    fill="#5b7099" letter-spacing="0.06em">projectxbrief.netlify.app</text>
 </svg>
