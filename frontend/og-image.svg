@@ -58,14 +58,23 @@
   <rect x="380" y="425" width="440" height="2" fill="url(#line1)" rx="1"/>
 
   <!-- Tagline -->
-  <text x="600" y="478" text-anchor="middle"
+  <text x="600" y="470" text-anchor="middle"
     font-family="'DM Sans', Arial, sans-serif"
     font-size="27" font-weight="400"
     fill="#94a3b8" letter-spacing="0.14em">DAILY MARKET INTELLIGENCE</text>
 
+  <!-- Powered by PulseAI badge -->
+  <g transform="translate(600, 516)">
+    <rect x="-150" y="-22" width="300" height="44" rx="22" fill="#0e2748" stroke="#2a4a8a" stroke-width="1.2"/>
+    <text x="0" y="6" text-anchor="middle"
+      font-family="'DM Sans', Arial, sans-serif"
+      font-size="19" font-weight="700" letter-spacing="0.1em"
+      fill="#7dd3fc"><tspan fill="url(#gold)">POWERED BY </tspan><tspan fill="#7dd3fc">PULSEAI</tspan></text>
+  </g>
+
   <!-- Bottom caption -->
-  <text x="600" y="560" text-anchor="middle"
+  <text x="600" y="578" text-anchor="middle"
     font-family="'DM Sans', Arial, sans-serif"
-    font-size="22" font-weight="400"
+    font-size="21" font-weight="400"
     fill="#5b7099" letter-spacing="0.06em">projectxbrief.netlify.app</text>
 </svg>
