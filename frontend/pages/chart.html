@@ -263,6 +263,17 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <option value="1d" selected>日線</option>
         <option value="1w">週線</option>
       </select>
+      <span class="ctrl-label">靈敏度</span>
+      <select id="in-sens" title="決定多大範圍的成交量樞紐才視為訂單塊：數字越小越靈敏、區間越多">
+        <option value="3">靈敏</option>
+        <option value="5" selected>標準</option>
+        <option value="8">平滑</option>
+      </select>
+      <span class="ctrl-label">失效判定</span>
+      <select id="in-mit" title="支撐/壓力區何時視為被破壞：收盤破壞較穩定，影線破壞較敏感">
+        <option value="Close" selected>收盤破壞</option>
+        <option value="Wick">影線破壞</option>
+      </select>
       <button class="btn-go" id="btn-go">查詢</button>
       <div class="quick" id="quick"></div>
     </div>
@@ -465,9 +476,10 @@ function initChart(){
     };
     quick.appendChild(b);
   });
-  document.getElementById('btn-go').onclick=loadSignal;
+  document.getElementById('btn-go').onclick=function(){ loadSignal(); };
   document.getElementById('in-symbol').addEventListener('keydown',function(e){ if(e.key==='Enter') loadSignal(); });
   loadSignal();
+  startAutoRefresh();
 }
 
 function buildChart(){
@@ -505,29 +517,52 @@ function status(msg){
   else s.style.display='none';
 }
 
-async function loadSignal(){
-  var symbol=(document.getElementById('in-symbol').value||'').trim();
-  if(!symbol){ status('請輸入標的代碼。'); return; }
-  var market=document.getElementById('in-market').value;
-  var interval=document.getElementById('in-interval').value;
-  var btn=document.getElementById('btn-go'); btn.disabled=true; btn.textContent='讀取中…';
-  status('讀取 '+symbol.toUpperCase()+' 資料中…（首次喚醒後端可能需 10-30 秒）');
+function readControls(){
+  return {
+    symbol:(document.getElementById('in-symbol').value||'').trim(),
+    market:document.getElementById('in-market').value,
+    interval:document.getElementById('in-interval').value,
+    length:document.getElementById('in-sens').value,
+    mitigation:document.getElementById('in-mit').value
+  };
+}
+
+var _lastQuery=null;
+async function loadSignal(silent){
+  var q = (silent && _lastQuery) ? _lastQuery : readControls();
+  if(!q.symbol){ if(!silent) status('請輸入標的代碼。'); return; }
+  if(!_session){ if(!silent) status('請先登入。'); return; }
+  var btn=document.getElementById('btn-go');
+  if(!silent){ btn.disabled=true; btn.textContent='讀取中…'; status('讀取 '+q.symbol.toUpperCase()+' 資料中…（首次喚醒後端可能需 10-30 秒）'); }
   try{
-    if(!_session){ status('請先登入。'); return; }
-    var url=BACKEND+'/signal?symbol='+encodeURIComponent(symbol)+'&market='+market+'&interval='+interval;
+    var url=BACKEND+'/signal?symbol='+encodeURIComponent(q.symbol)+'&market='+q.market+'&interval='+q.interval+'&length='+encodeURIComponent(q.length)+'&mitigation='+encodeURIComponent(q.mitigation);
     var res=await fetch(url,{ headers:{ 'Authorization':'Bearer '+_session.access_token } });
-    if(res.status===403){ status('此功能限 Pro 會員。'); return; }
+    if(res.status===403){ if(!silent) status('此功能需通過搶先試用審核後開放。'); return; }
     var j=await res.json();
-    if(!j.success){ status(j.hint ? j.hint : ('讀取失敗：'+(j.error||'unknown'))); return; }
-    renderSignal(j);
+    if(!j.success){ if(!silent) status(j.hint ? j.hint : ('讀取失敗：'+(j.error||'unknown'))); return; }
+    _lastQuery=q;
+    renderSignal(j, silent);
   }catch(e){
-    status('讀取失敗：'+e.message);
+    if(!silent) status('讀取失敗：'+e.message);
   }finally{
-    btn.disabled=false; btn.textContent='查詢';
+    if(!silent){ btn.disabled=false; btn.textContent='查詢'; }
   }
 }
 
-function renderSignal(j){
+// 每 60s 自動更新最新資料；分頁隱藏時暫停、切回前景立即補一次。保留使用者縮放（silent → 不重新 fitContent）。
+var _refreshTimer=null;
+function startAutoRefresh(){
+  if(_refreshTimer) clearInterval(_refreshTimer);
+  _refreshTimer=setInterval(function(){
+    if(document.hidden||!_session||!_lastQuery) return;
+    loadSignal(true);
+  },60000);
+}
+document.addEventListener('visibilitychange',function(){
+  if(!document.hidden && _refreshTimer && _lastQuery) loadSignal(true);
+});
+
+function renderSignal(j, preserve){
   status('');
   buildChart();
   var candles=j.candles.map(function(c){ return {time:c.time, open:c.open, high:c.high, low:c.low, close:c.close}; });
@@ -535,11 +570,12 @@ function renderSignal(j){
   _candleSeries.setData(candles);
   _volSeries.setData(vols);
   _obs=j.obs||{bull:[],bear:[]};
-  _chart.timeScale().fitContent();
+  if(!preserve) _chart.timeScale().fitContent();
 
   document.getElementById('chart-sym').textContent=j.symbol;
   var intLabel={'1h':'1 小時','4h':'4 小時','1d':'日線','1w':'週線','60m':'1 小時'}[j.interval]||j.interval;
-  document.getElementById('chart-meta').textContent=intLabel+' · '+j.candles.length+' 根 K 棒 · AI 運算';
+  var mitLabel=j.mitigation==='Wick'?'影線破壞':'收盤破壞';
+  document.getElementById('chart-meta').textContent=intLabel+' · '+j.candles.length+' 根 K 棒 · '+mitLabel+' · AI 運算';
 
   renderZoneList(j);
   // overlay needs a tick after layout settles
