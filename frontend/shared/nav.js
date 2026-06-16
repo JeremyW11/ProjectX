@@ -124,21 +124,24 @@
     var s=document.createElement('style'); s.id='px-announce-css'; s.textContent=css;
     (document.head||document.documentElement).appendChild(s);
   }
-  var _bar=null, _baseBodyMargin=0;
+  var _bar=null, _baseBodyPad=0;
   function apply(){
     if(!_bar) return;
     var h=_bar.offsetHeight||0;
-    document.body.style.marginTop=(_baseBodyMargin+h)+'px';
+    // 用 padding-top 而非 margin-top：margin 會與內文首個子元素的 margin-top 摺疊，
+    // 導致實際沒推開、固定 header 下移後蓋住內文頂端。padding 不摺疊，能確實留白。
+    document.body.style.paddingTop=(_baseBodyPad+h)+'px';
     var heads=document.querySelectorAll('.topbar, .header');
     for(var i=0;i<heads.length;i++){
-      if(window.getComputedStyle(heads[i]).position==='fixed') heads[i].style.top=h+'px';
+      var pos=window.getComputedStyle(heads[i]).position;
+      if(pos==='fixed'||pos==='sticky') heads[i].style.top=h+'px';
     }
   }
   function init(){
     if(document.getElementById('px-announce')) return;
     if(!document.body) return;
     injectCss();
-    _baseBodyMargin=parseFloat(window.getComputedStyle(document.body).marginTop)||0;
+    _baseBodyPad=parseFloat(window.getComputedStyle(document.body).paddingTop)||0;
     _bar=document.createElement('div');
     _bar.className='px-announce'; _bar.id='px-announce'; _bar.setAttribute('role','status');
     _bar.innerHTML=TEXT_HTML;
