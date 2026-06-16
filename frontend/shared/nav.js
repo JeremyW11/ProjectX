@@ -125,16 +125,27 @@
     (document.head||document.documentElement).appendChild(s);
   }
   var _bar=null, _baseBodyPad=0;
+  // 找出頁面頂部那條固定/吸附的 header bar。各頁寫法不一：.topbar / .header / 裸 <nav>
+  // （industry.html）/ 裸 <header>。除了 class 比對，也從導覽清單往上找它所在的 bar，涵蓋無 class 的情況。
+  function collectBars(){
+    var set=[];
+    function add(el){ if(el && set.indexOf(el)<0) set.push(el); }
+    var q=document.querySelectorAll('.topbar, .header');
+    for(var i=0;i<q.length;i++) add(q[i]);
+    var navEl=document.querySelector('.header-nav[data-active], .nav-links[data-active]');
+    if(navEl && navEl.closest) add(navEl.closest('.topbar, .header, header, nav'));
+    return set;
+  }
   function apply(){
     if(!_bar) return;
     var h=_bar.offsetHeight||0;
     // 用 padding-top 而非 margin-top：margin 會與內文首個子元素的 margin-top 摺疊，
     // 導致實際沒推開、固定 header 下移後蓋住內文頂端。padding 不摺疊，能確實留白。
     document.body.style.paddingTop=(_baseBodyPad+h)+'px';
-    var heads=document.querySelectorAll('.topbar, .header');
-    for(var i=0;i<heads.length;i++){
-      var pos=window.getComputedStyle(heads[i]).position;
-      if(pos==='fixed'||pos==='sticky') heads[i].style.top=h+'px';
+    var bars=collectBars();
+    for(var i=0;i<bars.length;i++){
+      var pos=window.getComputedStyle(bars[i]).position;
+      if(pos==='fixed'||pos==='sticky') bars[i].style.top=h+'px';
     }
   }
   function init(){
