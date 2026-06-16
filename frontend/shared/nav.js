@@ -86,7 +86,7 @@
       + '<div class="px-mm-foot">⚡ Powered by PulseAI</div>';
     document.body.appendChild(menu);
 
-    function position(){ menu.style.top = (bar.offsetHeight || 56) + 'px'; }
+    function position(){ menu.style.top = bar.getBoundingClientRect().bottom + 'px'; }
     position();
 
     function close(){ menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
@@ -105,6 +105,49 @@
     var nav = document.querySelector('.header-nav[data-active], .nav-links[data-active]');
     if(nav){ window.buildNav(nav.dataset.active); buildMobileNav(nav.dataset.active); }
   });
+})();
+
+// ── 全站置頂公告（內測期間）──
+// 注入固定頂部公告條，並把固定式 header(.topbar/.header) 與整體內文下移 banner 高度，
+// 一處注入即涵蓋全站。高度隨換行/視窗變動即時重算；行動選單已改用 header 實際底緣定位故自動跟隨。
+(function(){
+  var TEXT_HTML = '內測實施中，所有權限<b>免費申請</b>，將由後台審核後開放。';
+  function injectCss(){
+    if(document.getElementById('px-announce-css')) return;
+    var css = ".px-announce{position:fixed;top:0;left:0;right:0;z-index:300;"
+      + "background:linear-gradient(135deg,#0d1630,#1d2d5a);color:#fff;"
+      + "font-family:'Noto Sans TC','DM Sans',sans-serif;font-size:13px;font-weight:500;"
+      + "letter-spacing:.02em;text-align:center;line-height:1.5;padding:8px 44px;"
+      + "box-shadow:0 1px 6px rgba(8,15,40,.35);}"
+      + ".px-announce b{color:#f6c84b;font-weight:700;}"
+      + "@media(max-width:768px){.px-announce{font-size:12px;padding:7px 16px;}}";
+    var s=document.createElement('style'); s.id='px-announce-css'; s.textContent=css;
+    (document.head||document.documentElement).appendChild(s);
+  }
+  var _bar=null, _baseBodyMargin=0;
+  function apply(){
+    if(!_bar) return;
+    var h=_bar.offsetHeight||0;
+    document.body.style.marginTop=(_baseBodyMargin+h)+'px';
+    var heads=document.querySelectorAll('.topbar, .header');
+    for(var i=0;i<heads.length;i++){
+      if(window.getComputedStyle(heads[i]).position==='fixed') heads[i].style.top=h+'px';
+    }
+  }
+  function init(){
+    if(document.getElementById('px-announce')) return;
+    if(!document.body) return;
+    injectCss();
+    _baseBodyMargin=parseFloat(window.getComputedStyle(document.body).marginTop)||0;
+    _bar=document.createElement('div');
+    _bar.className='px-announce'; _bar.id='px-announce'; _bar.setAttribute('role','status');
+    _bar.innerHTML=TEXT_HTML;
+    document.body.insertBefore(_bar, document.body.firstChild);
+    apply();
+    window.addEventListener('resize', apply);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
 })();
 
 // ── PulseAI 文字 LOGO：全站自動把「PulseAI」字眼轉為品牌字標 ──
