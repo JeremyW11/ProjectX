@@ -140,8 +140,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .econ-data-col{flex:1;padding:5px 4px;text-align:center;background:var(--gray-50);border-right:1px solid var(--gray-200);}
 .econ-data-col:last-child{border-right:none;}
 .econ-data-col.has-act{background:#f0fdf4;}
-.econ-data-lbl{display:block;font-family:var(--font-en);font-size:8.5px;font-weight:600;letter-spacing:.06em;color:var(--gray-400);margin-bottom:2px;}
-.econ-data-num{font-size:11px;font-weight:600;color:var(--navy-800);display:block;line-height:1.35;word-break:break-word;overflow-wrap:anywhere;}
+.econ-data-lbl{display:block;font-size:9px;font-weight:600;letter-spacing:.02em;color:var(--gray-400);margin-bottom:2px;font-family:var(--font-zh);}
+.econ-data-num{font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--navy-800);display:block;line-height:1.3;}
 .econ-data-act{color:#16a34a;}
 .econ-data-tbd{color:var(--gray-400);font-weight:400;font-size:10px;}
 
@@ -899,11 +899,15 @@ function updateEconDataSidebar(events, todayStr){
       : isYesterday
         ? '<span class="econ-item-badge econ-item-tag-yesterday">PUBLISHED</span>'
         : '';
-    function truncVal(v){ if(!v) return '—'; return v.length>22 ? v.slice(0,21)+'…' : v; }
+    function extractNum(v){
+      if(!v) return '—';
+      var m = v.match(/[+\-]?\d[\d,]*\.?\d*\s*%?(?:\s*[-–~]\s*[+\-]?\d[\d,]*\.?\d*\s*%?)?(?:\s*(?:K|M|B|bps|bp))?/);
+      return (m && m[0].trim()) ? m[0].trim() : '—';
+    }
     var strip = '<div class="econ-data-strip">'
-      +'<div class="econ-data-col"><span class="econ-data-lbl">PREV</span><span class="econ-data-num">'+truncVal(e.prev)+'</span></div>'
-      +'<div class="econ-data-col"><span class="econ-data-lbl">EST</span><span class="econ-data-num">'+truncVal(e.expect)+'</span></div>'
-      +'<div class="econ-data-col'+(e.actual?' has-act':'')+'"><span class="econ-data-lbl">ACT</span><span class="econ-data-num '+(e.actual?'econ-data-act':'econ-data-tbd')+'">'+(e.actual||'TBD')+'</span></div>'
+      +'<div class="econ-data-col"><span class="econ-data-lbl">前期</span><span class="econ-data-num">'+extractNum(e.prev)+'</span></div>'
+      +'<div class="econ-data-col"><span class="econ-data-lbl">預期</span><span class="econ-data-num">'+extractNum(e.expect)+'</span></div>'
+      +'<div class="econ-data-col'+(e.actual?' has-act':'')+'"><span class="econ-data-lbl">公布值</span><span class="econ-data-num '+(e.actual?'econ-data-act':'econ-data-tbd')+'">'+(e.actual ? extractNum(e.actual) : 'TBD')+'</span></div>'
       +'</div>';
     return '<div class="econ-item">'
       +'<div class="econ-item-left">'
