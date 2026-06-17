@@ -123,6 +123,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .ec-data-published{color:var(--green-600);}
 .ec-data-pending{color:var(--gray-400);font-weight:400;font-size:11px;}
 
+/* Sidebar econ data card */
+.econ-item{padding:8px 0;border-bottom:1px solid var(--gray-100);}
+.econ-item:last-child{border-bottom:none;}
+.econ-item-date{font-size:10px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;margin-bottom:2px;}
+.econ-item-title{font-size:12px;font-weight:500;color:var(--gray-800);font-family:var(--font-zh);margin-bottom:5px;line-height:1.4;}
+.sc-title{font-size:12px;font-weight:600;color:var(--gray-500);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);margin-bottom:10px;}
+.sc-title-en{font-size:9px;color:var(--gray-400);margin-left:4px;}
+
 /* Type badge colors */
 .t-fed{background:#dbeafe;color:#1d4ed8;}
 .t-econ{background:#f0fdf4;color:#166534;}
@@ -519,6 +527,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         <div class="legend-row"><span class="legend-dot" style="background:#ea580c"></span><span class="legend-label">加密</span><span class="legend-count" id="lc-crypto">–</span></div>
       </div>
 
+      <!-- 總經數據常駐顯示 -->
+      <div class="sidebar-card" id="econ-data-card">
+        <div class="sc-title">總經數據 <span class="sc-title-en">ECONOMIC DATA</span></div>
+        <div id="econ-data-list" style="color:var(--gray-400);font-size:12px;font-family:var(--font-en);">載入中...</div>
+      </div>
+
       <!-- Countdown to key events (content replaced by updateCountdownsDynamic) -->
       <div class="sidebar-card" id="countdown-card">
         <div class="sc-title">重要倒數 <span class="sc-title-en">COUNTDOWN</span></div>
@@ -824,6 +838,7 @@ async function loadCalendarData(){
 
     // 動態更新 sidebar
     updateLegendCounts(allEvents);
+    updateEconDataSidebar(allEvents, todayStr);
     updateCountdownsDynamic(allEvents, todayStr);
     updateThisWeekDynamic(allEvents, todayStr);
 
@@ -833,6 +848,44 @@ async function loadCalendarData(){
     var tl = document.getElementById('timeline');
     if(tl) tl.innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--gray-400);font-size:13px;font-family:var(--font-zh);">資料載入失敗，請重新整理</div>';
   }
+}
+
+function updateEconDataSidebar(events, todayStr){
+  var el = document.getElementById('econ-data-list');
+  if(!el) return;
+  var yesterday = new Date(todayStr+'T00:00:00');
+  yesterday.setDate(yesterday.getDate()-1);
+  var yesterdayStr = yesterday.toISOString().split('T')[0];
+  var future14 = new Date(todayStr+'T00:00:00');
+  future14.setDate(future14.getDate()+14);
+  var future14Str = future14.toISOString().split('T')[0];
+
+  var econEvs = events.filter(function(e){
+    var t=(e.type||'').toLowerCase();
+    return (t==='data'||t==='econ'||t==='fed') && e.date >= yesterdayStr && e.date <= future14Str;
+  });
+  econEvs.sort(function(a,b){ return a.date.localeCompare(b.date); });
+
+  if(!econEvs.length){ el.innerHTML='<div style="color:var(--gray-400);font-size:12px;padding:4px 0;">近期無總經數據事件</div>'; return; }
+
+  var months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  el.innerHTML = econEvs.map(function(e){
+    var d = new Date(e.date+'T00:00:00');
+    var dateLabel = (d.getMonth()!==new Date(todayStr+'T00:00:00').getMonth()
+      ? months[d.getMonth()]+' '+d.getDate()
+      : months[d.getMonth()]+' '+d.getDate())
+      +(e.date===todayStr?' · TODAY':e.date===yesterdayStr?' · YESTERDAY':'');
+    var dataRow = '<div class="ec-data-row" style="margin-top:5px;">'
+      +'<div class="ec-data-cell" style="padding:4px 6px;"><span class="ec-data-label">前值</span><span class="ec-data-val" style="font-size:11px;">'+(e.prev||'—')+'</span></div>'
+      +'<div class="ec-data-cell" style="padding:4px 6px;"><span class="ec-data-label">預期</span><span class="ec-data-val" style="font-size:11px;">'+(e.expect||'—')+'</span></div>'
+      +'<div class="ec-data-cell ec-data-actual" style="padding:4px 6px;"><span class="ec-data-label">當期</span><span class="ec-data-val '+(e.actual?'ec-data-published':'ec-data-pending')+'" style="font-size:11px;">'+(e.actual||'待公布')+'</span></div>'
+      +'</div>';
+    return '<div class="econ-item">'
+      +'<div class="econ-item-date">'+dateLabel+'</div>'
+      +'<div class="econ-item-title">'+e.title+'</div>'
+      +dataRow
+      +'</div>';
+  }).join('');
 }
 
 function updateCountdownsDynamic(events, todayStr){
