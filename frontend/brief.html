@@ -815,8 +815,10 @@ img { display: block; max-width: 100%; }
 .ec-data-cell{flex:1;padding:5px 6px;background:var(--bg-subtle);border-right:1px solid var(--border-light);text-align:center;}
 .ec-data-cell:last-child{border-right:none;}
 .ec-data-actual{background:var(--navy-50,#eff6ff);}
-.ec-data-label{display:block;font-size:9px;color:var(--text-muted);font-family:var(--font-en);letter-spacing:.04em;margin-bottom:1px;}
-.ec-data-val{font-size:12px;font-weight:600;color:var(--navy-800,#1e3a8a);font-family:var(--font-en);}
+.ec-data-cell:last-child{border-right:none;}
+.ec-data-actual{background:var(--navy-50,#eff6ff);}
+.ec-data-label{display:block;font-size:9px;color:var(--text-muted);font-family:var(--font-zh);letter-spacing:.02em;margin-bottom:1px;}
+.ec-data-val{font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--navy-800,#1e3a8a);}
 .ec-data-published{color:var(--green-600,#16a34a);}
 .ec-data-pending{color:var(--text-muted);font-weight:400;font-size:10px;}
 
@@ -1161,11 +1163,12 @@ function renderCalendar(calendar) {
   return calendar.events.slice(0,5).map(e => {
     const d = new Date(e.date || e.start_date || '2026-05-12');
     const isEcon = e.type==='data'||e.type==='econ'||e.type==='fed';
-    const dataRow = (isEcon && (e.prev||e.expect||e.actual))
+    function extractNum(v){ if(!v) return '—'; const m=v.match(/[+\-]?\d[\d,]*\.?\d*\s*%?(?:\s*[-–~]\s*[+\-]?\d[\d,]*\.?\d*\s*%?)?(?:\s*(?:K|M|B|bps|bp))?/); return (m&&m[0].trim())?m[0].trim():'—'; }
+    const dataRow = isEcon
       ? '<div class="ec-data-row">'
-        +'<div class="ec-data-cell"><span class="ec-data-label">PREV</span><span class="ec-data-val">'+(e.prev||'—')+'</span></div>'
-        +'<div class="ec-data-cell"><span class="ec-data-label">EST</span><span class="ec-data-val">'+(e.expect||'—')+'</span></div>'
-        +'<div class="ec-data-cell ec-data-actual"><span class="ec-data-label">ACT</span><span class="ec-data-val '+(e.actual?'ec-data-published':'ec-data-pending')+'">'+(e.actual||'—')+'</span></div>'
+        +'<div class="ec-data-cell"><span class="ec-data-label">前期</span><span class="ec-data-val">'+extractNum(e.prev)+'</span></div>'
+        +'<div class="ec-data-cell"><span class="ec-data-label">預期</span><span class="ec-data-val">'+extractNum(e.expect)+'</span></div>'
+        +'<div class="ec-data-cell'+(e.actual?' ec-data-actual':'')+'"><span class="ec-data-label">公布值</span><span class="ec-data-val '+(e.actual?'ec-data-published':'ec-data-pending')+'">'+(e.actual?extractNum(e.actual):'—')+'</span></div>'
         +'</div>'
       : '';
     return '<div class="cal-item"><div class="cal-date"><div class="cal-date-d">'+d.getDate()+'</div><div class="cal-date-m">'+months[d.getMonth()]+'</div></div><div class="cal-info"><div class="cal-event-type">'+(e.market||'')+' · '+(e.type_label||e.type||'')+'</div><div class="cal-event-name">'+(e.title||e.name||'')+'</div>'+dataRow+'</div></div>';
