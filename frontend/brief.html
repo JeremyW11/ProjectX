@@ -821,51 +821,6 @@ img { display: block; max-width: 100%; }
 .person-note { font-size:11.5px; color:var(--text-secondary, #475569); font-family:var(--font-zh); line-height:1.45; }
 .person-watch { font-size:10.5px; color:#2563eb; font-family:var(--font-zh); margin-top:3px; }
 
-/* Nav CTA at bottom */
-.nav-cta {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.nav-cta-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 14px 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  transition: all 0.15s;
-  cursor: pointer;
-  box-shadow: var(--shadow-card);
-}
-
-.nav-cta-btn:hover {
-  border-color: var(--navy-300);
-  background: var(--navy-50);
-  box-shadow: var(--shadow-elevated);
-}
-
-.nav-cta-icon {
-  width: 32px; height: 32px;
-  background: var(--navy-50);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--navy-600);
-  font-size: 14px;
-}
-
-.nav-cta-label {
-  font-size: 11.5px;
-  color: var(--text-secondary);
-  font-family: var(--font-zh);
-  font-weight: 500;
-}
 
 /* ============================================================ FOOTER STRIP */
 .footer-strip {
@@ -1047,15 +1002,6 @@ img { display: block; max-width: 100%; }
       <div class="side-card" id="persons-card" style="display:none">
         <div class="side-card-title">重要人物動態<span class="section-title-en" style="font-size:10px">KEY PEOPLE</span></div>
         <div id="persons-list"></div>
-      </div>
-      <div class="side-card">
-        <div class="side-card-title">快速導航</div>
-        <div class="nav-cta">
-          <a href="/pages/market.html" class="nav-cta-btn"><div class="nav-cta-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span class="nav-cta-label">市場數據</span></a>
-          <a href="/pages/institutional.html" class="nav-cta-btn"><div class="nav-cta-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><span class="nav-cta-label">機構研報</span></a>
-          <a href="/pages/targets.html" class="nav-cta-btn"><div class="nav-cta-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div><span class="nav-cta-label">會員中心</span></a>
-          <a href="/pages/industry.html" class="nav-cta-btn"><div class="nav-cta-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/></svg></div><span class="nav-cta-label">產業追蹤</span></a>
-        </div>
       </div>
     </div>
   </div>
