@@ -124,12 +124,25 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .ec-data-pending{color:var(--gray-400);font-weight:400;font-size:11px;}
 
 /* Sidebar econ data card */
-.econ-item{padding:8px 0;border-bottom:1px solid var(--gray-100);}
+.econ-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray-100);}
 .econ-item:last-child{border-bottom:none;}
-.econ-item-date{font-size:10px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;margin-bottom:2px;}
-.econ-item-title{font-size:12px;font-weight:500;color:var(--gray-800);font-family:var(--font-zh);margin-bottom:5px;line-height:1.4;}
-.sc-title{font-size:12px;font-weight:600;color:var(--gray-500);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);margin-bottom:10px;}
-.sc-title-en{font-size:9px;color:var(--gray-400);margin-left:4px;}
+.econ-item-left{flex-shrink:0;width:34px;text-align:center;}
+.econ-item-dot{width:6px;height:6px;border-radius:50%;margin:0 auto 4px;flex-shrink:0;}
+.econ-item-day{font-family:var(--font-en);font-size:14px;font-weight:700;color:var(--navy-700);line-height:1;}
+.econ-item-mon{font-family:var(--font-en);font-size:9px;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;}
+.econ-item-body{flex:1;min-width:0;}
+.econ-item-meta{display:flex;align-items:center;gap:5px;margin-bottom:3px;}
+.econ-item-badge{font-family:var(--font-en);font-size:9px;font-weight:600;letter-spacing:.05em;padding:1px 6px;border-radius:3px;}
+.econ-item-tag-today{background:#fef3c7;color:#92400e;}
+.econ-item-tag-yesterday{background:#f0fdf4;color:#166534;}
+.econ-item-title{font-size:12.5px;font-weight:500;color:var(--gray-800);font-family:var(--font-zh);margin-bottom:6px;line-height:1.4;}
+.econ-data-strip{display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--gray-200);}
+.econ-data-col{flex:1;padding:5px 0;text-align:center;background:var(--gray-50);border-right:1px solid var(--gray-200);}
+.econ-data-col:last-child{border-right:none;background:#f0fdf4;}
+.econ-data-lbl{display:block;font-family:var(--font-en);font-size:8.5px;font-weight:600;letter-spacing:.06em;color:var(--gray-400);margin-bottom:2px;}
+.econ-data-num{font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--navy-800);}
+.econ-data-act{color:#16a34a;}
+.econ-data-tbd{color:var(--gray-400);font-weight:400;font-size:10px;}
 
 /* Type badge colors */
 .t-fed{background:#dbeafe;color:#1d4ed8;}
@@ -866,24 +879,41 @@ function updateEconDataSidebar(events, todayStr){
   });
   econEvs.sort(function(a,b){ return a.date.localeCompare(b.date); });
 
-  if(!econEvs.length){ el.innerHTML='<div style="color:var(--gray-400);font-size:12px;padding:4px 0;">近期無總經數據事件</div>'; return; }
+  if(!econEvs.length){
+    el.innerHTML='<div style="color:var(--gray-400);font-size:12px;padding:8px 0;text-align:center;font-family:var(--font-en);">No upcoming data</div>';
+    return;
+  }
 
   var months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  var typeColor={'fed':'#2563eb','econ':'#16a34a','data':'#16a34a'};
+
   el.innerHTML = econEvs.map(function(e){
     var d = new Date(e.date+'T00:00:00');
-    var dateLabel = (d.getMonth()!==new Date(todayStr+'T00:00:00').getMonth()
-      ? months[d.getMonth()]+' '+d.getDate()
-      : months[d.getMonth()]+' '+d.getDate())
-      +(e.date===todayStr?' · TODAY':e.date===yesterdayStr?' · YESTERDAY':'');
-    var dataRow = '<div class="ec-data-row" style="margin-top:5px;">'
-      +'<div class="ec-data-cell" style="padding:4px 6px;"><span class="ec-data-label">前值</span><span class="ec-data-val" style="font-size:11px;">'+(e.prev||'—')+'</span></div>'
-      +'<div class="ec-data-cell" style="padding:4px 6px;"><span class="ec-data-label">預期</span><span class="ec-data-val" style="font-size:11px;">'+(e.expect||'—')+'</span></div>'
-      +'<div class="ec-data-cell ec-data-actual" style="padding:4px 6px;"><span class="ec-data-label">當期</span><span class="ec-data-val '+(e.actual?'ec-data-published':'ec-data-pending')+'" style="font-size:11px;">'+(e.actual||'待公布')+'</span></div>'
+    var t = (e.type||'data').toLowerCase();
+    var dotColor = typeColor[t]||'#64748b';
+    var isToday = e.date===todayStr;
+    var isYesterday = e.date===yesterdayStr;
+    var tagHtml = isToday
+      ? '<span class="econ-item-badge econ-item-tag-today">TODAY</span>'
+      : isYesterday
+        ? '<span class="econ-item-badge econ-item-tag-yesterday">PUBLISHED</span>'
+        : '';
+    var strip = '<div class="econ-data-strip">'
+      +'<div class="econ-data-col"><span class="econ-data-lbl">PREV</span><span class="econ-data-num">'+(e.prev||'—')+'</span></div>'
+      +'<div class="econ-data-col"><span class="econ-data-lbl">EST</span><span class="econ-data-num">'+(e.expect||'—')+'</span></div>'
+      +'<div class="econ-data-col"><span class="econ-data-lbl">ACT</span><span class="econ-data-num '+(e.actual?'econ-data-act':'econ-data-tbd')+'">'+(e.actual||'TBD')+'</span></div>'
       +'</div>';
     return '<div class="econ-item">'
-      +'<div class="econ-item-date">'+dateLabel+'</div>'
-      +'<div class="econ-item-title">'+e.title+'</div>'
-      +dataRow
+      +'<div class="econ-item-left">'
+        +'<div class="econ-item-dot" style="background:'+dotColor+'"></div>'
+        +'<div class="econ-item-day">'+d.getDate()+'</div>'
+        +'<div class="econ-item-mon">'+months[d.getMonth()]+'</div>'
+      +'</div>'
+      +'<div class="econ-item-body">'
+        +'<div class="econ-item-meta">'+tagHtml+'</div>'
+        +'<div class="econ-item-title">'+e.title+'</div>'
+        +strip
+      +'</div>'
       +'</div>';
   }).join('');
 }
