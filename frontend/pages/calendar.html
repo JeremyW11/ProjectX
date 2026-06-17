@@ -774,13 +774,12 @@ async function loadCalendarData(){
           '<div class="ec-title">'+ev.title+'</div>'+
           (ev.desc?'<div class="ec-desc">'+ev.desc+'</div>':'')+
           (tickers?'<div class="ec-tickers">'+tickers+'</div>':'')+
-          (((ev.type==='data'||ev.type==='econ'||ev.type==='fed')&&(ev.prev||ev.expect||ev.actual))?
+          ((ev.type==='data'||ev.type==='econ'||ev.type==='fed')?
             '<div class="ec-data-row">'+
               '<div class="ec-data-cell"><span class="ec-data-label">前值</span><span class="ec-data-val">'+(ev.prev||'—')+'</span></div>'+
               '<div class="ec-data-cell"><span class="ec-data-label">預期</span><span class="ec-data-val">'+(ev.expect||'—')+'</span></div>'+
               '<div class="ec-data-cell ec-data-actual"><span class="ec-data-label">當期</span><span class="ec-data-val '+(ev.actual?'ec-data-published':'ec-data-pending')+'">'+(ev.actual||'待公布')+'</span></div>'+
-            '</div>':
-            (ev.expect?'<div class="ec-desc" style="color:var(--navy-600);font-size:12px;">📌 預期：'+ev.expect+(ev.prev?' ／ 前值：'+ev.prev:'')+'</div>':''))+
+            '</div>':'')+
           (ev.watch?'<div class="ec-desc" style="color:var(--amber-700);font-size:12px;">👁 觀察：'+ev.watch+'</div>':'')+
         '</div>'+
         '<div class="ec-right">'+
