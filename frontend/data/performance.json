@@ -1,81 +1,211 @@
 {
-  "updated": "2026-06-16",
+  "updated": "2026-06-17",
   "predictions": {
-    "total": 162,
-    "hit": 9,
-    "partial": 17,
-    "miss": 3,
-    "pending": 133,
-    "resolved": 29,
-    "hit_rate": 31,
-    "hit_rate_weighted": 60.3,
+    "total": 168,
+    "hit": 17,
+    "partial": 22,
+    "miss": 20,
+    "pending": 109,
+    "resolved": 59,
+    "hit_rate": 28.8,
+    "hit_rate_weighted": 47.5,
     "series": [
       {
         "date": "2026-05-20",
-        "rate": 75,
-        "n": 2
+        "rate": 50,
+        "n": 7
       },
       {
         "date": "2026-05-25",
-        "rate": 50,
-        "n": 4
+        "rate": 37.5,
+        "n": 16
       },
       {
         "date": "2026-05-26",
-        "rate": 50,
-        "n": 5
+        "rate": 39.3,
+        "n": 28
       },
       {
         "date": "2026-05-27",
-        "rate": 53.8,
-        "n": 13
+        "rate": 41.5,
+        "n": 41
       },
       {
         "date": "2026-05-28",
-        "rate": 50,
-        "n": 15
+        "rate": 40,
+        "n": 45
       },
       {
         "date": "2026-05-29",
-        "rate": 50,
-        "n": 17
+        "rate": 40.4,
+        "n": 47
       },
       {
         "date": "2026-06-01",
-        "rate": 52.6,
-        "n": 19
+        "rate": 41.8,
+        "n": 49
       },
       {
         "date": "2026-06-02",
-        "rate": 57.1,
-        "n": 21
+        "rate": 44.1,
+        "n": 51
       },
       {
         "date": "2026-06-03",
-        "rate": 60.9,
-        "n": 23
+        "rate": 46.2,
+        "n": 53
       },
       {
         "date": "2026-06-10",
-        "rate": 61.1,
-        "n": 27
+        "rate": 47.4,
+        "n": 57
       },
       {
         "date": "2026-06-11",
-        "rate": 60.3,
-        "n": 29
+        "rate": 47.5,
+        "n": 59
       }
     ]
   },
   "opportunities": {
-    "tracked": 139,
-    "evaluated7": 86,
-    "avg_r7": -1.46,
-    "win7": 39.5,
+    "tracked": 149,
+    "evaluated7": 96,
+    "avg_r7": -1.06,
+    "win7": 41.7,
     "evaluated30": 4,
     "avg_r30": 8.18,
     "win30": 75,
     "items": [
+      {
+        "date": "2026-06-10",
+        "ticker": "BTC",
+        "name": "Bitcoin",
+        "category": "crypto",
+        "r7": 7.54,
+        "r30": null,
+        "thesis": "恐懼貪婪指數9（極度恐懼歷史低位），2026-06-03已完成$18億最大規模強制清算，多單籌碼洗乾淨；資金費率-0.0",
+        "target": "$66,000-$68,000（+10-15%）",
+        "entry": 61643.7813,
+        "exit7": 66289.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-10",
+        "ticker": "MRVL",
+        "name": "Marvell Technology",
+        "category": "us",
+        "r7": 15.74,
+        "r30": null,
+        "thesis": "S&P 500成分股6/22生效調整，被動ETF與指數基金必須機械性買入，市場對此確定性流入定價不足；宣布日至生效日僅1",
+        "target": "+8-12%（生效日前溢價）",
+        "entry": 266.88,
+        "exit7": 308.88,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-10",
+        "ticker": "MSFT",
+        "name": "Microsoft",
+        "category": "us",
+        "r7": -0.9,
+        "r30": null,
+        "thesis": "今日-3.18%係市場整體科技殺跌所致，非Azure AI推論業務惡化；億萬富翁減碼製造短期超賣。TD Cowen目標$",
+        "target": "$450（+11.5%）",
+        "entry": 403.41,
+        "exit7": 399.76,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-10",
+        "ticker": "2317",
+        "name": "鴻海精密",
+        "category": "tw",
+        "r7": -3.6,
+        "r30": null,
+        "thesis": "高盛2026台股AI首選名單列名，AI伺服器為成長核心，現價$277.5遠低於外資目標$330（+19%）；法說會後外資",
+        "target": "330元（+19%）",
+        "entry": 277.5,
+        "exit7": 267.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-10",
+        "ticker": "SMCI",
+        "name": "Super Micro Computer",
+        "category": "us",
+        "r7": -24.09,
+        "r30": null,
+        "thesis": "2026-06-09因宣布$70億混合增資計畫股價重挫逾7%，市場過度聚焦稀釋恐懼；但公司同步揭露強勁AI伺服器訂單，基",
+        "target": "+20-25%（反彈至增資前價格）",
+        "entry": 40.64,
+        "exit7": 30.85,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-10",
+        "ticker": "3231",
+        "name": "緯創資通",
+        "category": "tw",
+        "r7": -2.42,
+        "r30": null,
+        "thesis": "高盛首選AI代工名單（2026-06-04），知名度與股價表現落後鴻海但AI伺服器佔比持續提升；機構資金在COMPUTE",
+        "target": "+15-20%",
+        "entry": 165.5,
+        "exit7": 161.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-10",
+        "ticker": "3008",
+        "name": "大立光電",
+        "category": "tw",
+        "r7": 13.77,
+        "r30": null,
+        "thesis": "CPO（共封裝光學）為台股2026新主軸，市場聚焦鏡頭傳統業務未定價CPO光學件潛力；董事長親口確認9月前完成光纖陣列自",
+        "target": "+15-25%（CPO題材重新定價）",
+        "entry": 3885,
+        "exit7": 4420,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-10",
+        "ticker": "XBI",
+        "name": "SPDR S&P Biotech ETF（生技板塊）",
+        "category": "sector",
+        "r7": 3.82,
+        "r30": null,
+        "thesis": "2026年生技M&A達$1,060億YTD（2019年來最佳步調），若全年維持則超$2,500億；市場目光集中AI半導體",
+        "target": "+15-20%（M&A溢價重估）",
+        "entry": 131.38,
+        "exit7": 136.4,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-10",
+        "ticker": "ETH",
+        "name": "Ethereum",
+        "category": "crypto",
+        "r7": 9.6,
+        "r30": null,
+        "thesis": "ETH/BTC比率處歷史低位，恐懼指數9與BTC同等極度恐懼，但ETH跌幅（-1.93%）與L2生態/質押收益基本面背離",
+        "target": "$1,900（+16%）",
+        "entry": 1637.7067,
+        "exit7": 1794.9612,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-10",
+        "ticker": "3711",
+        "name": "日月光投控",
+        "category": "tw",
+        "r7": 3.69,
+        "r30": null,
+        "thesis": "台積電下半年N2/N2P/A16放量直接拉動CoWoS先進封裝需求；$569今日已漲5.37%但市場低估CoWoS供應吃",
+        "target": "650元（+14%）",
+        "entry": 569,
+        "exit7": 590,
+        "exit30": null
+      },
       {
         "date": "2026-06-09",
         "ticker": "MU",
@@ -725,136 +855,6 @@
         "entry": 81.087,
         "exit7": 66.3106,
         "exit30": null
-      },
-      {
-        "date": "2026-06-02",
-        "ticker": "INTC",
-        "name": "Intel",
-        "category": "us",
-        "r7": -9.29,
-        "r30": null,
-        "thesis": "6/1因Nvidia進軍PC晶片大跌逾4%反應過度，Lip-Bu Tan 6/2 Computex keynote與TS",
-        "target": "反彈+8-10%",
-        "entry": 109.33,
-        "exit7": 99.17,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-01",
-        "ticker": "5274",
-        "name": "信驊科技",
-        "category": "tw",
-        "r7": -7.63,
-        "r30": null,
-        "thesis": "伺服器BMC龍頭受惠AI資料中心爆量,外資目標價持續上修",
-        "target": "23000元",
-        "entry": 18950,
-        "exit7": 17505,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-01",
-        "ticker": "TAN",
-        "name": "Invesco太陽能ETF",
-        "category": "sector",
-        "r7": -13.36,
-        "r30": null,
-        "thesis": "AI資料中心電力需求外溢至再生能源,題材外擴啟動",
-        "target": "續強",
-        "entry": 73.93,
-        "exit7": 64.05,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-01",
-        "ticker": "BTC",
-        "name": "比特幣",
-        "category": "crypto",
-        "r7": -17.28,
-        "r30": null,
-        "thesis": "F&G恐懼29+清算量近零+RSI超賣,低槓桿觀望盤的反彈位置",
-        "target": "81000美元",
-        "entry": 73579.6875,
-        "exit7": 60867.4141,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-01",
-        "ticker": "WDC",
-        "name": "Sandisk記憶體",
-        "category": "us",
-        "r7": -3.67,
-        "r30": null,
-        "thesis": "AI資料中心儲存超級循環,簽5份多年期合約前季三份達420億",
-        "target": "續強",
-        "entry": 531.21,
-        "exit7": 511.72,
-        "exit30": null
-      },
-      {
-        "date": "2026-05-30",
-        "ticker": "MRVL",
-        "name": "Marvell Technology",
-        "category": "us",
-        "r7": 54.36,
-        "r30": null,
-        "thesis": "AI基建客製化ASIC需求強勁 UBS上調目標價反映轉折",
-        "target": "$230",
-        "entry": 205,
-        "exit7": 316.43,
-        "exit30": null
-      },
-      {
-        "date": "2026-05-30",
-        "ticker": "BTC",
-        "name": "Bitcoin",
-        "category": "crypto",
-        "r7": -13.04,
-        "r30": null,
-        "thesis": "Fear&Greed 23極度恐懼 RSI超賣 CFTC核准永續結構性利多",
-        "target": "$78,000",
-        "entry": 73372.5234,
-        "exit7": 63801.5742,
-        "exit30": null
-      },
-      {
-        "date": "2026-05-29",
-        "ticker": "BTC",
-        "name": "Bitcoin",
-        "category": "crypto",
-        "r7": -12.95,
-        "r30": null,
-        "thesis": "7日RSI 27.99超賣 加密恐慌23與股市貪婪61極端背離 反向布局窗口",
-        "target": "$78,000-82,000",
-        "entry": 73536.5547,
-        "exit7": 64014.3672,
-        "exit30": null
-      },
-      {
-        "date": "2026-05-29",
-        "ticker": "2308",
-        "name": "台達電",
-        "category": "tw",
-        "r7": 2.72,
-        "r30": null,
-        "thesis": "單日跌5.16% 為AI伺服器電源散熱核心 超跌提供進場點",
-        "target": "2600-2700",
-        "entry": 2390,
-        "exit7": 2455,
-        "exit30": null
-      },
-      {
-        "date": "2026-05-29",
-        "ticker": "3661",
-        "name": "世芯-KY",
-        "category": "tw",
-        "r7": 6.86,
-        "r30": null,
-        "thesis": "AI ASIC設計純度高 Broadcom財報前題材升溫 聯發科弱勢資金輪入",
-        "target": "+15-20%",
-        "entry": 4300,
-        "exit7": 4595,
-        "exit30": null
       }
     ],
     "best": [
@@ -900,6 +900,19 @@
     ],
     "worst": [
       {
+        "date": "2026-06-10",
+        "ticker": "SMCI",
+        "name": "Super Micro Computer",
+        "category": "us",
+        "r7": -24.09,
+        "r30": null,
+        "thesis": "2026-06-09因宣布$70億混合增資計畫股價重挫逾7%，市場過度聚焦稀釋恐懼；但公司同步揭露強勁AI伺服器訂單，基",
+        "target": "+20-25%（反彈至增資前價格）",
+        "entry": 40.64,
+        "exit7": 30.85,
+        "exit30": null
+      },
+      {
         "date": "2026-05-15",
         "ticker": "BTC",
         "name": "比特幣",
@@ -923,19 +936,6 @@
         "target": "+20% 中期",
         "entry": 316.43,
         "exit7": 252.59,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-02",
-        "ticker": "SOL",
-        "name": "Solana",
-        "category": "crypto",
-        "r7": -18.22,
-        "r30": null,
-        "thesis": "加密恐慌氛圍下SOL跌幅大於BTC/ETH呈現高Beta超賣，OCC國家信託牌照成主流為公鏈生態提供機構入場路徑",
-        "target": "95美元（+19%）",
-        "entry": 81.087,
-        "exit7": 66.3106,
         "exit30": null
       }
     ]
