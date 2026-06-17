@@ -114,6 +114,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .impact-low{background:var(--green-100);color:var(--green-700);}
 .impact-info{background:var(--gray-100);color:var(--gray-500);}
 .ec-done-badge{font-size:10px;color:var(--gray-400);font-family:var(--font-en);}
+.ec-data-row{display:flex;gap:0;margin-top:8px;border:1px solid var(--gray-200);border-radius:var(--r-sm);overflow:hidden;}
+.ec-data-cell{flex:1;padding:6px 10px;background:var(--gray-50);border-right:1px solid var(--gray-200);text-align:center;}
+.ec-data-cell:last-child{border-right:none;}
+.ec-data-actual{background:var(--navy-50);}
+.ec-data-label{display:block;font-size:10px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;margin-bottom:2px;}
+.ec-data-val{font-size:13px;font-weight:600;color:var(--navy-800);font-family:var(--font-en);}
+.ec-data-published{color:var(--green-600);}
+.ec-data-pending{color:var(--gray-400);font-weight:400;font-size:11px;}
 
 /* Type badge colors */
 .t-fed{background:#dbeafe;color:#1d4ed8;}
@@ -641,8 +649,8 @@ buildCalendar(currentYear,currentMonth);
 // Filter
 function initDateWindow(){
   const today=new Date();today.setHours(0,0,0,0);
-  const past15=new Date(today); past15.setDate(today.getDate()-15);
-  const future15=new Date(today); future15.setDate(today.getDate()+15);
+  const yesterday=new Date(today); yesterday.setDate(today.getDate()-1);
+  const future60=new Date(today); future60.setDate(today.getDate()+60);
   document.querySelectorAll('.date-group').forEach(function(group){
     const code=group.getAttribute('data-date');
     if(!code) return;
@@ -650,7 +658,7 @@ function initDateWindow(){
     const day=parseInt(code.slice(2,4));
     const year=code.length===8?parseInt(code.slice(4,8)):2026;
     const d=new Date(year,month,day);
-    if(d<past15||d>future15) group.style.display='none';
+    if(d<yesterday||d>future60) group.style.display='none';
   });
 }
 initDateWindow();
@@ -766,7 +774,13 @@ async function loadCalendarData(){
           '<div class="ec-title">'+ev.title+'</div>'+
           (ev.desc?'<div class="ec-desc">'+ev.desc+'</div>':'')+
           (tickers?'<div class="ec-tickers">'+tickers+'</div>':'')+
-          (ev.expect?'<div class="ec-desc" style="color:var(--navy-600);font-size:12px;">📌 預期：'+ev.expect+(ev.prev?' ／ 前值：'+ev.prev:'')+'</div>':'')+
+          (((ev.type==='data'||ev.type==='econ'||ev.type==='fed')&&(ev.prev||ev.expect||ev.actual))?
+            '<div class="ec-data-row">'+
+              '<div class="ec-data-cell"><span class="ec-data-label">前值</span><span class="ec-data-val">'+(ev.prev||'—')+'</span></div>'+
+              '<div class="ec-data-cell"><span class="ec-data-label">預期</span><span class="ec-data-val">'+(ev.expect||'—')+'</span></div>'+
+              '<div class="ec-data-cell ec-data-actual"><span class="ec-data-label">當期</span><span class="ec-data-val '+(ev.actual?'ec-data-published':'ec-data-pending')+'">'+(ev.actual||'待公布')+'</span></div>'+
+            '</div>':
+            (ev.expect?'<div class="ec-desc" style="color:var(--navy-600);font-size:12px;">📌 預期：'+ev.expect+(ev.prev?' ／ 前值：'+ev.prev:'')+'</div>':''))+
           (ev.watch?'<div class="ec-desc" style="color:var(--amber-700);font-size:12px;">👁 觀察：'+ev.watch+'</div>':'')+
         '</div>'+
         '<div class="ec-right">'+
