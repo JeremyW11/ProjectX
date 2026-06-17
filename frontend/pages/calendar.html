@@ -141,7 +141,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .econ-data-col:last-child{border-right:none;}
 .econ-data-col.has-act{background:#f0fdf4;}
 .econ-data-lbl{display:block;font-family:var(--font-en);font-size:8.5px;font-weight:600;letter-spacing:.06em;color:var(--gray-400);margin-bottom:2px;}
-.econ-data-num{font-family:var(--font-en);font-size:11px;font-weight:700;color:var(--navy-800);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2;}
+.econ-data-num{font-size:11px;font-weight:600;color:var(--navy-800);display:block;line-height:1.35;word-break:break-word;overflow-wrap:anywhere;}
 .econ-data-act{color:#16a34a;}
 .econ-data-tbd{color:var(--gray-400);font-weight:400;font-size:10px;}
 
@@ -899,7 +899,7 @@ function updateEconDataSidebar(events, todayStr){
       : isYesterday
         ? '<span class="econ-item-badge econ-item-tag-yesterday">PUBLISHED</span>'
         : '';
-    function truncVal(v){ if(!v) return '—'; if(/[一-鿿]/.test(v)) return '—'; return v.length>12 ? v.slice(0,11)+'…' : v; }
+    function truncVal(v){ if(!v) return '—'; return v.length>22 ? v.slice(0,21)+'…' : v; }
     var strip = '<div class="econ-data-strip">'
       +'<div class="econ-data-col"><span class="econ-data-lbl">PREV</span><span class="econ-data-num">'+truncVal(e.prev)+'</span></div>'
       +'<div class="econ-data-col"><span class="econ-data-lbl">EST</span><span class="econ-data-num">'+truncVal(e.expect)+'</span></div>'
