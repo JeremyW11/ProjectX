@@ -137,10 +137,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .econ-item-tag-yesterday{background:#f0fdf4;color:#166534;}
 .econ-item-title{font-size:12.5px;font-weight:500;color:var(--gray-800);font-family:var(--font-zh);margin-bottom:6px;line-height:1.4;}
 .econ-data-strip{display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--gray-200);}
-.econ-data-col{flex:1;padding:5px 0;text-align:center;background:var(--gray-50);border-right:1px solid var(--gray-200);}
-.econ-data-col:last-child{border-right:none;background:#f0fdf4;}
+.econ-data-col{flex:1;padding:5px 4px;text-align:center;background:var(--gray-50);border-right:1px solid var(--gray-200);}
+.econ-data-col:last-child{border-right:none;}
+.econ-data-col.has-act{background:#f0fdf4;}
 .econ-data-lbl{display:block;font-family:var(--font-en);font-size:8.5px;font-weight:600;letter-spacing:.06em;color:var(--gray-400);margin-bottom:2px;}
-.econ-data-num{font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--navy-800);}
+.econ-data-num{font-family:var(--font-en);font-size:11px;font-weight:700;color:var(--navy-800);word-break:break-all;line-height:1.2;}
 .econ-data-act{color:#16a34a;}
 .econ-data-tbd{color:var(--gray-400);font-weight:400;font-size:10px;}
 
@@ -898,10 +899,11 @@ function updateEconDataSidebar(events, todayStr){
       : isYesterday
         ? '<span class="econ-item-badge econ-item-tag-yesterday">PUBLISHED</span>'
         : '';
+    function truncVal(v){ if(!v) return '—'; return v.length>14 ? v.slice(0,13)+'…' : v; }
     var strip = '<div class="econ-data-strip">'
-      +'<div class="econ-data-col"><span class="econ-data-lbl">PREV</span><span class="econ-data-num">'+(e.prev||'—')+'</span></div>'
-      +'<div class="econ-data-col"><span class="econ-data-lbl">EST</span><span class="econ-data-num">'+(e.expect||'—')+'</span></div>'
-      +'<div class="econ-data-col"><span class="econ-data-lbl">ACT</span><span class="econ-data-num '+(e.actual?'econ-data-act':'econ-data-tbd')+'">'+(e.actual||'TBD')+'</span></div>'
+      +'<div class="econ-data-col"><span class="econ-data-lbl">PREV</span><span class="econ-data-num">'+truncVal(e.prev)+'</span></div>'
+      +'<div class="econ-data-col"><span class="econ-data-lbl">EST</span><span class="econ-data-num">'+truncVal(e.expect)+'</span></div>'
+      +'<div class="econ-data-col'+(e.actual?' has-act':'')+'"><span class="econ-data-lbl">ACT</span><span class="econ-data-num '+(e.actual?'econ-data-act':'econ-data-tbd')+'">'+(e.actual||'TBD')+'</span></div>'
       +'</div>';
     return '<div class="econ-item">'
       +'<div class="econ-item-left">'
