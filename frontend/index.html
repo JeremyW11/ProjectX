@@ -587,7 +587,7 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
     <div class="tr-header reveal">
       <div class="tr-eyebrow">Track Record · 公開驗證</div>
       <h2 class="tr-h2">每一筆研判，攤開來對答案</h2>
-      <p class="tr-sub">PulseAI 的每日預測與進場機會不是說過就算：預測逐日驗證命中與否，機會標的追蹤 7 日與 30 日真實報酬。對與錯，全部留下紀錄。</p>
+      <p class="tr-sub">PulseAI 的每日預測與進場機會不是說過就算：預測逐日驗證命中與否，機會標的追蹤 30 日真實報酬。對與錯，全部留下紀錄。</p>
     </div>
     <div class="tr-grid reveal">
       <div class="tr-card tr-main">
@@ -603,9 +603,9 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
         <div class="tr-card-note" id="tr-pending">每日事件預測，到期自動評分</div>
       </div>
       <div class="tr-card">
-        <div class="tr-card-label">機會 7 日平均報酬</div>
-        <div class="tr-card-num tr-pos" id="tr-avg7">—</div>
-        <div class="tr-card-note" id="tr-win7">以實際收盤價計算</div>
+        <div class="tr-card-label">機會 30 日平均報酬</div>
+        <div class="tr-card-num tr-pos" id="tr-avg30">—</div>
+        <div class="tr-card-note" id="tr-win30">以實際收盤價計算</div>
       </div>
       <div class="tr-card">
         <div class="tr-card-label">追蹤中機會標的</div>
@@ -633,10 +633,10 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
       seg[0].style.width=(P.hit/tot*100)+'%'; seg[1].style.width=(P.partial/tot*100)+'%'; seg[2].style.width=(P.miss/tot*100)+'%';
       bar.hidden=false; document.getElementById('tr-legend').hidden=false;
     }
-    if(O.avg_r7!=null) set('tr-avg7',(O.avg_r7>=0?'+':'')+O.avg_r7.toFixed(2)+'%');
-    if(O.win7!=null) set('tr-win7','勝率 '+O.win7.toFixed(1)+'% · 已評估 '+(O.evaluated7||0)+' 項');
+    if(O.avg_r30!=null) set('tr-avg30',(O.avg_r30>=0?'+':'')+O.avg_r30.toFixed(2)+'%');
+    if(O.win30!=null) set('tr-win30','勝率 '+O.win30.toFixed(1)+'% · 已評估 '+(O.evaluated30||0)+' 項');
     if(O.tracked!=null) set('tr-tracked',O.tracked);
-    if(O.avg_r7!=null&&O.avg_r7<0) document.getElementById('tr-avg7').classList.remove('tr-pos');
+    if(O.avg_r30!=null&&O.avg_r30<0) document.getElementById('tr-avg30').classList.remove('tr-pos');
   }).catch(function(){});
 })();
 </script>
