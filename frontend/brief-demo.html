@@ -3,43 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project X · 今日情報 (Dark Demo)</title>
+<title>Project X · 今日情報 (Demo)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
+/* ─────────────────────────────────────────
+   Design direction: Print-editorial finance
+   No cards · No gradients · No glassmorphism
+   Single accent · Structural lines only
+   ───────────────────────────────────────── */
 :root {
-  --bg:        #070b16;
-  --bg-1:      #0c1224;
-  --bg-2:      #111827;
-  --bg-3:      #1a2235;
-  --line:      rgba(255,255,255,.07);
-  --line-mid:  rgba(255,255,255,.12);
+  --bg:      #f3f3f1;
+  --surface: #ffffff;
+  --ink-900: #0d0d0d;
+  --ink-700: #3b3b3b;
+  --ink-500: #717171;
+  --ink-300: #b0b0b0;
+  --ink-100: #e0e0dc;
 
-  --sky:       #38bdf8;
-  --sky-dim:   rgba(56,189,248,.12);
-  --sky-glow:  rgba(56,189,248,.06);
-  --gold:      #fbbf24;
-  --gold-dim:  rgba(251,191,36,.12);
+  /* Single accent — editorial red, not "tech blue" */
+  --accent:  #b91c1c;
+  --accent-bg: rgba(185,28,28,.06);
 
-  --up:        #34d399;
-  --up-dim:    rgba(52,211,153,.12);
-  --dn:        #f87171;
-  --dn-dim:    rgba(248,113,113,.12);
-  --warn:      #fb923c;
-  --warn-dim:  rgba(251,146,60,.12);
+  /* Directional — data use only */
+  --up:      #166534;
+  --up-bg:   rgba(22,101,52,.07);
+  --dn:      #991b1b;
+  --dn-bg:   rgba(153,27,27,.07);
+  --flat:    #71717a;
 
-  --t1: #f1f5f9;
-  --t2: #94a3b8;
-  --t3: #475569;
-  --t4: #2d3748;
-
+  --font-ui:   'Outfit', sans-serif;
   --font-data: 'JetBrains Mono', monospace;
-  --font-en:   'Space Grotesk', sans-serif;
   --font-zh:   'Noto Sans TC', sans-serif;
 
-  --h: 52px;
-  --ticker-h: 38px;
+  --header-h: 52px;
+  --r: 0px;   /* zero radius — editorial feel */
 }
 
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
@@ -47,441 +46,397 @@ html { font-size:16px; -webkit-font-smoothing:antialiased; }
 
 body {
   background: var(--bg);
-  color: var(--t1);
+  color: var(--ink-900);
   font-family: var(--font-zh);
   min-height: 100vh;
   overflow-x: hidden;
+  line-height: 1.6;
 }
 
-/* ambient glow top-right */
-body::before {
-  content: '';
-  position: fixed; top: -200px; right: -200px;
-  width: 800px; height: 800px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(56,189,248,.06) 0%, transparent 65%);
-  pointer-events: none; z-index: 0;
-}
+a { text-decoration:none; color:inherit; }
+button { cursor:pointer; border:none; background:none; font-family:inherit; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
 
-a { text-decoration: none; color: inherit; }
-button { cursor: pointer; border: none; background: none; font-family: inherit; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-@keyframes tickerScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-@keyframes blink { 0%,100%{opacity:1} 49%{opacity:1} 50%{opacity:0} }
-
-/* ══════════════════════════════════════════
-   HEADER
-══════════════════════════════════════════ */
-.hdr {
-  position: fixed; top: 0; left: 0; right: 0; height: var(--h);
-  background: rgba(7,11,22,.94);
-  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--line);
+/* ─── TOPBAR ─────────────────────────────── */
+.topbar {
+  position: fixed; top:0; left:0; right:0; height: var(--header-h);
+  background: var(--surface);
+  border-bottom: 2px solid var(--ink-900);  /* strong rule — editorial */
   display: flex; align-items: center; padding: 0 24px;
-  z-index: 200;
+  z-index: 100;
 }
 
-.hdr-logo { display: flex; align-items: center; gap: 10px; margin-right: 32px; flex-shrink: 0; }
-.logo-x {
-  width: 30px; height: 30px; border: 1.5px solid var(--sky);
-  border-radius: 5px; display: grid; place-items: center;
-  color: var(--sky); font-family: var(--font-data); font-size: 14px; font-weight: 600;
-  letter-spacing: -.04em;
+.logo {
+  display: flex; align-items: center; gap: 10px; margin-right: 40px; flex-shrink: 0;
 }
-.logo-name { font-family: var(--font-en); font-size: 13px; font-weight: 600; color: var(--t1); letter-spacing: .08em; }
-.logo-tag  { font-family: var(--font-data); font-size: 8.5px; color: var(--t3); letter-spacing: .1em; margin-top: 1px; }
+.logo-mark {
+  width: 28px; height: 28px;
+  background: var(--ink-900);
+  display: grid; place-items: center;
+  /* no border-radius — editorial hard edge */
+}
+.logo-mark svg { width: 14px; height: 14px; }
+.logo-name { font-family: var(--font-ui); font-size: 13.5px; font-weight: 700; color: var(--ink-900); letter-spacing: .06em; }
 
-.hdr-nav { display: flex; align-items: center; gap: 0; flex: 1; }
+.topbar-nav { display: flex; align-items: center; gap: 0; flex: 1; }
 .nav-link {
-  font-family: var(--font-en); font-size: 12.5px; font-weight: 400;
-  color: var(--t3); padding: 6px 13px; border-radius: 4px;
-  transition: color .2s, background .2s; white-space: nowrap; letter-spacing: .01em;
-}
-.nav-link:hover { color: var(--t2); background: rgba(255,255,255,.04); }
-.nav-link.active { color: var(--sky); font-weight: 500; }
-.nav-link.active::before { content: '▸ '; font-size: 9px; }
-
-.hdr-right { display: flex; align-items: center; gap: 12px; margin-left: auto; }
-.live-pip { display: flex; align-items: center; gap: 5px; }
-.pip { width: 6px; height: 6px; background: var(--up); border-radius: 50%; animation: pulse 2s infinite; }
-.pip-label { font-family: var(--font-data); font-size: 10px; color: var(--up); letter-spacing: .08em; }
-.hdr-clock { font-family: var(--font-data); font-size: 12px; color: var(--t3); letter-spacing: .04em; font-variant-numeric: tabular-nums; }
-.btn-hdr {
-  font-family: var(--font-en); font-size: 12px; font-weight: 600;
-  padding: 6px 16px; border: 1px solid var(--sky);
-  border-radius: 4px; color: var(--sky);
-  transition: background .2s; letter-spacing: .02em;
-}
-.btn-hdr:hover { background: var(--sky-dim); }
-
-/* ══════════════════════════════════════════
-   TICKER STRIP
-══════════════════════════════════════════ */
-.ticker-strip {
-  position: fixed; top: var(--h); left: 0; right: 0; height: var(--ticker-h);
-  background: var(--bg-1); border-bottom: 1px solid var(--line);
-  display: flex; align-items: center; overflow: hidden; z-index: 190;
-}
-.ticker-label {
-  flex-shrink: 0; padding: 0 16px;
-  font-family: var(--font-data); font-size: 9px; font-weight: 600;
-  color: var(--sky); letter-spacing: .12em;
-  border-right: 1px solid var(--line); height: 100%;
+  font-family: var(--font-ui); font-size: 13px; font-weight: 400;
+  color: var(--ink-500); padding: 0 14px; height: var(--header-h);
   display: flex; align-items: center;
-  background: rgba(56,189,248,.04);
+  border-right: 1px solid var(--ink-100);
+  transition: color .15s, background .15s;
+  letter-spacing: .01em;
 }
-.ticker-track { display: flex; gap: 0; animation: tickerScroll 36s linear infinite; }
-.ticker-item {
-  display: flex; align-items: center; gap: 8px;
-  padding: 0 20px; border-right: 1px solid var(--line);
-  height: var(--ticker-h); white-space: nowrap; flex-shrink: 0;
-}
-.ti-sym  { font-family: var(--font-data); font-size: 10px; font-weight: 600; color: var(--t3); letter-spacing: .06em; }
-.ti-val  { font-family: var(--font-data); font-size: 12px; font-weight: 500; color: var(--t1); font-variant-numeric: tabular-nums; }
-.ti-chg  { font-family: var(--font-data); font-size: 10px; font-weight: 500; font-variant-numeric: tabular-nums; }
-.ti-up   { color: var(--up); }
-.ti-dn   { color: var(--dn); }
+.nav-link:first-child { border-left: 1px solid var(--ink-100); }
+.nav-link:hover { color: var(--ink-900); background: var(--bg); }
+.nav-link.active { color: var(--accent); font-weight: 600; background: var(--accent-bg); }
 
-/* ══════════════════════════════════════════
-   PAGE
-══════════════════════════════════════════ */
+.topbar-right { display: flex; align-items: center; gap: 0; margin-left: auto; }
+.hdr-live {
+  display: flex; align-items: center; gap: 5px;
+  padding: 0 14px; height: var(--header-h);
+  border-left: 1px solid var(--ink-100);
+  font-family: var(--font-data); font-size: 10px; color: var(--up); letter-spacing: .06em;
+}
+.pip { width: 6px; height: 6px; background: var(--up); border-radius: 50%; animation: pulse 2s infinite; }
+.hdr-clock {
+  padding: 0 14px; height: var(--header-h);
+  display: flex; align-items: center;
+  font-family: var(--font-data); font-size: 11.5px; color: var(--ink-500);
+  border-left: 1px solid var(--ink-100); letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+}
+.btn-login {
+  height: var(--header-h); padding: 0 20px;
+  background: var(--ink-900); color: #fff;
+  font-family: var(--font-ui); font-size: 12.5px; font-weight: 600;
+  letter-spacing: .04em; border-left: 1px solid var(--ink-900);
+  transition: background .15s;
+  display: flex; align-items: center;
+}
+.btn-login:hover { background: var(--accent); }
+
+/* ─── PAGE ───────────────────────────────── */
 .page {
-  margin-top: calc(var(--h) + var(--ticker-h));
-  max-width: 1360px; margin-left: auto; margin-right: auto;
-  padding: 0 24px 80px;
-  position: relative; z-index: 1;
+  margin-top: var(--header-h);
+  max-width: 1320px; margin-left: auto; margin-right: auto;
+  padding: 0 24px 64px;
 }
 
-/* ══════════════════════════════════════════
-   MARKET OVERVIEW (full-width hero strip)
-══════════════════════════════════════════ */
-.mkt-strip {
-  display: grid; grid-template-columns: repeat(6,1fr);
-  border: 1px solid var(--line); border-radius: 6px;
-  overflow: hidden; margin: 24px 0 20px;
-  background: var(--bg-1);
+/* ─── MARKET STRIP ───────────────────────── */
+/* Single row — table-like, not card-grid */
+.market-strip {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  border: 1px solid var(--ink-100);
+  border-top: 3px solid var(--ink-900);
+  background: var(--surface);
+  margin: 20px 0;
 }
 .mkt-cell {
-  padding: 16px 18px;
-  border-right: 1px solid var(--line);
-  position: relative; overflow: hidden;
-  transition: background .25s;
-  cursor: default;
+  padding: 14px 16px 12px;
+  border-right: 1px solid var(--ink-100);
+  position: relative;
 }
 .mkt-cell:last-child { border-right: none; }
-.mkt-cell:hover { background: rgba(255,255,255,.03); }
-/* accent bar top */
-.mkt-cell::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-}
-.mkt-cell.up::before  { background: var(--up); }
-.mkt-cell.dn::before  { background: var(--dn); }
-.mkt-cell.flat::before { background: var(--t4); }
 
-.mc-sym  { font-family: var(--font-data); font-size: 9.5px; font-weight: 600; color: var(--t3); letter-spacing: .1em; margin-bottom: 4px; }
-.mc-name { font-family: var(--font-zh);   font-size: 10.5px; color: var(--t3); margin-bottom: 8px; }
-.mc-val  { font-family: var(--font-data); font-size: 22px; font-weight: 600; color: var(--t1); line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
-.mc-chg  { display: flex; align-items: center; gap: 4px; margin-top: 5px; font-family: var(--font-data); font-size: 11px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.mc-label { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.mc-sym  { font-family: var(--font-data); font-size: 9px; font-weight: 600; color: var(--ink-300); letter-spacing: .12em; }
+.mc-cat  { font-size: 9px; color: var(--ink-300); font-family: var(--font-ui); }
+.mc-name { font-family: var(--font-zh); font-size: 10.5px; color: var(--ink-500); margin-bottom: 6px; }
+/* Large, dominant number */
+.mc-val  {
+  font-family: var(--font-data); font-size: 21px; font-weight: 600;
+  color: var(--ink-900); letter-spacing: -.03em; line-height: 1;
+  font-variant-numeric: tabular-nums; margin-bottom: 5px;
+}
+.mc-chg  {
+  font-family: var(--font-data); font-size: 11px; font-weight: 500;
+  font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 4px;
+}
 .mc-chg.up   { color: var(--up); }
 .mc-chg.dn   { color: var(--dn); }
+.mc-chg.flat { color: var(--flat); }
+/* Accent bottom border = trend indicator */
+.mkt-cell::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+}
+.mkt-cell.up::after  { background: var(--up); }
+.mkt-cell.dn::after  { background: var(--dn); }
 
-/* ══════════════════════════════════════════
-   DATE ROW
-══════════════════════════════════════════ */
-.date-row {
+/* ─── DATE BAR ───────────────────────────── */
+.datebar {
   display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 20px; padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
+  padding: 10px 0; border-bottom: 1px solid var(--ink-100); margin-bottom: 20px;
 }
-.date-left { display: flex; align-items: center; gap: 10px; }
-.date-str { font-family: var(--font-data); font-size: 11px; color: var(--t3); letter-spacing: .08em; }
-.date-label { font-family: var(--font-zh); font-size: 12px; color: var(--t2); }
-.date-sep { color: var(--t4); }
-.date-gen { font-family: var(--font-data); font-size: 10px; color: var(--t3); }
+.datebar-left { display: flex; align-items: center; gap: 10px; }
+.datebar-date { font-family: var(--font-data); font-size: 10.5px; color: var(--ink-500); letter-spacing: .08em; }
+.datebar-pipe { color: var(--ink-100); }
+.datebar-label { font-family: var(--font-zh); font-size: 12px; color: var(--ink-700); }
+.datebar-gen   { font-family: var(--font-data); font-size: 10px; color: var(--ink-300); }
 .btn-archive {
-  font-family: var(--font-data); font-size: 10px; font-weight: 500;
-  color: var(--t3); padding: 4px 10px; border: 1px solid var(--line-mid);
-  border-radius: 3px; letter-spacing: .06em;
-  transition: color .2s, border-color .2s;
+  font-family: var(--font-data); font-size: 9.5px; font-weight: 600;
+  color: var(--ink-500); padding: 4px 10px;
+  border: 1px solid var(--ink-100); letter-spacing: .06em;
+  transition: all .15s;
 }
-.btn-archive:hover { color: var(--sky); border-color: var(--sky); }
+.btn-archive:hover { color: var(--ink-900); border-color: var(--ink-300); }
 
-/* ══════════════════════════════════════════
-   MAIN LAYOUT
-══════════════════════════════════════════ */
-.main { display: grid; grid-template-columns: 1fr 296px; gap: 24px; align-items: start; }
+/* ─── MAIN GRID ──────────────────────────── */
+.main { display: grid; grid-template-columns: 1fr 300px; gap: 0; align-items: start; }
+.left-col { border-right: 1px solid var(--ink-100); padding-right: 24px; }
+.right-col { padding-left: 24px; }
 
-/* ══════════════════════════════════════════
-   SYNTHESIS CARD
-══════════════════════════════════════════ */
+/* ─── SYNTHESIS ──────────────────────────── */
 .synthesis {
-  position: relative;
-  border: 1px solid rgba(251,191,36,.25);
-  border-radius: 6px;
-  padding: 22px 24px 20px;
+  border-left: 3px solid var(--accent);
+  padding: 16px 18px;
+  background: var(--surface);
+  border-top: 1px solid var(--ink-100);
+  border-right: 1px solid var(--ink-100);
+  border-bottom: 1px solid var(--ink-100);
   margin-bottom: 24px;
-  background: rgba(251,191,36,.03);
-  overflow: hidden;
+  position: relative;
 }
-/* glow */
-.synthesis::before {
-  content: '';
-  position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
-  background: linear-gradient(180deg, var(--gold), rgba(251,191,36,.3));
-}
-/* corner label */
-.synthesis::after {
-  content: 'SYNTHESIS';
-  position: absolute; top: 10px; right: 14px;
+.syn-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.syn-kicker {
   font-family: var(--font-data); font-size: 8.5px; font-weight: 600;
-  color: rgba(251,191,36,.4); letter-spacing: .14em;
+  color: var(--accent); letter-spacing: .14em; text-transform: uppercase;
+  padding: 2px 6px; border: 1px solid var(--accent); margin-right: 4px;
 }
-.syn-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-.syn-title { font-family: var(--font-en); font-size: 14px; font-weight: 600; color: var(--gold); letter-spacing: .01em; }
-.syn-date { font-family: var(--font-data); font-size: 9px; color: var(--t3); letter-spacing: .06em; padding: 2px 7px; border: 1px solid var(--line-mid); border-radius: 3px; }
-.syn-body { font-size: 13px; line-height: 1.9; color: var(--t2); font-family: var(--font-zh); }
+.syn-date { font-family: var(--font-data); font-size: 9px; color: var(--ink-300); letter-spacing: .06em; }
+.syn-body { font-size: 13px; line-height: 1.85; color: var(--ink-700); font-family: var(--font-zh); }
 .syn-body p { margin: 0 0 9px; }
-.syn-body p:last-child { margin-bottom: 0; }
-.syn-toggle {
-  display: inline-flex; align-items: center; gap: 5px;
-  margin-top: 12px; font-family: var(--font-data); font-size: 10.5px; font-weight: 500;
-  color: var(--gold); letter-spacing: .04em;
-  border: 1px solid rgba(251,191,36,.2); border-radius: 3px;
-  padding: 5px 12px; transition: background .2s;
+.syn-body p:last-child { margin: 0; }
+.syn-more {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 11px;
+  font-family: var(--font-data); font-size: 9.5px; font-weight: 600;
+  color: var(--accent); letter-spacing: .04em;
+  border-bottom: 1px solid var(--accent); padding-bottom: 1px;
+  transition: opacity .15s;
 }
-.syn-toggle:hover { background: var(--gold-dim); }
+.syn-more:hover { opacity: .7; }
 
-/* ══════════════════════════════════════════
-   SECTION LABEL
-══════════════════════════════════════════ */
-.section-label {
-  display: flex; align-items: center; gap: 12px;
-  margin-bottom: 12px; padding-bottom: 8px;
-  border-bottom: 1px solid var(--line);
+/* ─── SECTION RULE ───────────────────────── */
+.section-rule {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
 }
-.sl-text { font-family: var(--font-data); font-size: 9.5px; font-weight: 600; color: var(--t3); letter-spacing: .14em; }
-.sl-count { font-family: var(--font-data); font-size: 9px; color: var(--t4); }
-.sl-line { flex: 1; height: 1px; background: var(--line); }
-
-/* ══════════════════════════════════════════
-   TRACK TABS
-══════════════════════════════════════════ */
-.track-bar { display: flex; align-items: center; gap: 2px; margin-bottom: 14px; flex-wrap: wrap; }
-.track-btn {
-  font-family: var(--font-data); font-size: 9.5px; font-weight: 500;
-  letter-spacing: .06em; padding: 5px 11px;
-  border: 1px solid var(--line); border-radius: 3px;
-  color: var(--t3); transition: all .2s;
-}
-.track-btn:hover { border-color: var(--line-mid); color: var(--t2); background: rgba(255,255,255,.03); }
-.track-btn.active { border-color: var(--sky); color: var(--sky); background: var(--sky-dim); }
-
-/* ══════════════════════════════════════════
-   BRIEF ITEMS — no card boxes, just rows
-══════════════════════════════════════════ */
-.brief-feed { display: flex; flex-direction: column; }
-
-.feed-divider {
+.sr-label {
   font-family: var(--font-data); font-size: 9px; font-weight: 600;
-  color: var(--t4); letter-spacing: .16em;
-  padding: 14px 0 6px;
-  display: flex; align-items: center; gap: 8px;
+  color: var(--ink-500); letter-spacing: .16em; text-transform: uppercase;
+  white-space: nowrap;
 }
-.feed-divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
-.feed-divider:first-child { padding-top: 0; }
+.sr-line { flex: 1; height: 1px; background: var(--ink-100); }
+.sr-count { font-family: var(--font-data); font-size: 9px; color: var(--ink-300); }
+
+/* ─── FILTER BAR ─────────────────────────── */
+.filter-bar { display: flex; gap: 0; margin-bottom: 0; border-bottom: 1px solid var(--ink-100); }
+.filter-btn {
+  font-family: var(--font-data); font-size: 9.5px; font-weight: 500;
+  letter-spacing: .06em; padding: 7px 13px;
+  border-right: 1px solid var(--ink-100);
+  color: var(--ink-500); transition: all .15s; white-space: nowrap;
+}
+.filter-btn:first-child { border-left: none; }
+.filter-btn:hover { color: var(--ink-900); background: var(--bg); }
+.filter-btn.active {
+  color: var(--accent); font-weight: 600;
+  background: var(--accent-bg);
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: -1px;
+}
+
+/* ─── BRIEF FEED ─────────────────────────── */
+/* No card boxes. Lines only. */
+.feed-divider {
+  font-family: var(--font-data); font-size: 8.5px; font-weight: 600;
+  color: var(--ink-300); letter-spacing: .18em; text-transform: uppercase;
+  padding: 12px 0 5px;
+  border-bottom: 1px solid var(--ink-100);
+  margin-bottom: 0;
+}
 
 .brief-row {
-  display: flex; gap: 0; align-items: stretch;
-  border-bottom: 1px solid var(--line);
-  transition: background .2s;
+  display: flex; gap: 0;
+  border-bottom: 1px solid var(--ink-100);
+  transition: background .12s;
   cursor: default;
 }
-.brief-row:hover { background: rgba(255,255,255,.025); }
+.brief-row:hover { background: var(--surface); }
 
-/* sentiment left bar */
-.br-bar { width: 3px; flex-shrink: 0; margin: 12px 0; border-radius: 2px; }
-.br-bull { background: var(--up); }
-.br-bear { background: var(--dn); }
-.br-neut { background: var(--t4); }
+/* Left accent stripe = sentiment */
+.br-stripe { width: 3px; flex-shrink: 0; }
+.br-stripe.bull { background: var(--up); }
+.br-stripe.bear { background: var(--dn); }
+.br-stripe.neut { background: var(--ink-300); }
 
-.br-body { flex: 1; padding: 13px 16px 13px 14px; min-width: 0; }
-.br-meta { display: flex; align-items: center; gap: 7px; margin-bottom: 6px; flex-wrap: wrap; }
+.br-main { flex: 1; padding: 13px 14px; min-width: 0; }
+.br-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
 
-.br-badge {
-  font-family: var(--font-data); font-size: 9px; font-weight: 600;
-  letter-spacing: .1em; padding: 2px 7px; border-radius: 2px;
+/* Category badge — just a text label, not a pill */
+.br-cat {
+  font-family: var(--font-data); font-size: 8.5px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  /* No background fill — just colored text */
 }
-.bb-macro    { background: rgba(56,189,248,.15);  color: var(--sky); }
-.bb-us       { background: rgba(52,211,153,.12);  color: var(--up); }
-.bb-tw       { background: rgba(251,146,60,.12);  color: var(--warn); }
-.bb-industry { background: rgba(167,139,250,.12); color: #a78bfa; }
-.bb-crypto   { background: rgba(251,191,36,.12);  color: var(--gold); }
-.bb-commodity{ background: rgba(248,113,113,.12); color: var(--dn); }
+.cat-macro    { color: var(--ink-500); }
+.cat-us       { color: #0f766e; }   /* teal — data use, not brand */
+.cat-tw       { color: #7c3aed; }   /* purple — data use, not brand */
+.cat-industry { color: #1d4ed8; }
+.cat-crypto   { color: #92400e; }
+.cat-commodity{ color: var(--ink-500); }
 
-.br-time { font-family: var(--font-data); font-size: 9.5px; color: var(--t3); letter-spacing: .02em; }
-.br-sent { font-family: var(--font-data); font-size: 9px; letter-spacing: .06em; }
+.br-time { font-family: var(--font-data); font-size: 9px; color: var(--ink-300); }
+.br-sent {
+  font-family: var(--font-data); font-size: 9px; font-weight: 600; letter-spacing: .04em;
+}
 .br-sent.bull { color: var(--up); }
 .br-sent.bear { color: var(--dn); }
-.br-sent.neut { color: var(--t3); }
-.br-src  { font-family: var(--font-data); font-size: 9px; color: var(--t4); }
+.br-sent.neut { color: var(--flat); }
+.br-src  { font-family: var(--font-data); font-size: 9px; color: var(--ink-300); }
 
 .br-headline {
   font-family: var(--font-zh); font-size: 14px; font-weight: 500;
-  color: var(--t1); line-height: 1.5; margin-bottom: 5px;
+  color: var(--ink-900); line-height: 1.5; margin-bottom: 4px;
 }
-.br-body-text {
-  font-family: var(--font-zh); font-size: 12.5px; color: var(--t2);
+.br-body {
+  font-family: var(--font-zh); font-size: 12.5px; color: var(--ink-500);
   line-height: 1.65;
 }
-.br-tickers { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 7px; }
-.ticker-chip {
-  font-family: var(--font-data); font-size: 9.5px; font-weight: 500;
-  padding: 2px 7px; border: 1px solid var(--line-mid);
-  border-radius: 2px; color: var(--t3); letter-spacing: .04em;
-  transition: all .2s;
+.br-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 7px; }
+.chip {
+  font-family: var(--font-data); font-size: 9px; font-weight: 600;
+  color: var(--ink-500); padding: 2px 6px;
+  border: 1px solid var(--ink-100); letter-spacing: .04em;
+  transition: all .12s;
 }
-.ticker-chip:hover { color: var(--sky); border-color: var(--sky); }
+.chip:hover { color: var(--ink-900); border-color: var(--ink-300); }
 
-/* expand */
-.br-expand { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+/* Expand */
+.br-expand {
+  display: none; padding-top: 10px; margin-top: 10px;
+  border-top: 1px dashed var(--ink-100);
+}
 .brief-row.open .br-expand { display: block; }
-.exp-row { font-family: var(--font-zh); font-size: 12px; line-height: 1.6; color: var(--t2); margin-bottom: 5px; }
-.exp-lbl { font-family: var(--font-data); font-size: 9.5px; font-weight: 600; letter-spacing: .06em; margin-right: 6px; }
-.exp-lbl.pos { color: var(--up); }
-.exp-lbl.neg { color: var(--dn); }
-.exp-lbl.neu { color: var(--sky); }
+.exp-item { font-family: var(--font-zh); font-size: 12px; line-height: 1.6; color: var(--ink-700); margin-bottom: 5px; }
+.exp-label { font-family: var(--font-data); font-size: 8.5px; font-weight: 700; letter-spacing: .08em; margin-right: 6px; }
+.exp-label.pos { color: var(--up); }
+.exp-label.neg { color: var(--dn); }
+.exp-label.neu { color: var(--ink-500); }
 
-.br-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-start; padding: 13px 14px 13px 0; min-width: 56px; }
-.imp-label { font-family: var(--font-data); font-size: 8px; color: var(--t4); letter-spacing: .08em; margin-bottom: 4px; }
-.imp-bars { display: flex; gap: 2px; align-items: flex-end; height: 14px; }
-.imp-bar { width: 4px; border-radius: 1px; background: var(--sky); opacity: .7; }
-.imp-bar.e { background: var(--t4); opacity: 1; }
-/* heights */
-.imp-bar:nth-child(1) { height: 6px; }
-.imp-bar:nth-child(2) { height: 9px; }
-.imp-bar:nth-child(3) { height: 11px; }
-.imp-bar:nth-child(4) { height: 13px; }
-.imp-bar:nth-child(5) { height: 14px; }
+.br-impact { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; padding: 13px 12px; gap: 5px; min-width: 52px; }
+.impact-lbl { font-family: var(--font-data); font-size: 7.5px; color: var(--ink-300); letter-spacing: .08em; }
+/* Bar chart impact indicator */
+.impact-chart { display: flex; align-items: flex-end; gap: 2px; height: 16px; }
+.impact-bar { width: 5px; background: var(--ink-100); }
+.impact-bar.filled { background: var(--accent); }
+.impact-bar:nth-child(1) { height: 5px; }
+.impact-bar:nth-child(2) { height: 8px; }
+.impact-bar:nth-child(3) { height: 11px; }
+.impact-bar:nth-child(4) { height: 13px; }
+.impact-bar:nth-child(5) { height: 16px; }
 
-/* ══════════════════════════════════════════
-   SIDEBAR
-══════════════════════════════════════════ */
-.sidebar { display: flex; flex-direction: column; gap: 0; }
+/* ─── SIDEBAR ────────────────────────────── */
+/* No panel boxes — just sections divided by rules */
 
-.panel {
-  border: 1px solid var(--line);
-  border-radius: 6px; overflow: hidden;
-  margin-bottom: 12px;
-  background: var(--bg-1);
+.side-section { padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--ink-100); }
+.side-section:last-child { border-bottom: none; }
+.side-title {
+  font-family: var(--font-data); font-size: 8.5px; font-weight: 700;
+  color: var(--ink-300); letter-spacing: .16em; text-transform: uppercase;
+  margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;
 }
-.panel-head {
-  padding: 10px 14px; border-bottom: 1px solid var(--line);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.panel-title { font-family: var(--font-data); font-size: 9.5px; font-weight: 600; color: var(--t3); letter-spacing: .12em; }
-.panel-badge { font-family: var(--font-data); font-size: 9px; font-weight: 600; padding: 2px 7px; border-radius: 2px; letter-spacing: .06em; }
-.pb-high  { background: var(--dn-dim);  color: var(--dn); }
-.pb-mid   { background: var(--warn-dim); color: var(--warn); }
-.pb-low   { background: var(--up-dim);  color: var(--up); }
-.panel-body { padding: 12px 14px; }
+.side-title a { font-size: 8.5px; color: var(--accent); letter-spacing: .06em; }
+
+/* Sentiment data — 2-col grid, no card boxes */
+.sent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--ink-100); border: 1px solid var(--ink-100); }
+.sent-cell { background: var(--surface); padding: 10px 11px; }
+.sent-cell-label { font-family: var(--font-data); font-size: 8px; color: var(--ink-300); letter-spacing: .1em; margin-bottom: 4px; }
+.sent-cell-val   { font-family: var(--font-data); font-size: 22px; font-weight: 600; color: var(--ink-900); font-variant-numeric: tabular-nums; line-height: 1; }
+.sent-cell-sub   { font-family: var(--font-zh); font-size: 10px; color: var(--ink-500); margin-top: 3px; }
+.val-fear  { color: var(--dn); }
+.val-up    { color: var(--up); }
+.val-dn    { color: var(--dn); }
 
 /* Risk rows */
-.risk-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.risk-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--ink-100); }
 .risk-row:last-child { border-bottom: none; }
-.rr-left { display: flex; align-items: center; gap: 8px; }
-.rr-dot  { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-.rr-name { font-family: var(--font-zh); font-size: 12px; color: var(--t2); }
-.rr-val  { font-family: var(--font-data); font-size: 10.5px; font-weight: 500; letter-spacing: .02em; }
-
-/* Sentiment data grid */
-.sent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); }
-.sent-cell { background: var(--bg-1); padding: 11px 12px; }
-.sc-label { font-family: var(--font-data); font-size: 8.5px; font-weight: 600; color: var(--t3); letter-spacing: .1em; margin-bottom: 5px; }
-.sc-val   { font-family: var(--font-data); font-size: 20px; font-weight: 600; color: var(--t1); font-variant-numeric: tabular-nums; line-height: 1; }
-.sc-sub   { font-family: var(--font-zh); font-size: 10px; color: var(--t3); margin-top: 3px; }
-.sc-fear  { color: var(--dn); }
-.sc-greed { color: var(--up); }
-.sc-red   { color: var(--dn); }
-.sc-green { color: var(--up); }
+.risk-left { display: flex; align-items: center; gap: 7px; }
+.risk-dot { width: 6px; height: 6px; flex-shrink: 0; }  /* square, not circle */
+.risk-name { font-family: var(--font-zh); font-size: 12px; color: var(--ink-700); }
+.risk-val  { font-family: var(--font-data); font-size: 10px; font-weight: 600; }
 
 /* Calendar */
-.cal-item { display: flex; gap: 0; padding: 10px 0; border-bottom: 1px solid var(--line); align-items: flex-start; }
+.cal-item { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--ink-100); align-items: flex-start; }
 .cal-item:last-child { border-bottom: none; }
-.cal-date-col { flex-shrink: 0; width: 36px; text-align: center; margin-right: 10px; }
-.cal-day { font-family: var(--font-data); font-size: 16px; font-weight: 600; color: var(--sky); line-height: 1; font-variant-numeric: tabular-nums; }
-.cal-mon { font-family: var(--font-data); font-size: 8px; color: var(--t3); letter-spacing: .07em; text-transform: uppercase; }
-.cal-info { flex: 1; min-width: 0; }
-.cal-type { font-family: var(--font-data); font-size: 8.5px; color: var(--t3); letter-spacing: .06em; margin-bottom: 2px; }
-.cal-name { font-family: var(--font-zh); font-size: 12px; color: var(--t1); line-height: 1.4; }
+.cal-date { flex-shrink: 0; text-align: center; width: 28px; }
+.cal-d { font-family: var(--font-data); font-size: 15px; font-weight: 700; color: var(--accent); line-height: 1; font-variant-numeric: tabular-nums; }
+.cal-m { font-family: var(--font-data); font-size: 8px; color: var(--ink-300); letter-spacing: .06em; }
+.cal-info { flex: 1; }
+.cal-type { font-family: var(--font-data); font-size: 8.5px; color: var(--ink-300); letter-spacing: .05em; margin-bottom: 2px; }
+.cal-name { font-family: var(--font-zh); font-size: 12px; color: var(--ink-900); line-height: 1.4; }
 
-.econ-strip { display: flex; gap: 0; margin-top: 5px; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
-.es-col { flex: 1; padding: 5px 7px; border-right: 1px solid var(--line); }
+/* Econ data strip */
+.econ-strip { display: flex; border: 1px solid var(--ink-100); margin-top: 5px; }
+.es-col { flex: 1; padding: 4px 7px; border-right: 1px solid var(--ink-100); }
 .es-col:last-child { border-right: none; }
-.es-col.has-act { background: var(--up-dim); }
-.es-lbl { font-family: var(--font-data); font-size: 7.5px; color: var(--t3); letter-spacing: .06em; margin-bottom: 2px; }
-.es-val { font-family: var(--font-data); font-size: 11px; font-weight: 600; color: var(--t1); font-variant-numeric: tabular-nums; }
-.es-act { color: var(--up); }
-.es-tbd { color: var(--t4); font-weight: 400; font-size: 9px; }
+.es-col.has-act { background: var(--up-bg); }
+.es-lbl { font-family: var(--font-data); font-size: 7.5px; color: var(--ink-300); letter-spacing: .06em; }
+.es-val { font-family: var(--font-data); font-size: 11.5px; font-weight: 600; color: var(--ink-900); font-variant-numeric: tabular-nums; }
+.es-val.act { color: var(--up); }
+.es-val.tbd { color: var(--ink-300); font-weight: 400; font-size: 9.5px; }
 
 /* Persons */
-.person-row { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); align-items: flex-start; }
+.person-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--ink-100); align-items: flex-start; }
 .person-row:last-child { border-bottom: none; }
-.p-initial {
-  flex-shrink: 0; width: 30px; height: 30px;
-  border: 1px solid var(--line-mid); border-radius: 50%;
+.person-initial {
+  flex-shrink: 0; width: 28px; height: 28px;
+  background: var(--ink-900); color: #fff;
   display: grid; place-items: center;
-  font-family: var(--font-data); font-size: 10px; font-weight: 600; color: var(--t2);
-  background: var(--bg-2);
+  font-family: var(--font-data); font-size: 9px; font-weight: 600; letter-spacing: .02em;
 }
-.p-info { flex: 1; min-width: 0; }
-.p-name  { font-family: var(--font-en);  font-size: 12px; font-weight: 600; color: var(--t1); }
-.p-title { font-family: var(--font-zh);  font-size: 10px; color: var(--t3); margin-bottom: 3px; }
-.p-note  { font-family: var(--font-zh);  font-size: 11px; color: var(--t2); line-height: 1.5; }
+.person-info  { flex: 1; min-width: 0; }
+.person-name  { font-family: var(--font-ui); font-size: 12.5px; font-weight: 600; color: var(--ink-900); }
+.person-title { font-family: var(--font-zh); font-size: 10px; color: var(--ink-300); margin-bottom: 2px; }
+.person-note  { font-family: var(--font-zh); font-size: 11.5px; color: var(--ink-500); line-height: 1.5; }
 
-/* ══════════════════════════════════════════
-   FOOTER
-══════════════════════════════════════════ */
+/* ─── FOOTER ─────────────────────────────── */
 .footer {
-  margin-top: 48px; padding-top: 20px;
-  border-top: 1px solid var(--line);
+  margin-top: 40px; padding: 16px 0;
+  border-top: 2px solid var(--ink-900);
   display: flex; align-items: center; justify-content: space-between;
 }
-.ft-logo { font-family: var(--font-data); font-size: 11px; font-weight: 600; color: var(--t3); letter-spacing: .1em; }
-.ft-note { font-family: var(--font-zh); font-size: 11px; color: var(--t4); }
+.footer-logo { font-family: var(--font-data); font-size: 11px; font-weight: 700; color: var(--ink-900); letter-spacing: .1em; }
+.footer-note { font-family: var(--font-zh); font-size: 10.5px; color: var(--ink-300); }
 
-/* ══════════════════════════════════════════
-   DEMO TAG
-══════════════════════════════════════════ */
-.demo-tag {
+/* ─── DEMO LABEL ─────────────────────────── */
+.demo-label {
   position: fixed; bottom: 16px; right: 16px;
-  font-family: var(--font-data); font-size: 10px; font-weight: 600;
-  color: var(--sky); padding: 6px 14px; border: 1px solid var(--sky);
-  border-radius: 3px; background: rgba(56,189,248,.08);
-  letter-spacing: .08em; z-index: 9999;
-  animation: blink 2s step-end infinite;
+  background: var(--ink-900); color: #fff;
+  font-family: var(--font-data); font-size: 9.5px; font-weight: 600;
+  letter-spacing: .08em; padding: 6px 12px; z-index: 9999;
 }
 
-/* ══════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════ */
-@media (max-width:1100px){ .main { grid-template-columns:1fr; } }
-@media (max-width: 768px){ .mkt-strip { grid-template-columns:repeat(3,1fr); } .hdr-nav { display:none; } }
-@media (max-width: 480px){ .mkt-strip { grid-template-columns:repeat(2,1fr); } }
+/* ─── RESPONSIVE ─────────────────────────── */
+@media (max-width: 1060px) { .main { grid-template-columns: 1fr; } .left-col { border-right: none; padding-right: 0; } .right-col { padding-left: 0; border-top: 1px solid var(--ink-100); padding-top: 20px; margin-top: 8px; } }
+@media (max-width: 720px)  { .market-strip { grid-template-columns: repeat(3,1fr); } .topbar-nav { display: none; } }
+@media (max-width: 480px)  { .market-strip { grid-template-columns: repeat(2,1fr); } .filter-bar { overflow-x: auto; } }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="hdr">
-  <div class="hdr-logo">
-    <div class="logo-x">PX</div>
-    <div>
-      <div class="logo-name">PROJECT X</div>
-      <div class="logo-tag">MARKET INTELLIGENCE</div>
+<!-- ─── TOPBAR ─── -->
+<header class="topbar">
+  <div class="logo">
+    <div class="logo-mark">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M2 7L7 2L12 7L7 12L2 7Z" stroke="white" stroke-width="1.4" fill="none"/>
+        <circle cx="7" cy="7" r="1.8" fill="white"/>
+      </svg>
     </div>
+    <span class="logo-name">PROJECT X</span>
   </div>
-  <nav class="hdr-nav">
+  <nav class="topbar-nav">
     <a href="#" class="nav-link active">今日簡報</a>
     <a href="#" class="nav-link">市場行情</a>
     <a href="#" class="nav-link">機構研報</a>
@@ -490,100 +445,64 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     <a href="#" class="nav-link">選股雷達</a>
     <a href="#" class="nav-link">績效追蹤</a>
   </nav>
-  <div class="hdr-right">
-    <div class="live-pip"><div class="pip"></div><span class="pip-label">LIVE</span></div>
-    <span class="hdr-clock" id="demo-clock">08:31:04</span>
-    <a href="#" class="btn-hdr">LOGIN</a>
+  <div class="topbar-right">
+    <div class="hdr-live"><div class="pip"></div>LIVE</div>
+    <div class="hdr-clock" id="demo-clock">08:31:00</div>
+    <a href="#" class="btn-login">LOGIN</a>
   </div>
 </header>
 
-<!-- TICKER STRIP -->
-<div class="ticker-strip">
-  <div class="ticker-label">MKT</div>
-  <div class="ticker-track" id="ticker-track">
-    <div class="ticker-item"><span class="ti-sym">SPX</span><span class="ti-val">7,420.10</span><span class="ti-chg ti-dn">▼ 1.78%</span></div>
-    <div class="ticker-item"><span class="ti-sym">NDX</span><span class="ti-val">26,021.66</span><span class="ti-chg ti-dn">▼ 2.48%</span></div>
-    <div class="ticker-item"><span class="ti-sym">DJI</span><span class="ti-val">43,204.50</span><span class="ti-chg ti-dn">▼ 0.94%</span></div>
-    <div class="ticker-item"><span class="ti-sym">VIX</span><span class="ti-val">18.44</span><span class="ti-chg ti-dn">▲ 12.37%</span></div>
-    <div class="ticker-item"><span class="ti-sym">NVDA</span><span class="ti-val">204.65</span><span class="ti-chg ti-dn">▼ 3.67%</span></div>
-    <div class="ticker-item"><span class="ti-sym">MSFT</span><span class="ti-val">378.91</span><span class="ti-chg ti-dn">▼ 5.22%</span></div>
-    <div class="ticker-item"><span class="ti-sym">META</span><span class="ti-val">567.58</span><span class="ti-chg ti-dn">▼ 4.36%</span></div>
-    <div class="ticker-item"><span class="ti-sym">TSM</span><span class="ti-val">432.15</span><span class="ti-chg ti-dn">▼ 2.10%</span></div>
-    <div class="ticker-item"><span class="ti-sym">AAPL</span><span class="ti-val">295.95</span><span class="ti-chg ti-dn">▼ 0.16%</span></div>
-    <div class="ticker-item"><span class="ti-sym">BTC</span><span class="ti-val">96,480</span><span class="ti-chg ti-up">▲ 0.34%</span></div>
-    <div class="ticker-item"><span class="ti-sym">ETH</span><span class="ti-val">3,218</span><span class="ti-chg ti-dn">▼ 0.82%</span></div>
-    <div class="ticker-item"><span class="ti-sym">BRENT</span><span class="ti-val">78.75</span><span class="ti-chg ti-dn">▼ 0.27%</span></div>
-    <div class="ticker-item"><span class="ti-sym">DXY</span><span class="ti-val">104.22</span><span class="ti-chg ti-up">▲ 0.41%</span></div>
-    <div class="ticker-item"><span class="ti-sym">10Y</span><span class="ti-val">4.55%</span><span class="ti-chg ti-up">▲ 0.08</span></div>
-    <!-- 複製一遍讓動畫無縫 -->
-    <div class="ticker-item"><span class="ti-sym">SPX</span><span class="ti-val">7,420.10</span><span class="ti-chg ti-dn">▼ 1.78%</span></div>
-    <div class="ticker-item"><span class="ti-sym">NDX</span><span class="ti-val">26,021.66</span><span class="ti-chg ti-dn">▼ 2.48%</span></div>
-    <div class="ticker-item"><span class="ti-sym">DJI</span><span class="ti-val">43,204.50</span><span class="ti-chg ti-dn">▼ 0.94%</span></div>
-    <div class="ticker-item"><span class="ti-sym">VIX</span><span class="ti-val">18.44</span><span class="ti-chg ti-dn">▲ 12.37%</span></div>
-    <div class="ticker-item"><span class="ti-sym">NVDA</span><span class="ti-val">204.65</span><span class="ti-chg ti-dn">▼ 3.67%</span></div>
-    <div class="ticker-item"><span class="ti-sym">MSFT</span><span class="ti-val">378.91</span><span class="ti-chg ti-dn">▼ 5.22%</span></div>
-    <div class="ticker-item"><span class="ti-sym">META</span><span class="ti-val">567.58</span><span class="ti-chg ti-dn">▼ 4.36%</span></div>
-    <div class="ticker-item"><span class="ti-sym">TSM</span><span class="ti-val">432.15</span><span class="ti-chg ti-dn">▼ 2.10%</span></div>
-    <div class="ticker-item"><span class="ti-sym">AAPL</span><span class="ti-val">295.95</span><span class="ti-chg ti-dn">▼ 0.16%</span></div>
-    <div class="ticker-item"><span class="ti-sym">BTC</span><span class="ti-val">96,480</span><span class="ti-chg ti-up">▲ 0.34%</span></div>
-    <div class="ticker-item"><span class="ti-sym">ETH</span><span class="ti-val">3,218</span><span class="ti-chg ti-dn">▼ 0.82%</span></div>
-    <div class="ticker-item"><span class="ti-sym">BRENT</span><span class="ti-val">78.75</span><span class="ti-chg ti-dn">▼ 0.27%</span></div>
-    <div class="ticker-item"><span class="ti-sym">DXY</span><span class="ti-val">104.22</span><span class="ti-chg ti-up">▲ 0.41%</span></div>
-    <div class="ticker-item"><span class="ti-sym">10Y</span><span class="ti-val">4.55%</span><span class="ti-chg ti-up">▲ 0.08</span></div>
-  </div>
-</div>
-
-<!-- PAGE -->
+<!-- ─── PAGE ─── -->
 <main class="page">
 
-  <!-- MARKET OVERVIEW STRIP -->
-  <div class="mkt-strip">
+  <!-- MARKET STRIP -->
+  <div class="market-strip">
     <div class="mkt-cell dn">
-      <div class="mc-sym">SPX · S&amp;P 500</div>
+      <div class="mc-label"><span class="mc-sym">SPX</span><span class="mc-cat">US</span></div>
       <div class="mc-name">標普 500</div>
       <div class="mc-val">7,420</div>
-      <div class="mc-chg dn">▼ 134.2 <span style="opacity:.6">/ 1.78%</span></div>
+      <div class="mc-chg dn">▼ 1.78%</div>
     </div>
     <div class="mkt-cell dn">
-      <div class="mc-sym">NDX · NASDAQ</div>
+      <div class="mc-label"><span class="mc-sym">NDX</span><span class="mc-cat">US</span></div>
       <div class="mc-name">那斯達克</div>
       <div class="mc-val">26,021</div>
-      <div class="mc-chg dn">▼ 661.4 <span style="opacity:.6">/ 2.48%</span></div>
+      <div class="mc-chg dn">▼ 2.48%</div>
     </div>
     <div class="mkt-cell dn">
-      <div class="mc-sym">TWII · 台股</div>
+      <div class="mc-label"><span class="mc-sym">TWII</span><span class="mc-cat">台股</span></div>
       <div class="mc-name">加權指數</div>
       <div class="mc-val">22,384</div>
-      <div class="mc-chg dn">▼ 205.3 <span style="opacity:.6">/ 0.91%</span></div>
+      <div class="mc-chg dn">▼ 0.91%</div>
     </div>
     <div class="mkt-cell up">
-      <div class="mc-sym">BTC · Bitcoin</div>
+      <div class="mc-label"><span class="mc-sym">BTC</span><span class="mc-cat">Crypto</span></div>
       <div class="mc-name">比特幣</div>
       <div class="mc-val">96,480</div>
-      <div class="mc-chg up">▲ 328 <span style="opacity:.6">/ 0.34%</span></div>
+      <div class="mc-chg up">▲ 0.34%</div>
     </div>
     <div class="mkt-cell dn">
-      <div class="mc-sym">VIX · Volatility</div>
+      <div class="mc-label"><span class="mc-sym">VIX</span><span class="mc-cat">Vol</span></div>
       <div class="mc-name">恐慌指數</div>
       <div class="mc-val">18.44</div>
-      <div class="mc-chg dn" style="color:var(--dn)">▲ 2.04 <span style="opacity:.6">/ 12.37%</span></div>
+      <div class="mc-chg dn" style="color:var(--dn)">▲ 12.37%</div>
     </div>
     <div class="mkt-cell dn">
-      <div class="mc-sym">BRENT · Crude</div>
+      <div class="mc-label"><span class="mc-sym">BRENT</span><span class="mc-cat">Cmdty</span></div>
       <div class="mc-name">布蘭特原油</div>
       <div class="mc-val">78.75</div>
-      <div class="mc-chg dn">▼ 0.21 <span style="opacity:.6">/ 0.27%</span></div>
+      <div class="mc-chg dn">▼ 0.27%</div>
     </div>
   </div>
 
-  <!-- DATE ROW -->
-  <div class="date-row">
-    <div class="date-left">
-      <span class="date-str">2026-06-18 · WED</span>
-      <span class="date-sep">|</span>
-      <span class="date-label">今日情報簡報</span>
-      <span class="date-sep">|</span>
-      <span class="date-gen">GEN 01:26 CST</span>
+  <!-- DATE BAR -->
+  <div class="datebar">
+    <div class="datebar-left">
+      <span class="datebar-date">2026-06-18 · WED</span>
+      <span class="datebar-pipe">|</span>
+      <span class="datebar-label">今日情報簡報</span>
+      <span class="datebar-pipe">|</span>
+      <span class="datebar-gen">GEN 01:26 CST</span>
     </div>
     <a href="#" class="btn-archive">ARCHIVE →</a>
   </div>
@@ -591,379 +510,360 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   <!-- MAIN GRID -->
   <div class="main">
 
-    <!-- LEFT: BRIEF FEED -->
+    <!-- ─── LEFT ─── -->
     <div class="left-col">
 
       <!-- SYNTHESIS -->
       <div class="synthesis">
         <div class="syn-head">
-          <span class="syn-title">今日總結分析</span>
-          <span class="syn-date">2026-06-18</span>
+          <span class="syn-kicker">今日總結分析</span>
+          <span class="syn-date">2026-06-18 · PRO</span>
         </div>
         <div class="syn-body">
           <p>FOMC 六月決議維持利率 3.50–3.75% 不變，表面平靜，骨子裡卻是一次政策立場的重大轉折。Warsh 棄權點陣圖、移除「偏向降息」措辭，並明確預告工作組改革——市場迅速重新定價，期貨顯示年底利率升至 3.8%，2027 年中更看到 4.1%，升息可能性正式進入視野。</p>
-          <p>CPI 達 4.2%（2023 年 4 月來最高）、PCE 預測上修至 3.6%，通膨壓力不再是尾端風險。本周美股對此反應劇烈：S&amp;P 500 跌 1.78%、NASDAQ 跌 2.48%、VIX 單日急漲 12.37% 至 18.44，顯示市場開始正視升息定價。</p>
-          <p>台股雖相對抗跌，但三大法人全數賣超合計 251.59 億元，外資連續減持電子權值股，AI 半導體族群短線承壓。整體而言，此輪調整是利率路徑重估的前奏，而非信用事件或景氣反轉，策略上應提高現金比例、關注高殖利率防禦股。</p>
+          <p>CPI 達 4.2%（2023 年 4 月來最高）、PCE 預測上修至 3.6%，通膨壓力不再是尾端風險。本周美股對此反應劇烈：S&amp;P 500 跌 1.78%、NASDAQ 跌 2.48%、VIX 單日急漲 12.37% 至 18.44，顯示市場開始正視升息定價。台股雖相對抗跌，但三大法人全數賣超合計 251.59 億元，策略上應提高現金比例、關注高殖利率防禦股。</p>
         </div>
-        <button class="syn-toggle">EXPAND ▾</button>
+        <a href="#" class="syn-more">展開全文 →</a>
       </div>
 
-      <!-- SECTION: DAILY BRIEF -->
-      <div class="section-label">
-        <span class="sl-text">DAILY BRIEF</span>
-        <span class="sl-count">6 items</span>
-        <div class="sl-line"></div>
-      </div>
-
-      <!-- TRACK TABS -->
-      <div class="track-bar">
-        <button class="track-btn active">ALL</button>
-        <button class="track-btn">MACRO</button>
-        <button class="track-btn">US EQ</button>
-        <button class="track-btn">台股</button>
-        <button class="track-btn">INDUSTRY</button>
-        <button class="track-btn">CRYPTO</button>
-        <button class="track-btn">COMMODITY</button>
+      <!-- FILTER BAR -->
+      <div class="filter-bar">
+        <button class="filter-btn active">ALL</button>
+        <button class="filter-btn">MACRO</button>
+        <button class="filter-btn">US EQ</button>
+        <button class="filter-btn">台股</button>
+        <button class="filter-btn">INDUSTRY</button>
+        <button class="filter-btn">CRYPTO</button>
+        <button class="filter-btn">CMDTY</button>
       </div>
 
       <!-- FEED -->
-      <div class="brief-feed">
+      <div class="feed">
 
-        <div class="feed-divider">MACRO</div>
+        <div class="feed-divider">Macro · 宏觀</div>
 
-        <!-- Row 1: FOMC -->
         <div class="brief-row has-expand open">
-          <div class="br-bar br-bear"></div>
-          <div class="br-body">
+          <div class="br-stripe bear"></div>
+          <div class="br-main">
             <div class="br-meta">
-              <span class="br-badge bb-macro">MACRO</span>
+              <span class="br-cat cat-macro">MACRO</span>
               <span class="br-time">01:26</span>
               <span class="br-sent bear">▼ BEARISH</span>
               <span class="br-src">Bloomberg</span>
             </div>
-            <div class="br-headline">FOMC 維持利率不變，但 Warsh 棄權點陣圖並移除降息偏向措辭</div>
-            <div class="br-body-text">6 月 17 日決議維持聯邦基金利率目標區間 3.50%–3.75% 不變（第四度連續按兵），新版點陣圖中位數上修至 3.8%，9 位官員預期今年至少升息一次。Warsh 明確棄權並推動政策聲明大幅縮短。</div>
+            <div class="br-headline">FOMC 維持利率不變，Warsh 棄權點陣圖並移除降息偏向措辭</div>
+            <div class="br-body">6 月 17 日決議維持聯邦基金利率目標區間 3.50%–3.75% 不變（第四度連續按兵），新版點陣圖中位數上修至 3.8%，9 位官員預期今年至少升息一次。</div>
             <div class="br-expand">
-              <div class="exp-row"><span class="exp-lbl neu">ANALYSIS</span>棄權點陣圖 + 去除前瞻指引，意味 Fed 政策框架本身正在調整。市場過去依賴「dot plot anchor」定錨中性利率，此後難以沿用。</div>
-              <div class="exp-row"><span class="exp-lbl pos">BULL</span>維持不動有助企業短期融資壓力不驟升；改革框架若提升透明度，長期為市場加分。</div>
-              <div class="exp-row"><span class="exp-lbl neg">BEAR</span>期貨重新定價升息機率，成長股估值承壓；全球央行跟進評估升息節奏風險上升。</div>
+              <div class="exp-item"><span class="exp-label neu">ANALYSIS</span>棄權點陣圖 + 去除前瞻指引，意味 Fed 政策框架本身正在調整。市場過去依賴「dot plot anchor」定錨中性利率，此後難以沿用。</div>
+              <div class="exp-item"><span class="exp-label pos">BULL</span>維持不動有助企業短期融資壓力不驟升；改革框架若提升透明度，長期為市場加分。</div>
+              <div class="exp-item"><span class="exp-label neg">BEAR</span>期貨重新定價升息機率，成長股估值承壓；全球央行跟進評估升息節奏風險。</div>
             </div>
-            <div class="br-tickers">
-              <span class="ticker-chip">TLT</span><span class="ticker-chip">QQQ</span><span class="ticker-chip">NVDA</span><span class="ticker-chip">MSFT</span>
+            <div class="br-chips">
+              <span class="chip">TLT</span><span class="chip">QQQ</span><span class="chip">NVDA</span><span class="chip">MSFT</span>
             </div>
           </div>
-          <div class="br-right">
-            <div class="imp-label">IMPACT</div>
-            <div class="imp-bars">
-              <div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar"></div>
+          <div class="br-impact">
+            <div class="impact-lbl">IMPACT</div>
+            <div class="impact-chart">
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
             </div>
           </div>
         </div>
 
-        <!-- Row 2: CPI -->
         <div class="brief-row">
-          <div class="br-bar br-bear"></div>
-          <div class="br-body">
+          <div class="br-stripe bear"></div>
+          <div class="br-main">
             <div class="br-meta">
-              <span class="br-badge bb-macro">MACRO</span>
+              <span class="br-cat cat-macro">MACRO</span>
               <span class="br-time">06:15</span>
               <span class="br-sent bear">▼ BEARISH</span>
             </div>
             <div class="br-headline">美國 5 月 CPI 年增 4.2%，創 2023 年 4 月以來新高</div>
-            <div class="br-body-text">核心 CPI 月增 0.3%，住房、服務通膨黏性仍強。PCE 預測同步上修至 3.6%，Fed 升息預期壓力明顯上升。</div>
-            <div class="br-tickers"><span class="ticker-chip">TLT</span><span class="ticker-chip">DXY</span><span class="ticker-chip">GLD</span></div>
+            <div class="br-body">核心 CPI 月增 0.3%，住房、服務通膨黏性仍強。PCE 預測同步上修至 3.6%，Fed 升息預期壓力明顯上升。</div>
+            <div class="br-chips"><span class="chip">TLT</span><span class="chip">DXY</span><span class="chip">GLD</span></div>
           </div>
-          <div class="br-right">
-            <div class="imp-label">IMPACT</div>
-            <div class="imp-bars">
-              <div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar e"></div>
+          <div class="br-impact">
+            <div class="impact-lbl">IMPACT</div>
+            <div class="impact-chart">
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar"></div>
             </div>
           </div>
         </div>
 
-        <div class="feed-divider">US EQUITY</div>
+        <div class="feed-divider">US Equity · 美股</div>
 
-        <!-- Row 3: NASDAQ -->
         <div class="brief-row">
-          <div class="br-bar br-bear"></div>
-          <div class="br-body">
+          <div class="br-stripe bear"></div>
+          <div class="br-main">
             <div class="br-meta">
-              <span class="br-badge bb-us">US EQ</span>
+              <span class="br-cat cat-us">US EQ</span>
               <span class="br-time">08:10</span>
               <span class="br-sent bear">▼ BEARISH</span>
               <span class="br-src">Reuters</span>
             </div>
             <div class="br-headline">NASDAQ 重挫 2.48%，VIX 單日急漲 12.37% 至 18.44</div>
-            <div class="br-body-text">S&amp;P 500 跌 1.78% 至 7,420，科技、通訊服務領跌。市場消化升息預期重估，Broadcom 等半導體股拖累指數。</div>
-            <div class="br-tickers"><span class="ticker-chip">QQQ</span><span class="ticker-chip">NVDA</span><span class="ticker-chip">AVGO</span><span class="ticker-chip">META</span></div>
+            <div class="br-body">S&amp;P 500 跌 1.78% 至 7,420，科技、通訊服務領跌。市場消化升息預期重估，Broadcom 等半導體股拖累指數。</div>
+            <div class="br-chips"><span class="chip">QQQ</span><span class="chip">NVDA</span><span class="chip">AVGO</span><span class="chip">META</span></div>
           </div>
-          <div class="br-right">
-            <div class="imp-label">IMPACT</div>
-            <div class="imp-bars">
-              <div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar e"></div>
+          <div class="br-impact">
+            <div class="impact-lbl">IMPACT</div>
+            <div class="impact-chart">
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar"></div>
             </div>
           </div>
         </div>
 
-        <!-- Row 4: Energy -->
         <div class="brief-row">
-          <div class="br-bar br-bull"></div>
-          <div class="br-body">
+          <div class="br-stripe bull"></div>
+          <div class="br-main">
             <div class="br-meta">
-              <span class="br-badge bb-us">US EQ</span>
+              <span class="br-cat cat-us">US EQ</span>
               <span class="br-time">09:45</span>
               <span class="br-sent bull">▲ BULLISH</span>
             </div>
             <div class="br-headline">能源板塊今年漲幅 22%，ETF 淨流入超 307 億美元居冠</div>
-            <div class="br-body-text">在通膨壓力與升息背景下，能源股作為通膨對沖受到資金青睞。Exxon、Caterpillar 受惠油價上漲與 AI 資料中心建設需求。</div>
-            <div class="br-tickers"><span class="ticker-chip">XLE</span><span class="ticker-chip">XOM</span><span class="ticker-chip">CAT</span></div>
+            <div class="br-body">在通膨壓力與升息背景下，能源股作為通膨對沖受到資金青睞。Exxon、Caterpillar 受惠油價上漲與 AI 資料中心建設需求。</div>
+            <div class="br-chips"><span class="chip">XLE</span><span class="chip">XOM</span><span class="chip">CAT</span></div>
           </div>
-          <div class="br-right">
-            <div class="imp-label">IMPACT</div>
-            <div class="imp-bars">
-              <div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar e"></div><div class="imp-bar e"></div>
+          <div class="br-impact">
+            <div class="impact-lbl">IMPACT</div>
+            <div class="impact-chart">
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar"></div>
+              <div class="impact-bar"></div>
             </div>
           </div>
         </div>
 
-        <div class="feed-divider">台股 TAIWAN</div>
+        <div class="feed-divider">Taiwan · 台股</div>
 
-        <!-- Row 5: TW -->
         <div class="brief-row">
-          <div class="br-bar br-bear"></div>
-          <div class="br-body">
+          <div class="br-stripe bear"></div>
+          <div class="br-main">
             <div class="br-meta">
-              <span class="br-badge bb-tw">台股</span>
+              <span class="br-cat cat-tw">台股</span>
               <span class="br-time">16:30</span>
               <span class="br-sent bear">▼ BEARISH</span>
             </div>
             <div class="br-headline">三大法人合計賣超 251.59 億元，外資單日賣超 206.84 億</div>
-            <div class="br-body-text">外資、投信、自營商全數賣超，AI 半導體族群集中承壓。台積電短線面臨 FOMC 不確定性。鴻海 AI 伺服器能見度仍維持高位提供底部支撐。</div>
-            <div class="br-tickers"><span class="ticker-chip">2330</span><span class="ticker-chip">2317</span><span class="ticker-chip">2454</span></div>
+            <div class="br-body">外資、投信、自營商全數賣超，AI 半導體族群集中承壓。台積電短線面臨 FOMC 不確定性，鴻海 AI 伺服器能見度仍維持高位提供底部支撐。</div>
+            <div class="br-chips"><span class="chip">2330</span><span class="chip">2317</span><span class="chip">2454</span></div>
           </div>
-          <div class="br-right">
-            <div class="imp-label">IMPACT</div>
-            <div class="imp-bars">
-              <div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar e"></div><div class="imp-bar e"></div>
+          <div class="br-impact">
+            <div class="impact-lbl">IMPACT</div>
+            <div class="impact-chart">
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar"></div>
+              <div class="impact-bar"></div>
             </div>
           </div>
         </div>
 
-        <div class="feed-divider">INDUSTRY</div>
+        <div class="feed-divider">Industry · 產業</div>
 
-        <!-- Row 6: AI Capex -->
         <div class="brief-row">
-          <div class="br-bar br-bull"></div>
-          <div class="br-body">
+          <div class="br-stripe bull"></div>
+          <div class="br-main">
             <div class="br-meta">
-              <span class="br-badge bb-industry">INDUSTRY</span>
+              <span class="br-cat cat-industry">INDUSTRY</span>
               <span class="br-time">10:20</span>
               <span class="br-sent bull">▲ BULLISH</span>
             </div>
             <div class="br-headline">超大型業者 2026 AI Capex 年增 70%，全年合計估 6,000 億美元</div>
-            <div class="br-body-text">Amazon 200B、Alphabet 175–185B、Meta 115–135B、Microsoft 120B+，HBM 供應鏈 2026–2027 年已預訂一空。半導體整體產業收入估破 1 兆美元。</div>
-            <div class="br-tickers"><span class="ticker-chip">NVDA</span><span class="ticker-chip">TSM</span><span class="ticker-chip">AMZN</span><span class="ticker-chip">GOOGL</span></div>
+            <div class="br-body">Amazon 200B、Alphabet 175–185B、Meta 115–135B、Microsoft 120B+，HBM 供應鏈 2026–2027 年已預訂一空。半導體整體產業收入估破 1 兆美元。</div>
+            <div class="br-chips"><span class="chip">NVDA</span><span class="chip">TSM</span><span class="chip">AMZN</span><span class="chip">GOOGL</span></div>
           </div>
-          <div class="br-right">
-            <div class="imp-label">IMPACT</div>
-            <div class="imp-bars">
-              <div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar"></div><div class="imp-bar e"></div>
+          <div class="br-impact">
+            <div class="impact-lbl">IMPACT</div>
+            <div class="impact-chart">
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar filled"></div>
+              <div class="impact-bar"></div>
             </div>
           </div>
         </div>
 
-      </div><!-- /brief-feed -->
+      </div><!-- /feed -->
 
     </div><!-- /left-col -->
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
+    <!-- ─── RIGHT SIDEBAR ─── -->
+    <div class="right-col">
 
-      <!-- RISK MATRIX -->
-      <div class="panel">
-        <div class="panel-head">
-          <span class="panel-title">RISK MATRIX</span>
-          <span class="panel-badge pb-high">HIGH RISK</span>
-        </div>
-        <div class="panel-body">
-          <div class="risk-row">
-            <div class="rr-left"><div class="rr-dot" style="background:var(--dn)"></div><span class="rr-name">利率路徑</span></div>
-            <span class="rr-val" style="color:var(--dn)">↑ 升息預期</span>
-          </div>
-          <div class="risk-row">
-            <div class="rr-left"><div class="rr-dot" style="background:var(--warn)"></div><span class="rr-name">科技估值</span></div>
-            <span class="rr-val" style="color:var(--warn)">→ 承壓整理</span>
-          </div>
-          <div class="risk-row">
-            <div class="rr-left"><div class="rr-dot" style="background:var(--dn)"></div><span class="rr-name">通膨壓力</span></div>
-            <span class="rr-val" style="color:var(--dn)">↑ CPI 4.2%</span>
-          </div>
-          <div class="risk-row">
-            <div class="rr-left"><div class="rr-dot" style="background:var(--up)"></div><span class="rr-name">AI 資本支出</span></div>
-            <span class="rr-val" style="color:var(--up)">↑ 能見度高</span>
-          </div>
-          <div class="risk-row">
-            <div class="rr-left"><div class="rr-dot" style="background:var(--warn)"></div><span class="rr-name">台股外資</span></div>
-            <span class="rr-val" style="color:var(--warn)">↓ 持續流出</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- SENTIMENT -->
-      <div class="panel" style="margin-bottom:12px;">
-        <div class="panel-head"><span class="panel-title">SENTIMENT DATA</span></div>
+      <!-- Sentiment -->
+      <div class="side-section">
+        <div class="side-title">SENTIMENT DATA</div>
         <div class="sent-grid">
           <div class="sent-cell">
-            <div class="sc-label">FEAR &amp; GREED</div>
-            <div class="sc-val sc-fear">15</div>
-            <div class="sc-sub">極度恐懼 ▼7</div>
+            <div class="sent-cell-label">FEAR &amp; GREED</div>
+            <div class="sent-cell-val val-fear">15</div>
+            <div class="sent-cell-sub">極度恐懼 ▼7</div>
           </div>
           <div class="sent-cell">
-            <div class="sc-label">VIX</div>
-            <div class="sc-val sc-red">18.44</div>
-            <div class="sc-sub">+12.37%</div>
+            <div class="sent-cell-label">VIX</div>
+            <div class="sent-cell-val val-dn">18.44</div>
+            <div class="sent-cell-sub">+12.37%</div>
           </div>
           <div class="sent-cell">
-            <div class="sc-label">US 10Y YIELD</div>
-            <div class="sc-val" style="font-size:16px;">4.55%</div>
-            <div class="sc-sub">2025/2 來最高</div>
+            <div class="sent-cell-label">US 10Y</div>
+            <div class="sent-cell-val" style="font-size:18px">4.55%</div>
+            <div class="sent-cell-sub">2025/2 來最高</div>
           </div>
           <div class="sent-cell">
-            <div class="sc-label">BTC ETF FLOW</div>
-            <div class="sc-val sc-green" style="font-size:16px;">+8.4億</div>
-            <div class="sc-sub">現貨 ETF 淨流入</div>
+            <div class="sent-cell-label">BTC ETF</div>
+            <div class="sent-cell-val val-up" style="font-size:18px">+8.4億</div>
+            <div class="sent-cell-sub">現貨 ETF 淨流入</div>
           </div>
         </div>
       </div>
 
-      <!-- CALENDAR -->
-      <div class="panel">
-        <div class="panel-head">
-          <span class="panel-title">MARKET CALENDAR</span>
-          <a href="#" style="font-family:var(--font-data);font-size:9px;color:var(--sky);letter-spacing:.06em;">ALL →</a>
+      <!-- Risk Matrix -->
+      <div class="side-section">
+        <div class="side-title">RISK MATRIX <span style="color:var(--dn)">HIGH</span></div>
+        <div class="risk-row">
+          <div class="risk-left"><div class="risk-dot" style="background:var(--dn)"></div><span class="risk-name">利率路徑</span></div>
+          <span class="risk-val" style="color:var(--dn)">↑ 升息預期</span>
         </div>
-        <div class="panel-body">
-
-          <div class="cal-item">
-            <div class="cal-date-col"><div class="cal-day">18</div><div class="cal-mon">JUN</div></div>
-            <div class="cal-info">
-              <div class="cal-type">US · FED</div>
-              <div class="cal-name">Warsh 國會聽證（FOMC 後首次）</div>
-            </div>
-          </div>
-
-          <div class="cal-item">
-            <div class="cal-date-col"><div class="cal-day">19</div><div class="cal-mon">JUN</div></div>
-            <div class="cal-info">
-              <div class="cal-type">US · DATA</div>
-              <div class="cal-name">美國 5 月零售銷售</div>
-              <div class="econ-strip">
-                <div class="es-col"><div class="es-lbl">PREV</div><div class="es-val">+0.5%</div></div>
-                <div class="es-col"><div class="es-lbl">EST</div><div class="es-val">+0.3%</div></div>
-                <div class="es-col"><div class="es-lbl">ACT</div><div class="es-val es-tbd">TBD</div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cal-item">
-            <div class="cal-date-col"><div class="cal-day">25</div><div class="cal-mon">JUN</div></div>
-            <div class="cal-info">
-              <div class="cal-type">TW · 法說</div>
-              <div class="cal-name">鴻海 AI 伺服器業績說明會</div>
-            </div>
-          </div>
-
-          <div class="cal-item">
-            <div class="cal-date-col"><div class="cal-day">30</div><div class="cal-mon">JUN</div></div>
-            <div class="cal-info">
-              <div class="cal-type">US · DATA</div>
-              <div class="cal-name">美國 5 月 PCE 通膨</div>
-              <div class="econ-strip">
-                <div class="es-col"><div class="es-lbl">PREV</div><div class="es-val">+3.4%</div></div>
-                <div class="es-col"><div class="es-lbl">EST</div><div class="es-val">+3.6%</div></div>
-                <div class="es-col"><div class="es-lbl">ACT</div><div class="es-val es-tbd">TBD</div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cal-item">
-            <div class="cal-date-col"><div class="cal-day">9</div><div class="cal-mon">JUL</div></div>
-            <div class="cal-info">
-              <div class="cal-type">US · DATA</div>
-              <div class="cal-name">美國 6 月 CPI 公布</div>
-            </div>
-          </div>
-
+        <div class="risk-row">
+          <div class="risk-left"><div class="risk-dot" style="background:#d97706"></div><span class="risk-name">科技估值</span></div>
+          <span class="risk-val" style="color:#d97706">→ 承壓整理</span>
+        </div>
+        <div class="risk-row">
+          <div class="risk-left"><div class="risk-dot" style="background:var(--dn)"></div><span class="risk-name">通膨壓力</span></div>
+          <span class="risk-val" style="color:var(--dn)">↑ CPI 4.2%</span>
+        </div>
+        <div class="risk-row">
+          <div class="risk-left"><div class="risk-dot" style="background:var(--up)"></div><span class="risk-name">AI 資本支出</span></div>
+          <span class="risk-val" style="color:var(--up)">↑ 能見度高</span>
+        </div>
+        <div class="risk-row">
+          <div class="risk-left"><div class="risk-dot" style="background:#d97706"></div><span class="risk-name">台股外資</span></div>
+          <span class="risk-val" style="color:#d97706">↓ 持續流出</span>
         </div>
       </div>
 
-      <!-- KEY PERSONS -->
-      <div class="panel">
-        <div class="panel-head"><span class="panel-title">KEY PEOPLE</span></div>
-        <div class="panel-body">
-          <div class="person-row">
-            <div class="p-initial">KW</div>
-            <div class="p-info">
-              <div class="p-name">Kevin Warsh</div>
-              <div class="p-title">Fed 主席</div>
-              <div class="p-note">棄權點陣圖，推動政策聲明大幅縮短，成立多個特別工作組啟動 Fed 系統性改革。</div>
+      <!-- Calendar -->
+      <div class="side-section">
+        <div class="side-title">MARKET CALENDAR <a href="#">全部 →</a></div>
+        <div class="cal-item">
+          <div class="cal-date"><div class="cal-d">18</div><div class="cal-m">JUN</div></div>
+          <div class="cal-info">
+            <div class="cal-type">US · FED</div>
+            <div class="cal-name">Warsh 國會聽證（FOMC 後首次）</div>
+          </div>
+        </div>
+        <div class="cal-item">
+          <div class="cal-date"><div class="cal-d">19</div><div class="cal-m">JUN</div></div>
+          <div class="cal-info">
+            <div class="cal-type">US · DATA</div>
+            <div class="cal-name">美國 5 月零售銷售</div>
+            <div class="econ-strip">
+              <div class="es-col"><div class="es-lbl">PREV</div><div class="es-val">+0.5%</div></div>
+              <div class="es-col"><div class="es-lbl">EST</div><div class="es-val">+0.3%</div></div>
+              <div class="es-col"><div class="es-lbl">ACT</div><div class="es-val tbd">TBD</div></div>
             </div>
           </div>
-          <div class="person-row">
-            <div class="p-initial">JH</div>
-            <div class="p-info">
-              <div class="p-name">Jensen Huang</div>
-              <div class="p-title">NVIDIA CEO</div>
-              <div class="p-note">Blackwell 下半年出貨提速，多家投行上調 NVDA 目標價，營收斜率陡於六週前共識。</div>
-            </div>
+        </div>
+        <div class="cal-item">
+          <div class="cal-date"><div class="cal-d">25</div><div class="cal-m">JUN</div></div>
+          <div class="cal-info">
+            <div class="cal-type">TW · 法說</div>
+            <div class="cal-name">鴻海 AI 伺服器業績說明會</div>
           </div>
-          <div class="person-row">
-            <div class="p-initial">魏哲</div>
-            <div class="p-info">
-              <div class="p-name">魏哲家</div>
-              <div class="p-title">台積電 CEO</div>
-              <div class="p-note">Q1 法說確認全年美元營收成長超 30%，AI HPC 佔比 61%，資本支出 520–560 億維持。</div>
+        </div>
+        <div class="cal-item">
+          <div class="cal-date"><div class="cal-d">30</div><div class="cal-m">JUN</div></div>
+          <div class="cal-info">
+            <div class="cal-type">US · DATA</div>
+            <div class="cal-name">美國 5 月 PCE 通膨</div>
+            <div class="econ-strip">
+              <div class="es-col"><div class="es-lbl">PREV</div><div class="es-val">+3.4%</div></div>
+              <div class="es-col"><div class="es-lbl">EST</div><div class="es-val">+3.6%</div></div>
+              <div class="es-col"><div class="es-lbl">ACT</div><div class="es-val tbd">TBD</div></div>
             </div>
           </div>
         </div>
       </div>
 
-    </div><!-- /sidebar -->
+      <!-- Key People -->
+      <div class="side-section">
+        <div class="side-title">KEY PEOPLE</div>
+        <div class="person-row">
+          <div class="person-initial">KW</div>
+          <div class="person-info">
+            <div class="person-name">Kevin Warsh</div>
+            <div class="person-title">Fed 主席</div>
+            <div class="person-note">棄權點陣圖，推動政策聲明大幅縮短，成立多個特別工作組啟動 Fed 系統性改革。</div>
+          </div>
+        </div>
+        <div class="person-row">
+          <div class="person-initial">JH</div>
+          <div class="person-info">
+            <div class="person-name">Jensen Huang</div>
+            <div class="person-title">NVIDIA CEO</div>
+            <div class="person-note">Blackwell 下半年出貨提速，多家投行上調 NVDA 目標價，營收斜率陡於六週前共識。</div>
+          </div>
+        </div>
+        <div class="person-row">
+          <div class="person-initial">魏哲</div>
+          <div class="person-info">
+            <div class="person-name">魏哲家</div>
+            <div class="person-title">台積電 CEO</div>
+            <div class="person-note">Q1 法說確認全年美元營收成長超 30%，AI HPC 佔比 61%，資本支出 520–560 億維持。</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /right-col -->
   </div><!-- /main -->
 
   <div class="footer">
-    <span class="ft-logo">PROJECT X · INTELLIGENCE</span>
-    <span class="ft-note">資訊僅供參考，不構成投資建議 · 台北時間基準</span>
+    <span class="footer-logo">PROJECT X · INTELLIGENCE</span>
+    <span class="footer-note">資訊僅供參考，不構成投資建議 · 台北時間基準</span>
   </div>
 
 </main>
 
-<div class="demo-tag">DARK DEMO</div>
+<div class="demo-label">DEMO</div>
 
 <script>
-// clock
 function tick() {
   const el = document.getElementById('demo-clock');
   if (!el) return;
-  const tpe = new Intl.DateTimeFormat('en-US', {
+  el.textContent = new Intl.DateTimeFormat('en-US', {
     timeZone: 'Asia/Taipei', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
   }).format(new Date());
-  el.textContent = tpe;
 }
 tick(); setInterval(tick, 1000);
 
-// track tabs
-document.querySelectorAll('.track-btn').forEach(btn => {
+document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
   });
 });
 
-// expand rows
 document.querySelectorAll('.brief-row.has-expand').forEach(row => {
   row.addEventListener('click', e => {
-    if (e.target.closest('.ticker-chip')) return;
+    if (e.target.closest('.chip')) return;
     row.classList.toggle('open');
   });
 });
