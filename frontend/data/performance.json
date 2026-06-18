@@ -1,81 +1,202 @@
 {
-  "updated": "2026-06-17",
+  "updated": "2026-06-18",
   "predictions": {
-    "total": 168,
-    "hit": 17,
-    "partial": 22,
-    "miss": 20,
-    "pending": 109,
-    "resolved": 59,
-    "hit_rate": 28.8,
-    "hit_rate_weighted": 47.5,
+    "total": 173,
+    "hit": 33,
+    "partial": 27,
+    "miss": 34,
+    "pending": 79,
+    "resolved": 94,
+    "hit_rate_weighted": 49.5,
     "series": [
       {
         "date": "2026-05-20",
         "rate": 50,
-        "n": 7
+        "n": 12
       },
       {
         "date": "2026-05-25",
-        "rate": 37.5,
-        "n": 16
+        "rate": 40.5,
+        "n": 21
       },
       {
         "date": "2026-05-26",
-        "rate": 39.3,
-        "n": 28
+        "rate": 40.9,
+        "n": 33
       },
       {
         "date": "2026-05-27",
-        "rate": 41.5,
-        "n": 41
-      },
-      {
-        "date": "2026-05-28",
-        "rate": 40,
-        "n": 45
-      },
-      {
-        "date": "2026-05-29",
-        "rate": 40.4,
-        "n": 47
-      },
-      {
-        "date": "2026-06-01",
-        "rate": 41.8,
-        "n": 49
-      },
-      {
-        "date": "2026-06-02",
-        "rate": 44.1,
+        "rate": 45.1,
         "n": 51
       },
       {
+        "date": "2026-05-28",
+        "rate": 44.1,
+        "n": 59
+      },
+      {
+        "date": "2026-05-29",
+        "rate": 44.9,
+        "n": 69
+      },
+      {
+        "date": "2026-06-01",
+        "rate": 46.3,
+        "n": 82
+      },
+      {
+        "date": "2026-06-02",
+        "rate": 47.6,
+        "n": 84
+      },
+      {
         "date": "2026-06-03",
-        "rate": 46.2,
-        "n": 53
+        "rate": 48.8,
+        "n": 86
       },
       {
         "date": "2026-06-10",
-        "rate": 47.4,
-        "n": 57
+        "rate": 49.4,
+        "n": 90
       },
       {
         "date": "2026-06-11",
-        "rate": 47.5,
-        "n": 59
+        "rate": 49.5,
+        "n": 92
+      },
+      {
+        "date": "2026-06-17",
+        "rate": 49.5,
+        "n": 94
       }
     ]
   },
   "opportunities": {
-    "tracked": 149,
-    "evaluated7": 96,
-    "avg_r7": -1.06,
-    "win7": 41.7,
-    "evaluated30": 4,
-    "avg_r30": 8.18,
-    "win30": 75,
+    "tracked": 159,
+    "evaluated7": 105,
+    "avg_r7": -0.43,
+    "win7": 45.7,
+    "evaluated30": 9,
+    "avg_r30": 16.56,
+    "win30": 66.7,
     "items": [
+      {
+        "date": "2026-06-11",
+        "ticker": "BTC",
+        "name": "Bitcoin",
+        "category": "crypto",
+        "r7": 6.76,
+        "r30": null,
+        "thesis": "RSI降至25.75為深度技術性超賣；極度恐懼指數12觸及歷史低位，市場悲觀已充分甚至過度定價；多空比2.04顯示多頭人",
+        "target": "$72,000（+16%）",
+        "entry": 61449.2891,
+        "exit7": 65600.6406,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-11",
+        "ticker": "ETH",
+        "name": "Ethereum",
+        "category": "crypto",
+        "r7": 10.51,
+        "r30": null,
+        "thesis": "與BTC同步超賣但市場注意力高度集中BTC，ETH被相對忽視；鏈上基本面更具防守性；極度恐懼底部ETH歷史反彈彈性往往優",
+        "target": "$1,900（+16%）",
+        "entry": 1620.1377,
+        "exit7": 1790.3982,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-11",
+        "ticker": "2308",
+        "name": "台達電",
+        "category": "tw",
+        "r7": 1.36,
+        "r30": null,
+        "thesis": "單日暴跌8.9%為五大權值股跌幅之冠，超大盤3.31%達5.6個百分點，屬情緒性錯殺；AI伺服器電源與散熱基本面完全未變",
+        "target": "NT$2,500（+14%）",
+        "entry": 2200,
+        "exit7": 2230,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-11",
+        "ticker": "2609",
+        "name": "陽明海運",
+        "category": "tw",
+        "r7": 0.79,
+        "r30": null,
+        "thesis": "霍爾木茲海峽宣布關閉推升全球貨櫃航運費率急漲，市場注意力集中科技股殺盤而嚴重低估航運受益邏輯；今日大盤重挫中陽明籌碼穩定",
+        "target": "+30~50%（6週）",
+        "entry": 50.6,
+        "exit7": 51,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-11",
+        "ticker": "2882",
+        "name": "國泰金控",
+        "category": "tw",
+        "r7": 9.61,
+        "r30": null,
+        "thesis": "升息預期重返市場（10月升息機率51%），金融股NIM直接受益；今日大跌中金融板塊相對抗跌，外資賣超集中半導體科技而非金",
+        "target": "+12~18%（含股息）",
+        "entry": 99.9,
+        "exit7": 109.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-11",
+        "ticker": "CVX",
+        "name": "Chevron Corporation",
+        "category": "us",
+        "r7": -5.11,
+        "r30": null,
+        "thesis": "伊朗關閉霍爾木茲海峽+CPI 4.2%三年新高，能源板塊為美股唯一強勢區塊；CVX為最純粹油價貝塔標的；EIA庫存連七降",
+        "target": "油價破$100時CVX +20%",
+        "entry": 189.8,
+        "exit7": 180.11,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-11",
+        "ticker": "INTC",
+        "name": "Intel Corporation",
+        "category": "us",
+        "r7": 9.35,
+        "r30": null,
+        "thesis": "年初至今+250%但升評潮仍在持續，多家此前空頭分析師集體升至Hold/Buy；空頭大量回補創造額外買壓；市場焦點鎖定N",
+        "target": "+15~25%（動能延續）",
+        "entry": 107.04,
+        "exit7": 117.05,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-11",
+        "ticker": "RTX",
+        "name": "Raytheon Technologies（美國防禦板塊）",
+        "category": "sector",
+        "r7": 5.28,
+        "r30": null,
+        "thesis": "美軍對伊朗發動第二輪打擊確認衝突升級，直接拉動導彈系統和防禦採購需求；市場聚焦通膨和科技股殺盤，防禦板塊的直接受益邏輯被",
+        "target": "+15~20%（衝突持續期間）",
+        "entry": 177.41,
+        "exit7": 186.77,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-11",
+        "ticker": "GDX",
+        "name": "VanEck Gold Miners ETF（黃金礦業板塊）",
+        "category": "sector",
+        "r7": 18.2,
+        "r30": null,
+        "thesis": "黃金在2026-06-10因升息擔憂跌3%，但CPI 4.2%+地緣升溫本應是黃金最大利多；市場錯誤定價黃金礦商跌幅往往",
+        "target": "+20~30%（3個月）",
+        "entry": 73.81,
+        "exit7": 87.24,
+        "exit30": null
+      },
       {
         "date": "2026-06-10",
         "ticker": "BTC",
@@ -738,126 +859,22 @@
         "entry": 56.15,
         "exit7": 49.87,
         "exit30": null
-      },
-      {
-        "date": "2026-06-03",
-        "ticker": "STM",
-        "name": "STMicroelectronics",
-        "category": "us",
-        "r7": -5.66,
-        "r30": null,
-        "thesis": "資料中心營收指引從$500M倍增至$1B，市場仍以歐洲類比IC估值，AI基建轉型未被定價",
-        "target": "+20%",
-        "entry": 79.51,
-        "exit7": 75.01,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-03",
-        "ticker": "3034",
-        "name": "聯詠",
-        "category": "tw",
-        "r7": -6.71,
-        "r30": null,
-        "thesis": "驅動IC受惠AI PC換機潮與OLED滲透率提升，市場聚焦先進製程忽略顯示驅動鏈",
-        "target": "+12%",
-        "entry": 507,
-        "exit7": 473,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-03",
-        "ticker": "QCOM",
-        "name": "Qualcomm",
-        "category": "us",
-        "r7": -9.58,
-        "r30": null,
-        "thesis": "NVIDIA進軍ARM PC晶片驗證ARM架構在Windows上行，QCOM Snapdragon X為現有最大ARM ",
-        "target": "+15%",
-        "entry": 240.84,
-        "exit7": 217.77,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-02",
-        "ticker": "2609",
-        "name": "陽明海運",
-        "category": "tw",
-        "r7": -0.73,
-        "r30": null,
-        "thesis": "跨太平洋運價自伊朗戰爭起累漲約1000美元/FEU，旺季附加費將擴散，貨櫃三雄盈餘上修被低估",
-        "target": "65元（+16%）",
-        "entry": 54.9,
-        "exit7": 54.5,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-02",
-        "ticker": "BTC",
-        "name": "Bitcoin",
-        "category": "crypto",
-        "r7": -11.33,
-        "r30": null,
-        "thesis": "Fear&Greed跌至23極度恐懼背離美股貪婪59，RSI約35近超賣，永續持倉顯示風險偏好仍在，反向佈局機會",
-        "target": "75000（+7%）",
-        "entry": 71319.7734,
-        "exit7": 63239.5195,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-02",
-        "ticker": "ORCL",
-        "name": "Oracle",
-        "category": "us",
-        "r7": -13.89,
-        "r30": null,
-        "thesis": "AI雲端訂單動能延續但市場仍視為傳統軟體股估值，與hyperscaler共振6/1大漲9.9%顯示資金輪動進場",
-        "target": "中期+15%",
-        "entry": 248.15,
-        "exit7": 213.68,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-02",
-        "ticker": "3711",
-        "name": "日月光投控",
-        "category": "tw",
-        "r7": -3.99,
-        "r30": null,
-        "thesis": "CoWoS先進封裝產能緊俏卻被市場忽略，AVGO客製AI ASIC放量直接受惠後段封測，估值低於台積電折價過深",
-        "target": "680元（+13%）",
-        "entry": 601,
-        "exit7": 577,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-02",
-        "ticker": "XLE",
-        "name": "美國能源ETF",
-        "category": "sector",
-        "r7": 0.65,
-        "r30": null,
-        "thesis": "Brent94美元但EIA預估Q2庫存日均減850萬桶，市場已price-in Q4回落至89，能源股估值未反映短期供給",
-        "target": "+8-10%",
-        "entry": 57.3,
-        "exit7": 57.67,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-02",
-        "ticker": "SOL",
-        "name": "Solana",
-        "category": "crypto",
-        "r7": -18.22,
-        "r30": null,
-        "thesis": "加密恐慌氛圍下SOL跌幅大於BTC/ETH呈現高Beta超賣，OCC國家信託牌照成主流為公鏈生態提供機構入場路徑",
-        "target": "95美元（+19%）",
-        "entry": 81.087,
-        "exit7": 66.3106,
-        "exit30": null
       }
     ],
     "best": [
+      {
+        "date": "2026-05-19",
+        "ticker": "2327",
+        "name": "國巨",
+        "category": "tw",
+        "r7": 25.55,
+        "r30": 89.62,
+        "thesis": "被動元件三大廠漲價循環確立且AI伺服器供電密度提升帶動規格升級需求",
+        "target": "580-620",
+        "entry": 501,
+        "exit7": 629,
+        "exit30": 950
+      },
       {
         "date": "2026-05-30",
         "ticker": "MRVL",
@@ -872,30 +889,17 @@
         "exit30": null
       },
       {
-        "date": "2026-05-20",
-        "ticker": "2454",
-        "name": "聯發科",
-        "category": "tw",
-        "r7": 34.55,
-        "r30": null,
-        "thesis": "外資大砍台積電時聯發科逆勢漲2.38% 資金輪動至IC設計股跡象明顯",
-        "target": "3500",
-        "entry": 3155,
-        "exit7": 4245,
-        "exit30": null
-      },
-      {
-        "date": "2026-05-15",
-        "ticker": "3008",
-        "name": "大立光",
-        "category": "tw",
-        "r7": 2.07,
-        "r30": 28.23,
-        "thesis": "CPO矽光子商轉元年 NVIDIA定調核心技術 光學龍頭轉型AI基建受惠者 散戶仍視為手機舊經濟股",
-        "target": "$4000-4200",
-        "entry": 3135,
-        "exit7": 3200,
-        "exit30": 4020
+        "date": "2026-05-19",
+        "ticker": "MU",
+        "name": "Micron Technology",
+        "category": "us",
+        "r7": 10.19,
+        "r30": 49.77,
+        "thesis": "Nomura大幅上調記憶體股目標價且Agentic AI將驅動通用記憶體新需求類別",
+        "target": "+30-40%",
+        "entry": 681.54,
+        "exit7": 751,
+        "exit30": 1020.76
       }
     ],
     "worst": [
