@@ -802,7 +802,7 @@ async function loadCalendarData(){
           '<div class="ec-title">'+ev.title+'</div>'+
           (ev.desc?'<div class="ec-desc">'+ev.desc+'</div>':'')+
           (tickers?'<div class="ec-tickers">'+tickers+'</div>':'')+
-          ((ev.type==='data'||ev.type==='econ'||ev.type==='fed')?
+          ((ev.type==='data'||ev.type==='econ'||ev.type==='fed')&&(ev.prev||ev.expect)?
             '<div class="ec-data-row">'+
               '<div class="ec-data-cell"><span class="ec-data-label">前值</span><span class="ec-data-val">'+(ev.prev||'—')+'</span></div>'+
               '<div class="ec-data-cell"><span class="ec-data-label">預期</span><span class="ec-data-val">'+(ev.expect||'—')+'</span></div>'+
@@ -876,7 +876,7 @@ function updateEconDataSidebar(events, todayStr){
 
   var econEvs = events.filter(function(e){
     var t=(e.type||'').toLowerCase();
-    return (t==='data'||t==='econ'||t==='fed') && e.date >= yesterdayStr && e.date <= future14Str;
+    return (t==='data'||t==='econ'||t==='fed') && (e.prev||e.expect) && e.date >= yesterdayStr && e.date <= future14Str;
   });
   econEvs.sort(function(a,b){ return a.date.localeCompare(b.date); });
 

@@ -1162,7 +1162,7 @@ function renderCalendar(calendar) {
   const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
   return calendar.events.slice(0,5).map(e => {
     const d = new Date(e.date || e.start_date || '2026-05-12');
-    const isEcon = e.type==='data'||e.type==='econ'||e.type==='fed';
+    const isEcon = (e.type==='data'||e.type==='econ'||e.type==='fed') && (e.prev||e.expect);
     function extractNum(v){ if(!v) return '—'; const m=v.match(/[+\-]?\d[\d,]*\.?\d*\s*%?(?:\s*[-–~]\s*[+\-]?\d[\d,]*\.?\d*\s*%?)?(?:\s*(?:K|M|B|bps|bp))?/); return (m&&m[0].trim())?m[0].trim():'—'; }
     const dataRow = isEcon
       ? '<div class="ec-data-row">'

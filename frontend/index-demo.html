@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X · 全球決策情報 (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ── DESIGN SYSTEM DEMO ── */
+:root {
+  --navy-950: #070c1a;
+  --navy-900: #0d1630;
+  --navy-800: #152244;
+  --navy-700: #1d2d5a;
+  --navy-600: #1e3a8a;
+  --navy-500: #2563eb;
+  --navy-100: #dbeafe;
+  --navy-50:  #eff6ff;
+
+  --gray-900: #0f172a;
+  --gray-700: #334155;
+  --gray-600: #475569;
+  --gray-500: #64748b;
+  --gray-400: #94a3b8;
+  --gray-300: #cbd5e1;
+  --gray-200: #e2e8f0;
+  --gray-100: #f1f5f9;
+  --gray-50:  #f8fafc;
+  --white:    #ffffff;
+
+  --green-700: #15803d;
+  --green-600: #16a34a;
+  --green-100: #dcfce7;
+  --red-600:   #dc2626;
+  --red-100:   #fee2e2;
+  --amber-700: #b45309;
+  --amber-100: #fef3c7;
+
+  --pro-gold: #c9a84c;
+  --pro-gold-light: #f5e9c8;
+  --pro-gold-dark: #8a6a1f;
+
+  /* ── 改動 1：換字型，更有個性 ── */
+  --font-en: 'Instrument Sans', sans-serif;
+  --font-zh: 'Noto Sans TC', sans-serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
+
+  --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px;
+
+  /* ── 改動 2：帶 navy 色調的陰影，不用純黑 ── */
+  --shadow-sm:  0 1px 3px rgba(13,22,48,0.06), 0 4px 12px rgba(13,22,48,0.04);
+  --shadow-md:  0 4px 16px rgba(13,22,48,0.08), 0 12px 32px rgba(13,22,48,0.05);
+  --shadow-lg:  0 8px 32px rgba(13,22,48,0.12), 0 24px 64px rgba(13,22,48,0.08);
+  --shadow-hero: 0 20px 60px rgba(13,22,48,0.16), 0 40px 100px rgba(13,22,48,0.10);
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+/* ── 改動 3：簡化背景 — 單一漸層 + grain ── */
+body {
+  background:
+    radial-gradient(900px 700px at 85% -10%, rgba(37,99,235,.32), transparent 60%),
+    linear-gradient(160deg, #d9e1ef 0%, #edf0f8 60%, #e4e9f2 100%);
+  background-attachment: fixed;
+  color: var(--gray-900);
+  font-family: var(--font-zh);
+  overflow-x: hidden;
+  position: relative;
+}
+
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+/* ── 改動 4：Grain overlay (SVG noise, 固定，pointer-events none) ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: .08s; }
+.reveal-delay-2 { transition-delay: .16s; }
+.reveal-delay-3 { transition-delay: .24s; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+/* ── TOPBAR ── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; height: 56px;
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,.6);
+  /* ── 改動 5：陰影帶 navy 色調 ── */
+  box-shadow: 0 1px 0 rgba(13,22,48,.06);
+  display: flex; align-items: center; padding: 0 32px; z-index: 100;
+}
+.topbar-logo { display: flex; align-items: center; gap: 10px; flex: 1; }
+.logo-mark {
+  width: 32px; height: 32px; background: var(--navy-700); border-radius: 8px;
+  display: grid; place-items: center;
+  /* ── 改動 6：過渡改為 250ms ease-out ── */
+  transition: transform 250ms ease-out;
+}
+.logo-mark:hover { transform: rotate(45deg) scale(1.05); }
+.logo-main { font-family: var(--font-en); font-size: 13.5px; font-weight: 600; color: var(--navy-800); letter-spacing: .05em; }
+.logo-sub { font-size: 9.5px; color: var(--gray-400); letter-spacing: .08em; font-family: var(--font-en); }
+.topbar-actions { display: flex; align-items: center; gap: 10px; }
+.btn-ghost {
+  padding: 7px 16px; border: 1px solid var(--gray-300); border-radius: var(--r-sm);
+  font-size: 13px; font-weight: 500; color: var(--gray-700); font-family: var(--font-en);
+  transition: all 250ms ease-out; background: var(--white);
+}
+.btn-ghost:hover { border-color: var(--navy-400); color: var(--navy-700); background: var(--navy-50); }
+.btn-primary {
+  padding: 7px 18px; background: var(--navy-700); color: var(--white);
+  border-radius: var(--r-sm); font-size: 13px; font-weight: 500; font-family: var(--font-en);
+  transition: all 250ms ease-out;
+}
+.btn-primary:hover { background: var(--navy-600); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+/* ── HERO ── */
+.hero {
+  padding: 120px 32px 80px;
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 460px; gap: 64px; align-items: center;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--navy-50); border: 1px solid var(--navy-100);
+  border-radius: 20px; padding: 5px 14px; margin-bottom: 24px;
+}
+.eyebrow-dot { width: 6px; height: 6px; background: var(--green-600); border-radius: 50%; animation: pulse 2s infinite; }
+.eyebrow-text { font-size: 11.5px; font-weight: 500; color: var(--navy-600); font-family: var(--font-en); letter-spacing: .04em; }
+
+/* ── 改動 7：標題更大、字距更緊 ── */
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 1.08;
+  color: var(--navy-950);
+  /* 大標題用負字距 */
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.hero-h1-accent { color: var(--navy-600); font-style: italic; }
+.hero-h1-zh {
+  display: block; font-family: var(--font-zh);
+  font-size: 18px; font-weight: 400; color: var(--navy-700);
+  margin-top: 10px; font-style: normal; letter-spacing: .04em;
+}
+.hero-desc {
+  font-size: 15.5px; line-height: 1.75; color: var(--gray-700);
+  margin: 22px 0 34px; font-weight: 400;
+  /* ── 改動 8：段落最大寬度控制 ── */
+  max-width: 52ch;
+}
+.hero-cta { display: flex; align-items: center; gap: 12px; }
+.btn-hero-p {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; background: var(--navy-700); color: var(--white);
+  border-radius: var(--r-md); font-size: 15px; font-weight: 500; font-family: var(--font-en);
+  transition: all 250ms ease-out;
+}
+.btn-hero-p:hover {
+  background: var(--navy-600); transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(30,58,138,.24);
+}
+.btn-hero-p:active { transform: translateY(0) scale(0.98); }
+.hero-cta-link {
+  font-size: 13.5px; font-weight: 500; color: var(--navy-700); font-family: var(--font-zh);
+  cursor: pointer; border-bottom: 1px solid transparent; transition: all 250ms ease-out;
+}
+.hero-cta-link:hover { color: var(--navy-500); border-bottom-color: var(--navy-400); }
+.hero-note { margin-top: 18px; font-size: 12px; color: var(--gray-500); font-family: var(--font-en); display: flex; align-items: center; gap: 6px; }
+.hero-note-check { color: var(--green-600); }
+
+/* ── PREVIEW CARD ── */
+.preview-card {
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,.6);
+  border-radius: 20px; overflow: hidden;
+  /* ── 改動 9：navy 色調陰影，有層次 ── */
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.6) inset,
+    var(--shadow-hero);
+  transition: transform 400ms ease-out, box-shadow 400ms ease-out;
+}
+.preview-card:hover { transform: translateY(-4px); box-shadow: 0 28px 80px rgba(13,22,48,.20), 0 60px 120px rgba(13,22,48,.12); }
+
+.preview-topbar { background: var(--navy-900); padding: 11px 16px; display: flex; align-items: center; gap: 7px; }
+.pc-dot { width: 9px; height: 9px; border-radius: 50%; }
+.pc-title { margin-left: auto; font-family: var(--font-en); font-size: 10px; color: rgba(255,255,255,.3); letter-spacing: .1em; }
+.preview-body { padding: 16px 18px; }
+.pc-date-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.pc-date { font-family: var(--font-en); font-size: 10px; color: var(--gray-400); letter-spacing: .06em; }
+.pc-live { display: flex; align-items: center; gap: 4px; font-family: var(--font-en); font-size: 10px; font-weight: 500; color: var(--green-600); }
+.pc-live-dot { width: 5px; height: 5px; background: var(--green-600); border-radius: 50%; animation: pulse 2s infinite; }
+
+/* ── 改動 10：數字欄位加 tabular-nums ── */
+.pc-tickers { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-bottom: 14px; }
+.pc-ticker {
+  background: var(--gray-50); border-radius: 8px; padding: 8px 10px;
+  /* 移除 border，用背景色區分 */
+}
+.pc-ticker-sym { font-family: var(--font-en); font-size: 9.5px; font-weight: 600; color: var(--gray-500); letter-spacing: .08em; }
+.pc-ticker-val { font-family: var(--font-en); font-size: 15px; font-weight: 600; color: var(--gray-900); margin: 2px 0 1px; font-variant-numeric: tabular-nums; }
+.pc-ticker-chg { font-family: var(--font-en); font-size: 10px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.tc-up { color: var(--green-600); } .tc-dn { color: var(--red-600); }
+
+.pc-section-label { font-size: 10px; font-weight: 600; color: var(--gray-400); letter-spacing: .08em; font-family: var(--font-en); margin-bottom: 8px; }
+.pc-brief-item { display: flex; gap: 8px; align-items: flex-start; padding: 7px 0; border-bottom: 1px solid var(--gray-100); position: relative; }
+.pc-brief-item:last-child { border-bottom: none; }
+.pc-badge { font-family: var(--font-en); font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 3px; flex-shrink: 0; letter-spacing: .04em; margin-top: 1px; }
+.b-mac { background: #eff6ff; color: #1d4ed8; }
+.b-tw  { background: #fdf4ff; color: #7e22ce; }
+.b-us  { background: #f0fdf4; color: #166534; }
+.pc-brief-text { font-size: 11.5px; color: var(--gray-700); line-height: 1.45; font-family: var(--font-zh); }
+
+.pc-brief-item.locked .pc-brief-text {
+  color: transparent;
+  background: linear-gradient(90deg, var(--gray-200) 0%, var(--gray-100) 50%, var(--gray-200) 100%);
+  background-size: 200% 100%; animation: shimmer 1.8s infinite;
+  border-radius: 4px; user-select: none;
+}
+@keyframes shimmer { 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+.pc-lock-icon { position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--gray-400); }
+.pc-fade {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 160px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.96) 100%);
+  display: flex; align-items: flex-end; justify-content: center; padding-bottom: 16px;
+  pointer-events: none; border-radius: 0 0 20px 20px;
+}
+.pc-cta { font-size: 11.5px; color: var(--navy-600); font-weight: 500; font-family: var(--font-en); display: flex; align-items: center; gap: 5px; pointer-events: auto; cursor: pointer; transition: color 200ms; }
+.pc-cta:hover { color: var(--navy-500); }
+
+/* ── FEATURES ── */
+.features { padding: 100px 32px; max-width: 1200px; margin: 0 auto; }
+.section-eyebrow { font-family: var(--font-en); font-size: 11px; font-weight: 600; color: var(--navy-500); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+/* ── 改動 11：section 標題改大、負字距 ── */
+.section-h2 {
+  font-family: var(--font-display);
+  font-size: 42px;
+  color: var(--navy-950);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  margin-bottom: 14px;
+  text-wrap: balance;
+}
+.section-sub { font-size: 15px; color: var(--gray-500); font-weight: 300; max-width: 48ch; }
+
+/* ── 改動 12：非對稱特性格子（打破 3 等分格局）── */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 16px;
+  margin-top: 52px;
+}
+.feat-card {
+  border-radius: var(--r-lg); padding: 28px 28px 32px;
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.55);
+  /* ── 改動 13：navy 色調陰影 ── */
+  box-shadow: var(--shadow-sm);
+  transition: transform 250ms ease-out, box-shadow 250ms ease-out;
+}
+.feat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(255,255,255,.8);
+}
+.feat-card:active { transform: translateY(-1px) scale(0.99); }
+.feat-card.featured {
+  background: var(--navy-900);
+  border-color: rgba(255,255,255,.1);
+  grid-row: span 1;
+}
+.feat-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--navy-50); display: grid; place-items: center;
+  margin-bottom: 20px; color: var(--navy-600);
+}
+.feat-card.featured .feat-icon { background: rgba(255,255,255,.12); color: rgba(255,255,255,.8); }
+.feat-title { font-family: var(--font-zh); font-size: 16px; font-weight: 600; color: var(--navy-900); margin-bottom: 8px; }
+.feat-card.featured .feat-title { color: var(--white); }
+.feat-desc { font-size: 13.5px; color: var(--gray-600); line-height: 1.65; font-weight: 300; }
+.feat-card.featured .feat-desc { color: rgba(255,255,255,.6); }
+.feat-tag {
+  display: inline-block; margin-top: 16px;
+  font-size: 11px; font-weight: 600; font-family: var(--font-en);
+  letter-spacing: .04em; padding: 3px 10px; border-radius: 20px;
+  background: var(--green-100); color: var(--green-700);
+}
+.feat-card.featured .feat-tag { background: rgba(255,255,255,.1); color: rgba(255,255,255,.6); }
+
+/* ── STATS ── */
+.stats { padding: 80px 32px; max-width: 1200px; margin: 0 auto; }
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--gray-200); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.stat-item {
+  background: rgba(255,255,255,.8);
+  backdrop-filter: blur(12px);
+  padding: 32px 28px;
+  text-align: left;
+}
+/* ── 改動 14：統計數字超大，帶 tabular-nums ── */
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--navy-900);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 6px;
+}
+.stat-num em { font-style: italic; color: var(--navy-600); }
+.stat-label { font-size: 13px; color: var(--gray-500); font-weight: 400; }
+
+/* ── TRUST LOGOS ── */
+.trust { padding: 40px 32px 80px; max-width: 1200px; margin: 0 auto; text-align: center; }
+.trust-label { font-family: var(--font-en); font-size: 11px; font-weight: 600; color: var(--gray-400); letter-spacing: .10em; text-transform: uppercase; margin-bottom: 28px; }
+.trust-logos { display: flex; align-items: center; justify-content: center; gap: 36px; flex-wrap: wrap; }
+.trust-logo { font-family: var(--font-en); font-size: 14px; font-weight: 600; color: var(--gray-400); letter-spacing: .04em; opacity: .7; transition: opacity 200ms; }
+.trust-logo:hover { opacity: 1; color: var(--navy-700); }
+
+/* ── CTA SECTION ── */
+.cta-section {
+  padding: 0 32px 120px; max-width: 1200px; margin: 0 auto;
+}
+.cta-card {
+  border-radius: 24px;
+  background: var(--navy-900);
+  padding: 72px 64px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+/* Subtle glow inside the CTA card */
+.cta-card::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,99,235,.4), transparent 65%);
+  pointer-events: none;
+}
+.cta-content { position: relative; z-index: 1; max-width: 560px; }
+.cta-h2 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+.cta-desc { font-size: 15px; color: rgba(255,255,255,.55); line-height: 1.7; margin-bottom: 36px; font-weight: 300; }
+.cta-actions { display: flex; align-items: center; gap: 14px; }
+.btn-cta-primary {
+  padding: 13px 28px; background: var(--white); color: var(--navy-800);
+  border-radius: var(--r-md); font-size: 14.5px; font-weight: 600; font-family: var(--font-en);
+  transition: all 250ms ease-out;
+}
+.btn-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255,255,255,.2); }
+.btn-cta-ghost {
+  padding: 13px 22px; color: rgba(255,255,255,.6);
+  border-radius: var(--r-md); font-size: 14px; font-weight: 500; font-family: var(--font-en);
+  border: 1px solid rgba(255,255,255,.15); transition: all 250ms ease-out;
+}
+.btn-cta-ghost:hover { color: var(--white); border-color: rgba(255,255,255,.35); }
+
+/* ── FOOTER ── */
+.footer { border-top: 1px solid var(--gray-200); padding: 40px 32px; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.footer-logo { font-family: var(--font-en); font-size: 12px; font-weight: 600; color: var(--navy-700); letter-spacing: .06em; }
+.footer-note { font-size: 11.5px; color: var(--gray-400); font-family: var(--font-en); }
+
+/* ── DEMO LABEL ── */
+.demo-banner {
+  position: fixed; bottom: 16px; right: 16px;
+  background: rgba(30,45,90,.92); backdrop-filter: blur(12px);
+  color: white; padding: 8px 16px; border-radius: 20px;
+  font-family: var(--font-en); font-size: 11px; font-weight: 600;
+  letter-spacing: .06em; z-index: 9998;
+  box-shadow: 0 4px 20px rgba(13,22,48,.3);
+}
+
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; gap: 48px; }
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 640px) {
+  .hero { padding: 100px 20px 60px; }
+  .hero-h1 { font-size: 38px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .cta-card { padding: 48px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <div class="logo-mark">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M3 9L9 3L15 9L9 15L3 9Z" stroke="white" stroke-width="1.5" fill="none"/>
+        <path d="M9 5L13 9L9 13L5 9L9 5Z" fill="white" opacity=".4"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-main">PROJECT X</div>
+      <div class="logo-sub">INTELLIGENCE</div>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button class="btn-ghost">登入</button>
+    <button class="btn-primary">免費開始</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<main>
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow reveal">
+      <span class="eyebrow-dot"></span>
+      <span class="eyebrow-text">每日 08:30 更新 · AI 生成</span>
+    </div>
+    <h1 class="hero-h1 reveal reveal-delay-1">
+      Markets speak.<br>
+      <em class="hero-h1-accent">We translate.</em>
+      <span class="hero-h1-zh">每日全球決策情報</span>
+    </h1>
+    <p class="hero-desc reveal reveal-delay-2">
+      整合美股、台股、加密市場即時數據與機構研報，AI 每日生成決策情報。<br>
+      不是新聞，是判斷。
+    </p>
+    <div class="hero-cta reveal reveal-delay-3">
+      <a href="/brief.html" class="btn-hero-p">
+        看今日早報
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
+      <span class="hero-cta-link">了解 Pro 功能 →</span>
+    </div>
+    <p class="hero-note reveal reveal-delay-3">
+      <span class="hero-note-check">✓</span> 免費閱讀每日早報
+      <span style="color:var(--gray-300)">·</span>
+      <span class="hero-note-check">✓</span> 無需信用卡
+    </p>
+  </div>
+
+  <!-- Live Preview Card -->
+  <div style="position:relative">
+    <div class="preview-card reveal reveal-delay-2">
+      <div class="preview-topbar">
+        <span class="pc-dot" style="background:#ef4444"></span>
+        <span class="pc-dot" style="background:#f59e0b"></span>
+        <span class="pc-dot" style="background:#10b981"></span>
+        <span class="pc-title">DAILY.JSON</span>
+      </div>
+      <div class="preview-body" style="position:relative">
+        <div class="pc-date-row">
+          <span class="pc-date">JUN 18, 2026</span>
+          <span class="pc-live"><span class="pc-live-dot"></span>LIVE</span>
+        </div>
+        <div class="pc-tickers">
+          <div class="pc-ticker">
+            <div class="pc-ticker-sym">S&P 500</div>
+            <div class="pc-ticker-val">7,420</div>
+            <div class="pc-ticker-chg tc-dn">▼ 1.78%</div>
+          </div>
+          <div class="pc-ticker">
+            <div class="pc-ticker-sym">TAIEX</div>
+            <div class="pc-ticker-val">43,105</div>
+            <div class="pc-ticker-chg tc-dn">▼ 0.43%</div>
+          </div>
+          <div class="pc-ticker">
+            <div class="pc-ticker-sym">BTC</div>
+            <div class="pc-ticker-val">96.2K</div>
+            <div class="pc-ticker-chg tc-up">▲ 1.12%</div>
+          </div>
+        </div>
+        <div class="pc-section-label">TODAY'S BRIEF</div>
+        <div class="pc-brief-item">
+          <span class="pc-badge b-mac">MACRO</span>
+          <span class="pc-brief-text">Warsh 首場 FOMC 維持利率，點陣圖轉鷹，升息預期重燃</span>
+        </div>
+        <div class="pc-brief-item">
+          <span class="pc-badge b-us">US</span>
+          <span class="pc-brief-text">科技股全線下挫，MSFT -5.2%、NVDA -3.7%，VIX 飆 18.4</span>
+        </div>
+        <div class="pc-brief-item">
+          <span class="pc-badge b-tw">台股</span>
+          <span class="pc-brief-text">外資賣超 207 億，AI 鏈整理，金融股相對抗跌</span>
+        </div>
+        <div class="pc-brief-item locked">
+          <span class="pc-badge b-mac">PRO</span>
+          <span class="pc-brief-text">機構研報最新升評個股與不對稱機會</span>
+          <span class="pc-lock-icon">🔒</span>
+        </div>
+        <div class="pc-fade">
+          <span class="pc-cta">閱讀完整早報 →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats reveal">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num">47<em>%</em></div>
+      <div class="stat-label">加權命中率（AI 預判）</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">168</div>
+      <div class="stat-label">累計追蹤預判</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10<em>+</em></div>
+      <div class="stat-label">每日不對稱機會</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">08<em>:30</em></div>
+      <div class="stat-label">台北時間每日更新</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="reveal">
+    <div class="section-eyebrow">What's inside</div>
+    <h2 class="section-h2">市場判斷<br>不是市場新聞</h2>
+    <p class="section-sub">從海量資料中提煉信號，每天一份、精準到位。</p>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card featured reveal reveal-delay-1">
+      <div class="feat-icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="feat-title">AI 每日早報</div>
+      <div class="feat-desc">整合宏觀、美股、台股、加密市場，由 Claude 生成 2000+ 字全面分析，每日 08:30 台北時間準時更新。</div>
+      <span class="feat-tag">DAILY · FREE</span>
+    </div>
+    <div class="feat-card reveal reveal-delay-2">
+      <div class="feat-icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div class="feat-title">不對稱機會</div>
+      <div class="feat-desc">每日精選 10 個高信心度標的，附帶目標價、觸發條件與風險評估。</div>
+      <span class="feat-tag">PRO</span>
+    </div>
+    <div class="feat-card reveal reveal-delay-3">
+      <div class="feat-icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </div>
+      <div class="feat-title">機構研報追蹤</div>
+      <div class="feat-desc">Goldman、Morgan Stanley 等頂級投行最新評級，每日彙整附來源連結。</div>
+      <span class="feat-tag">PRO</span>
+    </div>
+    <div class="feat-card reveal reveal-delay-2" style="grid-column: 2 / 4;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center">
+        <div>
+          <div class="feat-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/></svg>
+          </div>
+          <div class="feat-title">PulseAI 名家專刊</div>
+          <div class="feat-desc">巴菲特、達利歐、馬克斯等七位名家的 AI 視角，每三日連載，觸發條件加發。</div>
+          <span class="feat-tag">PRO</span>
+        </div>
+        <div style="border-left:1px solid var(--gray-200);padding-left:32px">
+          <div class="feat-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="feat-title">市場日曆</div>
+          <div class="feat-desc">Fed 決議、財報、法說會、IPO 一表掌握，總經數據顯示前值與預期。</div>
+          <span class="feat-tag">FREE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust reveal">
+  <div class="trust-label">Data from</div>
+  <div class="trust-logos">
+    <span class="trust-logo">Bloomberg</span>
+    <span class="trust-logo">Finnhub</span>
+    <span class="trust-logo">CoinGecko</span>
+    <span class="trust-logo">TWSE</span>
+    <span class="trust-logo">Yahoo Finance</span>
+    <span class="trust-logo">Anthropic</span>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal">
+  <div class="cta-card">
+    <div class="cta-content">
+      <h2 class="cta-h2">每天花 5 分鐘，<br><em>讀懂市場在說什麼。</em></h2>
+      <p class="cta-desc">免費訂閱，每日台北時間 08:30 準時出刊。Pro 方案解鎖機構研報、不對稱機會與名家專刊。</p>
+      <div class="cta-actions">
+        <a href="/brief.html" class="btn-cta-primary">看今日早報</a>
+        <button class="btn-cta-ghost">了解 Pro →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <span class="footer-logo">PROJECT X · INTELLIGENCE</span>
+  <span class="footer-note">資訊僅供參考，不構成投資建議 · 台北時間基準</span>
+</footer>
+
+<div class="demo-banner">DEMO — 未部署</div>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
