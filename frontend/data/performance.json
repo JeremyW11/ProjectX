@@ -1,13 +1,13 @@
 {
-  "updated": "2026-06-18",
+  "updated": "2026-06-19",
   "predictions": {
-    "total": 173,
-    "hit": 33,
-    "partial": 27,
-    "miss": 34,
-    "pending": 79,
-    "resolved": 94,
-    "hit_rate_weighted": 49.5,
+    "total": 177,
+    "hit": 46,
+    "partial": 49,
+    "miss": 35,
+    "pending": 47,
+    "resolved": 130,
+    "hit_rate_weighted": 54.2,
     "series": [
       {
         "date": "2026-05-20",
@@ -41,45 +41,190 @@
       },
       {
         "date": "2026-06-01",
-        "rate": 46.3,
-        "n": 82
-      },
-      {
-        "date": "2026-06-02",
-        "rate": 47.6,
-        "n": 84
-      },
-      {
-        "date": "2026-06-03",
-        "rate": 48.8,
-        "n": 86
-      },
-      {
-        "date": "2026-06-10",
-        "rate": 49.4,
+        "rate": 48.3,
         "n": 90
       },
       {
+        "date": "2026-06-02",
+        "rate": 50.5,
+        "n": 101
+      },
+      {
+        "date": "2026-06-03",
+        "rate": 52.7,
+        "n": 112
+      },
+      {
+        "date": "2026-06-04",
+        "rate": 54.2,
+        "n": 119
+      },
+      {
+        "date": "2026-06-08",
+        "rate": 54.6,
+        "n": 120
+      },
+      {
+        "date": "2026-06-10",
+        "rate": 54.8,
+        "n": 124
+      },
+      {
         "date": "2026-06-11",
-        "rate": 49.5,
-        "n": 92
+        "rate": 54.8,
+        "n": 126
       },
       {
         "date": "2026-06-17",
-        "rate": 49.5,
-        "n": 94
+        "rate": 54.7,
+        "n": 128
+      },
+      {
+        "date": "2026-06-18",
+        "rate": 54.2,
+        "n": 130
       }
     ]
   },
   "opportunities": {
-    "tracked": 159,
-    "evaluated7": 105,
-    "avg_r7": -0.43,
-    "win7": 45.7,
-    "evaluated30": 9,
-    "avg_r30": 16.56,
-    "win30": 66.7,
+    "tracked": 169,
+    "evaluated7": 115,
+    "avg_r7": 0.28,
+    "win7": 50.4,
+    "evaluated30": 11,
+    "avg_r30": 15.99,
+    "win30": 63.6,
     "items": [
+      {
+        "date": "2026-06-12",
+        "ticker": "MRVL",
+        "name": "邁威爾科技",
+        "category": "us",
+        "r7": 3.15,
+        "r30": null,
+        "thesis": "2026-06-22 S&P 500季度調整正式納入MRVL，被動基金強制買進$220-270億，主動型基金佈局窗口僅剩",
+        "target": "+12至+15%（至06-22前後）",
+        "entry": 280.71,
+        "exit7": 289.54,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-12",
+        "ticker": "3624",
+        "name": "光頡電子",
+        "category": "tw",
+        "r7": 32.73,
+        "r30": null,
+        "thesis": "薄膜電感為AI伺服器電源管理關鍵被動元件，2026-06-06宣布全年首波漲價10-40%，議價能力確立。台灣中小型被動",
+        "target": "+20至+30%（元件漲價落地毛利率修復）",
+        "entry": 110,
+        "exit7": 146,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-12",
+        "ticker": "LRCX",
+        "name": "科林研發",
+        "category": "us",
+        "r7": 3.22,
+        "r30": null,
+        "thesis": "半導體設備商直接受益AI Capex 70%年增率，設備訂單能見度高於晶片設計股。SIA確認4月全球半導體銷售$1,10",
+        "target": "+18%",
+        "entry": 362.52,
+        "exit7": 374.18,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-12",
+        "ticker": "ETN",
+        "name": "伊頓公司",
+        "category": "us",
+        "r7": 4.06,
+        "r30": null,
+        "thesis": "AI資料中心電力分配基礎建設供應商，2026年超大規模業者AI Capex $4,500億帶動配電、UPS需求爆炸性增長",
+        "target": "+18%",
+        "entry": 393.64,
+        "exit7": 409.64,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-12",
+        "ticker": "AMD",
+        "name": "超微半導體",
+        "category": "us",
+        "r7": 4.92,
+        "r30": null,
+        "thesis": "6/5單日暴跌11%後6/11急彈8%，技術面確認過度拋售修正完成。Intel獲Google 300萬TPU訂單（202",
+        "target": "+20%（跌前高點修復）",
+        "entry": 488.45,
+        "exit7": 512.48,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-12",
+        "ticker": "BTC",
+        "name": "比特幣",
+        "category": "crypto",
+        "r7": 3.21,
+        "r30": null,
+        "thesis": "恐懼貪婪指數12（極度恐懼）歷史上為短線底部訊號；月RSI 35.12技術超賣；$60K支撐強勁。市場定價ETF持續流出",
+        "target": "+15%至$72,800",
+        "entry": 63561.0547,
+        "exit7": 65600.6406,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-12",
+        "ticker": "ETH",
+        "name": "以太坊",
+        "category": "crypto",
+        "r7": 7.06,
+        "r30": null,
+        "thesis": "ETH/BTC比值處歷史相對低位，BTC反彈時ETH通常以2-3倍槓桿跟漲。SOL已先漲3.6%顯示資金開始輪動山寨幣，",
+        "target": "+20%至$2,000",
+        "entry": 1672.2806,
+        "exit7": 1790.3982,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-12",
+        "ticker": "GLD",
+        "name": "SPDR黃金ETF",
+        "category": "sector",
+        "r7": 0.59,
+        "r30": null,
+        "thesis": "黃金創6個月低點，同期CPI年增4.2%三年最高、PPI年增6.5% 2022年底最快；金價與通膨嚴重背離。市場誤將美伊",
+        "target": "+12%（回補6個月高點）",
+        "entry": 386.32,
+        "exit7": 388.6,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-12",
+        "ticker": "3037",
+        "name": "欣興電子",
+        "category": "tw",
+        "r7": 15.69,
+        "r30": null,
+        "thesis": "外資大幅上修欣興2026-2028年光收發器出貨預估（2026-06-12），光收發器ABF載板為AI資料中心800G高",
+        "target": "+15至+20%",
+        "entry": 854,
+        "exit7": 988,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-12",
+        "ticker": "EWY",
+        "name": "iShares韓國ETF",
+        "category": "sector",
+        "r7": 3.09,
+        "r30": null,
+        "thesis": "韓KOSPI單日+8%觸發熔斷（2026-06-12），三星+12%、SK海力士+9%，記憶體缺貨預計延伸至2027年。",
+        "target": "+15%",
+        "entry": 198.94,
+        "exit7": 205.08,
+        "exit30": null
+      },
       {
         "date": "2026-06-11",
         "ticker": "BTC",
@@ -728,136 +873,6 @@
         "target": "+15% 中期",
         "entry": 55.15,
         "exit7": 48.27,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-04",
-        "ticker": "2344",
-        "name": "華邦電",
-        "category": "tw",
-        "r7": -11.83,
-        "r30": null,
-        "thesis": "記憶體缺貨延伸至2027，HBM與利基型DRAM雙旺，市場仍視為次階記憶體股給予折價，未反映WSTS記憶體市場年增3.5",
-        "target": "+18% 中期",
-        "entry": 177.5,
-        "exit7": 156.5,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-04",
-        "ticker": "2382",
-        "name": "廣達",
-        "category": "tw",
-        "r7": -10.07,
-        "r30": null,
-        "thesis": "AI伺服器ODM龍頭，Blackwell與Rubin出貨放量但市場仍以PC代工本益比估值，AI營收佔比超過50%尚未反映",
-        "target": "+15% 中期",
-        "entry": 417,
-        "exit7": 375,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-04",
-        "ticker": "2603",
-        "name": "長榮海運",
-        "category": "tw",
-        "r7": -6.33,
-        "r30": null,
-        "thesis": "荷姆茲擾動帶動運價走高，集裝箱業者燃油成本附加費啟動轉嫁，市場仍以景氣循環低點本益比估值",
-        "target": "+12% 短期",
-        "entry": 237,
-        "exit7": 222,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-04",
-        "ticker": "SOL",
-        "name": "Solana",
-        "category": "crypto",
-        "r7": -9.29,
-        "r30": null,
-        "thesis": "Fear & Greed 12極度恐懼且SOL跌幅居前已超賣，CLARITY Act通過後高速公鏈最受惠，現價對應市值/",
-        "target": "+25% 中期",
-        "entry": 71.6124,
-        "exit7": 64.9621,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-04",
-        "ticker": "XLE",
-        "name": "Energy Select Sector SPDR",
-        "category": "sector",
-        "r7": -2.25,
-        "r30": null,
-        "thesis": "Brent維持97美元但能源股相對油價落後，UAE退出OPEC+與荷姆茲擾動推升地緣溢價，市場仍預期Q4降至89而低估短",
-        "target": "+10% 短期",
-        "entry": 58.71,
-        "exit7": 57.39,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-04",
-        "ticker": "INDA",
-        "name": "iShares MSCI India ETF",
-        "category": "sector",
-        "r7": 0.38,
-        "r30": null,
-        "thesis": "台股市值已超越印度成全球第五，印度遭課10%+強迫勞動關稅但內需與服務業占比高、出口曝險相對亞洲偏低，跌深後估值具吸引力",
-        "target": "+8% 中期",
-        "entry": 47.36,
-        "exit7": 47.54,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-04",
-        "ticker": "3035",
-        "name": "智原",
-        "category": "tw",
-        "r7": -8.37,
-        "r30": null,
-        "thesis": "ASIC設計服務受惠Broadcom AI營收年增106%帶動的客製化晶片浪潮，市場仍以傳統IP本益比估值，未反映ASI",
-        "target": "+18% 中期",
-        "entry": 203,
-        "exit7": 186,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-04",
-        "ticker": "STM",
-        "name": "STMicroelectronics",
-        "category": "us",
-        "r7": -8.02,
-        "r30": null,
-        "thesis": "資料中心SiC與類比晶片供應商，市場仍視為車用與工業景氣股給予折價，未反映其上修資料中心營收目標",
-        "target": "+12% 中期",
-        "entry": 79.71,
-        "exit7": 73.32,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-03",
-        "ticker": "MRVL",
-        "name": "Marvell Technology",
-        "category": "us",
-        "r7": -0.67,
-        "r30": null,
-        "thesis": "客製ASIC受惠hyperscaler自研晶片潮，黃仁勳點名下一兆元候選後市場僅給單日反應，AI光通訊與資料中心連接器業",
-        "target": "+25%",
-        "entry": 290.79,
-        "exit7": 288.85,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-03",
-        "ticker": "HPE",
-        "name": "Hewlett Packard Enterprise",
-        "category": "us",
-        "r7": -11.18,
-        "r30": null,
-        "thesis": "AI伺服器訂單推動全年指引上修，市場仍以傳統硬體本益比評價，未反映Juniper整合後網路+AI機架價值",
-        "target": "+20%",
-        "entry": 56.15,
-        "exit7": 49.87,
         "exit30": null
       }
     ],
