@@ -539,7 +539,7 @@ async function loadPerformance(){
 
   var ledger=buildLedger(O.items||[]);
   if(ledger){
-    html+='<div class="card rv"><div class="card-head"><h2>機會報酬帳目</h2>'
+    html+='<div class="card rv"><div class="card-head"><h2>不對稱風險機會</h2>'
       +'<div class="card-kpis"><span>EVALUATED <b>'+ledger.evaluated.length+'</b></span><span>WIN <b>'+(O.win7!=null?O.win7+'%':'—')+'</b></span><span>AVG <b>'+(O.avg_r7!=null?fmtPct(O.avg_r7):'—')+'</b></span></div></div>'
       +'<div class="desc">依 7 日報酬排序 · 中軸發散條 ±20% 滿格</div>'
       +'<div class="ledger-head"><span>日期</span><span>標的</span><span>市場</span><span style="text-align:center">−20% ⟵ 0 ⟶ +20%</span><span style="text-align:right">7 日報酬</span></div>'
