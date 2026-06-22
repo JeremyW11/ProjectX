@@ -237,7 +237,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
   <a href="/pages/industry.html" class="active">產業</a>
   <a href="/pages/institutional.html">機構研報</a>
   <a href="/pages/calendar.html">市場日曆</a>
-  <a href="/pages/targets.html">會員中心</a>
+  <a href="/pages/targets.html">會員專屬</a>
   <div class="mobile-menu-btns">
     <a href="/pages/login.html" class="btn btn-ghost" style="text-align:center;">登入</a>
     <button class="btn btn-glow">訂閱 Pro</button>
@@ -391,7 +391,7 @@ function checkDataStaleness(dateStr){var today=new Intl.DateTimeFormat('en-CA',{
 
 async function loadData(){
  try{
-  var res=await fetch('../data/daily.json?t='+Date.now());
+  var res=await fetch('../data/daily.json?v='+Math.floor(Date.now()/300000));
   allData=await res.json();
   checkDataStaleness(allData.date);
 

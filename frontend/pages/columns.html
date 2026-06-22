@@ -253,7 +253,7 @@ async function loadColumns(){
   if(!listEl) return;
   var idx={};
   try{
-    var res=await fetch('/data/columns/index.json?t='+Date.now());
+    var res=await fetch('/data/columns/index.json?v='+Math.floor(Date.now()/300000));
     idx=await res.json();
   }catch(e){ idx={}; }
 
@@ -360,7 +360,7 @@ async function toggleIssue(i, forceOpen){
   var data=COL_STATE.issueCache[key];
   if(!data){
     try{
-      var res=await fetch('/data/columns/'+encodeURIComponent(f.persona)+'/'+encodeURIComponent(f.date)+'.json?t='+Date.now());
+      var res=await fetch('/data/columns/'+encodeURIComponent(f.persona)+'/'+encodeURIComponent(f.date)+'.json?v='+Math.floor(Date.now()/300000));
       data=await res.json();
       COL_STATE.issueCache[key]=data;
     }catch(e){ bodyEl.innerHTML='<div class="loading">這期內容載入失敗。</div>'; return; }

@@ -4,8 +4,8 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project X · 會員中心</title>
-<meta property="og:title" content="Project X · 會員中心">
+<title>Project X · 會員專屬</title>
+<meta property="og:title" content="Project X · 會員專屬">
 <meta property="og:description" content="每日 AI 市場簡報，整合美股、台股、加密市場即時數據與機構研報。">
 <meta property="og:image" content="https://projectxbrief.netlify.app/og-image.svg">
 <meta property="og:url" content="https://projectxbrief.netlify.app/">
@@ -271,7 +271,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .cs-dim{font-size:10px;padding:2px 6px;border-radius:3px;font-family:var(--font-en);}
 #stale-banner{display:none;align-items:center;justify-content:center;gap:6px;background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 24px;font-size:12px;color:#92400e;font-family:var(--font-zh);position:fixed;top:56px;left:0;right:0;z-index:99;}
 
-/* ── 會員中心側欄 Hub ── */
+/* ── 會員專屬側欄 Hub ── */
 .hub-layout{display:flex;gap:22px;align-items:flex-start;}
 .hub-side{width:212px;flex-shrink:0;position:sticky;top:72px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:14px 12px;}
 .hub-avatar{display:flex;align-items:center;gap:10px;padding:4px 6px 14px;border-bottom:1px solid var(--gray-100);margin-bottom:10px;}
@@ -405,7 +405,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
   <div class="page-header">
     <div>
-      <h1 class="page-title">會員中心 <span class="page-title-sub">Member Hub</span></h1>
+      <h1 class="page-title">會員專屬 <span class="page-title-sub">Member Hub</span></h1>
       <div class="page-update">個人化看板 · 台北時間基準</div>
     </div>
   </div>
@@ -414,7 +414,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div id="pro-gate-view">
     <div class="pro-gate">
       <div class="pro-gate-icon">✦</div>
-      <h2 class="pro-gate-title">你的專屬<em>會員中心</em></h2>
+      <h2 class="pro-gate-title">你的<em>會員專屬</em>空間</h2>
       <p class="pro-gate-desc">自選標的追蹤、AI 推演沙盤、Morning Brief，Pro 會員專屬看板，每天早上一站掌握所有重要資訊。</p>
 
       <div class="pro-features">
@@ -775,7 +775,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 var _dailyPromise = null;
 function getDaily(){
   if(!_dailyPromise){
-    _dailyPromise = fetch('/data/daily.json?t='+Date.now()).then(function(r){ return r.json(); });
+    _dailyPromise = fetch('/data/daily.json?v='+Math.floor(Date.now()/300000)).then(function(r){ return r.json(); });
   }
   return _dailyPromise;
 }
@@ -1139,7 +1139,7 @@ async function loadConsensusMeter(watchlistItems){
     (m.crypto||[]).forEach(function(s){ dailyData[s.symbol] = s; });
     signals = d1.signals || [];
 
-    var r2 = await fetch('/data/accumulated.json?t='+Date.now());
+    var r2 = await fetch('/data/accumulated.json?v='+Math.floor(Date.now()/300000));
     var d2 = await r2.json();
     accResearch = d2.research || [];
     accEarnings = d2.earnings || [];
@@ -1432,7 +1432,7 @@ async function loadEventTracker(watchlistItems){
     var aiPredictions = d.event_predictions || [];
     var todayStr = d.date || '';
 
-    var res2 = await fetch('/data/accumulated.json?t='+Date.now());
+    var res2 = await fetch('/data/accumulated.json?v='+Math.floor(Date.now()/300000));
     var acc = await res2.json();
     var predHistory = acc.prediction_history || [];
 
@@ -1908,7 +1908,7 @@ async function loadHubStories(){
   if(!listEl) return;
   var stories=[];
   try{
-    var res=await fetch('/data/accumulated.json?t='+Date.now());
+    var res=await fetch('/data/accumulated.json?v='+Math.floor(Date.now()/300000));
     var acc=await res.json();
     stories=Array.isArray(acc.tracked_stories)?acc.tracked_stories:[];
   }catch(e){ stories=[]; }
@@ -1968,7 +1968,7 @@ async function loadHubDateList(){
   var list=document.getElementById('date-list-hub');
   if(!list) return;
   try{
-    var res=await fetch('/data/history-index.json?t='+Date.now());
+    var res=await fetch('/data/history-index.json?v='+Math.floor(Date.now()/300000));
     if(!res.ok) throw new Error('index not found');
     var dates=await res.json();
     list.innerHTML=dates.map(function(d){

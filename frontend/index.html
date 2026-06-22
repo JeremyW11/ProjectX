@@ -622,7 +622,7 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
 </section>
 <script>
 (function(){
-  fetch('/data/performance.json?t='+Date.now()).then(function(r){return r.json();}).then(function(d){
+  fetch('/data/performance.json?v='+Math.floor(Date.now()/300000)).then(function(r){return r.json();}).then(function(d){
     var P=d.predictions||{},O=d.opportunities||{};
     function set(id,v){var el=document.getElementById(id);if(el&&v!=null)el.textContent=v;}
     if(P.hit_rate_weighted!=null) set('tr-hr',P.hit_rate_weighted.toFixed(1));
@@ -648,7 +648,7 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
     <div class="comparison-header reveal">
       <div class="comparison-eyebrow">FREE vs PRO</div>
       <h2 class="comparison-h2">免費就很完整，Pro 更進一步</h2>
-      <p class="comparison-sub">每日情報、機構研報、市場數據免費看；Pro 解鎖會員中心、名家視角與 AI 功能、全部歷史報告，每月再送 30 點。</p>
+      <p class="comparison-sub">每日情報、機構研報、市場數據免費看；Pro 解鎖會員專屬、名家視角與 AI 功能、全部歷史報告，每月再送 30 點。</p>
     </div>
 
     <p class="comparison-sub reveal" style="margin-top:-8px;margin-bottom:18px;font-size:12.5px;color:var(--gray-400);">示範介面 · 以今日真實情報資料即時呈現</p>
@@ -699,14 +699,14 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
             </div>
           </div>
 
-          <!-- 真正受限：歷史報告 + 會員中心 + AI 功能（皆 Pro 專屬） -->
+          <!-- 真正受限：歷史報告 + 會員專屬 + AI 功能（皆 Pro 專屬） -->
           <div style="display:flex;flex-direction:column;gap:8px">
             <div class="free-locked-section">
               <span class="fls-label"><span data-ico="lock"></span> 歷史報告完整內容</span>
               <button class="fls-lock" onclick="window.location.href='/pages/credits.html'">✦ 升級 Pro</button>
             </div>
             <div class="free-locked-section">
-              <span class="fls-label"><span data-ico="lock"></span> 會員中心：自選看板 / 共識溫度計 / 事件追蹤</span>
+              <span class="fls-label"><span data-ico="lock"></span> 會員專屬：自選看板 / 共識溫度計 / 事件追蹤</span>
               <button class="fls-lock" onclick="window.location.href='/pages/credits.html'">✦ 升級 Pro</button>
             </div>
             <div class="free-locked-section">
@@ -801,9 +801,9 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
           <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="chart"></span><div class="ft-txt"><span class="ft-name">財報 EPS 對比 + 法說會摘要</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="cal"></span><div class="ft-txt"><span class="ft-name">市場日曆</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
-          <tr><td colspan="3" class="ft-group-row">會員中心（Pro 專屬）</td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="target"></span><div class="ft-txt"><span class="ft-name">會員中心</span><span class="ft-desc">自選看板 + 共識溫度計 + 事件追蹤 + 訊號雷達</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="ai"></span><div class="ft-txt"><span class="ft-name">AI 個股分析 + 推演沙盤</span><span class="ft-desc">會員中心內，依點數</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">用訂閱點數</span></td></tr>
+          <tr><td colspan="3" class="ft-group-row">會員專屬（Pro 專屬）</td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="target"></span><div class="ft-txt"><span class="ft-name">會員專屬</span><span class="ft-desc">自選看板 + 共識溫度計 + 事件追蹤 + 訊號雷達</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="ai"></span><div class="ft-txt"><span class="ft-name">AI 個股分析 + 推演沙盤</span><span class="ft-desc">會員專屬內，依點數</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">用訂閱點數</span></td></tr>
           <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="world"></span><div class="ft-txt"><span class="ft-name">全球事件追蹤</span><span class="ft-desc">跨日國際大事時間軸</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">名家視角 + 進階工具（Pro 專屬）</td></tr>
@@ -837,7 +837,7 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
           <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">加密 / 美股 / 台股 即時市場數據</span></li>
           <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">機構研報 + 財報 + 法說會摘要</span></li>
           <li class="plan-feat"><span class="pf-check-free">✓</span><span class="plan-feat-text">市場日曆</span></li>
-          <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">會員中心（自選看板 / 共識溫度計 / 事件追蹤）為 Pro 專屬</span></li>
+          <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">會員專屬（自選看板 / 共識溫度計 / 事件追蹤）為 Pro 專屬</span></li>
           <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">AI 個股分析 / 推演沙盤為 Pro 專屬</span></li>
           <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">名家觀點 / 互動圖表 / 歷史數據為 Pro 專屬</span></li>
           <li class="plan-feat"><span class="pf-lock">○</span><span class="pf-lock-text">歷史報告僅顯示標題與日期</span></li>
@@ -948,7 +948,7 @@ const _sb=window.supabase.createClient('https://eezhmeccakaeiprviqra.supabase.co
 /* real tickers from daily.json */
 async function loadRealTickers(){
   try{
-    const res=await fetch('/data/daily.json?t='+Date.now());
+    const res=await fetch('/data/daily.json?v='+Math.floor(Date.now()/300000));
     const d=await res.json();
     const setTicker=(valId,chgId,val,chg,dir)=>{
       const ve=document.getElementById(valId);
@@ -1033,7 +1033,7 @@ loadRealTickers();
 /* 名家觀點 demo：讀今日真實出刊 */
 async function loadColumnDemo(){
   try{
-    const res=await fetch('/data/columns/index.json?t='+Date.now());
+    const res=await fetch('/data/columns/index.json?v='+Math.floor(Date.now()/300000));
     const c=await res.json();
     const f=(c.feed||[])[0];
     if(!f)return;

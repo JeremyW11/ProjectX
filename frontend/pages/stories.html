@@ -214,7 +214,7 @@ async function loadStories(){
   if(!listEl) return;
   var stories=[];
   try{
-    var res=await fetch('/data/accumulated.json?t='+Date.now());
+    var res=await fetch('/data/accumulated.json?v='+Math.floor(Date.now()/300000));
     var acc=await res.json();
     stories=Array.isArray(acc.tracked_stories)?acc.tracked_stories:[];
   }catch(e){ stories=[]; if(window.PX_showDataError)window.PX_showDataError('⚠ 追蹤資料載入失敗，請稍後重新整理。'); }

@@ -9,7 +9,7 @@
     {key:'performance', href:'/pages/performance.html',   label:'歷史數據'},
     {key:'columns',  href:'/pages/columns.html',           label:'名家觀點'},
     {key:'chart',    href:'/pages/chart.html',             label:'互動圖表'},
-    {key:'member',   href:'/pages/targets.html',          label:'會員中心'},
+    {key:'member',   href:'/pages/targets.html',          label:'會員專屬'},
     {key:'archive',  href:'/pages/archive.html',          label:'歷史報告'},
     {key:'credits',  href:'/pages/credits.html',          label:'方案 / 點數'},
   ];

@@ -191,6 +191,7 @@ tr:last-child td{border-bottom:none;}
 .badge.hit{background:var(--green-100);color:var(--green-700);}
 .badge.miss{background:var(--red-100);color:var(--red-700);}
 .badge.partial{background:var(--amber-100);color:var(--amber-600);}
+.badge.pending{background:#e0e7ff;color:#4338ca;}
 
 .method-note{font-size:12px;color:var(--gray-400);margin-top:6px;line-height:1.75;}
 .empty-box{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--r-lg);padding:36px;text-align:center;color:var(--gray-500);font-size:13.5px;}
@@ -472,8 +473,8 @@ async function loadPerformance(){
   var viewEl=document.getElementById('perf-view');
   if(!viewEl) return;
   var perf=null, acc=null;
-  try{ var r1=await fetch('/data/performance.json?t='+Date.now()); perf=await r1.json(); }catch(e){}
-  try{ var r2=await fetch('/data/accumulated.json?t='+Date.now()); acc=await r2.json(); }catch(e){}
+  try{ var r1=await fetch('/data/performance.json?v='+Math.floor(Date.now()/300000)); perf=await r1.json(); }catch(e){}
+  try{ var r2=await fetch('/data/accumulated.json?v='+Math.floor(Date.now()/300000)); acc=await r2.json(); }catch(e){}
   if(!perf){ viewEl.innerHTML='<div class="empty-box">績效資料尚未生成，下次早報後將自動出現。</div>'; return; }
 
   var P=perf.predictions||{}, O=perf.opportunities||{};
@@ -547,6 +548,16 @@ async function loadPerformance(){
   var ph=(acc&&Array.isArray(acc.prediction_history))?acc.prediction_history:[];
   var recent=ph.filter(function(p){return ['hit','partial','miss'].indexOf(p.accuracy)>=0;})
     .sort(function(a,b){return (b.verified_at||b.date||'').localeCompare(a.verified_at||a.date||'');}).slice(0,10);
+  var pendingPred=ph.filter(function(p){return p.accuracy==='pending';})
+    .sort(function(a,b){return (a.event_date||a.date||'').localeCompare(b.event_date||b.date||'');});
+  if(pendingPred.length){
+    html+='<div class="card rv"><div class="card-head"><h2>待驗證預判</h2><div class="card-kpis"><span>PENDING <b>'+pendingPred.length+'</b></span></div></div>'
+      +'<div class="desc">事件日期尚未到來，結果待市場驗證</div><table>'
+      +'<tr><th>預判日</th><th>事件</th><th>事件日期</th><th>狀態</th></tr>'
+      +pendingPred.map(function(p){
+        return '<tr><td style="white-space:nowrap;" class="num">'+esc((p.date||'').slice(5))+'</td><td>'+esc(p.event_title||'')+'</td><td style="white-space:nowrap;" class="num">'+esc(p.event_date||'')+'</td><td><span class="badge pending">待驗證</span></td></tr>';
+      }).join('')+'</table></div>';
+  }
   if(recent.length){
     var BADGE={hit:'<span class="badge hit">命中</span>',partial:'<span class="badge partial">部分</span>',miss:'<span class="badge miss">未中</span>'};
     html+='<div class="card rv"><div class="card-head"><h2>近期已驗證預判</h2><div class="card-kpis"><span>LATEST <b>'+recent.length+'</b></span></div></div>'
