@@ -144,6 +144,7 @@ input::placeholder{color:var(--gray-400);}
 /* Loading */
 #loading-view{text-align:center;padding:20px;color:var(--gray-400);font-size:13px;font-family:var(--font-en);}
 </style>
+  <script src="/js/icons.js"></script>
 </head>
 <body>
 <div class="container">
@@ -175,7 +176,7 @@ input::placeholder{color:var(--gray-400);}
         <div class="user-avatar" id="user-initial">U</div>
         <div id="user-email-display" class="user-email"></div>
         <a href="/pages/targets.html" class="btn-goto">✦ 前往會員中心</a>
-        <a href="/index.html" class="btn-goto">📊 前往總覽</a>
+        <a href="/index.html" class="btn-goto"><span data-ico="chart"></span> 前往總覽</a>
         <button class="btn-logout" onclick="signOut()">登出</button>
       </div>
     </div>
@@ -364,7 +365,7 @@ async function signUp(){
     showMsg('signup-msg','註冊失敗：'+signupErrMsg(result.error),'error');
     btn.disabled=false;btn.textContent='建立帳號';
   }else{
-    showMsg('signup-msg','✅ 註冊成功！請查看信箱確認連結','success');
+    showMsg('signup-msg','✓ 註冊成功！請查看信箱確認連結','success');
     btn.disabled=false;btn.textContent='建立帳號';
   }
 }
@@ -394,7 +395,7 @@ async function sendReset(){
   if(result.error){
     showMsg('forgot-msg','寄送失敗：'+result.error.message,'error');
   }else{
-    showMsg('forgot-msg','✅ 已寄送重設連結，請至信箱查收（含垃圾信匣）','success');
+    showMsg('forgot-msg','✓ 已寄送重設連結，請至信箱查收（含垃圾信匣）','success');
   }
 }
 async function submitNewPassword(){
@@ -409,7 +410,7 @@ async function submitNewPassword(){
     showMsg('reset-msg','更新失敗：'+result.error.message,'error');
     btn.disabled=false;btn.textContent='更新密碼';
   }else{
-    showMsg('reset-msg','✅ 密碼已更新，跳轉中...','success');
+    showMsg('reset-msg','✓ 密碼已更新，跳轉中...','success');
     setTimeout(function(){window.location.href=(window.PX_postAuthDest?window.PX_postAuthDest():'/brief.html');},1200);
   }
 }

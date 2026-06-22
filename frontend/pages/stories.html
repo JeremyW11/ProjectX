@@ -84,6 +84,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .empty-box{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--r-lg);padding:48px 24px;text-align:center;color:var(--gray-400);font-size:14px;}
 @media(max-width:768px){.header-nav{display:none;}}
 </style>
+  <script src="/js/icons.js"></script>
 </head>
 <body>
 
@@ -237,7 +238,7 @@ async function loadStories(){
     var tl=(Array.isArray(s.timeline)?s.timeline:[]).slice().reverse();
     var tlHTML=tl.map(function(t){
       var sc=SENT_COLOR[t.sentiment]||'var(--gray-500)';
-      var src=t.source_url?' <a class="tl-src" href="'+esc(t.source_url)+'" target="_blank" rel="noopener">📎 原文</a>':'';
+      var src=t.source_url?' <a class="tl-src" href="'+esc(t.source_url)+'" target="_blank" rel="noopener">'+ICO.link+' 原文</a>':'';
       return '<div class="tl-item">'+
         '<div class="tl-date">'+esc(t.date)+' · <span style="color:'+sc+';">'+esc(t.sentiment||'')+'</span></div>'+
         '<div class="tl-text">'+esc(t.update)+src+'</div>'+

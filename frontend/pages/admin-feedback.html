@@ -154,6 +154,7 @@ a{text-decoration:none;color:inherit;}
   .stat-grid{grid-template-columns:repeat(2,1fr);}
 }
 </style>
+  <script src="/js/icons.js"></script>
 </head>
 <body>
 
@@ -166,19 +167,19 @@ a{text-decoration:none;color:inherit;}
   <div class="sb-nav">
     <div class="sb-section">Main</div>
     <div class="sb-item active" onclick="showPanel('dashboard',this)">
-      <span class="sb-icon">📊</span><span>總覽</span>
+      <span class="sb-icon" data-ico="chart"></span><span>總覽</span>
     </div>
     <div class="sb-section">Users</div>
     <div class="sb-item" onclick="showPanel('members',this)">
-      <span class="sb-icon">👥</span><span>會員管理</span>
+      <span class="sb-icon" data-ico="users"></span><span>會員管理</span>
     </div>
     <div class="sb-item" onclick="showPanel('applications',this)">
-      <span class="sb-icon">📋</span><span>申請審核</span>
+      <span class="sb-icon" data-ico="clip"></span><span>申請審核</span>
       <span class="sb-badge" id="sb-pending-count" style="display:none"></span>
     </div>
     <div class="sb-section">Content</div>
     <div class="sb-item" onclick="showPanel('feedback',this)">
-      <span class="sb-icon">💬</span><span>意見回饋</span>
+      <span class="sb-icon" data-ico="chat"></span><span>意見回饋</span>
     </div>
   </div>
   <div class="sb-footer" id="sb-user"></div>
@@ -247,7 +248,7 @@ a{text-decoration:none;color:inherit;}
     <div class="section">
       <div class="toolbar">
         <div class="searchbar">
-          <span class="s-ico">🔍</span>
+          <span class="s-ico" data-ico="search"></span>
           <input id="m-search" type="text" placeholder="搜尋名稱或 ID…" oninput="onMemberSearch(this.value)">
           <button class="s-clear" id="m-clear" onclick="clearMemberSearch()">×</button>
         </div>
@@ -275,7 +276,7 @@ a{text-decoration:none;color:inherit;}
     <div class="section">
       <div class="toolbar">
         <div class="searchbar">
-          <span class="s-ico">🔍</span>
+          <span class="s-ico" data-ico="search"></span>
           <input id="a-search" type="text" placeholder="搜尋申請者或內容…" oninput="onAppSearch(this.value)">
           <button class="s-clear" id="a-clear" onclick="clearAppSearch()">×</button>
         </div>
@@ -307,7 +308,7 @@ a{text-decoration:none;color:inherit;}
     <div class="section">
       <div class="toolbar">
         <div class="searchbar">
-          <span class="s-ico">🔍</span>
+          <span class="s-ico" data-ico="search"></span>
           <input id="f-search" type="text" placeholder="搜尋使用者或回饋內容…" oninput="onFbSearch(this.value)">
           <button class="s-clear" id="f-clear" onclick="clearFbSearch()">×</button>
         </div>
@@ -550,7 +551,7 @@ function renderFbCard(f,isApply){
   var uid=(f.user_id||'').slice(0,8);
   var label={pending:'審核中',adopted:'已採納 +10',rejected:'未採納',granted:'已開放',denied:'已婉拒'};
   if(isCredit){ label.pending='待處理'; label.granted='已加點'; label.denied='未完成'; }
-  var catChip=isChart?'<span class="tag chart">🔓 圖表申請</span>':(isProApp?'<span class="tag proapp">✦ Pro 申請</span>':(isCredit?'<span class="tag credit">💎 點數購買</span>':''));
+  var catChip=isChart?'<span class="tag chart">'+ICO.unlock+' 圖表申請</span>':(isProApp?'<span class="tag proapp">✦ Pro 申請</span>':(isCredit?'<span class="tag credit">'+ICO.gem+' 點數購買</span>':''));
   var acts='';
   if(st==='pending'){
     if(isCredit){
@@ -597,7 +598,7 @@ function renderThreadInner(id,viewer){
       +'<div style="font-size:9.5px;opacity:.7;margin-bottom:2px;">'+who+' · '+fmtDate(m.created_at)+'</div>'
       +esc(m.content)+'</div></div>';
   }).join(''):'<div style="font-size:11.5px;color:var(--gray-400);padding:2px 0 6px;">尚無後續對話</div>';
-  return '<div class="thread-label" style="font-size:11px;color:var(--gray-400);font-weight:700;letter-spacing:.05em;margin:10px 0 6px;">💬 對話串</div>'
+  return '<div class="thread-label" style="font-size:11px;color:var(--gray-400);font-weight:700;letter-spacing:.05em;margin:10px 0 6px;">'+ICO.chat+' 對話串</div>'
     +'<div class="thread-msgs">'+body+'</div>'
     +'<div style="display:flex;gap:6px;margin-top:6px;">'
     +'<input id="tmsg-'+id+'" type="text" maxlength="500" placeholder="輸入訊息…" '

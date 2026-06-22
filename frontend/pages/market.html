@@ -250,6 +250,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 </style>
   <script src="/shared/nav.js"></script>
   <script src="/shared/footer.js"></script>
+  <script src="/js/icons.js"></script>
 </head>
 <body>
 
@@ -287,10 +288,10 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <!-- TAB BAR -->
   <div class="tab-bar">
     <button class="tab-btn active" data-tab="us" onclick="switchTab('tab-us',this)">
-      <span class="tab-icon">📈</span>美股
+      <span class="tab-icon" data-ico="up"></span>美股
     </button>
     <button class="tab-btn" data-tab="tw" onclick="switchTab('tab-tw',this)">
-      <span class="tab-icon">🇹🇼</span>台股
+      <span class="tab-icon" data-ico="tw"></span>台股
     </button>
     <button class="tab-btn" data-tab="crypto" onclick="switchTab('tab-crypto',this)">
       <span class="tab-icon">₿</span>加密貨幣

@@ -199,7 +199,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 /* Pro lock overlay */
 .pro-lock{position:relative;overflow:hidden;}
-.pro-lock::after{content:'🔒 PRO 功能 · 升級解鎖';position:absolute;inset:0;background:rgba(247,248,252,.92);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--navy-700);font-family:var(--font-zh);backdrop-filter:blur(2px);}
+.pro-lock::after{content:'PRO 功能 · 升級解鎖';position:absolute;inset:0;background:rgba(247,248,252,.92);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--navy-700);font-family:var(--font-zh);backdrop-filter:blur(2px);}
 
 @media(max-width:1024px){.two-col{grid-template-columns:1fr;}}
 @media(max-width:768px){.ec-body{grid-template-columns:repeat(2,1fr);}.header-nav{display:none;}}
@@ -234,6 +234,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 </style>
   <script src="/shared/nav.js"></script>
   <script src="/shared/footer.js"></script>
+  <script src="/js/icons.js"></script>
 </head>
 <body>
 
@@ -270,13 +271,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <!-- TAB BAR -->
   <div class="tab-bar">
     <button class="tab-btn active" data-tab="research" onclick="switchTab('research')">
-      🏛 機構研報
+      <span data-ico="bank"></span> 機構研報
     </button>
     <button class="tab-btn" data-tab="earnings" onclick="switchTab('earnings')">
-      📈 公司財報
+      <span data-ico="up"></span> 公司財報
     </button>
     <button class="tab-btn" data-tab="calls" onclick="switchTab('calls')">
-      📞 法說會
+      <span data-ico="phone"></span> 法說會
     </button>
   </div>
 
@@ -552,14 +553,14 @@ function renderResearch(list){
       '<div class="rc-title">'+r.name+'（'+r.ticker+'）'+': '+r.note+'</div>'+
       '<div class="rc-body">'+
         '<div style="margin-bottom:10px;font-size:13px;color:var(--gray-700);font-weight:500;border-left:3px solid var(--navy-400);padding-left:10px;">'+( r.core_logic||r.note)+'</div>'+
-        (r.risk_note?'<div style="margin-bottom:8px;font-size:12px;color:var(--amber-700);background:var(--amber-50);border-radius:6px;padding:7px 10px;">⚠️ 風險：'+r.risk_note+'</div>':'')+
-        (r.action?'<div style="font-size:12px;color:var(--navy-700);font-weight:600;margin-top:4px;">📌 操作建議：'+r.action+'</div>':'')+
+        (r.risk_note?'<div style="margin-bottom:8px;font-size:12px;color:var(--amber-700);background:var(--amber-50);border-radius:6px;padding:7px 10px;">'+ICO.warn+' 風險：'+r.risk_note+'</div>':'')+
+        (r.action?'<div style="font-size:12px;color:var(--navy-700);font-weight:600;margin-top:4px;">'+ICO.pin+' 操作建議：'+r.action+'</div>':'')+
         '</div>'+
       '<div class="rc-meta">'+
         '<span class="rc-rating '+rc+'">'+r.rating+'</span>'+
         (r.target?'<span class="rc-target">目標價 <span>'+r.target+(r.prev_target?' → '+r.target:'')+'</span></span>':'')+
         '<span class="sent-chip '+sc+'">'+sl+'</span>'+
-        (r.source_url?'<a class="rc-source-link" href="'+r.source_url+'" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" title="查看原文">📎 原文</a>':'')+
+        (r.source_url?'<a class="rc-source-link" href="'+r.source_url+'" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" title="查看原文">'+ICO.link+' 原文</a>':'')+
       '</div>'+
       '<hr class="rc-divider">'+
       '<div class="rc-impact">'+
@@ -608,11 +609,11 @@ function renderEarnings(list){
   }
 
   if(reported.length){
-    html+='<div class="earnings-section-title">✅ 已公布財報</div>';
+    html+='<div class="earnings-section-title">'+ICO.ok+' 已公布財報</div>';
     html+=reported.map(renderCard).join('');
   }
   if(upcoming.length){
-    html+='<div class="earnings-section-title" style="margin-top:16px;">📅 即將公布</div>';
+    html+='<div class="earnings-section-title" style="margin-top:16px;">'+ICO.cal+' 即將公布</div>';
     html+=upcoming.map(renderCard).join('');
   }
   return html;
@@ -657,7 +658,7 @@ function _old_renderCalls(list){
   if(!list||!list.length) return '<div class="empty-state">暫無法說會數據</div>';
   return list.map(function(c){
     var sentClass=c.sentiment==='positive'?'positive':c.sentiment==='negative'?'negative':'neutral';
-    var sentLabel=c.sentiment==='positive'?'📈 正面':c.sentiment==='negative'?'📉 負面':'➡ 中性';
+    var sentLabel=c.sentiment==='positive'?ICO.up+' 正面':c.sentiment==='negative'?ICO.down+' 負面':'→ 中性';
     return '<div class="call-card '+sentClass+'">'+
       '<div class="call-header">'+
         '<div>'+

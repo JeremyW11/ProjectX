@@ -203,6 +203,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
 </style>
   <script src="/shared/nav.js"></script>
   <script src="/shared/footer.js"></script>
+  <script src="/js/icons.js"></script>
 </head>
 <body>
 
@@ -266,7 +267,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
     <div>
       <div class="glass-card">
         <div class="card-header">
-          <div class="card-title">📰 產業重大事件</div>
+          <div class="card-title"><span data-ico="news"></span> 產業重大事件</div>
           <span class="news-count" id="news-count"></span>
         </div>
         <!-- inject target -->
@@ -274,7 +275,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
       </div>
       <div class="glass-card">
         <div class="card-header">
-          <div class="card-title">🔄 產業輪動洞察</div>
+          <div class="card-title"><span data-ico="refresh"></span> 產業輪動洞察</div>
           <span class="card-badge badge-free">FREE</span>
         </div>
         <!-- inject target -->
@@ -284,14 +285,14 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
     <div>
       <div class="glass-card">
         <div class="card-header">
-          <div class="card-title">📅 近期股務事件</div>
+          <div class="card-title"><span data-ico="cal"></span> 近期股務事件</div>
         </div>
         <!-- inject target -->
         <div id="corp-events"></div>
       </div>
       <div class="glass-card">
         <div class="card-header">
-          <div class="card-title">🏢 全球前十大公司動向</div>
+          <div class="card-title"><span data-ico="bldg"></span> 全球前十大公司動向</div>
         </div>
         <!-- inject target -->
         <div id="top-companies"></div>
@@ -352,7 +353,7 @@ function toggleCompany(el){
 }
 
 var currentFilter=null;
-var radarIcons={'半導體 / AI':'💾','加密貨幣':'🪙','能源':'⚡','雲端 / 資料中心':'☁️','金融':'🏦','航運':'🚢','消費':'🛒'};
+var radarIcons={'半導體 / AI':ICO.chip,'加密貨幣':ICO.coin,'能源':ICO.lightning,'雲端 / 資料中心':ICO.cloud,'金融':ICO.bldg,'航運':ICO.anchor,'消費':ICO.cart};
 var signalTypeMap={'半導體 / AI':'semi','加密貨幣':'crypto','能源':'energy','雲端 / 資料中心':'ai','金融':'finance','航運':'shipping','消費':'tw','生技 / 醫療':'biotech'};
 
 function filterNews(signalName){
@@ -401,7 +402,7 @@ async function loadData(){
   if(allData.signals){
     document.getElementById('signal-radar').innerHTML=allData.signals.map(function(s){
       return '<div class="radar-item" onclick="filterNews(\''+s.name+'\')">'+
-        '<div class="radar-icon">'+(radarIcons[s.name]||'📊')+'</div>'+
+        '<div class="radar-icon">'+(radarIcons[s.name]||ICO.chart)+'</div>'+
         '<div class="radar-name">'+s.name+'</div>'+
         '<span class="radar-signal '+s.signal+'">'+s.label+'</span>'+
       '</div>';

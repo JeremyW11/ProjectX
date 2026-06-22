@@ -396,6 +396,7 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
 }
 .logo-link{transition:opacity .2s,transform .2s;}.logo-link:hover{opacity:.75;transform:scale(1.04);}
 </style>
+<script src="/js/icons.js"></script>
 </head>
 <body>
 
@@ -507,26 +508,26 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
 <section class="pulse-sec">
   <div class="pulse-inner">
     <div class="pulse-header reveal">
-      <div class="pulse-eyebrow">⚡ Powered by PulseAI</div>
+      <div class="pulse-eyebrow"><span data-ico="lightning"></span> Powered by PulseAI</div>
       <h2 class="pulse-h2">每一份判斷，背後都是同一套 AI 引擎</h2>
       <p class="pulse-sub">PulseAI 是驅動 Project X 的分析引擎。它每天蒐集總經、個經、美股、市場風向四維資料，再轉成可閱讀的判斷——從名家視角的市場評述，到個股深度分析與情境推演。</p>
     </div>
 
     <div class="pulse-caps reveal">
       <div class="pulse-cap">
-        <div class="pcap-icon">📰</div>
+        <div class="pcap-icon"><span data-ico="news"></span></div>
         <div class="pcap-name">名家觀點</div>
         <div class="pcap-desc">以七位投資名家的思維框架解讀市場：短期的「三日分析」回顧近數個交易日；長期的「名人專刊」在遇到關鍵轉折時由名家自行判斷不定期加發。每期延續上一期論點，串成有記憶的判斷脈絡。</div>
         <div class="pcap-tag">PRO 專屬</div>
       </div>
       <div class="pulse-cap">
-        <div class="pcap-icon">🤖</div>
+        <div class="pcap-icon"><span data-ico="ai"></span></div>
         <div class="pcap-name">AI 個股深度分析</div>
         <div class="pcap-desc">輸入任一標的，PulseAI 彙整基本面、技術面、籌碼與新聞，產出結構化的多面向分析報告。</div>
         <div class="pcap-tag">PRO · 1 點 / 次</div>
       </div>
       <div class="pulse-cap">
-        <div class="pcap-icon">🎲</div>
+        <div class="pcap-icon"><span data-ico="dice"></span></div>
         <div class="pcap-name">推演沙盤</div>
         <div class="pcap-desc">提出假設情境，PulseAI 推演多種結果的機率與後續驗證，把「如果」變成可追蹤的判斷。</div>
         <div class="pcap-tag">PRO · 4 點 / 次</div>
@@ -701,15 +702,15 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
           <!-- 真正受限：歷史報告 + 會員中心 + AI 功能（皆 Pro 專屬） -->
           <div style="display:flex;flex-direction:column;gap:8px">
             <div class="free-locked-section">
-              <span class="fls-label">🔒 歷史報告完整內容</span>
+              <span class="fls-label"><span data-ico="lock"></span> 歷史報告完整內容</span>
               <button class="fls-lock" onclick="window.location.href='/pages/credits.html'">✦ 升級 Pro</button>
             </div>
             <div class="free-locked-section">
-              <span class="fls-label">🔒 會員中心：自選看板 / 共識溫度計 / 事件追蹤</span>
+              <span class="fls-label"><span data-ico="lock"></span> 會員中心：自選看板 / 共識溫度計 / 事件追蹤</span>
               <button class="fls-lock" onclick="window.location.href='/pages/credits.html'">✦ 升級 Pro</button>
             </div>
             <div class="free-locked-section">
-              <span class="fls-label">🔒 名家觀點 · 歷史數據 · AI 個股分析 / 推演沙盤</span>
+              <span class="fls-label"><span data-ico="lock"></span> 名家觀點 · 歷史數據 · AI 個股分析 / 推演沙盤</span>
               <button class="fls-lock" onclick="window.location.href='/pages/credits.html'">✦ 升級 Pro</button>
             </div>
           </div>
@@ -790,28 +791,28 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
         </thead>
         <tbody>
           <tr><td colspan="3" class="ft-group-row" style="border-top:none;">每日情報 + 市場（免費）</td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🌐</span><div class="ft-txt"><span class="ft-name">每日情報簡報</span><span class="ft-desc">宏觀 + 產業 + 個股</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="globe"></span><div class="ft-txt"><span class="ft-name">每日情報簡報</span><span class="ft-desc">宏觀 + 產業 + 個股</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">₿</span><div class="ft-txt"><span class="ft-name">美股 + 台股 + 加密 市場數據</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🧭</span><div class="ft-txt"><span class="ft-name">產業地圖</span><span class="ft-desc">產業新聞 + 各產業前五大公司</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">😱</span><div class="ft-txt"><span class="ft-name">風險矩陣 + VIX 情緒追蹤</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="compass"></span><div class="ft-txt"><span class="ft-name">產業地圖</span><span class="ft-desc">產業新聞 + 各產業前五大公司</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="fear"></span><div class="ft-txt"><span class="ft-name">風險矩陣 + VIX 情緒追蹤</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">機構情報（免費）</td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🏛</span><div class="ft-txt"><span class="ft-name">機構研報摘要</span><span class="ft-desc">GS / MS / UBS 等</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">📊</span><div class="ft-txt"><span class="ft-name">財報 EPS 對比 + 法說會摘要</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">📅</span><div class="ft-txt"><span class="ft-name">市場日曆</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="bank"></span><div class="ft-txt"><span class="ft-name">機構研報摘要</span><span class="ft-desc">GS / MS / UBS 等</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="chart"></span><div class="ft-txt"><span class="ft-name">財報 EPS 對比 + 法說會摘要</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="cal"></span><div class="ft-txt"><span class="ft-name">市場日曆</span></div></div></td><td><span class="ft-check-free">✓</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">會員中心（Pro 專屬）</td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🎯</span><div class="ft-txt"><span class="ft-name">會員中心</span><span class="ft-desc">自選看板 + 共識溫度計 + 事件追蹤 + 訊號雷達</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🤖</span><div class="ft-txt"><span class="ft-name">AI 個股分析 + 推演沙盤</span><span class="ft-desc">會員中心內，依點數</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">用訂閱點數</span></td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">🌍</span><div class="ft-txt"><span class="ft-name">全球事件追蹤</span><span class="ft-desc">跨日國際大事時間軸</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="target"></span><div class="ft-txt"><span class="ft-name">會員中心</span><span class="ft-desc">自選看板 + 共識溫度計 + 事件追蹤 + 訊號雷達</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="ai"></span><div class="ft-txt"><span class="ft-name">AI 個股分析 + 推演沙盤</span><span class="ft-desc">會員中心內，依點數</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">用訂閱點數</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="world"></span><div class="ft-txt"><span class="ft-name">全球事件追蹤</span><span class="ft-desc">跨日國際大事時間軸</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">名家視角 + 進階工具（Pro 專屬）</td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">📰</span><div class="ft-txt"><span class="ft-name">名家觀點</span><span class="ft-desc">七位名家人格每日出刊</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">📈</span><div class="ft-txt"><span class="ft-name">互動圖表</span><span class="ft-desc">K 線 + 訂單簿熱力 + 技術訊號</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">📜</span><div class="ft-txt"><span class="ft-name">歷史數據</span><span class="ft-desc">預測命中率 + 機會 7／30 日真實報酬</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="news"></span><div class="ft-txt"><span class="ft-name">名家觀點</span><span class="ft-desc">七位名家人格每日出刊</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="up"></span><div class="ft-txt"><span class="ft-name">互動圖表</span><span class="ft-desc">K 線 + 訂單簿熱力 + 技術訊號</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="history"></span><div class="ft-txt"><span class="ft-name">歷史數據</span><span class="ft-desc">預測命中率 + 機會 7／30 日真實報酬</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
 
           <tr><td colspan="3" class="ft-group-row">Pro 專屬</td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">📂</span><div class="ft-txt"><span class="ft-name">歷史報告完整內容</span><span class="ft-desc">免費僅看標題與日期</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="folder"></span><div class="ft-txt"><span class="ft-name">歷史報告完整內容</span><span class="ft-desc">免費僅看標題與日期</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
           <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">⚡</span><div class="ft-txt"><span class="ft-name">每月訂閱點數</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">30 點 / 月</span></td></tr>
         </tbody>
       </table>
@@ -1099,7 +1100,7 @@ async function doSignup(){
     showMsg('s-msg','註冊失敗：'+r.error.message);
     return;
   }
-  btn.textContent='✅ 請查看信箱確認連結';
+  btn.textContent='✓ 請查看信箱確認連結';
   showMsg('s-msg','帳號建立成功！請至信箱點擊確認連結後即可登入。','#16a34a');
 }
 

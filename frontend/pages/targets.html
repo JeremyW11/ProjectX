@@ -372,6 +372,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 </style>
   <script src="/shared/nav.js"></script>
   <script src="/shared/footer.js"></script>
+  <script src="/js/icons.js"></script>
 </head>
 <body>
 
@@ -418,17 +419,17 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
       <div class="pro-features">
         <div class="pro-feat">
-          <div class="pro-feat-icon">📊</div>
+          <div class="pro-feat-icon"><span data-ico="chart"></span></div>
           <div class="pro-feat-title">自選標的追蹤</div>
           <div class="pro-feat-desc">美股、台股、加密貨幣無限自選，即時前收價與漲跌</div>
         </div>
         <div class="pro-feat">
-          <div class="pro-feat-icon">🤖</div>
+          <div class="pro-feat-icon"><span data-ico="ai"></span></div>
           <div class="pro-feat-title">AI 推演沙盤</div>
           <div class="pro-feat-desc">輸入問題，Claude 生成三情境機率推演，追蹤驗證準確率</div>
         </div>
         <div class="pro-feat">
-          <div class="pro-feat-icon">🔔</div>
+          <div class="pro-feat-icon"><span data-ico="bell"></span></div>
           <div class="pro-feat-title">信號強度雷達</div>
           <div class="pro-feat-desc">整合宏觀、產業、技術面訊號，顯示每個標的的綜合強度</div>
         </div>
@@ -450,7 +451,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         </div>
       </div>
       <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-        <div style="background:var(--navy-700);color:var(--white);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;font-family:var(--font-en);">🔒 Pro Members Only</div>
+        <div style="background:var(--navy-700);color:var(--white);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;font-family:var(--font-en);"><span data-ico="lock"></span> Pro Members Only</div>
       </div>
     </div>
   </div>
@@ -468,11 +469,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <div class="hub-av-plan">✦ PRO</div>
         </div>
       </div>
-      <button class="side-item active" data-cat="daily" onclick="goCat('daily',this)"><span class="side-ico">📡</span>每日情報</button>
-      <button class="side-item" data-cat="pulse" onclick="goCat('pulse',this)"><span class="side-ico">🤖</span>PulseAI<span class="side-star">★</span></button>
-      <button class="side-item" data-cat="stories" onclick="goCat('stories',this)"><span class="side-ico">🌍</span>全球追蹤</button>
-      <button class="side-item" data-cat="history" onclick="goCat('history',this)"><span class="side-ico">📂</span>歷史報告</button>
-      <button class="side-item" data-cat="account" onclick="goCat('account',this)"><span class="side-ico">⚙️</span>帳戶方案</button>
+      <button class="side-item active" data-cat="daily" onclick="goCat('daily',this)"><span class="side-ico" data-ico="signal"></span>每日情報</button>
+      <button class="side-item" data-cat="pulse" onclick="goCat('pulse',this)"><span class="side-ico" data-ico="ai"></span>PulseAI<span class="side-star">★</span></button>
+      <button class="side-item" data-cat="stories" onclick="goCat('stories',this)"><span class="side-ico" data-ico="world"></span>全球追蹤</button>
+      <button class="side-item" data-cat="history" onclick="goCat('history',this)"><span class="side-ico" data-ico="folder"></span>歷史報告</button>
+      <button class="side-item" data-cat="account" onclick="goCat('account',this)"><span class="side-ico" data-ico="tool"></span>帳戶方案</button>
       <div class="hub-credits">
         <div style="font-size:10px;color:var(--gray-400);letter-spacing:.06em;font-family:var(--font-en);margin-bottom:4px;">MY CREDITS</div>
         <a href="/pages/credits.html" id="hub-credits-val" title="前往購點" style="font-size:18px;font-weight:700;color:var(--navy-700);font-family:var(--font-en);text-decoration:none;">⚡ — 點</a>
@@ -545,7 +546,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
       <a href="/pages/scenario.html" class="ai-card">
         <div>
-          <div class="ai-t">🤖 PulseAI 推演沙盤</div>
+          <div class="ai-t"><span data-ico="ai"></span> PulseAI 推演沙盤</div>
           <div class="ai-d">輸入市場問題，AI 生成三情境機率推演與行動建議</div>
         </div>
         <span class="ai-go">開始推演 →</span>
@@ -553,7 +554,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
       <a href="/pages/chart.html" class="ai-card" style="background:linear-gradient(135deg,#1e293b,#334155);">
         <div>
-          <div class="ai-t">📈 PulseAI 互動圖表</div>
+          <div class="ai-t"><span data-ico="up"></span> PulseAI 互動圖表</div>
           <div class="ai-d">AI 捕捉市場脈動，自動標出支撐（綠）與壓力（紅）區間</div>
         </div>
         <span class="ai-go">開啟圖表 →</span>
@@ -561,7 +562,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
       <a href="/pages/columns.html" class="ai-card" style="background:linear-gradient(135deg,#3b2f63,#5b4a8a);">
         <div>
-          <div class="ai-t">📰 PulseAI 名家觀點</div>
+          <div class="ai-t"><span data-ico="news"></span> PulseAI 名家觀點</div>
           <div class="ai-d">以名家投資框架啟發的市場評述，依人物分類，含三日分析（短期）與名人專刊（長期）</div>
         </div>
         <span class="ai-go">前往名家觀點 →</span>
@@ -569,7 +570,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
       <a href="/pages/performance.html" class="ai-card" style="background:linear-gradient(135deg,#0d1630,#1d2d5a);">
         <div>
-          <div class="ai-t">📜 PulseAI 歷史數據</div>
+          <div class="ai-t"><span data-ico="history"></span> PulseAI 歷史數據</div>
           <div class="ai-d">預測命中率與機會 7／30 日真實報酬，每一筆研判攤開對答案</div>
         </div>
         <span class="ai-go">查看績效 →</span>
@@ -682,7 +683,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <!-- ═══ 站內信箱入口（所有已登入會員可用，含免費） ═══ -->
   <div class="section-block" id="feedback-block" style="margin-bottom:16px;display:none;">
     <a href="/pages/inbox.html" style="display:flex;align-items:center;gap:14px;padding:16px 20px;text-decoration:none;">
-      <span style="font-size:22px;line-height:1;">✉️</span>
+      <span style="font-size:22px;line-height:1;"><span data-ico="mail"></span></span>
       <span style="flex:1;">
         <span style="display:block;font-size:14px;font-weight:700;color:var(--navy-900);font-family:var(--font-zh);">站內信箱<span id="inbox-unread-pill" style="display:none;margin-left:8px;font-size:11px;font-weight:700;color:#fff;background:var(--red-600);padding:1px 8px;border-radius:10px;vertical-align:middle;"></span></span>
         <span style="display:block;font-size:12.5px;color:var(--gray-500);font-family:var(--font-zh);margin-top:2px;">權限申請、點數購買、意見回饋與官方回覆，都記錄並通知於此</span>
@@ -980,12 +981,12 @@ async function saveProfile(){
 // ── Morning Brief 渲染 ─────────────────────────────
 function renderMorningBriefHTML(text) {
   var sections = [
-    { prefix: '宏觀層面', icon: '🌐', label: '宏觀總覽', color: '#3b82f6', bg: '#eff6ff', border: '#bfdbfe' },
-    { prefix: '產業動態', icon: '⚙️', label: '產業動態', color: '#7c3aed', bg: '#f5f3ff', border: '#ddd6fe' },
+    { prefix: '宏觀層面', icon: ICO.globe, label: '宏觀總覽', color: '#3b82f6', bg: '#eff6ff', border: '#bfdbfe' },
+    { prefix: '產業動態', icon: ICO.tool, label: '產業動態', color: '#7c3aed', bg: '#f5f3ff', border: '#ddd6fe' },
     { prefix: '加密市場', icon: '₿',  label: '加密市場', color: '#d97706', bg: '#fffbeb', border: '#fde68a' },
-    { prefix: '台股方面', icon: '🟢', label: '台股市場', color: '#059669', bg: '#ecfdf5', border: '#a7f3d0' },
-    { prefix: '今日需特別留意', icon: '⚡', label: '今日焦點', color: '#dc2626', bg: '#fef2f2', border: '#fecaca' },
-    { prefix: '操作基調', icon: '🎯', label: '操作建議', color: '#4f46e5', bg: '#eef2ff', border: '#c7d2fe' },
+    { prefix: '台股方面', icon: ICO.dotgreen, label: '台股市場', color: '#059669', bg: '#ecfdf5', border: '#a7f3d0' },
+    { prefix: '今日需特別留意', icon: ICO.lightning, label: '今日焦點', color: '#dc2626', bg: '#fef2f2', border: '#fecaca' },
+    { prefix: '操作基調', icon: ICO.target, label: '操作建議', color: '#4f46e5', bg: '#eef2ff', border: '#c7d2fe' },
   ];
   var paras = text.split(/\n\n+/).map(function(p){ return p.trim(); }).filter(Boolean);
   var html = '';
@@ -1225,7 +1226,7 @@ async function loadConsensusMeter(watchlistItems){
   }
 
   function tempLabel(score){
-    if(score >= 80) return '過熱⚠️';
+    if(score >= 80) return '過熱 '+ICO.warn;
     if(score >= 65) return '偏熱';
     if(score >= 50) return '中性';
     if(score >= 35) return '偏冷';
@@ -1307,10 +1308,10 @@ async function loadOpportunities(){
         '</div>'+
         '<div class="opp-thesis">'+opp.thesis+'</div>'+
         '<div class="opp-meta">'+
-          (opp.catalyst?'<span class="opp-tag" style="background:var(--navy-50);color:var(--navy-600);">⚡ '+opp.catalyst+'</span>':'')+
-          (opp.target?'<span class="opp-tag" style="background:var(--green-100);color:var(--green-700);">🎯 '+opp.target+'</span>':'')+
-          (opp.risk?'<span class="opp-tag" style="background:var(--red-100);color:var(--red-600);">⚠️ '+opp.risk+'</span>':'')+
-          (opp.timeframe?'<span class="opp-tag" style="background:var(--gray-100);color:var(--gray-500);">⏱ '+opp.timeframe+'</span>':'')+
+          (opp.catalyst?'<span class="opp-tag" style="background:var(--navy-50);color:var(--navy-600);">'+ICO.lightning+' '+opp.catalyst+'</span>':'')+
+          (opp.target?'<span class="opp-tag" style="background:var(--green-100);color:var(--green-700);">'+ICO.target+' '+opp.target+'</span>':'')+
+          (opp.risk?'<span class="opp-tag" style="background:var(--red-100);color:var(--red-600);">'+ICO.warn+' '+opp.risk+'</span>':'')+
+          (opp.timeframe?'<span class="opp-tag" style="background:var(--gray-100);color:var(--gray-500);">'+opp.timeframe+'</span>':'')+
         '</div>'+
       '</div>';
     }).join('');
@@ -1584,7 +1585,7 @@ function renderWatchlist(items, dailyData){
   var staticTabs = document.querySelector('.cat-tabs:not(#cat-tabs-dynamic)');
 
   if(!items.length){
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray-400);"><div style="font-size:32px;margin-bottom:12px;">🎯</div><div style="font-size:15px;margin-bottom:8px;">尚未新增任何標的</div><div style="font-size:13px;">點擊「+ 新增標的」開始追蹤</div></div>';
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray-400);"><div style="font-size:32px;margin-bottom:12px;">'+ICO.target+'</div><div style="font-size:15px;margin-bottom:8px;">尚未新增任何標的</div><div style="font-size:13px;">點擊「+ 新增標的」開始追蹤</div></div>';
     if(tabsDyn) tabsDyn.style.display='none';
     if(staticTabs) staticTabs.style.display='none';
     return;
@@ -1620,11 +1621,11 @@ function renderWatchlist(items, dailyData){
     var isRunning = !hasCacheToday && ((typeof ANALYSIS_RUNNING==='object' && ANALYSIS_RUNNING[item.id]) || (pend && (nowTs - (pend.ts||0)) <= 180000));
     var analysisInner, boxDisplay, btnLabel, btnDisabled='';
     if(hasCacheToday){
-      analysisInner = renderAnalysisMd(item.analysis); boxDisplay='block'; btnLabel='🔼 收起';
+      analysisInner = renderAnalysisMd(item.analysis); boxDisplay='block'; btnLabel=ICO.chevup+' 收起';
     } else if(isRunning){
-      analysisInner = '⚡ AI 分析中，請稍候...'; boxDisplay='block'; btnLabel='分析中...'; btnDisabled=' disabled';
+      analysisInner = ICO.lightning+' AI 分析中，請稍候...'; boxDisplay='block'; btnLabel='分析中...'; btnDisabled=' disabled';
     } else {
-      analysisInner = ''; boxDisplay='none'; btnLabel='🔍 分析';
+      analysisInner = ''; boxDisplay='none'; btnLabel=ICO.search+' 分析';
     }
     return '<div class="target-card '+cardClass+'" data-cat="'+item.category+'" data-id="'+item.id+'">'+
       '<div class="tc-top">'+
@@ -1642,7 +1643,7 @@ function renderWatchlist(items, dailyData){
         '<span class="tc-chg '+changeClass+'">'+changeIcon+' '+changeVal+'</span>'+
       '</div>'+
       (techNote?'<div style="font-size:11px;color:var(--gray-500);margin:6px 0 4px;line-height:1.5;font-family:var(--font-zh);">'+techNote+'</div>':'')+
-      (item.note?'<div style="font-size:11px;color:var(--navy-600);margin-top:4px;padding:5px 8px;background:var(--navy-50);border-radius:5px;">📌 '+item.note+'</div>':'')+
+      (item.note?'<div style="font-size:11px;color:var(--navy-600);margin-top:4px;padding:5px 8px;background:var(--navy-50);border-radius:5px;">'+ICO.pin+' '+item.note+'</div>':'')+
             '<div id="analysis-'+item.id+'" class="analysis-box" style="display:'+boxDisplay+';margin:8px 0 4px;padding:10px 12px;background:var(--navy-50);border-radius:8px;font-size:12px;color:var(--gray-700);line-height:1.7;font-family:var(--font-zh);border-left:3px solid var(--navy-400);">'+analysisInner+'</div>'+
       '<div class="tc-meta">'+
         '<button class="tc-analyze-btn" data-ticker="'+item.ticker+'" data-cat="'+item.category+'" data-id="'+item.id+'"'+btnDisabled+' onclick="analyzeTarget(event,this.dataset.ticker,this.dataset.cat,this.dataset.id)" style="font-size:11px;color:var(--navy-600);padding:3px 8px;border:1px solid var(--navy-200,#c7d7fd);border-radius:4px;background:var(--navy-50);cursor:pointer;font-family:var(--font-zh);">'+btnLabel+'</button>'+
@@ -1672,7 +1673,7 @@ async function analyzeTarget(e, ticker, category, id){
   if(resultEl.style.display !== 'none' && resultEl.style.display !== '' && !ANALYSIS_RUNNING[id]){
     resultEl.style.display = 'none';
     var b = document.querySelector('.tc-analyze-btn[data-id="'+id+'"]');
-    if(b) b.textContent = '🔍 分析';
+    if(b) b.innerHTML = ICO.search+' 分析';
     return;
   }
   delete ANALYSIS_NUDGED[id]; // 手動觸發 → 重置自動接續額度
@@ -1694,7 +1695,7 @@ async function runAnalysis(ticker, category, id, isResume){
      && String(cacheCheck.data.analysis_date||'').slice(0,10) === today){
     box.innerHTML = renderAnalysisMd(cacheCheck.data.analysis);
     box.style.display = 'block';
-    btn.textContent = '🔼 收起';
+    btn.innerHTML = ICO.chevup+' 收起';
     clearPending(id);
     return;
   }
@@ -1761,18 +1762,18 @@ async function runAnalysis(ticker, category, id, isResume){
       var box2 = document.getElementById('analysis-'+id);
       var btn2 = document.querySelector('.tc-analyze-btn[data-id="'+id+'"]');
       if(box2){ box2.innerHTML = renderAnalysisMd(data.analysis); box2.style.display='block'; }
-      if(btn2){ btn2.textContent='🔼 收起'; btn2.disabled=false; }
+      if(btn2){ btn2.innerHTML=ICO.chevup+' 收起'; btn2.disabled=false; }
     } else {
       clearPending(id); delete ANALYSIS_NUDGED[id];
       box.textContent = '分析失敗：'+(data.error||'未知錯誤');
-      btn.textContent = '🔍 分析'; btn.disabled=false;
+      btn.innerHTML = ICO.search+' 分析'; btn.disabled=false;
     }
   } catch(e3){
     // 連線中斷（含手機凍結被殺）：保留 pending，回到頁面自動接續一次
     var bx = document.getElementById('analysis-'+id);
     var bt = document.querySelector('.tc-analyze-btn[data-id="'+id+'"]');
     if(bx) bx.textContent = '連線中斷，回到頁面將自動接續…';
-    if(bt){ bt.textContent='🔍 分析'; bt.disabled=false; }
+    if(bt){ bt.innerHTML=ICO.search+' 分析'; bt.disabled=false; }
     if(document.visibilityState==='visible' && !ANALYSIS_NUDGED[id]){
       ANALYSIS_NUDGED[id]=true;
       setTimeout(function(){ resumePendingAnalyses(); }, 600);
@@ -1930,7 +1931,7 @@ async function loadHubStories(){
     var tl=(Array.isArray(s.timeline)?s.timeline:[]).slice().reverse();
     var tlHTML=tl.map(function(t){
       var sc=STORY_SENT_COLOR[t.sentiment]||'var(--gray-500)';
-      var src=t.source_url?' <a class="tl-src" href="'+storyEsc(t.source_url)+'" target="_blank" rel="noopener">📎 原文</a>':'';
+      var src=t.source_url?' <a class="tl-src" href="'+storyEsc(t.source_url)+'" target="_blank" rel="noopener">'+ICO.link+' 原文</a>':'';
       return '<div class="tl-item">'+
         '<div class="tl-date">'+storyEsc(t.date)+' · <span style="color:'+sc+';">'+storyEsc(t.sentiment||'')+'</span></div>'+
         '<div class="tl-text">'+storyEsc(t.update)+src+'</div>'+
@@ -1984,7 +1985,7 @@ async function loadHubDateList(){
 
 function arcRenderLock(){
   return '<div class="report-card" style="text-align:center;padding:64px 32px;">'+
-    '<div style="font-size:40px;margin-bottom:16px;">🔒</div>'+
+    '<div style="font-size:40px;margin-bottom:16px;color:var(--navy-400);">'+ICO.lock+'</div>'+
     '<div style="font-size:18px;font-weight:600;color:var(--navy-900);font-family:var(--font-zh);margin-bottom:8px;">歷史報告為付費會員專屬</div>'+
     '<div style="font-size:13.5px;color:var(--gray-500);font-family:var(--font-zh);line-height:1.7;max-width:420px;margin:0 auto 24px;">升級為付費會員即可解鎖過去 30 天每日 Brief 的完整內容。</div>'+
     '<a href="/pages/credits.html" style="display:inline-block;padding:11px 28px;background:var(--navy-700);color:#fff;border-radius:var(--r-sm);font-size:14px;font-weight:600;font-family:var(--font-zh);">升級看完整報告</a>'+
@@ -2013,7 +2014,7 @@ async function loadHubReport(date){
 
 function arcRenderReport(d){
   var html='<div class="report-card">';
-  html+='<div class="report-date-badge">📅 '+arcFmtDate(d.date)+' &nbsp;·&nbsp; '+arcWeekday(d.date)+'</div>';
+  html+='<div class="report-date-badge">'+ICO.cal+' '+arcFmtDate(d.date)+' &nbsp;·&nbsp; '+arcWeekday(d.date)+'</div>';
   if(d.tickers && d.tickers.length){
     html+='<div class="arc-ticker-row">';
     d.tickers.forEach(function(t){

@@ -433,6 +433,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 </style>
   <script src="/shared/nav.js"></script>
   <script src="/shared/footer.js"></script>
+  <script src="/js/icons.js"></script>
 </head>
 <body>
 
@@ -493,7 +494,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <span class="filter-dot" style="background:#d97706"></span>IPO
     </button>
     <button class="filter-chip" onclick="filterEvents('high',this)">
-      🔴 高影響
+      <span data-ico="dotred"></span> 高影響
     </button>
   </div>
 
@@ -808,7 +809,7 @@ async function loadCalendarData(){
               '<div class="ec-data-cell"><span class="ec-data-label">預期</span><span class="ec-data-val">'+(ev.expect||'—')+'</span></div>'+
               '<div class="ec-data-cell ec-data-actual"><span class="ec-data-label">當期</span><span class="ec-data-val '+(ev.actual?'ec-data-published':'ec-data-pending')+'">'+(ev.actual||'待公布')+'</span></div>'+
             '</div>':'')+
-          (ev.watch?'<div class="ec-desc" style="color:var(--amber-700);font-size:12px;">👁 觀察：'+ev.watch+'</div>':'')+
+          (ev.watch?'<div class="ec-desc" style="color:var(--amber-700);font-size:12px;">'+ICO.eye+' 觀察：'+ev.watch+'</div>':'')+
         '</div>'+
         '<div class="ec-right">'+
           '<span class="ec-impact-label '+ilc+'">'+il+'</span>'+

@@ -925,6 +925,7 @@ img { display: block; max-width: 100%; }
 </style>
   <script src="/shared/nav.js"></script>
   <script src="/shared/footer.js"></script>
+  <script src="/js/icons.js"></script>
 </head>
 <body>
 
@@ -963,7 +964,7 @@ img { display: block; max-width: 100%; }
     </div>
     <div style="display:flex;align-items:center;gap:12px;">
       <span class="date-gen-time" id="date-gen-time">—</span>
-      <a href="/pages/archive.html" style="font-size:11px;font-weight:600;color:var(--navy-600);text-decoration:none;font-family:var(--font-zh);padding:4px 10px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:6px;white-space:nowrap;">📂 歷史報告</a>
+      <a href="/pages/archive.html" style="font-size:11px;font-weight:600;color:var(--navy-600);text-decoration:none;font-family:var(--font-zh);padding:4px 10px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:6px;white-space:nowrap;"><span data-ico="folder"></span> 歷史報告</a>
     </div>
   </div>
 
@@ -976,7 +977,7 @@ img { display: block; max-width: 100%; }
     </div>
     <div class="synthesis-body" id="synthesis-body"></div>
     <button class="synthesis-toggle" id="synthesis-toggle" onclick="toggleSynthesis()" style="display:none;">展開全文 ▾</button>
-    <a class="synthesis-upsell" id="synthesis-upsell" href="/pages/credits.html" style="display:none;">🔒 升級 Pro 解鎖完整版總結分析 →</a>
+    <a class="synthesis-upsell" id="synthesis-upsell" href="/pages/credits.html" style="display:none;"><span data-ico="lock"></span> 升級 Pro 解鎖完整版總結分析 →</a>
   </div>
 
   <div class="main-grid">
@@ -987,12 +988,12 @@ img { display: block; max-width: 100%; }
       <div class="brief-flex">
         <nav class="track-side">
           <button class="track-tab active" data-filter="all">全部</button>
-          <button class="track-tab" data-filter="macro">🌐 宏觀</button>
-          <button class="track-tab" data-filter="us">📈 美股</button>
-          <button class="track-tab" data-filter="tw">🇹🇼 台股</button>
-          <button class="track-tab" data-filter="industry">🏭 產業</button>
+          <button class="track-tab" data-filter="macro"><span data-ico="globe"></span> 宏觀</button>
+          <button class="track-tab" data-filter="us"><span data-ico="up"></span> 美股</button>
+          <button class="track-tab" data-filter="tw"><span data-ico="tw"></span> 台股</button>
+          <button class="track-tab" data-filter="industry"><span data-ico="factory"></span> 產業</button>
           <button class="track-tab" data-filter="crypto">₿ 加密貨幣</button>
-          <button class="track-tab" data-filter="commodity">🛢 大宗</button>
+          <button class="track-tab" data-filter="commodity"><span data-ico="oil"></span> 大宗</button>
         </nav>
         <div class="brief-list" id="brief-list" style="flex:1;min-width:0;"></div>
       </div>

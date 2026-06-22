@@ -135,6 +135,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 </style>
   <script src="/shared/nav.js"></script>
   <script src="/shared/footer.js"></script>
+  <script src="/js/icons.js"></script>
 </head>
 <body>
 
@@ -167,7 +168,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div class="page-header">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
       <h1 class="page-title">AI 推演沙盤 <span class="page-title-sub">Scenario Sandbox</span></h1>
-      <a href="/pages/my-scenarios.html" class="btn-my-sc" style="white-space:nowrap;flex-shrink:0;">📁 我的推演 →</a>
+      <a href="/pages/my-scenarios.html" class="btn-my-sc" style="white-space:nowrap;flex-shrink:0;"><span data-ico="folder"></span> 我的推演 →</a>
     </div>
     <p class="page-desc">輸入市場問題，AI 結合今日最新數據，推演三種情境並給出行動建議。每次推演 4 點，結果可加入追蹤，等待驗證。</p>
   </div>
@@ -175,7 +176,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <!-- Login gate -->
   <div id="gate-view" style="display:none;">
     <div class="gate">
-      <div class="gate-icon">🧪</div>
+      <div class="gate-icon"><span data-ico="flask"></span></div>
       <h2 class="gate-title">AI 推演沙盤</h2>
       <p class="gate-desc">登入後可使用 AI 推演沙盤，每次推演消耗 4 點，結果自動追蹤並驗證命中率。</p>
       <a href="/pages/login.html" class="btn-primary">登入 / 註冊</a>
