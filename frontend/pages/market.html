@@ -736,7 +736,7 @@ async function loadData(){
     function renderNewsList(listId,countId,arr,badgeClass,badgeLabel){
       var el=document.getElementById(listId);
       if(!el) return;
-      var list=Array.isArray(arr)?arr:[];
+      var list=(Array.isArray(arr)?arr:[]).slice().sort(function(a,b){return (b.time||b.date||'').localeCompare(a.time||a.date||'');});
       el.innerHTML=list.length?list.map(function(n,i){return renderNewsCard(n,i,badgeClass,badgeLabel);}).join(''):'<div class="news-item" style="justify-content:center;color:var(--gray-400);">今日暫無新聞</div>';
       var cnt=document.getElementById(countId);
       if(cnt) cnt.textContent='今日 '+list.length+' 則';

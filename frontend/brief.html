@@ -1256,13 +1256,14 @@ async function loadData() {
     if (mktEl) mktEl.innerHTML = renderMarketBar(data.tickers);
     renderSynthesis(data.morning_brief, data.date);
     const mk = data.market || {};
+    const sortDesc = arr => arr.slice().sort((a,b) => (b.time||b.date||'').localeCompare(a.time||a.date||''));
     const allItems = [
-      ...(data.macro||[]).map(i=>({...i,type:'macro'})),
-      ...(mk.us_news||[]).map(i=>({...i,type:'us'})),
-      ...(mk.tw_news||[]).map(i=>({...i,type:'tw'})),
-      ...(data.industry||[]).map(i=>({...i,type:'industry'})),
-      ...(mk.crypto_news||[]).map(i=>({...i,type:'crypto'})),
-      ...(mk.commodity_news||[]).map(i=>({...i,type:'commodity'})),
+      ...sortDesc(data.macro||[]).map(i=>({...i,type:'macro'})),
+      ...sortDesc(mk.us_news||[]).map(i=>({...i,type:'us'})),
+      ...sortDesc(mk.tw_news||[]).map(i=>({...i,type:'tw'})),
+      ...sortDesc(data.industry||[]).map(i=>({...i,type:'industry'})),
+      ...sortDesc(mk.crypto_news||[]).map(i=>({...i,type:'crypto'})),
+      ...sortDesc(mk.commodity_news||[]).map(i=>({...i,type:'commodity'})),
     ];
     const briefEl = document.getElementById('brief-list');
     if (briefEl) briefEl.innerHTML = renderBriefList(allItems);
