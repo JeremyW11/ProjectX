@@ -1,121 +1,115 @@
 {
-  "date": "2026-06-23",
-  "started_at": "2026-06-23T00:25:49.473Z",
-  "finished_at": "2026-06-23T01:37:09.880Z",
-  "claude_calls": 17,
-  "claude_total_ms": 3089274,
+  "date": "2026-06-24",
+  "started_at": "2026-06-24T00:38:33.063Z",
+  "finished_at": "2026-06-24T01:12:42.564Z",
+  "claude_calls": 16,
+  "claude_total_ms": 2800179,
   "claude_retries": 0,
   "api_fallbacks": 9,
-  "failed_calls": 3,
+  "failed_calls": 0,
   "calls": [
     {
-      "chars": 4895,
+      "chars": 5298,
       "attempts": 1,
-      "ms": 103455,
+      "ms": 107069,
       "ok": true
     },
     {
       "chars": 1234,
       "attempts": 1,
-      "ms": 215438,
+      "ms": 217138,
       "ok": true,
       "api_fallback": true
     },
     {
-      "chars": 5998,
+      "chars": 6400,
       "attempts": 1,
-      "ms": 150869,
-      "ok": false
+      "ms": 297762,
+      "ok": true,
+      "api_fallback": true
     },
     {
-      "chars": 5998,
+      "chars": 5970,
       "attempts": 1,
-      "ms": 150702,
-      "ok": false
-    },
-    {
-      "chars": 5998,
-      "attempts": 1,
-      "ms": 150964,
-      "ok": false
-    },
-    {
-      "chars": 5191,
-      "attempts": 1,
-      "ms": 20218,
+      "ms": 17382,
       "ok": true
     },
     {
-      "chars": 7759,
+      "chars": 8607,
       "attempts": 1,
-      "ms": 245391,
+      "ms": 229668,
       "ok": true,
       "api_fallback": true
     },
     {
-      "chars": 24866,
+      "chars": 35990,
       "attempts": 1,
-      "ms": 395754,
+      "ms": 382485,
       "ok": true,
       "api_fallback": true
     },
     {
-      "chars": 25952,
+      "chars": 37122,
       "attempts": 1,
-      "ms": 269514,
+      "ms": 277254,
       "ok": true,
       "api_fallback": true
     },
     {
-      "chars": 25188,
+      "chars": 36358,
       "attempts": 1,
-      "ms": 289482,
-      "ok": true,
-      "api_fallback": true
-    },
-    {
-      "chars": 27157,
-      "attempts": 1,
-      "ms": 219943,
-      "ok": true,
-      "api_fallback": true
-    },
-    {
-      "chars": 25605,
-      "attempts": 1,
-      "ms": 242359,
-      "ok": true,
-      "api_fallback": true
-    },
-    {
-      "chars": 27620,
-      "attempts": 1,
-      "ms": 140046,
+      "ms": 125971,
       "ok": true
     },
     {
-      "chars": 25771,
+      "chars": 38017,
       "attempts": 1,
-      "ms": 189537,
+      "ms": 209341,
       "ok": true,
       "api_fallback": true
     },
     {
-      "chars": 26139,
+      "chars": 36466,
       "attempts": 1,
-      "ms": 32961,
+      "ms": 244135,
+      "ok": true,
+      "api_fallback": true
+    },
+    {
+      "chars": 39193,
+      "attempts": 1,
+      "ms": 104424,
       "ok": true
     },
     {
-      "chars": 26812,
+      "chars": 36944,
       "attempts": 1,
-      "ms": 74015,
+      "ms": 194979,
+      "ok": true,
+      "api_fallback": true
+    },
+    {
+      "chars": 39288,
+      "attempts": 1,
+      "ms": 61620,
       "ok": true
     },
     {
-      "chars": 11448,
+      "chars": 36662,
       "attempts": 1,
-      "ms": 198626,
+      "ms": 28103,
+      "ok": true
+    },
+    {
+      "chars": 35647,
+      "attempts": 1,
+      "ms": 108507,
+      "ok": true
+    },
+    {
+      "chars": 11480,
+      "attempts": 1,
+      "ms": 194341,
       "ok": true,
       "api_fallback": true
     }
