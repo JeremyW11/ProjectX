@@ -569,8 +569,21 @@ async function loadPerformance(){
   function dirTag(d){return DIR[d]||'';}
   function typeTag(t){return TBADGE[t]||TBADGE.calendar;}
 
-  /* ── 分類命中率小卡 ── */
-  var byType=(P.by_type)||{};
+  /* ── 分類命中率小卡（優先用 performance.json by_type，否則從 prediction_history 即時計算） ── */
+  var byType=P.by_type||null;
+  if(!byType && ph.length){
+    byType={};
+    ['calendar','story','industry'].forEach(function(t){
+      var sub=ph.filter(function(p){return (p.type||'calendar')===t;});
+      var res=sub.filter(function(p){return ['hit','partial','miss'].indexOf(p.accuracy)>=0;});
+      var hit=sub.filter(function(p){return p.accuracy==='hit';}).length;
+      var partial=sub.filter(function(p){return p.accuracy==='partial';}).length;
+      var pend=sub.filter(function(p){return p.accuracy==='pending';}).length;
+      var weighted=hit+partial*0.5;
+      byType[t]={resolved:res.length,hit:hit,partial:partial,miss:res.length-hit-partial,pending:pend,hit_rate:res.length?Math.round(weighted/res.length*1000)/10:null};
+    });
+  }
+  byType=byType||{};
   var typeNames={calendar:'日曆事件',story:'全球追蹤',industry:'產業新聞'};
   var byTypeHtml='<div class="bytype-grid rv">';
   ['calendar','story','industry'].forEach(function(t){
