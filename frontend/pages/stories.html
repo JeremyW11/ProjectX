@@ -82,6 +82,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .tl-src{font-size:11px;color:var(--navy-500);margin-left:6px;font-weight:600;}
 .sc-dir{font-weight:700;}
 .empty-box{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--r-lg);padding:48px 24px;text-align:center;color:var(--gray-400);font-size:14px;}
+.story-pred{margin-top:14px;border-top:1px solid var(--gray-200);padding-top:12px;}
+.story-pred-header{font-size:10px;font-weight:700;color:var(--navy-600);font-family:var(--font-en);letter-spacing:.5px;margin-bottom:5px;display:flex;align-items:center;gap:6px;}
+.story-pred-meta{color:var(--gray-400);font-weight:400;}
+.story-pred-text{font-size:13.5px;color:var(--gray-800);line-height:1.6;margin-bottom:7px;}
+.story-pred-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;}
+.story-pred-trigger{color:var(--gray-500);font-size:11.5px;}
+.story-pred-assets{font-size:11.5px;color:var(--navy-700);margin-top:5px;background:var(--navy-50);border-radius:5px;padding:3px 8px;display:inline-block;}
 @media(max-width:768px){.header-nav{display:none;}}
 </style>
   <script src="/js/icons.js"></script>
@@ -212,11 +219,13 @@ function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){retur
 async function loadStories(){
   var listEl=document.getElementById('stories-list');
   if(!listEl) return;
-  var stories=[];
+  var stories=[], storyPreds={};
   try{
-    var res=await fetch('/data/accumulated.json?v='+Math.floor(Date.now()/300000));
-    var acc=await res.json();
+    var v=Math.floor(Date.now()/300000);
+    var [accRes,dailyRes]=await Promise.all([fetch('/data/accumulated.json?v='+v),fetch('/data/daily.json?v='+v)]);
+    var acc=await accRes.json();
     stories=Array.isArray(acc.tracked_stories)?acc.tracked_stories:[];
+    try{var daily=await dailyRes.json();(daily.story_predictions||[]).forEach(function(p){if(p.story_id)storyPreds[p.story_id]=p;});}catch(e2){}
   }catch(e){ stories=[]; if(window.PX_showDataError)window.PX_showDataError('⚠ 追蹤資料載入失敗，請稍後重新整理。'); }
 
   // 進行中優先，落幕殿後；各自依最新更新排序
@@ -244,6 +253,25 @@ async function loadStories(){
         '<div class="tl-text">'+esc(t.update)+src+'</div>'+
       '</div>';
     }).join('');
+    // ── AI 預判區塊（今日 story_predictions 匹配）──
+    var pred=storyPreds[s.id]||null;
+    var predHTML='';
+    if(pred&&s.status!=='落幕'){
+      var PDCOL={positive:'var(--green-600)',negative:'var(--red-600)',neutral:'var(--amber-600)'};
+      var PDLBL={positive:'利多',negative:'利空',neutral:'中性'};
+      var PCBG={HIGH:'var(--green-100)',MED:'var(--amber-100)',LOW:'var(--gray-100)'};
+      var PCCOL={HIGH:'var(--green-700)',MED:'var(--amber-700)',LOW:'var(--gray-600)'};
+      predHTML='<div class="story-pred">'+
+        '<div class="story-pred-header">✦ AI 預判 <span class="story-pred-meta">｜'+esc(pred.timeframe||'')+'</span></div>'+
+        '<div class="story-pred-text">'+esc(pred.prediction||'')+'</div>'+
+        '<div class="story-pred-foot">'+
+          '<span style="color:'+(PDCOL[pred.direction]||'var(--gray-500)')+';">'+(PDLBL[pred.direction]||pred.direction||'')+'</span>'+
+          '<span style="background:'+(PCBG[pred.confidence]||'var(--gray-100)')+';color:'+(PCCOL[pred.confidence]||'var(--gray-600)')+';border-radius:4px;padding:1px 6px;font-size:10px;font-weight:600;font-family:var(--font-en);">'+esc(pred.confidence||'')+'</span>'+
+          (pred.next_trigger?'<span class="story-pred-trigger">觀察：'+esc(pred.next_trigger)+'</span>':'')+
+        '</div>'+
+        (pred.affect_assets?'<div class="story-pred-assets">影響：'+esc(pred.affect_assets)+'</div>':'')+
+      '</div>';
+    }
     return '<div class="story-card">'+
       '<div class="sc-head">'+
         '<span class="sc-title">'+esc(s.title)+'</span>'+
@@ -258,6 +286,7 @@ async function loadStories(){
       '</div>'+
       (assets.length?'<div class="sc-assets" style="margin-bottom:12px;"><span style="background:none;color:var(--gray-400);padding-left:0;">受影響標的：</span>'+assets.map(function(a){return '<span>'+esc(a)+'</span>';}).join('')+'</div>':'')+
       (tlHTML?'<div class="timeline">'+tlHTML+'</div>':'')+
+      predHTML+
     '</div>';
   }).join('');
 }
