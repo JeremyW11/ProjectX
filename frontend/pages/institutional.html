@@ -279,10 +279,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <button class="tab-btn" data-tab="calls" onclick="switchTab('calls')">
       <span data-ico="phone"></span> 法說會
     </button>
-    <button class="tab-btn" data-tab="industry-pred" onclick="switchTab('industry-pred')" style="position:relative;">
-      <span data-ico="target"></span> 產業預判
-      <span style="font-size:9px;font-weight:700;color:var(--pro-gold,#f6c84b);font-family:var(--font-en);background:rgba(246,200,75,.15);border-radius:4px;padding:1px 5px;margin-left:2px;">Pro</span>
-    </button>
   </div>
 
   <!-- ═══════════════ RESEARCH TAB ═══════════════ -->
@@ -492,18 +488,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </div>
   </div>
 
-  <!-- ═══════════════ INDUSTRY PRED TAB (Pro) ═══════════════ -->
-  <div class="tab-panel" id="tab-industry-pred">
-    <div id="ipred-gate" style="display:none;background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:12px;padding:48px 40px;text-align:center;color:var(--white);margin-bottom:20px;">
-      <div style="font-size:32px;margin-bottom:10px;color:#f6c84b;">✦</div>
-      <div style="font-size:20px;font-weight:600;margin-bottom:8px;">產業預判為 <em style="color:#f6c84b;font-style:normal;">Pro 會員</em>專屬</div>
-      <div style="font-size:13.5px;color:rgba(255,255,255,.7);max-width:440px;margin:0 auto 22px;line-height:1.7;">AI 每日針對重要產業新聞預判市場影響方向、信心度與關鍵標的，幫助你在市場開盤前掌握板塊輪動信號。</div>
-      <a href="/pages/login.html" style="display:inline-block;padding:11px 26px;background:#f6c84b;color:#0d1630;border-radius:8px;font-size:13.5px;font-weight:700;">✦ 升級 Pro</a>
-    </div>
-    <div id="ipred-content">
-      <div style="padding:40px;text-align:center;color:var(--gray-400);font-size:14px;">載入中...</div>
-    </div>
-  </div>
 
 </main>
 
@@ -536,60 +520,6 @@ window.addEventListener('scroll',function(){
 function switchTab(id){
   document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.toggle('active',p.id==='tab-'+id);});
   document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-tab')===id);});
-  if(id==='industry-pred') loadIndustryPred();
-}
-
-var _ipredLoaded=false;
-var _industryPreds=[];
-async function loadIndustryPred(){
-  if(_ipredLoaded) return;
-  _ipredLoaded=true;
-  var gateEl=document.getElementById('ipred-gate');
-  var contEl=document.getElementById('ipred-content');
-  try{
-    var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
-    var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
-    var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-    var {data:{session}}=await sb.auth.getSession();
-    var isPro=false;
-    if(session&&session.user){
-      if(session.user.email==='jermy831102@gmail.com'){isPro=true;}
-      else{
-        var {data:prof}=await sb.from('profiles').select('is_pro').eq('id',session.user.id).single();
-        isPro=!!(prof&&prof.is_pro);
-      }
-    }
-    if(!isPro){if(gateEl)gateEl.style.display='block';if(contEl)contEl.innerHTML='';return;}
-    if(gateEl)gateEl.style.display='none';
-    if(!_industryPreds.length){if(contEl)contEl.innerHTML='<div style="padding:40px;text-align:center;color:var(--gray-400);font-size:14px;">今日尚無產業新聞預判，下次早報生成後將自動更新。</div>';return;}
-    var DIRCOL={positive:'var(--green-600)',negative:'var(--red-600)',neutral:'var(--amber-600)'};
-    var DIRLBL={positive:'利多',negative:'利空',neutral:'中性'};
-    var CBGC={HIGH:'var(--green-100)',MED:'var(--amber-100)',LOW:'var(--gray-100)'};
-    var CCOL={HIGH:'var(--green-700)',MED:'var(--amber-700)',LOW:'var(--gray-600)'};
-    var TYPMAP={semi:'半導體',ai:'AI／雲端',energy:'能源',tw:'台股',shipping:'航運',finance:'金融',biotech:'生技'};
-    if(contEl) contEl.innerHTML='<div style="display:flex;flex-direction:column;gap:12px;">'+_industryPreds.map(function(p){
-      var dc=DIRCOL[p.direction]||'var(--gray-500)';
-      var dl=DIRLBL[p.direction]||p.direction||'';
-      var cb=CBGC[p.confidence]||'var(--gray-100)';
-      var cc=CCOL[p.confidence]||'var(--gray-600)';
-      var tks=(p.affect_tickers||[]).map(function(t){return '<span style="background:var(--navy-50);color:var(--navy-700);font-size:11px;padding:2px 8px;border-radius:5px;margin-right:4px;font-family:var(--font-en);">'+t+'</span>';}).join('');
-      return '<div style="background:var(--white);border:1px solid var(--gray-200);border-radius:10px;padding:16px 18px;">'+
-        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">'+
-          '<span style="font-size:11px;font-weight:600;background:var(--gray-100);color:var(--gray-600);padding:2px 8px;border-radius:5px;">'+(TYPMAP[p.news_type]||p.news_type||'')+'</span>'+
-          '<span style="font-size:11px;color:var(--gray-400);">'+esc(p.news_tag||'')+'</span>'+
-        '</div>'+
-        '<div style="font-size:13px;color:var(--gray-500);margin-bottom:6px;line-height:1.5;">'+esc(p.news_text||'')+'</div>'+
-        '<div style="font-size:14px;color:var(--gray-900);font-weight:500;line-height:1.6;margin-bottom:8px;">'+esc(p.prediction||'')+'</div>'+
-        '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">'+
-          '<span style="color:'+dc+';font-weight:600;font-size:13px;">'+dl+'</span>'+
-          '<span style="background:'+cb+';color:'+cc+';border-radius:4px;padding:1px 7px;font-size:10.5px;font-weight:700;font-family:var(--font-en);">'+esc(p.confidence||'')+'</span>'+
-          '<span style="font-size:11.5px;color:var(--gray-400);">'+esc(p.timeframe||'')+'</span>'+
-          (tks?'<span>'+tks+'</span>':'')+
-        '</div>'+
-        (p.watch_note?'<div style="font-size:11.5px;color:var(--gray-500);margin-top:6px;border-top:1px solid var(--gray-100);padding-top:6px;">觀察：'+esc(p.watch_note)+'</div>':'')+
-      '</div>';
-    }).join('')+'</div>';
-  }catch(e){if(contEl)contEl.innerHTML='<div style="padding:20px;color:var(--gray-400);">載入失敗，請稍後重試。</div>';}
 }
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
@@ -829,8 +759,6 @@ async function loadData(){
     checkDataStaleness(data.date);
 
     var inst=data.institutional||{};
-    _industryPreds=Array.isArray(data.industry_predictions)?data.industry_predictions:[];
-
     // try accumulated.json for more data (covers full current month)
     var accCoverage='';
     try{

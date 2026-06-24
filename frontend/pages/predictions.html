@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project X · 事件預判</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-950:#070d1c;--navy-900:#0d1630;--navy-800:#152244;
+  --navy-700:#1d2d5a;--navy-600:#1e3a8a;--navy-500:#2563eb;
+  --navy-400:#3b82f6;--navy-300:#93c5fd;--navy-100:#dbeafe;--navy-50:#eff6ff;
+  --gray-900:#0f172a;--gray-700:#334155;--gray-600:#475569;
+  --gray-500:#64748b;--gray-400:#94a3b8;--gray-300:#cbd5e1;
+  --gray-200:#e2e8f0;--gray-100:#f1f5f9;--gray-50:#f8fafc;--white:#ffffff;
+  --green-700:#15803d;--green-600:#16a34a;--green-100:#dcfce7;
+  --red-700:#b91c1c;--red-100:#fee2e2;
+  --amber-600:#d97706;--amber-100:#fef3c7;
+  --pro-gold:#c9a84c;
+  --font-en:'DM Sans',sans-serif;--font-zh:'Noto Sans TC',sans-serif;
+  --r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:24px;
+  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;-webkit-font-smoothing:antialiased;}
+body{background:radial-gradient(1120px 640px at 94% -14%,rgba(37,99,235,.46),transparent 64%),radial-gradient(940px 720px at -10% 4%,rgba(51,65,85,.40),transparent 64%),radial-gradient(820px 620px at 50% 118%,rgba(29,78,216,.28),transparent 66%),linear-gradient(160deg,#dbe2ef 0%,#f4f6fb 56%);background-attachment:fixed;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:100;}
+.topbar-logo{display:flex;align-items:center;gap:10px;margin-right:36px;}
+.header-nav{display:flex;align-items:center;gap:2px;flex:1;}
+.nav-item{font-size:13.5px;color:var(--gray-600);padding:6px 12px;border-radius:var(--r-sm);font-weight:500;display:flex;align-items:center;gap:6px;transition:all .15s;}
+.nav-item:hover{background:var(--gray-100);color:var(--navy-700);}
+.nav-item.active{background:var(--navy-50);color:var(--navy-700);font-weight:600;}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-500);}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green-600);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.header-time{font-size:12px;color:var(--gray-400);font-family:var(--font-en);}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;}
+
+.page{max-width:860px;margin:0 auto;padding:88px 24px 64px;}
+.page-header{margin-bottom:20px;}
+.page-title{font-size:26px;font-weight:600;color:var(--navy-900);}
+.page-title-sub{font-size:14px;color:var(--gray-400);font-family:var(--font-en);font-weight:400;margin-left:8px;}
+.page-update{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
+
+/* PRO GATE */
+.pro-gate{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--r-xl);padding:48px 40px;text-align:center;color:var(--white);margin-bottom:20px;}
+.pro-gate-icon{font-size:36px;color:var(--pro-gold);margin-bottom:12px;}
+.pro-gate-title{font-size:24px;font-weight:600;margin-bottom:10px;}
+.pro-gate-title em{color:var(--pro-gold);font-style:normal;}
+.pro-gate-desc{font-size:14px;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 24px;line-height:1.7;}
+.btn-pro-upgrade{display:inline-block;padding:12px 28px;background:var(--pro-gold);color:var(--navy-900);border-radius:var(--r-md);font-size:14px;font-weight:700;}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+@media(max-width:640px){.stats-bar{grid-template-columns:repeat(2,1fr);}}
+.stat-chip{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;box-shadow:var(--shadow-card);}
+.stat-chip .sc-label{font-size:11px;color:var(--gray-500);font-weight:600;margin-bottom:4px;}
+.stat-chip .sc-value{font-size:22px;font-weight:700;color:var(--navy-700);font-family:var(--font-en);}
+.stat-chip .sc-sub{font-size:11px;color:var(--gray-400);margin-top:2px;}
+.stat-chip a{color:var(--navy-500);font-size:11px;}
+
+/* TYPE TABS */
+.type-tabs{display:flex;gap:6px;margin-bottom:18px;border-bottom:1px solid var(--gray-200);}
+.type-tab{padding:9px 16px;font-size:13.5px;font-weight:600;color:var(--gray-500);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;}
+.type-tab:hover{color:var(--navy-700);}
+.type-tab.active{color:var(--navy-700);border-bottom-color:var(--navy-500);}
+.type-tab .tc{font-size:11px;color:var(--gray-400);font-family:var(--font-en);margin-left:5px;}
+
+/* PREDICTION CARDS */
+.pred-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:18px 22px;margin-bottom:12px;box-shadow:var(--shadow-card);transition:border-color .15s;}
+.pred-card:hover{border-color:var(--navy-300);}
+.pred-card.hidden{display:none;}
+.pred-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+.pred-due{margin-left:auto;font-size:11.5px;color:var(--gray-400);font-family:var(--font-en);white-space:nowrap;}
+.pred-title{font-size:13px;font-weight:600;color:var(--gray-600);margin-bottom:8px;}
+.pred-text{font-size:14.5px;color:var(--navy-900);line-height:1.75;margin-bottom:10px;}
+.pred-footer{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+.pred-assets{font-size:12px;color:var(--navy-700);background:var(--navy-50);border-radius:5px;padding:3px 10px;font-family:var(--font-en);}
+.pred-watch{font-size:12px;color:var(--gray-500);}
+.pred-watch b{color:var(--gray-700);}
+
+/* BADGES & TAGS */
+.badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+.badge.type-cal{background:#eff6ff;color:#1d4ed8;}
+.badge.type-story{background:#f0fdf4;color:#15803d;}
+.badge.type-ind{background:var(--amber-100);color:var(--amber-600);}
+.badge.new-today{background:#fef3c7;color:#92400e;}
+.dir{font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;}
+.dir.pos{background:var(--green-100);color:var(--green-700);}
+.dir.neg{background:var(--red-100);color:var(--red-700);}
+.dir.neu{background:var(--gray-100);color:var(--gray-600);}
+.conf{font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;}
+.conf.high{background:var(--green-100);color:var(--green-700);}
+.conf.med{background:#e0e7ff;color:#4338ca;}
+.conf.low{background:var(--gray-100);color:var(--gray-500);}
+.tf-tag{font-size:11.5px;color:var(--gray-400);font-family:var(--font-en);}
+
+.empty-box{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--r-lg);padding:48px 24px;text-align:center;color:var(--gray-400);font-size:14px;}
+.loading-box{text-align:center;color:var(--gray-400);font-size:13.5px;padding:40px;}
+
+@media(max-width:768px){.header-nav{display:none;}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/index.html" style="text-decoration:none;display:flex;align-items:center;"><div class="topbar-logo">
+    <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
+      <line x1="10" y1="10" x2="30" y2="30" stroke="white" stroke-width="6" stroke-linecap="round"/>
+      <line x1="30" y1="10" x2="10" y2="30" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="3" fill="#2563eb"/>
+      <circle cx="20" cy="20" r="1.5" fill="#93c5fd"/>
+      <text x="48" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" letter-spacing="0.3" fill="#0f172a">PROJECT </text>
+      <text x="148" y="26" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="700" fill="#2563eb">X</text>
+    </svg>
+  </div></a>
+  <nav class="header-nav" data-active="predictions"></nav>
+  <div class="header-right">
+    <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+    <span class="header-time" id="clock">—</span>
+    <a href="/pages/login.html" class="btn-login" id="auth-btn">登入</a>
+  </div>
+</header>
+
+<script src="/shared/nav.js"></script>
+<script src="/shared/footer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/shared/header-user.js"></script>
+
+<main class="page">
+
+  <div class="page-header">
+    <h1 class="page-title">事件預判 <span class="page-title-sub">Event Predictions</span></h1>
+    <div class="page-update">⚡ Powered by PulseAI · 每日生成三類市場預判，追蹤至驗收 · 結果計入<a href="/pages/performance.html" style="color:var(--navy-500);">歷史績效</a> · Pro 會員專屬</div>
+  </div>
+
+  <!-- PRO GATE -->
+  <div id="pro-gate-view">
+    <div class="pro-gate">
+      <div class="pro-gate-icon">✦</div>
+      <h2 class="pro-gate-title">看 PulseAI <em>每天在預判什麼</em></h2>
+      <p class="pro-gate-desc">PulseAI 每日生成三類預判：針對 FOMC/財報等固定日期的<b style="color:var(--pro-gold);">日曆事件</b>、追蹤地緣與貿易故事走向的<b style="color:var(--pro-gold);">全球追蹤</b>、以及產業新聞短期影響的<b style="color:var(--pro-gold);">產業新聞</b>。所有預判到期後自動驗收，命中率計入歷史績效，全程公開透明。</p>
+      <div>
+        <a href="/pages/login.html" class="btn-pro-upgrade">✦ 登入體驗 Pro</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN VIEW -->
+  <div id="pred-view" style="display:none;">
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat-chip"><div class="sc-label">今日新增</div><div class="sc-value" id="stat-today">—</div><div class="sc-sub">三類合計</div></div>
+      <div class="stat-chip"><div class="sc-label">待驗證中</div><div class="sc-value" id="stat-pending">—</div><div class="sc-sub">追蹤中</div></div>
+      <div class="stat-chip"><div class="sc-label">已驗證</div><div class="sc-value" id="stat-resolved">—</div><div class="sc-sub">歷史累計</div></div>
+      <div class="stat-chip"><div class="sc-label">加權命中率</div><div class="sc-value" id="stat-hitrate">—</div><div class="sc-sub"><a href="/pages/performance.html">查看歷史績效 →</a></div></div>
+    </div>
+
+    <div class="type-tabs" id="type-tabs">
+      <button class="type-tab active" data-type="all">全部 <span class="tc" id="cnt-all"></span></button>
+      <button class="type-tab" data-type="calendar">日曆事件 <span class="tc" id="cnt-cal"></span></button>
+      <button class="type-tab" data-type="story">全球追蹤 <span class="tc" id="cnt-story"></span></button>
+      <button class="type-tab" data-type="industry">產業新聞 <span class="tc" id="cnt-ind"></span></button>
+    </div>
+
+    <div id="pred-list"><div class="loading-box">載入預判資料中…</div></div>
+  </div>
+
+</main>
+
+<script>
+function tick(){
+  var t=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
+  var el=document.getElementById('clock'); if(el) el.textContent=t+' CST';
+}
+tick(); setInterval(tick,1000);
+
+var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
+var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
+var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+function initAuth(){
+  _supabase.auth.onAuthStateChange(function(event,session){
+    if(event==='INITIAL_SESSION'||event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){
+      setAuthState(session?session.user:null);
+    } else if(event==='SIGNED_OUT'){
+      setAuthState(null);
+    }
+  });
+}
+
+function setAuthState(user){
+  var gateEl=document.getElementById('pro-gate-view');
+  var viewEl=document.getElementById('pred-view');
+  var btnEl=document.getElementById('auth-btn');
+  if(user){
+    if(btnEl){ btnEl.textContent='登出'; btnEl.href='#'; btnEl.onclick=function(e){e.preventDefault();_supabase.auth.signOut().then(function(){window.location.reload();});}; }
+    checkProStatus(user, gateEl, viewEl);
+  } else {
+    if(gateEl) gateEl.style.display='block';
+    if(viewEl) viewEl.style.display='none';
+    if(btnEl){ btnEl.textContent='登入'; btnEl.href='/pages/login.html'; btnEl.onclick=null; }
+  }
+}
+
+async function checkProStatus(user, gateEl, viewEl){
+  var isAdmin = user.email === 'jermy831102@gmail.com';
+  var isPro = isAdmin;
+  if(!isPro){
+    var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
+    isPro = result.data && result.data.is_pro === true;
+  }
+  if(isPro){
+    if(gateEl) gateEl.style.display='none';
+    if(viewEl) viewEl.style.display='block';
+    loadPredictions();
+  } else {
+    if(gateEl) gateEl.style.display='block';
+    if(viewEl) viewEl.style.display='none';
+  }
+}
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+var TYPE_BADGE = {
+  calendar: '<span class="badge type-cal">日曆事件</span>',
+  story:    '<span class="badge type-story">全球追蹤</span>',
+  industry: '<span class="badge type-ind">產業新聞</span>'
+};
+var DIR_TAG = {
+  positive: '<span class="dir pos">看多</span>',
+  negative: '<span class="dir neg">看空</span>',
+  neutral:  '<span class="dir neu">中性</span>'
+};
+var CONF_CLASS = { HIGH:'high', MED:'med', MEDIUM:'med', LOW:'low' };
+
+function renderCard(p, todayStr){
+  var t = p.type || 'calendar';
+  var dueDate = p.verify_after || p.event_date || '';
+  var conf = (p.confidence||'').toUpperCase();
+  var confClass = CONF_CLASS[conf] || 'med';
+  var isNew = p.date === todayStr;
+  var tickers = '';
+  if(Array.isArray(p.affect_tickers) && p.affect_tickers.length) tickers = p.affect_tickers.join(' · ');
+  else if(p.affect_assets) tickers = p.affect_assets;
+
+  return '<div class="pred-card" data-type="'+t+'">'
+    +'<div class="pred-header">'
+      +(TYPE_BADGE[t]||TYPE_BADGE.calendar)
+      +(DIR_TAG[p.direction]||'')
+      +(conf?'<span class="conf '+confClass+'">'+conf+'</span>':'')
+      +(p.timeframe?'<span class="tf-tag">'+esc(p.timeframe)+'</span>':'')
+      +(isNew?'<span class="badge new-today">今日</span>':'')
+      +(dueDate?'<span class="pred-due">驗收 '+esc(dueDate)+'</span>':'')
+    +'</div>'
+    +(p.event_title?'<div class="pred-title">'+esc(p.event_title)+'</div>':'')
+    +'<div class="pred-text">'+esc(p.prediction||'')+'</div>'
+    +(tickers||p.watch_note||p.next_trigger?
+      '<div class="pred-footer">'
+        +(tickers?'<span class="pred-assets">'+esc(tickers)+'</span>':'')
+        +((p.watch_note||p.next_trigger)?'<span class="pred-watch"><b>觀察：</b>'+esc(p.watch_note||p.next_trigger)+'</span>':'')
+      +'</div>'
+    :'')
+  +'</div>';
+}
+
+async function loadPredictions(){
+  var listEl = document.getElementById('pred-list');
+  var v = Math.floor(Date.now()/300000);
+  var acc = {}, perf = {};
+  try{ acc = await (await fetch('/data/accumulated.json?v='+v)).json(); }catch(e){}
+  try{ perf = await (await fetch('/data/performance.json?v='+v)).json(); }catch(e){}
+
+  var ph = Array.isArray(acc.prediction_history) ? acc.prediction_history : [];
+  var pending = ph.filter(function(p){ return p.accuracy === 'pending' && p.prediction; });
+  var resolved = ph.filter(function(p){ return ['hit','partial','miss'].indexOf(p.accuracy) >= 0; });
+
+  var todayStr = new Date(Date.now()+8*3600000).toISOString().split('T')[0];
+  var todayNew = pending.filter(function(p){ return p.date === todayStr; });
+
+  // stats
+  document.getElementById('stat-today').textContent = todayNew.length;
+  document.getElementById('stat-pending').textContent = pending.length;
+  document.getElementById('stat-resolved').textContent = resolved.length;
+  var hr = perf.predictions && perf.predictions.hit_rate_weighted;
+  document.getElementById('stat-hitrate').textContent = hr != null ? hr + '%' : '—';
+
+  // sort: today's first, then by due date asc
+  pending.sort(function(a,b){
+    if(a.date === todayStr && b.date !== todayStr) return -1;
+    if(b.date === todayStr && a.date !== todayStr) return 1;
+    var da = a.verify_after||a.event_date||a.date||'';
+    var db = b.verify_after||b.event_date||b.date||'';
+    return da.localeCompare(db);
+  });
+
+  // count by type
+  var counts = { calendar:0, story:0, industry:0 };
+  pending.forEach(function(p){ var t=p.type||'calendar'; if(counts[t]!=null) counts[t]++; });
+  document.getElementById('cnt-all').textContent = pending.length;
+  document.getElementById('cnt-cal').textContent = counts.calendar;
+  document.getElementById('cnt-story').textContent = counts.story;
+  document.getElementById('cnt-ind').textContent = counts.industry;
+
+  if(!pending.length){
+    listEl.innerHTML='<div class="empty-box">目前無待驗證的預判。明日早報生成後將自動更新。</div>';
+    return;
+  }
+
+  listEl.innerHTML = pending.map(function(p){ return renderCard(p, todayStr); }).join('');
+
+  // type filter
+  document.getElementById('type-tabs').addEventListener('click', function(e){
+    var btn = e.target.closest('.type-tab');
+    if(!btn) return;
+    var active = btn.dataset.type;
+    document.querySelectorAll('.type-tab').forEach(function(b){ b.classList.toggle('active', b.dataset.type===active); });
+    document.querySelectorAll('.pred-card').forEach(function(card){
+      card.classList.toggle('hidden', active !== 'all' && card.dataset.type !== active);
+    });
+  });
+}
+
+initAuth();
+</script>
+</body>
+</html>
