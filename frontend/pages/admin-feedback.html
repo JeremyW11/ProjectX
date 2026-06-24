@@ -341,7 +341,7 @@ a{text-decoration:none;color:inherit;}
 
 <script>
 var BACKEND='https://projectx-backend-o2pl.onrender.com';
-var _code=sessionStorage.getItem('px_admin_code')||'';
+var _code='';
 
 // state
 var _members=[],_mFilter='all',_mQ='';
@@ -354,7 +354,7 @@ async function api(path,opts){
   var headers=Object.assign({'x-admin-code':_code},opts.headers||{});
   if(opts.body){ headers['Content-Type']='application/json'; opts.body=JSON.stringify(opts.body); }
   var r=await fetch(BACKEND+path,{method:opts.method||'GET',headers:headers,body:opts.body});
-  if(r.status===401){ _code=''; sessionStorage.removeItem('px_admin_code'); showGate('密碼錯誤，請重新輸入。'); throw new Error('unauthorized'); }
+  if(r.status===401){ _code=''; showGate('密碼錯誤，請重新輸入。'); throw new Error('unauthorized'); }
   var data=null; try{ data=await r.json(); }catch(e){}
   if(!r.ok) throw new Error((data&&data.error)||('http_'+r.status));
   return data;
@@ -379,7 +379,6 @@ async function submitCode(){
   _code=code;
   try{
     await api('/admin/login',{method:'POST'});
-    sessionStorage.setItem('px_admin_code',_code);
     enterAdmin();
   }catch(e){ /* api() 已處理 401 並顯示訊息 */ }
 }
@@ -554,29 +553,30 @@ function renderFbCard(f,isApply){
   var catChip=isChart?'<span class="tag chart">'+ICO.unlock+' 圖表申請</span>':(isProApp?'<span class="tag proapp">✦ Pro 申請</span>':(isCredit?'<span class="tag credit">'+ICO.gem+' 點數購買</span>':''));
   var acts='';
   if(st==='pending'){
+    var did=f.id, duid=f.user_id||'';
     if(isCredit){
       acts='<div class="fb-actions">'
-        +'<button class="btn btn-success" onclick="grantCredits(\''+f.id+'\',\''+f.user_id+'\',this)">已收款，完成加點</button>'
-        +'<button class="btn btn-ghost" onclick="denyCredits(\''+f.id+'\',this)">婉拒 / 取消</button></div>';
+        +'<button class="btn btn-success" data-action="grantCredits" data-id="'+did+'" data-uid="'+duid+'">已收款，完成加點</button>'
+        +'<button class="btn btn-ghost" data-action="denyCredits" data-id="'+did+'">婉拒 / 取消</button></div>';
     } else if(isChart){
       acts='<div class="fb-actions">'
-        +'<button class="btn btn-success" onclick="grantChart(\''+f.id+'\',\''+f.user_id+'\',true,this)">開放圖表權限</button>'
-        +'<button class="btn btn-ghost" onclick="grantChart(\''+f.id+'\',\''+f.user_id+'\',false,this)">婉拒</button></div>';
+        +'<button class="btn btn-success" data-action="grantChart" data-id="'+did+'" data-uid="'+duid+'" data-allow="true">開放圖表權限</button>'
+        +'<button class="btn btn-ghost" data-action="grantChart" data-id="'+did+'" data-uid="'+duid+'" data-allow="false">婉拒</button></div>';
     } else if(isProApp){
       acts='<div class="fb-actions">'
-        +'<button class="btn btn-success" onclick="grantPro(\''+f.id+'\',\''+f.user_id+'\',true,this)">開放 Pro 會員</button>'
-        +'<button class="btn btn-ghost" onclick="grantPro(\''+f.id+'\',\''+f.user_id+'\',false,this)">婉拒</button></div>';
+        +'<button class="btn btn-success" data-action="grantPro" data-id="'+did+'" data-uid="'+duid+'" data-allow="true">開放 Pro 會員</button>'
+        +'<button class="btn btn-ghost" data-action="grantPro" data-id="'+did+'" data-uid="'+duid+'" data-allow="false">婉拒</button></div>';
     } else {
       acts='<div class="fb-actions">'
-        +'<button class="btn btn-success" onclick="decide(\''+f.id+'\',\'adopted\',this)">採納並 +10 點</button>'
-        +'<button class="btn btn-ghost" onclick="decide(\''+f.id+'\',\'rejected\',this)">不採納</button></div>';
+        +'<button class="btn btn-success" data-action="decide" data-id="'+did+'" data-status="adopted">採納並 +10 點</button>'
+        +'<button class="btn btn-ghost" data-action="decide" data-id="'+did+'" data-status="rejected">不採納</button></div>';
     }
   }
   var reply='<div class="reply-box">'
     +'<div class="reply-label">給'+(isApply?'申請者':'回饋者')+'的回覆（會顯示在頁面上）</div>'
     +'<textarea class="reply-ta" id="reply-'+f.id+'" maxlength="500" placeholder="輸入回覆…">'+esc(f.reply||'')+'</textarea>'
     +'<div class="reply-row"><span class="reply-msg" id="reply-msg-'+f.id+'"></span>'
-    +'<button class="btn btn-primary" onclick="saveReply(\''+f.id+'\',this)">送出回覆</button></div></div>';
+    +'<button class="btn btn-primary" data-action="saveReply" data-id="'+f.id+'">送出回覆</button></div></div>';
   return '<div class="fb-card" id="fc-'+f.id+'">'
     +'<div class="fb-top"><div><div class="fb-who">'+esc(name)+'<small>'+esc(uid)+'</small></div></div>'
     +'<div class="fb-meta">'+catChip
@@ -685,7 +685,7 @@ async function grantCredits(id,userId,btn){
   var input=prompt('確認已收款，要加多少永久點數？',def);
   if(input===null) return;
   var amount=parseInt(input,10);
-  if(!amount||amount<=0){ alert('點數必須是正整數'); return; }
+  if(!amount||amount<=0||amount>9999){ alert('點數必須是 1–9999 之間的正整數'); return; }
   setCardBtns(id,true);
   var ta=document.getElementById('reply-'+id);
   var reply=(ta&&ta.value.trim())||'';
@@ -738,6 +738,23 @@ function fmtDate(s){
   var p=function(n){return n<10?'0'+n:n;};
   return (d.getMonth()+1)+'/'+d.getDate()+' '+p(d.getHours())+':'+p(d.getMinutes());
 }
+
+// ── event delegation：取代所有 inline onclick ──
+document.addEventListener('click',function(e){
+  var btn=e.target.closest('[data-action]');
+  if(!btn) return;
+  var action=btn.dataset.action;
+  var id=btn.dataset.id;
+  var uid=btn.dataset.uid||'';
+  var allow=btn.dataset.allow==='true';
+  var status=btn.dataset.status||'';
+  if(action==='grantCredits') grantCredits(id,uid,btn);
+  else if(action==='denyCredits') denyCredits(id,btn);
+  else if(action==='grantChart') grantChart(id,uid,allow,btn);
+  else if(action==='grantPro') grantPro(id,uid,allow,btn);
+  else if(action==='decide') decide(id,status,btn);
+  else if(action==='saveReply') saveReply(id,btn);
+});
 </script>
 <script src="/shared/footer.js"></script>
 </body>
