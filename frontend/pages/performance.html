@@ -197,6 +197,18 @@ tr:last-child td{border-bottom:none;}
 .dir.neg{background:var(--red-100);color:var(--red-700);}
 .dir.neu{background:var(--gray-100);color:var(--gray-600);}
 .pred-cell{font-size:12.5px;color:var(--gray-700);line-height:1.5;}
+.type-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.type-btn{font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;border:1.5px solid var(--gray-200);color:var(--gray-500);cursor:pointer;background:var(--white);transition:background .15s,color .15s,border-color .15s;}
+.type-btn.active{background:var(--navy-600);color:#fff;border-color:var(--navy-600);}
+.badge.type-cal{background:#eff6ff;color:#1d4ed8;}
+.badge.type-story{background:#f0fdf4;color:#15803d;}
+.badge.type-ind{background:#fef3c7;color:#b45309;}
+.bytype-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px;}
+@media(max-width:600px){.bytype-grid{grid-template-columns:1fr;}}
+.bytype-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;}
+.bytype-card .bt-label{font-size:11px;color:var(--gray-500);font-weight:600;margin-bottom:4px;}
+.bytype-card .bt-value{font-size:22px;font-weight:700;color:var(--navy-700);}
+.bytype-card .bt-foot{font-size:11px;color:var(--gray-400);margin-top:2px;}
 
 .method-note{font-size:12px;color:var(--gray-400);margin-top:6px;line-height:1.75;}
 .empty-box{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--r-lg);padding:36px;text-align:center;color:var(--gray-500);font-size:13.5px;}
@@ -553,18 +565,47 @@ async function loadPerformance(){
   var ph=(acc&&Array.isArray(acc.prediction_history))?acc.prediction_history:[];
   var BADGE={hit:'<span class="badge hit">命中</span>',partial:'<span class="badge partial">部分</span>',miss:'<span class="badge miss">未中</span>'};
   var DIR={positive:'<span class="dir pos">看多</span>',negative:'<span class="dir neg">看空</span>',neutral:'<span class="dir neu">中性</span>'};
+  var TBADGE={calendar:'<span class="badge type-cal">日曆</span>',story:'<span class="badge type-story">全球追蹤</span>',industry:'<span class="badge type-ind">產業</span>'};
   function dirTag(d){return DIR[d]||'';}
+  function typeTag(t){return TBADGE[t]||TBADGE.calendar;}
+
+  /* ── 分類命中率小卡 ── */
+  var byType=(P.by_type)||{};
+  var typeNames={calendar:'日曆事件',story:'全球追蹤',industry:'產業新聞'};
+  var byTypeHtml='<div class="bytype-grid rv">';
+  ['calendar','story','industry'].forEach(function(t){
+    var bt=byType[t]||{};
+    byTypeHtml+='<div class="bytype-card">'
+      +'<div class="bt-label">'+typeNames[t]+'</div>'
+      +'<div class="bt-value">'+(bt.hit_rate!=null?bt.hit_rate+'%':'—')+'</div>'
+      +'<div class="bt-foot">已驗證 '+(bt.resolved||0)+' 件 · 待驗證 '+(bt.pending||0)+' 件</div>'
+      +'</div>';
+  });
+  byTypeHtml+='</div>';
+  html+=byTypeHtml;
+
+  var mkFilter=function(id){
+    return '<div class="type-filter" id="'+id+'">'
+      +'<button class="type-btn active" data-type="all">全部</button>'
+      +'<button class="type-btn" data-type="calendar">日曆事件</button>'
+      +'<button class="type-btn" data-type="story">全球追蹤</button>'
+      +'<button class="type-btn" data-type="industry">產業新聞</button>'
+      +'</div>';
+  };
 
   /* ── 近期已驗證（上方；只顯示有 prediction 欄位的） ── */
   var recent=ph.filter(function(p){return ['hit','partial','miss'].indexOf(p.accuracy)>=0 && p.prediction;})
-    .sort(function(a,b){return (b.verified_at||b.date||'').localeCompare(a.verified_at||a.date||'');}).slice(0,15);
+    .sort(function(a,b){return (b.verified_at||b.date||'').localeCompare(a.verified_at||a.date||'');}).slice(0,20);
   if(recent.length){
     html+='<div class="card rv"><div class="card-head"><h2>近期已驗證預判</h2><div class="card-kpis"><span>LATEST <b>'+recent.length+'</b></span></div></div>'
-      +'<div class="desc">預判內容 → 實際市場反應</div><table>'
-      +'<tr><th>預判日</th><th>事件</th><th>預判內容</th><th>實際結果</th><th>結果</th></tr>'
+      +'<div class="desc">預判內容 → 實際市場反應</div>'
+      +mkFilter('vrf-filter')
+      +'<table id="vrf-table"><tr><th>預判日</th><th>類型</th><th>事件</th><th>預判內容</th><th>實際結果</th><th>結果</th></tr>'
       +recent.map(function(p){
-        return '<tr>'
+        var t=p.type||'calendar';
+        return '<tr data-type="'+t+'">'
           +'<td style="white-space:nowrap;" class="num">'+esc((p.date||'').slice(5))+'</td>'
+          +'<td>'+typeTag(t)+'</td>'
           +'<td>'+esc(p.event_title||'')+'</td>'
           +'<td class="pred-cell">'+dirTag(p.direction)+esc(p.prediction)+'</td>'
           +'<td class="pred-cell">'+esc(p.actual_result||'—')+'</td>'
@@ -575,23 +616,27 @@ async function loadPerformance(){
 
   /* ── 待驗證（下方；只顯示有 prediction 欄位的） ── */
   var pendingPred=ph.filter(function(p){return p.accuracy==='pending' && p.prediction;})
-    .sort(function(a,b){return (a.event_date||a.date||'').localeCompare(b.event_date||b.date||'');});
+    .sort(function(a,b){return (a.verify_after||a.event_date||a.date||'').localeCompare(b.verify_after||b.event_date||b.date||'');});
   if(pendingPred.length){
     html+='<div class="card rv"><div class="card-head"><h2>待驗證預判</h2><div class="card-kpis"><span>PENDING <b>'+pendingPred.length+'</b></span></div></div>'
-      +'<div class="desc">事件日期尚未到來，結果待市場驗證</div><table>'
-      +'<tr><th>預判日</th><th>事件</th><th>預判內容</th><th>事件日期</th><th>狀態</th></tr>'
+      +'<div class="desc">結果待市場驗證（日曆型按事件日期、全球追蹤及產業新聞按預計驗收日）</div>'
+      +mkFilter('pnd-filter')
+      +'<table id="pnd-table"><tr><th>預判日</th><th>類型</th><th>事件</th><th>預判內容</th><th>驗收日</th><th>狀態</th></tr>'
       +pendingPred.map(function(p){
-        return '<tr>'
+        var t=p.type||'calendar';
+        var dueDate=p.verify_after||p.event_date||'';
+        return '<tr data-type="'+t+'">'
           +'<td style="white-space:nowrap;" class="num">'+esc((p.date||'').slice(5))+'</td>'
+          +'<td>'+typeTag(t)+'</td>'
           +'<td>'+esc(p.event_title||'')+'</td>'
           +'<td class="pred-cell">'+dirTag(p.direction)+esc(p.prediction)+'</td>'
-          +'<td style="white-space:nowrap;" class="num">'+esc(p.event_date||'')+'</td>'
+          +'<td style="white-space:nowrap;" class="num">'+esc(dueDate)+'</td>'
           +'<td><span class="badge pending">待驗證</span></td>'
           +'</tr>';
       }).join('')+'</table></div>';
   }
 
-  html+='<div class="method-note rv">計算方式：機會報酬＝提出日收盤 → 7／30 個日曆日後最近交易日收盤（Yahoo Finance 實際行情），不含交易成本與滑價；題材型（無單一代號）機會不納入報酬統計。預判驗證由隔日報告比對實際市場結果，部分命中計 0.5。歷史樣本自 2026-05-15 起累積，每日自動更新、不可回溯修改。</div>';
+  html+='<div class="method-note rv">計算方式：機會報酬＝提出日收盤 → 7／30 個日曆日後最近交易日收盤（Yahoo Finance 實際行情），不含交易成本與滑價；題材型（無單一代號）機會不納入報酬統計。預判驗證由隔日報告比對實際市場結果，部分命中計 0.5。預判類型分三種：日曆事件（FOMC/財報等固定日期）、全球追蹤（地緣政治/貿易等跨週期故事，+14 日驗收）、產業新聞（產業動態短期影響，+7 日驗收）。歷史樣本自 2026-05-15 起累積，每日自動更新、不可回溯修改。</div>';
 
   viewEl.innerHTML=html;
 
@@ -606,6 +651,24 @@ async function loadPerformance(){
     });
   },{threshold:.15});
   viewEl.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  /* 分類篩選 */
+  ['vrf-filter','pnd-filter'].forEach(function(fid){
+    var fbar=document.getElementById(fid);
+    if(!fbar) return;
+    var tableId=fid==='vrf-filter'?'vrf-table':'pnd-table';
+    fbar.addEventListener('click',function(e){
+      var btn=e.target.closest('.type-btn');
+      if(!btn) return;
+      var active=btn.dataset.type;
+      fbar.querySelectorAll('.type-btn').forEach(function(b){b.classList.toggle('active',b.dataset.type===active);});
+      var tbl=document.getElementById(tableId);
+      if(!tbl) return;
+      tbl.querySelectorAll('tr[data-type]').forEach(function(r){
+        r.style.display=(active==='all'||r.dataset.type===active)?'':'none';
+      });
+    });
+  });
 
   /* 帳目逐筆展開 */
   if(ledger){

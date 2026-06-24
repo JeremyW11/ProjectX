@@ -115,6 +115,25 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .ib-disclaimer{font-size:11.5px;color:var(--gray-400);line-height:1.6;margin-top:16px;border-top:1px dashed var(--gray-200);padding-top:12px;}
 .loading{font-size:13px;color:var(--gray-400);padding:14px 0;}
 .empty-box{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--r-lg);padding:48px 24px;text-align:center;color:var(--gray-400);font-size:14px;}
+/* industry pred section */
+.ipred-section-title{font-size:15px;font-weight:700;color:var(--navy-800);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.ipred-section-title span{font-size:12px;font-weight:400;color:var(--gray-500);}
+.ipred-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:16px 20px;margin-bottom:12px;box-shadow:var(--shadow-card);}
+.ipred-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.ipred-tag{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:var(--amber-100);color:var(--amber-600);}
+.ipred-conf{font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;}
+.ipred-conf.high{background:var(--green-100);color:var(--green-700);}
+.ipred-conf.medium{background:#e0e7ff;color:#4338ca;}
+.ipred-conf.low{background:var(--gray-100);color:var(--gray-500);}
+.ipred-dir{font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;}
+.ipred-dir.pos{background:var(--green-100);color:var(--green-700);}
+.ipred-dir.neg{background:var(--red-100);color:var(--red-700);}
+.ipred-dir.neu{background:var(--gray-100);color:var(--gray-600);}
+.ipred-news{font-size:12.5px;color:var(--gray-500);margin-bottom:8px;line-height:1.5;}
+.ipred-pred{font-size:14px;color:var(--navy-900);line-height:1.7;margin-bottom:8px;}
+.ipred-foot{display:flex;gap:14px;flex-wrap:wrap;}
+.ipred-foot span{font-size:11.5px;color:var(--gray-400);}
+.ipred-foot b{color:var(--navy-700);}
 @media(max-width:768px){.header-nav{display:none;}}
 </style>
 </head>
@@ -160,7 +179,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="pro-gate">
       <div class="pro-gate-icon">✦</div>
       <h2 class="pro-gate-title">用<em>名家的思維框架</em>讀今天的市場</h2>
-      <p class="pro-gate-desc">每位名家有兩種獨立的觀察：短期的「三日分析」固定回顧近數個交易日；長期的「名人專刊」則在每日資料蒐集後自行判斷——遇到值得一講的轉折才不定期加發。每期延續上一期的論點，串成一條可反覆閱讀的思考脈絡——不是零碎的單日評論，而是有記憶、有姿態的判斷層。</p>
+      <p class="pro-gate-desc">每位名家有兩種獨立的觀察：短期的「三日分析」固定回顧近數個交易日；長期的「名人專刊」則在每日資料蒐集後自行判斷——遇到值得一講的轉折才不定期加發。每期延續上一期的論點，串成一條可反覆閱讀的思考脈絡。此外，PulseAI 每日生成「產業預判」——針對當日產業新聞的短期市場影響評估，7 日後自動驗收，結果計入歷史績效。</p>
       <div class="pro-gate-btns">
         <a href="/pages/login.html" class="btn-pro-upgrade">✦ 登入體驗 Pro</a>
       </div>
@@ -176,6 +195,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <div class="cat-tabs" id="cat-tabs"></div>
       <div id="issue-list"></div>
     </div>
+  </div>
+
+  <!-- INDUSTRY PRED VIEW (Pro, same page) -->
+  <div id="ipred-view" style="display:none;margin-top:32px;">
+    <div class="ipred-section-title">⚡ 今日產業預判 <span>由 PulseAI 根據當日產業新聞生成 · +7 日驗收 · Pro 會員專屬</span></div>
+    <div id="ipred-list"></div>
   </div>
 
 </main>
@@ -218,16 +243,61 @@ function setAuthState(user){
 }
 
 async function checkProStatus(user, gateEl, viewEl){
-  var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
-  var isPro = result.data && result.data.is_pro === true;
+  var isAdmin = user.email === 'jermy831102@gmail.com';
+  var isPro = isAdmin;
+  if(!isPro){
+    var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
+    isPro = result.data && result.data.is_pro === true;
+  }
+  var ipredEl = document.getElementById('ipred-view');
   if(isPro){
     if(gateEl) gateEl.style.display='none';
     if(viewEl) viewEl.classList.add('active');
+    if(ipredEl) ipredEl.style.display='block';
     loadColumns();
+    loadIndustryPredColumns();
   } else {
     if(gateEl) gateEl.style.display='block';
     if(viewEl) viewEl.classList.remove('active');
+    if(ipredEl) ipredEl.style.display='none';
   }
+}
+
+async function loadIndustryPredColumns(){
+  var listEl = document.getElementById('ipred-list');
+  if(!listEl) return;
+  var daily = {};
+  try{
+    var res = await fetch('/data/daily.json?v='+Math.floor(Date.now()/300000));
+    daily = await res.json();
+  }catch(e){}
+  var preds = Array.isArray(daily.industry_predictions) ? daily.industry_predictions : [];
+  if(!preds.length){
+    listEl.innerHTML='<div class="empty-box">今日產業預判尚未生成，明日早報後更新。</div>';
+    return;
+  }
+  var dirClass={positive:'pos',negative:'neg',neutral:'neu'};
+  var dirLabel={positive:'看多',negative:'看空',neutral:'中性'};
+  var confClass={HIGH:'high',MEDIUM:'medium',LOW:'low'};
+  listEl.innerHTML = preds.map(function(p){
+    var dc = dirClass[p.direction]||'neu';
+    var cc = confClass[(p.confidence||'').toUpperCase()]||'medium';
+    var tickers = (Array.isArray(p.affect_tickers)&&p.affect_tickers.length)?p.affect_tickers.join(' · '):'';
+    return '<div class="ipred-card">'
+      +'<div class="ipred-header">'
+        +'<span class="ipred-tag">'+esc(p.news_tag||p.news_type||'產業')+'</span>'
+        +'<span class="ipred-dir '+dc+'">'+(dirLabel[p.direction]||'中性')+'</span>'
+        +'<span class="ipred-conf '+cc+'">'+(p.confidence||'').toUpperCase()+'</span>'
+        +(p.timeframe?'<span style="font-size:11px;color:var(--gray-400);">'+esc(p.timeframe)+'</span>':'')
+      +'</div>'
+      +(p.news_text?'<div class="ipred-news">'+esc(p.news_text)+'</div>':'')
+      +'<div class="ipred-pred">'+esc(p.prediction)+'</div>'
+      +'<div class="ipred-foot">'
+        +(tickers?'<span>影響標的：<b>'+esc(tickers)+'</b></span>':'')
+        +(p.watch_note?'<span>觀察：'+esc(p.watch_note)+'</span>':'')
+      +'</div>'
+    +'</div>';
+  }).join('');
 }
 
 async function signOutUser(){
