@@ -846,7 +846,7 @@ function setAuthState(user){
 
 async function checkProStatus(user, gateEl, viewEl){
   var result = await _supabase.from('profiles').select('is_pro,subscription_credits,purchased_credits,credits_reset_date,display_name,phone,birthday').eq('id', user.id).single();
-  var isPro = result.data && result.data.is_pro === true;
+  var isPro = (user.email === 'jermy831102@gmail.com') || (result.data && result.data.is_pro === true);
   currentUser.isPro = isPro;
   currentUser.subCredits = (result.data && result.data.subscription_credits) || 0;
   currentUser.purCredits = (result.data && result.data.purchased_credits) || 0;

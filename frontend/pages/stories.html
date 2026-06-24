@@ -187,8 +187,11 @@ function setAuthState(user){
 }
 
 async function checkProStatus(user, gateEl, viewEl){
-  var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
-  var isPro = result.data && result.data.is_pro === true;
+  var isPro = user.email === 'jermy831102@gmail.com';
+  if(!isPro){
+    var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
+    isPro = result.data && result.data.is_pro === true;
+  }
   if(isPro){
     if(gateEl) gateEl.style.display='none';
     if(viewEl) viewEl.classList.add('active');

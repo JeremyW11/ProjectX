@@ -275,10 +275,14 @@ function renderCard(p, todayStr){
 async function loadPredictions(){
   var listEl = document.getElementById('pred-list');
   var v = Math.floor(Date.now()/300000);
-  var acc = {}, perf = {};
+  var acc = null, perf = {};
   try{ acc = await (await fetch('/data/accumulated.json?v='+v)).json(); }catch(e){}
   try{ perf = await (await fetch('/data/performance.json?v='+v)).json(); }catch(e){}
 
+  if(!acc){
+    listEl.innerHTML='<div class="empty-box">資料載入失敗，請稍後重新整理頁面。</div>';
+    return;
+  }
   var ph = Array.isArray(acc.prediction_history) ? acc.prediction_history : [];
   var pending = ph.filter(function(p){ return p.accuracy === 'pending' && p.prediction; });
   var resolved = ph.filter(function(p){ return ['hit','partial','miss'].indexOf(p.accuracy) >= 0; });
@@ -311,7 +315,7 @@ async function loadPredictions(){
   document.getElementById('cnt-ind').textContent = counts.industry;
 
   if(!pending.length){
-    listEl.innerHTML='<div class="empty-box">目前無待驗證的預判。明日早報生成後將自動更新。</div>';
+    listEl.innerHTML='<div class="empty-box">目前無待驗證的預判。下次早報生成後將自動更新。</div>';
     return;
   }
 
