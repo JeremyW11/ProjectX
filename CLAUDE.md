@@ -78,19 +78,24 @@ server.js          (Express server, runs /brief endpoint that generates daily.js
   - Real errors → red + retry button.
   - Timeout → yellow "backend may still be running" hint.
 
-### P7 (2026-06-02, awaiting first trigger to verify)
+### P7 (2026-06-02, verified 2026-06-25)
 
 - **Whitelist expansion**: `TRUSTED_URL_DOMAINS` 68 → 116 (added intl banks, intl media, TW banks/media). Mirrored here.
 - **Global story tracking** (`Step 14` in `generate_brief.js`): `updateTrackedStories()` maintains persistent `accumulated.json.tracked_stories` — same global/geopolitical/trade/monetary/energy/tech news event tracked across days as a timeline (not disposable daily news). Caps ~10 active + 30-day ended retention; timeline last 5; source_url validated via whitelist; auto-落幕 after 14 days no update. NOT macro data-point tracking (CPI/FOMC) — tracks evolving global news storylines.
 - **New Pro page** `frontend/pages/stories.html` (`全球追蹤` nav key `stories`): is_pro-gated reader of `tracked_stories`, renders each as a timeline card.
-- **Pending verify**: Step 14 prompt can only be validated on a real trigger (cost). Backend changes not yet pushed to Render.
+- Verified 2026-06-25: `tracked_stories` 10 active entries, structure normal.
+
+### P8 (2026-06-25)
+
+- **RSS expansion** (`commit 403c734`): added WSJ Markets, WSJ Tech, Ars Technica, EE Times; Yahoo ticker RSS 5→11 (NVDA/TSM/MSFT/AAPL/META/AMD/AVGO/MU/QCOM/ARM/AMAT); Finnhub news slice 20→40; usItems limit 30→50.
+- **newsdata.io full-industry** (`commit 460c83b`): `fetchNewsdataIO()` now returns `{ twSummary, enSummary }`. Makes 6 parallel calls: 1 TW Chinese + 5 English sector queries (tech/AI, energy/commodity, finance/macro, healthcare/biotech, consumer/industrial). Both injected into marketData2/3.
+- **Alpha Vantage NEWS_SENTIMENT** (`commit 460c83b`): new `fetchAlphaVantageNews()` with 6 API calls — 2 ticker-based (NVDA/AMD/AVGO, MU/QCOM/ARM) + 4 topic-based (energy_transportation, finance+financial_markets, life_sciences, manufacturing+retail_wholesale). Covers all major sectors. Key in `.env` as `ALPHA_VANTAGE_API_KEY`. 6 of 25 daily quota consumed per brief run. TSM excluded from ticker batches (breaks multi-ticker API). Injected into marketData3.
 
 ## Backlog (not yet started)
 
 - **Prefetch TW/US rebalance**: `/morning` skill's 16 queries are ~1/16 TW-specific (rest US/global). Suggest cutting 1 of the 3 overlapping US-equity queries (#10/11/12) and adding 2 TW-specific (大盤外資法人 + 台股財報法說/題材). Not yet done.
 - **"Since last trigger" data window logic**: Shelved (user is concerned about content sparsity).
 - **TWSE primary/fallback inversion**: If TWSE stays broken, swap order so Yahoo is primary.
-- **Market data-source gaps** (frontend `market.html` falls back to `--` correctly; needs backend fetch in `generate_brief.js`): (1) **VIX** — no field in daily.json at all (line ~827 hardcoded `--`). (2) **投信買賣超** — `tw_market_summary` only has `trade_value`+`foreign_net`, no 投信 (line ~843 hardcoded `--`). (3) **台股成交量** — `tw_market_summary.trade_value` is `"--"` from backend though tw_news text contains it (e.g. 「成交值1.607兆」). (4) **crypto high/low** — coingecko fetch doesn't include当日 high/low. Verified 2026-06-03 against live daily.json. Requires backend change + paid trigger to validate.
 
 ## Code style notes
 
