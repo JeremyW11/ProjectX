@@ -1,13 +1,39 @@
 {
-  "updated": "2026-06-24",
+  "updated": "2026-06-25",
   "predictions": {
-    "total": 181,
-    "hit": 67,
+    "total": 208,
+    "hit": 69,
     "partial": 63,
-    "miss": 41,
-    "pending": 10,
-    "resolved": 171,
-    "hit_rate_weighted": 57.6,
+    "miss": 42,
+    "pending": 34,
+    "resolved": 174,
+    "hit_rate_weighted": 57.8,
+    "by_type": {
+      "calendar": {
+        "hit": 69,
+        "partial": 63,
+        "miss": 42,
+        "pending": 20,
+        "resolved": 174,
+        "hit_rate": 57.8
+      },
+      "story": {
+        "hit": 0,
+        "partial": 0,
+        "miss": 0,
+        "pending": 8,
+        "resolved": 0,
+        "hit_rate": null
+      },
+      "industry": {
+        "hit": 0,
+        "partial": 0,
+        "miss": 0,
+        "pending": 6,
+        "resolved": 0,
+        "hit_rate": null
+      }
+    },
     "series": [
       {
         "date": "2026-05-20",
@@ -106,25 +132,147 @@
       },
       {
         "date": "2026-06-22",
-        "rate": 57.9,
-        "n": 170
+        "rate": 58.2,
+        "n": 171
       },
       {
         "date": "2026-06-23",
-        "rate": 57.6,
-        "n": 171
+        "rate": 57.8,
+        "n": 172
+      },
+      {
+        "date": "2026-06-24",
+        "rate": 57.8,
+        "n": 174
       }
     ]
   },
   "opportunities": {
-    "tracked": 197,
-    "evaluated7": 143,
-    "avg_r7": 0.6,
-    "win7": 50.3,
-    "evaluated30": 16,
-    "avg_r30": 17.7,
-    "win30": 62.5,
+    "tracked": 206,
+    "evaluated7": 152,
+    "avg_r7": 0.63,
+    "win7": 49.3,
+    "evaluated30": 21,
+    "avg_r30": 11.87,
+    "win30": 52.4,
     "items": [
+      {
+        "date": "2026-06-18",
+        "ticker": "INTC",
+        "name": "Intel Corporation",
+        "category": "us",
+        "r7": 9.23,
+        "r30": null,
+        "thesis": "BofA雙升評後股價仍處歷史低位，18A製程已量產，市場低估其重返代工競爭力，本益比僅12倍遠低於同業",
+        "target": "$32（+29%）",
+        "entry": 121.1,
+        "exit7": 132.28,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-18",
+        "ticker": "2454.TW",
+        "name": "聯發科",
+        "category": "tw",
+        "r7": 1.68,
+        "r30": null,
+        "thesis": "AI ASIC訂單全年目標倍增至$20億，外資目標價NT$5000，目前股價反映FOMC恐慌而非基本面惡化",
+        "target": "NT$5000（+12%）",
+        "entry": 4460,
+        "exit7": 4535,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-18",
+        "ticker": "3090.TW",
+        "name": "日電貿",
+        "category": "tw",
+        "r7": 0,
+        "r30": null,
+        "thesis": "鋁電容日商漲價15%，代理商直接受惠，2026-06-17漲停後籌碼仍集中，市場未完全反映漲價轉嫁效益",
+        "target": "NT$350（+16%）",
+        "entry": 302.5,
+        "exit7": 302.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-18",
+        "ticker": "FCX",
+        "name": "Freeport-McMoRan",
+        "category": "us",
+        "r7": -6.75,
+        "r30": null,
+        "thesis": "銅價受AI資料中心電力需求支撐，FCX為全球最大上市銅礦商，Fed鷹派壓制股價但銅基本面未變",
+        "target": "$58（+20%）",
+        "entry": 69.06,
+        "exit7": 64.4,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-18",
+        "ticker": "SOL",
+        "name": "Solana",
+        "category": "crypto",
+        "r7": -3.18,
+        "r30": null,
+        "thesis": "F&G=15極度恐懼但SOL跌幅僅1.62%相對抗跌，DeFi活躍度維持高位，清算潮後槓桿去化反成買點",
+        "target": "$90（+24%）",
+        "entry": 71.931,
+        "exit7": 69.6437,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-18",
+        "ticker": "XLE",
+        "name": "能源ETF",
+        "category": "sector",
+        "r7": -0.38,
+        "r30": null,
+        "thesis": "能源板塊YTD+22%為最強板塊，美伊協議僅保障60天，地緣風險溢價未消，市場低估油價維持高檔機率",
+        "target": "$108（+10%）",
+        "entry": 54.67,
+        "exit7": 54.46,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-18",
+        "ticker": "2316.TW",
+        "name": "楠梓電",
+        "category": "tw",
+        "r7": 16.31,
+        "r30": null,
+        "thesis": "2026-06-17漲停，PCB載板受惠AI伺服器需求，法人籌碼轉進中，股價尚未反映下半年訂單能見度",
+        "target": "NT$220（+18%）",
+        "entry": 187,
+        "exit7": 217.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-18",
+        "ticker": "SNAP",
+        "name": "Snap Inc",
+        "category": "us",
+        "r7": -5.91,
+        "r30": null,
+        "thesis": "AR眼鏡遭Wells Fargo看空股價重挫，但Specs為長期佈局，短線過度反應，廣告業務穩健被忽視",
+        "target": "$16（+25%）",
+        "entry": 4.74,
+        "exit7": 4.46,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-18",
+        "ticker": "GE",
+        "name": "GE Aerospace",
+        "category": "us",
+        "r7": -0.16,
+        "r30": null,
+        "thesis": "航太維修需求強勁，核能與先進電力佈局被低估，FOMC後工業股回調提供進場點，2026-07-16財報為催化",
+        "target": "$205（+15%）",
+        "entry": 357.03,
+        "exit7": 356.47,
+        "exit30": null
+      },
       {
         "date": "2026-06-17",
         "ticker": "XOM",
@@ -786,123 +934,6 @@
         "target": "330元（+19%）",
         "entry": 277.5,
         "exit7": 267.5,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-10",
-        "ticker": "SMCI",
-        "name": "Super Micro Computer",
-        "category": "us",
-        "r7": -24.09,
-        "r30": null,
-        "thesis": "2026-06-09因宣布$70億混合增資計畫股價重挫逾7%，市場過度聚焦稀釋恐懼；但公司同步揭露強勁AI伺服器訂單，基",
-        "target": "+20-25%（反彈至增資前價格）",
-        "entry": 40.64,
-        "exit7": 30.85,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-10",
-        "ticker": "3231",
-        "name": "緯創資通",
-        "category": "tw",
-        "r7": -2.42,
-        "r30": null,
-        "thesis": "高盛首選AI代工名單（2026-06-04），知名度與股價表現落後鴻海但AI伺服器佔比持續提升；機構資金在COMPUTE",
-        "target": "+15-20%",
-        "entry": 165.5,
-        "exit7": 161.5,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-10",
-        "ticker": "3008",
-        "name": "大立光電",
-        "category": "tw",
-        "r7": 13.77,
-        "r30": null,
-        "thesis": "CPO（共封裝光學）為台股2026新主軸，市場聚焦鏡頭傳統業務未定價CPO光學件潛力；董事長親口確認9月前完成光纖陣列自",
-        "target": "+15-25%（CPO題材重新定價）",
-        "entry": 3885,
-        "exit7": 4420,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-10",
-        "ticker": "XBI",
-        "name": "SPDR S&P Biotech ETF（生技板塊）",
-        "category": "sector",
-        "r7": 3.82,
-        "r30": null,
-        "thesis": "2026年生技M&A達$1,060億YTD（2019年來最佳步調），若全年維持則超$2,500億；市場目光集中AI半導體",
-        "target": "+15-20%（M&A溢價重估）",
-        "entry": 131.38,
-        "exit7": 136.4,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-10",
-        "ticker": "ETH",
-        "name": "Ethereum",
-        "category": "crypto",
-        "r7": 9.6,
-        "r30": null,
-        "thesis": "ETH/BTC比率處歷史低位，恐懼指數9與BTC同等極度恐懼，但ETH跌幅（-1.93%）與L2生態/質押收益基本面背離",
-        "target": "$1,900（+16%）",
-        "entry": 1637.7067,
-        "exit7": 1794.9612,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-10",
-        "ticker": "3711",
-        "name": "日月光投控",
-        "category": "tw",
-        "r7": 3.69,
-        "r30": null,
-        "thesis": "台積電下半年N2/N2P/A16放量直接拉動CoWoS先進封裝需求；$569今日已漲5.37%但市場低估CoWoS供應吃",
-        "target": "650元（+14%）",
-        "entry": 569,
-        "exit7": 590,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-09",
-        "ticker": "MU",
-        "name": "Micron Technology",
-        "category": "us",
-        "r7": 3.41,
-        "r30": null,
-        "thesis": "2026年HBM產能全數售罄、DRAM capex年增14%，6/5跌13%為市場對AVGO財報的連帶誤殺，實際基本面未",
-        "target": "$286.54（+47%）",
-        "entry": 949.28,
-        "exit7": 981.61,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-09",
-        "ticker": "MRVL",
-        "name": "Marvell Technology",
-        "category": "us",
-        "r7": -3.17,
-        "r30": null,
-        "thesis": "S&P500正式納入帶動被動ETF強制買盤入場，AI ASIC設計贏單2026-2027兌現，6/5跌16%完全消化利空",
-        "target": "+25%至+35%",
-        "entry": 288.85,
-        "exit7": 279.7,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-09",
-        "ticker": "AMD",
-        "name": "Advanced Micro Devices",
-        "category": "us",
-        "r7": 4.33,
-        "r30": null,
-        "thesis": "Oracle採用5萬張MI450 GPU確立AI晶片多元化趨勢，非NVDA算力需求崛起被市場低估；機構目標$626.67",
-        "target": "$626.67（+20.6%）",
-        "entry": 490.33,
-        "exit7": 511.57,
         "exit30": null
       }
     ],
