@@ -1,30 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0d1630"/>
-      <stop offset="100%" style="stop-color:#1a2d5a"/>
-    </linearGradient>
-    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#d4a30a"/>
-      <stop offset="100%" style="stop-color:#f0c840"/>
-    </linearGradient>
-    <linearGradient id="line1" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#d4a30a;stop-opacity:0"/>
-      <stop offset="50%" style="stop-color:#d4a30a;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#d4a30a;stop-opacity:0"/>
-    </linearGradient>
-  </defs>
+  <!-- flat ink background (no gradient, per Vela identity) -->
+  <rect width="1200" height="630" fill="#0B1F4D"/>
 
-  <!-- Background -->
-  <rect width="1200" height="630" fill="url(#bg)"/>
-
-  <!-- Subtle grid lines -->
-  <g stroke="#1e3366" stroke-width="1" opacity="0.35">
-    <line x1="0" y1="105" x2="1200" y2="105"/>
-    <line x1="0" y1="210" x2="1200" y2="210"/>
-    <line x1="0" y1="315" x2="1200" y2="315"/>
-    <line x1="0" y1="420" x2="1200" y2="420"/>
-    <line x1="0" y1="525" x2="1200" y2="525"/>
+  <!-- subtle construction grid -->
+  <g stroke="#147EFF" stroke-width="1" opacity="0.08">
+    <line x1="0" y1="126" x2="1200" y2="126"/>
+    <line x1="0" y1="252" x2="1200" y2="252"/>
+    <line x1="0" y1="378" x2="1200" y2="378"/>
+    <line x1="0" y1="504" x2="1200" y2="504"/>
     <line x1="200" y1="0" x2="200" y2="630"/>
     <line x1="400" y1="0" x2="400" y2="630"/>
     <line x1="600" y1="0" x2="600" y2="630"/>
@@ -32,49 +15,30 @@
     <line x1="1000" y1="0" x2="1000" y2="630"/>
   </g>
 
-  <!-- Gold accent bar top / bottom -->
-  <rect x="0" y="0" width="1200" height="4" fill="url(#gold)"/>
-  <rect x="0" y="626" width="1200" height="4" fill="url(#gold)"/>
+  <!-- top accent bar -->
+  <rect x="0" y="0" width="1200" height="5" fill="#147EFF"/>
 
-  <!-- ===== Centered logo mark (matches site favicon / topbar) ===== -->
-  <!-- 40-unit mark scaled x4 = 160px, centered at x=600, top y=120 -->
-  <g transform="translate(520, 120) scale(4)">
-    <rect x="-6" y="-6" width="52" height="52" rx="12" fill="none" stroke="url(#gold)" stroke-width="1.1" opacity="0.4"/>
-    <rect x="0" y="0" width="40" height="40" rx="9" ry="9" fill="#07090f"/>
-    <line x1="10" y1="10" x2="30" y2="30" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
-    <line x1="30" y1="10" x2="10" y2="30" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
-    <circle cx="20" cy="20" r="3" fill="#2563eb"/>
-    <circle cx="20" cy="20" r="1.5" fill="#93c5fd"/>
+  <!-- logo lockup: reversed V-mark + vela wordmark, centered -->
+  <g transform="translate(452, 92) scale(2.0)">
+    <path d="M 9 13 L 24 44 L 31.5 28.5" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="33" y="17" width="7" height="7" rx="1.2" fill="#147EFF"/>
+    <rect x="36" y="11.5" width="6" height="6" rx="1" fill="#39D5FF"/>
+    <rect x="39" y="6.5" width="5" height="5" rx="0.9" fill="#39D5FF"/>
   </g>
+  <text x="556" y="186" font-family="'Poppins','DM Sans',Arial,sans-serif" font-size="86" font-weight="600" letter-spacing="-3" fill="#ffffff">vela</text>
 
-  <!-- ===== Centered wordmark ===== -->
-  <text x="600" y="400" text-anchor="middle"
-    font-family="Georgia, 'Times New Roman', serif"
-    font-size="84" font-weight="900" letter-spacing="-1">
-    <tspan fill="white">PROJECT </tspan><tspan fill="url(#gold)">X</tspan>
-  </text>
+  <!-- slogan (hero) -->
+  <text x="600" y="372" text-anchor="middle" font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif" font-size="94" font-weight="700" letter-spacing="3" fill="#ffffff">把雜訊，變成判斷</text>
 
-  <!-- Divider line (centered) -->
-  <rect x="380" y="425" width="440" height="2" fill="url(#line1)" rx="1"/>
+  <!-- english sub -->
+  <text x="600" y="440" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="30" font-weight="500" letter-spacing="0.34em" fill="#39D5FF">FROM NOISE TO SIGNAL</text>
 
-  <!-- Tagline -->
-  <text x="600" y="470" text-anchor="middle"
-    font-family="'DM Sans', Arial, sans-serif"
-    font-size="27" font-weight="400"
-    fill="#94a3b8" letter-spacing="0.14em">DAILY MARKET INTELLIGENCE</text>
+  <!-- divider -->
+  <rect x="500" y="480" width="200" height="2" rx="1" fill="#147EFF" opacity="0.55"/>
 
-  <!-- Powered by PulseAI badge -->
-  <g transform="translate(600, 516)">
-    <rect x="-150" y="-22" width="300" height="44" rx="22" fill="#0e2748" stroke="#2a4a8a" stroke-width="1.2"/>
-    <text x="0" y="6" text-anchor="middle"
-      font-family="'DM Sans', Arial, sans-serif"
-      font-size="19" font-weight="700" letter-spacing="0.1em"
-      fill="#7dd3fc"><tspan fill="url(#gold)">POWERED BY </tspan><tspan fill="#7dd3fc">PULSEAI</tspan></text>
-  </g>
+  <!-- powered by OrionAI -->
+  <text x="600" y="530" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="22" font-weight="600" letter-spacing="0.08em"><tspan fill="#7e93c4">POWERED BY </tspan><tspan fill="#ffffff">ORION</tspan><tspan fill="#39D5FF">AI</tspan></text>
 
-  <!-- Bottom caption -->
-  <text x="600" y="578" text-anchor="middle"
-    font-family="'DM Sans', Arial, sans-serif"
-    font-size="21" font-weight="400"
-    fill="#5b7099" letter-spacing="0.06em">projectxbrief.netlify.app</text>
+  <!-- url -->
+  <text x="600" y="584" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="21" font-weight="400" letter-spacing="0.06em" fill="#5b74a8">projectxbrief.netlify.app</text>
 </svg>

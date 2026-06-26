@@ -24,7 +24,8 @@
     + ".site-disclaimer .sd-inner{max-width:920px;margin:0 auto;}"
     + ".site-disclaimer .sd-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;font-family:'DM Sans',sans-serif;margin-bottom:8px;}"
     + ".site-disclaimer .sd-text{font-size:11.5px;line-height:1.78;color:#94a3b8;font-family:'Noto Sans TC',sans-serif;}"
-    + ".site-disclaimer .sd-copy{margin-top:14px;font-size:11px;color:#9aa6b8;font-family:'DM Sans',sans-serif;letter-spacing:.01em;}";
+    + ".site-disclaimer .sd-copy{margin-top:14px;font-size:11px;color:#9aa6b8;font-family:'DM Sans',sans-serif;letter-spacing:.01em;}"
+    + ".site-disclaimer .sd-slogan{margin-top:22px;font-size:14px;font-weight:600;color:#0B1F4D;font-family:'Noto Sans TC',sans-serif;letter-spacing:.04em;}";
 
   function injectCss(){
     if(document.getElementById('site-disclaimer-css')) return;
@@ -48,9 +49,12 @@
     var inner=document.createElement('div'); inner.className='sd-inner';
     var t=document.createElement('div'); t.className='sd-title'; t.textContent='免責聲明 · Disclaimer';
     var p=document.createElement('div'); p.className='sd-text'; p.textContent=TEXT;
-    var pa=document.createElement('div'); pa.className='sd-copy'; pa.style.cssText='margin-top:16px;font-size:12px;color:#94a3b8;'; pa.textContent='⚡ Powered by OrionAI · Vela 的 AI 分析引擎';
+    var sl=document.createElement('div'); sl.className='sd-slogan';
+    var slz=document.createElement('span'); slz.textContent='把雜訊，變成判斷'; sl.appendChild(slz);
+    var sle=document.createElement('span'); sle.style.cssText="margin-left:10px;color:#94a3b8;font-weight:500;font-family:'DM Sans',sans-serif;letter-spacing:.12em;font-size:12px;"; sle.textContent='FROM NOISE TO SIGNAL'; sl.appendChild(sle);
+    var pa=document.createElement('div'); pa.className='sd-copy'; pa.style.cssText='margin-top:10px;font-size:12px;color:#94a3b8;'; pa.textContent='⚡ Powered by OrionAI · Vela 的 AI 分析引擎';
     var c=document.createElement('div'); c.className='sd-copy'; c.textContent='© '+year+' Vela. 版權所有，內容非投資建議。';
-    inner.appendChild(t); inner.appendChild(p); inner.appendChild(pa); inner.appendChild(c);
+    inner.appendChild(t); inner.appendChild(p); inner.appendChild(sl); inner.appendChild(pa); inner.appendChild(c);
     foot.appendChild(inner);
     document.body.appendChild(foot);
   }
