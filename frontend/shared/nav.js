@@ -166,15 +166,11 @@
 })();
 
 // ── OrionAI 文字 LOGO：全站自動把「OrionAI」字眼轉為品牌字標 ──
-// Badge 樣式（漸層實心）：深藍→藍漸層膠囊，白字 Pulse + 青色 AI；行內隨文字自動縮放、垂直置中。含 MutationObserver 以涵蓋動態渲染內容。
+// Badge 樣式（純色，對齊 Vela 識別）：ink #0B1F4D 膠囊，白字 Orion + 青色 #39D5FF AI；無漸層/陰影/發光。行內隨文字自動縮放、垂直置中。含 MutationObserver 以涵蓋動態渲染內容。
 (function(){
-  var LOGO_CSS = ".pulseai-logo{display:inline-flex;align-items:baseline;font-family:'DM Sans','Noto Sans TC',sans-serif;font-weight:600;letter-spacing:-.01em;white-space:nowrap;font-style:normal;background:linear-gradient(135deg,#1e40af,#2563eb 50%,#0ea5e9);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.30),inset 0 -1px 1px rgba(0,0,0,.22),0 1px 3px rgba(8,15,40,.45);color:#fff;border-radius:.45em;padding:.1em .46em;line-height:1.15;vertical-align:baseline;}"
-    + ".pulseai-logo .pa-pulse,.pulseai-logo .pa-ai{-webkit-text-fill-color:initial;}"
-    + ".pulseai-logo .pa-pulse{font-weight:700;color:#ffffff;text-shadow:0 1px 2px rgba(0,0,0,.45);}"
-    + ".pulseai-logo .pa-ai{font-weight:800;color:#a5f9ff;margin-left:.04em;text-shadow:0 1px 2px rgba(0,0,0,.45);}"
-    + "@supports ((-webkit-background-clip:text) or (background-clip:text)){"
-    + ".pulseai-logo .pa-pulse{background:linear-gradient(180deg,#ffffff 0%,#ffffff 55%,#eaf1ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}"
-    + ".pulseai-logo .pa-ai{background:linear-gradient(180deg,#dffcff 0%,#9bf6ff 55%,#5ee7f5 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}}";
+  var LOGO_CSS = ".pulseai-logo{display:inline-flex;align-items:baseline;font-family:'DM Sans','Noto Sans TC',sans-serif;font-weight:600;letter-spacing:-.01em;white-space:nowrap;font-style:normal;background:#0B1F4D;color:#fff;border-radius:.42em;padding:.1em .5em;line-height:1.15;vertical-align:baseline;}"
+    + ".pulseai-logo .pa-pulse{font-weight:700;color:#ffffff;}"
+    + ".pulseai-logo .pa-ai{font-weight:800;color:#39D5FF;margin-left:.05em;}";
   function injectCss(){
     if(document.getElementById('pulseai-logo-css')) return;
     var s=document.createElement('style'); s.id='pulseai-logo-css'; s.textContent=LOGO_CSS;

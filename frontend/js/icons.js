@@ -1,4 +1,4 @@
-/* ProjectX icon system — replaces all emoji with inline SVG */
+/* Vela icon system — replaces all emoji with inline SVG */
 (function () {
   /* inject base CSS so data-ico spans display correctly */
   var st = document.createElement('style');
