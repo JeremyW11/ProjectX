@@ -183,7 +183,7 @@
   var SKIP={SCRIPT:1,STYLE:1,TEXTAREA:1,INPUT:1,SELECT:1,OPTION:1,NOSCRIPT:1,TITLE:1};
   function makeLogo(){
     var s=document.createElement('span'); s.className='pulseai-logo';
-    var p=document.createElement('span'); p.className='pa-pulse'; p.textContent='Pulse';
+    var p=document.createElement('span'); p.className='pa-pulse'; p.textContent='Orion';
     s.appendChild(p);
     var ai=document.createElement('span'); ai.className='pa-ai'; ai.textContent='AI';
     s.appendChild(ai);
