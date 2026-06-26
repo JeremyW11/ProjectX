@@ -48,8 +48,8 @@
     var inner=document.createElement('div'); inner.className='sd-inner';
     var t=document.createElement('div'); t.className='sd-title'; t.textContent='免責聲明 · Disclaimer';
     var p=document.createElement('div'); p.className='sd-text'; p.textContent=TEXT;
-    var pa=document.createElement('div'); pa.className='sd-copy'; pa.style.cssText='margin-top:16px;font-size:12px;color:#94a3b8;'; pa.textContent='⚡ Powered by PulseAI · Project X 的 AI 分析引擎';
-    var c=document.createElement('div'); c.className='sd-copy'; c.textContent='© '+year+' Project X. 版權所有，內容非投資建議。';
+    var pa=document.createElement('div'); pa.className='sd-copy'; pa.style.cssText='margin-top:16px;font-size:12px;color:#94a3b8;'; pa.textContent='⚡ Powered by OrionAI · Vela 的 AI 分析引擎';
+    var c=document.createElement('div'); c.className='sd-copy'; c.textContent='© '+year+' Vela. 版權所有，內容非投資建議。';
     inner.appendChild(t); inner.appendChild(p); inner.appendChild(pa); inner.appendChild(c);
     foot.appendChild(inner);
     document.body.appendChild(foot);

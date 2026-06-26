@@ -84,7 +84,7 @@
       +   '<a class="px-mm-login" href="/pages/login.html">登入</a>'
       +   '<a class="px-mm-pro" href="/pages/credits.html">訂閱 Pro</a>'
       + '</div>'
-      + '<div class="px-mm-foot">⚡ Powered by PulseAI</div>';
+      + '<div class="px-mm-foot">⚡ Powered by OrionAI</div>';
     document.body.appendChild(menu);
 
     function position(){ menu.style.top = bar.getBoundingClientRect().bottom + 'px'; }
@@ -165,7 +165,7 @@
   else init();
 })();
 
-// ── PulseAI 文字 LOGO：全站自動把「PulseAI」字眼轉為品牌字標 ──
+// ── OrionAI 文字 LOGO：全站自動把「OrionAI」字眼轉為品牌字標 ──
 // Badge 樣式（漸層實心）：深藍→藍漸層膠囊，白字 Pulse + 青色 AI；行內隨文字自動縮放、垂直置中。含 MutationObserver 以涵蓋動態渲染內容。
 (function(){
   var LOGO_CSS = ".pulseai-logo{display:inline-flex;align-items:baseline;font-family:'DM Sans','Noto Sans TC',sans-serif;font-weight:600;letter-spacing:-.01em;white-space:nowrap;font-style:normal;background:linear-gradient(135deg,#1e40af,#2563eb 50%,#0ea5e9);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.30),inset 0 -1px 1px rgba(0,0,0,.22),0 1px 3px rgba(8,15,40,.45);color:#fff;border-radius:.45em;padding:.1em .46em;line-height:1.15;vertical-align:baseline;}"
@@ -200,9 +200,9 @@
   }
   function wrapTextNode(node){
     var val=node.nodeValue;
-    if(!val || val.indexOf('PulseAI')<0) return;
+    if(!val || val.indexOf('OrionAI')<0) return;
     if(skipParent(node.parentNode)) return;
-    var parts=val.split('PulseAI');
+    var parts=val.split('OrionAI');
     var frag=document.createDocumentFragment();
     for(var i=0;i<parts.length;i++){
       if(i>0) frag.appendChild(makeLogo());
@@ -217,7 +217,7 @@
     if(root.nodeType===1 && SKIP[root.tagName]) return;
     var walker=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
     var nodes=[],n;
-    while((n=walker.nextNode())){ if(n.nodeValue && n.nodeValue.indexOf('PulseAI')>=0) nodes.push(n); }
+    while((n=walker.nextNode())){ if(n.nodeValue && n.nodeValue.indexOf('OrionAI')>=0) nodes.push(n); }
     nodes.forEach(wrapTextNode);
   }
   var _busy=false;
