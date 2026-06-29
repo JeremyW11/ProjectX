@@ -1,27 +1,27 @@
 {
-  "updated": "2026-06-26",
+  "updated": "2026-06-29",
   "predictions": {
-    "total": 242,
-    "hit": 70,
-    "partial": 67,
-    "miss": 43,
-    "pending": 62,
-    "resolved": 180,
-    "hit_rate_weighted": 57.5,
+    "total": 261,
+    "hit": 72,
+    "partial": 68,
+    "miss": 45,
+    "pending": 76,
+    "resolved": 185,
+    "hit_rate_weighted": 57.3,
     "by_type": {
       "calendar": {
-        "hit": 70,
-        "partial": 67,
-        "miss": 43,
+        "hit": 72,
+        "partial": 68,
+        "miss": 45,
         "pending": 34,
-        "resolved": 180,
-        "hit_rate": 57.5
+        "resolved": 185,
+        "hit_rate": 57.3
       },
       "story": {
         "hit": 0,
         "partial": 0,
         "miss": 0,
-        "pending": 16,
+        "pending": 24,
         "resolved": 0,
         "hit_rate": null
       },
@@ -29,7 +29,7 @@
         "hit": 0,
         "partial": 0,
         "miss": 0,
-        "pending": 12,
+        "pending": 18,
         "resolved": 0,
         "hit_rate": null
       }
@@ -142,25 +142,134 @@
       },
       {
         "date": "2026-06-24",
-        "rate": 58,
-        "n": 176
+        "rate": 57.9,
+        "n": 178
       },
       {
         "date": "2026-06-25",
-        "rate": 57.5,
-        "n": 180
+        "rate": 57.1,
+        "n": 183
+      },
+      {
+        "date": "2026-06-26",
+        "rate": 57.3,
+        "n": 185
       }
     ]
   },
   "opportunities": {
-    "tracked": 216,
-    "evaluated7": 162,
-    "avg_r7": 0.27,
-    "win7": 47.5,
-    "evaluated30": 24,
-    "avg_r30": 8.92,
-    "win30": 45.8,
+    "tracked": 223,
+    "evaluated7": 170,
+    "avg_r7": 0.15,
+    "win7": 45.9,
+    "evaluated30": 31,
+    "avg_r30": 4.95,
+    "win30": 38.7,
     "items": [
+      {
+        "date": "2026-06-22",
+        "ticker": "AMKR",
+        "name": "Amkor Technology",
+        "category": "us",
+        "r7": -12.98,
+        "r30": null,
+        "thesis": "台積電10年先進封裝合作協議消息後股價飆漲但市場仍低估長期營收貢獻，CoWoS產能缺口擴大將持續推升訂單能見度，估值仍低",
+        "target": "72.00 (+23%)",
+        "entry": 90.46,
+        "exit7": 78.72,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-22",
+        "ticker": "2344",
+        "name": "華邦電",
+        "category": "tw",
+        "r7": -5.49,
+        "r30": null,
+        "thesis": "被動元件結構性成長帶動DRAM需求回溫，法人看好台廠評價重估行情，股價尚未反映AI邊緣運算對利基型記憶體的拉貨潮",
+        "target": "52.00 (+22%)",
+        "entry": 218.5,
+        "exit7": 206.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-22",
+        "ticker": "CEG",
+        "name": "Constellation Energy",
+        "category": "us",
+        "r7": -3.66,
+        "r30": null,
+        "thesis": "核電股受惠AI資料中心電力需求爆發，週漲8%後市場仍低估長期PPA合約價值，能源板塊年至今+22%領漲但核電估值折價",
+        "target": "320.00 (+17%)",
+        "entry": 274.06,
+        "exit7": 264.02,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-22",
+        "ticker": "6548",
+        "name": "長科",
+        "category": "tw",
+        "r7": -1.16,
+        "r30": null,
+        "thesis": "機器人領域Q2放量、FOPLP特殊金屬載板專案年底試產，市場尚未充分定價次世代封裝題材，外資持股偏低",
+        "target": "230.00 (+24%)",
+        "entry": 86.1,
+        "exit7": 85.1,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-22",
+        "ticker": "XOM",
+        "name": "Exxon Mobil",
+        "category": "us",
+        "r7": -0.92,
+        "r30": null,
+        "thesis": "能源板塊年至今+22%領漲但XOM落後大盤，美伊談判若破裂油價將再飆，當前估值隱含過度樂觀的和平情境",
+        "target": "135.00 (+14%)",
+        "entry": 137.81,
+        "exit7": 136.54,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-22",
+        "ticker": "SOL",
+        "name": "Solana",
+        "category": "crypto",
+        "r7": -2.77,
+        "r30": null,
+        "thesis": "極度恐懼指數20但SOL生態活躍度維持，ETF申請進度被低估，資金費率正向顯示空頭回補壓力，清算後籌碼已洗清",
+        "target": "95.00 (+28%)",
+        "entry": 72.4182,
+        "exit7": 70.4107,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-22",
+        "ticker": "2327",
+        "name": "國巨",
+        "category": "tw",
+        "r7": -6.02,
+        "r30": null,
+        "thesis": "AI高密度算力推升MLCC規格與用量，被動元件龍頭受惠漲價循環，股價回檔後本益比低於歷史均值",
+        "target": "680.00 (+17%)",
+        "entry": 1080,
+        "exit7": 1015,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-22",
+        "ticker": "UAL",
+        "name": "United Airlines",
+        "category": "us",
+        "r7": 15.04,
+        "r30": null,
+        "thesis": "油價暴跌40美元後航空成本大幅改善，暑期旅遊旺季需求強勁但股價尚未完全反映獲利上修空間",
+        "target": "85.00 (+18%)",
+        "entry": 118.32,
+        "exit7": 136.11,
+        "exit30": null
+      },
       {
         "date": "2026-06-19",
         "ticker": "MU",
@@ -836,110 +945,6 @@
         "entry": 488.45,
         "exit7": 512.48,
         "exit30": null
-      },
-      {
-        "date": "2026-06-12",
-        "ticker": "BTC",
-        "name": "比特幣",
-        "category": "crypto",
-        "r7": 3.21,
-        "r30": null,
-        "thesis": "恐懼貪婪指數12（極度恐懼）歷史上為短線底部訊號；月RSI 35.12技術超賣；$60K支撐強勁。市場定價ETF持續流出",
-        "target": "+15%至$72,800",
-        "entry": 63561.0547,
-        "exit7": 65600.6406,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-12",
-        "ticker": "ETH",
-        "name": "以太坊",
-        "category": "crypto",
-        "r7": 7.06,
-        "r30": null,
-        "thesis": "ETH/BTC比值處歷史相對低位，BTC反彈時ETH通常以2-3倍槓桿跟漲。SOL已先漲3.6%顯示資金開始輪動山寨幣，",
-        "target": "+20%至$2,000",
-        "entry": 1672.2806,
-        "exit7": 1790.3982,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-12",
-        "ticker": "GLD",
-        "name": "SPDR黃金ETF",
-        "category": "sector",
-        "r7": 0.59,
-        "r30": null,
-        "thesis": "黃金創6個月低點，同期CPI年增4.2%三年最高、PPI年增6.5% 2022年底最快；金價與通膨嚴重背離。市場誤將美伊",
-        "target": "+12%（回補6個月高點）",
-        "entry": 386.32,
-        "exit7": 388.6,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-12",
-        "ticker": "3037",
-        "name": "欣興電子",
-        "category": "tw",
-        "r7": 15.69,
-        "r30": null,
-        "thesis": "外資大幅上修欣興2026-2028年光收發器出貨預估（2026-06-12），光收發器ABF載板為AI資料中心800G高",
-        "target": "+15至+20%",
-        "entry": 854,
-        "exit7": 988,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-12",
-        "ticker": "EWY",
-        "name": "iShares韓國ETF",
-        "category": "sector",
-        "r7": 3.09,
-        "r30": null,
-        "thesis": "韓KOSPI單日+8%觸發熔斷（2026-06-12），三星+12%、SK海力士+9%，記憶體缺貨預計延伸至2027年。",
-        "target": "+15%",
-        "entry": 198.94,
-        "exit7": 205.08,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-11",
-        "ticker": "BTC",
-        "name": "Bitcoin",
-        "category": "crypto",
-        "r7": 6.76,
-        "r30": null,
-        "thesis": "RSI降至25.75為深度技術性超賣；極度恐懼指數12觸及歷史低位，市場悲觀已充分甚至過度定價；多空比2.04顯示多頭人",
-        "target": "$72,000（+16%）",
-        "entry": 61449.2891,
-        "exit7": 65600.6406,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-11",
-        "ticker": "ETH",
-        "name": "Ethereum",
-        "category": "crypto",
-        "r7": 10.51,
-        "r30": null,
-        "thesis": "與BTC同步超賣但市場注意力高度集中BTC，ETH被相對忽視；鏈上基本面更具防守性；極度恐懼底部ETH歷史反彈彈性往往優",
-        "target": "$1,900（+16%）",
-        "entry": 1620.1377,
-        "exit7": 1790.3982,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-11",
-        "ticker": "2308",
-        "name": "台達電",
-        "category": "tw",
-        "r7": 1.36,
-        "r30": null,
-        "thesis": "單日暴跌8.9%為五大權值股跌幅之冠，超大盤3.31%達5.6個百分點，屬情緒性錯殺；AI伺服器電源與散熱基本面完全未變",
-        "target": "NT$2,500（+14%）",
-        "entry": 2200,
-        "exit7": 2230,
-        "exit30": null
       }
     ],
     "best": [
@@ -985,6 +990,19 @@
     ],
     "worst": [
       {
+        "date": "2026-05-29",
+        "ticker": "2308",
+        "name": "台達電",
+        "category": "tw",
+        "r7": 2.72,
+        "r30": -24.27,
+        "thesis": "單日跌5.16% 為AI伺服器電源散熱核心 超跌提供進場點",
+        "target": "2600-2700",
+        "entry": 2390,
+        "exit7": 2455,
+        "exit30": 1810
+      },
+      {
         "date": "2026-06-10",
         "ticker": "SMCI",
         "name": "Super Micro Computer",
@@ -1009,19 +1027,6 @@
         "entry": 81051.25,
         "exit7": 77457.7734,
         "exit30": 63543.1992
-      },
-      {
-        "date": "2026-06-05",
-        "ticker": "MRVL",
-        "name": "Marvell Technology",
-        "category": "us",
-        "r7": -20.18,
-        "r30": null,
-        "thesis": "Huang 於 COMPUTEX 點名為下一個兆元市值候選，客製化 ASIC 受惠雲端 capex 上修至 7250 億",
-        "target": "+20% 中期",
-        "entry": 316.43,
-        "exit7": 252.59,
-        "exit30": null
       }
     ]
   }
