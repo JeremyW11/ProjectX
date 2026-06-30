@@ -1,27 +1,27 @@
 {
-  "updated": "2026-06-29",
+  "updated": "2026-06-30",
   "predictions": {
-    "total": 261,
-    "hit": 72,
+    "total": 292,
+    "hit": 74,
     "partial": 68,
     "miss": 45,
-    "pending": 76,
-    "resolved": 185,
-    "hit_rate_weighted": 57.3,
+    "pending": 105,
+    "resolved": 187,
+    "hit_rate_weighted": 57.8,
     "by_type": {
       "calendar": {
-        "hit": 72,
+        "hit": 74,
         "partial": 68,
         "miss": 45,
-        "pending": 34,
-        "resolved": 185,
-        "hit_rate": 57.3
+        "pending": 49,
+        "resolved": 187,
+        "hit_rate": 57.8
       },
       "story": {
         "hit": 0,
         "partial": 0,
         "miss": 0,
-        "pending": 24,
+        "pending": 32,
         "resolved": 0,
         "hit_rate": null
       },
@@ -29,7 +29,7 @@
         "hit": 0,
         "partial": 0,
         "miss": 0,
-        "pending": 18,
+        "pending": 24,
         "resolved": 0,
         "hit_rate": null
       }
@@ -142,30 +142,165 @@
       },
       {
         "date": "2026-06-24",
-        "rate": 57.9,
-        "n": 178
+        "rate": 58.1,
+        "n": 179
       },
       {
         "date": "2026-06-25",
-        "rate": 57.1,
-        "n": 183
+        "rate": 57.3,
+        "n": 184
       },
       {
         "date": "2026-06-26",
-        "rate": 57.3,
-        "n": 185
+        "rate": 57.5,
+        "n": 186
+      },
+      {
+        "date": "2026-06-29",
+        "rate": 57.8,
+        "n": 187
       }
     ]
   },
   "opportunities": {
-    "tracked": 223,
-    "evaluated7": 170,
-    "avg_r7": 0.15,
-    "win7": 45.9,
+    "tracked": 232,
+    "evaluated7": 180,
+    "avg_r7": -0.49,
+    "win7": 43.3,
     "evaluated30": 31,
     "avg_r30": 4.95,
     "win30": 38.7,
     "items": [
+      {
+        "date": "2026-06-23",
+        "ticker": "SMCI",
+        "name": "Super Micro Computer",
+        "category": "us",
+        "r7": -13.62,
+        "r30": null,
+        "thesis": "6/22與NVDA合作Vera Rubin液冷AI機架消息後單日飆漲15%，市場低估其作為AI基礎設施二線受惠者的彈性，",
+        "target": "110.00 (+23%)",
+        "entry": 35.46,
+        "exit7": 30.63,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-23",
+        "ticker": "2408",
+        "name": "南亞科技",
+        "category": "tw",
+        "r7": -11.09,
+        "r30": null,
+        "thesis": "6/22漲停創新天價，Anthropic長約訂單利多外溢至HBM供應鏈，市場低估台系DRAM廠在AI記憶體升級週期的補漲",
+        "target": "580.00 (+16%)",
+        "entry": 505,
+        "exit7": 449,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-23",
+        "ticker": "UMC",
+        "name": "聯華電子ADR",
+        "category": "us",
+        "r7": -6.98,
+        "r30": null,
+        "thesis": "6/22 ADR飆漲14%，台積電收斂28奈米產能轉單效應被低估，成熟製程代工需求回溫但估值僅0.9倍PB",
+        "target": "22.00 (+19%)",
+        "entry": 27.5,
+        "exit7": 25.58,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-23",
+        "ticker": "2301",
+        "name": "光寶科技",
+        "category": "tw",
+        "r7": -12.96,
+        "r30": null,
+        "thesis": "6/22漲停，AI伺服器電源供應鏈補漲啟動，外資投信籌碼大舉回流，市場低估老牌電源廠轉型AI的獲利彈性",
+        "target": "265.00 (+14%)",
+        "entry": 231.5,
+        "exit7": 201.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-23",
+        "ticker": "QCOM",
+        "name": "高通",
+        "category": "us",
+        "r7": -14.65,
+        "r30": null,
+        "thesis": "6/22傳以40億美元洽購AI新創Modular劍指NVDA，市場低估其在端側AI晶片的佈局價值，估值相對AI同業偏低",
+        "target": "195.00 (+16%)",
+        "entry": 221.9,
+        "exit7": 189.39,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-23",
+        "ticker": "XLE",
+        "name": "能源精選板塊ETF",
+        "category": "sector",
+        "r7": -0.41,
+        "r30": null,
+        "thesis": "YTD+22%為最強板塊但資金輪動剛啟動，美伊談判雖緩和但6/22川普暗示不保證伊朗遵守協議，油價下檔有撐",
+        "target": "108.00 (+10%)",
+        "entry": 54.06,
+        "exit7": 53.84,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-23",
+        "ticker": "BTC",
+        "name": "比特幣",
+        "category": "crypto",
+        "r7": -6.91,
+        "r30": null,
+        "thesis": "恐懼指數23極度恐懼但多空比1.74顯示散戶偏多，資金費率轉正為潛在多頭訊號，66400美元有18.4億空單擠壓潛力",
+        "target": "68000 (+7%)",
+        "entry": 63952.1055,
+        "exit7": 59532.3398,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-23",
+        "ticker": "3034",
+        "name": "聯詠科技",
+        "category": "tw",
+        "r7": -10.23,
+        "r30": null,
+        "thesis": "6/22漲停收在IC設計族群領頭羊，DDIC需求回溫疊加AI PC面板升級，市場低估驅動IC龍頭的週期底部彈性",
+        "target": "600.00 (+15%)",
+        "entry": 567,
+        "exit7": 509,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-23",
+        "ticker": "ORCL",
+        "name": "甲骨文",
+        "category": "us",
+        "r7": -15.16,
+        "r30": null,
+        "thesis": "6/22年報揭露AI裁員2.1萬人，市場過度反應負面情緒，雲端AI基礎設施訂單能見度強勁，成本優化反利多",
+        "target": "200.00 (+12%)",
+        "entry": 175.07,
+        "exit7": 148.53,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-23",
+        "ticker": "6147",
+        "name": "頎邦科技",
+        "category": "tw",
+        "r7": -21.84,
+        "r30": null,
+        "thesis": "6/22封測族群強漲但頎邦漲幅落後日月光，COF封裝在OLED面板滲透率提升被低估，補漲空間明確",
+        "target": "110.00 (+16%)",
+        "entry": 277,
+        "exit7": 216.5,
+        "exit30": null
+      },
       {
         "date": "2026-06-22",
         "ticker": "AMKR",
@@ -815,136 +950,6 @@
         "entry": 57.55,
         "exit7": 53.77,
         "exit30": null
-      },
-      {
-        "date": "2026-06-15",
-        "ticker": "2409",
-        "name": "友達",
-        "category": "tw",
-        "r7": 19.79,
-        "r30": null,
-        "thesis": "面板股長期低迷致估值極低，但車載與IT面板需求回溫，產能利用率提升將帶動獲利改善，股價淨值比僅0.4倍嚴重低估重置成本",
-        "target": "23元(+22%)",
-        "entry": 23.5,
-        "exit7": 28.15,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-15",
-        "ticker": "MRVL",
-        "name": "Marvell Technology",
-        "category": "us",
-        "r7": 11.04,
-        "r30": null,
-        "thesis": "6/22將納入S&P 500指數，被動資金強制買入尚未完全反映股價，AI客製化晶片業務成長強勁但市場聚焦NVDA忽視二線",
-        "target": "88美元(+12%)",
-        "entry": 279.7,
-        "exit7": 310.58,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-15",
-        "ticker": "3037",
-        "name": "欣興",
-        "category": "tw",
-        "r7": 7.32,
-        "r30": null,
-        "thesis": "ABF載板龍頭受惠AI伺服器需求，但股價自高點回落20%，市場擔憂PC需求但忽視AI佔比提升，千金股俱樂部成員具稀缺性溢",
-        "target": "580元(+20%)",
-        "entry": 902,
-        "exit7": 968,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-15",
-        "ticker": "FLEX",
-        "name": "Flex Ltd",
-        "category": "us",
-        "r7": -1.4,
-        "r30": null,
-        "thesis": "6/22與MRVL同日納入S&P 500，製造服務商受惠供應鏈重組與近岸外包趨勢，本益比僅14倍低於電子製造同業平均",
-        "target": "48美元(+12%)",
-        "entry": 149.71,
-        "exit7": 147.61,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-15",
-        "ticker": "2376",
-        "name": "技嘉",
-        "category": "tw",
-        "r7": 0.58,
-        "r30": null,
-        "thesis": "AI伺服器代工受惠者但股價落後廣達緯創漲幅，GB200機櫃出貨在即，市場過度聚焦品牌PC業務忽視伺服器營收佔比提升至40",
-        "target": "450元(+17%)",
-        "entry": 342,
-        "exit7": 344,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-12",
-        "ticker": "MRVL",
-        "name": "邁威爾科技",
-        "category": "us",
-        "r7": 3.15,
-        "r30": null,
-        "thesis": "2026-06-22 S&P 500季度調整正式納入MRVL，被動基金強制買進$220-270億，主動型基金佈局窗口僅剩",
-        "target": "+12至+15%（至06-22前後）",
-        "entry": 280.71,
-        "exit7": 289.54,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-12",
-        "ticker": "3624",
-        "name": "光頡電子",
-        "category": "tw",
-        "r7": 32.73,
-        "r30": null,
-        "thesis": "薄膜電感為AI伺服器電源管理關鍵被動元件，2026-06-06宣布全年首波漲價10-40%，議價能力確立。台灣中小型被動",
-        "target": "+20至+30%（元件漲價落地毛利率修復）",
-        "entry": 110,
-        "exit7": 146,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-12",
-        "ticker": "LRCX",
-        "name": "科林研發",
-        "category": "us",
-        "r7": 3.22,
-        "r30": null,
-        "thesis": "半導體設備商直接受益AI Capex 70%年增率，設備訂單能見度高於晶片設計股。SIA確認4月全球半導體銷售$1,10",
-        "target": "+18%",
-        "entry": 362.52,
-        "exit7": 374.18,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-12",
-        "ticker": "ETN",
-        "name": "伊頓公司",
-        "category": "us",
-        "r7": 4.06,
-        "r30": null,
-        "thesis": "AI資料中心電力分配基礎建設供應商，2026年超大規模業者AI Capex $4,500億帶動配電、UPS需求爆炸性增長",
-        "target": "+18%",
-        "entry": 393.64,
-        "exit7": 409.64,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-12",
-        "ticker": "AMD",
-        "name": "超微半導體",
-        "category": "us",
-        "r7": 4.92,
-        "r30": null,
-        "thesis": "6/5單日暴跌11%後6/11急彈8%，技術面確認過度拋售修正完成。Intel獲Google 300萬TPU訂單（202",
-        "target": "+20%（跌前高點修復）",
-        "entry": 488.45,
-        "exit7": 512.48,
-        "exit30": null
       }
     ],
     "best": [
@@ -1016,17 +1021,17 @@
         "exit30": null
       },
       {
-        "date": "2026-05-15",
-        "ticker": "BTC",
-        "name": "比特幣",
-        "category": "crypto",
-        "r7": -4.43,
-        "r30": -21.6,
-        "thesis": "多空比0.73空方過度擁擠 負資金費率顯示軋空條件成熟 清算量極端後常見反轉",
-        "target": "+15%至$94000",
-        "entry": 81051.25,
-        "exit7": 77457.7734,
-        "exit30": 63543.1992
+        "date": "2026-06-23",
+        "ticker": "6147",
+        "name": "頎邦科技",
+        "category": "tw",
+        "r7": -21.84,
+        "r30": null,
+        "thesis": "6/22封測族群強漲但頎邦漲幅落後日月光，COF封裝在OLED面板滲透率提升被低估，補漲空間明確",
+        "target": "110.00 (+16%)",
+        "entry": 277,
+        "exit7": 216.5,
+        "exit30": null
       }
     ]
   }
