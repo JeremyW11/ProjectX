@@ -38,58 +38,58 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;z-index:100;}
 .topbar-logo{display:flex;align-items:center;gap:10px;margin-right:36px;}
 .header-nav{display:flex;align-items:center;gap:2px;flex:1;}
-.nav-item{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--gray-500);transition:all .15s;white-space:nowrap;font-family:var(--font-zh);}
+.nav-item{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:var(--fs-4);color:var(--gray-500);transition:all .15s;white-space:nowrap;font-family:var(--font-zh);}
 .nav-item:hover{background:var(--navy-50);color:var(--navy-700);}
 .nav-item.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);opacity:0;}
 .nav-item.active .nav-dot{opacity:1;}
 .header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
-.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
 .live-dot{width:5px;height:5px;background:var(--green-600);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-.header-time{font-family:var(--font-en);font-size:12px;color:var(--gray-400);}
-.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;font-family:var(--font-en);}
+.header-time{font-family:var(--font-en);font-size:var(--fs-3);color:var(--gray-400);}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:var(--fs-3);font-weight:500;font-family:var(--font-en);}
 
 /* ── LAYOUT ── */
 .page{margin-top:56px;max-width:1200px;margin-left:auto;margin-right:auto;padding:28px 24px 60px;}
 .page-header{margin-bottom:24px;}
-.page-title{font-family:var(--font-display);font-size:28px;color:var(--navy-950);}
-.page-title-sub{font-size:13px;color:var(--gray-400);margin-top:4px;font-family:var(--font-zh);}
+.page-title{font-family:var(--font-display);font-size:var(--fs-7);color:var(--navy-950);}
+.page-title-sub{font-size:var(--fs-3);color:var(--gray-400);margin-top:4px;font-family:var(--font-zh);}
 
 .archive-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:start;}
 @media(max-width:768px){.archive-layout{grid-template-columns:1fr;}}
 
 /* ── DATE LIST ── */
 .date-list-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-card);position:sticky;top:72px;}
-.date-list-header{padding:12px 16px;border-bottom:1px solid var(--gray-100);font-size:11px;font-weight:600;color:var(--gray-500);letter-spacing:.06em;font-family:var(--font-en);}
+.date-list-header{padding:12px 16px;border-bottom:1px solid var(--gray-100);font-size:var(--fs-2);font-weight:600;color:var(--gray-500);letter-spacing:.06em;font-family:var(--font-en);}
 .date-list{max-height:calc(100vh - 180px);overflow-y:auto;}
 .date-item{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;cursor:pointer;border-bottom:1px solid var(--gray-100);transition:all .15s;}
 .date-item:last-child{border-bottom:none;}
 .date-item:hover{background:var(--navy-50);}
 .date-item.active{background:var(--navy-50);border-left:3px solid var(--navy-500);}
-.di-date{font-family:var(--font-en);font-size:13px;font-weight:500;color:var(--gray-700);}
-.di-wd{font-size:10.5px;color:var(--gray-400);font-family:var(--font-en);}
+.di-date{font-family:var(--font-en);font-size:var(--fs-3);font-weight:500;color:var(--gray-700);}
+.di-wd{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);}
 
 /* ── REPORT PANEL ── */
 .report-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:28px 32px;box-shadow:var(--shadow-card);}
-.report-date-badge{display:inline-flex;align-items:center;gap:8px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:20px;padding:4px 14px;font-family:var(--font-en);font-size:12px;font-weight:600;color:var(--navy-700);margin-bottom:20px;}
+.report-date-badge{display:inline-flex;align-items:center;gap:8px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:20px;padding:4px 14px;font-family:var(--font-en);font-size:var(--fs-3);font-weight:600;color:var(--navy-700);margin-bottom:20px;}
 
 /* Tickers row */
 .ticker-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--gray-100);}
 .ticker-chip{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:8px 14px;min-width:90px;}
-.tc-label{font-size:10px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
-.tc-val{font-size:14px;font-weight:600;color:var(--gray-900);font-family:var(--font-en);margin-top:2px;}
-.tc-chg{font-size:11px;font-family:var(--font-en);}
+.tc-label{font-size:var(--fs-1);color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
+.tc-val{font-size:var(--fs-4);font-weight:600;color:var(--gray-900);font-family:var(--font-en);margin-top:2px;}
+.tc-chg{font-size:var(--fs-2);font-family:var(--font-en);}
 .tc-chg.up{color:var(--green-600);}
 .tc-chg.down{color:var(--red-600);}
 
 /* Morning brief */
-.section-label{font-size:11px;font-weight:600;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);margin-bottom:10px;}
-.morning-brief-text{font-size:13.5px;line-height:1.9;color:var(--gray-700);font-family:var(--font-zh);white-space:pre-wrap;}
+.section-label{font-size:var(--fs-2);font-weight:600;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-en);margin-bottom:10px;}
+.morning-brief-text{font-size:var(--fs-4);line-height:1.9;color:var(--gray-700);font-family:var(--font-zh);white-space:pre-wrap;}
 
 /* Signals */
 .signals-row{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 24px;padding-bottom:20px;border-bottom:1px solid var(--gray-100);}
-.signal-chip{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;font-family:var(--font-zh);}
+.signal-chip{padding:6px 14px;border-radius:20px;font-size:var(--fs-3);font-weight:500;font-family:var(--font-zh);}
 .signal-chip.bull{background:var(--green-100);color:var(--green-700);}
 .signal-chip.bear{background:var(--red-100);color:var(--red-600);}
 .signal-chip.neutral{background:var(--gray-100);color:var(--gray-600);}
@@ -98,16 +98,16 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .opp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:10px;}
 .opp-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;}
 .oc-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-.oc-ticker{font-family:var(--font-en);font-size:13px;font-weight:700;color:var(--navy-700);}
-.oc-conf{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);}
+.oc-ticker{font-family:var(--font-en);font-size:var(--fs-3);font-weight:700;color:var(--navy-700);}
+.oc-conf{font-size:var(--fs-1);font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);}
 .conf-HIGH{background:#dcfce7;color:#15803d;}
 .conf-MED{background:#fef3c7;color:#92400e;}
 .conf-LOW{background:var(--gray-100);color:var(--gray-500);}
-.oc-thesis{font-size:12px;color:var(--gray-600);font-family:var(--font-zh);line-height:1.55;}
-.oc-target{font-size:11px;color:var(--navy-600);font-family:var(--font-en);margin-top:4px;font-weight:500;}
+.oc-thesis{font-size:var(--fs-3);color:var(--gray-600);font-family:var(--font-zh);line-height:1.55;}
+.oc-target{font-size:var(--fs-2);color:var(--navy-600);font-family:var(--font-en);margin-top:4px;font-weight:500;}
 
 /* Empty / loading */
-.empty-state{text-align:center;padding:60px 0;color:var(--gray-400);font-size:13px;font-family:var(--font-zh);}
+.empty-state{text-align:center;padding:60px 0;color:var(--gray-400);font-size:var(--fs-3);font-family:var(--font-zh);}
 </style>
   <script src="/js/icons.js"></script>
 </head>
@@ -135,7 +135,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 <main class="page">
   <div class="page-header">
-    <div class="page-title">歷史報告 <span style="font-family:var(--font-en);font-size:16px;font-weight:400;color:var(--gray-400);">Archive</span></div>
+    <div class="page-title">歷史報告 <span style="font-family:var(--font-en);font-size:var(--fs-5);font-weight:400;color:var(--gray-400);">Archive</span></div>
     <div class="page-title-sub">過去 30 天每日 Brief 完整記錄</div>
   </div>
 
@@ -200,9 +200,9 @@ async function loadDateList(){
 function renderLock(){
   return '<div class="report-card" style="text-align:center;padding:64px 32px;">'+
     '<div style="font-size:40px;margin-bottom:16px;color:var(--navy-400);">'+ICO.lock+'</div>'+
-    '<div style="font-size:18px;font-weight:600;color:var(--navy-900);font-family:var(--font-zh);margin-bottom:8px;">歷史報告為付費會員專屬</div>'+
-    '<div style="font-size:13.5px;color:var(--gray-500);font-family:var(--font-zh);line-height:1.7;max-width:420px;margin:0 auto 24px;">升級為付費會員即可解鎖過去 30 天每日 Brief 的完整內容——機會標的、機構研報、市場摘要與事件預判。</div>'+
-    '<a href="/pages/credits.html" style="display:inline-block;padding:11px 28px;background:var(--navy-700);color:#fff;border-radius:var(--r-sm);font-size:14px;font-weight:600;font-family:var(--font-zh);">升級看完整報告</a>'+
+    '<div style="font-size:var(--fs-5);font-weight:600;color:var(--navy-900);font-family:var(--font-zh);margin-bottom:8px;">歷史報告為付費會員專屬</div>'+
+    '<div style="font-size:var(--fs-4);color:var(--gray-500);font-family:var(--font-zh);line-height:1.7;max-width:420px;margin:0 auto 24px;">升級為付費會員即可解鎖過去 30 天每日 Brief 的完整內容——機會標的、機構研報、市場摘要與事件預判。</div>'+
+    '<a href="/pages/credits.html" style="display:inline-block;padding:11px 28px;background:var(--navy-700);color:#fff;border-radius:var(--r-sm);font-size:var(--fs-4);font-weight:600;font-family:var(--font-zh);">升級看完整報告</a>'+
   '</div>';
 }
 
@@ -284,7 +284,7 @@ function renderReport(d){
         '<div class="oc-header">'+
           '<span class="oc-ticker">'+o.ticker+'</span>'+
           '<span class="oc-conf conf-'+(o.confidence||'MED')+'">'+o.confidence+'</span>'+
-          '<span style="font-size:11px;color:var(--gray-400);font-family:var(--font-zh);">'+o.name+'</span>'+
+          '<span style="font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-zh);">'+o.name+'</span>'+
         '</div>'+
         '<div class="oc-thesis">'+escHtml(o.thesis||'')+'</div>'+
         (o.target?'<div class="oc-target">目標：'+o.target+'</div>':'')+

@@ -41,31 +41,31 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .topbar-logo{display:flex;align-items:center;gap:10px;margin-right:36px;}
 .logo-mark{width:32px;height:32px;background:var(--navy-700);border-radius:8px;display:grid;place-items:center;flex-shrink:0;transition:transform .3s;}
 .logo-mark:hover{transform:rotate(45deg) scale(1.05);}
-.logo-main{font-family:var(--font-en);font-size:13.5px;font-weight:600;color:var(--navy-800);letter-spacing:.05em;}
-.logo-sub{font-size:9.5px;color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);}
+.logo-main{font-family:var(--font-en);font-size:var(--fs-4);font-weight:600;color:var(--navy-800);letter-spacing:.05em;}
+.logo-sub{font-size:var(--fs-1);color:var(--gray-400);letter-spacing:.08em;font-family:var(--font-en);}
 .header-nav{display:flex;align-items:center;gap:2px;flex:1;}
-.nav-item{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:13.5px;color:var(--gray-500);transition:all .15s;white-space:nowrap;font-family:var(--font-zh);}
+.nav-item{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--r-sm);font-size:var(--fs-4);color:var(--gray-500);transition:all .15s;white-space:nowrap;font-family:var(--font-zh);}
 .nav-item:hover{background:var(--navy-50);color:var(--navy-700);}
 .nav-item.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);opacity:0;}
 .nav-item.active .nav-dot{opacity:1;}
 .header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
-.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
 .live-dot{width:5px;height:5px;background:var(--green-600);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-.header-time{font-family:var(--font-en);font-size:12px;color:var(--gray-400);}
-.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:13px;font-weight:500;font-family:var(--font-en);}
+.header-time{font-family:var(--font-en);font-size:var(--fs-3);color:var(--gray-400);}
+.btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:var(--fs-3);font-weight:500;font-family:var(--font-en);}
 
 /* ── PAGE ── */
 .page{margin-top:56px;max-width:1280px;margin-left:auto;margin-right:auto;padding:28px 24px 60px;}
 .page-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;}
-.page-title{font-family:var(--font-display);font-size:28px;color:var(--navy-950);}
-.page-title-sub{font-family:var(--font-zh);font-size:13px;font-weight:300;color:var(--gray-400);margin-top:4px;}
-.page-update{font-size:11.5px;color:var(--gray-400);font-family:var(--font-en);}
+.page-title{font-family:var(--font-display);font-size:var(--fs-7);color:var(--navy-950);}
+.page-title-sub{font-family:var(--font-zh);font-size:var(--fs-3);font-weight:300;color:var(--gray-400);margin-top:4px;}
+.page-update{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);}
 
 /* ── FILTER ROW ── */
 .filter-row{display:flex;align-items:center;gap:8px;margin-bottom:22px;flex-wrap:wrap;}
-.filter-chip{font-size:12px;padding:6px 14px;border-radius:20px;border:1px solid var(--gray-200);color:var(--gray-500);background:var(--white);cursor:pointer;transition:all .15s;font-family:var(--font-zh);display:flex;align-items:center;gap:5px;}
+.filter-chip{font-size:var(--fs-3);padding:6px 14px;border-radius:20px;border:1px solid var(--gray-200);color:var(--gray-500);background:var(--white);cursor:pointer;transition:all .15s;font-family:var(--font-zh);display:flex;align-items:center;gap:5px;}
 .filter-chip:hover{border-color:var(--navy-300);color:var(--navy-600);}
 .filter-chip.active{background:var(--navy-700);border-color:var(--navy-700);color:var(--white);font-weight:500;}
 .filter-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
@@ -79,11 +79,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 /* Date group header */
 .date-group{margin-bottom:6px;}
 .date-group-header{display:flex;align-items:center;gap:12px;padding:10px 0 8px;position:sticky;top:56px;background:#f7f8fc;z-index:10;}
-.dg-date-pill{background:var(--navy-700);color:var(--white);font-family:var(--font-en);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.04em;flex-shrink:0;}
+.dg-date-pill{background:var(--navy-700);color:var(--white);font-family:var(--font-en);font-size:var(--fs-3);font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.04em;flex-shrink:0;}
 .dg-date-pill.today{background:var(--navy-500);}
 .dg-date-pill.past{background:var(--gray-400);}
-.dg-weekday{font-size:12px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
-.dg-today-badge{font-size:10px;font-weight:600;color:var(--navy-500);background:var(--navy-50);border:1px solid var(--navy-100);border-radius:4px;padding:2px 7px;font-family:var(--font-en);}
+.dg-weekday{font-size:var(--fs-3);color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
+.dg-today-badge{font-size:var(--fs-1);font-weight:600;color:var(--navy-500);background:var(--navy-50);border:1px solid var(--navy-100);border-radius:4px;padding:2px 7px;font-family:var(--font-en);}
 .dg-line{flex:1;height:1px;background:var(--gray-200);}
 
 /* Event card */
@@ -100,51 +100,51 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 .ec-content{flex:1;min-width:0;}
 .ec-meta{display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap;}
-.ec-type-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);letter-spacing:.04em;}
-.ec-time{font-size:11px;color:var(--gray-400);font-family:var(--font-en);}
-.ec-market{font-size:10px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
-.ec-title{font-size:13.5px;font-weight:500;color:var(--gray-800);font-family:var(--font-zh);line-height:1.45;margin-bottom:3px;}
-.ec-desc{font-size:12px;color:var(--gray-500);font-family:var(--font-zh);line-height:1.55;font-weight:300;}
+.ec-type-badge{font-size:var(--fs-1);font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);letter-spacing:.04em;}
+.ec-time{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);}
+.ec-market{font-size:var(--fs-1);color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
+.ec-title{font-size:var(--fs-4);font-weight:500;color:var(--gray-800);font-family:var(--font-zh);line-height:1.45;margin-bottom:3px;}
+.ec-desc{font-size:var(--fs-3);color:var(--gray-500);font-family:var(--font-zh);line-height:1.55;font-weight:300;}
 .ec-tickers{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
-.ec-ticker{font-family:var(--font-en);font-size:10px;font-weight:600;padding:1px 7px;background:var(--gray-100);color:var(--navy-700);border-radius:3px;border:1px solid var(--gray-200);}
+.ec-ticker{font-family:var(--font-en);font-size:var(--fs-1);font-weight:600;padding:1px 7px;background:var(--gray-100);color:var(--navy-700);border-radius:3px;border:1px solid var(--gray-200);}
 
 .ec-right{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
-.ec-impact-label{font-size:9.5px;font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);letter-spacing:.04em;}
+.ec-impact-label{font-size:var(--fs-1);font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);letter-spacing:.04em;}
 .impact-high{background:var(--red-100);color:var(--red-600);}
 .impact-med{background:var(--amber-100);color:var(--amber-700);}
 .impact-low{background:var(--green-100);color:var(--green-700);}
 .impact-info{background:var(--gray-100);color:var(--gray-500);}
-.ec-done-badge{font-size:10px;color:var(--gray-400);font-family:var(--font-en);}
+.ec-done-badge{font-size:var(--fs-1);color:var(--gray-400);font-family:var(--font-en);}
 .ec-data-row{display:flex;gap:0;margin-top:8px;border:1px solid var(--gray-200);border-radius:var(--r-sm);overflow:hidden;}
 .ec-data-cell{flex:1;padding:6px 10px;background:var(--gray-50);border-right:1px solid var(--gray-200);text-align:center;}
 .ec-data-cell:last-child{border-right:none;}
 .ec-data-actual{background:var(--navy-50);}
-.ec-data-label{display:block;font-size:10px;color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;margin-bottom:2px;}
-.ec-data-val{font-size:13px;font-weight:600;color:var(--navy-800);font-family:var(--font-en);}
+.ec-data-label{display:block;font-size:var(--fs-1);color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;margin-bottom:2px;}
+.ec-data-val{font-size:var(--fs-3);font-weight:600;color:var(--navy-800);font-family:var(--font-en);}
 .ec-data-published{color:var(--green-600);}
-.ec-data-pending{color:var(--gray-400);font-weight:400;font-size:11px;}
+.ec-data-pending{color:var(--gray-400);font-weight:400;font-size:var(--fs-2);}
 
 /* Sidebar econ data card */
 .econ-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray-100);}
 .econ-item:last-child{border-bottom:none;}
 .econ-item-left{flex-shrink:0;width:34px;text-align:center;}
 .econ-item-dot{width:6px;height:6px;border-radius:50%;margin:0 auto 4px;flex-shrink:0;}
-.econ-item-day{font-family:var(--font-en);font-size:14px;font-weight:700;color:var(--navy-700);line-height:1;}
-.econ-item-mon{font-family:var(--font-en);font-size:9px;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;}
+.econ-item-day{font-family:var(--font-en);font-size:var(--fs-4);font-weight:700;color:var(--navy-700);line-height:1;}
+.econ-item-mon{font-family:var(--font-en);font-size:var(--fs-1);color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;}
 .econ-item-body{flex:1;min-width:0;}
 .econ-item-meta{display:flex;align-items:center;gap:5px;margin-bottom:3px;}
-.econ-item-badge{font-family:var(--font-en);font-size:9px;font-weight:600;letter-spacing:.05em;padding:1px 6px;border-radius:3px;}
+.econ-item-badge{font-family:var(--font-en);font-size:var(--fs-1);font-weight:600;letter-spacing:.05em;padding:1px 6px;border-radius:3px;}
 .econ-item-tag-today{background:#fef3c7;color:#92400e;}
 .econ-item-tag-yesterday{background:#f0fdf4;color:#166534;}
-.econ-item-title{font-size:12.5px;font-weight:500;color:var(--gray-800);font-family:var(--font-zh);margin-bottom:6px;line-height:1.4;}
+.econ-item-title{font-size:var(--fs-3);font-weight:500;color:var(--gray-800);font-family:var(--font-zh);margin-bottom:6px;line-height:1.4;}
 .econ-data-strip{display:flex;border-radius:6px;overflow:hidden;border:1px solid var(--gray-200);}
 .econ-data-col{flex:1;padding:5px 4px;text-align:center;background:var(--gray-50);border-right:1px solid var(--gray-200);}
 .econ-data-col:last-child{border-right:none;}
 .econ-data-col.has-act{background:#f0fdf4;}
-.econ-data-lbl{display:block;font-size:9px;font-weight:600;letter-spacing:.02em;color:var(--gray-400);margin-bottom:2px;font-family:var(--font-zh);}
-.econ-data-num{font-family:var(--font-en);font-size:12px;font-weight:700;color:var(--navy-800);display:block;line-height:1.3;}
+.econ-data-lbl{display:block;font-size:var(--fs-1);font-weight:600;letter-spacing:.02em;color:var(--gray-400);margin-bottom:2px;font-family:var(--font-zh);}
+.econ-data-num{font-family:var(--font-en);font-size:var(--fs-3);font-weight:700;color:var(--navy-800);display:block;line-height:1.3;}
 .econ-data-act{color:#16a34a;}
-.econ-data-tbd{color:var(--gray-400);font-weight:400;font-size:10px;}
+.econ-data-tbd{color:var(--gray-400);font-weight:400;font-size:var(--fs-1);}
 
 /* Type badge colors */
 .t-fed{background:#dbeafe;color:#1d4ed8;}
@@ -160,29 +160,29 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 /* ── SIDEBAR ── */
 .sidebar-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow-card);margin-bottom:14px;}
-.sc-title{font-size:13px;font-weight:600;color:var(--gray-900);font-family:var(--font-zh);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;}
-.sc-title-en{font-family:var(--font-en);font-size:10px;font-weight:400;color:var(--gray-400);letter-spacing:.05em;}
+.sc-title{font-size:var(--fs-3);font-weight:600;color:var(--gray-900);font-family:var(--font-zh);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;}
+.sc-title-en{font-family:var(--font-en);font-size:var(--fs-1);font-weight:400;color:var(--gray-400);letter-spacing:.05em;}
 
 /* Legend */
 .legend-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--gray-100);}
 .legend-row:last-child{border-bottom:none;}
 .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.legend-label{font-size:12px;color:var(--gray-600);font-family:var(--font-zh);}
-.legend-count{font-size:11px;color:var(--gray-400);font-family:var(--font-en);margin-left:auto;}
+.legend-label{font-size:var(--fs-3);color:var(--gray-600);font-family:var(--font-zh);}
+.legend-count{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);margin-left:auto;}
 
 /* This week summary */
 .week-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--gray-100);}
 .week-item:last-child{border-bottom:none;}
-.wi-date{font-family:var(--font-en);font-size:11px;font-weight:600;color:var(--navy-700);width:44px;flex-shrink:0;padding-top:1px;}
-.wi-text{font-size:12px;color:var(--gray-600);font-family:var(--font-zh);line-height:1.5;}
+.wi-date{font-family:var(--font-en);font-size:var(--fs-2);font-weight:600;color:var(--navy-700);width:44px;flex-shrink:0;padding-top:1px;}
+.wi-text{font-size:var(--fs-3);color:var(--gray-600);font-family:var(--font-zh);line-height:1.5;}
 
 /* Countdown */
 .countdown-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);}
 .countdown-item:last-child{border-bottom:none;}
 .ci-left{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;}
-.ci-name{font-size:12.5px;color:var(--gray-700);font-family:var(--font-zh);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.ci-date{font-size:10.5px;color:var(--gray-400);font-family:var(--font-en);}
-.ci-days{font-family:var(--font-en);font-size:13px;font-weight:600;color:var(--navy-700);}
+.ci-name{font-size:var(--fs-3);color:var(--gray-700);font-family:var(--font-zh);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ci-date{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);}
+.ci-days{font-family:var(--font-en);font-size:var(--fs-3);font-weight:600;color:var(--navy-700);}
 .ci-days.soon{color:var(--red-600);}
 
 @media(max-width:1024px){.cal-layout{grid-template-columns:1fr;}}
@@ -211,7 +211,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   border: 1px solid var(--gray-200);
   background: var(--white);
   color: var(--gray-500);
-  font-size: 14px;
+  font-size: var(--fs-4);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -221,7 +221,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 .month-title {
   font-family: var(--font-en);
-  font-size: 15px;
+  font-size: var(--fs-4);
   font-weight: 600;
   color: var(--gray-900);
   letter-spacing: .02em;
@@ -242,7 +242,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .cal-wd {
   text-align: center;
   font-family: var(--font-en);
-  font-size: 10.5px;
+  font-size: var(--fs-2);
   font-weight: 600;
   color: var(--gray-400);
   letter-spacing: .06em;
@@ -280,7 +280,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 .cal-day-num {
   font-family: var(--font-en);
-  font-size: 13px;
+  font-size: var(--fs-3);
   font-weight: 500;
   color: var(--gray-700);
   line-height: 1;
@@ -332,7 +332,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 10.5px;
+  font-size: var(--fs-2);
   color: var(--gray-500);
   font-family: var(--font-en);
 }
@@ -355,7 +355,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   border: 1px solid var(--gray-200);
   background: var(--white);
   color: var(--gray-500);
-  font-size: 12px;
+  font-size: var(--fs-3);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -364,7 +364,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .sc-cal-nav-btn:hover { background: var(--gray-100); }
 .sc-cal-month-title {
   font-family: var(--font-en);
-  font-size: 12.5px;
+  font-size: var(--fs-3);
   font-weight: 600;
   color: var(--gray-800);
 }
@@ -377,7 +377,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .sc-cal-wd {
   text-align: center;
   font-family: var(--font-en);
-  font-size: 9px;
+  font-size: var(--fs-1);
   font-weight: 600;
   color: var(--gray-400);
   letter-spacing: .04em;
@@ -406,7 +406,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .sc-day.has-event:hover:not(.sc-day-today) { background: var(--navy-50); }
 .sc-day-num {
   font-family: var(--font-en);
-  font-size: 10.5px;
+  font-size: var(--fs-2);
   font-weight: 400;
   color: var(--gray-600);
   line-height: 1;
@@ -430,7 +430,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 .logo-link{transition:opacity .2s,transform .2s;display:inline-flex;}
 .logo-link:hover{opacity:.75;transform:scale(1.04);}
-#stale-banner{display:none;align-items:center;justify-content:center;gap:6px;background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 24px;font-size:12px;color:#92400e;font-family:var(--font-zh);position:fixed;top:56px;left:0;right:0;z-index:99;}
+#stale-banner{display:none;align-items:center;justify-content:center;gap:6px;background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 24px;font-size:var(--fs-3);color:#92400e;font-family:var(--font-zh);position:fixed;top:56px;left:0;right:0;z-index:99;}
 </style>
   <script src="/shared/nav.js"></script>
   <script src="/shared/footer.js"></script>
@@ -503,7 +503,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
     <!-- Timeline -->
     <div class="timeline" id="timeline">
-      <div id="timeline-loading" style="padding:40px 0;text-align:center;color:var(--gray-400);font-size:13px;font-family:var(--font-en);">載入中...</div>
+      <div id="timeline-loading" style="padding:40px 0;text-align:center;color:var(--gray-400);font-size:var(--fs-3);font-family:var(--font-en);">載入中...</div>
 
       <!-- all content rendered dynamically via loadCalendarData() -->
 
@@ -546,19 +546,19 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <!-- 總經數據常駐顯示 -->
       <div class="sidebar-card" id="econ-data-card">
         <div class="sc-title">總經數據 <span class="sc-title-en">ECONOMIC DATA</span></div>
-        <div id="econ-data-list" style="color:var(--gray-400);font-size:12px;font-family:var(--font-en);">載入中...</div>
+        <div id="econ-data-list" style="color:var(--gray-400);font-size:var(--fs-3);font-family:var(--font-en);">載入中...</div>
       </div>
 
       <!-- Countdown to key events (content replaced by updateCountdownsDynamic) -->
       <div class="sidebar-card" id="countdown-card">
         <div class="sc-title">重要倒數 <span class="sc-title-en">COUNTDOWN</span></div>
-        <div style="padding:8px 0;color:var(--gray-400);font-size:12px;font-family:var(--font-en);">載入中...</div>
+        <div style="padding:8px 0;color:var(--gray-400);font-size:var(--fs-3);font-family:var(--font-en);">載入中...</div>
       </div>
 
       <!-- This week summary (content replaced by updateThisWeekDynamic) -->
       <div class="sidebar-card" id="this-week-card">
         <div class="sc-title">本週重點 <span class="sc-title-en">THIS WEEK</span></div>
-        <div style="padding:8px 0;color:var(--gray-400);font-size:12px;font-family:var(--font-en);">載入中...</div>
+        <div style="padding:8px 0;color:var(--gray-400);font-size:var(--fs-3);font-family:var(--font-en);">載入中...</div>
       </div>
 
     </div>
@@ -810,7 +810,7 @@ async function loadCalendarData(){
               '<div class="ec-data-cell"><span class="ec-data-label">預期</span><span class="ec-data-val">'+(ev.expect||'—')+'</span></div>'+
               '<div class="ec-data-cell ec-data-actual"><span class="ec-data-label">當期</span><span class="ec-data-val '+(ev.actual?'ec-data-published':'ec-data-pending')+'">'+(ev.actual||'待公布')+'</span></div>'+
             '</div>':'')+
-          (ev.watch?'<div class="ec-desc" style="color:var(--amber-700);font-size:12px;">'+ICO.eye+' 觀察：'+ev.watch+'</div>':'')+
+          (ev.watch?'<div class="ec-desc" style="color:var(--amber-700);font-size:var(--fs-3);">'+ICO.eye+' 觀察：'+ev.watch+'</div>':'')+
         '</div>'+
         '<div class="ec-right">'+
           '<span class="ec-impact-label '+ilc+'">'+il+'</span>'+
@@ -840,7 +840,7 @@ async function loadCalendarData(){
       if(html){
         timeline.innerHTML = html;
       } else {
-        timeline.innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--gray-400);font-size:13px;font-family:var(--font-en);">今日暫無日曆事件</div>';
+        timeline.innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--gray-400);font-size:var(--fs-3);font-family:var(--font-en);">今日暫無日曆事件</div>';
       }
     }
 
@@ -862,7 +862,7 @@ async function loadCalendarData(){
     console.error('calendar loadData error',e);
     if(window.PX_showDataError)window.PX_showDataError();
     var tl = document.getElementById('timeline');
-    if(tl) tl.innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--gray-400);font-size:13px;font-family:var(--font-zh);">資料載入失敗，請重新整理</div>';
+    if(tl) tl.innerHTML = '<div style="padding:60px 0;text-align:center;color:var(--gray-400);font-size:var(--fs-3);font-family:var(--font-zh);">資料載入失敗，請重新整理</div>';
   }
 }
 
@@ -883,7 +883,7 @@ function updateEconDataSidebar(events, todayStr){
   econEvs.sort(function(a,b){ return a.date.localeCompare(b.date); });
 
   if(!econEvs.length){
-    el.innerHTML='<div style="color:var(--gray-400);font-size:12px;padding:8px 0;text-align:center;font-family:var(--font-en);">No upcoming data</div>';
+    el.innerHTML='<div style="color:var(--gray-400);font-size:var(--fs-3);padding:8px 0;text-align:center;font-family:var(--font-en);">No upcoming data</div>';
     return;
   }
 
@@ -974,7 +974,7 @@ function updateThisWeekDynamic(events, todayStr){
   weekEvs.sort(function(a,b){ return a.date.localeCompare(b.date); });
   var html = '<div class="sc-title">本週重點 <span class="sc-title-en">THIS WEEK</span></div>';
   if(!weekEvs.length){
-    html += '<div style="padding:8px 0;color:var(--gray-400);font-size:12px;font-family:var(--font-zh);">本週暫無重要事件</div>';
+    html += '<div style="padding:8px 0;color:var(--gray-400);font-size:var(--fs-3);font-family:var(--font-zh);">本週暫無重要事件</div>';
   } else {
     weekEvs.slice(0,6).forEach(function(ev){
       var d = new Date(ev.date+'T00:00:00');
