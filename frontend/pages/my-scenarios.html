@@ -38,8 +38,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);opacity:0;}
 .nav-item.active .nav-dot{opacity:1;}
 .header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
-.live-badge{display:flex;align-items:center;gap:5px;font-size:var(--fs-2);font-weight:600;color:var(--green-600);font-family:var(--font-en);letter-spacing:.06em;}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green-600);animation:pulse 2s infinite;}
+.live-badge{display:flex;align-items:center;gap:5px;font-size:var(--fs-2);font-weight:600;color:var(--navy-600);font-family:var(--font-en);letter-spacing:.06em;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--navy-600);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .header-time{font-size:var(--fs-3);font-family:var(--font-en);color:var(--gray-400);}
 .btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:var(--fs-3);font-weight:500;font-family:var(--font-en);}
@@ -101,8 +101,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .sc-detail-item{display:flex;gap:5px;}
 .sc-detail-label{font-weight:600;color:var(--gray-500);}
 .sc-item-actions{display:flex;gap:8px;margin-top:10px;}
-.btn-delete{padding:5px 12px;border:1px solid var(--red-100);border-radius:var(--r-sm);font-size:var(--fs-3);color:var(--red-600);transition:all .15s;}
-.btn-delete:hover{background:var(--red-100);}
+.btn-delete{padding:5px 12px;border:1px solid var(--amber-100);border-radius:var(--r-sm);font-size:var(--fs-3);color:var(--amber-700);transition:all .15s;}
+.btn-delete:hover{background:var(--amber-100);}
 
 /* Empty state */
 .empty-state{text-align:center;padding:60px 20px;color:var(--gray-400);}
@@ -256,7 +256,7 @@ async function loadScenarios() {
     updateStats(allItems);
     renderList(allItems, currentFilter);
   } catch(e) {
-    document.getElementById('sc-list').innerHTML = '<div style="text-align:center;padding:40px;color:var(--red-600);">載入失敗：' + escHtml(e.message) + '</div>';
+    document.getElementById('sc-list').innerHTML = '<div style="text-align:center;padding:40px;color:var(--amber-700);">載入失敗：' + escHtml(e.message) + '</div>';
   }
 }
 

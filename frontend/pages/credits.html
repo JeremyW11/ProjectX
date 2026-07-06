@@ -124,7 +124,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .usage-icon{font-size:var(--fs-5);margin-right:12px;width:24px;text-align:center;}
 .usage-name{flex:1;font-size:var(--fs-3);color:var(--gray-700);}
 .usage-cost{font-family:var(--font-en);font-size:var(--fs-3);font-weight:700;color:var(--amber-600);background:var(--amber-100);padding:3px 10px;border-radius:20px;}
-.usage-cost.free{color:var(--green-700);background:var(--green-100);}
+.usage-cost.free{color:var(--gray-600);background:var(--gray-100);}
 .usage-cost.pro{color:var(--pro-gold-dark);background:var(--pro-gold-light);}
 .usage-cost.review{color:var(--navy-600);background:var(--navy-50);border:1px solid var(--navy-100);}
 
@@ -166,7 +166,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .compare-row>div{padding:13px 16px;font-size:var(--fs-3);display:flex;align-items:center;justify-content:center;}
 .compare-row .feat{justify-content:flex-start;color:var(--gray-700);}
 .compare-row .col-pro{background:rgba(245,233,200,.35);}
-.ck-yes{color:var(--green-600);font-weight:700;}
+.ck-yes{color:var(--navy-600);font-weight:700;}
 .ck-no{color:var(--gray-300);}
 .ck-txt{font-size:var(--fs-3);color:var(--gray-600);font-family:var(--font-en);}
 </style>
@@ -541,7 +541,7 @@ async function submitProApply(user){
   if(btn){ btn.style.pointerEvents='none'; btn.textContent='送出中…'; }
   var res=await _supabase.from('feedback').insert({ user_id:user.id, content:reason, category:'pro_access' });
   if(res.error){
-    if(msg){ msg.textContent='送出失敗：'+res.error.message; msg.style.color='#fca5a5'; }
+    if(msg){ msg.textContent='送出失敗：'+res.error.message; msg.style.color='#fbbf24'; }
     if(btn){ btn.style.pointerEvents=''; btn.textContent='送出申請'; }
     return;
   }

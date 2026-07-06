@@ -183,7 +183,7 @@ function showFbMsg(text,ok){
   var msg=document.getElementById('fb-msg');
   if(!msg) return;
   msg.textContent=text;
-  msg.style.color=ok?'var(--navy-600)':'var(--red-600)';
+  msg.style.color=ok?'var(--navy-600)':'var(--amber-700)';
 }
 async function submitFeedback(){
   if(!currentUser){ showFbMsg('請先登入',false); return; }

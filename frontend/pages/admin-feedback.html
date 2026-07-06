@@ -41,7 +41,7 @@ a{text-decoration:none;color:inherit;}
 .sb-item:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.04);}
 .sb-item.active{color:var(--white);background:rgba(59,130,246,.15);border-left-color:var(--navy-400);}
 .sb-item .sb-icon{font-size:var(--fs-4);width:20px;text-align:center;flex-shrink:0;}
-.sb-badge{margin-left:auto;background:var(--red-600);color:var(--white);font-size:var(--fs-1);font-weight:700;padding:1px 6px;border-radius:10px;font-family:var(--font-en);}
+.sb-badge{margin-left:auto;background:var(--amber-600);color:var(--white);font-size:var(--fs-1);font-weight:700;padding:1px 6px;border-radius:10px;font-family:var(--font-en);}
 .sb-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,.07);font-size:var(--fs-2);color:rgba(255,255,255,.3);word-break:break-all;}
 
 /* ── main ── */
@@ -56,7 +56,7 @@ a{text-decoration:none;color:inherit;}
 .stat-label{font-size:var(--fs-2);color:var(--gray-500);font-family:var(--font-en);font-weight:500;letter-spacing:.04em;text-transform:uppercase;}
 .stat-value{font-size:var(--fs-7);font-weight:700;color:var(--navy-800);font-family:var(--font-en);margin-top:4px;line-height:1;}
 .stat-sub{font-size:var(--fs-2);color:var(--gray-400);margin-top:5px;}
-.stat-card.alert .stat-value{color:var(--red-600);}
+.stat-card.alert .stat-value{color:var(--amber-700);}
 .stat-card.pro .stat-value{color:var(--pro-dark);}
 
 /* ── section card ── */
@@ -97,19 +97,19 @@ a{text-decoration:none;color:inherit;}
 .tag.denied{background:var(--gray-100);color:var(--gray-500);}
 .tag.proapp{background:#f5e9c8;color:var(--pro-dark);}
 .tag.chart{background:var(--navy-50);color:var(--navy-600);}
-.tag.credit{background:var(--green-100);color:var(--green-700);}
+.tag.credit{background:var(--gray-100);color:var(--gray-600);}
 
 /* ── action btns ── */
 .btn-row{display:flex;gap:6px;align-items:center;}
 .btn{font-size:var(--fs-3);font-family:var(--font-zh);font-weight:500;padding:6px 14px;border-radius:var(--r-sm);cursor:pointer;border:1px solid transparent;transition:all .15s;white-space:nowrap;}
 .btn-primary{background:var(--navy-700);color:var(--white);}
 .btn-primary:hover{background:var(--navy-600);}
-.btn-success{background:var(--green-600);color:var(--white);}
+.btn-success{background:var(--navy-600);color:var(--white);}
 .btn-success:hover{opacity:.88;}
 .btn-ghost{background:var(--white);color:var(--gray-600);border-color:var(--gray-200);}
 .btn-ghost:hover{background:var(--gray-50);}
-.btn-danger{background:var(--white);color:var(--red-600);border-color:var(--red-600);}
-.btn-danger:hover{background:var(--red-100);}
+.btn-danger{background:var(--white);color:var(--amber-700);border-color:var(--amber-700);}
+.btn-danger:hover{background:var(--amber-100);}
 .btn:disabled{opacity:.45;cursor:default;}
 
 /* ── feedback cards ── */
@@ -717,8 +717,8 @@ async function saveReply(id,btn){
   try{
     await api('/admin/feedback/'+id,{method:'POST',body:{reply:ta.value.trim()||null}});
     updateFbItem(id,{reply:ta.value.trim()});
-    if(msg){msg.textContent='✓ 已送出';msg.style.color='var(--green-600)';}
-  }catch(e){ if(msg){msg.textContent='送出失敗';msg.style.color='var(--red-600)';} }
+    if(msg){msg.textContent='✓ 已送出';msg.style.color='var(--navy-600)';}
+  }catch(e){ if(msg){msg.textContent='送出失敗';msg.style.color='var(--amber-700)';} }
   btn.disabled=false; btn.textContent='送出回覆';
 }
 

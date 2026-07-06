@@ -42,8 +42,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .nav-item.active{background:var(--navy-50);color:var(--navy-700);font-weight:600;}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-500);}
 .header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
-.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green-600);animation:pulse 2s infinite;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--navy-50);color:var(--navy-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--navy-600);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
 .header-time{font-size:var(--fs-3);color:var(--gray-400);font-family:var(--font-en);}
 .btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:var(--fs-3);font-weight:500;font-family:var(--font-en);}
@@ -418,7 +418,7 @@ async function prepApply(user){
   var st=document.getElementById('apply-status');
   if(res.data && res.data.length){
     var r=res.data[0], s=r.status||'pending';
-    if(s==='granted'){ if(st){ st.textContent='✓ 已開放，請重新整理頁面'; st.style.color='var(--green-600)'; } }
+    if(s==='granted'){ if(st){ st.textContent='✓ 已開放，請重新整理頁面'; st.style.color='var(--navy-600)'; } }
     else if(s==='denied'){ if(st){ st.textContent='上次申請未通過'+(r.reply?'：'+r.reply:'')+'，可重新提出'; st.style.color='var(--gray-500)'; } }
     else { if(st){ st.textContent='⏳ 申請審核中，請耐心等候'; st.style.color='var(--amber-600)'; } if(btn){ btn.disabled=true; btn.textContent='申請審核中'; } }
   }
@@ -436,13 +436,13 @@ async function submitApply(){
   var btn=document.getElementById('btn-apply-submit');
   var msg=document.getElementById('apply-msg');
   var reason=(ta.value||'').trim();
-  if(reason.length<5){ if(msg){ msg.textContent='請至少填寫 5 個字'; msg.style.color='var(--red-600)'; } return; }
+  if(reason.length<5){ if(msg){ msg.textContent='請至少填寫 5 個字'; msg.style.color='var(--amber-700)'; } return; }
   btn.disabled=true; btn.textContent='送出中…';
   var res=await _supabase.from('feedback').insert({ user_id:_user.id, content:reason, category:'chart_access' });
   btn.disabled=false; btn.textContent='送出申請';
-  if(res.error){ if(msg){ msg.textContent='送出失敗，請稍後再試'; msg.style.color='var(--red-600)'; } return; }
+  if(res.error){ if(msg){ msg.textContent='送出失敗，請稍後再試'; msg.style.color='var(--amber-700)'; } return; }
   ta.value='';
-  if(msg){ msg.textContent='✓ 已送出，官方審核後將回覆於你的帳號'; msg.style.color='var(--green-600)'; }
+  if(msg){ msg.textContent='✓ 已送出，官方審核後將回覆於你的帳號'; msg.style.color='var(--navy-600)'; }
   prepApply(_user);
 }
 

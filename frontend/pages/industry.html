@@ -54,8 +54,8 @@ nav{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,
 .nav-links a.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);display:inline-block;}
 .nav-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
-.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
-.live-dot{width:5px;height:5px;background:var(--green-600);border-radius:50%;animation:pulse 2s infinite;display:inline-block;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--navy-50);color:var(--navy-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-dot{width:5px;height:5px;background:var(--navy-600);border-radius:50%;animation:pulse 2s infinite;display:inline-block;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .header-time{font-family:var(--font-en);font-size:var(--fs-3);color:var(--gray-400);}
 .btn{padding:7px 16px;border-radius:var(--r-sm);font-size:var(--fs-3);font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font-en);}
@@ -109,7 +109,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--gray-100);}
 .card-title{display:flex;align-items:center;gap:7px;font-size:var(--fs-3);font-weight:600;color:var(--gray-900);font-family:var(--font-zh);}
 .card-badge{font-size:var(--fs-1);padding:2px 8px;border-radius:20px;font-weight:600;font-family:var(--font-en);}
-.badge-free{background:var(--green-100);color:var(--green-700);}
+.badge-free{background:var(--gray-100);color:var(--gray-600);}
 .news-count{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);}
 
 /* ── INDUSTRY NEWS ── */
@@ -123,8 +123,8 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
 .tag-ai{background:#fdf4ff;color:#7e22ce;border:1px solid #e9d5ff;}
 .tag-energy{background:var(--amber-100);color:var(--amber-700);border:1px solid #fde68a;}
 .tag-tw{background:#ccfbf1;color:#0f766e;border:1px solid #99f6e4;}
-.tag-shipping{background:var(--green-100);color:var(--green-700);border:1px solid #bbf7d0;}
-.tag-finance{background:var(--red-100);color:var(--red-700);border:1px solid #fecaca;}
+.tag-shipping{background:#cffafe;color:#0e7490;border:1px solid #a5f3fc;}
+.tag-finance{background:#e0e7ff;color:#4338ca;border:1px solid #c7d2fe;}
 .ind-body{flex:1;min-width:0;}
 .ind-text{font-size:var(--fs-4);color:var(--gray-700);line-height:1.65;font-family:var(--font-zh);}
 .ind-footer{display:flex;justify-content:space-between;margin-top:3px;flex-wrap:wrap;gap:3px;}
@@ -170,14 +170,14 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
 .company-note{font-size:var(--fs-3);color:var(--gray-600);line-height:1.5;margin-top:2px;font-family:var(--font-zh);}
 .event-badge{font-size:var(--fs-1);font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;flex-shrink:0;font-family:var(--font-en);}
 .event-watch{background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);}
-.event-earnings{background:var(--green-100);color:var(--green-700);border:1px solid #bbf7d0;}
+.event-earnings{background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;}
 .event-expand{background:var(--amber-100);color:var(--amber-700);border:1px solid #fde68a;}
 .company-expand{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .3s;opacity:0;}
 .company-item.open .company-expand{max-height:240px;opacity:1;}
 .company-expand-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--gray-100);}
 .ce-label{font-size:var(--fs-1);color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px;font-weight:600;font-family:var(--font-en);}
 .ce-value{font-size:var(--fs-3);color:var(--gray-600);line-height:1.5;font-family:var(--font-zh);}
-.ce-risk{color:var(--red-600);}
+.ce-risk{color:var(--amber-700);}
 .ce-action{color:var(--amber-600);font-weight:600;}
 
 /* ── RESPONSIVE ── */

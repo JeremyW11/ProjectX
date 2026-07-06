@@ -55,8 +55,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);opacity:0;}
 .nav-item.active .nav-dot{opacity:1;}
 .header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
-.live-badge{display:flex;align-items:center;gap:5px;background:var(--green-100);color:var(--green-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
-.live-dot{width:5px;height:5px;background:var(--green-600);border-radius:50%;animation:pulse 2s infinite;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--navy-50);color:var(--navy-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-dot{width:5px;height:5px;background:var(--navy-600);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 .header-time{font-family:var(--font-en);font-size:var(--fs-3);color:var(--gray-400);}
 .btn-login{padding:7px 16px;background:var(--navy-700);color:var(--white);border-radius:var(--r-sm);font-size:var(--fs-3);font-weight:500;font-family:var(--font-en);}
@@ -151,7 +151,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .tc-sym{font-family:var(--font-en);font-size:var(--fs-4);font-weight:700;color:var(--gray-900);}
 .tc-name{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-zh);margin-top:2px;}
 .tc-cat-badge{font-size:var(--fs-1);font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);letter-spacing:.04em;flex-shrink:0;}
-.cat-us{background:#f0fdf4;color:#166534;}
+.cat-us{background:#e0f2fe;color:#0369a1;}
 .cat-tw{background:#fdf4ff;color:#7e22ce;}
 .cat-crypto{background:#fef3c7;color:#92400e;}
 
@@ -176,7 +176,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .tc-meta-label{font-size:var(--fs-1);color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
 .tc-meta-val{font-family:var(--font-en);font-size:var(--fs-2);font-weight:500;color:var(--gray-700);}
 .tc-remove{font-size:var(--fs-3);color:var(--gray-300);transition:color .15s;cursor:pointer;}
-.tc-remove:hover{color:var(--red-600);}
+.tc-remove:hover{color:var(--amber-700);}
 
 /* Alert badge */
 .tc-alert{position:absolute;top:12px;right:12px;background:var(--amber-100);color:var(--amber-600);font-size:var(--fs-1);font-weight:700;padding:2px 6px;border-radius:3px;font-family:var(--font-en);letter-spacing:.04em;}
@@ -381,7 +381,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .oc-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
 .oc-ticker{font-family:var(--font-en);font-size:var(--fs-3);font-weight:700;color:var(--navy-700);}
 .oc-conf{font-size:var(--fs-1);font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--font-en);}
-.conf-HIGH{background:#dcfce7;color:#15803d;}
+.conf-HIGH{background:var(--navy-50);color:var(--navy-700);}
 .conf-MED{background:#fef3c7;color:#92400e;}
 .conf-LOW{background:var(--gray-100);color:var(--gray-500);}
 .oc-thesis{font-size:var(--fs-3);color:var(--gray-600);font-family:var(--font-zh);line-height:1.55;}
@@ -711,7 +711,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <a href="/pages/inbox.html" style="display:flex;align-items:center;gap:14px;padding:16px 20px;text-decoration:none;">
       <span style="font-size:var(--fs-6);line-height:1;"><span data-ico="mail"></span></span>
       <span style="flex:1;">
-        <span style="display:block;font-size:var(--fs-4);font-weight:700;color:var(--navy-900);font-family:var(--font-zh);">站內信箱<span id="inbox-unread-pill" style="display:none;margin-left:8px;font-size:var(--fs-2);font-weight:700;color:#fff;background:var(--red-600);padding:1px 8px;border-radius:10px;vertical-align:middle;"></span></span>
+        <span style="display:block;font-size:var(--fs-4);font-weight:700;color:var(--navy-900);font-family:var(--font-zh);">站內信箱<span id="inbox-unread-pill" style="display:none;margin-left:8px;font-size:var(--fs-2);font-weight:700;color:#fff;background:var(--amber-600);padding:1px 8px;border-radius:10px;vertical-align:middle;"></span></span>
         <span style="display:block;font-size:var(--fs-3);color:var(--gray-500);font-family:var(--font-zh);margin-top:2px;">權限申請、點數購買、意見回饋與官方回覆，都記錄並通知於此</span>
       </span>
       <span style="font-size:var(--fs-5);color:var(--gray-400);">›</span>
@@ -952,7 +952,7 @@ function closePwdModalBg(e){ if(e.target===e.currentTarget) closePwdModal(); }
 function showPwdMsg(text,ok){
   var msg=document.getElementById('pwd-msg');
   msg.textContent=text;
-  msg.style.color=ok?'var(--navy-600)':'var(--red-600)';
+  msg.style.color=ok?'var(--navy-600)':'var(--amber-700)';
   msg.style.display='block';
 }
 async function changePassword(){
@@ -982,7 +982,7 @@ function closeProfileModalBg(e){ if(e.target===e.currentTarget) closeProfileModa
 function showProfileMsg(text,ok){
   var msg=document.getElementById('pf-msg');
   msg.textContent=text;
-  msg.style.color=ok?'var(--navy-600)':'var(--red-600)';
+  msg.style.color=ok?'var(--navy-600)':'var(--amber-700)';
   msg.style.display='block';
 }
 async function saveProfile(){
@@ -1089,7 +1089,7 @@ async function generateMorningBrief(items, dailyData){
       content.innerHTML = '<div style="color:var(--gray-400);padding:20px;text-align:center;">今日早報尚未產出，請稍後再試</div>';
     }
   } catch(e){
-    content.innerHTML = '<div style="color:var(--red-600);padding:10px;">載入失敗：' + e.message + '</div>';
+    content.innerHTML = '<div style="color:var(--amber-700);padding:10px;">載入失敗：' + e.message + '</div>';
   }
 }
 // ── End Morning Brief ───────────────────────────────
@@ -1331,8 +1331,8 @@ async function loadOpportunities(){
       return;
     }
 
-    var confColor = {HIGH:'var(--green-600)',MED:'var(--amber-600)',LOW:'var(--gray-400)'};
-    var confBg = {HIGH:'var(--green-100)',MED:'var(--amber-100)',LOW:'var(--gray-100)'};
+    var confColor = {HIGH:'var(--navy-600)',MED:'var(--amber-600)',LOW:'var(--gray-400)'};
+    var confBg = {HIGH:'var(--navy-50)',MED:'var(--amber-100)',LOW:'var(--gray-100)'};
     var catLabel = {us:'美股',tw:'台股',crypto:'加密',sector:'板塊'};
     var catColor = {us:'var(--navy-600)',tw:'var(--purple-600,#7c3aed)',crypto:'var(--amber-600)',sector:'var(--green-600)'};
     var catBg = {us:'var(--navy-50)',tw:'var(--purple-100,#ede9fe)',crypto:'var(--amber-100)',sector:'var(--green-100)'};
@@ -1363,7 +1363,7 @@ async function loadOpportunities(){
       '</div>';
     }).join('');
   } catch(e){
-    el.innerHTML = '<div style="color:var(--red-600);padding:20px;">載入失敗：'+e.message+'</div>';
+    el.innerHTML = '<div style="color:var(--amber-700);padding:20px;">載入失敗：'+e.message+'</div>';
   }
 }
 // ── End 不對稱機會 ─────────────────────────────────
@@ -1462,7 +1462,7 @@ async function loadRiskRadar(watchlistItems){
       '</div>' : '');
 
   } catch(e){
-    el.innerHTML = '<div style="color:var(--red-600);padding:10px;">載入失敗：'+e.message+'</div>';
+    el.innerHTML = '<div style="color:var(--amber-700);padding:10px;">載入失敗：'+e.message+'</div>';
   }
 }
 // ── End 組合風險雷達 ───────────────────────────────────
@@ -1500,7 +1500,7 @@ async function loadEventTracker(watchlistItems){
     var dirColor = {positive:'var(--green-600)',negative:'var(--red-600)',neutral:'var(--amber-600)'};
     var accColor = {hit:'var(--green-600)',miss:'var(--red-600)',partial:'var(--amber-600)',pending:'var(--gray-400)'};
     var accLabel = {hit:'✓ 命中',miss:'✗ 未中',partial:'~ 部分命中',pending:'⏳ 待驗證'};
-    var confColor = {HIGH:'var(--green-600)',MED:'var(--amber-600)',LOW:'var(--gray-400)'};
+    var confColor = {HIGH:'var(--navy-600)',MED:'var(--amber-600)',LOW:'var(--gray-400)'};
 
     var eventsHTML = relevantEvents.length ? relevantEvents.map(function(ev){
       var isPast = ev.date < todayStr;
@@ -1570,7 +1570,7 @@ async function loadEventTracker(watchlistItems){
     el.innerHTML = statsHTML + eventsHTML;
 
   } catch(e){
-    el.innerHTML = '<div style="color:var(--red-600);padding:10px;">載入失敗：'+e.message+'</div>';
+    el.innerHTML = '<div style="color:var(--amber-700);padding:10px;">載入失敗：'+e.message+'</div>';
   }
 }
 // ── End 事件驅動追蹤 ───────────────────────────────────
