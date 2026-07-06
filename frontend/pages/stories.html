@@ -60,7 +60,19 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .pro-gate-title{font-size:24px;font-weight:600;margin-bottom:10px;}
 .pro-gate-title em{color:var(--pro-gold);font-style:normal;}
 .pro-gate-desc{font-size:14px;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 24px;line-height:1.7;}
-.btn-pro-upgrade{display:inline-block;padding:12px 28px;background:var(--pro-gold);color:var(--navy-900);border-radius:var(--r-md);font-size:14px;font-weight:700;}
+.btn-pro-upgrade{display:inline-block;padding:12px 28px;background:var(--pro-gold);color:var(--navy-900);border-radius:var(--r-md);font-size:14px;font-weight:700;white-space:nowrap;}
+
+/* PRO TEASER — real tracked stories rendered + blurred/faded, not an empty shell */
+.stories-view.teaser{max-height:640px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 90%);mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 90%);}
+.stories-view.teaser .timeline,.stories-view.teaser .story-pred{filter:blur(4px);user-select:none;}
+.teaser-convert{position:relative;margin-top:-88px;z-index:5;display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--r-xl);padding:18px 26px;color:var(--white);box-shadow:0 20px 50px rgba(10,15,30,.35);flex-wrap:wrap;}
+.teaser-convert-txt{flex:1 1 220px;min-width:0;}
+.teaser-convert-txt b{font-size:14.5px;display:block;margin-bottom:3px;font-weight:600;}
+.teaser-convert-txt b em{color:var(--pro-gold);font-style:normal;}
+.teaser-convert-txt span{font-size:12px;color:rgba(255,255,255,.68);}
+.teaser-proof{font-family:var(--font-en);text-align:center;padding:0 16px;border-left:1px solid rgba(255,255,255,.15);border-right:1px solid rgba(255,255,255,.15);flex-shrink:0;}
+.teaser-proof b{font-size:18px;color:var(--pro-gold);display:block;}
+.teaser-proof span{font-size:9.5px;color:rgba(255,255,255,.6);letter-spacing:.05em;}
 
 /* STORY CARDS */
 .stories-view{display:none;}
@@ -131,22 +143,11 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </div>
   </div>
 
-  <!-- PRO GATE -->
-  <div id="pro-gate-view">
-    <div class="pro-gate">
-      <div class="pro-gate-icon">✦</div>
-      <h2 class="pro-gate-title">追蹤<em>全球大事</em>的完整脈絡</h2>
-      <p class="pro-gate-desc">地緣衝突、貿易政策、央行路徑、AI 與半導體供應鏈——每條重大事件串成連續時間軸，每天更新進展、方向與受影響標的。OrionAI 每日針對進行中的事件生成市場預判，14 日後自動驗收，結果計入歷史績效。</p>
-      <div class="pro-gate-btns">
-        <a href="/pages/login.html" class="btn-pro-upgrade">✦ 登入體驗 Pro</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- LOGGED-IN VIEW -->
+  <!-- CONTENT VIEW — always rendered with real data; teaser class blurs/fades it for non-Pro -->
   <div id="stories-view" class="stories-view">
     <div id="stories-list"></div>
   </div>
+  <div id="teaser-convert-wrap"></div>
 
 </main>
 
@@ -174,33 +175,55 @@ function initAuth(){
 }
 
 function setAuthState(user){
-  var gateEl=document.getElementById('pro-gate-view');
   var viewEl=document.getElementById('stories-view');
+  if(viewEl) viewEl.classList.add('active');
   var btnEl=document.getElementById('auth-btn');
   if(user){
     if(btnEl){ btnEl.textContent='登出'; btnEl.href='#'; btnEl.onclick=function(e){e.preventDefault();signOutUser();}; }
-    checkProStatus(user, gateEl, viewEl);
+    checkProStatus(user, viewEl);
   } else {
-    if(gateEl) gateEl.style.display='block';
-    if(viewEl) viewEl.classList.remove('active');
+    renderTeaser(viewEl, false);
     if(btnEl){ btnEl.textContent='登入'; btnEl.href='/pages/login.html'; btnEl.onclick=null; }
   }
 }
 
-async function checkProStatus(user, gateEl, viewEl){
+async function checkProStatus(user, viewEl){
   var isPro = user.email === 'jermy831102@gmail.com';
   if(!isPro){
     var result = await _supabase.from('profiles').select('is_pro').eq('id', user.id).single();
     isPro = result.data && result.data.is_pro === true;
   }
   if(isPro){
-    if(gateEl) gateEl.style.display='none';
-    if(viewEl) viewEl.classList.add('active');
+    if(viewEl) viewEl.classList.remove('teaser');
+    var wrap=document.getElementById('teaser-convert-wrap');
+    if(wrap) wrap.innerHTML='';
     loadStories();
   } else {
-    if(gateEl) gateEl.style.display='block';
-    if(viewEl) viewEl.classList.remove('active');
+    renderTeaser(viewEl, true);
   }
+}
+
+async function renderTeaser(viewEl, loggedIn){
+  if(viewEl) viewEl.classList.add('teaser');
+  await loadStories();
+  var wrap=document.getElementById('teaser-convert-wrap');
+  if(!wrap) return;
+  var proof='';
+  try{
+    var r=await fetch('/data/performance.json?v='+Math.floor(Date.now()/300000));
+    var p=await r.json();
+    var pr=p.predictions||{};
+    if(pr.by_type&&pr.by_type.story&&pr.by_type.story.hit_rate!=null){
+      proof='<div class="teaser-proof"><b>'+pr.by_type.story.hit_rate+'%</b><span>全球追蹤命中率</span></div>';
+    }
+  }catch(e){}
+  var cta=loggedIn
+    ? '<a href="/pages/credits.html" class="btn-pro-upgrade">升級 Pro →</a>'
+    : '<a href="/pages/login.html" class="btn-pro-upgrade">登入解鎖 →</a>';
+  wrap.innerHTML='<div class="teaser-convert">'+
+    '<div class="teaser-convert-txt"><b>追蹤<em>全球大事</em>的完整脈絡</b><span>升級 Pro 解鎖完整時間軸與 AI 預判</span></div>'+
+    proof+cta+
+  '</div>';
 }
 
 async function signOutUser(){

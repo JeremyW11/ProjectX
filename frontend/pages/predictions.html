@@ -57,7 +57,19 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .pro-gate-title{font-size:24px;font-weight:600;margin-bottom:10px;}
 .pro-gate-title em{color:var(--pro-gold);font-style:normal;}
 .pro-gate-desc{font-size:14px;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 24px;line-height:1.7;}
-.btn-pro-upgrade{display:inline-block;padding:12px 28px;background:var(--pro-gold);color:var(--navy-900);border-radius:var(--r-md);font-size:14px;font-weight:700;}
+.btn-pro-upgrade{display:inline-block;padding:12px 28px;background:var(--pro-gold);color:var(--navy-900);border-radius:var(--r-md);font-size:14px;font-weight:700;white-space:nowrap;}
+
+/* TEASER (blurred preview + conversion bar) */
+#pred-view.teaser{position:relative;max-height:700px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 58%,transparent 92%);mask-image:linear-gradient(180deg,#000 0%,#000 58%,transparent 92%);}
+#pred-view.teaser .pred-text{filter:blur(4px);user-select:none;}
+.teaser-convert{position:relative;margin-top:-88px;z-index:5;display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border-radius:var(--r-xl);padding:18px 26px;color:var(--white);box-shadow:0 20px 50px rgba(10,15,30,.35);flex-wrap:wrap;}
+.teaser-convert-txt{flex:1 1 220px;min-width:0;}
+.teaser-convert-txt b{font-size:14.5px;display:block;margin-bottom:3px;font-weight:600;}
+.teaser-convert-txt b em{color:var(--pro-gold);font-style:normal;}
+.teaser-convert-txt span{font-size:12px;color:rgba(255,255,255,.68);}
+.teaser-proof{font-family:var(--font-en);text-align:center;padding:0 16px;border-left:1px solid rgba(255,255,255,.15);border-right:1px solid rgba(255,255,255,.15);flex-shrink:0;}
+.teaser-proof b{font-size:18px;color:var(--pro-gold);display:block;}
+.teaser-proof span{font-size:9.5px;color:rgba(255,255,255,.6);letter-spacing:.05em;}
 
 /* STATS BAR */
 .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
@@ -144,18 +156,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     <div class="page-update">⚡ Powered by OrionAI · 每日生成三類市場預判，追蹤至驗收 · 結果計入<a href="/pages/performance.html" style="color:var(--navy-500);">歷史績效</a> · Pro 會員專屬</div>
   </div>
 
-  <!-- PRO GATE -->
-  <div id="pro-gate-view">
-    <div class="pro-gate">
-      <div class="pro-gate-icon">✦</div>
-      <h2 class="pro-gate-title">看 OrionAI <em>每天在預判什麼</em></h2>
-      <p class="pro-gate-desc">OrionAI 每日生成三類預判：針對 FOMC/財報等固定日期的<b style="color:var(--pro-gold);">日曆事件</b>、追蹤地緣與貿易故事走向的<b style="color:var(--pro-gold);">全球追蹤</b>、以及產業新聞短期影響的<b style="color:var(--pro-gold);">產業新聞</b>。所有預判到期後自動驗收，命中率計入歷史績效，全程公開透明。</p>
-      <div>
-        <a href="/pages/login.html" class="btn-pro-upgrade">✦ 登入體驗 Pro</a>
-      </div>
-    </div>
-  </div>
-
   <!-- MAIN VIEW -->
   <div id="pred-view" style="display:none;">
     <div class="stats-bar" id="stats-bar">
@@ -174,6 +174,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
     <div id="pred-list"><div class="loading-box">載入預判資料中…</div></div>
   </div>
+
+  <div id="teaser-convert-wrap"></div>
 
 </main>
 
@@ -199,20 +201,19 @@ function initAuth(){
 }
 
 function setAuthState(user){
-  var gateEl=document.getElementById('pro-gate-view');
   var viewEl=document.getElementById('pred-view');
   var btnEl=document.getElementById('auth-btn');
+  if(viewEl) viewEl.style.display='block';
   if(user){
     if(btnEl){ btnEl.textContent='登出'; btnEl.href='#'; btnEl.onclick=function(e){e.preventDefault();_supabase.auth.signOut().then(function(){window.location.reload();});}; }
-    checkProStatus(user, gateEl, viewEl);
+    checkProStatus(user, viewEl);
   } else {
-    if(gateEl) gateEl.style.display='block';
-    if(viewEl) viewEl.style.display='none';
+    renderTeaser(viewEl, false);
     if(btnEl){ btnEl.textContent='登入'; btnEl.href='/pages/login.html'; btnEl.onclick=null; }
   }
 }
 
-async function checkProStatus(user, gateEl, viewEl){
+async function checkProStatus(user, viewEl){
   var isAdmin = user.email === 'jermy831102@gmail.com';
   var isPro = isAdmin;
   if(!isPro){
@@ -220,13 +221,37 @@ async function checkProStatus(user, gateEl, viewEl){
     isPro = result.data && result.data.is_pro === true;
   }
   if(isPro){
-    if(gateEl) gateEl.style.display='none';
-    if(viewEl) viewEl.style.display='block';
+    if(viewEl) viewEl.classList.remove('teaser');
+    var wrap=document.getElementById('teaser-convert-wrap');
+    if(wrap) wrap.innerHTML='';
     loadPredictions();
   } else {
-    if(gateEl) gateEl.style.display='block';
-    if(viewEl) viewEl.style.display='none';
+    renderTeaser(viewEl, true);
   }
+}
+
+async function renderTeaser(viewEl, loggedIn){
+  if(viewEl) viewEl.classList.add('teaser');
+  loadPredictions();
+  var wrap=document.getElementById('teaser-convert-wrap');
+  if(!wrap) return;
+  var proof='';
+  try{
+    var r=await fetch('/data/performance.json?v='+Math.floor(Date.now()/300000));
+    var p=await r.json();
+    var pr=p.predictions||{};
+    if(pr.hit_rate_weighted!=null){
+      proof='<div class="teaser-proof"><b>'+pr.hit_rate_weighted+'%</b><span>加權命中率</span></div>'+
+            '<div class="teaser-proof" style="border-right:none;"><b>'+pr.resolved+'</b><span>已驗證研判</span></div>';
+    }
+  }catch(e){}
+  var cta=loggedIn
+    ? '<a href="/pages/credits.html" class="btn-pro-upgrade">升級 Pro →</a>'
+    : '<a href="/pages/login.html" class="btn-pro-upgrade">登入解鎖 →</a>';
+  wrap.innerHTML='<div class="teaser-convert">'+
+    '<div class="teaser-convert-txt"><b>看 OrionAI <em>每天在預判什麼</em></b><span>升級 Pro 解鎖完整清單與到期驗收明細</span></div>'+
+    proof+cta+
+  '</div>';
 }
 
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
