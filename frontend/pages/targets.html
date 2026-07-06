@@ -190,6 +190,23 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .s-bear{background:var(--red-100);color:var(--red-700);}
 .s-neut{background:var(--amber-100);color:var(--amber-600);}
 
+/* ── MORNING BRIEF 渲染 ── */
+.mb-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--gray-200);}
+.mb-brand{font-family:var(--font-en);font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--navy-700);}
+.mb-date{font-size:11.5px;color:var(--gray-400);}
+.mb-lead{margin:0 0 12px;font-size:13.5px;line-height:1.9;color:var(--gray-700);}
+.mb-sec{border:1px solid var(--gray-200);border-radius:10px;overflow:hidden;margin-bottom:12px;background:var(--white);}
+.mb-sec-head{display:flex;align-items:center;gap:8px;padding:9px 14px;}
+.mb-sec-ico{display:inline-flex;align-items:center;font-size:13px;}
+.mb-sec-title{font-size:12.5px;font-weight:700;letter-spacing:.03em;}
+.mb-sec-sub{font-size:12px;color:var(--gray-600);padding-left:10px;border-left:1px solid var(--gray-300);}
+.mb-sec-body{padding:12px 16px 2px;}
+.mb-sec-body p{margin:0 0 12px;font-size:13px;line-height:1.95;color:var(--gray-700);}
+.mb-pct,.mb-pct-up,.mb-pct-dn{font-family:var(--font-en);font-weight:600;font-style:normal;}
+.mb-pct{color:var(--navy-600);}
+.mb-pct-up{color:var(--green-600);}
+.mb-pct-dn{color:var(--red-600);}
+
 
 /* ── SIGNAL STRENGTH ── */
 .signal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px;}
@@ -987,39 +1004,60 @@ async function saveProfile(){
 
 
 // ── Morning Brief 渲染 ─────────────────────────────
+var MB_THEMES = [
+  { re: /氛圍|總覽/,       ico: 'signal',    color: '#1e3a8a', bg: '#eff6ff' },
+  { re: /宏觀|政策|總經/,  ico: 'bank',      color: '#2563eb', bg: '#eff6ff' },
+  { re: /產業/,            ico: 'chip',      color: '#7c3aed', bg: '#f5f3ff' },
+  { re: /加密/,            ico: 'coin',      color: '#b45309', bg: '#fffbeb' },
+  { re: /台股/,            ico: 'chart',     color: '#059669', bg: '#ecfdf5' },
+  { re: /關注|留意|焦點/,  ico: 'lightning', color: '#dc2626', bg: '#fef2f2' },
+  { re: /操作|基調/,       ico: 'target',    color: '#4f46e5', bg: '#eef2ff' }
+];
 function renderMorningBriefHTML(text) {
-  var sections = [
-    { prefix: '宏觀層面', icon: ICO.globe, label: '宏觀總覽', color: '#3b82f6', bg: '#eff6ff', border: '#bfdbfe' },
-    { prefix: '產業動態', icon: ICO.tool, label: '產業動態', color: '#7c3aed', bg: '#f5f3ff', border: '#ddd6fe' },
-    { prefix: '加密市場', icon: '₿',  label: '加密市場', color: '#d97706', bg: '#fffbeb', border: '#fde68a' },
-    { prefix: '台股方面', icon: ICO.dotgreen, label: '台股市場', color: '#059669', bg: '#ecfdf5', border: '#a7f3d0' },
-    { prefix: '今日需特別留意', icon: ICO.lightning, label: '今日焦點', color: '#dc2626', bg: '#fef2f2', border: '#fecaca' },
-    { prefix: '操作基調', icon: ICO.target, label: '操作建議', color: '#4f46e5', bg: '#eef2ff', border: '#c7d2fe' },
-  ];
-  var paras = text.split(/\n\n+/).map(function(p){ return p.trim(); }).filter(Boolean);
-  var html = '';
+  var esc = function(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+  var pct = function(s){
+    return s.replace(/([+\-−＋]?\d+(?:[.,]\d+)?%)/g, function(m){
+      var cls = /^[-−]/.test(m) ? 'mb-pct-dn' : /^[+＋]/.test(m) ? 'mb-pct-up' : 'mb-pct';
+      return '<b class="' + cls + '">' + m + '</b>';
+    });
+  };
+  var paras = text.split(/\n{2,}/).map(function(p){ return p.trim(); }).filter(Boolean)
+    .filter(function(p){ return !/^[─—–\-]{4,}$/.test(p); });
+  var html = '', cur = null;
+  var flush = function(){
+    if (!cur) return;
+    html += '<div class="mb-sec">'
+      + '<div class="mb-sec-head" style="background:' + cur.bg + ';">'
+      + '<span class="mb-sec-ico" style="color:' + cur.color + ';">' + (ICO[cur.ico] || '') + '</span>'
+      + '<span class="mb-sec-title" style="color:' + cur.color + ';">' + esc(cur.main) + '</span>'
+      + (cur.sub ? '<span class="mb-sec-sub">' + esc(cur.sub) + '</span>' : '')
+      + '</div>'
+      + '<div class="mb-sec-body">' + cur.paras.map(function(p){ return '<p>' + pct(esc(p)) + '</p>'; }).join('') + '</div>'
+      + '</div>';
+    cur = null;
+  };
   paras.forEach(function(p, i) {
-    // 第一段若含日期標題，渲染為副標題列
-    if (i === 0 && /Vela|市場早報/.test(p)) {
-      html += '<div style="font-size:11px;color:var(--gray-400);letter-spacing:.04em;margin-bottom:14px;font-family:var(--font-en);">' + p.replace(/</g,'&lt;') + '</div>';
+    if (i === 0 && /市場早報|Vela/.test(p)) {
+      var date = (p.split(/[｜|]/)[1] || '').trim();
+      html += '<div class="mb-head"><span class="mb-brand">VELA 市場早報</span>'
+        + (date ? '<span class="mb-date">' + esc(date) + '</span>' : '') + '</div>';
       return;
     }
-    var matched = null;
-    for (var j = 0; j < sections.length; j++) {
-      if (p.indexOf(sections[j].prefix) === 0) { matched = sections[j]; break; }
+    var h = p.match(/^【(.+?)】$/);
+    if (h) {
+      flush();
+      var parts = h[1].split(/[：:]/);
+      var main = parts[0].trim(), sub = parts.slice(1).join('：').trim();
+      var theme = null;
+      for (var j = 0; j < MB_THEMES.length; j++) { if (MB_THEMES[j].re.test(main)) { theme = MB_THEMES[j]; break; } }
+      theme = theme || { ico: 'news', color: '#1d2d5a', bg: '#f8fafc' };
+      cur = { main: main, sub: sub, ico: theme.ico, color: theme.color, bg: theme.bg, paras: [] };
+      return;
     }
-    if (matched) {
-      html += '<div style="margin-bottom:10px;padding:12px 14px;background:' + matched.bg + ';border-radius:8px;border-left:3px solid ' + matched.color + ';">'
-        + '<div style="font-size:10px;font-weight:700;color:' + matched.color + ';letter-spacing:.08em;margin-bottom:5px;text-transform:uppercase;">' + matched.icon + ' ' + matched.label + '</div>'
-        + '<div style="font-size:13px;color:#374151;line-height:1.85;">' + p.replace(/</g,'&lt;') + '</div>'
-        + '</div>';
-    } else {
-      // 導言段落
-      html += '<div style="margin-bottom:10px;padding:14px 16px;background:linear-gradient(135deg,#f0f4ff,#e8f0fe);border-radius:8px;border:1px solid #c7d2fe;">'
-        + '<div style="font-size:13.5px;color:#1e3a6e;line-height:1.9;font-weight:500;">' + p.replace(/</g,'&lt;') + '</div>'
-        + '</div>';
-    }
+    if (cur) { cur.paras.push(p); }
+    else { html += '<p class="mb-lead">' + pct(esc(p)) + '</p>'; }
   });
+  flush();
   return html || '<div style="color:var(--gray-400);text-align:center;padding:20px;">無內容</div>';
 }
 
