@@ -1,0 +1,72 @@
+/* ============================================================
+   Vela shared design tokens
+   Phase 0: canonicalizes tokens already duplicated per-page.
+   Loaded before each page's inline <style>, so any page-local
+   :root redeclaration of the same variable still wins (same
+   specificity, later source order) — this file is additive/inert
+   until pages are migrated to stop redeclaring locally.
+   ============================================================ */
+
+:root {
+  /* Brand navy scale */
+  --navy-950:#070d1c; --navy-900:#0d1630; --navy-800:#152244;
+  --navy-700:#1d2d5a; --navy-600:#1e3a8a; --navy-500:#2563eb;
+  --navy-400:#3b82f6; --navy-300:#93c5fd; --navy-100:#dbeafe; --navy-50:#eff6ff;
+
+  /* Neutrals */
+  --gray-900:#0f172a; --gray-700:#334155; --gray-600:#475569;
+  --gray-500:#64748b; --gray-400:#94a3b8; --gray-300:#cbd5e1;
+  --gray-200:#e2e8f0; --gray-100:#f1f5f9; --gray-50:#f8fafc; --white:#ffffff;
+
+  /* Semantic — reserved for direction/outcome only (see 風格2 color discipline) */
+  --green-700:#15803d; --green-600:#16a34a; --green-500:#22c55e; --green-100:#dcfce7; --green-50:#f0fdf4;
+  --red-700:#991b1b; --red-600:#dc2626; --red-100:#fee2e2; --red-50:#fef2f2;
+  --amber-700:#b45309; --amber-600:#d97706; --amber-100:#fef3c7; --amber-50:#fffbeb;
+
+  /* Pro / paid-feature gold — the ONLY place gold should appear (see 風格3) */
+  --pro-gold:#c9a84c;
+  --pro-gold-light:#f5e9c8;
+  --pro-gold-dark:#8a6a1f;
+
+  /* Radius — 3 tiers (see 風格5) */
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:20px;
+
+  /* Shadow — 2 tiers: content cards stay border-only, only floating layers get shadow-md */
+  --shadow-sm: 0 1px 3px rgba(15,23,41,.05);
+  --shadow-md: 0 12px 40px rgba(15,23,41,.14);
+
+  /* Fonts */
+  --font-en:'DM Sans',sans-serif;
+  --font-zh:'Noto Sans TC',sans-serif;
+
+  /* Font-size scale — 8 tiers (see 風格1). Existing px values migrate into these. */
+  --fs-1:10px;   /* micro labels, timestamps */
+  --fs-2:11px;   /* meta, tags */
+  --fs-3:12.5px; /* secondary body, table cells */
+  --fs-4:14px;   /* primary body, card titles */
+  --fs-5:17px;   /* section titles */
+  --fs-6:22px;   /* page titles */
+  --fs-7:28px;   /* hero numbers */
+  --fs-8:36px;   /* hero display */
+}
+
+/* Tabular numerals for any price / % / index value (see 風格4) */
+.num {
+  font-family: var(--font-en);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Single canonical Pro/paid badge (see 風格3) */
+.pro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-en);
+  font-size: var(--fs-1);
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--pro-gold-dark);
+  background: var(--pro-gold-light);
+  border-radius: var(--r-sm);
+  padding: 2px 7px;
+}
