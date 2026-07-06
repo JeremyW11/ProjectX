@@ -135,8 +135,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .pc-tickers{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px;}
 .pc-ticker{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;padding:8px 10px;}
 .pc-ticker-sym{font-family:var(--font-en);font-size:var(--fs-1);font-weight:600;color:var(--gray-500);letter-spacing:.08em;}
-.pc-ticker-val{font-family:var(--font-en);font-size:var(--fs-4);font-weight:600;color:var(--gray-900);margin:2px 0 1px;letter-spacing:-.01em;}
-.pc-ticker-chg{font-family:var(--font-en);font-size:var(--fs-1);font-weight:500;}
+.pc-ticker-val{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:var(--fs-4);font-weight:600;color:var(--gray-900);margin:2px 0 1px;letter-spacing:-.01em;}
+.pc-ticker-chg{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:var(--fs-1);font-weight:500;}
 .tc-up{color:var(--green-600);} .tc-dn{color:var(--red-600);}
 
 /* Brief items with FREE / PRO distinction */
@@ -210,8 +210,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .free-mkt-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px;}
 .free-mkt-card{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;padding:10px;text-align:center;}
 .fmc-sym{font-family:var(--font-en);font-size:var(--fs-1);font-weight:600;color:var(--gray-500);letter-spacing:.06em;}
-.fmc-val{font-family:var(--font-en);font-size:var(--fs-6);font-weight:600;color:var(--gray-900);margin:2px 0;}
-.fmc-chg{font-family:var(--font-en);font-size:var(--fs-2);font-weight:500;}
+.fmc-val{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:var(--fs-6);font-weight:600;color:var(--gray-900);margin:2px 0;}
+.fmc-chg{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:var(--fs-2);font-weight:500;}
 
 /* FREE: locked sections */
 .free-locked-section{background:var(--gray-50);border:1px dashed var(--gray-300);border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
@@ -235,7 +235,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .prc-tag{font-size:var(--fs-1);font-family:var(--font-en);padding:2px 6px;border-radius:3px;font-weight:600;}
 .prc-rating-up{background:rgba(22,163,74,.2);color:#4ade80;}
 .prc-rating-neut{background:rgba(217,119,6,.2);color:#fbbf24;}
-.prc-target{font-size:var(--fs-1);color:rgba(255,255,255,.4);font-family:var(--font-en);}
+.prc-target{font-variant-numeric:tabular-nums;font-size:var(--fs-1);color:rgba(255,255,255,.4);font-family:var(--font-en);}
 
 /* PRO: earnings row */
 .pro-earnings-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);}
@@ -244,7 +244,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .per-ticker{font-family:var(--font-en);font-size:var(--fs-2);font-weight:600;color:rgba(255,255,255,.85);letter-spacing:.04em;}
 .per-name{font-size:var(--fs-1);color:rgba(255,255,255,.4);font-family:var(--font-zh);}
 .per-right{display:flex;align-items:center;gap:8px;}
-.per-eps{font-family:var(--font-en);font-size:var(--fs-2);color:rgba(255,255,255,.6);}
+.per-eps{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:var(--fs-2);color:rgba(255,255,255,.6);}
 .per-beat{font-size:var(--fs-1);font-weight:600;font-family:var(--font-en);padding:2px 7px;border-radius:3px;}
 .beat-yes{background:rgba(22,163,74,.2);color:#4ade80;}
 .beat-no{background:rgba(220,38,38,.2);color:#f87171;}
@@ -258,7 +258,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .ptc-sym{font-family:var(--font-en);font-size:var(--fs-2);font-weight:600;color:rgba(255,255,255,.8);width:48px;}
 .ptc-bar-track{flex:1;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
 .ptc-bar-fill{height:100%;border-radius:2px;}
-.ptc-chg{font-family:var(--font-en);font-size:var(--fs-2);font-weight:500;width:46px;text-align:right;}
+.ptc-chg{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:var(--fs-2);font-weight:500;width:46px;text-align:right;}
 .ptc-chg.up{color:#4ade80;} .ptc-chg.dn{color:#f87171;}
 
 /* ── FEATURE COMPARISON TABLE ── */
@@ -322,9 +322,9 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
 .pro-card-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--pro-gold);color:var(--pro-gold-dark);font-size:var(--fs-2);font-weight:700;font-family:var(--font-en);padding:4px 16px;border-radius:20px;letter-spacing:.06em;white-space:nowrap;box-shadow:0 2px 12px rgba(201,168,76,.3);}
 .plan-name{font-family:var(--font-en);font-size:var(--fs-3);font-weight:600;color:var(--gray-500);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
 .plan-price{display:flex;align-items:baseline;gap:4px;margin-bottom:6px;}
-.plan-price-num{font-family:var(--font-en);font-size:40px;font-weight:600;color:var(--navy-950);letter-spacing:-.02em;line-height:1;transition:all .3s;}
-.plan-price-curr{font-family:var(--font-en);font-size:var(--fs-6);color:var(--gray-500);margin-bottom:4px;}
-.plan-price-period{font-size:var(--fs-3);color:var(--gray-400);font-family:var(--font-en);}
+.plan-price-num{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:40px;font-weight:600;color:var(--navy-950);letter-spacing:-.02em;line-height:1;transition:all .3s;}
+.plan-price-curr{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:var(--fs-6);color:var(--gray-500);margin-bottom:4px;}
+.plan-price-period{font-variant-numeric:tabular-nums;font-size:var(--fs-3);color:var(--gray-400);font-family:var(--font-en);}
 .plan-tagline{font-size:var(--fs-3);color:var(--gray-500);margin-bottom:22px;font-family:var(--font-zh);line-height:1.5;}
 .plan-feats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:26px;}
 .plan-feat{display:flex;align-items:flex-start;gap:9px;font-size:var(--fs-3);font-family:var(--font-zh);line-height:1.4;}

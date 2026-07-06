@@ -55,12 +55,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .balance-label{font-size:var(--fs-2);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);font-family:var(--font-en);margin-bottom:16px;}
 .balance-row{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;}
 .balance-total{display:flex;align-items:baseline;gap:6px;}
-.balance-num{font-family:var(--font-en);font-size:48px;font-weight:600;color:var(--pro-gold);line-height:1;}
+.balance-num{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:48px;font-weight:600;color:var(--pro-gold);line-height:1;}
 .balance-unit{font-size:var(--fs-5);color:rgba(255,255,255,.5);font-family:var(--font-en);}
 .balance-breakdown{display:flex;flex-direction:column;gap:4px;padding-left:24px;border-left:1px solid rgba(255,255,255,.1);}
 .balance-sub-row{display:flex;align-items:center;gap:8px;font-size:var(--fs-3);}
 .balance-sub-label{color:rgba(255,255,255,.4);font-family:var(--font-en);}
-.balance-sub-val{color:rgba(255,255,255,.8);font-weight:600;font-family:var(--font-en);}
+.balance-sub-val{font-variant-numeric:tabular-nums;color:rgba(255,255,255,.8);font-weight:600;font-family:var(--font-en);}
 .balance-reset{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);font-size:var(--fs-3);color:rgba(255,255,255,.35);font-family:var(--font-en);}
 .balance-reset span{color:var(--pro-gold);font-weight:600;}
 .balance-guest{padding:20px;text-align:center;font-size:var(--fs-4);color:rgba(255,255,255,.5);}
@@ -78,7 +78,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .tier-tag.pro{background:var(--pro-gold);color:var(--pro-gold-dark);}
 .tier-tag.pts{background:var(--navy-50);color:var(--navy-600);}
 .tier-name{font-size:var(--fs-4);font-weight:700;color:var(--gray-900);margin-bottom:4px;}
-.tier-price{font-family:var(--font-en);font-size:var(--fs-3);color:var(--gray-600);margin-bottom:12px;}
+.tier-price{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:var(--fs-3);color:var(--gray-600);margin-bottom:12px;}
 .tier-price b{font-size:var(--fs-6);color:var(--navy-800);font-weight:700;}
 .tier-pro .tier-price b{color:var(--pro-gold-dark);}
 .tier-desc{font-size:var(--fs-3);color:var(--gray-600);line-height:1.6;margin-bottom:12px;flex:1;}
@@ -110,7 +110,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .pkg-popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--pro-gold);color:var(--pro-gold-dark);font-size:var(--fs-1);font-weight:700;font-family:var(--font-en);padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em;}
 .pkg-pts{font-family:var(--font-en);font-size:var(--fs-8);font-weight:700;color:var(--navy-800);line-height:1;}
 .pkg-pts-label{font-size:var(--fs-3);color:var(--gray-400);font-family:var(--font-en);margin-bottom:12px;}
-.pkg-price{font-family:var(--font-en);font-size:var(--fs-5);font-weight:600;color:var(--gray-700);margin-bottom:4px;}
+.pkg-price{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:var(--fs-5);font-weight:600;color:var(--gray-700);margin-bottom:4px;}
 .pkg-per{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);margin-bottom:16px;}
 .pkg-desc{font-size:var(--fs-3);color:var(--gray-500);line-height:1.5;margin-bottom:20px;min-height:36px;}
 .btn-buy{display:block;width:100%;padding:10px;background:var(--navy-700);color:var(--white);border-radius:var(--r-md);font-size:var(--fs-3);font-weight:600;font-family:var(--font-en);text-align:center;transition:all .2s;}
@@ -138,8 +138,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .pro-badge{font-family:var(--font-en);font-size:var(--fs-2);font-weight:700;letter-spacing:.1em;color:var(--pro-gold-dark);background:var(--pro-gold);padding:3px 10px;border-radius:20px;}
 .pro-title{font-family:var(--font-display);font-size:var(--fs-6);color:var(--white);}
 .pro-price{display:flex;align-items:baseline;gap:6px;margin:12px 0 18px;}
-.pro-price-num{font-family:var(--font-en);font-size:40px;font-weight:600;color:var(--pro-gold);line-height:1;}
-.pro-price-unit{font-size:var(--fs-4);color:rgba(255,255,255,.5);font-family:var(--font-en);}
+.pro-price-num{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:40px;font-weight:600;color:var(--pro-gold);line-height:1;}
+.pro-price-unit{font-variant-numeric:tabular-nums;font-size:var(--fs-4);color:rgba(255,255,255,.5);font-family:var(--font-en);}
 .pro-benefits{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px;}
 .pro-benefits li{font-size:var(--fs-3);color:rgba(255,255,255,.85);display:flex;align-items:flex-start;gap:8px;}
 .pro-benefits li::before{content:"✦";color:var(--pro-gold);flex-shrink:0;}
