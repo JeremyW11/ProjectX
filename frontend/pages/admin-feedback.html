@@ -22,9 +22,9 @@
   --amber-700:#b45309; --amber-600:#d97706; --amber-100:#fef3c7; --amber-50:#fffbeb;
   --pro-gold:#c9a84c; --pro-dark:#8a6a1f;
   --font-en:'DM Sans',sans-serif; --font-zh:'Noto Sans TC',sans-serif;
-  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:20px;
-  --shadow-card:0 1px 3px rgba(15,23,42,.07),0 4px 16px rgba(15,23,42,.05);
-  --shadow-md:0 4px 20px rgba(15,23,42,.10);
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:24px;
+  --shadow-card:0 1px 3px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.04);
+  --shadow-md:0 12px 40px rgba(15,23,42,.14);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#f0f4f8;color:var(--gray-900);font-family:var(--font-zh);min-height:100vh;}
@@ -41,7 +41,7 @@ a{text-decoration:none;color:inherit;}
 .sb-item:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.04);}
 .sb-item.active{color:var(--white);background:rgba(59,130,246,.15);border-left-color:var(--navy-400);}
 .sb-item .sb-icon{font-size:var(--fs-4);width:20px;text-align:center;flex-shrink:0;}
-.sb-badge{margin-left:auto;background:var(--amber-600);color:var(--white);font-size:var(--fs-1);font-weight:700;padding:1px 6px;border-radius:10px;font-family:var(--font-en);}
+.sb-badge{margin-left:auto;background:var(--amber-600);color:var(--white);font-size:var(--fs-1);font-weight:700;padding:1px 6px;border-radius:var(--r-md);font-family:var(--font-en);}
 .sb-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,.07);font-size:var(--fs-2);color:rgba(255,255,255,.3);word-break:break-all;}
 
 /* ── main ── */
@@ -87,7 +87,7 @@ a{text-decoration:none;color:inherit;}
 .user-cell{display:flex;flex-direction:column;gap:2px;}
 .user-name{font-weight:500;color:var(--navy-800);}
 .user-email{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);}
-.tag{display:inline-flex;align-items:center;font-size:var(--fs-2);font-weight:600;padding:2px 9px;border-radius:10px;white-space:nowrap;}
+.tag{display:inline-flex;align-items:center;font-size:var(--fs-2);font-weight:600;padding:2px 9px;border-radius:var(--r-md);white-space:nowrap;}
 .tag.pro{background:#f5e9c8;color:var(--pro-dark);}
 .tag.free{background:var(--gray-100);color:var(--gray-500);}
 .tag.pending{background:var(--amber-100);color:var(--amber-700);}

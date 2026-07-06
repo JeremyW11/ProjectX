@@ -235,7 +235,7 @@ img { display: block; max-width: 100%; }
   font-size: var(--fs-2);
   font-weight: 500;
   padding: 3px 9px;
-  border-radius: 20px;
+  border-radius:var(--r-xl);
   font-family: var(--font-en);
   letter-spacing: 0.04em;
 }
@@ -471,7 +471,7 @@ img { display: block; max-width: 100%; }
 @media (max-width: 720px) {
   .brief-flex { flex-direction: column; }
   .track-side { flex-direction: row; flex-wrap: wrap; position: static; width: auto; }
-  .track-tab { border-radius: 20px; padding: 5px 12px; }
+  .track-tab { border-radius:var(--r-xl); padding: 5px 12px; }
 }
 
 .track-tab:hover {
@@ -581,7 +581,7 @@ img { display: block; max-width: 100%; }
 .synthesis-card {
   position: relative;
   background: linear-gradient(160deg, var(--navy-900) 0%, var(--navy-700) 100%);
-  border-radius: 16px;
+  border-radius:var(--r-lg);
   padding: 26px 28px 22px;
   margin-bottom: 22px;
   box-shadow: 0 10px 30px -12px rgba(15,23,42,.45);
@@ -695,7 +695,7 @@ img { display: block; max-width: 100%; }
 .risk-label {
   font-size: var(--fs-1);
   padding: 2px 8px;
-  border-radius: 20px;
+  border-radius:var(--r-xl);
   font-weight: 500;
   font-family: var(--font-en);
 }
@@ -775,7 +775,7 @@ img { display: block; max-width: 100%; }
   width: 34px;
   text-align: center;
   background: var(--bg-subtle);
-  border-radius: 6px;
+  border-radius:var(--r-sm);
   padding: 4px 0;
 }
 
@@ -812,7 +812,7 @@ img { display: block; max-width: 100%; }
   line-height: 1.4;
 }
 
-.ec-data-row{display:flex;gap:0;margin-top:6px;border:1px solid var(--border-light);border-radius:6px;overflow:hidden;}
+.ec-data-row{display:flex;gap:0;margin-top:6px;border:1px solid var(--border-light);border-radius:var(--r-sm);overflow:hidden;}
 .ec-data-cell{flex:1;padding:5px 6px;background:var(--bg-subtle);border-right:1px solid var(--border-light);text-align:center;}
 .ec-data-cell:last-child{border-right:none;}
 .ec-data-actual{background:var(--navy-50,#eff6ff);}
@@ -965,7 +965,7 @@ img { display: block; max-width: 100%; }
     </div>
     <div style="display:flex;align-items:center;gap:12px;">
       <span class="date-gen-time" id="date-gen-time">—</span>
-      <a href="/pages/archive.html" style="font-size:var(--fs-2);font-weight:600;color:var(--navy-600);text-decoration:none;font-family:var(--font-zh);padding:4px 10px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:6px;white-space:nowrap;"><span data-ico="folder"></span> 歷史報告</a>
+      <a href="/pages/archive.html" style="font-size:var(--fs-2);font-weight:600;color:var(--navy-600);text-decoration:none;font-family:var(--font-zh);padding:4px 10px;background:var(--navy-50);border:1px solid var(--navy-100);border-radius:var(--r-sm);white-space:nowrap;"><span data-ico="folder"></span> 歷史報告</a>
     </div>
   </div>
 

@@ -22,7 +22,7 @@
   --font-en:'DM Sans',system-ui,sans-serif;
   --font-display:'DM Serif Display',Georgia,serif;
   --font-zh:'Noto Sans TC','PingFang TC',sans-serif;
-  --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:18px;
+  --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:24px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-zh);background:radial-gradient(1120px 640px at 94% -14%, rgba(37,99,235,.46), transparent 64%),radial-gradient(940px 720px at -10% 4%, rgba(51,65,85,.40), transparent 64%),radial-gradient(820px 620px at 50% 118%, rgba(29,78,216,.28), transparent 66%),linear-gradient(160deg, #dbe2ef 0%, #f4f6fb 56%);background-attachment:fixed;color:var(--gray-900);min-height:100vh;}
@@ -63,7 +63,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 /* Filter tabs */
 .filter-tabs{display:flex;gap:6px;margin-bottom:16px;}
-.filter-tab{padding:6px 14px;border-radius:20px;font-size:var(--fs-3);border:1px solid var(--gray-200);color:var(--gray-500);transition:all .15s;}
+.filter-tab{padding:6px 14px;border-radius:var(--r-xl);font-size:var(--fs-3);border:1px solid var(--gray-200);color:var(--gray-500);transition:all .15s;}
 .filter-tab.active{background:var(--navy-700);color:var(--white);border-color:var(--navy-700);}
 .filter-tab:hover:not(.active){border-color:var(--navy-300);color:var(--navy-600);}
 
@@ -79,7 +79,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .dot-miss{background:var(--red-600);}
 .sc-item-question{flex:1;font-size:var(--fs-4);font-weight:500;color:var(--navy-800);line-height:1.4;}
 .sc-item-meta{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-.sc-status-badge{padding:3px 8px;border-radius:20px;font-size:var(--fs-2);font-weight:600;font-family:var(--font-en);}
+.sc-status-badge{padding:3px 8px;border-radius:var(--r-xl);font-size:var(--fs-2);font-weight:600;font-family:var(--font-en);}
 .badge-running{background:var(--amber-100);color:var(--amber-600);}
 .badge-hit{font-variant-numeric:tabular-nums;font-family:var(--font-en);background:var(--green-100);color:var(--green-700);}
 .badge-miss{background:var(--red-100);color:var(--red-600);}

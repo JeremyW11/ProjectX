@@ -55,7 +55,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);opacity:0;transition:opacity .15s;}
 .nav-item.active .nav-dot{opacity:1;}
 .header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
-.live-badge{display:flex;align-items:center;gap:5px;background:var(--navy-50);color:var(--navy-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--navy-50);color:var(--navy-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:var(--r-xl);font-family:var(--font-en);}
 .live-dot{width:5px;height:5px;background:var(--navy-600);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 .header-time{font-family:var(--font-en);font-size:var(--fs-3);color:var(--gray-400);}
@@ -115,7 +115,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .ec-ticker{font-family:var(--font-en);font-size:var(--fs-4);font-weight:700;color:var(--gray-900);}
 .ec-name{font-size:var(--fs-3);color:var(--gray-500);font-family:var(--font-zh);}
 .ec-quarter{font-family:var(--font-en);font-size:var(--fs-2);font-weight:600;color:var(--gray-400);background:var(--gray-100);padding:2px 8px;border-radius:4px;}
-.ec-status{font-size:var(--fs-2);font-weight:600;padding:3px 10px;border-radius:20px;font-family:var(--font-en);}
+.ec-status{font-size:var(--fs-2);font-weight:600;padding:3px 10px;border-radius:var(--r-xl);font-family:var(--font-en);}
 .status-reported{background:var(--navy-50);color:var(--navy-700);}
 .status-upcoming{background:var(--amber-100);color:var(--amber-700);}
 .ec-body{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
@@ -148,7 +148,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .cc-ticker{font-family:var(--font-en);font-size:var(--fs-4);font-weight:700;color:var(--gray-900);}
 .cc-name{font-size:var(--fs-3);color:var(--gray-500);font-family:var(--font-zh);}
 .cc-date{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);margin-top:2px;}
-.cc-badge{font-size:var(--fs-2);font-weight:600;padding:3px 10px;border-radius:20px;font-family:var(--font-en);}
+.cc-badge{font-size:var(--fs-2);font-weight:600;padding:3px 10px;border-radius:var(--r-xl);font-family:var(--font-en);}
 .cc-highlight{background:var(--navy-50);border-radius:var(--r-md);padding:12px 14px;margin-bottom:10px;}
 .cc-highlight-label{font-size:var(--fs-1);font-weight:600;color:var(--navy-600);font-family:var(--font-en);letter-spacing:.06em;margin-bottom:6px;}
 .cc-highlight-text{font-size:var(--fs-3);color:var(--gray-700);font-family:var(--font-zh);line-height:1.6;font-weight:500;}
@@ -172,7 +172,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 /* Upcoming calendar */
 .upcoming-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--gray-100);}
 .upcoming-item:last-child{border-bottom:none;}
-.ui-date{flex-shrink:0;width:38px;background:var(--gray-50);border-radius:6px;text-align:center;padding:4px 0;}
+.ui-date{flex-shrink:0;width:38px;background:var(--gray-50);border-radius:var(--r-sm);text-align:center;padding:4px 0;}
 .ui-date-d{font-family:var(--font-en);font-size:var(--fs-4);font-weight:600;color:var(--navy-700);line-height:1;}
 .ui-date-m{font-family:var(--font-en);font-size:var(--fs-1);color:var(--gray-400);text-transform:uppercase;letter-spacing:.06em;}
 .ui-info{flex:1;}
@@ -182,18 +182,18 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 /* Firm filter chips */
 .firm-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
-.firm-chip{font-size:var(--fs-2);font-family:var(--font-en);font-weight:500;padding:4px 12px;border-radius:20px;border:1px solid var(--gray-200);color:var(--gray-500);background:var(--white);cursor:pointer;transition:all .15s;}
+.firm-chip{font-size:var(--fs-2);font-family:var(--font-en);font-weight:500;padding:4px 12px;border-radius:var(--r-xl);border:1px solid var(--gray-200);color:var(--gray-500);background:var(--white);cursor:pointer;transition:all .15s;}
 .firm-chip:hover{border-color:var(--navy-300);color:var(--navy-600);background:var(--navy-50);}
 .firm-chip.active{background:var(--navy-700);border-color:var(--navy-700);color:var(--white);}
 
 /* Sector chips */
 .sector-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
-.sector-chip{font-size:var(--fs-2);font-family:var(--font-zh);padding:4px 12px;border-radius:20px;border:1px solid var(--gray-200);color:var(--gray-500);background:var(--white);cursor:pointer;transition:all .15s;}
+.sector-chip{font-size:var(--fs-2);font-family:var(--font-zh);padding:4px 12px;border-radius:var(--r-xl);border:1px solid var(--gray-200);color:var(--gray-500);background:var(--white);cursor:pointer;transition:all .15s;}
 .sector-chip:hover{border-color:var(--navy-300);color:var(--navy-600);}
 .sector-chip.active{background:var(--navy-50);border-color:var(--navy-300);color:var(--navy-700);font-weight:500;}
 
 /* Sent chip */
-.sent-chip{font-size:var(--fs-1);font-weight:500;padding:2px 8px;border-radius:20px;font-family:var(--font-en);}
+.sent-chip{font-size:var(--fs-1);font-weight:500;padding:2px 8px;border-radius:var(--r-xl);font-family:var(--font-en);}
 .s-bull{background:var(--green-100);color:var(--green-700);}
 .s-bear{background:var(--red-100);color:var(--red-700);}
 .s-neut{background:var(--amber-100);color:var(--amber-700);}
@@ -211,7 +211,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .ec-note{padding:0 18px 12px;font-size:var(--fs-3);color:var(--gray-600);line-height:1.6;font-family:var(--font-zh);}
 .ec-val.beat{color:var(--green-600);font-weight:700;}
 .ec-val.miss{color:var(--red-600);}
-.status-pill{font-size:var(--fs-1);font-weight:700;padding:3px 10px;border-radius:20px;font-family:var(--font-en);}
+.status-pill{font-size:var(--fs-1);font-weight:700;padding:3px 10px;border-radius:var(--r-xl);font-family:var(--font-en);}
 .status-reported{background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-200);}
 .status-upcoming{background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);}
 .earnings-section-title{font-size:var(--fs-2);font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.08em;padding:10px 0 8px;border-bottom:1px solid var(--gray-100);margin-bottom:8px;font-family:var(--font-en);}
@@ -220,7 +220,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .call-name{font-size:var(--fs-2);font-weight:400;color:var(--gray-400);margin-left:4px;}
 .call-ceo{font-size:var(--fs-3);color:var(--gray-500);margin-top:2px;font-family:var(--font-zh);}
 .call-date{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);}
-.call-sentiment-pill{font-size:var(--fs-1);font-weight:700;padding:2px 8px;border-radius:20px;font-family:var(--font-en);}
+.call-sentiment-pill{font-size:var(--fs-1);font-weight:700;padding:2px 8px;border-radius:var(--r-xl);font-family:var(--font-en);}
 .sentiment-positive{background:var(--green-100);color:var(--green-700);border:1px solid #bbf7d0;}
 .sentiment-negative{background:var(--red-100);color:var(--red-700);border:1px solid #fecaca;}
 .sentiment-neutral{background:var(--gray-100);color:var(--gray-500);border:1px solid var(--gray-200);}
@@ -557,7 +557,7 @@ function renderResearch(list){
       '<div class="rc-title">'+r.name+'（'+r.ticker+'）'+': '+r.note+'</div>'+
       '<div class="rc-body">'+
         '<div style="margin-bottom:10px;font-size:var(--fs-3);color:var(--gray-700);font-weight:500;border-left:3px solid var(--navy-400);padding-left:10px;">'+( r.core_logic||r.note)+'</div>'+
-        (r.risk_note?'<div style="margin-bottom:8px;font-size:var(--fs-3);color:var(--amber-700);background:var(--amber-50);border-radius:6px;padding:7px 10px;">'+ICO.warn+' 風險：'+r.risk_note+'</div>':'')+
+        (r.risk_note?'<div style="margin-bottom:8px;font-size:var(--fs-3);color:var(--amber-700);background:var(--amber-50);border-radius:var(--r-sm);padding:7px 10px;">'+ICO.warn+' 風險：'+r.risk_note+'</div>':'')+
         (r.action?'<div style="font-size:var(--fs-3);color:var(--navy-700);font-weight:600;margin-top:4px;">'+ICO.pin+' 操作建議：'+r.action+'</div>':'')+
         '</div>'+
       '<div class="rc-meta">'+

@@ -73,7 +73,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
 .tier{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:20px 18px;display:flex;flex-direction:column;position:relative;}
 .tier.tier-pro{border-color:var(--pro-gold);box-shadow:0 6px 22px rgba(201,168,76,.13);}
-.tier-tag{font-family:var(--font-en);font-size:var(--fs-1);font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;align-self:flex-start;margin-bottom:10px;}
+.tier-tag{font-family:var(--font-en);font-size:var(--fs-1);font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:var(--r-xl);align-self:flex-start;margin-bottom:10px;}
 .tier-tag.free{background:var(--gray-100);color:var(--gray-500);}
 .tier-tag.pro{background:var(--pro-gold);color:var(--pro-gold-dark);}
 .tier-tag.pts{background:var(--navy-50);color:var(--navy-600);}
@@ -107,7 +107,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .pkg-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:24px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:all .2s;position:relative;}
 .pkg-card:hover{border-color:var(--pro-gold);box-shadow:0 4px 20px rgba(201,168,76,.12);}
 .pkg-card.popular{border-color:var(--pro-gold);border-width:2px;}
-.pkg-popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--pro-gold);color:var(--pro-gold-dark);font-size:var(--fs-1);font-weight:700;font-family:var(--font-en);padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em;}
+.pkg-popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--pro-gold);color:var(--pro-gold-dark);font-size:var(--fs-1);font-weight:700;font-family:var(--font-en);padding:3px 12px;border-radius:var(--r-xl);white-space:nowrap;letter-spacing:.05em;}
 .pkg-pts{font-family:var(--font-en);font-size:var(--fs-8);font-weight:700;color:var(--navy-800);line-height:1;}
 .pkg-pts-label{font-size:var(--fs-3);color:var(--gray-400);font-family:var(--font-en);margin-bottom:12px;}
 .pkg-price{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:var(--fs-5);font-weight:600;color:var(--gray-700);margin-bottom:4px;}
@@ -123,7 +123,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .usage-row:last-child{border-bottom:none;}
 .usage-icon{font-size:var(--fs-5);margin-right:12px;width:24px;text-align:center;}
 .usage-name{flex:1;font-size:var(--fs-3);color:var(--gray-700);}
-.usage-cost{font-family:var(--font-en);font-size:var(--fs-3);font-weight:700;color:var(--amber-600);background:var(--amber-100);padding:3px 10px;border-radius:20px;}
+.usage-cost{font-family:var(--font-en);font-size:var(--fs-3);font-weight:700;color:var(--amber-600);background:var(--amber-100);padding:3px 10px;border-radius:var(--r-xl);}
 .usage-cost.free{color:var(--gray-600);background:var(--gray-100);}
 .usage-cost.pro{color:var(--pro-gold-dark);background:var(--pro-gold-light);}
 .usage-cost.review{color:var(--navy-600);background:var(--navy-50);border:1px solid var(--navy-100);}
@@ -135,7 +135,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .pro-card{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));border:1px solid var(--pro-gold);border-radius:var(--r-xl);padding:28px 32px;margin-bottom:32px;color:var(--white);position:relative;overflow:hidden;}
 .pro-card::after{content:"";position:absolute;top:-40px;right:-40px;width:140px;height:140px;background:radial-gradient(circle,rgba(201,168,76,.18),transparent 70%);}
 .pro-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
-.pro-badge{font-family:var(--font-en);font-size:var(--fs-2);font-weight:700;letter-spacing:.1em;color:var(--pro-gold-dark);background:var(--pro-gold);padding:3px 10px;border-radius:20px;}
+.pro-badge{font-family:var(--font-en);font-size:var(--fs-2);font-weight:700;letter-spacing:.1em;color:var(--pro-gold-dark);background:var(--pro-gold);padding:3px 10px;border-radius:var(--r-xl);}
 .pro-title{font-family:var(--font-display);font-size:var(--fs-6);color:var(--white);}
 .pro-price{display:flex;align-items:baseline;gap:6px;margin:12px 0 18px;}
 .pro-price-num{font-variant-numeric:tabular-nums;font-family:var(--font-en);font-size:40px;font-weight:600;color:var(--pro-gold);line-height:1;}

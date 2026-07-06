@@ -54,7 +54,7 @@ nav{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(255,255,255,
 .nav-links a.active{background:var(--navy-50);color:var(--navy-600);font-weight:500;}
 .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--navy-400);display:inline-block;}
 .nav-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
-.live-badge{display:flex;align-items:center;gap:5px;background:var(--navy-50);color:var(--navy-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:20px;font-family:var(--font-en);}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--navy-50);color:var(--navy-600);font-size:var(--fs-2);font-weight:500;padding:3px 9px;border-radius:var(--r-xl);font-family:var(--font-en);}
 .live-dot{width:5px;height:5px;background:var(--navy-600);border-radius:50%;animation:pulse 2s infinite;display:inline-block;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .header-time{font-family:var(--font-en);font-size:var(--fs-3);color:var(--gray-400);}
@@ -88,7 +88,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
 .radar-item.active{border-color:var(--navy-400);background:var(--navy-50);}
 .radar-icon{font-size:var(--fs-6);margin-bottom:5px;}
 .radar-name{font-size:var(--fs-3);color:var(--gray-500);margin-bottom:7px;font-weight:500;line-height:1.3;font-family:var(--font-zh);}
-.radar-signal{font-size:var(--fs-2);font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.04em;font-family:var(--font-en);}
+.radar-signal{font-size:var(--fs-2);font-weight:700;padding:2px 8px;border-radius:var(--r-xl);letter-spacing:.04em;font-family:var(--font-en);}
 .bull{background:var(--green-100);color:var(--green-700);border:1px solid #bbf7d0;}
 .bear{background:var(--red-100);color:var(--red-700);border:1px solid #fecaca;}
 .watch{background:var(--amber-100);color:var(--amber-700);border:1px solid #fde68a;}
@@ -98,7 +98,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
 .filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:14px;min-height:24px;}
 .filter-label{font-size:var(--fs-3);color:var(--gray-400);font-family:var(--font-zh);}
 .filter-active{font-size:var(--fs-3);color:var(--navy-600);font-weight:600;font-family:var(--font-zh);}
-.filter-clear{font-size:var(--fs-2);color:var(--gray-500);cursor:pointer;padding:2px 8px;border-radius:20px;border:1px solid var(--gray-200);background:var(--white);font-family:var(--font-en);transition:all .15s;}
+.filter-clear{font-size:var(--fs-2);color:var(--gray-500);cursor:pointer;padding:2px 8px;border-radius:var(--r-xl);border:1px solid var(--gray-200);background:var(--white);font-family:var(--font-en);transition:all .15s;}
 .filter-clear:hover{border-color:var(--navy-300);color:var(--navy-600);}
 
 /* ── LAYOUT ── */
@@ -108,7 +108,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
 .glass-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:18px 20px;backdrop-filter:none;margin-bottom:12px;box-shadow:var(--shadow-card);}
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--gray-100);}
 .card-title{display:flex;align-items:center;gap:7px;font-size:var(--fs-3);font-weight:600;color:var(--gray-900);font-family:var(--font-zh);}
-.card-badge{font-size:var(--fs-1);padding:2px 8px;border-radius:20px;font-weight:600;font-family:var(--font-en);}
+.card-badge{font-size:var(--fs-1);padding:2px 8px;border-radius:var(--r-xl);font-weight:600;font-family:var(--font-en);}
 .badge-free{background:var(--gray-100);color:var(--gray-600);}
 .news-count{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);}
 
@@ -145,7 +145,7 @@ main{margin-top:56px;max-width:1440px;margin-left:auto;margin-right:auto;padding
 .rot-from{font-size:var(--fs-3);color:var(--red-600);font-weight:700;font-family:var(--font-en);}
 .rot-arrow{color:var(--gray-400);font-size:var(--fs-3);}
 .rot-to{font-size:var(--fs-3);color:var(--green-600);font-weight:700;font-family:var(--font-en);}
-.rot-strength{font-size:var(--fs-1);font-weight:700;padding:2px 8px;border-radius:20px;background:var(--amber-100);color:var(--amber-700);font-family:var(--font-en);}
+.rot-strength{font-size:var(--fs-1);font-weight:700;padding:2px 8px;border-radius:var(--r-xl);background:var(--amber-100);color:var(--amber-700);font-family:var(--font-en);}
 .rot-reason{font-size:var(--fs-3);color:var(--gray-500);line-height:1.5;font-family:var(--font-zh);}
 
 /* ── CORP EVENTS ── */
