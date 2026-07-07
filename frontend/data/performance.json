@@ -1,37 +1,37 @@
 {
-  "updated": "2026-07-06",
+  "updated": "2026-07-07",
   "predictions": {
-    "total": 305,
-    "hit": 83,
-    "partial": 80,
-    "miss": 61,
-    "pending": 81,
-    "resolved": 224,
-    "hit_rate_weighted": 54.9,
+    "total": 332,
+    "hit": 84,
+    "partial": 81,
+    "miss": 62,
+    "pending": 105,
+    "resolved": 227,
+    "hit_rate_weighted": 54.8,
     "by_type": {
       "calendar": {
         "hit": 78,
-        "partial": 69,
-        "miss": 54,
-        "pending": 35,
-        "resolved": 201,
-        "hit_rate": 56
+        "partial": 70,
+        "miss": 55,
+        "pending": 46,
+        "resolved": 203,
+        "hit_rate": 55.7
       },
       "story": {
         "hit": 0,
         "partial": 0,
         "miss": 0,
-        "pending": 40,
+        "pending": 48,
         "resolved": 0,
         "hit_rate": null
       },
       "industry": {
-        "hit": 5,
+        "hit": 6,
         "partial": 11,
         "miss": 7,
-        "pending": 6,
-        "resolved": 23,
-        "hit_rate": 45.7
+        "pending": 11,
+        "resolved": 24,
+        "hit_rate": 47.9
       }
     },
     "series": [
@@ -157,25 +157,134 @@
       },
       {
         "date": "2026-06-29",
-        "rate": 55.3,
-        "n": 218
+        "rate": 55.5,
+        "n": 219
       },
       {
         "date": "2026-06-30",
-        "rate": 54.9,
-        "n": 224
+        "rate": 55.1,
+        "n": 225
+      },
+      {
+        "date": "2026-07-06",
+        "rate": 54.8,
+        "n": 227
       }
     ]
   },
   "opportunities": {
-    "tracked": 240,
-    "evaluated7": 217,
-    "avg_r7": -0.41,
-    "win7": 43.8,
+    "tracked": 249,
+    "evaluated7": 225,
+    "avg_r7": -0.02,
+    "win7": 44.9,
     "evaluated30": 67,
     "avg_r30": -2.37,
     "win30": 34.3,
     "items": [
+      {
+        "date": "2026-06-30",
+        "ticker": "MU",
+        "name": "Micron Technology",
+        "category": "us",
+        "r7": -14.82,
+        "r30": null,
+        "thesis": "Q3財報創紀錄後股價回吐漲幅，市場忽視HBM4超級週期與AI DRAM佔全球70%高端產能的結構性利多，估值相對Sams",
+        "target": "$155.00 (-86.5%)",
+        "entry": 1145.28,
+        "exit7": 975.56,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-30",
+        "ticker": "IRDM",
+        "name": "Iridium Communications",
+        "category": "us",
+        "r7": -1.54,
+        "r30": null,
+        "thesis": "被Rocket Lab以80億美元收購，溢價顯著但股價尚未完全反映交易價值，套利空間存在且太空整合趨勢明確",
+        "target": "$54.00 (-1.1%)",
+        "entry": 54.59,
+        "exit7": 53.75,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-30",
+        "ticker": "2301",
+        "name": "光寶科",
+        "category": "tw",
+        "r7": 3.55,
+        "r30": null,
+        "thesis": "AI伺服器電源供應鏈與台達電同族群，6/26錯殺後6/29法人籌碼大幅回流，市場低估其毛利率改善潛力",
+        "target": "185 (-12.5%)",
+        "entry": 211.5,
+        "exit7": 219,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-30",
+        "ticker": "AVAV",
+        "name": "AeroVironment",
+        "category": "us",
+        "r7": 37.33,
+        "r30": null,
+        "thesis": "無人機防務需求爆發，訂單積壓達12億美元創紀錄，財報超預期後股價單日+19%仍被低估",
+        "target": "$280.00 (+101.4%)",
+        "entry": 139,
+        "exit7": 190.89,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-30",
+        "ticker": "SOL",
+        "name": "Solana",
+        "category": "crypto",
+        "r7": 8.64,
+        "r30": null,
+        "thesis": "Fear & Greed 15極度恐懼下SOL單日+5.29%大幅跑贏BTC，資金向高Beta山寨幣傾斜，去槓桿壓力緩解",
+        "target": "$95.00 (+27.0%)",
+        "entry": 74.9468,
+        "exit7": 81.423,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-30",
+        "ticker": "6488",
+        "name": "環球晶",
+        "category": "tw",
+        "r7": 37.16,
+        "r30": null,
+        "thesis": "第三代半導體12吋矽晶圓醞釀漲價，Factset上修EPS至21.12元，目標價733.5元，市場尚未充分定價漲價循環",
+        "target": "733",
+        "entry": 915,
+        "exit7": 1255,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-30",
+        "ticker": "NKE",
+        "name": "Nike",
+        "category": "us",
+        "r7": 6.29,
+        "r30": null,
+        "thesis": "本季股價已跌24%充分反映利空，6/30財報若優於極低預期將觸發空頭回補，風險報酬比佳",
+        "target": "$85.00 (+104.9%)",
+        "entry": 41.48,
+        "exit7": 44.09,
+        "exit30": null
+      },
+      {
+        "date": "2026-06-30",
+        "ticker": "4958",
+        "name": "臻鼎-KY",
+        "category": "tw",
+        "r7": 6.98,
+        "r30": null,
+        "thesis": "PCB龍頭受惠AI伺服器HDI板需求，Factset目標價調升7.14%至600元，外資賣壓收斂後籌碼轉佳",
+        "target": "600 (+4.7%)",
+        "entry": 573,
+        "exit7": 613,
+        "exit30": null
+      },
       {
         "date": "2026-06-29",
         "ticker": "SOL",
@@ -850,110 +959,6 @@
         "target": "135.00 (+14%)",
         "entry": 137.81,
         "exit7": 136.54,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-22",
-        "ticker": "SOL",
-        "name": "Solana",
-        "category": "crypto",
-        "r7": -2.77,
-        "r30": null,
-        "thesis": "極度恐懼指數20但SOL生態活躍度維持，ETF申請進度被低估，資金費率正向顯示空頭回補壓力，清算後籌碼已洗清",
-        "target": "95.00 (+28%)",
-        "entry": 72.4182,
-        "exit7": 70.4107,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-22",
-        "ticker": "2327",
-        "name": "國巨",
-        "category": "tw",
-        "r7": -6.02,
-        "r30": null,
-        "thesis": "AI高密度算力推升MLCC規格與用量，被動元件龍頭受惠漲價循環，股價回檔後本益比低於歷史均值",
-        "target": "680.00 (+17%)",
-        "entry": 1080,
-        "exit7": 1015,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-22",
-        "ticker": "UAL",
-        "name": "United Airlines",
-        "category": "us",
-        "r7": 15.04,
-        "r30": null,
-        "thesis": "油價暴跌40美元後航空成本大幅改善，暑期旅遊旺季需求強勁但股價尚未完全反映獲利上修空間",
-        "target": "85.00 (+18%)",
-        "entry": 118.32,
-        "exit7": 136.11,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-19",
-        "ticker": "MU",
-        "name": "Micron Technology",
-        "category": "us",
-        "r7": -7.54,
-        "r30": null,
-        "thesis": "HBM供應吃緊2026全年售罄，市場僅定價NVDA而低估記憶體供應商；MU單日漲8%創新高但HBM營收貢獻仍被低估",
-        "target": "185",
-        "entry": 1133.99,
-        "exit7": 1048.51,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-19",
-        "ticker": "AMKR",
-        "name": "Amkor Technology",
-        "category": "us",
-        "r7": -8.51,
-        "r30": null,
-        "thesis": "台積電宣布10年封測合作協議，市場聚焦TSM忽略封測夥伴；先進封裝產能缺口下AMKR議價能力提升",
-        "target": "52",
-        "entry": 90.46,
-        "exit7": 82.76,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-19",
-        "ticker": "2609",
-        "name": "陽明海運",
-        "category": "tw",
-        "r7": 0.58,
-        "r30": null,
-        "thesis": "SCFI連八漲四大航線齊揚，航運股整裝啟航但市場仍以防守心態觀望；Q3價量齊揚盛況預期未充分定價",
-        "target": "105",
-        "entry": 51.3,
-        "exit7": 51.6,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-19",
-        "ticker": "ASTS",
-        "name": "AST SpaceMobile",
-        "category": "us",
-        "r7": -15.68,
-        "r30": null,
-        "thesis": "成功發射3顆衛星股價僅漲6%，衛星直連手機商業化進度被低估；SpaceX IPO帶動太空概念但ASTS估值相對合理",
-        "target": "38",
-        "entry": 80.66,
-        "exit7": 68.01,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-19",
-        "ticker": "2327",
-        "name": "國巨",
-        "category": "tw",
-        "r7": -2.78,
-        "r30": null,
-        "thesis": "6/9費半強彈被動元件領漲但近期回落修正，AI伺服器MLCC用量倍增趨勢未變；股價已回調至相對低點",
-        "target": "720",
-        "entry": 1080,
-        "exit7": 1050,
         "exit30": null
       }
     ],
