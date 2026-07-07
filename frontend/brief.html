@@ -661,77 +661,6 @@ img { display: block; max-width: 100%; }
   background: var(--gray-200);
 }
 
-/* ── 頭條卡：每分類最重要一條放大呈現 ── */
-.brief-item.headline-card {
-  border-left: 4px solid var(--red-600);
-  padding: 20px 20px 20px 16px;
-}
-.brief-item.headline-card .brief-headline {
-  font-size: var(--fs-5);
-  font-weight: 700;
-}
-.headline-quotes {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 4px;
-}
-.headline-quote {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 10px;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-light);
-  border-radius: var(--r-sm, 6px);
-  font-family: var(--font-en);
-  font-size: var(--fs-2);
-}
-.hq-ticker { font-weight: 700; color: var(--navy-700); }
-.hq-price { font-weight: 600; color: var(--text-primary); font-variant-numeric: tabular-nums; }
-.hq-chg { font-weight: 600; font-variant-numeric: tabular-nums; }
-.hq-chg.up { color: var(--green-600); }
-.hq-chg.down { color: var(--red-600); }
-.hq-chg.flat { color: var(--text-muted); }
-
-/* ── 精簡列：非頭條壓成單行 + 重要度圓點 ── */
-.brief-item.compact-row {
-  padding: 9px 14px;
-  margin-bottom: 1px;
-  box-shadow: none;
-  border-color: transparent;
-  background: transparent;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.brief-item.compact-row:hover {
-  background: var(--bg-subtle);
-  border-color: var(--border-light);
-}
-.compact-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.compact-dot.dot-bull { background: var(--green-500, #22c55e); }
-.compact-dot.dot-bear { background: var(--red-600); }
-.compact-dot.dot-neut { background: var(--gray-300); }
-.compact-dot.dot-notable { box-shadow: 0 0 0 3px rgba(15,23,42,.08); }
-.brief-item.compact-row .brief-time { flex-shrink: 0; }
-.compact-headline {
-  font-size: var(--fs-3);
-  font-weight: 400;
-  color: var(--text-primary);
-  font-family: var(--font-zh);
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.brief-item.compact-row .brief-expand { flex-basis: 100%; margin-top: 8px; }
-
 /* ============================================================ SIDEBAR */
 .sidebar {
   display: flex;
@@ -1164,52 +1093,23 @@ function buildExpand(item) {
   return rows.join('');
 }
 
-function buildQuoteMap(mk) {
-  const map = {};
-  (mk.us_stocks || []).forEach(s => { map[s.ticker] = s; });
-  (mk.tw_stocks || []).forEach(s => { map[s.ticker] = s; });
-  (mk.crypto || []).forEach(s => { map[s.symbol] = Object.assign({}, s, {ticker: s.symbol}); });
-  return map;
-}
-
-function relatedQuotes(item, quoteMap) {
-  const syms = [];
-  (item.tickers || []).forEach(t => { if (t) syms.push(t); });
-  if (item.expand_tickers) item.expand_tickers.split(/[、,\/\s]+/).forEach(t => { if (t) syms.push(t); });
-  const seen = {}, out = [];
-  syms.forEach(s => {
-    const key = (s || '').trim();
-    if (!key || seen[key]) return;
-    const q = quoteMap[key];
-    if (q) { seen[key] = 1; out.push(q); }
-  });
-  return out.slice(0, 3);
-}
-
-function renderHeadlineQuotes(quotes) {
-  if (!quotes.length) return '';
-  return '<div class="headline-quotes">' + quotes.map(q => {
-    const dc = q.dir === 'up' ? 'up' : q.dir === 'down' ? 'down' : 'flat';
-    const di = q.dir === 'up' ? '▲' : q.dir === 'down' ? '▼' : '―';
-    return '<div class="headline-quote"><span class="hq-ticker">' + (q.ticker || q.symbol) + '</span><span class="hq-price">' + q.price + '</span><span class="hq-chg ' + dc + '">' + di + ' ' + q.change + '</span></div>';
-  }).join('') + '</div>';
-}
-
-function renderBriefItem(item, type, isHeadline, quoteMap) {
-  const tickers = (item.tickers || []).map(t => '<span class="ticker-chip">' + t + '</span>').join('');
-  const sentiment = normSentiment(item);
-  const sentLabel = sentiment === 'bull' ? '利多' : sentiment === 'bear' ? '利空' : '中性';
-  const sentClass = sentiment === 'bull' ? 'sent-bull' : sentiment === 'bear' ? 'sent-bear' : 'sent-neut';
-  const score = item.impact_score || 3;
-  const badgeLabel = badgeLabelMap[type] || type;
-  const subTag = (item.tag && item.tag !== badgeLabel) ? '<span class="brief-subtag">· ' + item.tag + '</span>' : '';
-  const source = item.source ? '<span class="brief-source">· ' + item.source + '</span>' : '';
-  const expandHtml = buildExpand(item);
-  const hasExpand = !!expandHtml;
-
-  if (isHeadline) {
-    const quotes = relatedQuotes(item, quoteMap);
-    return '<div class="brief-item headline-card' + (hasExpand ? ' has-expand' : '') + '" data-type="' + type + '">' +
+function renderBriefList(items) {
+  if (!items || !items.length) return '<div style="padding:20px;text-align:center;color:var(--gray-400);">暫無數據</div>';
+  let html = '', lastType = '';
+  items.forEach(item => {
+    const type = item.type || 'macro';
+    if (type !== lastType) { html += '<div class="track-divider">' + (dividerMap[type] || type) + '</div>'; lastType = type; }
+    const tickers = (item.tickers || []).map(t => '<span class="ticker-chip">' + t + '</span>').join('');
+    const sentiment = normSentiment(item);
+    const sentLabel = sentiment === 'bull' ? '利多' : sentiment === 'bear' ? '利空' : '中性';
+    const sentClass = sentiment === 'bull' ? 'sent-bull' : sentiment === 'bear' ? 'sent-bear' : 'sent-neut';
+    const score = item.impact_score || 3;
+    const badgeLabel = badgeLabelMap[type] || type;
+    const subTag = (item.tag && item.tag !== badgeLabel) ? '<span class="brief-subtag">· ' + item.tag + '</span>' : '';
+    const source = item.source ? '<span class="brief-source">· ' + item.source + '</span>' : '';
+    const expandHtml = buildExpand(item);
+    const hasExpand = !!expandHtml;
+    html += '<div class="brief-item' + (hasExpand ? ' has-expand' : '') + '" data-type="' + type + '">' +
       '<div class="brief-item-left">' +
         '<div class="brief-item-meta">' +
           '<span class="brief-track-badge ' + (badgeMap[type] || 'badge-macro') + '">' + badgeLabel + '</span>' +
@@ -1220,7 +1120,6 @@ function renderBriefItem(item, type, isHeadline, quoteMap) {
         '</div>' +
         '<div class="brief-headline">' + (item.text || item.headline || '') + (hasExpand ? '<span class="brief-caret">▼</span>' : '') + '</div>' +
         '<div class="brief-body">' + (item.body || item.detail || item.impact || '') + '</div>' +
-        renderHeadlineQuotes(quotes) +
         (tickers ? '<div class="brief-tickers">' + tickers + '</div>' : '') +
         (hasExpand ? '<div class="brief-expand">' + expandHtml + '</div>' : '') +
       '</div>' +
@@ -1229,39 +1128,6 @@ function renderBriefItem(item, type, isHeadline, quoteMap) {
         '<div class="impact-dots">' + renderImpactDots(score) + '</div>' +
       '</div></div>' +
     '</div>';
-  }
-
-  const dotClass = sentiment === 'bull' ? 'dot-bull' : sentiment === 'bear' ? 'dot-bear' : 'dot-neut';
-  return '<div class="brief-item compact-row' + (hasExpand ? ' has-expand' : '') + '" data-type="' + type + '">' +
-    '<span class="compact-dot ' + dotClass + (hasExpand ? ' dot-notable' : '') + '"></span>' +
-    '<span class="brief-time">' + (item.time || '') + '</span>' +
-    '<span class="compact-headline">' + (item.text || item.headline || '') + '</span>' +
-    (hasExpand ? '<span class="brief-caret">▼</span>' : '') +
-    (hasExpand ? '<div class="brief-expand">' + expandHtml + '</div>' : '') +
-  '</div>';
-}
-
-function renderBriefList(items, quoteMap) {
-  if (!items || !items.length) return '<div style="padding:20px;text-align:center;color:var(--gray-400);">暫無數據</div>';
-  quoteMap = quoteMap || {};
-  const groups = [];
-  items.forEach(item => {
-    const type = item.type || 'macro';
-    let g = groups[groups.length - 1];
-    if (!g || g.type !== type) { g = {type, items: []}; groups.push(g); }
-    g.items.push(item);
-  });
-  let html = '';
-  groups.forEach(g => {
-    html += '<div class="track-divider">' + (dividerMap[g.type] || g.type) + '</div>';
-    let headIdx = 0, headScore = -1;
-    g.items.forEach((item, idx) => {
-      const s = (item.impact_score || 3) * 10 + (buildExpand(item) ? 1 : 0);
-      if (s > headScore) { headScore = s; headIdx = idx; }
-    });
-    g.items.forEach((item, idx) => {
-      html += renderBriefItem(item, g.type, idx === headIdx, quoteMap);
-    });
   });
   return html;
 }
@@ -1401,7 +1267,7 @@ async function loadData() {
       ...sortDesc(mk.commodity_news||[]).map(i=>({...i,type:'commodity'})),
     ];
     const briefEl = document.getElementById('brief-list');
-    if (briefEl) briefEl.innerHTML = renderBriefList(allItems, buildQuoteMap(mk));
+    if (briefEl) briefEl.innerHTML = renderBriefList(allItems);
     const riskEl = document.getElementById('risk-body');
     if (riskEl) riskEl.innerHTML = renderRiskMatrix(data.signals);
     const calEl = document.getElementById('cal-list');
