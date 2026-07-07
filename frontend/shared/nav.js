@@ -84,7 +84,7 @@
       +   '<a class="px-mm-login" href="/pages/login.html">登入</a>'
       +   '<a class="px-mm-pro" href="/pages/credits.html">訂閱 Pro</a>'
       + '</div>'
-      + '<div class="px-mm-foot">⚡ Powered by OrionAI</div>';
+      + '<div class="px-mm-foot">'+(window.ICO&&ICO.lightning||'')+' Powered by OrionAI</div>';
     document.body.appendChild(menu);
 
     function position(){ menu.style.top = bar.getBoundingClientRect().bottom + 'px'; }

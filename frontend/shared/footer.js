@@ -52,7 +52,7 @@
     var sl=document.createElement('div'); sl.className='sd-slogan';
     var slz=document.createElement('span'); slz.textContent='把雜訊，變成判斷'; sl.appendChild(slz);
     var sle=document.createElement('span'); sle.style.cssText="margin-left:10px;color:#94a3b8;font-weight:500;font-family:'DM Sans',sans-serif;letter-spacing:.12em;font-size:12px;"; sle.textContent='FROM NOISE TO SIGNAL'; sl.appendChild(sle);
-    var pa=document.createElement('div'); pa.className='sd-copy'; pa.style.cssText='margin-top:10px;font-size:12px;color:#94a3b8;'; pa.textContent='⚡ Powered by OrionAI · Vela 的 AI 分析引擎';
+    var pa=document.createElement('div'); pa.className='sd-copy'; pa.style.cssText='margin-top:10px;font-size:12px;color:#94a3b8;'; pa.innerHTML=(window.ICO&&ICO.lightning||'')+' Powered by OrionAI · Vela 的 AI 分析引擎';
     var c=document.createElement('div'); c.className='sd-copy'; c.textContent='© '+year+' Vela. 版權所有，內容非投資建議。';
     inner.appendChild(t); inner.appendChild(p); inner.appendChild(sl); inner.appendChild(pa); inner.appendChild(c);
     foot.appendChild(inner);
