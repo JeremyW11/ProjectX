@@ -488,13 +488,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
         </div>
       </div>
       <button class="side-item active" data-cat="daily" onclick="goCat('daily',this)"><span class="side-ico" data-ico="signal"></span>每日情報</button>
-      <button class="side-item" data-cat="pulse" onclick="goCat('pulse',this)"><span class="side-ico" data-ico="ai"></span>OrionAI<span class="side-star">★</span></button>
+      <button class="side-item" data-cat="pulse" onclick="goCat('pulse',this)"><span class="side-ico" data-ico="ai"></span>OrionAI<span class="side-star" data-ico="star"></span></button>
       <button class="side-item" data-cat="stories" onclick="goCat('stories',this)"><span class="side-ico" data-ico="world"></span>全球追蹤</button>
       <button class="side-item" data-cat="history" onclick="goCat('history',this)"><span class="side-ico" data-ico="folder"></span>歷史報告</button>
       <button class="side-item" data-cat="account" onclick="goCat('account',this)"><span class="side-ico" data-ico="tool"></span>帳戶方案</button>
       <div class="hub-credits">
         <div style="font-size:var(--fs-1);color:var(--gray-400);letter-spacing:.06em;font-family:var(--font-en);margin-bottom:4px;">MY CREDITS</div>
-        <a href="/pages/credits.html" id="hub-credits-val" title="前往購點" style="font-size:var(--fs-5);font-weight:700;color:var(--navy-700);font-family:var(--font-en);text-decoration:none;">⚡ — 點</a>
+        <a href="/pages/credits.html" id="hub-credits-val" title="前往購點" style="font-size:var(--fs-5);font-weight:700;color:var(--navy-700);font-family:var(--font-en);text-decoration:none;"><span data-ico="lightning"></span> — 點</a>
       </div>
     </aside>
 
@@ -508,7 +508,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
           <div class="sbh-title">今日簡報 <span class="sbh-title-en">MORNING BRIEF</span></div>
           <div style="display:flex;align-items:center;gap:8px;">
             <span class="sbh-badge" id="brief-date" style="background:var(--navy-50);color:var(--navy-600);border:1px solid var(--navy-100);font-size:var(--fs-1);font-family:var(--font-en);"></span>
-            <button class="btn-outline-sm" onclick="generateMorningBrief()" id="brief-btn">⚡ 重新生成</button>
+            <button class="btn-outline-sm" onclick="generateMorningBrief()" id="brief-btn"><span data-ico="lightning"></span> 重新生成</button>
           </div>
         </div>
         <div id="morning-brief-content" style="padding:20px;font-size:var(--fs-4);color:var(--gray-700);line-height:1.8;font-family:var(--font-zh);">
@@ -556,7 +556,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
       <a href="#watchlist" class="ai-card" style="background:linear-gradient(135deg,var(--navy-700),var(--navy-500));">
         <div>
-          <div class="ai-t">⭐ OrionAI 自選投資</div>
+          <div class="ai-t"><span data-ico="star"></span> OrionAI 自選投資</div>
           <div class="ai-d">自選標的即時報價、共識溫度計與組合風險雷達一站掌握</div>
         </div>
         <span class="ai-go">管理自選 →</span>
@@ -658,9 +658,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
      <!-- 自選標的 -->
      <div class="section-block" style="margin-bottom:16px;">
        <div class="section-block-header">
-         <div class="sbh-title">⭐ 我的自選標的 <span class="sbh-title-en">WATCHLIST</span></div>
+         <div class="sbh-title"><span data-ico="star"></span> 我的自選標的 <span class="sbh-title-en">WATCHLIST</span></div>
          <div style="display:flex;align-items:center;gap:8px;">
-           <a href="/pages/credits.html" id="credits-display" title="查看點數詳情" style="font-size:var(--fs-2);color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:var(--r-xl);font-family:var(--font-en);text-decoration:none;cursor:pointer;">⚡ — 點</a>
+           <a href="/pages/credits.html" id="credits-display" title="查看點數詳情" style="font-size:var(--fs-2);color:var(--amber-600);font-weight:600;padding:4px 10px;background:var(--amber-100);border-radius:var(--r-xl);font-family:var(--font-en);text-decoration:none;cursor:pointer;"><span data-ico="lightning"></span> — 點</a>
            <button class="btn-outline-sm" onclick="openModal()">+ 新增標的</button>
          </div>
        </div>
@@ -1152,13 +1152,13 @@ function updateCreditsDisplay(){
   var total = currentUser.totalCredits||0;
   var el = document.getElementById('credits-display');
   if(el){
-    el.textContent = '⚡ '+total+' 點';
+    el.innerHTML = ICO.lightning+' '+total+' 點';
     el.title = currentUser.resetDate
       ? '訂閱點數將於 '+currentUser.resetDate+' 重置 · 點擊購點'
       : '點擊前往購點頁面';
   }
   var hubEl = document.getElementById('hub-credits-val');
-  if(hubEl) hubEl.textContent = '⚡ '+total+' 點';
+  if(hubEl) hubEl.innerHTML = ICO.lightning+' '+total+' 點';
   var acct = document.getElementById('account-credits');
   if(acct){
     acct.innerHTML =
@@ -1764,7 +1764,7 @@ async function runAnalysis(ticker, category, id, isResume){
   btn.textContent = '分析中...';
   btn.disabled = true;
   box.style.display = 'block';
-  box.textContent = isResume ? '⚡ 接續分析中...' : '⚡ AI 分析中，請稍候...';
+  box.innerHTML = isResume ? ICO.lightning+' 接續分析中...' : ICO.lightning+' AI 分析中，請稍候...';
 
   // 組 context
   var context = ''; var marketContext = '';
@@ -1777,7 +1777,7 @@ async function runAnalysis(ticker, category, id, isResume){
       context = JSON.stringify(found);
     } else {
       try {
-        box.textContent = '⚡ 搜尋即時資料中...';
+        box.innerHTML = ICO.lightning+' 搜尋即時資料中...';
         var sr = await fetch('https://projectx-backend-o2pl.onrender.com/search-ticker', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ symbol: ticker, market: category })

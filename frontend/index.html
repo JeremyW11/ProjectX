@@ -856,7 +856,7 @@ td.ft-group-row::before{content:"";display:inline-block;width:3px;height:12px;ba
 
           <tr><td colspan="3" class="ft-group-row">Pro 專屬</td></tr>
           <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="folder"></span><div class="ft-txt"><span class="ft-name">歷史報告完整內容</span><span class="ft-desc">免費僅看標題與日期</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-check-pro">✓</span></td></tr>
-          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico">⚡</span><div class="ft-txt"><span class="ft-name">每月訂閱點數</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">30 點 / 月</span></td></tr>
+          <tr class="ft-row"><td><div class="ft-feat"><span class="ft-ico" data-ico="lightning"></span><div class="ft-txt"><span class="ft-name">每月訂閱點數</span></div></div></td><td><span class="ft-lock">—</span></td><td><span class="ft-partial">30 點 / 月</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1163,22 +1163,22 @@ async function doSignup(){
 /* ── TOUR ── */
 var _tourIdx=0;
 var TOUR=[
-  {icon:'📰',pro:false,badge:'免費',title:'每日早報',
+  {icon:'news',pro:false,badge:'免費',title:'每日早報',
    desc:'每天早上由 OrionAI 自動生成，整合宏觀訊號、加密行情、美股、台股四大面向。含機會清單、情緒指標與今日早報摘要，完全免費、無需登入。',
    href:'/brief.html',cta:'查看今日早報'},
-  {icon:'📊',pro:false,badge:'圖表 Pro',title:'市場即時行情',
+  {icon:'chart',pro:false,badge:'圖表 Pro',title:'市場即時行情',
    desc:'美股、台股、加密幣三大市場報價一站匯整。Pro 會員可開啟互動 K 線圖表、訂單簿熱力圖與技術訊號；基本行情所有人皆可查看。',
    href:'/pages/market.html',cta:'前往市場頁'},
-  {icon:'🏦',pro:false,badge:'免費',title:'機構研報 · 財報日曆',
+  {icon:'bank',pro:false,badge:'免費',title:'機構研報 · 財報日曆',
    desc:'彙整高盛、摩根等大行評級調整與目標價，追蹤未來財報排程、法說會摘要與 EPS 對比結果，每日隨早報自動更新。',
    href:'/pages/institutional.html',cta:'查看機構情報'},
-  {icon:'🔍',pro:true,badge:'Pro · 1 點 / 次',title:'AI 個股深度分析',
+  {icon:'search',pro:true,badge:'Pro · 1 點 / 次',title:'AI 個股深度分析',
    desc:'輸入任一美股或台股代號，OrionAI 從基本面、技術面、籌碼、最新新聞多維切入，產出結構化分析報告。每次消耗 1 訂閱點數。',
    href:'/pages/targets.html',cta:'試用個股分析'},
-  {icon:'🌐',pro:true,badge:'Pro 專屬',title:'全球事件追蹤',
+  {icon:'world',pro:true,badge:'Pro 專屬',title:'全球事件追蹤',
    desc:'重大地緣政治、貿易政策、貨幣政策事件跨日持續更新時間軸，讓你不只看到新聞點，更能掌握事件的完整演進脈絡。',
    href:'/pages/stories.html',cta:'查看全球追蹤'},
-  {icon:'👤',pro:true,badge:'Pro 專屬',title:'OrionAI 名家觀點',
+  {icon:'users',pro:true,badge:'Pro 專屬',title:'OrionAI 名家觀點',
    desc:'七位頂尖投資名家的 AI 人格每三日輪番出刊評述市場，遇關鍵轉折自動觸發臨時特刊，每期延續上一期論點，串成有記憶的判斷脈絡。',
    href:'/pages/columns.html',cta:'看名家觀點'}
 ];
@@ -1194,7 +1194,7 @@ function renderTour(){
   document.getElementById('tour-slide-area').innerHTML=
     '<div class="tour-slide">'
     +'<span class="tour-tag '+tagCls+'">'+s.badge+'</span>'
-    +'<span class="tour-icon">'+s.icon+'</span>'
+    +'<span class="tour-icon">'+(ICO[s.icon]||'')+'</span>'
     +'<div class="tour-title">'+s.title+'</div>'
     +'<div class="tour-desc">'+s.desc+'</div>'
     +ctaHtml+'</div>';
