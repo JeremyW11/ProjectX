@@ -87,7 +87,10 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .rc-firm-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
 .rc-firm{font-family:var(--font-en);font-size:var(--fs-2);font-weight:700;color:var(--navy-700);letter-spacing:.06em;background:var(--navy-50);border:1px solid var(--navy-100);padding:2px 9px;border-radius:4px;}
 .rc-date{font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-en);}
-.rc-sector{font-size:var(--fs-1);color:var(--gray-400);font-family:var(--font-en);letter-spacing:.04em;}
+.rc-action-badge{font-size:var(--fs-1);font-weight:700;padding:2px 8px;border-radius:4px;font-family:var(--font-en);letter-spacing:.04em;}
+.rc-action-badge.action-up{background:var(--green-100);color:var(--green-700);}
+.rc-action-badge.action-down{background:var(--red-100);color:var(--red-700);}
+.rc-action-badge.action-hold{background:var(--gray-100);color:var(--gray-400);}
 .rc-title{font-size:var(--fs-4);font-weight:600;color:var(--gray-900);font-family:var(--font-zh);line-height:1.5;margin-bottom:8px;}
 .rc-body{font-size:var(--fs-3);color:var(--gray-600);line-height:1.7;font-family:var(--font-zh);font-weight:300;margin-bottom:12px;display:none;}
 .rc-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
@@ -97,8 +100,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .rating-hold{background:var(--amber-100);color:var(--amber-700);}
 .rating-sell{background:var(--red-100);color:var(--red-700);}
 .rating-uw{background:var(--red-100);color:var(--red-700);}
-.rc-target{font-variant-numeric:tabular-nums;font-size:var(--fs-2);color:var(--gray-500);font-family:var(--font-en);}
-.rc-target span{color:var(--navy-700);font-weight:600;}
+.rc-target{font-variant-numeric:tabular-nums;font-size:var(--fs-2);color:var(--gray-500);font-family:var(--font-en);display:inline-flex;align-items:center;gap:5px;}
+.rc-target-old{color:var(--gray-400);text-decoration:line-through;}
+.rc-target-new{color:var(--navy-700);font-weight:700;}
+.rc-target-arrow{color:var(--gray-300);}
+.rc-target-pct{font-weight:700;padding:1px 6px;border-radius:999px;font-size:var(--fs-1);}
+.rc-target-pct.up{background:var(--green-100);color:var(--green-700);}
+.rc-target-pct.down{background:var(--red-100);color:var(--red-700);}
 .rc-source-link{font-size:var(--fs-2);font-family:var(--font-zh);font-weight:600;color:var(--navy-600);text-decoration:none;padding:3px 9px;border:1px solid var(--navy-200,#c7d7fd);border-radius:4px;background:var(--navy-50);transition:all .15s;display:inline-flex;align-items:center;gap:3px;margin-left:auto;}
 .rc-source-link:hover{background:var(--navy-100);border-color:var(--navy-400);color:var(--navy-800);}
 .rc-tickers{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto;}
@@ -534,6 +542,31 @@ function renderChangeClass(change){
   return change==='上調'?'change-up':change==='下調'?'change-dn':'change-hold';
 }
 
+function parseTargetNum(t){
+  if(!t) return null;
+  var m=String(t).replace(/,/g,'').match(/[\d.]+/);
+  return m?parseFloat(m[0]):null;
+}
+
+function renderTargetBlock(r){
+  if(!r.target) return '';
+  var oldNum=parseTargetNum(r.prev_target);
+  var newNum=parseTargetNum(r.target);
+  var hasOld=r.prev_target&&r.prev_target!==r.target;
+  var priceHtml=hasOld
+    ?'<span class="rc-target-old">'+esc(r.prev_target)+'</span><span class="rc-target-arrow">→</span><span class="rc-target-new">'+esc(r.target)+'</span>'
+    :'<span class="rc-target-new">'+esc(r.target)+'</span>';
+  var pctHtml='';
+  if(hasOld&&oldNum&&newNum&&oldNum>0){
+    var pct=(newNum-oldNum)/oldNum*100;
+    if(Math.abs(pct)>=0.1){
+      var dir=pct>0?'up':'down';
+      pctHtml='<span class="rc-target-pct '+dir+'">'+(pct>0?'+':'')+pct.toFixed(1)+'%</span>';
+    }
+  }
+  return '<span class="rc-target">目標價 '+priceHtml+pctHtml+'</span>';
+}
+
 function renderResearch(list){
   if(!list||!list.length) return '<div class="empty-state">暫無研報數據</div>';
   var ratingClassMap={buy:'rating-buy',outperform:'rating-ow',overweight:'rating-ow',hold:'rating-hold',neutral:'rating-hold',sell:'rating-sell'};
@@ -543,15 +576,16 @@ function renderResearch(list){
     var rc=ratingClassMap[r.rating_type]||'rating-hold';
     var sc=sentMap[r.rating_type]||'s-neut';
     var sl=sentLabel[r.rating_type]||'中性';
-    var changeIcon=r.rating_change==='上調'?'▲ 上調':r.rating_change==='下調'?'▼ 下調':'— 維持';
+    var actionClass=r.rating_change==='上調'?'action-up':r.rating_change==='下調'?'action-down':'action-hold';
+    var actionText=r.rating_change==='上調'?'▲ 升評':r.rating_change==='下調'?'▼ 降評':'— 維持';
     var impactScore=r.impact_score||3;
     var dots='';
     for(var i=1;i<=5;i++) dots+='<span class="rc-impact-dot" style="background:'+(i<=impactScore?'var(--navy-600)':'var(--gray-200)')+'"></span>';
-    return '<div class="research-card" data-firm="'+r.firm+'" onclick="toggleResearchCard(this)" style="cursor:pointer;">'+  
+    return '<div class="research-card" data-firm="'+r.firm+'" onclick="toggleResearchCard(this)" style="cursor:pointer;">'+
       '<div class="rc-firm-row">'+
         '<span class="rc-firm">'+r.firm.toUpperCase()+'</span>'+
         '<span class="rc-date">'+r.date+'</span>'+
-        '<span class="rc-sector">'+(r.rating_change==='上調'?'▲ 上調':r.rating_change==='下調'?'▼ 下調':'— 維持')+'</span>'+
+        '<span class="rc-action-badge '+actionClass+'">'+actionText+'</span>'+
       '</div>'+
       (r.firm_background?'<div style="font-size:var(--fs-2);color:var(--gray-400);font-family:var(--font-zh);margin-bottom:6px;">'+r.firm_background+'</div>':'')+
       '<div class="rc-title">'+r.name+'（'+r.ticker+'）'+': '+r.note+'</div>'+
@@ -562,7 +596,7 @@ function renderResearch(list){
         '</div>'+
       '<div class="rc-meta">'+
         '<span class="rc-rating '+rc+'">'+r.rating+'</span>'+
-        (r.target?'<span class="rc-target">目標價 <span>'+r.target+(r.prev_target?' → '+r.target:'')+'</span></span>':'')+
+        renderTargetBlock(r)+
         '<span class="sent-chip '+sc+'">'+sl+'</span>'+
         (r.source_url?'<a class="rc-source-link" href="'+r.source_url+'" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" title="查看原文">'+ICO.link+' 原文</a>':'')+
       '</div>'+
