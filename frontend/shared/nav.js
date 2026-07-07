@@ -1,42 +1,105 @@
 (function(){
-  var NAV = [
-    {key:'brief',    href:'/brief.html',                  label:'總覽'},
-    {key:'market',   href:'/pages/market.html',           label:'市場'},
-    {key:'industry', href:'/pages/industry.html',         label:'產業'},
-    {key:'research', href:'/pages/institutional.html',    label:'機構研報'},
-    {key:'calendar', href:'/pages/calendar.html',         label:'市場日曆'},
-    {key:'stories',  href:'/pages/stories.html',          label:'全球追蹤'},
-    {key:'columns',  href:'/pages/columns.html',           label:'名家觀點'},
-    {key:'predictions', href:'/pages/predictions.html',   label:'事件預判'},
-    {key:'performance', href:'/pages/performance.html',   label:'歷史數據'},
-    {key:'chart',    href:'/pages/chart.html',             label:'互動圖表'},
-    {key:'member',   href:'/pages/targets.html',          label:'會員專屬'},
-    {key:'archive',  href:'/pages/archive.html',          label:'歷史報告'},
-    {key:'credits',  href:'/pages/credits.html',          label:'方案 / 點數'},
+  // 桌面版頂部導覽：總覽｜情報▾｜觀點▾｜數據▾｜會員專屬。方案/點數移至 header-right 作 CTA，不佔一級選單。
+  // 分組後不受寬度限制，全部 13 個功能皆可從此結構抵達（先前縮排版隱藏的全球追蹤/互動圖表/歷史報告已收回選單）。
+  var NAV_GROUPS = [
+    {type:'link', key:'brief', href:'/brief.html', label:'總覽'},
+    {type:'group', label:'情報', items:[
+      {key:'market',   href:'/pages/market.html',        label:'市場',     icon:'chart',  pro:false, desc:'美股、台股、加密即時報價，Pro 可開互動圖表'},
+      {key:'industry', href:'/pages/industry.html',      label:'產業',     icon:'chip',   pro:false, desc:'半導體、AI 等重點產業資金與族群動態'},
+      {key:'research', href:'/pages/institutional.html', label:'機構研報', icon:'bank',   pro:false, desc:'國際大行評級調整、財報日曆與法說摘要'},
+      {key:'calendar', href:'/pages/calendar.html',      label:'市場日曆', icon:'cal',    pro:false, desc:'重要經濟數據與財報公布時程一覽'},
+      {key:'stories',  href:'/pages/stories.html',       label:'全球追蹤', icon:'world',  pro:true,  desc:'地緣政治、政策事件跨日時間軸持續追蹤'}
+    ]},
+    {type:'group', label:'觀點', items:[
+      {key:'columns',     href:'/pages/columns.html',     label:'名家觀點', icon:'users',  pro:true, desc:'七位投資名家 AI 人格輪番評述市場'},
+      {key:'predictions', href:'/pages/predictions.html', label:'事件預判', icon:'target', pro:true, desc:'每日三類市場預判，追蹤至驗收命中率'}
+    ]},
+    {type:'group', label:'數據', items:[
+      {key:'performance', href:'/pages/performance.html', label:'歷史數據', icon:'history', pro:true,  desc:'機會清單與事件預判的完整命中率戰績'},
+      {key:'chart',       href:'/pages/chart.html',       label:'互動圖表', icon:'chart',   pro:true,  desc:'K 線圖表、訂單簿熱力圖與技術訊號'},
+      {key:'archive',     href:'/pages/archive.html',     label:'歷史報告', icon:'folder',  pro:false, desc:'每日早報歷史存檔，隨時回顧'}
+    ]},
+    {type:'link', key:'member', href:'/pages/targets.html', label:'會員專屬'}
   ];
 
-  // 縮排版頂部導覽：全球追蹤／互動圖表／歷史報告整併進會員中心側欄；名家觀點(columns)
-  // 因落地頁主推、保留於 toolbar。方案點數(credits)作為訪客購點入口。個別頁面可用 data-nav-keys 覆寫。
-  var TOOLBAR_KEYS = ['brief','market','industry','research','calendar','columns','predictions','performance','member','credits'];
+  function injectDropdownCss(){
+    if(document.getElementById('px-navdrop-css')) return;
+    var css = ".nav-group{position:relative;}"
+      + ".nav-trigger{background:none;border:none;cursor:pointer;font-family:var(--font-zh);}"
+      + ".nav-caret{font-size:10px;margin-left:3px;opacity:.55;display:inline-block;transition:transform .15s;}"
+      + ".nav-group.open .nav-caret{transform:rotate(180deg);}"
+      + ".nav-dropdown{position:absolute;top:100%;left:0;margin-top:8px;min-width:270px;background:var(--white);border-radius:var(--r-lg);box-shadow:var(--shadow-md);padding:8px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .15s,transform .15s;z-index:150;}"
+      + ".nav-group.open .nav-dropdown{opacity:1;visibility:visible;transform:translateY(0);}"
+      + ".nav-drop-item{display:flex;align-items:flex-start;gap:10px;padding:9px 10px;border-radius:var(--r-sm);text-decoration:none;color:inherit;}"
+      + ".nav-drop-item:hover,.nav-drop-item.active{background:var(--navy-50);}"
+      + ".ndi-ico{flex-shrink:0;width:18px;height:18px;color:var(--navy-500);margin-top:2px;}"
+      + ".ndi-ico svg{width:100%;height:100%;}"
+      + ".ndi-body{display:flex;flex-direction:column;gap:2px;min-width:0;}"
+      + ".ndi-title{font-size:var(--fs-4);font-weight:600;color:var(--navy-700);font-family:var(--font-zh);display:flex;align-items:center;gap:6px;}"
+      + ".ndi-desc{font-size:var(--fs-2);color:var(--gray-500);line-height:1.4;font-family:var(--font-zh);}"
+      + "@media(max-width:768px){.nav-dropdown{display:none!important;}}";
+    var s=document.createElement('style'); s.id='px-navdrop-css'; s.textContent=css;
+    (document.head||document.documentElement).appendChild(s);
+  }
+
+  function bindDropdowns(nav){
+    var groups = nav.querySelectorAll('.nav-group');
+    function closeAll(){ groups.forEach(function(g){ g.classList.remove('open'); var t=g.querySelector('.nav-trigger'); if(t) t.setAttribute('aria-expanded','false'); }); }
+    groups.forEach(function(g){
+      var trigger = g.querySelector('.nav-trigger');
+      var closeTimer = null;
+      function open(){
+        clearTimeout(closeTimer);
+        groups.forEach(function(o){ if(o!==g) o.classList.remove('open'); });
+        g.classList.add('open'); trigger.setAttribute('aria-expanded','true');
+      }
+      trigger.addEventListener('click', function(e){
+        e.stopPropagation();
+        g.classList.contains('open') ? closeAll() : open();
+      });
+      g.addEventListener('mouseenter', open);
+      g.addEventListener('mouseleave', function(){ closeTimer = setTimeout(function(){ g.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); }, 150); });
+    });
+    document.addEventListener('click', function(e){
+      groups.forEach(function(g){ if(!g.contains(e.target)) g.classList.remove('open'); });
+    });
+  }
 
   window.buildNav = function(activeKey){
     // Support both .header-nav (standard) and .nav-links (industry.html ul-based)
     var nav = document.querySelector('.header-nav[data-active], .nav-links[data-active]');
     if(!nav) return;
-    // 可選：data-nav-keys 覆寫顯示項目（逗號分隔）；未指定則用縮排版預設
-    var keys = nav.dataset.navKeys ? nav.dataset.navKeys.split(',').map(function(k){return k.trim();}) : TOOLBAR_KEYS;
-    var list = NAV.filter(function(i){ return keys.indexOf(i.key) >= 0; });
+    injectDropdownCss();
     var isUl = nav.tagName === 'UL';
-    nav.innerHTML = list.map(function(item){
-      var active = item.key === activeKey;
-      var link = '<a href="'+item.href+'" class="nav-item'+(active?' active':'')+'">'
-        +(active?'<span class="nav-dot"></span>':'')+item.label+'</a>';
-      return isUl ? '<li>'+link+'</li>' : link;
+    var activeGroupLabel = null;
+    NAV_GROUPS.forEach(function(g){ if(g.type==='group' && g.items.some(function(it){ return it.key===activeKey; })) activeGroupLabel = g.label; });
+    var ico = window.ICO || {};
+    nav.innerHTML = NAV_GROUPS.map(function(g){
+      if(g.type==='link'){
+        var active = g.key === activeKey;
+        var link = '<a href="'+g.href+'" class="nav-item'+(active?' active':'')+'">'
+          +(active?'<span class="nav-dot"></span>':'')+g.label+'</a>';
+        return isUl ? '<li>'+link+'</li>' : link;
+      }
+      var groupActive = g.label === activeGroupLabel;
+      var itemsHtml = g.items.map(function(it){
+        var active = it.key === activeKey;
+        return '<a href="'+it.href+'" class="nav-drop-item'+(active?' active':'')+'">'
+          +'<span class="ndi-ico">'+(ico[it.icon]||'')+'</span>'
+          +'<span class="ndi-body"><span class="ndi-title">'+it.label+(it.pro?' <span class="pro-badge">PRO</span>':'')+'</span>'
+          +'<span class="ndi-desc">'+it.desc+'</span></span>'
+          +'</a>';
+      }).join('');
+      var trigger = '<button type="button" class="nav-item nav-trigger'+(groupActive?' active':'')+'" aria-haspopup="true" aria-expanded="false">'
+        +(groupActive?'<span class="nav-dot"></span>':'')+g.label+'<span class="nav-caret">▾</span></button>';
+      var body = '<div class="nav-group">'+trigger+'<div class="nav-dropdown">'+itemsHtml+'</div></div>';
+      return isUl ? '<li class="nav-group-li">'+body+'</li>' : body;
     }).join('');
+    bindDropdowns(nav);
   };
 
   // ── 行動裝置導覽（≤768px）：桌面 nav 在窄螢幕被各頁 CSS 隱藏卻無替代，
-  //    這裡統一注入漢堡選單＋抽屜，從同一份 NAV 生成，一處修正涵蓋全站。
+  //    這裡統一注入漢堡選單＋抽屜，從同一份 NAV_GROUPS 生成，一處修正涵蓋全站。
   //    頁面若已自帶漢堡（如 industry.html）則跳過，避免重複。
   function injectMobileCss(){
     if(document.getElementById('px-mnav-css')) return;
@@ -47,8 +110,9 @@
       + ".px-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}"
       + ".px-mobile-menu{display:none;position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.975);backdrop-filter:blur(14px);z-index:198;padding:16px 22px 36px;flex-direction:column;overflow-y:auto;border-top:1px solid #e5e7eb;}"
       + ".px-mobile-menu.open{display:flex;}"
-      + ".px-mobile-menu .px-mm-link{color:#475569;font-size:18px;font-weight:500;padding:15px 4px;border-bottom:1px solid #f1f5f9;text-decoration:none;font-family:'Noto Sans TC','DM Sans',sans-serif;}"
+      + ".px-mobile-menu .px-mm-link{color:#475569;font-size:18px;font-weight:500;padding:15px 4px;padding-left:8px;border-bottom:1px solid #f1f5f9;text-decoration:none;font-family:'Noto Sans TC','DM Sans',sans-serif;}"
       + ".px-mobile-menu .px-mm-link.active{color:#2563eb;font-weight:700;}"
+      + ".px-mobile-menu .px-mm-section{margin-top:14px;font-size:12px;font-weight:700;letter-spacing:.06em;color:#94a3b8;text-transform:uppercase;font-family:'DM Sans',sans-serif;}"
       + ".px-mm-btns{margin-top:20px;display:flex;flex-direction:column;gap:10px;}"
       + ".px-mm-btns a{text-align:center;padding:12px;border-radius:9px;text-decoration:none;font-size:15px;font-family:'Noto Sans TC',sans-serif;}"
       + ".px-mm-login{border:1px solid #cbd5e1;color:#475569;}"
@@ -67,8 +131,6 @@
     if(!bar) return;
     injectMobileCss();
 
-    var list = NAV.filter(function(i){ return TOOLBAR_KEYS.indexOf(i.key) >= 0; });
-
     var btn=document.createElement('button');
     btn.className='px-hamburger'; btn.id='px-hamburger'; btn.type='button';
     btn.setAttribute('aria-label','開啟選單'); btn.setAttribute('aria-expanded','false');
@@ -77,8 +139,13 @@
 
     var menu=document.createElement('div');
     menu.className='px-mobile-menu'; menu.id='px-mobile-menu';
-    menu.innerHTML = list.map(function(item){
-      return '<a class="px-mm-link'+(item.key===activeKey?' active':'')+'" href="'+item.href+'">'+item.label+'</a>';
+    menu.innerHTML = NAV_GROUPS.map(function(g){
+      if(g.type==='link'){
+        return '<a class="px-mm-link'+(g.key===activeKey?' active':'')+'" href="'+g.href+'">'+g.label+'</a>';
+      }
+      return '<div class="px-mm-section">'+g.label+'</div>' + g.items.map(function(it){
+        return '<a class="px-mm-link'+(it.key===activeKey?' active':'')+'" href="'+it.href+'">'+it.label+(it.pro?' <span class="pro-badge">PRO</span>':'')+'</a>';
+      }).join('');
     }).join('')
       + '<div class="px-mm-btns">'
       +   '<a class="px-mm-login" href="/pages/login.html">登入</a>'
@@ -102,9 +169,31 @@
     window.addEventListener('resize', function(){ if(window.innerWidth>768) close(); else position(); });
   }
 
+  // 方案/點數(credits)不佔一級選單，改在 header-right 插入金色 CTA，全站一致（credits.html 本身不插自連結）
+  function injectCreditsLink(activeKey){
+    if(activeKey==='credits') return;
+    var box=document.querySelector('.header-right, .topbar-right, .nav-right');
+    if(!box || box.querySelector('.nav-credits-link')) return;
+    if(document.getElementById('px-credits-css')===null){
+      var css = ".nav-credits-link{display:inline-flex;align-items:center;padding:7px 14px;border-radius:var(--r-sm);font-size:var(--fs-3);font-weight:600;color:var(--pro-gold-dark);background:var(--pro-gold-light);font-family:var(--font-zh);text-decoration:none;white-space:nowrap;}"
+        + ".nav-credits-link:hover{background:var(--pro-gold);color:#fff;}"
+        + "@media(max-width:768px){.nav-credits-link{display:none;}}";
+      var s=document.createElement('style'); s.id='px-credits-css'; s.textContent=css;
+      (document.head||document.documentElement).appendChild(s);
+    }
+    var a=document.createElement('a');
+    a.className='nav-credits-link'; a.href='/pages/credits.html'; a.textContent='方案 / 點數';
+    var anchor=box.querySelector('.btn-login,#auth-btn,a[href*="login"]');
+    if(anchor) box.insertBefore(a,anchor); else box.appendChild(a);
+  }
+
   document.addEventListener('DOMContentLoaded', function(){
     var nav = document.querySelector('.header-nav[data-active], .nav-links[data-active]');
-    if(nav){ window.buildNav(nav.dataset.active); buildMobileNav(nav.dataset.active); }
+    if(nav){
+      window.buildNav(nav.dataset.active);
+      buildMobileNav(nav.dataset.active);
+      injectCreditsLink(nav.dataset.active);
+    }
   });
 })();
 
