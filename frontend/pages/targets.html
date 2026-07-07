@@ -1045,9 +1045,11 @@ function renderMorningBriefHTML(text) {
       return;
     }
     var h = p.match(/^【(.+?)】$/);
-    if (h) {
+    var bareHeader = !h && p.length <= 14 && !/[。！？，、]/.test(p) && MB_THEMES.some(function(t){ return t.re.test(p); });
+    if (h || bareHeader) {
       flush();
-      var parts = h[1].split(/[：:]/);
+      var raw = h ? h[1] : p;
+      var parts = raw.split(/[：:]/);
       var main = parts[0].trim(), sub = parts.slice(1).join('：').trim();
       var theme = null;
       for (var j = 0; j < MB_THEMES.length; j++) { if (MB_THEMES[j].re.test(main)) { theme = MB_THEMES[j]; break; } }
