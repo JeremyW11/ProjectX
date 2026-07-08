@@ -44,7 +44,6 @@
 
   function bindDropdowns(nav){
     var groups = nav.querySelectorAll('.nav-group');
-    function closeAll(){ groups.forEach(function(g){ g.classList.remove('open'); var t=g.querySelector('.nav-trigger'); if(t) t.setAttribute('aria-expanded','false'); }); }
     groups.forEach(function(g){
       var trigger = g.querySelector('.nav-trigger');
       var closeTimer = null;
@@ -55,7 +54,7 @@
       }
       trigger.addEventListener('click', function(e){
         e.stopPropagation();
-        g.classList.contains('open') ? closeAll() : open();
+        open();
       });
       g.addEventListener('mouseenter', open);
       g.addEventListener('mouseleave', function(){ closeTimer = setTimeout(function(){ g.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); }, 150); });
