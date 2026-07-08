@@ -95,7 +95,8 @@ server.js          (Express server, runs /brief endpoint that generates daily.js
 
 - **Prefetch TW/US rebalance**: `/morning` skill's 16 queries are ~1/16 TW-specific (rest US/global). Suggest cutting 1 of the 3 overlapping US-equity queries (#10/11/12) and adding 2 TW-specific (大盤外資法人 + 台股財報法說/題材). Not yet done.
 - **"Since last trigger" data window logic**: Shelved (user is concerned about content sparsity).
-- **TWSE primary/fallback inversion**: If TWSE stays broken, swap order so Yahoo is primary.
+
+**Closed, do not re-open**: TWSE primary/fallback inversion — decided 2026-06-16 after zero-cost live testing: primary source (`STOCK_DAY`/`FMTQIK`/`BFI82U`) returns valid JSON; the would-be fallback (`mis.twse.com.tw` realtime) times out from this machine. Inverting would trade a working primary for a broken one. Not worth re-checking unless primary starts failing again.
 
 ## Code style notes
 
