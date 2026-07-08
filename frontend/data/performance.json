@@ -1,35 +1,35 @@
 {
-  "updated": "2026-07-07",
+  "updated": "2026-07-08",
   "predictions": {
-    "total": 332,
-    "hit": 84,
-    "partial": 81,
-    "miss": 62,
-    "pending": 105,
-    "resolved": 227,
-    "hit_rate_weighted": 54.8,
+    "total": 347,
+    "hit": 85,
+    "partial": 85,
+    "miss": 67,
+    "pending": 110,
+    "resolved": 237,
+    "hit_rate_weighted": 53.8,
     "by_type": {
       "calendar": {
         "hit": 78,
         "partial": 70,
-        "miss": 55,
-        "pending": 46,
-        "resolved": 203,
-        "hit_rate": 55.7
+        "miss": 57,
+        "pending": 45,
+        "resolved": 205,
+        "hit_rate": 55.1
       },
       "story": {
-        "hit": 0,
-        "partial": 0,
-        "miss": 0,
+        "hit": 1,
+        "partial": 4,
+        "miss": 3,
         "pending": 48,
-        "resolved": 0,
-        "hit_rate": null
+        "resolved": 8,
+        "hit_rate": 37.5
       },
       "industry": {
         "hit": 6,
         "partial": 11,
         "miss": 7,
-        "pending": 11,
+        "pending": 17,
         "resolved": 24,
         "hit_rate": 47.9
       }
@@ -132,54 +132,59 @@
       },
       {
         "date": "2026-06-22",
-        "rate": 57.8,
-        "n": 173
-      },
-      {
-        "date": "2026-06-23",
         "rate": 57.5,
         "n": 174
       },
       {
-        "date": "2026-06-24",
+        "date": "2026-06-23",
         "rate": 57.1,
-        "n": 182
+        "n": 175
+      },
+      {
+        "date": "2026-06-24",
+        "rate": 56.8,
+        "n": 183
       },
       {
         "date": "2026-06-25",
-        "rate": 56.6,
-        "n": 196
-      },
-      {
-        "date": "2026-06-26",
-        "rate": 56.3,
+        "rate": 55.6,
         "n": 205
       },
       {
+        "date": "2026-06-26",
+        "rate": 55.4,
+        "n": 214
+      },
+      {
         "date": "2026-06-29",
-        "rate": 55.5,
-        "n": 219
+        "rate": 54.6,
+        "n": 228
       },
       {
         "date": "2026-06-30",
-        "rate": 55.1,
-        "n": 225
+        "rate": 54.3,
+        "n": 234
       },
       {
         "date": "2026-07-06",
-        "rate": 54.8,
-        "n": 227
+        "rate": 54,
+        "n": 236
+      },
+      {
+        "date": "2026-07-07",
+        "rate": 53.8,
+        "n": 237
       }
     ]
   },
   "opportunities": {
-    "tracked": 249,
+    "tracked": 259,
     "evaluated7": 225,
     "avg_r7": -0.02,
     "win7": 44.9,
-    "evaluated30": 67,
-    "avg_r30": -2.37,
-    "win30": 34.3,
+    "evaluated30": 76,
+    "avg_r30": -1.36,
+    "win30": 38.2,
     "items": [
       {
         "date": "2026-06-30",
