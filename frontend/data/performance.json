@@ -1,35 +1,35 @@
 {
-  "updated": "2026-07-08",
+  "updated": "2026-07-09",
   "predictions": {
-    "total": 347,
-    "hit": 85,
-    "partial": 85,
-    "miss": 67,
-    "pending": 110,
-    "resolved": 237,
-    "hit_rate_weighted": 53.8,
+    "total": 371,
+    "hit": 88,
+    "partial": 88,
+    "miss": 70,
+    "pending": 125,
+    "resolved": 246,
+    "hit_rate_weighted": 53.7,
     "by_type": {
       "calendar": {
         "hit": 78,
-        "partial": 70,
+        "partial": 71,
         "miss": 57,
-        "pending": 45,
-        "resolved": 205,
+        "pending": 55,
+        "resolved": 206,
         "hit_rate": 55.1
       },
       "story": {
-        "hit": 1,
-        "partial": 4,
-        "miss": 3,
+        "hit": 4,
+        "partial": 6,
+        "miss": 6,
         "pending": 48,
-        "resolved": 8,
-        "hit_rate": 37.5
+        "resolved": 16,
+        "hit_rate": 43.8
       },
       "industry": {
         "hit": 6,
         "partial": 11,
         "miss": 7,
-        "pending": 17,
+        "pending": 22,
         "resolved": 24,
         "hit_rate": 47.9
       }
@@ -152,39 +152,44 @@
       },
       {
         "date": "2026-06-26",
-        "rate": 55.4,
-        "n": 214
+        "rate": 55.2,
+        "n": 222
       },
       {
         "date": "2026-06-29",
-        "rate": 54.6,
-        "n": 228
-      },
-      {
-        "date": "2026-06-30",
-        "rate": 54.3,
-        "n": 234
-      },
-      {
-        "date": "2026-07-06",
-        "rate": 54,
+        "rate": 54.4,
         "n": 236
       },
       {
+        "date": "2026-06-30",
+        "rate": 54.1,
+        "n": 242
+      },
+      {
+        "date": "2026-07-06",
+        "rate": 53.9,
+        "n": 244
+      },
+      {
         "date": "2026-07-07",
-        "rate": 53.8,
-        "n": 237
+        "rate": 53.7,
+        "n": 245
+      },
+      {
+        "date": "2026-07-08",
+        "rate": 53.7,
+        "n": 246
       }
     ]
   },
   "opportunities": {
-    "tracked": 259,
+    "tracked": 269,
     "evaluated7": 225,
     "avg_r7": -0.02,
     "win7": 44.9,
-    "evaluated30": 76,
-    "avg_r30": -1.36,
-    "win30": 38.2,
+    "evaluated30": 86,
+    "avg_r30": -1.77,
+    "win30": 39.5,
     "items": [
       {
         "date": "2026-06-30",
@@ -1036,17 +1041,17 @@
         "exit30": 140.27
       },
       {
-        "date": "2026-06-05",
-        "ticker": "SPRO",
-        "name": "Spero Therapeutics",
+        "date": "2026-06-09",
+        "ticker": "ORCL",
+        "name": "Oracle Corporation",
         "category": "us",
-        "r7": -14.77,
-        "r30": -26.17,
-        "thesis": "FDA 6 月 cUTI 抗生素審查，小型 biotech 二元事件具高勝率不對稱回報，市場關注度低",
-        "target": "+50% 短期",
-        "entry": 2.98,
-        "exit7": 2.54,
-        "exit30": 2.2
+        "r7": -13.07,
+        "r30": -33.15,
+        "thesis": "capex/收入比76%顯示AI押注規模僅次Mag7但估值明顯折價；5萬張AMD GPU確立非NVDA AI基礎設施路線",
+        "target": "+20%至+25%",
+        "entry": 211.82,
+        "exit7": 184.13,
+        "exit30": 141.6
       }
     ]
   }
