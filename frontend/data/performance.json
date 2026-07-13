@@ -1,37 +1,37 @@
 {
-  "updated": "2026-07-11",
+  "updated": "2026-07-13",
   "predictions": {
-    "total": 416,
-    "hit": 90,
-    "partial": 92,
-    "miss": 71,
-    "pending": 163,
-    "resolved": 253,
-    "hit_rate_weighted": 53.8,
+    "total": 432,
+    "hit": 111,
+    "partial": 104,
+    "miss": 77,
+    "pending": 140,
+    "resolved": 292,
+    "hit_rate_weighted": 55.8,
     "by_type": {
       "calendar": {
-        "hit": 80,
-        "partial": 75,
-        "miss": 58,
-        "pending": 65,
-        "resolved": 213,
-        "hit_rate": 55.2
+        "hit": 87,
+        "partial": 78,
+        "miss": 60,
+        "pending": 55,
+        "resolved": 225,
+        "hit_rate": 56
       },
       "story": {
-        "hit": 4,
-        "partial": 6,
-        "miss": 6,
-        "pending": 64,
-        "resolved": 16,
-        "hit_rate": 43.8
+        "hit": 12,
+        "partial": 12,
+        "miss": 8,
+        "pending": 56,
+        "resolved": 32,
+        "hit_rate": 56.3
       },
       "industry": {
-        "hit": 6,
-        "partial": 11,
-        "miss": 7,
-        "pending": 34,
-        "resolved": 24,
-        "hit_rate": 47.9
+        "hit": 12,
+        "partial": 14,
+        "miss": 9,
+        "pending": 29,
+        "resolved": 35,
+        "hit_rate": 54.3
       }
     },
     "series": [
@@ -142,65 +142,182 @@
       },
       {
         "date": "2026-06-24",
-        "rate": 56.8,
-        "n": 183
+        "rate": 56.5,
+        "n": 184
       },
       {
         "date": "2026-06-25",
-        "rate": 55.3,
-        "n": 206
+        "rate": 54.8,
+        "n": 208
       },
       {
         "date": "2026-06-26",
-        "rate": 54.9,
-        "n": 223
+        "rate": 54.4,
+        "n": 225
       },
       {
         "date": "2026-06-29",
-        "rate": 54.2,
-        "n": 237
+        "rate": 54.6,
+        "n": 249
       },
       {
         "date": "2026-06-30",
-        "rate": 53.9,
-        "n": 243
+        "rate": 54.8,
+        "n": 263
       },
       {
         "date": "2026-07-06",
-        "rate": 53.7,
-        "n": 245
+        "rate": 54.8,
+        "n": 272
       },
       {
         "date": "2026-07-07",
-        "rate": 53.5,
-        "n": 246
+        "rate": 55,
+        "n": 279
       },
       {
         "date": "2026-07-08",
-        "rate": 53.4,
-        "n": 247
+        "rate": 55.4,
+        "n": 285
       },
       {
         "date": "2026-07-09",
-        "rate": 53.6,
-        "n": 251
+        "rate": 55.7,
+        "n": 290
       },
       {
         "date": "2026-07-10",
-        "rate": 53.8,
-        "n": 253
+        "rate": 55.8,
+        "n": 292
       }
     ]
   },
   "opportunities": {
-    "tracked": 289,
-    "evaluated7": 225,
-    "avg_r7": -0.02,
-    "win7": 44.9,
-    "evaluated30": 105,
-    "avg_r30": -1.72,
-    "win30": 42.9,
+    "tracked": 298,
+    "evaluated7": 234,
+    "avg_r7": -0.04,
+    "win7": 45.3,
+    "evaluated30": 115,
+    "avg_r30": -1.31,
+    "win30": 44.3,
     "items": [
+      {
+        "date": "2026-07-06",
+        "ticker": "AMD",
+        "name": "Advanced Micro Devices",
+        "category": "us",
+        "r7": 7.74,
+        "r30": null,
+        "thesis": "H1 AMD跑贏NVDA卻未獲市場充分認可；Wells Fargo維持Overweight、Cantor Fitzger",
+        "target": "$180.00 (-65.2%)",
+        "entry": 517.82,
+        "exit7": 557.89,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-06",
+        "ticker": "PLTR",
+        "name": "Palantir Technologies",
+        "category": "us",
+        "r7": -1.94,
+        "r30": null,
+        "thesis": "企業AI部署加速但散戶對高估值普遍懷疑導致低估；BlackRock納入30大重要AI持倉、DA Davidson升評，機",
+        "target": "$175.00 (+35.3%)",
+        "entry": 129.3,
+        "exit7": 126.79,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-06",
+        "ticker": "BZ",
+        "name": "Kanzhun BOSS直聘",
+        "category": "us",
+        "r7": 5.85,
+        "r30": null,
+        "thesis": "中國最大招聘平台，市場因ADR偏見系統性低估；JPMorgan首次覆蓋即給Overweight，首次機構認可觸發量化跟進",
+        "target": "$15.00 (+15.4%)",
+        "entry": 13,
+        "exit7": 13.76,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-06",
+        "ticker": "RIVN",
+        "name": "Rivian Automotive",
+        "category": "us",
+        "r7": -6.17,
+        "r30": null,
+        "thesis": "上調2026年交付指引但股價仍遠低於峰值；EV需求強勁而市場過度悲觀，Q2法說前尚未充分定價產能提升與交付指引上修的正面",
+        "target": "$20.00 (+7.4%)",
+        "entry": 18.63,
+        "exit7": 17.48,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-06",
+        "ticker": "BTC",
+        "name": "Bitcoin",
+        "category": "crypto",
+        "r7": 0.4,
+        "r30": null,
+        "thesis": "F&G指數24（極度恐懼）為歷史統計買入區間；資金費率+0.0087%顯示槓桿未過熱，已突破$62,183短期阻力，下行",
+        "target": "$80,000 (+25.7%)",
+        "entry": 63547.8828,
+        "exit7": 63802.0273,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-06",
+        "ticker": "ETH",
+        "name": "Ethereum",
+        "category": "crypto",
+        "r7": 0.29,
+        "r30": null,
+        "thesis": "ETH/BTC比率處歷史低位，Layer2生態持續擴張被極度恐懼情緒掩蓋；相對BTC定價更為低估，機構配置需求未被市場情",
+        "target": "$2,800 (+56.6%)",
+        "entry": 1783.006,
+        "exit7": 1788.0996,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-06",
+        "ticker": "6446.TW",
+        "name": "藥華藥",
+        "category": "tw",
+        "r7": 2.18,
+        "r30": null,
+        "thesis": "6月營收年增94.88%創紀錄，高速成長生技在AI題材主導市場下被資金忽視；本益比相對成長率嚴重低估，存在明顯定價落差等",
+        "target": "480",
+        "entry": 1257.575,
+        "exit7": 1285,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-06",
+        "ticker": "1301.TW",
+        "name": "台灣化學纖維（台化）",
+        "category": "tw",
+        "r7": -11.76,
+        "r30": null,
+        "thesis": "散戶資金集中AI題材忽視低基期轉機股；外資連3買推動週漲25.46%創近3年新高，石化轉型題材持續發酵，本益比仍處歷史低",
+        "target": "145",
+        "entry": 62.1,
+        "exit7": 54.8,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-06",
+        "ticker": "4938.TW",
+        "name": "和碩",
+        "category": "tw",
+        "r7": -1.08,
+        "r30": null,
+        "thesis": "市場聚焦鴻海忽視同為AI伺服器組裝受惠的和碩；Factset調查明確上調目標價至83元，AI伺服器Q3旺季產能爬坡未被市",
+        "target": "83",
+        "entry": 83.6,
+        "exit7": 82.7,
+        "exit30": null
+      },
       {
         "date": "2026-06-30",
         "ticker": "MU",
@@ -862,123 +979,6 @@
         "target": "108.00 (+10%)",
         "entry": 54.06,
         "exit7": 53.84,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-23",
-        "ticker": "BTC",
-        "name": "比特幣",
-        "category": "crypto",
-        "r7": -6.91,
-        "r30": null,
-        "thesis": "恐懼指數23極度恐懼但多空比1.74顯示散戶偏多，資金費率轉正為潛在多頭訊號，66400美元有18.4億空單擠壓潛力",
-        "target": "68000 (+7%)",
-        "entry": 63952.1055,
-        "exit7": 59532.3398,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-23",
-        "ticker": "3034",
-        "name": "聯詠科技",
-        "category": "tw",
-        "r7": -10.23,
-        "r30": null,
-        "thesis": "6/22漲停收在IC設計族群領頭羊，DDIC需求回溫疊加AI PC面板升級，市場低估驅動IC龍頭的週期底部彈性",
-        "target": "600.00 (+15%)",
-        "entry": 567,
-        "exit7": 509,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-23",
-        "ticker": "ORCL",
-        "name": "甲骨文",
-        "category": "us",
-        "r7": -15.16,
-        "r30": null,
-        "thesis": "6/22年報揭露AI裁員2.1萬人，市場過度反應負面情緒，雲端AI基礎設施訂單能見度強勁，成本優化反利多",
-        "target": "200.00 (+12%)",
-        "entry": 175.07,
-        "exit7": 148.53,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-23",
-        "ticker": "6147",
-        "name": "頎邦科技",
-        "category": "tw",
-        "r7": -21.84,
-        "r30": null,
-        "thesis": "6/22封測族群強漲但頎邦漲幅落後日月光，COF封裝在OLED面板滲透率提升被低估，補漲空間明確",
-        "target": "110.00 (+16%)",
-        "entry": 277,
-        "exit7": 216.5,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-22",
-        "ticker": "AMKR",
-        "name": "Amkor Technology",
-        "category": "us",
-        "r7": -12.98,
-        "r30": null,
-        "thesis": "台積電10年先進封裝合作協議消息後股價飆漲但市場仍低估長期營收貢獻，CoWoS產能缺口擴大將持續推升訂單能見度，估值仍低",
-        "target": "72.00 (+23%)",
-        "entry": 90.46,
-        "exit7": 78.72,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-22",
-        "ticker": "2344",
-        "name": "華邦電",
-        "category": "tw",
-        "r7": -5.49,
-        "r30": null,
-        "thesis": "被動元件結構性成長帶動DRAM需求回溫，法人看好台廠評價重估行情，股價尚未反映AI邊緣運算對利基型記憶體的拉貨潮",
-        "target": "52.00 (+22%)",
-        "entry": 218.5,
-        "exit7": 206.5,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-22",
-        "ticker": "CEG",
-        "name": "Constellation Energy",
-        "category": "us",
-        "r7": -3.66,
-        "r30": null,
-        "thesis": "核電股受惠AI資料中心電力需求爆發，週漲8%後市場仍低估長期PPA合約價值，能源板塊年至今+22%領漲但核電估值折價",
-        "target": "320.00 (+17%)",
-        "entry": 274.06,
-        "exit7": 264.02,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-22",
-        "ticker": "6548",
-        "name": "長科",
-        "category": "tw",
-        "r7": -1.16,
-        "r30": null,
-        "thesis": "機器人領域Q2放量、FOPLP特殊金屬載板專案年底試產，市場尚未充分定價次世代封裝題材，外資持股偏低",
-        "target": "230.00 (+24%)",
-        "entry": 86.1,
-        "exit7": 85.1,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-22",
-        "ticker": "XOM",
-        "name": "Exxon Mobil",
-        "category": "us",
-        "r7": -0.92,
-        "r30": null,
-        "thesis": "能源板塊年至今+22%領漲但XOM落後大盤，美伊談判若破裂油價將再飆，當前估值隱含過度樂觀的和平情境",
-        "target": "135.00 (+14%)",
-        "entry": 137.81,
-        "exit7": 136.54,
         "exit30": null
       }
     ],
