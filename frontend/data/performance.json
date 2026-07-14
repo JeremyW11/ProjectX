@@ -1,21 +1,21 @@
 {
-  "updated": "2026-07-13",
+  "updated": "2026-07-14",
   "predictions": {
-    "total": 432,
-    "hit": 111,
-    "partial": 104,
-    "miss": 77,
-    "pending": 140,
-    "resolved": 292,
-    "hit_rate_weighted": 55.8,
+    "total": 452,
+    "hit": 112,
+    "partial": 112,
+    "miss": 79,
+    "pending": 149,
+    "resolved": 303,
+    "hit_rate_weighted": 55.4,
     "by_type": {
       "calendar": {
-        "hit": 87,
-        "partial": 78,
+        "hit": 88,
+        "partial": 82,
         "miss": 60,
-        "pending": 55,
-        "resolved": 225,
-        "hit_rate": 56
+        "pending": 64,
+        "resolved": 230,
+        "hit_rate": 56.1
       },
       "story": {
         "hit": 12,
@@ -27,11 +27,11 @@
       },
       "industry": {
         "hit": 12,
-        "partial": 14,
-        "miss": 9,
+        "partial": 18,
+        "miss": 11,
         "pending": 29,
-        "resolved": 35,
-        "hit_rate": 54.3
+        "resolved": 41,
+        "hit_rate": 51.2
       }
     },
     "series": [
@@ -148,59 +148,194 @@
       {
         "date": "2026-06-25",
         "rate": 54.8,
-        "n": 208
+        "n": 209
       },
       {
         "date": "2026-06-26",
         "rate": 54.4,
-        "n": 225
+        "n": 226
       },
       {
         "date": "2026-06-29",
         "rate": 54.6,
-        "n": 249
+        "n": 250
       },
       {
         "date": "2026-06-30",
-        "rate": 54.8,
-        "n": 263
+        "rate": 54.7,
+        "n": 264
       },
       {
         "date": "2026-07-06",
         "rate": 54.8,
-        "n": 272
+        "n": 273
       },
       {
         "date": "2026-07-07",
         "rate": 55,
-        "n": 279
+        "n": 280
       },
       {
         "date": "2026-07-08",
-        "rate": 55.4,
-        "n": 285
+        "rate": 55,
+        "n": 292
       },
       {
         "date": "2026-07-09",
-        "rate": 55.7,
-        "n": 290
+        "rate": 55.2,
+        "n": 297
       },
       {
         "date": "2026-07-10",
-        "rate": 55.8,
-        "n": 292
+        "rate": 55.4,
+        "n": 299
+      },
+      {
+        "date": "2026-07-13",
+        "rate": 55.4,
+        "n": 303
       }
     ]
   },
   "opportunities": {
-    "tracked": 298,
-    "evaluated7": 234,
-    "avg_r7": -0.04,
-    "win7": 45.3,
+    "tracked": 308,
+    "evaluated7": 244,
+    "avg_r7": -0.14,
+    "win7": 44.7,
     "evaluated30": 115,
     "avg_r30": -1.31,
     "win30": 44.3,
     "items": [
+      {
+        "date": "2026-07-07",
+        "ticker": "ETH",
+        "name": "以太坊 Ethereum",
+        "category": "crypto",
+        "r7": 0.46,
+        "r30": null,
+        "thesis": "加密恐懼指數27（恐懼區），ETH漲幅+1.54%略優於BTC，ETH/BTC比值觸底訊號浮現；機構以BTC ETF為入",
+        "target": "$2,500 (+38.4%)",
+        "entry": 1797.5737,
+        "exit7": 1805.7881,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-07",
+        "ticker": "AMD",
+        "name": "超微半導體 Advanced Micro Devices",
+        "category": "us",
+        "r7": 1.06,
+        "r30": null,
+        "thesis": "NVDA因Kyber NVL144延遲至2028年股價承壓，AI GPU需求外溢AMD為最直接替代受益；Goldman ",
+        "target": "$200.00 (-63.8%)",
+        "entry": 552.05,
+        "exit7": 557.89,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-07",
+        "ticker": "MU",
+        "name": "美光科技 Micron Technology",
+        "category": "us",
+        "r7": -0.55,
+        "r30": null,
+        "thesis": "股價距高點下跌22%，但AI HBM需求確認持續吃緊；SK Hynix Nasdaq IPO（7/10）定價驗證記憶體荒",
+        "target": "$180.00 (-81.7%)",
+        "entry": 984.75,
+        "exit7": 979.3,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-07",
+        "ticker": "LMT",
+        "name": "洛克希德馬丁 Lockheed Martin",
+        "category": "us",
+        "r7": -2.75,
+        "r30": null,
+        "thesis": "國防股在AI狂熱中遭市場系統性忽視，但NATO峰會、以黎衝突持續催化採購；Citi甫升評Buy目標$582，LMT同時宣",
+        "target": "$582.00 (+8.2%)",
+        "entry": 538,
+        "exit7": 523.22,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-07",
+        "ticker": "DAL",
+        "name": "達美航空 Delta Air Lines",
+        "category": "us",
+        "r7": -4.68,
+        "r30": null,
+        "thesis": "旅遊離峰旺季創紀錄（CNBC 7/6），Factset全年EPS上調至$5.84目標$105；市場資金集中AI科技股，航",
+        "target": "$105.00 (+14.5%)",
+        "entry": 91.68,
+        "exit7": 87.39,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-07",
+        "ticker": "2327",
+        "name": "國巨 Yageo",
+        "category": "tw",
+        "r7": -10.45,
+        "r30": null,
+        "thesis": "MLCC為AI伺服器最關鍵被動元件，散戶只關注晶片忽略被動元件商；五大雲端7250億美元AI資本支出直接拉動需求，經濟日",
+        "target": "1240 (+23.4%)",
+        "entry": 1005,
+        "exit7": 900,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-07",
+        "ticker": "2408",
+        "name": "南亞科 Nanya Technology",
+        "category": "tw",
+        "r7": 3.57,
+        "r30": null,
+        "thesis": "DRAM受惠記憶體荒論文與AI HBM需求，市場低估南亞科隨報價回升的獲利彈性；FactSet連續上調EPS至57.72",
+        "target": "548 (+30.3%)",
+        "entry": 420.5,
+        "exit7": 435.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-07",
+        "ticker": "6446",
+        "name": "藥華藥 PharmaEssentia",
+        "category": "tw",
+        "r7": -1.35,
+        "r30": null,
+        "thesis": "生技板塊防禦性補漲行情啟動，藥華藥BESREMi為全球罕見血液疾病唯一口服新藥，美國市場滲透率成長被低估；電子股過熱資金",
+        "target": "1266 (-12.4%)",
+        "entry": 1302.6493,
+        "exit7": 1285,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-07",
+        "ticker": "8210",
+        "name": "勤誠 Chenbro Micom",
+        "category": "tw",
+        "r7": -8.91,
+        "r30": null,
+        "thesis": "AI伺服器機箱直接受益五大雲端7250億美元AI資本支出，但市場聚焦TSMC與NVDA完全忽略機箱廠；FactSet大幅",
+        "target": "1790 (+38.8%)",
+        "entry": 1290,
+        "exit7": 1175,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-07",
+        "ticker": "XLF",
+        "name": "金融板塊 Financial Select Sector ETF",
+        "category": "sector",
+        "r7": -0.77,
+        "r30": null,
+        "thesis": "殖利率曲線走陡（2-10年利差0.35%擴張）直接受益銀行淨利差，Q2財報季7/14起密集公布；散戶全面聚焦AI科技股低",
+        "target": "+12%",
+        "entry": 56.14,
+        "exit7": 55.71,
+        "exit30": null
+      },
       {
         "date": "2026-07-06",
         "ticker": "AMD",
@@ -849,136 +984,6 @@
         "target": "$92 (+18%)",
         "entry": 211.5,
         "exit7": 203,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-24",
-        "ticker": "2317",
-        "name": "鴻海精密",
-        "category": "tw",
-        "r7": -5.01,
-        "r30": null,
-        "thesis": "6/23跌3.35%隨大盤修正但AI伺服器與量子運算題材未變，川普量子運算行政命令直接點名受惠，股價已反映短期利空",
-        "target": "$290 (+12%)",
-        "entry": 259.5,
-        "exit7": 246.5,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-24",
-        "ticker": "XLE",
-        "name": "Energy Select Sector SPDR",
-        "category": "sector",
-        "r7": -1.62,
-        "r30": null,
-        "thesis": "能源板塊YTD+22%領先全板塊但仍被低估，伊朗談判反覆維持地緣溢價，資金從科技輪動至實體經濟趨勢持續",
-        "target": "$108 (+10%)",
-        "entry": 54.46,
-        "exit7": 53.58,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-24",
-        "ticker": "BTC",
-        "name": "Bitcoin",
-        "category": "crypto",
-        "r7": -4.04,
-        "r30": null,
-        "thesis": "恐懼貪婪指數17極度恐懼但$62K支撐守住，6/26選擇權到期後賣壓釋放，多空比2.07顯示多方仍有信心，超跌反彈機率高",
-        "target": "$68,000 (+8%)",
-        "entry": 62668.0195,
-        "exit7": 60138.3789,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-24",
-        "ticker": "2603",
-        "name": "長榮海運",
-        "category": "tw",
-        "r7": -2.65,
-        "r30": null,
-        "thesis": "荷姆茲海峽航運受阻推升運價，市場聚焦科技股忽視航運受惠邏輯，6/23鉅亨網報導高運價吸引油輪重返戰區確認需求",
-        "target": "$220 (+13%)",
-        "entry": 189,
-        "exit7": 184,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-23",
-        "ticker": "SMCI",
-        "name": "Super Micro Computer",
-        "category": "us",
-        "r7": -13.62,
-        "r30": null,
-        "thesis": "6/22與NVDA合作Vera Rubin液冷AI機架消息後單日飆漲15%，市場低估其作為AI基礎設施二線受惠者的彈性，",
-        "target": "110.00 (+23%)",
-        "entry": 35.46,
-        "exit7": 30.63,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-23",
-        "ticker": "2408",
-        "name": "南亞科技",
-        "category": "tw",
-        "r7": -11.09,
-        "r30": null,
-        "thesis": "6/22漲停創新天價，Anthropic長約訂單利多外溢至HBM供應鏈，市場低估台系DRAM廠在AI記憶體升級週期的補漲",
-        "target": "580.00 (+16%)",
-        "entry": 505,
-        "exit7": 449,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-23",
-        "ticker": "UMC",
-        "name": "聯華電子ADR",
-        "category": "us",
-        "r7": -6.98,
-        "r30": null,
-        "thesis": "6/22 ADR飆漲14%，台積電收斂28奈米產能轉單效應被低估，成熟製程代工需求回溫但估值僅0.9倍PB",
-        "target": "22.00 (+19%)",
-        "entry": 27.5,
-        "exit7": 25.58,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-23",
-        "ticker": "2301",
-        "name": "光寶科技",
-        "category": "tw",
-        "r7": -12.96,
-        "r30": null,
-        "thesis": "6/22漲停，AI伺服器電源供應鏈補漲啟動，外資投信籌碼大舉回流，市場低估老牌電源廠轉型AI的獲利彈性",
-        "target": "265.00 (+14%)",
-        "entry": 231.5,
-        "exit7": 201.5,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-23",
-        "ticker": "QCOM",
-        "name": "高通",
-        "category": "us",
-        "r7": -14.65,
-        "r30": null,
-        "thesis": "6/22傳以40億美元洽購AI新創Modular劍指NVDA，市場低估其在端側AI晶片的佈局價值，估值相對AI同業偏低",
-        "target": "195.00 (+16%)",
-        "entry": 221.9,
-        "exit7": 189.39,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-23",
-        "ticker": "XLE",
-        "name": "能源精選板塊ETF",
-        "category": "sector",
-        "r7": -0.41,
-        "r30": null,
-        "thesis": "YTD+22%為最強板塊但資金輪動剛啟動，美伊談判雖緩和但6/22川普暗示不保證伊朗遵守協議，油價下檔有撐",
-        "target": "108.00 (+10%)",
-        "entry": 54.06,
-        "exit7": 53.84,
         "exit30": null
       }
     ],
