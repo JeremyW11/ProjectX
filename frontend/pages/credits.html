@@ -439,7 +439,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 <script>
 var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
 var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
-var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+var _supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{autoRefreshToken:false,persistSession:true}});
 
 async function initCreditsPage(){
   var session=await _supabase.auth.getSession();

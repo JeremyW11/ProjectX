@@ -923,7 +923,7 @@ loadData();
 (function(){
   var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
   var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
-  var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{autoRefreshToken:false,persistSession:true}});
   sb.auth.onAuthStateChange(function(event,session){
     var btn=document.querySelector('.btn-login');
     if(!btn) return;
