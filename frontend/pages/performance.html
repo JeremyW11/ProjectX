@@ -634,9 +634,16 @@ async function loadPerformance(){
       +'</div>';
   };
 
-  /* ── 近期已驗證（上方；只顯示有 prediction 欄位的） ── */
-  var recent=ph.filter(function(p){return ['hit','partial','miss'].indexOf(p.accuracy)>=0 && p.prediction;})
-    .sort(function(a,b){return (b.verified_at||b.date||'').localeCompare(a.verified_at||a.date||'');}).slice(0,20);
+  /* ── 近期已驗證（上方；只顯示有 prediction 欄位的；各類型各取最新，避免日曆事件洗掉全球追蹤/產業新聞） ── */
+  var verifiedAll=ph.filter(function(p){return ['hit','partial','miss'].indexOf(p.accuracy)>=0 && p.prediction;});
+  var recent=[];
+  ['calendar','story','industry'].forEach(function(t){
+    var sub=verifiedAll.filter(function(p){return (p.type||'calendar')===t;})
+      .sort(function(a,b){return (b.verified_at||b.date||'').localeCompare(a.verified_at||a.date||'');})
+      .slice(0,10);
+    recent=recent.concat(sub);
+  });
+  recent.sort(function(a,b){return (b.verified_at||b.date||'').localeCompare(a.verified_at||a.date||'');});
   if(recent.length){
     html+='<div class="card rv"><div class="card-head"><h2>近期已驗證預判</h2><div class="card-kpis"><span>LATEST <b>'+recent.length+'</b></span></div></div>'
       +'<div class="desc">預判內容 → 實際市場反應</div>'
@@ -690,7 +697,7 @@ async function loadPerformance(){
       if(e.target.querySelector('#gauge-arc')&&hr!=null) runGauge(hr);
       if(e.target.querySelector('#trend')) drawTrend(P.series||[]);
     });
-  },{threshold:.15});
+  },{threshold:0});
   viewEl.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
 
   /* 分類篩選 */

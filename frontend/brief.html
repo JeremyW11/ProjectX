@@ -1016,6 +1016,10 @@ img { display: block; max-width: 100%; }
         <div class="side-card-title">重要人物動態<span class="section-title-en" style="font-size:var(--fs-1)">KEY PEOPLE</span></div>
         <div id="persons-list"></div>
       </div>
+      <div class="side-card" id="columns-card" style="display:none">
+        <div class="side-card-title">OrionAI 名家觀點<a href="/pages/columns.html" class="section-link" style="font-size:var(--fs-2)">全部 →</a></div>
+        <div id="columns-list"></div>
+      </div>
     </div>
   </div>
 
@@ -1190,6 +1194,38 @@ function renderPersons(persons) {
   }).join('');
 }
 
+var _colState = { feed: null, date: null, isPro: false };
+function esc_(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+async function loadColumns(){
+  try{
+    const r = await fetch('/data/columns/index.json?v='+Math.floor(Date.now()/300000));
+    const c = await r.json();
+    _colState.feed = c.feed||[];
+  }catch(e){ _colState.feed = []; }
+  renderColumnsCard();
+}
+function renderColumnsCard(){
+  var card=document.getElementById('columns-card');
+  var list=document.getElementById('columns-list');
+  if(!card||!list) return;
+  if(!_colState.feed || !_colState.date || !_colState.isPro){ card.style.display='none'; return; }
+  var todays=_colState.feed.filter(function(f){return f.date===_colState.date;});
+  if(!todays.length){ card.style.display='none'; return; }
+  list.innerHTML = todays.map(function(f){
+    var dn=f.display_name||'';
+    var zh=dn.replace(/（[^）]+）/,'').trim();
+    var m=dn.match(/（([^）]+)）/);
+    var mono=(m?m[1]:zh).split(/\s+/).map(function(w){return w[0]||'';}).join('').slice(0,2).toUpperCase();
+    var badge=f.type==='special'?'名人專刊':'三日分析';
+    return '<div class="person-item"><div class="person-avatar" style="overflow:hidden;background:linear-gradient(135deg,#1e40af,#0ea5e9);">'
+      +'<img src="/assets/personas/'+esc_(f.persona)+'.png" alt="'+esc_(zh)+'" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display=\'none\';this.parentNode.textContent=\''+esc_(mono)+'\';"></div>'
+      +'<div class="person-info"><div class="person-name">'+esc_(zh)+' <span style="font-size:var(--fs-1);font-weight:600;color:#2563eb;">'+badge+'</span></div>'
+      +'<div class="person-note">「'+esc_(f.title||'')+'」</div>'
+      +'</div></div>';
+  }).join('');
+  card.style.display='block';
+}
+
 var _synthText='', _synthDate='', _synthPro=false;
 var SYNTH_FREE_CHARS=130;
 function renderSynthesis(text, dateStr, isPro){
@@ -1279,6 +1315,8 @@ async function loadData() {
       if (personsHtml) { personsEl.innerHTML = personsHtml; personsCard.style.display = 'block'; }
       else personsCard.style.display = 'none';
     }
+    _colState.date = data.date;
+    renderColumnsCard();
   } catch(e) { console.error('loadData error:', e); if(window.PX_showDataError)window.PX_showDataError(); }
 }
 
@@ -1288,6 +1326,7 @@ document.getElementById('brief-list').addEventListener('click', function(e){
 });
 
 loadData();
+loadColumns();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1296,9 +1335,12 @@ loadData();
 (function(){
   var SUPABASE_URL='https://eezhmeccakaeiprviqra.supabase.co';
   var SUPABASE_KEY='sb_publishable_qb__g5BMRYLiV2Bin6b1Bw_LwmVARqM';
-  var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{autoRefreshToken:false,persistSession:true}});
   var ADMIN_EMAIL='jermy831102@gmail.com';
-  function applyPro(isPro){ if(typeof renderSynthesis==='function') renderSynthesis(undefined,undefined,!!isPro); }
+  function applyPro(isPro){
+    if(typeof renderSynthesis==='function') renderSynthesis(undefined,undefined,!!isPro);
+    if(typeof _colState!=='undefined'){ _colState.isPro=!!isPro; if(typeof renderColumnsCard==='function') renderColumnsCard(); }
+  }
   async function resolvePro(user){
     if(!user){ applyPro(false); return; }
     if((user.email||'').toLowerCase()===ADMIN_EMAIL){ applyPro(true); return; }
