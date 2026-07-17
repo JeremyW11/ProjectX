@@ -760,6 +760,18 @@ img { display: block; max-width: 100%; }
   justify-content: space-between;
 }
 
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow .15s, transform .15s, border-color .15s;
+}
+.card-link:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,.09);
+  transform: translateY(-1px);
+  border-color: var(--border-medium, var(--border-light));
+}
+
 /* Calendar events */
 .cal-item {
   display: flex;
@@ -1001,21 +1013,21 @@ img { display: block; max-width: 100%; }
     </div>
 
     <div class="sidebar">
-      <div class="side-card" id="columns-card" style="display:none">
-        <div class="side-card-title">OrionAI 名家觀點<a href="/pages/columns.html" class="section-link" style="font-size:var(--fs-2)">全部 →</a></div>
+      <a class="side-card card-link" id="columns-card" href="/pages/columns.html" style="display:none">
+        <div class="side-card-title">OrionAI 名家觀點<span class="section-link" style="font-size:var(--fs-2)">全部 →</span></div>
         <div id="columns-list"></div>
-      </div>
-      <div class="risk-card">
+      </a>
+      <a class="risk-card card-link" href="/pages/predictions.html">
         <div class="risk-card-header">
           <span class="risk-card-title">風險矩陣</span>
           <span class="risk-label risk-moderate" id="risk-overall">中等風險</span>
         </div>
         <div class="risk-body" id="risk-body"></div>
-      </div>
-      <div class="side-card">
-        <div class="side-card-title">市場日曆<a href="/pages/calendar.html" class="section-link" style="font-size:var(--fs-2)">全部 →</a></div>
+      </a>
+      <a class="side-card card-link" href="/pages/calendar.html">
+        <div class="side-card-title">市場日曆<span class="section-link" style="font-size:var(--fs-2)">全部 →</span></div>
         <div id="cal-list"></div>
-      </div>
+      </a>
       <div class="side-card" id="persons-card" style="display:none">
         <div class="side-card-title">重要人物動態<span class="section-title-en" style="font-size:var(--fs-1)">KEY PEOPLE</span></div>
         <div id="persons-list"></div>
