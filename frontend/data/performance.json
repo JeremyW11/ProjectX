@@ -1,37 +1,37 @@
 {
-  "updated": "2026-07-18",
+  "updated": "2026-07-21",
   "predictions": {
-    "total": 575,
-    "hit": 150,
-    "partial": 133,
-    "miss": 110,
-    "pending": 182,
-    "resolved": 393,
-    "hit_rate_weighted": 55.1,
+    "total": 611,
+    "hit": 164,
+    "partial": 150,
+    "miss": 119,
+    "pending": 178,
+    "resolved": 433,
+    "hit_rate_weighted": 55.2,
     "by_type": {
       "calendar": {
         "hit": 119,
         "partial": 98,
         "miss": 86,
-        "pending": 66,
+        "pending": 90,
         "resolved": 303,
         "hit_rate": 55.4
       },
       "story": {
-        "hit": 12,
-        "partial": 12,
-        "miss": 8,
-        "pending": 81,
-        "resolved": 32,
-        "hit_rate": 56.3
+        "hit": 20,
+        "partial": 21,
+        "miss": 15,
+        "pending": 63,
+        "resolved": 56,
+        "hit_rate": 54.5
       },
       "industry": {
-        "hit": 19,
-        "partial": 23,
-        "miss": 16,
-        "pending": 35,
-        "resolved": 58,
-        "hit_rate": 52.6
+        "hit": 25,
+        "partial": 31,
+        "miss": 18,
+        "pending": 25,
+        "resolved": 74,
+        "hit_rate": 54.7
       }
     },
     "series": [
@@ -167,70 +167,304 @@
       },
       {
         "date": "2026-07-06",
-        "rate": 54.4,
-        "n": 282
+        "rate": 54.1,
+        "n": 290
       },
       {
         "date": "2026-07-07",
-        "rate": 54.7,
-        "n": 289
+        "rate": 54.6,
+        "n": 305
       },
       {
         "date": "2026-07-08",
-        "rate": 54.8,
-        "n": 304
-      },
-      {
-        "date": "2026-07-09",
-        "rate": 55,
-        "n": 317
-      },
-      {
-        "date": "2026-07-10",
-        "rate": 55.2,
+        "rate": 54.6,
         "n": 328
       },
       {
+        "date": "2026-07-09",
+        "rate": 54.8,
+        "n": 341
+      },
+      {
+        "date": "2026-07-10",
+        "rate": 55,
+        "n": 352
+      },
+      {
         "date": "2026-07-11",
-        "rate": 55.4,
-        "n": 336
+        "rate": 55.1,
+        "n": 360
       },
       {
         "date": "2026-07-13",
-        "rate": 55.2,
-        "n": 348
+        "rate": 55,
+        "n": 378
       },
       {
         "date": "2026-07-14",
         "rate": 55.2,
-        "n": 367
+        "n": 403
       },
       {
         "date": "2026-07-15",
-        "rate": 55.1,
-        "n": 381
+        "rate": 55.2,
+        "n": 421
       },
       {
         "date": "2026-07-16",
-        "rate": 55.2,
-        "n": 386
+        "rate": 55.3,
+        "n": 426
       },
       {
         "date": "2026-07-17",
-        "rate": 55.1,
-        "n": 393
+        "rate": 55.2,
+        "n": 433
       }
     ]
   },
   "opportunities": {
-    "tracked": 345,
-    "evaluated7": 281,
-    "avg_r7": -0.25,
-    "win7": 45.2,
-    "evaluated30": 152,
-    "avg_r30": -1.57,
-    "win30": 44.7,
+    "tracked": 351,
+    "evaluated7": 299,
+    "avg_r7": -0.43,
+    "win7": 44.8,
+    "evaluated30": 162,
+    "avg_r30": -2.27,
+    "win30": 44.4,
     "items": [
+      {
+        "date": "2026-07-14",
+        "ticker": "BTC",
+        "name": "比特幣",
+        "category": "crypto",
+        "r7": 3.94,
+        "r30": null,
+        "thesis": "Crypto F&G 22極度恐懼為歷史中期底部訊號；空頭清算佔比65.7%（$104.98M）顯示做空能量已充分釋放；",
+        "target": "$80,000 (+28.4%)",
+        "entry": 62239.1211,
+        "exit7": 64690.8047,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-14",
+        "ticker": "MU",
+        "name": "美光科技",
+        "category": "us",
+        "r7": -9.4,
+        "r30": null,
+        "thesis": "JPMorgan 7/13明確指半導體拋售係擁擠部位調整非AI週期反轉；Micron宣布$2,500億美國新廠鎖定AI需",
+        "target": "$150.00 (-84.0%)",
+        "entry": 937,
+        "exit7": 848.95,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-14",
+        "ticker": "DDOG",
+        "name": "Datadog",
+        "category": "us",
+        "r7": -0.6,
+        "r30": null,
+        "thesis": "Morgan Stanley 7月中升評至Overweight目標$180，認為2026年成長趨勢明確改善；AI可觀測性",
+        "target": "$180.00 (-30.8%)",
+        "entry": 260.24,
+        "exit7": 258.69,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-14",
+        "ticker": "GS",
+        "name": "高盛集團",
+        "category": "us",
+        "r7": 1.85,
+        "r30": null,
+        "thesis": "銀行板塊近一週漲7.76%動能未熄；Q2財報季已報18家EPS年增143.3%、88.9%優於預期；GS受惠AI並購潮顧",
+        "target": "$620.00 (-40.7%)",
+        "entry": 1045.91,
+        "exit7": 1065.22,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-14",
+        "ticker": "NFLX",
+        "name": "Netflix",
+        "category": "us",
+        "r7": -6.61,
+        "r30": null,
+        "thesis": "7/16法說與台積電同日公布，市場焦點完全被TSMC吸走，NFLX可能被系統性低估；廣告訂閱定價權強，密碼分享管控後訂戶",
+        "target": "$1200.00 (+1525.4%)",
+        "entry": 73.83,
+        "exit7": 68.95,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-14",
+        "ticker": "2408",
+        "name": "南亞科技",
+        "category": "tw",
+        "r7": -6.5,
+        "r30": null,
+        "thesis": "AI超大業者Capex年增70%至$600B持續驅動DRAM需求超週期；Micron $2,500億美廠擴張提升DRAM",
+        "target": "120 (-71.6%)",
+        "entry": 423,
+        "exit7": 395.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-14",
+        "ticker": "2603",
+        "name": "長榮海運",
+        "category": "tw",
+        "r7": 1.54,
+        "r30": null,
+        "thesis": "Section 122關稅7/24到期引爆提前拉貨潮，6月美國進口量年增14.3%至225萬TEU創高；歐盟ICS2 R",
+        "target": "280 (+43.6%)",
+        "entry": 195,
+        "exit7": 198,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-14",
+        "ticker": "6488",
+        "name": "環球晶圓",
+        "category": "tw",
+        "r7": -16.5,
+        "r30": null,
+        "thesis": "台積電Capex上修至$52-56B實際落上緣，先進製程矽晶圓供需吃緊延伸至2027-28；環球晶為全球第三大矽晶圓廠，",
+        "target": "900",
+        "entry": 1485,
+        "exit7": 1240,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-14",
+        "ticker": "SOL",
+        "name": "Solana",
+        "category": "crypto",
+        "r7": 2,
+        "r30": null,
+        "thesis": "F&G 22極度恐懼期間SOL Beta最高，歷史修復彈幅往往3-5倍BTC；Solana DeFi TVL仍居前三基本",
+        "target": "$120.00 (+60.0%)",
+        "entry": 74.8614,
+        "exit7": 76.3553,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-13",
+        "ticker": "BTC",
+        "name": "比特幣 Bitcoin",
+        "category": "crypto",
+        "r7": 1.63,
+        "r30": null,
+        "thesis": "加密恐懼指數僅28（恐懼區），但BTC現貨ETF本週淨流入$197.4M逆轉多週淨流出，多空比1.36多方略佔優，多單已",
+        "target": "$80,000 (+24.6%)",
+        "entry": 63758.2188,
+        "exit7": 64796.6016,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-13",
+        "ticker": "ETH",
+        "name": "以太坊 Ethereum",
+        "category": "crypto",
+        "r7": 3.08,
+        "r30": null,
+        "thesis": "ETH今日+2.53%遠跑贏BTC（+0.56%），恐懼區出現相對強勢分化，顯示機構在恐慌中優先佈局ETH，加密情緒28",
+        "target": "$2,800 (+52.8%)",
+        "entry": 1805.7881,
+        "exit7": 1861.3921,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-13",
+        "ticker": "ASML",
+        "name": "ASML Holding N.V.",
+        "category": "us",
+        "r7": -2.77,
+        "r30": null,
+        "thesis": "全球唯一EUV供應商，台積電Capex上調至$52-56B偏上緣且CoWoS年增逾60%直接拉動EUV訂單，市場聚焦NV",
+        "target": "$1050.00 (-41.6%)",
+        "entry": 1797.3199,
+        "exit7": 1747.58,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-13",
+        "ticker": "NFLX",
+        "name": "Netflix Inc.",
+        "category": "us",
+        "r7": -6.02,
+        "r30": null,
+        "thesis": "市場焦點集中在銀行財報季與台積電法說，NFLX廣告訂閱ARPU擴張及Funflation消費轉向串流尚未充分定價，7/1",
+        "target": "$1350.00 (+1740.0%)",
+        "entry": 73.37,
+        "exit7": 68.95,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-13",
+        "ticker": "GE",
+        "name": "GE Aerospace",
+        "category": "us",
+        "r7": -2.91,
+        "r30": null,
+        "thesis": "GE Aerospace兼具國防（美伊衝突升溫政府採購加速）與商業航空（Q4貨運旺季）雙主題，7/16法說EPS共識$1",
+        "target": "$295.00 (-17.9%)",
+        "entry": 359.27,
+        "exit7": 348.83,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-13",
+        "ticker": "AVGO",
+        "name": "Broadcom Inc.",
+        "category": "us",
+        "r7": -7.29,
+        "r30": null,
+        "thesis": "Apple宣布$300億Broadcom合作擴大AI與美國供應鏈，META自研AI雲端基礎設施同步拉升Broadcom網",
+        "target": "$310.00 (-22.5%)",
+        "entry": 399.97,
+        "exit7": 370.83,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-13",
+        "ticker": "OXY",
+        "name": "Occidental Petroleum",
+        "category": "us",
+        "r7": 3.72,
+        "r30": null,
+        "thesis": "美伊空襲（7/12）+霍爾木茲宣告封鎖，OXY油價敏感度為主要美國石油商最高，路透已報導其Q2實現油價因伊朗戰爭大幅跳升",
+        "target": "$82.00 (+55.0%)",
+        "entry": 52.89,
+        "exit7": 54.86,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-13",
+        "ticker": "2344",
+        "name": "華邦電子 Winbond Electronics",
+        "category": "tw",
+        "r7": -12.18,
+        "r30": null,
+        "thesis": "台積電成熟製程調漲5-10%直接墊高DRAM/Flash成本底並帶動ASP上調，2026台股七大漲價題材之一，外資連續賣",
+        "target": "65 (-63.2%)",
+        "entry": 176.5,
+        "exit7": 155,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-13",
+        "ticker": "6488",
+        "name": "環球晶圓 GlobalWafers",
+        "category": "tw",
+        "r7": -8.15,
+        "r30": null,
+        "thesis": "矽晶圓供給偏緊（近日攻漲停），台積電Capex上調至$52-56B+2nm量產拉升矽晶圓消耗，七大漲價主線中估值最低、法",
+        "target": "255",
+        "entry": 1350,
+        "exit7": 1240,
+        "exit30": null
+      },
       {
         "date": "2026-07-11",
         "ticker": "MU",
@@ -776,240 +1010,6 @@
         "entry": 91.68,
         "exit7": 87.39,
         "exit30": null
-      },
-      {
-        "date": "2026-07-07",
-        "ticker": "2327",
-        "name": "國巨 Yageo",
-        "category": "tw",
-        "r7": -10.45,
-        "r30": null,
-        "thesis": "MLCC為AI伺服器最關鍵被動元件，散戶只關注晶片忽略被動元件商；五大雲端7250億美元AI資本支出直接拉動需求，經濟日",
-        "target": "1240 (+23.4%)",
-        "entry": 1005,
-        "exit7": 900,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-07",
-        "ticker": "2408",
-        "name": "南亞科 Nanya Technology",
-        "category": "tw",
-        "r7": 3.57,
-        "r30": null,
-        "thesis": "DRAM受惠記憶體荒論文與AI HBM需求，市場低估南亞科隨報價回升的獲利彈性；FactSet連續上調EPS至57.72",
-        "target": "548 (+30.3%)",
-        "entry": 420.5,
-        "exit7": 435.5,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-07",
-        "ticker": "6446",
-        "name": "藥華藥 PharmaEssentia",
-        "category": "tw",
-        "r7": -1.35,
-        "r30": null,
-        "thesis": "生技板塊防禦性補漲行情啟動，藥華藥BESREMi為全球罕見血液疾病唯一口服新藥，美國市場滲透率成長被低估；電子股過熱資金",
-        "target": "1266 (-12.4%)",
-        "entry": 1302.6493,
-        "exit7": 1285,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-07",
-        "ticker": "8210",
-        "name": "勤誠 Chenbro Micom",
-        "category": "tw",
-        "r7": -8.91,
-        "r30": null,
-        "thesis": "AI伺服器機箱直接受益五大雲端7250億美元AI資本支出，但市場聚焦TSMC與NVDA完全忽略機箱廠；FactSet大幅",
-        "target": "1790 (+38.8%)",
-        "entry": 1290,
-        "exit7": 1175,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-07",
-        "ticker": "XLF",
-        "name": "金融板塊 Financial Select Sector ETF",
-        "category": "sector",
-        "r7": -0.77,
-        "r30": null,
-        "thesis": "殖利率曲線走陡（2-10年利差0.35%擴張）直接受益銀行淨利差，Q2財報季7/14起密集公布；散戶全面聚焦AI科技股低",
-        "target": "+12%",
-        "entry": 56.14,
-        "exit7": 55.71,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-06",
-        "ticker": "AMD",
-        "name": "Advanced Micro Devices",
-        "category": "us",
-        "r7": 7.74,
-        "r30": null,
-        "thesis": "H1 AMD跑贏NVDA卻未獲市場充分認可；Wells Fargo維持Overweight、Cantor Fitzger",
-        "target": "$180.00 (-65.2%)",
-        "entry": 517.82,
-        "exit7": 557.89,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-06",
-        "ticker": "PLTR",
-        "name": "Palantir Technologies",
-        "category": "us",
-        "r7": -1.94,
-        "r30": null,
-        "thesis": "企業AI部署加速但散戶對高估值普遍懷疑導致低估；BlackRock納入30大重要AI持倉、DA Davidson升評，機",
-        "target": "$175.00 (+35.3%)",
-        "entry": 129.3,
-        "exit7": 126.79,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-06",
-        "ticker": "BZ",
-        "name": "Kanzhun BOSS直聘",
-        "category": "us",
-        "r7": 5.85,
-        "r30": null,
-        "thesis": "中國最大招聘平台，市場因ADR偏見系統性低估；JPMorgan首次覆蓋即給Overweight，首次機構認可觸發量化跟進",
-        "target": "$15.00 (+15.4%)",
-        "entry": 13,
-        "exit7": 13.76,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-06",
-        "ticker": "RIVN",
-        "name": "Rivian Automotive",
-        "category": "us",
-        "r7": -6.17,
-        "r30": null,
-        "thesis": "上調2026年交付指引但股價仍遠低於峰值；EV需求強勁而市場過度悲觀，Q2法說前尚未充分定價產能提升與交付指引上修的正面",
-        "target": "$20.00 (+7.4%)",
-        "entry": 18.63,
-        "exit7": 17.48,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-06",
-        "ticker": "BTC",
-        "name": "Bitcoin",
-        "category": "crypto",
-        "r7": 0.4,
-        "r30": null,
-        "thesis": "F&G指數24（極度恐懼）為歷史統計買入區間；資金費率+0.0087%顯示槓桿未過熱，已突破$62,183短期阻力，下行",
-        "target": "$80,000 (+25.7%)",
-        "entry": 63547.8828,
-        "exit7": 63802.0273,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-06",
-        "ticker": "ETH",
-        "name": "Ethereum",
-        "category": "crypto",
-        "r7": 0.29,
-        "r30": null,
-        "thesis": "ETH/BTC比率處歷史低位，Layer2生態持續擴張被極度恐懼情緒掩蓋；相對BTC定價更為低估，機構配置需求未被市場情",
-        "target": "$2,800 (+56.6%)",
-        "entry": 1783.006,
-        "exit7": 1788.0996,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-06",
-        "ticker": "6446.TW",
-        "name": "藥華藥",
-        "category": "tw",
-        "r7": 2.18,
-        "r30": null,
-        "thesis": "6月營收年增94.88%創紀錄，高速成長生技在AI題材主導市場下被資金忽視；本益比相對成長率嚴重低估，存在明顯定價落差等",
-        "target": "480",
-        "entry": 1257.575,
-        "exit7": 1285,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-06",
-        "ticker": "1301.TW",
-        "name": "台灣化學纖維（台化）",
-        "category": "tw",
-        "r7": -11.76,
-        "r30": null,
-        "thesis": "散戶資金集中AI題材忽視低基期轉機股；外資連3買推動週漲25.46%創近3年新高，石化轉型題材持續發酵，本益比仍處歷史低",
-        "target": "145",
-        "entry": 62.1,
-        "exit7": 54.8,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-06",
-        "ticker": "4938.TW",
-        "name": "和碩",
-        "category": "tw",
-        "r7": -1.08,
-        "r30": null,
-        "thesis": "市場聚焦鴻海忽視同為AI伺服器組裝受惠的和碩；Factset調查明確上調目標價至83元，AI伺服器Q3旺季產能爬坡未被市",
-        "target": "83",
-        "entry": 83.6,
-        "exit7": 82.7,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-30",
-        "ticker": "MU",
-        "name": "Micron Technology",
-        "category": "us",
-        "r7": -14.82,
-        "r30": null,
-        "thesis": "Q3財報創紀錄後股價回吐漲幅，市場忽視HBM4超級週期與AI DRAM佔全球70%高端產能的結構性利多，估值相對Sams",
-        "target": "$155.00 (-86.5%)",
-        "entry": 1145.28,
-        "exit7": 975.56,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-30",
-        "ticker": "IRDM",
-        "name": "Iridium Communications",
-        "category": "us",
-        "r7": -1.54,
-        "r30": null,
-        "thesis": "被Rocket Lab以80億美元收購，溢價顯著但股價尚未完全反映交易價值，套利空間存在且太空整合趨勢明確",
-        "target": "$54.00 (-1.1%)",
-        "entry": 54.59,
-        "exit7": 53.75,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-30",
-        "ticker": "2301",
-        "name": "光寶科",
-        "category": "tw",
-        "r7": 3.55,
-        "r30": null,
-        "thesis": "AI伺服器電源供應鏈與台達電同族群，6/26錯殺後6/29法人籌碼大幅回流，市場低估其毛利率改善潛力",
-        "target": "185 (-12.5%)",
-        "entry": 211.5,
-        "exit7": 219,
-        "exit30": null
-      },
-      {
-        "date": "2026-06-30",
-        "ticker": "AVAV",
-        "name": "AeroVironment",
-        "category": "us",
-        "r7": 37.33,
-        "r30": null,
-        "thesis": "無人機防務需求爆發，訂單積壓達12億美元創紀錄，財報超預期後股價單日+19%仍被低估",
-        "target": "$280.00 (+101.4%)",
-        "entry": 139,
-        "exit7": 190.89,
-        "exit30": null
       }
     ],
     "best": [
@@ -1081,17 +1081,17 @@
         "exit30": 140.27
       },
       {
-        "date": "2026-06-09",
-        "ticker": "ORCL",
-        "name": "Oracle Corporation",
-        "category": "us",
-        "r7": -13.07,
-        "r30": -33.15,
-        "thesis": "capex/收入比76%顯示AI押注規模僅次Mag7但估值明顯折價；5萬張AMD GPU確立非NVDA AI基礎設施路線",
-        "target": "+20%至+25%",
-        "entry": 211.82,
-        "exit7": 184.13,
-        "exit30": 141.6
+        "date": "2026-06-19",
+        "ticker": "2327",
+        "name": "國巨",
+        "category": "tw",
+        "r7": -2.78,
+        "r30": -35.28,
+        "thesis": "6/9費半強彈被動元件領漲但近期回落修正，AI伺服器MLCC用量倍增趨勢未變；股價已回調至相對低點",
+        "target": "720",
+        "entry": 1080,
+        "exit7": 1050,
+        "exit30": 699
       }
     ]
   }
