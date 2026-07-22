@@ -1,37 +1,37 @@
 {
-  "updated": "2026-07-21",
+  "updated": "2026-07-22",
   "predictions": {
-    "total": 611,
-    "hit": 164,
-    "partial": 150,
-    "miss": 119,
-    "pending": 178,
-    "resolved": 433,
-    "hit_rate_weighted": 55.2,
+    "total": 656,
+    "hit": 175,
+    "partial": 167,
+    "miss": 128,
+    "pending": 186,
+    "resolved": 470,
+    "hit_rate_weighted": 55,
     "by_type": {
       "calendar": {
-        "hit": 119,
-        "partial": 98,
-        "miss": 86,
-        "pending": 90,
-        "resolved": 303,
-        "hit_rate": 55.4
+        "hit": 123,
+        "partial": 110,
+        "miss": 91,
+        "pending": 100,
+        "resolved": 324,
+        "hit_rate": 54.9
       },
       "story": {
-        "hit": 20,
-        "partial": 21,
-        "miss": 15,
+        "hit": 21,
+        "partial": 25,
+        "miss": 18,
         "pending": 63,
-        "resolved": 56,
-        "hit_rate": 54.5
+        "resolved": 64,
+        "hit_rate": 52.3
       },
       "industry": {
-        "hit": 25,
-        "partial": 31,
-        "miss": 18,
-        "pending": 25,
-        "resolved": 74,
-        "hit_rate": 54.7
+        "hit": 31,
+        "partial": 32,
+        "miss": 19,
+        "pending": 23,
+        "resolved": 82,
+        "hit_rate": 57.3
       }
     },
     "series": [
@@ -132,105 +132,219 @@
       },
       {
         "date": "2026-06-22",
-        "rate": 57.5,
-        "n": 174
+        "rate": 57.1,
+        "n": 177
       },
       {
         "date": "2026-06-23",
-        "rate": 57.1,
-        "n": 175
+        "rate": 56.7,
+        "n": 178
       },
       {
         "date": "2026-06-24",
-        "rate": 56.5,
-        "n": 186
+        "rate": 56.1,
+        "n": 189
       },
       {
         "date": "2026-06-25",
-        "rate": 54.5,
-        "n": 212
+        "rate": 54.2,
+        "n": 215
       },
       {
         "date": "2026-06-26",
-        "rate": 54.1,
-        "n": 229
+        "rate": 53.9,
+        "n": 232
       },
       {
         "date": "2026-06-29",
-        "rate": 54.1,
-        "n": 254
+        "rate": 53.9,
+        "n": 257
       },
       {
         "date": "2026-06-30",
-        "rate": 54.3,
-        "n": 268
+        "rate": 54.1,
+        "n": 271
       },
       {
         "date": "2026-07-06",
-        "rate": 54.1,
-        "n": 290
+        "rate": 53.9,
+        "n": 293
       },
       {
         "date": "2026-07-07",
-        "rate": 54.6,
-        "n": 305
+        "rate": 54.4,
+        "n": 308
       },
       {
         "date": "2026-07-08",
-        "rate": 54.6,
-        "n": 328
+        "rate": 54.4,
+        "n": 331
       },
       {
         "date": "2026-07-09",
-        "rate": 54.8,
-        "n": 341
-      },
-      {
-        "date": "2026-07-10",
-        "rate": 55,
+        "rate": 54.3,
         "n": 352
       },
       {
+        "date": "2026-07-10",
+        "rate": 54.4,
+        "n": 363
+      },
+      {
         "date": "2026-07-11",
-        "rate": 55.1,
-        "n": 360
+        "rate": 54.6,
+        "n": 371
       },
       {
         "date": "2026-07-13",
-        "rate": 55,
-        "n": 378
+        "rate": 54.5,
+        "n": 389
       },
       {
         "date": "2026-07-14",
-        "rate": 55.2,
-        "n": 403
+        "rate": 54.7,
+        "n": 414
       },
       {
         "date": "2026-07-15",
-        "rate": 55.2,
-        "n": 421
+        "rate": 54.8,
+        "n": 434
       },
       {
         "date": "2026-07-16",
         "rate": 55.3,
-        "n": 426
+        "n": 445
       },
       {
         "date": "2026-07-17",
-        "rate": 55.2,
-        "n": 433
+        "rate": 55,
+        "n": 458
+      },
+      {
+        "date": "2026-07-20",
+        "rate": 55.1,
+        "n": 464
+      },
+      {
+        "date": "2026-07-21",
+        "rate": 55,
+        "n": 470
       }
     ]
   },
   "opportunities": {
-    "tracked": 351,
-    "evaluated7": 299,
-    "avg_r7": -0.43,
-    "win7": 44.8,
-    "evaluated30": 162,
-    "avg_r30": -2.27,
-    "win30": 44.4,
+    "tracked": 359,
+    "evaluated7": 307,
+    "avg_r7": -0.6,
+    "win7": 44.3,
+    "evaluated30": 170,
+    "avg_r30": -2.86,
+    "win30": 43.5,
     "items": [
+      {
+        "date": "2026-07-15",
+        "ticker": "MU",
+        "name": "Micron Technology",
+        "category": "us",
+        "r7": -11.97,
+        "r30": null,
+        "thesis": "全球AI記憶體超週期尚未充分定價；MU為美本土唯一HBM主力供應商，市場因SKHY IPO新鮮感而低估MU長線合約護城河",
+        "target": "$480.00 (-51.2%)",
+        "entry": 983.12,
+        "exit7": 865.46,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-15",
+        "ticker": "ASML",
+        "name": "ASML Holding N.V.",
+        "category": "us",
+        "r7": -2.06,
+        "r30": null,
+        "thesis": "EUV設備全球唯一供應商護城河極深；SK Hynix鎖定86億美元訂單至2029年；五大科技公司AI Capex上調17",
+        "target": "$1000.00 (-43.7%)",
+        "entry": 1775.64,
+        "exit7": 1739.02,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-15",
+        "ticker": "ETH",
+        "name": "Ethereum",
+        "category": "crypto",
+        "r7": 0.76,
+        "r30": null,
+        "thesis": "恐慌貪婪22（極度恐懼）與今日+6.76%形成背離信號；ETH跑贏BTC顯示資金選擇性回流更高貝塔資產；BTC ETF ",
+        "target": "$4,500 (+138.9%)",
+        "entry": 1889.4799,
+        "exit7": 1903.7589,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-15",
+        "ticker": "2303",
+        "name": "聯華電子",
+        "category": "tw",
+        "r7": -13.91,
+        "r30": null,
+        "thesis": "川普助英特爾搶台積電訂單使成熟製程供應缺口轉向UMC填補；外資連賣台積電錯殺同族群；聯電汽車工業成熟節點訂單能見度高，本",
+        "target": "90 (-40.4%)",
+        "entry": 151,
+        "exit7": 130,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-15",
+        "ticker": "2408",
+        "name": "南亞科技",
+        "category": "tw",
+        "r7": -14.96,
+        "r30": null,
+        "thesis": "AI HBM/DRAM需求強化但本土龍頭被台積電光環遮蔽；今日台股大跌-1.42%中南亞科相對抗跌顯示資金護盤意志；SK",
+        "target": "220 (-50.9%)",
+        "entry": 448,
+        "exit7": 381,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-15",
+        "ticker": "1301",
+        "name": "台灣塑膠",
+        "category": "tw",
+        "r7": -4.72,
+        "r30": null,
+        "thesis": "石化週期觸底訊號出現，台化+8%台塑化+7%帶頭但台塑集團母艦漲幅相對落後為補漲標的；AI伺服器PCB工程塑料需求同步拉",
+        "target": "125 (+96.5%)",
+        "entry": 63.6,
+        "exit7": 60.6,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-15",
+        "ticker": "BTC",
+        "name": "Bitcoin",
+        "category": "crypto",
+        "r7": 0.42,
+        "r30": null,
+        "thesis": "恐慌貪婪22（極度恐懼）歷史為中線買入信號；62,000美元上方逾4.5億空單強平形成機械式支撐底板；資金費率+0.01",
+        "target": "$80,000 (+23.3%)",
+        "entry": 64956.1133,
+        "exit7": 65230.0273,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-15",
+        "ticker": "AMD",
+        "name": "Advanced Micro Devices",
+        "category": "us",
+        "r7": -8.13,
+        "r30": null,
+        "thesis": "AI GPU需求超週期中以顯著折價於NVDA交易；Q2漲幅186%驗證AI晶片景氣動能持續；台積電法說CoWoS指引若正",
+        "target": "$380.00 (-30.7%)",
+        "entry": 548.13,
+        "exit7": 503.57,
+        "exit30": null
+      },
       {
         "date": "2026-07-14",
         "ticker": "BTC",
@@ -906,110 +1020,6 @@
         "entry": 339.22,
         "exit7": 334.53,
         "exit30": null
-      },
-      {
-        "date": "2026-07-08",
-        "ticker": "2327",
-        "name": "國巨",
-        "category": "tw",
-        "r7": -9.83,
-        "r30": null,
-        "thesis": "被動元件漲價週期啟動國巨為全球前三大 MLCC 廠；AI 伺服器每台 MLCC 用量是傳統伺服器 3-5 倍但此溢價尚未",
-        "target": "1500 (+65.7%)",
-        "entry": 905,
-        "exit7": 816,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-08",
-        "ticker": "GILD",
-        "name": "Gilead Sciences",
-        "category": "us",
-        "r7": -3.64,
-        "r30": null,
-        "thesis": "長效 HIV 療法與 ADC 腫瘤管線被市場過度忽視；生技防禦股在半導體拋售潮中相對強勢，HSBC 上調確認管線折現率被",
-        "target": "$155.00 (+13.7%)",
-        "entry": 136.36,
-        "exit7": 131.4,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-08",
-        "ticker": "PEP",
-        "name": "PepsiCo",
-        "category": "us",
-        "r7": -4.48,
-        "r30": null,
-        "thesis": "美國零售銷售年比 +4.9% 但儲蓄率跌至 2.6% 顯示消費靠品牌商品支撐；市場恐慌下防禦消費股被拋售造成定價偏低；P",
-        "target": "$185.00 (+27.6%)",
-        "entry": 144.98,
-        "exit7": 138.49,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-07",
-        "ticker": "ETH",
-        "name": "以太坊 Ethereum",
-        "category": "crypto",
-        "r7": 0.46,
-        "r30": null,
-        "thesis": "加密恐懼指數27（恐懼區），ETH漲幅+1.54%略優於BTC，ETH/BTC比值觸底訊號浮現；機構以BTC ETF為入",
-        "target": "$2,500 (+38.4%)",
-        "entry": 1797.5737,
-        "exit7": 1805.7881,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-07",
-        "ticker": "AMD",
-        "name": "超微半導體 Advanced Micro Devices",
-        "category": "us",
-        "r7": 1.06,
-        "r30": null,
-        "thesis": "NVDA因Kyber NVL144延遲至2028年股價承壓，AI GPU需求外溢AMD為最直接替代受益；Goldman ",
-        "target": "$200.00 (-63.8%)",
-        "entry": 552.05,
-        "exit7": 557.89,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-07",
-        "ticker": "MU",
-        "name": "美光科技 Micron Technology",
-        "category": "us",
-        "r7": -0.55,
-        "r30": null,
-        "thesis": "股價距高點下跌22%，但AI HBM需求確認持續吃緊；SK Hynix Nasdaq IPO（7/10）定價驗證記憶體荒",
-        "target": "$180.00 (-81.7%)",
-        "entry": 984.75,
-        "exit7": 979.3,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-07",
-        "ticker": "LMT",
-        "name": "洛克希德馬丁 Lockheed Martin",
-        "category": "us",
-        "r7": -2.75,
-        "r30": null,
-        "thesis": "國防股在AI狂熱中遭市場系統性忽視，但NATO峰會、以黎衝突持續催化採購；Citi甫升評Buy目標$582，LMT同時宣",
-        "target": "$582.00 (+8.2%)",
-        "entry": 538,
-        "exit7": 523.22,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-07",
-        "ticker": "DAL",
-        "name": "達美航空 Delta Air Lines",
-        "category": "us",
-        "r7": -4.68,
-        "r30": null,
-        "thesis": "旅遊離峰旺季創紀錄（CNBC 7/6），Factset全年EPS上調至$5.84目標$105；市場資金集中AI科技股，航",
-        "target": "$105.00 (+14.5%)",
-        "entry": 91.68,
-        "exit7": 87.39,
-        "exit30": null
       }
     ],
     "best": [
@@ -1055,6 +1065,19 @@
     ],
     "worst": [
       {
+        "date": "2026-06-22",
+        "ticker": "2327",
+        "name": "國巨",
+        "category": "tw",
+        "r7": -6.02,
+        "r30": -41.67,
+        "thesis": "AI高密度算力推升MLCC規格與用量，被動元件龍頭受惠漲價循環，股價回檔後本益比低於歷史均值",
+        "target": "680.00 (+17%)",
+        "entry": 1080,
+        "exit7": 1015,
+        "exit30": 630
+      },
+      {
         "date": "2026-06-02",
         "ticker": "ORCL",
         "name": "Oracle",
@@ -1079,19 +1102,6 @@
         "entry": 236.34,
         "exit7": 201.26,
         "exit30": 140.27
-      },
-      {
-        "date": "2026-06-19",
-        "ticker": "2327",
-        "name": "國巨",
-        "category": "tw",
-        "r7": -2.78,
-        "r30": -35.28,
-        "thesis": "6/9費半強彈被動元件領漲但近期回落修正，AI伺服器MLCC用量倍增趨勢未變；股價已回調至相對低點",
-        "target": "720",
-        "entry": 1080,
-        "exit7": 1050,
-        "exit30": 699
       }
     ]
   }
