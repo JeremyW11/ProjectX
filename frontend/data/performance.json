@@ -1,37 +1,37 @@
 {
-  "updated": "2026-07-23",
+  "updated": "2026-07-24",
   "predictions": {
-    "total": 692,
-    "hit": 192,
-    "partial": 193,
-    "miss": 136,
+    "total": 732,
+    "hit": 207,
+    "partial": 213,
+    "miss": 141,
     "pending": 171,
-    "resolved": 521,
-    "hit_rate_weighted": 55.4,
+    "resolved": 561,
+    "hit_rate_weighted": 55.9,
     "by_type": {
       "calendar": {
-        "hit": 133,
-        "partial": 131,
-        "miss": 97,
-        "pending": 85,
-        "resolved": 361,
-        "hit_rate": 55
+        "hit": 142,
+        "partial": 147,
+        "miss": 99,
+        "pending": 84,
+        "resolved": 388,
+        "hit_rate": 55.5
       },
       "story": {
-        "hit": 27,
-        "partial": 26,
-        "miss": 19,
+        "hit": 30,
+        "partial": 28,
+        "miss": 22,
         "pending": 63,
-        "resolved": 72,
-        "hit_rate": 55.6
+        "resolved": 80,
+        "hit_rate": 55
       },
       "industry": {
-        "hit": 32,
-        "partial": 36,
+        "hit": 35,
+        "partial": 38,
         "miss": 20,
-        "pending": 23,
-        "resolved": 88,
-        "hit_rate": 56.8
+        "pending": 24,
+        "resolved": 93,
+        "hit_rate": 58.1
       }
     },
     "series": [
@@ -147,105 +147,232 @@
       },
       {
         "date": "2026-06-25",
-        "rate": 54.1,
-        "n": 219
+        "rate": 53.9,
+        "n": 220
       },
       {
         "date": "2026-06-26",
-        "rate": 53.8,
-        "n": 236
+        "rate": 53.6,
+        "n": 237
       },
       {
         "date": "2026-06-29",
-        "rate": 53.8,
-        "n": 261
+        "rate": 53.6,
+        "n": 262
       },
       {
         "date": "2026-06-30",
-        "rate": 54,
-        "n": 275
+        "rate": 53.8,
+        "n": 276
       },
       {
         "date": "2026-07-06",
-        "rate": 54,
-        "n": 298
+        "rate": 53.8,
+        "n": 299
       },
       {
         "date": "2026-07-07",
-        "rate": 54.5,
-        "n": 313
+        "rate": 54.3,
+        "n": 314
       },
       {
         "date": "2026-07-08",
-        "rate": 54.5,
-        "n": 336
+        "rate": 54.3,
+        "n": 337
       },
       {
         "date": "2026-07-09",
-        "rate": 54.3,
-        "n": 357
+        "rate": 54.2,
+        "n": 358
       },
       {
         "date": "2026-07-10",
-        "rate": 55.1,
-        "n": 376
+        "rate": 54.9,
+        "n": 377
       },
       {
         "date": "2026-07-11",
-        "rate": 55.2,
-        "n": 384
+        "rate": 55,
+        "n": 393
       },
       {
         "date": "2026-07-13",
-        "rate": 55.1,
-        "n": 402
+        "rate": 54.9,
+        "n": 411
       },
       {
         "date": "2026-07-14",
-        "rate": 55.3,
-        "n": 427
+        "rate": 55,
+        "n": 436
       },
       {
         "date": "2026-07-15",
-        "rate": 55.4,
-        "n": 447
+        "rate": 55.2,
+        "n": 456
       },
       {
         "date": "2026-07-16",
-        "rate": 55.8,
-        "n": 459
+        "rate": 55.4,
+        "n": 469
       },
       {
         "date": "2026-07-17",
+        "rate": 55.5,
+        "n": 494
+      },
+      {
+        "date": "2026-07-18",
         "rate": 55.7,
-        "n": 483
+        "n": 499
       },
       {
         "date": "2026-07-20",
-        "rate": 55.7,
-        "n": 495
+        "rate": 55.8,
+        "n": 517
       },
       {
         "date": "2026-07-21",
-        "rate": 55.8,
-        "n": 508
+        "rate": 56.1,
+        "n": 536
       },
       {
         "date": "2026-07-22",
-        "rate": 55.4,
-        "n": 521
+        "rate": 55.8,
+        "n": 552
+      },
+      {
+        "date": "2026-07-23",
+        "rate": 55.9,
+        "n": 561
       }
     ]
   },
   "opportunities": {
-    "tracked": 369,
-    "evaluated7": 317,
-    "avg_r7": -0.56,
-    "win7": 44.8,
-    "evaluated30": 180,
-    "avg_r30": -3.66,
-    "win30": 42.2,
+    "tracked": 377,
+    "evaluated7": 326,
+    "avg_r7": -0.51,
+    "win7": 45.1,
+    "evaluated30": 190,
+    "avg_r30": -3.65,
+    "win30": 42.6,
     "items": [
+      {
+        "date": "2026-07-17",
+        "ticker": "PYPL",
+        "name": "PayPal Holdings Inc.",
+        "category": "us",
+        "r7": -2.15,
+        "r30": null,
+        "thesis": "Stripe 出價 $530 億競購 PayPal 形成明確底部支撐，市場注意力被半導體拋售吸走而低估併購溢價；Morg",
+        "target": "$80.00 (+41.0%)",
+        "entry": 56.73,
+        "exit7": 55.51,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-17",
+        "ticker": "MU",
+        "name": "Micron Technology Inc.",
+        "category": "us",
+        "r7": 12.46,
+        "r30": null,
+        "thesis": "TSMC 法說後情緒蔓延被錯殺逾 5%，但 AI HBM 需求結構完整；IDC 預估半導體市場年增52.8%至$1.29",
+        "target": "$135.00 (-84.2%)",
+        "entry": 853.2,
+        "exit7": 959.48,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-17",
+        "ticker": "AMD",
+        "name": "Advanced Micro Devices Inc.",
+        "category": "us",
+        "r7": 10.26,
+        "r30": null,
+        "thesis": "TSMC 法說後跟跌逾5%屬情緒錯殺；MI450 有望機架層次挑戰 Nvidia，ASIC 算力滲透帶來的增量市場尚未定",
+        "target": "$175.00 (-65.1%)",
+        "entry": 500.94,
+        "exit7": 552.33,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-17",
+        "ticker": "BTC",
+        "name": "Bitcoin",
+        "category": "crypto",
+        "r7": 3.62,
+        "r30": null,
+        "thesis": "恐懼指數25（極度恐懼）為歷史性反向指標；空方清算占84.8%顯示空頭擁擠且去槓桿已完成；資金費率+0.0077%輕度偏",
+        "target": "$75,000 (+17.6%)",
+        "entry": 63789.2813,
+        "exit7": 66100.7969,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-17",
+        "ticker": "BLK",
+        "name": "BlackRock Inc.",
+        "category": "us",
+        "r7": -2.8,
+        "r30": null,
+        "thesis": "Q2 EPS $13.91超預期但股價僅漲5%反應溫和；高利率環境延長使固定收益AUM費率有利，Fed維持3.5-3.7",
+        "target": "$1364.00 (+25.5%)",
+        "entry": 1087.05,
+        "exit7": 1056.63,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-17",
+        "ticker": "6239",
+        "name": "力成科技",
+        "category": "tw",
+        "r7": -7.11,
+        "r30": null,
+        "thesis": "與博通合資於新加坡成立 FOPLP 公司，切入次世代先進封裝；台積電法說確認 CoWoS 需求強勁且資本支出上調至$60",
+        "target": "300 (-5.2%)",
+        "entry": 316.5,
+        "exit7": 294,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-17",
+        "ticker": "2618",
+        "name": "長榮航空",
+        "category": "tw",
+        "r7": 0.48,
+        "r30": null,
+        "thesis": "外資連兩日買超冠軍；美國6月進口量年增14.3%達225萬TEU，零售商提前拉貨潮延伸至7月；Section 122關稅",
+        "target": "52 (+24.1%)",
+        "entry": 41.9,
+        "exit7": 42.1,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-17",
+        "ticker": "5351",
+        "name": "鈺創科技",
+        "category": "tw",
+        "r7": -7.47,
+        "r30": null,
+        "thesis": "SK Hynix ADR暴跌13%當日鈺創逆勢飆漲，顯示記憶體板塊分化；台廠利基型記憶體在大廠集中受壓時獲資金青睞，低本",
+        "target": "130",
+        "entry": 97.7,
+        "exit7": 90.4,
+        "exit30": null
+      },
+      {
+        "date": "2026-07-17",
+        "ticker": "ETH",
+        "name": "Ethereum",
+        "category": "crypto",
+        "r7": 3.77,
+        "r30": null,
+        "thesis": "跌幅3.14%超過BTC的1.64%，ETH/BTC比值壓縮至低位；極度恐懼底部反彈時ETH歷史彈幅更大；Layer2生",
+        "target": "$2,800 (+50.5%)",
+        "entry": 1863.1934,
+        "exit7": 1933.4901,
+        "exit30": null
+      },
       {
         "date": "2026-07-16",
         "ticker": "BTC",
@@ -907,123 +1034,6 @@
         "target": "--",
         "entry": 1350,
         "exit7": 1480,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-10",
-        "ticker": "2303",
-        "name": "聯華電子",
-        "category": "tw",
-        "r7": 6.41,
-        "r30": null,
-        "thesis": "外資連4日以上買超確認（7/8），成熟製程電源管理IC受惠AI伺服器電源爆炸需求；聯電本益比遠低台積電但在特殊製程具護城",
-        "target": "--",
-        "entry": 156,
-        "exit7": 166,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-10",
-        "ticker": "2618",
-        "name": "長榮航空",
-        "category": "tw",
-        "r7": 6.44,
-        "r30": null,
-        "thesis": "7/8外資單日買超逾6.1萬張居法人榜首且連買2日；6月合併營收234.72億元創歷史新高；暑期客運旺季加上深化航網布局",
-        "target": "--",
-        "entry": 39.6,
-        "exit7": 42.15,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-09",
-        "ticker": "XLE",
-        "name": "Energy Select Sector SPDR Fund",
-        "category": "sector",
-        "r7": 2.43,
-        "r30": null,
-        "thesis": "美伊衝突升級推升油價單日+6%，但能源ETF漲幅落後原油，市場低估地緣溢價持續性，YTD+22%仍有補漲空間",
-        "target": "+15%",
-        "entry": 55.6,
-        "exit7": 56.95,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-09",
-        "ticker": "2454",
-        "name": "聯發科",
-        "category": "tw",
-        "r7": -8.39,
-        "r30": null,
-        "thesis": "Google TPU ASIC合約確立帶動高盛目標價翻倍至5000元，但股價僅3995元，市場尚未反映ASIC業務20億",
-        "target": "5000 (+25.2%)",
-        "entry": 3995,
-        "exit7": 3660,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-09",
-        "ticker": "FISV",
-        "name": "Fiserv Inc",
-        "category": "us",
-        "r7": -2.09,
-        "r30": null,
-        "thesis": "7/7傳出與JPM/BAC洽談出售支付業務，股價僅漲5%，市場低估分拆後核心業務重估價值與潛在溢價",
-        "target": "$220.00 (+334.8%)",
-        "entry": 50.6,
-        "exit7": 49.54,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-09",
-        "ticker": "DAL",
-        "name": "Delta Air Lines",
-        "category": "us",
-        "r7": -2.04,
-        "r30": null,
-        "thesis": "航空股因伊朗衝突普跌2-4%，但油價對沖充足的達美被錯殺，7/10財報前存在均值回歸機會",
-        "target": "$62.00 (-29.0%)",
-        "entry": 87.29,
-        "exit7": 85.51,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-09",
-        "ticker": "MU",
-        "name": "Micron Technology",
-        "category": "us",
-        "r7": 3.62,
-        "r30": null,
-        "thesis": "7/7暴跌13%後Seeking Alpha升評，HBM需求結構性成長未變，Melius預測市值可達萬億美元，當前估值已",
-        "target": "$155.00 (-83.7%)",
-        "entry": 948.8,
-        "exit7": 983.12,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-09",
-        "ticker": "2395",
-        "name": "研華",
-        "category": "tw",
-        "r7": -3.11,
-        "r30": null,
-        "thesis": "6月營收大幅超預期推動7/7漲停創歷史新高，工業電腦AI邊緣運算需求被低估，外資尚未大幅加碼",
-        "target": "580 (+6.2%)",
-        "entry": 546,
-        "exit7": 529,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-09",
-        "ticker": "RIVN",
-        "name": "Rivian Automotive",
-        "category": "us",
-        "r7": 5.04,
-        "r30": null,
-        "thesis": "7/7宣布增發7500萬股後暴跌10%+，但現金強化有助長期生存，市場過度懲罰稀釋效應，接近歷史低點",
-        "target": "$18.00 (+8.0%)",
-        "entry": 16.66,
-        "exit7": 17.5,
         "exit30": null
       }
     ],
