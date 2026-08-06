@@ -1,37 +1,37 @@
 {
-  "updated": "2026-08-05",
+  "updated": "2026-08-06",
   "predictions": {
-    "total": 963,
-    "hit": 271,
-    "partial": 314,
-    "miss": 248,
-    "pending": 130,
-    "resolved": 833,
-    "hit_rate_weighted": 51.4,
+    "total": 998,
+    "hit": 281,
+    "partial": 325,
+    "miss": 261,
+    "pending": 131,
+    "resolved": 867,
+    "hit_rate_weighted": 51.2,
     "by_type": {
       "calendar": {
-        "hit": 184,
-        "partial": 222,
-        "miss": 159,
-        "pending": 50,
-        "resolved": 565,
-        "hit_rate": 52.2
+        "hit": 189,
+        "partial": 229,
+        "miss": 167,
+        "pending": 51,
+        "resolved": 585,
+        "hit_rate": 51.9
       },
       "story": {
-        "hit": 42,
-        "partial": 43,
-        "miss": 50,
+        "hit": 43,
+        "partial": 46,
+        "miss": 54,
         "pending": 57,
-        "resolved": 135,
-        "hit_rate": 47
+        "resolved": 143,
+        "hit_rate": 46.2
       },
       "industry": {
-        "hit": 45,
-        "partial": 49,
-        "miss": 39,
+        "hit": 49,
+        "partial": 50,
+        "miss": 40,
         "pending": 23,
-        "resolved": 133,
-        "hit_rate": 52.3
+        "resolved": 139,
+        "hit_rate": 53.2
       }
     },
     "series": [
@@ -243,53 +243,58 @@
       {
         "date": "2026-07-23",
         "rate": 52.1,
-        "n": 707
+        "n": 708
       },
       {
         "date": "2026-07-24",
-        "rate": 52.1,
-        "n": 728
+        "rate": 51.9,
+        "n": 737
       },
       {
         "date": "2026-07-27",
-        "rate": 52.1,
-        "n": 755
+        "rate": 51.8,
+        "n": 764
       },
       {
         "date": "2026-07-28",
-        "rate": 52.3,
-        "n": 784
+        "rate": 52.1,
+        "n": 793
       },
       {
         "date": "2026-07-29",
-        "rate": 51.9,
-        "n": 804
+        "rate": 51.7,
+        "n": 813
       },
       {
         "date": "2026-07-31",
-        "rate": 51.9,
-        "n": 815
+        "rate": 51.8,
+        "n": 831
       },
       {
         "date": "2026-08-01",
-        "rate": 51.8,
-        "n": 821
+        "rate": 51.7,
+        "n": 837
       },
       {
         "date": "2026-08-03",
-        "rate": 51.4,
-        "n": 833
+        "rate": 51.2,
+        "n": 858
+      },
+      {
+        "date": "2026-08-05",
+        "rate": 51.2,
+        "n": 867
       }
     ]
   },
   "opportunities": {
-    "tracked": 441,
+    "tracked": 451,
     "evaluated7": 401,
     "avg_r7": -0.81,
     "win7": 44.9,
-    "evaluated30": 234,
-    "avg_r30": -3.63,
-    "win30": 42.7,
+    "evaluated30": 244,
+    "avg_r30": -3.71,
+    "win30": 43,
     "items": [
       {
         "date": "2026-07-29",
@@ -1115,6 +1120,19 @@
     ],
     "worst": [
       {
+        "date": "2026-07-07",
+        "ticker": "2327",
+        "name": "國巨 Yageo",
+        "category": "tw",
+        "r7": -10.45,
+        "r30": -43.68,
+        "thesis": "MLCC為AI伺服器最關鍵被動元件，散戶只關注晶片忽略被動元件商；五大雲端7250億美元AI資本支出直接拉動需求，經濟日",
+        "target": "1240 (+23.4%)",
+        "entry": 1005,
+        "exit7": 900,
+        "exit30": 566
+      },
+      {
         "date": "2026-06-22",
         "ticker": "2327",
         "name": "國巨",
@@ -1139,19 +1157,6 @@
         "entry": 248.15,
         "exit7": 213.68,
         "exit30": 146.55
-      },
-      {
-        "date": "2026-06-05",
-        "ticker": "ORCL",
-        "name": "Oracle",
-        "category": "us",
-        "r7": -14.84,
-        "r30": -40.65,
-        "thesis": "6 月法說將公布 OCI 雲端營收，超大規模 capex 上修至 7250 億的最大受惠者之一，市場仍以傳統軟體估值",
-        "target": "+12% 短期",
-        "entry": 236.34,
-        "exit7": 201.26,
-        "exit30": 140.27
       }
     ]
   }
