@@ -1,27 +1,27 @@
 {
-  "updated": "2026-08-08",
+  "updated": "2026-08-10",
   "predictions": {
-    "total": 17,
-    "hit": 1,
+    "total": 48,
+    "hit": 2,
     "partial": 2,
     "miss": 0,
-    "pending": 14,
-    "resolved": 3,
-    "hit_rate_weighted": 66.7,
+    "pending": 44,
+    "resolved": 4,
+    "hit_rate_weighted": 75,
     "by_type": {
       "calendar": {
-        "hit": 1,
+        "hit": 2,
         "partial": 2,
         "miss": 0,
-        "pending": 9,
-        "resolved": 3,
-        "hit_rate": 66.7
+        "pending": 27,
+        "resolved": 4,
+        "hit_rate": 75
       },
       "story": {
         "hit": 0,
         "partial": 0,
         "miss": 0,
-        "pending": 0,
+        "pending": 6,
         "resolved": 0,
         "hit_rate": null
       },
@@ -29,7 +29,7 @@
         "hit": 0,
         "partial": 0,
         "miss": 0,
-        "pending": 5,
+        "pending": 11,
         "resolved": 0,
         "hit_rate": null
       }
@@ -39,11 +39,16 @@
         "date": "2026-08-07",
         "rate": 66.7,
         "n": 3
+      },
+      {
+        "date": "2026-08-08",
+        "rate": 75,
+        "n": 4
       }
     ]
   },
   "opportunities": {
-    "tracked": 10,
+    "tracked": 20,
     "evaluated7": 0,
     "avg_r7": null,
     "win7": null,
