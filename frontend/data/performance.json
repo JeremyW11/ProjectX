@@ -1,27 +1,27 @@
 {
-  "updated": "2026-08-10",
+  "updated": "2026-08-11",
   "predictions": {
-    "total": 48,
-    "hit": 2,
-    "partial": 2,
-    "miss": 0,
-    "pending": 44,
-    "resolved": 4,
-    "hit_rate_weighted": 75,
+    "total": 84,
+    "hit": 5,
+    "partial": 5,
+    "miss": 4,
+    "pending": 70,
+    "resolved": 14,
+    "hit_rate_weighted": 53.6,
     "by_type": {
       "calendar": {
-        "hit": 2,
-        "partial": 2,
-        "miss": 0,
-        "pending": 27,
-        "resolved": 4,
-        "hit_rate": 75
+        "hit": 5,
+        "partial": 5,
+        "miss": 4,
+        "pending": 39,
+        "resolved": 14,
+        "hit_rate": 53.6
       },
       "story": {
         "hit": 0,
         "partial": 0,
         "miss": 0,
-        "pending": 6,
+        "pending": 14,
         "resolved": 0,
         "hit_rate": null
       },
@@ -29,7 +29,7 @@
         "hit": 0,
         "partial": 0,
         "miss": 0,
-        "pending": 11,
+        "pending": 17,
         "resolved": 0,
         "hit_rate": null
       }
@@ -37,18 +37,23 @@
     "series": [
       {
         "date": "2026-08-07",
-        "rate": 66.7,
-        "n": 3
+        "rate": 58.3,
+        "n": 6
       },
       {
         "date": "2026-08-08",
-        "rate": 75,
-        "n": 4
+        "rate": 55,
+        "n": 10
+      },
+      {
+        "date": "2026-08-10",
+        "rate": 53.6,
+        "n": 14
       }
     ]
   },
   "opportunities": {
-    "tracked": 20,
+    "tracked": 30,
     "evaluated7": 0,
     "avg_r7": null,
     "win7": null,
