@@ -1,37 +1,37 @@
 {
-  "updated": "2026-08-13",
+  "updated": "2026-08-14",
   "predictions": {
-    "total": 1113,
-    "hit": 296,
-    "partial": 342,
-    "miss": 281,
-    "pending": 194,
-    "resolved": 919,
-    "hit_rate_weighted": 50.8,
+    "total": 1148,
+    "hit": 324,
+    "partial": 350,
+    "miss": 287,
+    "pending": 187,
+    "resolved": 961,
+    "hit_rate_weighted": 51.9,
     "by_type": {
       "calendar": {
-        "hit": 193,
-        "partial": 233,
-        "miss": 175,
-        "pending": 93,
-        "resolved": 601,
-        "hit_rate": 51.5
+        "hit": 200,
+        "partial": 237,
+        "miss": 178,
+        "pending": 100,
+        "resolved": 615,
+        "hit_rate": 51.8
       },
       "story": {
-        "hit": 50,
-        "partial": 57,
-        "miss": 61,
+        "hit": 54,
+        "partial": 59,
+        "miss": 63,
         "pending": 62,
-        "resolved": 168,
-        "hit_rate": 46.7
+        "resolved": 176,
+        "hit_rate": 47.4
       },
       "industry": {
-        "hit": 53,
-        "partial": 52,
-        "miss": 45,
-        "pending": 39,
-        "resolved": 150,
-        "hit_rate": 52.7
+        "hit": 70,
+        "partial": 54,
+        "miss": 46,
+        "pending": 25,
+        "resolved": 170,
+        "hit_rate": 57.1
       }
     },
     "series": [
@@ -207,120 +207,229 @@
       },
       {
         "date": "2026-07-15",
-        "rate": 53.7,
-        "n": 477
+        "rate": 53.8,
+        "n": 478
       },
       {
         "date": "2026-07-16",
-        "rate": 53.8,
-        "n": 505
+        "rate": 53.9,
+        "n": 506
       },
       {
         "date": "2026-07-17",
         "rate": 54.2,
-        "n": 542
+        "n": 543
       },
       {
         "date": "2026-07-18",
-        "rate": 54.3,
-        "n": 548
+        "rate": 54.4,
+        "n": 549
       },
       {
         "date": "2026-07-20",
-        "rate": 54.3,
-        "n": 570
+        "rate": 54.4,
+        "n": 571
       },
       {
         "date": "2026-07-21",
-        "rate": 53.5,
-        "n": 611
+        "rate": 53.6,
+        "n": 612
       },
       {
         "date": "2026-07-22",
         "rate": 52.2,
-        "n": 647
+        "n": 648
       },
       {
         "date": "2026-07-23",
         "rate": 51.9,
-        "n": 684
+        "n": 686
       },
       {
         "date": "2026-07-24",
         "rate": 51.7,
-        "n": 715
+        "n": 717
       },
       {
         "date": "2026-07-27",
         "rate": 51.5,
-        "n": 743
+        "n": 745
       },
       {
         "date": "2026-07-28",
         "rate": 51.8,
-        "n": 782
+        "n": 784
       },
       {
         "date": "2026-07-29",
         "rate": 51.3,
-        "n": 810
+        "n": 813
       },
       {
         "date": "2026-07-31",
-        "rate": 51.6,
-        "n": 838
+        "rate": 51.5,
+        "n": 841
       },
       {
         "date": "2026-08-01",
-        "rate": 51.2,
-        "n": 849
+        "rate": 51.3,
+        "n": 860
       },
       {
         "date": "2026-08-03",
-        "rate": 50.9,
-        "n": 882
+        "rate": 51,
+        "n": 893
       },
       {
         "date": "2026-08-05",
-        "rate": 50.9,
-        "n": 896
+        "rate": 51.3,
+        "n": 917
       },
       {
         "date": "2026-08-06",
-        "rate": 50.9,
-        "n": 901
+        "rate": 51.8,
+        "n": 932
       },
       {
         "date": "2026-08-07",
-        "rate": 51,
-        "n": 907
+        "rate": 51.9,
+        "n": 944
       },
       {
         "date": "2026-08-08",
-        "rate": 51,
-        "n": 911
+        "rate": 52.1,
+        "n": 951
       },
       {
         "date": "2026-08-10",
-        "rate": 51,
-        "n": 915
+        "rate": 52,
+        "n": 955
       },
       {
         "date": "2026-08-12",
-        "rate": 50.8,
-        "n": 919
+        "rate": 51.9,
+        "n": 959
+      },
+      {
+        "date": "2026-08-13",
+        "rate": 51.9,
+        "n": 961
       }
     ]
   },
   "opportunities": {
-    "tracked": 496,
-    "evaluated7": 446,
-    "avg_r7": -0.11,
-    "win7": 48,
-    "evaluated30": 299,
-    "avg_r30": -3.46,
-    "win30": 45.5,
+    "tracked": 504,
+    "evaluated7": 454,
+    "avg_r7": -0.01,
+    "win7": 48.5,
+    "evaluated30": 307,
+    "avg_r30": -3.51,
+    "win30": 45,
     "items": [
+      {
+        "date": "2026-08-07",
+        "ticker": "AMD",
+        "name": "Advanced Micro Devices",
+        "category": "us",
+        "r7": -1.3,
+        "r30": null,
+        "thesis": "Q2 財報 EPS $1.66 超預期但盤後重挫 8.8%，市場懲罰指引保守而忽視數據中心業務季翻倍的結構性成長；AI ",
+        "target": "$175.00 (-64.2%)",
+        "entry": 489.28,
+        "exit7": 482.93,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-07",
+        "ticker": "BTC",
+        "name": "Bitcoin",
+        "category": "crypto",
+        "r7": -1.34,
+        "r30": null,
+        "thesis": "恐慌貪婪指數 25 極度恐懼，機構 ETF 單週淨流入 $385.9M（BlackRock 主導），資金費率接近中性未過",
+        "target": "$72,000 (+12.2%)",
+        "entry": 64262.1133,
+        "exit7": 63402.4336,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-07",
+        "ticker": "2337",
+        "name": "旺宏電子",
+        "category": "tw",
+        "r7": 5.81,
+        "r30": null,
+        "thesis": "NOR Flash 供需反轉入中段，AI 推論端記憶體需求結構化，三大法人大量買超驗證認同；市場資金聚焦 DRAM/HB",
+        "target": "115 (-10.9%)",
+        "entry": 129,
+        "exit7": 136.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-07",
+        "ticker": "2317",
+        "name": "鴻海精密",
+        "category": "tw",
+        "r7": 2.08,
+        "r30": null,
+        "thesis": "AI 整機伺服器組裝龍頭仍以傳統 EMS 本益比定價，未反映 AI 伺服器單機 ASP 大幅提升及 CoWoS 轉型溢價",
+        "target": "310 (+17.2%)",
+        "entry": 264.5,
+        "exit7": 270,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-07",
+        "ticker": "COP",
+        "name": "ConocoPhillips",
+        "category": "us",
+        "r7": 9.03,
+        "r30": null,
+        "thesis": "能源板塊 Q2 EPS 年增 122.9% 為 11 大板塊最強，COP 明確 2029 年 $70 億 FCF 路徑；",
+        "target": "$135.00 (+15.6%)",
+        "entry": 116.76,
+        "exit7": 127.3,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-07",
+        "ticker": "PLTR",
+        "name": "Palantir Technologies",
+        "category": "us",
+        "r7": 9.7,
+        "r30": null,
+        "thesis": "AIP 平台在政府與企業 AI 採購加速中具差異化護城河，市場仍以傳統 SaaS 乘數低估平台溢價；政府 AI 採購預算",
+        "target": "$95.00 (-39.1%)",
+        "entry": 155.92,
+        "exit7": 171.04,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-07",
+        "ticker": "SOL",
+        "name": "Solana",
+        "category": "crypto",
+        "r7": 4.06,
+        "r30": null,
+        "thesis": "本週跌幅 -1.90% 為三大主流加密資產最大，但網路活躍度與 DeFi TVL 未出現結構退化；極度恐懼期間高 Bet",
+        "target": "$95.00 (+31.3%)",
+        "entry": 72.5765,
+        "exit7": 75.5255,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-07",
+        "ticker": "ABNB",
+        "name": "Airbnb",
+        "category": "us",
+        "r7": 18.76,
+        "r30": null,
+        "thesis": "Q2 財報雙超預期且 Q3 指引強勁，但 AI 搜尋功能提升轉換率及新興市場滲透加速尚未被充分定價；競爭對手同步收縮市占",
+        "target": "$195.00 (+28.6%)",
+        "entry": 151.64,
+        "exit7": 180.095,
+        "exit30": null
+      },
       {
         "date": "2026-08-06",
         "ticker": "MU",
@@ -995,110 +1104,6 @@
         "target": "--",
         "entry": 113.5,
         "exit7": 118,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-29",
-        "ticker": "BTC",
-        "name": "Bitcoin",
-        "category": "crypto",
-        "r7": -0.64,
-        "r30": null,
-        "thesis": "恐懼指數29、50日均線$63,343與主要流動性帶$62,500-62,600形成多重支撐。多空比1.70顯示籌碼未極",
-        "target": "$67,100 (+5.3%)",
-        "entry": 63871.3633,
-        "exit7": 63460.8984,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-29",
-        "ticker": "ETH",
-        "name": "Ethereum",
-        "category": "crypto",
-        "r7": -3.21,
-        "r30": null,
-        "thesis": "ETH/BTC相對強弱比值處於今年低位，市場恐慌中無差別拋售ETH，忽視其staking殖利率與DeFi基礎設施機構採用",
-        "target": "--",
-        "entry": 1919.9485,
-        "exit7": 1858.2565,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-29",
-        "ticker": "XLE",
-        "name": "能源板塊 Energy Select Sector",
-        "category": "sector",
-        "r7": 2.12,
-        "r30": null,
-        "thesis": "伊朗7/29重啟攻擊美軍並拒絕霍爾木茲海峽共管提案，Brent接近$90但XLE月漲僅+0.92%，遠落後油價漲幅。市場",
-        "target": "+15%",
-        "entry": 57.57,
-        "exit7": 58.79,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-28",
-        "ticker": "AMD",
-        "name": "Advanced Micro Devices Inc.",
-        "category": "us",
-        "r7": -3.8,
-        "r30": null,
-        "thesis": "AMD因板塊情緒超賣跌5%，但7/27發表新資料中心GPU強化競爭力，Mizuho維持目標$625，AI基建週期未反轉，",
-        "target": "$625.00 (+26.3%)",
-        "entry": 494.95,
-        "exit7": 476.15,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-28",
-        "ticker": "2408",
-        "name": "南亞科技",
-        "category": "tw",
-        "r7": -17.32,
-        "r30": null,
-        "thesis": "記憶體族群確認反彈，南亞科7/27單日飆升8%，外資大舉回補，DRAM capex年增14%驗證週期上行，台股記憶體估值",
-        "target": "75 (-82.8%)",
-        "entry": 436,
-        "exit7": 360.5,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-28",
-        "ticker": "XLF",
-        "name": "Financial Select Sector SPDR ETF",
-        "category": "sector",
-        "r7": 0.11,
-        "r30": null,
-        "thesis": "金融板塊7/27觸歷史新高，Q2銀行財報強勁，高利率環境擴大淨利差，市場焦點全在科技財報週，金融板塊動能被系統性忽略",
-        "target": "+12%",
-        "entry": 56.88,
-        "exit7": 56.94,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-28",
-        "ticker": "BTC",
-        "name": "Bitcoin",
-        "category": "crypto",
-        "r7": -0.38,
-        "r30": null,
-        "thesis": "BTC守SMA50($63,114)關口，恐懼指數30歷史入場佳區，ETF週淨流入$5.1億顯示機構底部回補，加密市場對",
-        "target": "$75,000 (+17.5%)",
-        "entry": 63724.8984,
-        "exit7": 63482,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-28",
-        "ticker": "V",
-        "name": "Visa Inc.",
-        "category": "us",
-        "r7": 0.99,
-        "r30": null,
-        "thesis": "Visa財報今盤後揭曉，金融板塊XLF創歷史新高，消費信貸仍健康，Q2財報季86%標普企業超預期，支付龍頭被科技修正情緒",
-        "target": "$380.00 (+4.8%)",
-        "entry": 362.53,
-        "exit7": 366.13,
         "exit30": null
       }
     ],
