@@ -1,37 +1,37 @@
 {
-  "updated": "2026-08-14",
+  "updated": "2026-08-15",
   "predictions": {
-    "total": 1148,
-    "hit": 324,
-    "partial": 350,
-    "miss": 287,
-    "pending": 187,
-    "resolved": 961,
-    "hit_rate_weighted": 51.9,
+    "total": 1170,
+    "hit": 342,
+    "partial": 371,
+    "miss": 291,
+    "pending": 166,
+    "resolved": 1004,
+    "hit_rate_weighted": 52.5,
     "by_type": {
       "calendar": {
-        "hit": 200,
-        "partial": 237,
-        "miss": 178,
-        "pending": 100,
-        "resolved": 615,
-        "hit_rate": 51.8
+        "hit": 216,
+        "partial": 258,
+        "miss": 182,
+        "pending": 72,
+        "resolved": 656,
+        "hit_rate": 52.6
       },
       "story": {
         "hit": 54,
         "partial": 59,
         "miss": 63,
-        "pending": 62,
+        "pending": 70,
         "resolved": 176,
         "hit_rate": 47.4
       },
       "industry": {
-        "hit": 70,
+        "hit": 72,
         "partial": 54,
         "miss": 46,
-        "pending": 25,
-        "resolved": 170,
-        "hit_rate": 57.1
+        "pending": 24,
+        "resolved": 172,
+        "hit_rate": 57.6
       }
     },
     "series": [
@@ -248,84 +248,206 @@
       {
         "date": "2026-07-24",
         "rate": 51.7,
-        "n": 717
+        "n": 718
       },
       {
         "date": "2026-07-27",
         "rate": 51.5,
-        "n": 745
+        "n": 746
       },
       {
         "date": "2026-07-28",
         "rate": 51.8,
-        "n": 784
+        "n": 785
       },
       {
         "date": "2026-07-29",
         "rate": 51.3,
-        "n": 813
+        "n": 814
       },
       {
         "date": "2026-07-31",
         "rate": 51.5,
-        "n": 841
+        "n": 842
       },
       {
         "date": "2026-08-01",
         "rate": 51.3,
-        "n": 860
+        "n": 861
       },
       {
         "date": "2026-08-03",
         "rate": 51,
-        "n": 893
+        "n": 894
       },
       {
         "date": "2026-08-05",
         "rate": 51.3,
-        "n": 917
+        "n": 918
       },
       {
         "date": "2026-08-06",
         "rate": 51.8,
-        "n": 932
+        "n": 933
       },
       {
         "date": "2026-08-07",
         "rate": 51.9,
-        "n": 944
+        "n": 945
       },
       {
         "date": "2026-08-08",
-        "rate": 52.1,
-        "n": 951
+        "rate": 52.3,
+        "n": 962
       },
       {
         "date": "2026-08-10",
-        "rate": 52,
-        "n": 955
+        "rate": 52.7,
+        "n": 980
       },
       {
         "date": "2026-08-12",
-        "rate": 51.9,
-        "n": 959
+        "rate": 52.5,
+        "n": 991
       },
       {
         "date": "2026-08-13",
-        "rate": 51.9,
-        "n": 961
+        "rate": 52.6,
+        "n": 999
+      },
+      {
+        "date": "2026-08-14",
+        "rate": 52.5,
+        "n": 1004
       }
     ]
   },
   "opportunities": {
-    "tracked": 504,
-    "evaluated7": 454,
-    "avg_r7": -0.01,
-    "win7": 48.5,
-    "evaluated30": 307,
-    "avg_r30": -3.51,
-    "win30": 45,
+    "tracked": 513,
+    "evaluated7": 463,
+    "avg_r7": 0.06,
+    "win7": 49,
+    "evaluated30": 317,
+    "avg_r30": -3.35,
+    "win30": 45.1,
     "items": [
+      {
+        "date": "2026-08-08",
+        "ticker": "MU",
+        "name": "Micron Technology",
+        "category": "us",
+        "r7": 8.23,
+        "r30": null,
+        "thesis": "Morgan Stanley 列為 2026 半導體板塊首選股；HBM4 量產在即、AI 訓練 DRAM 需求攀升，但市",
+        "target": "$175.00 (-80.1%)",
+        "entry": 877.57,
+        "exit7": 949.83,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-08",
+        "ticker": "LITE",
+        "name": "Lumentum Holdings",
+        "category": "us",
+        "r7": -1.1,
+        "r30": null,
+        "thesis": "COHR 因美國禁止中國數據中心組件進口傳聞本週暴漲 47%，光互聯族群全面重估；Lumentum 同類型光組件廠商市場",
+        "target": "$140.00 (-84.3%)",
+        "entry": 890.17,
+        "exit7": 880.41,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-08",
+        "ticker": "BKR",
+        "name": "Baker Hughes",
+        "category": "us",
+        "r7": 3.07,
+        "r30": null,
+        "thesis": "LNG 基礎建設長期合約確定性高，Morgan Stanley 剛啟動 Overweight；能源板塊 YTD +22%",
+        "target": "$70.00 (+13.7%)",
+        "entry": 61.55,
+        "exit7": 63.44,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-08",
+        "ticker": "TSEM",
+        "name": "Tower Semiconductor",
+        "category": "us",
+        "r7": 0.18,
+        "r30": null,
+        "thesis": "特殊製程（RF、功率、CMOS）受汽車AI與工業IoT驅動，需求黏度高、競爭壁壘深；BofA 剛啟動 Buy 外資最高目",
+        "target": "$367.00 (+45.4%)",
+        "entry": 252.49,
+        "exit7": 252.95,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-08",
+        "ticker": "2356.TW",
+        "name": "英業達",
+        "category": "tw",
+        "r7": 7.5,
+        "r30": null,
+        "thesis": "AI伺服器代工族群中英業達籌碼集中度遠低於鴻海，但獲三大法人同等力度補貨；市場過度聚焦鴻海造成英業達補漲幅度明顯落後，同",
+        "target": "135",
+        "entry": 64,
+        "exit7": 68.8,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-08",
+        "ticker": "2603.TW",
+        "name": "長榮海運",
+        "category": "tw",
+        "r7": 3.86,
+        "r30": null,
+        "thesis": "關稅壁壘推動提前備貨需求，陽明法說揭示2027Q1小旺季能見度高；市場普遍認為航運已見頂，法說後法人消化悲觀預期反構成逆",
+        "target": "220",
+        "entry": 207.5,
+        "exit7": 215.5,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-08",
+        "ticker": "2059.TW",
+        "name": "川湖科技",
+        "category": "tw",
+        "r7": 10.13,
+        "r30": null,
+        "thesis": "滑軌業王者轉型為資料中心機架元件純AI股，訂單能見度延伸至2029年、百億擴產提前啟動；市場長期將川湖歸類傳產嚴重低估其",
+        "target": "2200",
+        "entry": 11110,
+        "exit7": 12235,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-08",
+        "ticker": "ETH",
+        "name": "Ethereum",
+        "category": "crypto",
+        "r7": -1.53,
+        "r30": null,
+        "thesis": "加密F&G 29（恐懼）vs 美股F&G 63（貪婪），背離幅度達近期歷史高位；ETH未反映鏈上代幣化資產激增至$74億",
+        "target": "$2,800 (+46.3%)",
+        "entry": 1913.2794,
+        "exit7": 1883.9913,
+        "exit30": null
+      },
+      {
+        "date": "2026-08-08",
+        "ticker": "SOL",
+        "name": "Solana",
+        "category": "crypto",
+        "r7": 3.44,
+        "r30": null,
+        "thesis": "SOL生態交易量持續成長但恐懼情緒壓制估值；機構關注度落後於BTC/ETH，Beta值歷史上高於大幣，情緒修復時彈升幅度",
+        "target": "$120.00 (+63.0%)",
+        "entry": 73.6427,
+        "exit7": 76.1773,
+        "exit30": null
+      },
       {
         "date": "2026-08-07",
         "ticker": "AMD",
@@ -987,123 +1109,6 @@
         "target": "$120.00 (+60.7%)",
         "entry": 74.468,
         "exit7": 73.9614,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-31",
-        "ticker": "2408.TW",
-        "name": "南亞科技股份有限公司",
-        "category": "tw",
-        "r7": 35.67,
-        "r30": null,
-        "thesis": "DRAM Q3合約價漲幅預估逾25%，台灣本土記憶體廠相對HBM廠折價顯著；三星利潤年增19倍驗證週期，市場卻因Sams",
-        "target": "210",
-        "entry": 328,
-        "exit7": 445,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-31",
-        "ticker": "ABBV",
-        "name": "AbbVie Inc.",
-        "category": "us",
-        "r7": -4.35,
-        "r30": null,
-        "thesis": "生技財報季同業J&J和Novartis均超預期且上修指引，形成板塊動能；ABBV今日盤前財報具超預期條件，Rinvoq/",
-        "target": "$235.00 (-8.7%)",
-        "entry": 257.41,
-        "exit7": 246.2,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-29",
-        "ticker": "LRCX",
-        "name": "Lam Research Corporation",
-        "category": "us",
-        "r7": 9.27,
-        "r30": null,
-        "thesis": "月跌-27.4%嚴重超賣；台積電7/16法說確認capex $62B中值，晶圓設備需求受益確定。市場將LRCX與記憶體評",
-        "target": "--",
-        "entry": 269.61,
-        "exit7": 294.61,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-29",
-        "ticker": "ARM",
-        "name": "Arm Holdings plc",
-        "category": "us",
-        "r7": -2.32,
-        "r30": null,
-        "thesis": "每顆AI晶片均需ARM架構授權，屬輕資產版稅模型，與晶圓製造週期無直接關聯。股價卻隨半導體恐慌同步重挫，市場混淆ARM與",
-        "target": "--",
-        "entry": 244.74,
-        "exit7": 239.06,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-29",
-        "ticker": "PLTR",
-        "name": "Palantir Technologies Inc.",
-        "category": "us",
-        "r7": 1.72,
-        "r30": null,
-        "thesis": "政府AI資料分析平台具獨家護城河，AIP軍事與政府合約壁壘高。市場仍以傳統SaaS估值低估其AI平台FCF加速潛力，Ci",
-        "target": "$235.00 (+90.2%)",
-        "entry": 123.53,
-        "exit7": 125.65,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-29",
-        "ticker": "ZBH",
-        "name": "Zimmer Biomet Holdings Inc.",
-        "category": "us",
-        "r7": 1.28,
-        "r30": null,
-        "thesis": "UBS 7/28從賣出雙升至買進（目標$89→$115，+29%），為本週最激進評級反轉。市場尚未充分消化此信號，高齡化",
-        "target": "$115.00 (+20.1%)",
-        "entry": 95.75,
-        "exit7": 96.98,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-29",
-        "ticker": "3037",
-        "name": "欣興電子 Unimicron Technology",
-        "category": "tw",
-        "r7": 13.22,
-        "r30": null,
-        "thesis": "Q2稅後純益131億元創歷史新高、上半年EPS 11.7元，ABF載板直接受益AI伺服器需求。7/28台股恐慌殺盤遭連帶",
-        "target": "--",
-        "entry": 764,
-        "exit7": 865,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-29",
-        "ticker": "2618",
-        "name": "長榮航空 EVA Air",
-        "category": "tw",
-        "r7": 2.22,
-        "r30": null,
-        "thesis": "航空貨運進入高運價低成本黃金獲利期，貨機艙位供不應求。市場聚焦電子股崩跌，忽視2026年搶進效應（TEU年增14.3%）",
-        "target": "--",
-        "entry": 42.75,
-        "exit7": 43.7,
-        "exit30": null
-      },
-      {
-        "date": "2026-07-29",
-        "ticker": "2303",
-        "name": "聯華電子 UMC",
-        "category": "tw",
-        "r7": 3.96,
-        "r30": null,
-        "thesis": "外資7/27買超43,124張（當日最大外資買超個股），卻在7/28恐慌中接近跌停。成熟製程在車用IoT工業端需求穩定，",
-        "target": "--",
-        "entry": 113.5,
-        "exit7": 118,
         "exit30": null
       }
     ],
